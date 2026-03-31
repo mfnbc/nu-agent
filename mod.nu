@@ -2,22 +2,27 @@ use ./tool-registry.nu *
 use ./api.nu *
 use ./tools.nu *
 
+const TOOL_SPECS = {
+  "read-file": { required: [path], allowed: [path] }
+  "write-file": { required: [path, content], allowed: [path, content] }
+  "list-files": { required: [path], allowed: [path] }
+  "search": { required: [pattern, path], allowed: [pattern, path] }
+  "replace-in-file": { required: [path, pattern, replacement], allowed: [path, pattern, replacement] }
+  "propose-edit": { required: [path, pattern, replacement], allowed: [path, pattern, replacement] }
+  "apply-edit": { required: [file, after], allowed: [file, after] }
+}
+
 def build-tool-schema [] {
-  let cmds = tool-commands
+  $TOOL_SPECS | transpose name spec | each { |row|
+    let required = $row.spec.required
+    let allowed = $row.spec.allowed
 
-  $cmds | each { |c|
-    let params = ($c.signature.parameters? | default [])
-
-    let props = ($params | each { |p|
-      { ($p.name): { type: "string" } }
-    } | reduce -f {} { |it, acc| $acc | merge $it })
-
-    let required = ($params | where optional == false | get name)
+    let props = ($allowed | each { |p| { ($p): { type: "string" } } } | reduce -f {} { |it, acc| $acc | merge $it })
 
     {
       type: "function",
       function: {
-        name: $c.name,
+        name: $row.name,
         parameters: {
           type: "object",
           properties: $props,
@@ -32,9 +37,61 @@ def parse-json-calls [raw] {
   let t = ($raw | describe)
 
   if ($t | str starts-with "string") {
-    ($raw | into string) | from json
+    let text = ($raw | into string | str trim)
+
+    let direct = (if ($text | str starts-with "[") { "yes" } else { "no" })
+    let candidate = $text
+    let parsed_direct = (if $direct == "yes" { $candidate | from json } else { [] })
+
+    if $direct == "yes" {
+      $parsed_direct
+    } else {
+      let start = ($text | str index-of "[")
+      let end = ($text | str index-of -e "]")
+
+      if $start < 0 or $end < 0 or $end < $start {
+        error make { msg: "LLM did not return parseable JSON array" }
+      }
+
+      let extracted = ($text | str substring $start..$end)
+      let candidate = $extracted
+      let parsed = ($candidate | from json)
+
+      $parsed
+    }
   } else {
     $raw
+  }
+}
+
+def validate-call-args [call] {
+  let name = $call.name
+  let args = ($call.arguments | default {})
+  let arg_type = ($args | describe)
+
+  if not ($TOOL_SPECS | columns | any { |k| $k == $name }) {
+    error make { msg: $"Unknown tool: ($name)" }
+  }
+
+  let spec = ($TOOL_SPECS | get $name)
+  let allowed = $spec.allowed
+  let required = $spec.required
+
+  if (not ($arg_type | str starts-with "record")) {
+    error make { msg: $"Invalid arguments for tool '($name)'; expected an object" }
+  }
+
+  let arg_keys = ($args | columns)
+  let missing = ($required | where { |p| not ($arg_keys | any { |k| $k == $p }) })
+
+  if (($missing | length) > 0) {
+    error make { msg: $"Missing required arguments for tool '($name)': (($missing | str join ', '))" }
+  }
+
+  let unknown = ($arg_keys | where { |k| not ($allowed | any { |a| $a == $k }) })
+
+  if (($unknown | length) > 0) {
+    error make { msg: $"Unknown arguments for tool '($name)': (($unknown | str join ', '))" }
   }
 }
 
@@ -78,6 +135,8 @@ def invoke-tool [call] {
 
 def run-calls [calls] {
   $calls | each { |c|
+    validate-call-args $c
+
     {
       tool: $c.name,
       result: (invoke-tool $c)

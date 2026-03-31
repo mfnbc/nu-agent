@@ -9,7 +9,7 @@ export const TOOL_NAMES = [
 ]
 
 export def tool-commands [] {
-  let cmds = scope commands
+  let cmds = (scope commands)
   $TOOL_NAMES | each { |t| $cmds | where name == $t } | flatten
 }
 
