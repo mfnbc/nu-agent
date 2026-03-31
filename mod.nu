@@ -133,14 +133,31 @@ def invoke-tool [call] {
   }
 }
 
+def format-tool-output [call] {
+  let result = (invoke-tool $call)
+  let result_type = ($result | describe)
+
+  if ($result_type | str starts-with "record") {
+    if (($result | columns) | any { |c| $c == "before" }) and (($result | columns) | any { |c| $c == "after" }) {
+      {
+        tool: $call.name
+        file: ($result.file? | default null)
+        replacements: ($result.replacements? | default null)
+        preview: $result.after
+      }
+    } else {
+      { tool: $call.name } | merge $result
+    }
+  } else {
+    { tool: $call.name, result: $result }
+  }
+}
+
 def run-calls [calls] {
   $calls | each { |c|
     validate-call-args $c
 
-    {
-      tool: $c.name,
-      result: (invoke-tool $c)
-    }
+    format-tool-output $c
   }
 }
 
