@@ -32,37 +32,45 @@ export def search [--pattern: string, --path: string] {
 
   if $t == 'dir' {
     glob $"($path)/**/*"
-    | where { |f| (($f | path type) == 'file') }
+    | where { |f| (($f | path type) == 'file') and not ($f | str contains ".git/") and not ($f | str ends-with ".png") and not ($f | str ends-with ".jpg") and not ($f | str ends-with ".ico") }
     | each { |f|
-        open $f
-        | lines
-        | enumerate
-        | where ($it.item =~ $pattern)
-        | each { |m|
-            {
-              file: $f,
-              line: ($m.index + 1),
-              text: $m.item
+        try {
+          open $f
+          | lines
+          | enumerate
+          | where ($it.item =~ $pattern)
+          | each { |m|
+              {
+                file: $f,
+                line: ($m.index + 1),
+                text: $m.item
+              }
             }
-          }
+        } catch { [] }
       }
     | flatten
   } else {
-    open $path
-    | lines
-    | enumerate
-    | where ($it.item =~ $pattern)
-    | each { |m|
-        {
-          file: $path,
-          line: ($m.index + 1),
-          text: $m.item
+    try {
+      open $path
+      | lines
+      | enumerate
+      | where ($it.item =~ $pattern)
+      | each { |m|
+          {
+            file: $path,
+            line: ($m.index + 1),
+            text: $m.item
+          }
         }
-      }
+    } catch { [] }
   }
 }
 
 export def "replace-in-file" [--path: string, --pattern: string, --replacement: string] {
+  if not ($path | path exists) {
+    error make { msg: $"File not found: ($path)" }
+  }
+
   let original = (open $path | lines)
 
   let updated = (
@@ -94,6 +102,10 @@ export def "replace-in-file" [--path: string, --pattern: string, --replacement: 
 
 # Propose an edit without writing. Returns before/after and change count.
 export def "propose-edit" [--path: string, --pattern: string, --replacement: string] {
+  if not ($path | path exists) {
+    error make { msg: $"File not found: ($path)" }
+  }
+
   let original = (open $path | lines)
 
   let updated = (

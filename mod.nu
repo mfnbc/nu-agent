@@ -109,7 +109,7 @@ def validate-calls [calls] {
     error make { msg: "Calls must be a list" }
   }
 
-  let allowed = $TOOLS
+  let allowed = ($TOOL_SPECS | columns)
 
   $calls | each { |c|
     let cols = ($c | columns)
