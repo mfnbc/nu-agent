@@ -5,7 +5,7 @@ export def main [] {
   let commands = (scope commands | get name)
   let expected_tools = (get-tools | get name)
 
-  let missing_tools = ($expected_tools | filter { |t| not ($commands | any { |c| $c == $t }) })
+  let missing_tools = ($expected_tools | where { |t| not ($commands | any { |c| $c == $t }) })
   
   if ($missing_tools | length) > 0 {
     print $"Warning: The following tools are not available as commands: ($missing_tools)"
@@ -14,12 +14,13 @@ export def main [] {
   }
 
   let forbidden = ["jq", "grep", "sed", "awk", "patch"]
-  let files = (glob "**/*.nu")
+  let files = (glob "**/*.nu" | where { |f| not ($f | str ends-with "check-env.nu") })
   
   let violations = ($files | each { |f|
     let contents = (open $f)
     $forbidden | each { |cmd|
-      if ($contents | str contains $cmd) {
+      let pattern = (['(^|\s|\|)', $cmd, '(\s|$|\|)'] | str join)
+      if ($contents =~ $pattern) {
         { file: $f, cmd: $cmd }
       } else {
         null
