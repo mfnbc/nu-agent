@@ -69,6 +69,8 @@ nu-agent --task "refactor"
 ## Notes
 
 - Prefer `propose-edit` -> `apply-edit` for inspectable edits.
+- For multi-step requests, the model must emit every requested tool call in order.
+- For edit preview requests, `propose-edit` should be used so the preview is surfaced.
 - Rust is allowed only as `nu_plugin` extensions exposed back as Nushell tools.
 
 ## LLM Backend Configuration

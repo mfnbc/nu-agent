@@ -119,8 +119,7 @@ export def "propose-edit" [--path: string, --pattern: string, --replacement: str
   {
     file: $path,
     replacements: $count,
-    before: ($original | str join (char nl)),
-    after: ($updated | str join (char nl))
+    preview: ($updated | str join (char nl))
   }
 }
 
