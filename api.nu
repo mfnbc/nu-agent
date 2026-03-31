@@ -20,9 +20,9 @@ export def call-llm [prompt: string, tools: list] {
   } | to json)
 
   let res = if ($api_key | str length) > 0 {
-    http post -H [ $"Authorization: Bearer ($api_key)" ] $chat_url $body
+    http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] $chat_url $body
   } else {
-    http post $chat_url $body
+    http post -t application/json $chat_url $body
   }
 
   let message = $res.choices.0.message
