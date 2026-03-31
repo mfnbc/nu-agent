@@ -117,6 +117,28 @@ def validate-calls [calls] {
   }
 }
 
+def expected-call-count [task: string] {
+  let t = ($task | str downcase)
+
+  if ($t | str contains "exactly one tool call") {
+    1
+  } else if ($t | str contains "exactly two tool calls") {
+    2
+  } else if ($t | str contains "exactly three tool calls") {
+    3
+  } else if ($t | str contains "exactly four tool calls") {
+    4
+  } else if ($t | str contains "exactly five tool calls") {
+    5
+  } else {
+    null
+  }
+}
+
+def continue-prompt [task: string, executed: list] {
+  $"Original request: ($task)\nAlready executed tool calls and results: (($executed | to json))\nEmit only the remaining tool calls needed to satisfy the original request. Preserve the original order. Output only a JSON array."
+}
+
 def invoke-tool [call] {
   let name = $call.name
   let args = $call.arguments
@@ -172,5 +194,16 @@ export def airun [--task: string] {
   let raw = call-llm $task $tools
   let calls = parse-json-calls $raw
   validate-calls $calls
-  run-calls $calls
+  let results = (run-calls $calls)
+  let expected = (expected-call-count $task)
+
+  if ($expected != null) and (($calls | length) < $expected) {
+    let prompt = (continue-prompt $task $results)
+    let raw2 = call-llm $prompt $tools
+    let calls2 = parse-json-calls $raw2
+    validate-calls $calls2
+    $results ++ (run-calls $calls2)
+  } else {
+    $results
+  }
 }
