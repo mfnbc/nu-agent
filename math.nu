@@ -1,1 +1,0 @@
-add-numbers := fn [a: int, b: int] { a + b }
