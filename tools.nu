@@ -6,6 +6,7 @@ export const TOOL_NAMES = [
   "replace-in-file"
   "propose-edit"
   "apply-edit"
+  "check-nu-syntax"
 ]
 
 export def tool-commands [] {
@@ -139,4 +140,18 @@ export def "propose-edit" [--path: string, --pattern: string, --replacement: str
 export def "apply-edit" [--file: string, --after: string] {
   $after | save -f $file
   { file: $file, status: "applied" }
+}
+
+# Check Nushell file syntax without executing it
+export def "check-nu-syntax" [--path: string] {
+  if not ($path | path exists) {
+    error make { msg: $"File not found: ($path)" }
+  }
+
+  let result = (do { ^$nu.current-exe --no-config-file -c $"use ($path)" } | complete)
+  if $result.exit_code == 0 {
+    { status: "ok", file: $path, message: "No syntax errors found." }
+  } else {
+    { status: "error", file: $path, error: ($result.stderr | str trim) }
+  }
 }

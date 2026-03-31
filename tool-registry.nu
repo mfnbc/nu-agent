@@ -8,6 +8,7 @@ export const TOOLS = [
   "replace-in-file"
   "propose-edit"
   "apply-edit"
+  "check-nu-syntax"
 ]
 
 export def get-tools [] {

@@ -10,6 +10,7 @@ const TOOL_SPECS = {
   "replace-in-file": { required: [path, pattern, replacement], allowed: [path, pattern, replacement] }
   "propose-edit": { required: [path, pattern, replacement], allowed: [path, pattern, replacement] }
   "apply-edit": { required: [file, after], allowed: [file, after] }
+  "check-nu-syntax": { required: [path], allowed: [path] }
 }
 
 def build-tool-schema [] {
@@ -159,6 +160,7 @@ def invoke-tool [call] {
     "replace-in-file" => { replace-in-file --path $args.path --pattern $args.pattern --replacement $args.replacement }
     "propose-edit" => { propose-edit --path $args.path --pattern $args.pattern --replacement $args.replacement }
     "apply-edit" => { apply-edit --file $args.file --after $args.after }
+    "check-nu-syntax" => { check-nu-syntax --path $args.path }
     _ => { error make { msg: $"Unknown tool: ($name)" } }
   }
 }
