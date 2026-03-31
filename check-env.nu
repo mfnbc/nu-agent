@@ -1,3 +1,4 @@
+#!/usr/bin/env nu
 use ./tool-registry.nu *
 
 export def main [] {

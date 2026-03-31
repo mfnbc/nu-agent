@@ -1,3 +1,4 @@
+#!/usr/bin/env nu
 use ./mod.nu *
 
 export def main [] {
