@@ -33,6 +33,11 @@ def build-tool-schema [] {
   }
 }
 
+def parse-json-text [text: string] {
+  let candidate = $text
+  $candidate | from json
+}
+
 def parse-json-calls [raw] {
   let t = ($raw | describe)
 
@@ -40,8 +45,7 @@ def parse-json-calls [raw] {
     let text = ($raw | into string | str trim)
 
     let direct = (if ($text | str starts-with "[") { "yes" } else { "no" })
-    let candidate = $text
-    let parsed_direct = (if $direct == "yes" { $candidate | from json } else { [] })
+    let parsed_direct = (if $direct == "yes" { parse-json-text $text } else { [] })
 
     if $direct == "yes" {
       $parsed_direct
@@ -54,8 +58,7 @@ def parse-json-calls [raw] {
       }
 
       let extracted = ($text | str substring $start..$end)
-      let candidate = $extracted
-      let parsed = ($candidate | from json)
+      let parsed = (parse-json-text $extracted)
 
       $parsed
     }
@@ -64,8 +67,12 @@ def parse-json-calls [raw] {
   }
 }
 
+def canonical-tool-name [name: string] {
+  $name | str replace -a "_" "-"
+}
+
 def validate-call-args [call] {
-  let name = $call.name
+  let name = (canonical-tool-name $call.name)
   let args = ($call.arguments | default {})
   let arg_type = ($args | describe)
 
@@ -106,12 +113,13 @@ def validate-calls [calls] {
 
   $calls | each { |c|
     let cols = ($c | columns)
+    let name = (canonical-tool-name $c.name)
 
     if (not ($cols | any { |k| $k == "name" })) or (not ($cols | any { |k| $k == "arguments" })) {
       error make { msg: "Invalid call shape" }
     }
 
-    if not ($allowed | any { |a| $a == $c.name }) {
+    if not ($allowed | any { |a| $a == $name }) {
       error make { msg: $"Unknown tool: ($c.name)" }
     }
   }
@@ -140,7 +148,7 @@ def continue-prompt [task: string, executed: list] {
 }
 
 def invoke-tool [call] {
-  let name = $call.name
+  let name = (canonical-tool-name $call.name)
   let args = $call.arguments
 
   match $name {
