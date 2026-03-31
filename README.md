@@ -50,7 +50,7 @@ Example with Nushell:
 
 ```nu
 use ./mod.nu *
-main --task "refactor"
+airun --task "refactor"
 ```
 
 Deterministic local execution test (no LLM):

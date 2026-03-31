@@ -8,7 +8,7 @@ export def call-llm [prompt: string, tools: list] {
   let chat_url = ($env.NU_AGENT_CHAT_URL? | default "https://api.openai.com/v1/chat/completions")
   let api_key = ($env.NU_AGENT_API_KEY? | default ($env.OPENAI_API_KEY? | default ""))
 
-  let body = {
+  let body = ({
     model: $model,
     temperature: 0,
     top_p: 1,
@@ -17,7 +17,7 @@ export def call-llm [prompt: string, tools: list] {
       { role: "user", content: $prompt }
     ],
     tools: $tools
-  }
+  } | to json)
 
   let res = if ($api_key | str length) > 0 {
     http post -H [ $"Authorization: Bearer ($api_key)" ] $chat_url $body
@@ -25,7 +25,20 @@ export def call-llm [prompt: string, tools: list] {
     http post $chat_url $body
   }
 
-  let content = ($res.choices.0.message.content | str trim)
+  let message = $res.choices.0.message
+
+  let content = if ($message.content? | default "" | str trim | str length) > 0 {
+    ($message.content | str trim)
+  } else if ($message.tool_calls? | default [] | length) > 0 {
+    ($message.tool_calls | each { |tc|
+      {
+        name: $tc.function.name,
+        arguments: ($tc.function.arguments | from json)
+      }
+    } | to json)
+  } else {
+    ""
+  }
 
   if not ($content | str starts-with "[") {
     error make { msg: "LLM did not return JSON array" }

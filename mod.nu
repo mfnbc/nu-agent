@@ -91,7 +91,7 @@ export def run-json [--calls: string] {
   run-calls $parsed
 }
 
-export def main [--task: string] {
+export def airun [--task: string] {
   let tools = build-tool-schema
   let raw = call-llm $task $tools
   let calls = parse-json-calls $raw
