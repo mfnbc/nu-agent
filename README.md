@@ -3,12 +3,13 @@
 Deterministic Nushell tool orchestrator.
 
 `nu-agent` is a helper for Nushell only. It is not a general-purpose coding assistant.
+It is also the single-item primitive for deterministic data enrichment: one structured record in, one validated JSON result out.
 
 ## Core Contract
 
 - Input: prompt/task + Nushell tool schema
 - Model output: JSON array of tool calls only
-- Runtime output: Nushell table/records on stdout
+- Runtime output: structured results; enrichment mode emits validated JSON on stdout
 
 Conceptually:
 
@@ -24,13 +25,15 @@ Conceptually:
 - Serial execution (no parallel scheduler yet)
 - Stateless core (state is controller/user owned)
 - No external text-processing tool dependency in core path (`jq`, `grep`, `patch`, etc.)
+- Single-item execution only; batching lives outside `nu-agent`
+- Enrichment output is strict JSON only on stdout after validation and retry
+- Schema validation rejects extra keys and enforces required/non-null keys
 
 ## Files
 
 - `mod.nu` - core pipeline (schema build, parse/validate, execution)
 - `api.nu` - `http post` wrapper with strict no-prose system prompt
 - `tools.nu` - canonical Nushell tools
-- `tool-registry.nu` - thin shim over `tools.nu`
 - `RULES.md` - hard project constraints
 - `PLAN.md` - current status and next steps
 
@@ -48,6 +51,10 @@ Conceptually:
 
 Schema is strict: unsupported argument types are rejected early, and invalid JSON output from the model is wrapped with a project-specific error.
 
+## Module Exports
+
+- `enrich --task <string> --record <json> --schema <json>` — single-item structured enrichment; validates output against a schema
+
 ## Usage
 
 Example with Nushell:
@@ -55,6 +62,19 @@ Example with Nushell:
 ```nu
 use ./mod.nu *
 airun --task "refactor"
+```
+
+Single-item enrichment example:
+
+```nu
+use ./mod.nu *
+enrich --task "annotate workout" --record '{"exercise":"squat","reps":5}' --schema '{"allowed":["label","notes"],"required":["label"],"non_null":["label"]}'
+```
+
+Repo-local CLI wrapper for enrichment:
+
+```bash
+NU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task "annotate workout" --record '{"exercise":"squat","reps":5}' --schema '{"allowed":["label"],"required":["label"],"non_null":["label"]}'
 ```
 
 Deterministic local execution test (no LLM):
@@ -94,3 +114,25 @@ Example for LM Studio:
 $env.NU_AGENT_CHAT_URL = "http://127.0.0.1:1234/v1/chat/completions"
 $env.NU_AGENT_MODEL = "qwen2.5-coder-7b-instruct"
 ```
+
+## Enrichment Contract
+
+`nu-agent` is designed to enrich one record at a time.
+
+- Input: one structured record plus a target schema and prompt
+- Output: one validated JSON result on stdout
+- Errors: diagnostics on stderr and non-zero exit code
+- Batch iteration, retries across a dataset, and persistence live in a separate batch tool
+- `enrich` is the stable single-item entrypoint
+
+Recommended caller pattern:
+
+```nu
+let result = (try {
+  ./nu-agent --task "annotate workout" --record '{"exercise":"squat"}' --schema '{"allowed":["exercise"],"required":["exercise"],"non_null":["exercise"]}' --validate-only
+} catch { |err|
+  error make { msg: ($err.msg? | default "nu-agent enrichment failed") }
+})
+```
+
+For now, keep stderr free-form and let Nushell `try/catch` handle failures. Do not depend on parsing stderr as JSON.

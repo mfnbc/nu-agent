@@ -15,7 +15,7 @@ nu-agent is a helper for Nushell only. It is not a general-purpose coding assist
   - `arguments: object`
 - Execution model is serial (no parallel execution yet).
 - Interface is CLI-first (example: `nu-agent --task "refactor"`).
-- Output should be Nushell-native table/records on stdout.
+- Runtime output must stay structured; enrichment mode emits validated JSON on stdout.
 
 ## Tooling and Language Boundary
 
@@ -48,6 +48,15 @@ nu-agent is a helper for Nushell only. It is not a general-purpose coding assist
 - API wrapper must enforce strict no-prose system prompt.
 - Temperature should stay deterministic (`0`).
 - Returned content must parse as JSON array before execution.
+
+## Runtime Contract
+
+- `nu-agent` is single-item only; batching belongs in external tooling.
+- Successful enrichment emits only validated JSON on stdout.
+- Failures report via stderr and a non-zero exit code.
+- Callers should use Nushell `try/catch` for failures; stderr remains free-form for humans.
+- Schema validation rejects extra keys.
+- Schema validation enforces required keys and non-null keys.
 
 ## Current Non-Goals
 

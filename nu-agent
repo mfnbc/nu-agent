@@ -1,15 +1,32 @@
-#!/usr/bin/env nu
+#!/home/michael/.cargo/bin/nu
 use ./mod.nu *
 
-export def main [--task: string] {
-  if ($task | default "" | str length) == 0 {
-    error make { msg: "Missing required --task argument. Example: nu-agent --task \"refactor\"" }
-  }
+export def main [
+  --task: string
+  --record: string
+  --schema: string
+  --validate-only
+] {
+  if (($record | default "" | str length) > 0) or (($schema | default "" | str length) > 0) {
+    if (($task | default "" | str length) == 0) {
+      error make { msg: "Missing required --task argument for enrichment mode" }
+    }
 
-  if (($env.NU_AGENT_CHAT_URL? | default "" | str length) == 0) {
-    error make { msg: "NU_AGENT_CHAT_URL is required. Set it to your LLM endpoint before running nu-agent." }
-  }
+    if (not $validate_only) and (($env.NU_AGENT_CHAT_URL? | default "" | str length) == 0) {
+      error make { msg: "NU_AGENT_CHAT_URL is required. Set it to your LLM endpoint before running nu-agent" }
+    }
 
-  print --stderr "Starting nu-agent. The selected model may take several minutes to respond."
-  airun --task $task
+    enrich --task $task --record $record --schema $schema --validate-only=$validate_only
+  } else {
+    if (($task | default "" | str length) == 0) {
+      error make { msg: "Missing required --task argument. Example: nu-agent --task \"refactor\"" }
+    }
+
+    if (($env.NU_AGENT_CHAT_URL? | default "" | str length) == 0) {
+      error make { msg: "NU_AGENT_CHAT_URL is required. Set it to your LLM endpoint before running nu-agent" }
+    }
+
+    print --stderr "Starting nu-agent. The selected model may take several minutes to respond."
+    airun --task $task
+  }
 }

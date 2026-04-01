@@ -1,4 +1,3 @@
-use ./tool-registry.nu *
 use ./api.nu *
 export use ./tools.nu *
 
@@ -163,7 +162,7 @@ def build-tool-schema [] {
   }
 }
 
-def parse-json-calls [raw] {
+def coerce-json [raw] {
   let t = ($raw | describe)
 
   if ($t | str starts-with "string") {
@@ -175,7 +174,7 @@ def parse-json-calls [raw] {
 
 def parse-json-calls-safe [raw] {
   try {
-    parse-json-calls $raw
+    coerce-json $raw
   } catch { |err|
     let reason = ($err.msg? | default ($err | to text))
     error make { msg: $"nu-agent expected JSON array output from the model, but parsing failed: ($reason)" }
@@ -204,7 +203,7 @@ def nu-candidate-content [call result] {
   match $name {
     "write-file" => { $call.arguments.content }
     "replace-in-file" => { open $call.arguments.path }
-    "propose-edit" => { $result.preview }
+    "propose-edit" => { $result.preview.preview }
     "apply-edit" => { $call.arguments.after }
     _ => { null }
   }
@@ -272,22 +271,150 @@ def call-llm-json [task: string, tools: list] {
   let raw = (call-llm $task $tools)
 
   try {
-    parse-json-calls $raw
+    coerce-json $raw
   } catch { |err|
     let reason = ($err.msg? | default ($err | to text))
     let retry_task = (repair-prompt $task $raw $reason)
     let raw2 = (call-llm $retry_task $tools)
 
     try {
-      parse-json-calls $raw2
+      coerce-json $raw2
     } catch {
       error make { msg: "LLM did not return parseable JSON array after retry" }
     }
   }
 }
 
+def enrichment-schema-parts [schema] {
+  let schema_type = ($schema | describe)
+
+  if not ($schema_type | str starts-with "record") {
+    error make { msg: "Enrichment schema must be a record" }
+  }
+
+  let allowed = ($schema.allowed? | default null)
+
+  if $allowed == null {
+    error make { msg: "Enrichment schema must include an allowed list" }
+  }
+
+  let allowed_type = ($allowed | describe)
+  if not ($allowed_type | str starts-with "list") {
+    error make { msg: "Enrichment schema allowed field must be a list" }
+  }
+
+  let required = ($schema.required? | default [])
+  let non_null = ($schema.non_null? | default [])
+
+  if not (($required | describe) | str starts-with "list") {
+    error make { msg: "Enrichment schema required field must be a list" }
+  }
+
+  if not (($non_null | describe) | str starts-with "list") {
+    error make { msg: "Enrichment schema non_null field must be a list" }
+  }
+
+  let required_outside_allowed = ($required | where { |k| $k not-in $allowed })
+  let non_null_outside_allowed = ($non_null | where { |k| $k not-in $allowed })
+
+  if (($required_outside_allowed | length) > 0) {
+    error make { msg: $"Enrichment schema required keys must be inside allowed: (($required_outside_allowed | str join ', '))" }
+  }
+
+  if (($non_null_outside_allowed | length) > 0) {
+    error make { msg: $"Enrichment schema non_null keys must be inside allowed: (($non_null_outside_allowed | str join ', '))" }
+  }
+
+  { allowed: $allowed, required: $required, non_null: $non_null }
+}
+
+def validate-enrichment-output [output, schema] {
+  let parts = (enrichment-schema-parts $schema)
+  let allowed = $parts.allowed
+  let required = $parts.required
+  let non_null = $parts.non_null
+
+  let output_type = ($output | describe)
+  if not ($output_type | str starts-with "record") {
+    error make { msg: "Enrichment output must be a JSON object" }
+  }
+
+  let keys = ($output | columns)
+  let extra = ($keys | where { |k| $k not-in $allowed })
+  let missing = ($required | where { |k| $k not-in $keys })
+  let nulls = ($non_null | where { |k| ($k not-in $keys) or (($output | get $k) == null) })
+
+  if (($extra | length) > 0) {
+    error make { msg: $"Enrichment output contains extra keys: (($extra | str join ', '))" }
+  }
+
+  if (($missing | length) > 0) {
+    error make { msg: $"Enrichment output is missing required keys: (($missing | str join ', '))" }
+  }
+
+  if (($nulls | length) > 0) {
+    error make { msg: $"Enrichment output contains null or missing non-null keys: (($nulls | str join ', '))" }
+  }
+
+  $output
+}
+
+def enrichment-prompt [task: string, record, schema] {
+  $"Task: ($task)\nInput record: (($record | to json))\nTarget schema: (($schema | to json))\nReturn only a valid JSON object that matches the target schema exactly. Do not add extra keys."
+}
+
+def enrichment-repair-prompt [task: string, record, schema, broken: string, reason: string] {
+  $"Task: ($task)\nInput record: (($record | to json))\nTarget schema: (($schema | to json))\nThe previous answer was invalid.\nAnswer was: ($broken)\nReason: ($reason)\nReturn only a valid JSON object that matches the target schema exactly. Do not add extra keys."
+}
+
+def run-enrichment [task: string, record, schema] {
+  let prompt = (enrichment-prompt $task $record $schema)
+  mut raw = ""
+
+  try {
+    $raw = (call-llm-content $prompt)
+    let parsed = (coerce-json $raw)
+    validate-enrichment-output $parsed $schema
+  } catch { |err|
+    let reason = ($err.msg? | default ($err | to text))
+    let repair_prompt = (enrichment-repair-prompt $task $record $schema $raw $reason)
+    let repaired_raw = (call-llm-content $repair_prompt)
+    let repaired_parsed = (coerce-json $repaired_raw)
+
+    try {
+      validate-enrichment-output $repaired_parsed $schema
+    } catch { |repair_err|
+      let repair_reason = ($repair_err.msg? | default ($repair_err | to text))
+      error make { msg: $"Enrichment failed after retry: ($repair_reason)" }
+    }
+  }
+}
+
+export def enrich [--task: string, --record: string, --schema: string, --validate-only] {
+  if (($task | default "" | str length) == 0) {
+    error make { msg: "Missing required --task argument" }
+  }
+
+  if (($record | default "" | str length) == 0) {
+    error make { msg: "Missing required --record argument" }
+  }
+
+  if (($schema | default "" | str length) == 0) {
+    error make { msg: "Missing required --schema argument" }
+  }
+
+  let parsed_record = (coerce-json $record)
+  let parsed_schema = (coerce-json $schema)
+
+  if $validate_only {
+    validate-enrichment-output $parsed_record $parsed_schema
+  } else {
+    run-enrichment $task $parsed_record $parsed_schema
+  }
+}
+
 def canonical-tool-name [name: string] {
-  $name | str replace -a "_" "-"
+  $name | str replace --all "_" "-"
 }
 
 def validate-call-args [call] {
@@ -295,7 +422,7 @@ def validate-call-args [call] {
   let args = ($call.arguments | default {})
   let arg_type = ($args | describe)
 
-  if not ($TOOL_SPECS | columns | any { |k| $k == $name }) {
+  if not ($name in ($TOOL_SPECS | columns)) {
     error make { msg: $"Unknown tool: ($name)" }
   }
 
@@ -309,13 +436,13 @@ def validate-call-args [call] {
   }
 
   let arg_keys = ($args | columns)
-  let missing = ($required | where { |p| not ($arg_keys | any { |k| $k == $p }) })
+  let missing = ($required | where { |p| $p not-in $arg_keys })
 
   if (($missing | length) > 0) {
     error make { msg: $"Missing required arguments for tool '($name)': (($missing | str join ', '))" }
   }
 
-  let unknown = ($arg_keys | where { |k| not ($allowed | any { |a| $a == $k }) })
+  let unknown = ($arg_keys | where { |k| $k not-in $allowed })
 
   if (($unknown | length) > 0) {
     error make { msg: $"Unknown arguments for tool '($name)': (($unknown | str join ', '))" }
@@ -325,13 +452,13 @@ def validate-call-args [call] {
       let matches = ($param_specs | where name == $k)
       let expected = (if (($matches | length) > 0) { $matches | first | get syntax } else { null })
 
-    if $expected == null {
-      null
-    } else if not (value-matches-syntax ($args | get $k) $expected) {
-      { argument: $k, expected: $expected, actual: (($args | get $k) | describe) }
-    } else {
-      null
-    }
+      if $expected == null {
+        null
+      } else if not (value-matches-syntax ($args | get $k) $expected) {
+        { argument: $k, expected: $expected, actual: (($args | get $k) | describe) }
+      } else {
+        null
+      }
   } | compact)
 
   if (($type_violations | length) > 0) {
@@ -346,22 +473,22 @@ def validate-calls [calls] {
     error make { msg: "Calls must be a list" }
   }
 
-  let allowed = ($TOOL_SPECS | columns)
-
   for $c in $calls {
     let cols = ($c | columns)
     let name = (canonical-tool-name $c.name)
 
-    if (not ($cols | any { |k| $k == "name" })) or (not ($cols | any { |k| $k == "arguments" })) {
+    if ("name" not-in $cols) or ("arguments" not-in $cols) {
       error make { msg: "Invalid call shape" }
     }
 
-    if not ($allowed | any { |a| $a == $name }) {
+    if $name not-in $TOOL_NAMES {
       error make { msg: $"Unknown tool: ($c.name)" }
     }
   }
 }
 
+# Parse exact call-count hints from the task string. Caps at 5; prompts beyond
+# that should not use this hint mechanism.
 def expected-call-count [task: string] {
   let t = ($task | str downcase)
 
@@ -406,19 +533,10 @@ def format-tool-output [call, result] {
   let result_type = ($result | describe)
 
   if ($result_type | str starts-with "record") {
-    if (($result | columns) | any { |c| $c == "preview" }) {
-      {
-        tool: $call.name
-        file: ($result.file? | default null)
-        replacements: ($result.replacements? | default null)
-        status: ($result.status? | default null)
-        try_path: ($result.try_path? | default null)
-        error: ($result.error? | default null)
-        preview: $result.preview.preview
-        preview_lines: $result.preview.preview_lines
-        line_count: $result.preview.line_count
-        truncated: $result.preview.truncated
-      }
+    if "preview" in ($result | columns) {
+      { tool: $call.name }
+      | merge ($result | reject preview)
+      | merge $result.preview
     } else {
       { tool: $call.name } | merge $result
     }
@@ -462,6 +580,8 @@ export def airun [--task: string] {
   let results = (run-calls $calls $tools)
   let expected = (expected-call-count $task)
 
+  # One-shot continuation: if the model returned fewer calls than expected,
+  # prompt it once more with the already-executed results. No further retry.
   if ($expected != null) and (($calls | length) < $expected) {
     let prompt = (continue-prompt $task $results)
     let calls2 = (call-llm-json $prompt $tools)

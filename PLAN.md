@@ -14,7 +14,6 @@ Implemented:
   - Rejects non-array responses.
 - `tools.nu`
   - Canonical whitelist of callable tools via `TOOL_NAMES`.
-  - `tool-registry.nu` is a thin shim over `tools.nu`.
 - `tools.nu` canonical tools:
   - `read-file`
   - `write-file`
@@ -25,6 +24,24 @@ Implemented:
   - `apply-edit`
   - `check-nu-syntax`
   - `self-check`
+
+## Product Direction
+
+Primary use cases, in order:
+
+1. Enrichment
+- Single-item JSON enrichment for structured local data.
+- `nu-agent` handles one record at a time.
+- Batch orchestration lives outside `nu-agent`.
+- Implement `enrich` as the stable single-item entrypoint.
+- Add a direct CLI path for enrichment records and schemas.
+- Add a smoke test for enrichment entrypoint behavior.
+
+2. Automation
+- Generate Nu/Rust tooling to ingest, transform, and analyze data.
+
+3. General data operations
+- Keep the actual data operations user-driven in Nu.
 
 ## Decisions Locked In
 
@@ -56,6 +73,13 @@ Implemented:
 - Implemented as repo-local `./nu-agent` wrapper.
 - Ensure clean stdout table output for piping.
 - Keep prompts and docs explicit that nu-agent is a Nushell helper, not a multi-language shell orchestrator.
+
+5. Enrichment engine contract
+- One record in, one validated JSON result out.
+- stdout is reserved for the final JSON result after validation/retry.
+- stderr is reserved for diagnostics and failures.
+- Schema validation rejects extra keys and enforces required/non-null keys.
+- Callers should use Nu `try/catch`; stderr stays free-form for humans.
 
 ## Mid-Term Options
 

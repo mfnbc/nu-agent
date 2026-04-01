@@ -13,7 +13,7 @@ export const TOOL_NAMES = [
 export def tool-commands [] {
   let cmds = (scope commands)
 
-  $cmds | where { |c| $TOOL_NAMES | any { |name| $name == $c.name } }
+  $cmds | where { |c| $c.name in $TOOL_NAMES }
 }
 
 export def read-file [--path: string] {
@@ -32,15 +32,15 @@ export def write-file [--path: string, --content: string] {
 
     if ($check.status? | default "") == "ok" {
       $content | save -f $path
-      { status: "ok", path: $path }
+      { status: "ok", file: $path }
     } else {
       let try_path = $"($path).try"
       $content | save -f $try_path
-      { status: "syntax-error", path: $path, try_path: $try_path, error: $check.error }
+      { status: "syntax-error", file: $path, try_path: $try_path, error: $check.error }
     }
   } else {
     $content | save -f $path
-    { status: "ok", path: $path }
+    { status: "ok", file: $path }
   }
 }
 
@@ -58,7 +58,7 @@ def edit-preview [lines: list<string>] {
     let head = ($lines | first 40)
     let tail = ($lines | last 40)
     {
-      preview: (($head ++ ["..." ] ++ $tail) | str join (char nl)),
+      preview: (($head ++ ["..."] ++ $tail) | str join (char nl)),
       preview_lines: ($head ++ ["..."] ++ $tail),
       line_count: $count,
       truncated: true
@@ -82,7 +82,7 @@ export def search [--pattern: string, --path: string] {
 
   if $t == 'dir' {
     glob $"($path)/**/*"
-    | where { |f| (($f | path type) == 'file') and not ($f | str contains ".git/") and not ($f | str ends-with ".png") and not ($f | str ends-with ".jpg") and not ($f | str ends-with ".ico") }
+    | where { |f| (($f | path type) == 'file') and not ($f | str contains ".git/") and not ($f =~ '\.(png|jpg|ico)$') }
     | each { |f|
         try {
           open $f
@@ -204,7 +204,7 @@ export def "apply-edit" [--file: string, --after: string] {
 
     if ($check.status? | default "") == "ok" {
       $after | save -f $file
-      { file: $file, status: "applied" }
+      { file: $file, status: "ok" }
     } else {
       let try_path = $"($file).try"
       $after | save -f $try_path
@@ -212,7 +212,7 @@ export def "apply-edit" [--file: string, --after: string] {
     }
   } else {
     $after | save -f $file
-    { file: $file, status: "applied" }
+    { file: $file, status: "ok" }
   }
 }
 
