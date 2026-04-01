@@ -13,7 +13,7 @@ export def main [] {
     print "Success: All expected tools are registered."
   }
 
-  let forbidden = ["jq", "grep", "sed", "awk", "patch"]
+  let forbidden = ["jq" "grep" "sed" "awk" "patch"]
   let files = (glob "**/*.nu" | where { |f| not ($f | str ends-with "check-env.nu") })
   
   let violations = ($files | each { |f|

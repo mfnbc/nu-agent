@@ -3,41 +3,25 @@ use ./mod.nu *
 
 export def main [] {
   let cases = [
-    {
-      name: "Prose with JSON inside",
-      input: "Here is your JSON.\n[{\"name\": \"list-files\", \"arguments\": {\"path\": \".\"}}]\nHope this helps!",
-      valid: true
-    },
-    {
-      name: "Hallucinated tool",
-      input: "[{\"name\": \"fake-tool\", \"arguments\": {}}]",
-      valid: false
-    },
-    {
-      name: "Missing required arg",
-      input: "[{\"name\": \"read-file\", \"arguments\": {}}]",
-      valid: false
-    },
-    {
-      name: "Markdown json fence",
-      input: "```json\n[{\"name\": \"list-files\", \"arguments\": {\"path\": \".\"}}]\n```",
-      valid: true
-    },
-    {
-      name: "Pure prose",
-      input: "I am unable to do that.",
-      valid: false
-    }
+    { name: "Prose with JSON inside", should_fail: true, input: "Here is your JSON.\n[{\"name\": \"list-files\", \"arguments\": {\"path\": \".\"}}]\nHope this helps!" }
+    { name: "Hallucinated tool", should_fail: true, input: "[{\"name\": \"fake-tool\", \"arguments\": {}}]" }
+    { name: "Missing required arg", should_fail: true, input: "[{\"name\": \"read-file\", \"arguments\": {}}]" }
+    { name: "Markdown json fence", should_fail: true, input: "```json\n[{\"name\": \"list-files\", \"arguments\": {\"path\": \".\"}}]\n```" }
+    { name: "Pure prose", should_fail: true, input: "I am unable to do that." }
   ]
 
   $cases | each { |case|
-    let result = (try { run-json --calls $case.input; "pass" } catch { "fail" })
-    let ok = if $case.valid { $result == "pass" } else { $result == "fail" }
-    if not $ok {
-      print $"Failed test case: ($case.name) (Expected ($case.valid), but validation returned ($result))"
+    let name = $case.name
+    let should_fail = $case.should_fail
+    let input = $case.input
+    let result = (try { run-json --calls $input; "pass" } catch { "fail" })
+    let expected = if $should_fail { "fail" } else { "pass" }
+
+    if $result != $expected {
+      print $"Failed test case: ($name). Expected=($expected), got=($result)"
       error make { msg: "Tests failed" }
     } else {
-      print $"Passed test case: ($case.name)"
+      print $"Passed test case: ($name)"
     }
   }
 }

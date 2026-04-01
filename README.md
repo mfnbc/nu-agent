@@ -20,7 +20,7 @@ Conceptually:
 - No prose/explanations/markdown from the model
 - System prompt defines the model as a Nushell expert
 - System prompt defines the model as Nushell-only controller/developer
-- Whitelist-only callable tools (`tool-registry.nu`)
+- Whitelist-only callable tools (`TOOL_NAMES` in `tools.nu`)
 - Serial execution (no parallel scheduler yet)
 - Stateless core (state is controller/user owned)
 - No external text-processing tool dependency in core path (`jq`, `grep`, `patch`, etc.)
@@ -30,7 +30,7 @@ Conceptually:
 - `mod.nu` - core pipeline (schema build, parse/validate, execution)
 - `api.nu` - `http post` wrapper with strict no-prose system prompt
 - `tools.nu` - canonical Nushell tools
-- `tool-registry.nu` - explicit tool whitelist
+- `tool-registry.nu` - thin shim over `tools.nu`
 - `RULES.md` - hard project constraints
 - `PLAN.md` - current status and next steps
 
@@ -43,6 +43,10 @@ Conceptually:
 - `replace-in-file --path <string> --pattern <string> --replacement <string>`
 - `propose-edit --path <string> --pattern <string> --replacement <string>`
 - `apply-edit --file <string> --after <string>`
+- `check-nu-syntax --path <string>`
+- `self-check`
+
+Schema is strict: unsupported argument types are rejected early, and invalid JSON output from the model is wrapped with a project-specific error.
 
 ## Usage
 
@@ -60,11 +64,14 @@ use ./mod.nu *
 run-json --calls '[{"name":"list-files","arguments":{"path":"."}}]'
 ```
 
-Planned CLI form:
+Repo-local CLI wrapper:
 
 ```bash
-nu-agent --task "refactor"
+NU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task "refactor"
 ```
+
+The CLI requires `NU_AGENT_CHAT_URL` so it points at your local or test LLM endpoint.
+It prints a short notice before calling the model, since some local models can take several minutes to respond.
 
 ## Notes
 
@@ -78,7 +85,7 @@ nu-agent --task "refactor"
 `api.nu` supports OpenAI-compatible endpoints via env vars:
 
 - `NU_AGENT_CHAT_URL` (default: `https://api.openai.com/v1/chat/completions`)
-- `NU_AGENT_MODEL` (default: `gpt-5.3-chat-latest`)
+- `NU_AGENT_MODEL` (default: `gpt-4o`)
 - `NU_AGENT_API_KEY` (optional; falls back to `OPENAI_API_KEY`)
 
 Example for LM Studio:

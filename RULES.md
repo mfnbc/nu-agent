@@ -32,7 +32,7 @@ nu-agent is a helper for Nushell only. It is not a general-purpose coding assist
 - Core contract: `(Prompt + ToolSchema) -> JSON Calls`.
 - Keep runtime state outside the agent core (controller/user-owned state).
 - No conversational UI in the agent runtime.
-- Tools are discovered from an explicit whitelist (`tool-registry.nu`).
+- Tools are discovered from an explicit whitelist (`TOOL_NAMES` const in `tools.nu`).
 - Unknown tool names are rejected.
 - The runtime is a Nushell tool orchestrator only; all capabilities must be represented as Nushell-callable tools.
 
@@ -51,7 +51,5 @@ nu-agent is a helper for Nushell only. It is not a general-purpose coding assist
 
 ## Current Non-Goals
 
-- No retry/failure recovery framework yet.
-- No advanced schema strictness for every argument type yet.
 - No parallel tool scheduling yet.
 - No long-term memory/state layer in core.

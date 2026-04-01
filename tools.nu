@@ -7,24 +7,73 @@ export const TOOL_NAMES = [
   "propose-edit"
   "apply-edit"
   "check-nu-syntax"
+  "self-check"
 ]
 
 export def tool-commands [] {
   let cmds = (scope commands)
-  $TOOL_NAMES | each { |t| $cmds | where name == $t } | flatten
+
+  $cmds | where { |c| $TOOL_NAMES | any { |name| $name == $c.name } }
 }
 
 export def read-file [--path: string] {
-  open $path
+  if ($path == null) or (($path | str trim) == "") {
+    error make { msg: "Missing required path for read-file" }
+  } else if not ($path | path exists) {
+    error make { msg: $"File not found: ($path)" }
+  } else {
+    open $path
+  }
 }
 
 export def write-file [--path: string, --content: string] {
-  $content | save $path
-  { status: "ok", path: $path }
+  if ($path | str ends-with ".nu") {
+    let check = (check-nu-content $content)
+
+    if ($check.status? | default "") == "ok" {
+      $content | save -f $path
+      { status: "ok", path: $path }
+    } else {
+      let try_path = $"($path).try"
+      $content | save -f $try_path
+      { status: "syntax-error", path: $path, try_path: $try_path, error: $check.error }
+    }
+  } else {
+    $content | save -f $path
+    { status: "ok", path: $path }
+  }
+}
+
+def edit-preview [lines: list<string>] {
+  let count = ($lines | length)
+
+  if $count <= 80 {
+    {
+      preview: ($lines | str join (char nl)),
+      preview_lines: $lines,
+      line_count: $count,
+      truncated: false
+    }
+  } else {
+    let head = ($lines | first 40)
+    let tail = ($lines | last 40)
+    {
+      preview: (($head ++ ["..." ] ++ $tail) | str join (char nl)),
+      preview_lines: ($head ++ ["..."] ++ $tail),
+      line_count: $count,
+      truncated: true
+    }
+  }
 }
 
 export def list-files [--path: string] {
-  ls $path | select name type size
+  if ($path == null) or (($path | str trim) == "") {
+    error make { msg: "Missing required path for list-files" }
+  } else if not ($path | path exists) {
+    error make { msg: $"Path not found: ($path)" }
+  } else {
+    ls $path | select name type size
+  }
 }
 
 export def search [--pattern: string, --path: string] {
@@ -79,7 +128,7 @@ export def "replace-in-file" [--path: string, --pattern: string, --replacement: 
     | enumerate
     | upsert item { |row|
         if ($row.item =~ $pattern) {
-          $row.item | str replace $pattern $replacement
+          $row.item | str replace --regex $pattern $replacement
         } else {
           $row.item
         }
@@ -94,11 +143,23 @@ export def "replace-in-file" [--path: string, --pattern: string, --replacement: 
     | length
   )
 
-  $updated
-  | str join (char nl)
-  | save -f $path
+  let content = ($updated | str join (char nl))
 
-  { file: $path, replacements: $count }
+  if ($path | str ends-with ".nu") {
+    let check = (check-nu-content $content)
+
+    if ($check.status? | default "") == "ok" {
+      $content | save -f $path
+      { file: $path, replacements: $count, status: "ok", preview: (edit-preview $updated) }
+    } else {
+      let try_path = $"($path).try"
+      $content | save -f $try_path
+      { file: $path, replacements: $count, status: "syntax-error", try_path: $try_path, error: $check.error, preview: (edit-preview $updated) }
+    }
+  } else {
+    $content | save -f $path
+    { file: $path, replacements: $count, status: "ok", preview: (edit-preview $updated) }
+  }
 }
 
 # Propose an edit without writing. Returns before/after and change count.
@@ -114,7 +175,7 @@ export def "propose-edit" [--path: string, --pattern: string, --replacement: str
     | enumerate
     | upsert item { |row|
         if ($row.item =~ $pattern) {
-          $row.item | str replace $pattern $replacement
+          $row.item | str replace --regex $pattern $replacement
         } else {
           $row.item
         }
@@ -132,14 +193,27 @@ export def "propose-edit" [--path: string, --pattern: string, --replacement: str
   {
     file: $path,
     replacements: $count,
-    preview: ($updated | str join (char nl))
+    preview: (edit-preview $updated)
   }
 }
 
 # Apply a previously proposed edit
 export def "apply-edit" [--file: string, --after: string] {
-  $after | save -f $file
-  { file: $file, status: "applied" }
+  if ($file | str ends-with ".nu") {
+    let check = (check-nu-content $after)
+
+    if ($check.status? | default "") == "ok" {
+      $after | save -f $file
+      { file: $file, status: "applied" }
+    } else {
+      let try_path = $"($file).try"
+      $after | save -f $try_path
+      { file: $file, status: "syntax-error", try_path: $try_path, error: $check.error }
+    }
+  } else {
+    $after | save -f $file
+    { file: $file, status: "applied" }
+  }
 }
 
 # Check Nushell file syntax without executing it
@@ -152,6 +226,68 @@ export def "check-nu-syntax" [--path: string] {
   if $result.exit_code == 0 {
     { status: "ok", file: $path, message: "No syntax errors found." }
   } else {
-    { status: "error", file: $path, error: ($result.stderr | str trim) }
+    { status: "syntax-error", file: $path, error: ($result.stderr | str trim) }
+  }
+}
+
+export def check-nu-content [content: string] {
+  let temp_dir = ($env.TMPDIR? | default "/tmp")
+  let temp = ($temp_dir | path join "nu-agent-syntax-check.nu")
+  $content | save -f $temp
+
+  let result = (check-nu-syntax --path $temp)
+
+  if ($temp | path exists) {
+    rm $temp
+  }
+
+  $result
+}
+
+export def self-check [] {
+  let expected_tools = $TOOL_NAMES
+  let commands = (scope commands | get name)
+
+  let missing_tools = ($expected_tools | where { |t| not ($commands | any { |c| $c == $t }) })
+
+  let forbidden = ["jq" "grep" "sed" "awk" "patch"]
+  let files = (glob "**/*.nu")
+
+  let token_violations = ($files | each { |f|
+    let contents = (open $f)
+    $forbidden | each { |cmd|
+      let pattern = (['(^|\s|\|)', $cmd, '(\s|$|\|)'] | str join)
+      if ($contents =~ $pattern) {
+        { file: $f, token: $cmd }
+      } else {
+        null
+      }
+    }
+  } | flatten | compact)
+
+  let syntax_results = ($files | each { |f|
+    let result = (check-nu-syntax --path $f)
+    {
+      file: $f,
+      status: $result.status,
+      error: ($result.error? | default null)
+    }
+  })
+
+  let syntax_failures = ($syntax_results | where status != "ok")
+
+  let overall_status = if (($missing_tools | length) == 0) and (($token_violations | length) == 0) and (($syntax_failures | length) == 0) {
+    "ok"
+  } else {
+    "error"
+  }
+
+  {
+    status: $overall_status,
+    checks: [
+      { check: "commands-present", status: (if (($missing_tools | length) == 0) { "ok" } else { "error" }), missing: $missing_tools }
+      { check: "blocked-tokens", status: (if (($token_violations | length) == 0) { "ok" } else { "error" }), violations: $token_violations }
+      { check: "syntax-health", status: (if (($syntax_failures | length) == 0) { "ok" } else { "error" }), files: $syntax_results }
+    ]
   }
 }

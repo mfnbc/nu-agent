@@ -1,0 +1,15 @@
+#!/usr/bin/env nu
+use ./mod.nu *
+
+export def main [--task: string] {
+  if ($task | default "" | str length) == 0 {
+    error make { msg: "Missing required --task argument. Example: nu-agent --task \"refactor\"" }
+  }
+
+  if (($env.NU_AGENT_CHAT_URL? | default "" | str length) == 0) {
+    error make { msg: "NU_AGENT_CHAT_URL is required. Set it to your LLM endpoint before running nu-agent." }
+  }
+
+  print --stderr "Starting nu-agent. The selected model may take several minutes to respond."
+  airun --task $task
+}

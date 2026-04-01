@@ -12,8 +12,9 @@ Implemented:
   - Wraps `http post` for LLM calls.
   - Injects strict no-prose system prompt.
   - Rejects non-array responses.
-- `tool-registry.nu`
-  - Explicit whitelist of callable tools.
+- `tools.nu`
+  - Canonical whitelist of callable tools via `TOOL_NAMES`.
+  - `tool-registry.nu` is a thin shim over `tools.nu`.
 - `tools.nu` canonical tools:
   - `read-file`
   - `write-file`
@@ -22,6 +23,8 @@ Implemented:
   - `replace-in-file`
   - `propose-edit`
   - `apply-edit`
+  - `check-nu-syntax`
+  - `self-check`
 
 ## Decisions Locked In
 
@@ -40,16 +43,17 @@ Implemented:
 - Improve type mapping from Nushell signatures.
 
 2. Add runtime self-check command
-- Verify all whitelisted commands exist.
-- Verify no blocked external command tokens in project `.nu` files.
-- Print machine-readable results.
+- Implemented as `self-check`.
+- Verifies all whitelisted commands exist.
+- Verifies no blocked external command tokens in project `.nu` files.
+- Prints machine-readable results.
 
 3. Improve edit ergonomics
 - Prefer `propose-edit` -> `apply-edit` in planner prompts.
 - Add optional preview/diff-friendly output shape for large files.
 
 4. Stabilize CLI entrypoint
-- Provide a single user-facing command (`nu-agent --task ...`).
+- Implemented as repo-local `./nu-agent` wrapper.
 - Ensure clean stdout table output for piping.
 - Keep prompts and docs explicit that nu-agent is a Nushell helper, not a multi-language shell orchestrator.
 

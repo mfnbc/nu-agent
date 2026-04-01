@@ -4,7 +4,7 @@ export def system-prompt [] {
 
 export def call-llm [prompt: string, tools: list] {
   let system = (system-prompt)
-  let model = ($env.NU_AGENT_MODEL? | default "gpt-5.3-chat-latest")
+  let model = ($env.NU_AGENT_MODEL? | default "gpt-4o")
   let chat_url = ($env.NU_AGENT_CHAT_URL? | default "https://api.openai.com/v1/chat/completions")
   let api_key = ($env.NU_AGENT_API_KEY? | default ($env.OPENAI_API_KEY? | default ""))
 
@@ -20,9 +20,9 @@ export def call-llm [prompt: string, tools: list] {
   } | to json)
 
   let res = if ($api_key | str length) > 0 {
-    http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --full $chat_url $body
+    http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --max-time 120sec --full $chat_url $body
   } else {
-    http post -t application/json --full $chat_url $body
+    http post -t application/json --max-time 120sec --full $chat_url $body
   }
 
   if $res.status >= 400 {
