@@ -1,5 +1,6 @@
 use ./api.nu *
 export use ./tools.nu *
+export use ./seed-template.nu *
 
 const TOOL_SPECS = {
   "read-file": {
@@ -369,10 +370,9 @@ def enrichment-repair-prompt [task: string, record, schema, broken: string, reas
 
 def run-enrichment [task: string, record, schema] {
   let prompt = (enrichment-prompt $task $record $schema)
-  mut raw = ""
+  let raw = (call-llm-content $prompt)
 
   try {
-    $raw = (call-llm-content $prompt)
     let parsed = (coerce-json $raw)
     validate-enrichment-output $parsed $schema
   } catch { |err|
