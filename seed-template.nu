@@ -33,3 +33,31 @@ export def token-seed-schema [] {
     ]
   }
 }
+
+export def token-seed-input [token: record] {
+  let cols = ($token | columns)
+  let surface = if ($cols | any { |c| $c == "surface" }) {
+    $token.surface
+  } else if ($cols | any { |c| $c == "idx_form" }) {
+    $token.idx_form
+  } else {
+    null
+  }
+
+  {
+    surface: $surface
+    detected_root: null
+    paa_root: null
+    paa_guesses: []
+    association_types: []
+    phenomenological_association: null
+    source: {
+      volume: ($token.volume? | default null)
+      book: ($token.book? | default null)
+      chapter: ($token.chapter? | default null)
+      verse: ($token.verse? | default null)
+    }
+    confidence: "guessing"
+    note: null
+  }
+}

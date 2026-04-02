@@ -136,3 +136,26 @@ let result = (try {
 ```
 
 For now, keep stderr free-form and let Nushell `try/catch` handle failures. Do not depend on parsing stderr as JSON.
+
+## Token Seed Pass
+
+The first seed pass can turn a normalized Hebrew token into a structured record:
+
+```nu
+use ./mod.nu *
+
+let token = {
+  surface: "אַ֥שְֽׁרֵי־"
+  volume: "Ketuvim"
+  book: "Tehillim"
+  chapter: 1
+  verse: 1
+}
+
+let seed = (token-seed-input $token)
+let prompt = (seed-prompt $seed)
+let schema = (token-seed-schema)
+```
+
+That seed record is then sent to the LLM, which fills in the missing fields while
+preserving the same JSON object shape.
