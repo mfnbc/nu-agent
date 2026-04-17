@@ -13,12 +13,14 @@ Input record: (($record | to json))"
 export def token-seed-schema [] {
   {
     allowed: [
+      "idx_form"
       "surface"
       "detected_root"
       "paa_root"
       "paa_guesses"
       "association_types"
       "phenomenological_association"
+      "context"
       "source"
       "confidence"
       "note"
@@ -45,19 +47,21 @@ export def token-seed-input [token: record] {
   }
 
   {
+    idx_form: ($token.idx_form? | default null)
     surface: $surface
-    detected_root: null
-    paa_root: null
-    paa_guesses: []
-    association_types: []
-    phenomenological_association: null
-    source: {
+    detected_root: ($token.detected_root? | default null)
+    paa_root: ($token.paa_root? | default null)
+    paa_guesses: ($token.paa_guesses? | default [])
+    association_types: ($token.association_types? | default [])
+    phenomenological_association: ($token.phenomenological_association? | default null)
+    context: ($token.context? | default null)
+    source: ($token.source? | default {
       volume: ($token.volume? | default null)
       book: ($token.book? | default null)
       chapter: ($token.chapter? | default null)
       verse: ($token.verse? | default null)
-    }
-    confidence: "guessing"
-    note: null
+    })
+    confidence: ($token.confidence? | default "guessing")
+    note: ($token.note? | default null)
   }
 }

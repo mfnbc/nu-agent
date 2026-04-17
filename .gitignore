@@ -1,0 +1,3 @@
+build/
+shredder/target/
+*.nu.try

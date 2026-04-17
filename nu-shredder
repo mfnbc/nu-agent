@@ -1,0 +1,30 @@
+#!/usr/bin/env nu
+
+export def main [
+  path: string
+  --source: string = ""
+  --attach-code-blocks
+] {
+  let args = [
+    "run"
+    "--quiet"
+    "--manifest-path"
+    "shredder/Cargo.toml"
+    "--"
+    $path
+  ]
+
+  let args = if ($source | str length) > 0 {
+    $args | append "--source" | append $source
+  } else {
+    $args
+  }
+
+  let args = if $attach_code_blocks {
+    $args | append "--attach-code-blocks"
+  } else {
+    $args
+  }
+
+  ^cargo ...$args
+}

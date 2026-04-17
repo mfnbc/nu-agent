@@ -1,0 +1,70 @@
+# Nu-Agent Architectural Manifest
+
+## 1. Core Philosophy
+
+### The Covenant of Purity
+- Retrieval is deterministic only.
+- No LLM-based searching.
+- LLMs are for synthesis, not discovery.
+
+### Stack
+- Rust: performance and parsing/shredding
+- Nushell: routing, validation, and pipeline control
+- Kùzu: embedded graph / structural retrieval
+- Rig: local embeddings via `rig-fastembed`
+
+### Execution model
+- One local binary family
+- Local-first
+- Zero API dependency for retrieval
+
+## 2. The 3-Tier Retrieval Engine
+
+### Tier 1: Semantic
+- `rig-fastembed` with BGE-Small
+- Fuzzy topical recall from Nu documentation and other corpora
+
+### Tier 2: Structural
+- Kùzu embedded graph
+- Exact command signatures
+- Hierarchy
+- Linguistic cognate trees / Semitic relations
+
+### Tier 3: Reasoning
+- `nu-agent` synthesizes evidence into code or structured actions
+- Reasoning consumes evidence from tiers 1 and 2
+
+## 3. Ingestion Pipeline
+
+### Status
+- Rust shredder binary is implemented
+- Nushell ingestion script is implemented
+
+### Input corpora
+- Markdown: Nu Book / Cookbook
+- UXLC: Leningrad Codex, NFC-normalized
+- StarLing: Semitic `.dbf` sources
+
+### Output
+- Nu Doc Chunk JSONL
+- Embedding-input JSONL jobs for Rig/FastEmbed -> LanceDB
+- Stable chunk IDs derived from path + heading path + order
+- Command tokens extracted from backticks and code fences
+
+## 4. Linguistic Specialization
+
+### Data
+- UXLC (normalized)
+- StarLing PAA / Semitic etymology data
+
+### Goal
+- Use Kùzu graph topology to resolve contradictions in rough notes
+- Traverse linkage such as:
+  - Surface Form -> Lemma -> Root -> Cognates
+
+## 5. Current Task
+
+- Active: LanceDB execution harness (`rig_plan.nu` + `rig_run.nu`) and Kùzu planning/execution harness (`kuzu_plan.nu` + `kuzu_run.nu`)
+- Next: add graph validation checks (edges/nodes counts) after real Kùzu import
+- Next: hydrate LanceDB tables with actual vectors and expose retrieval tools over the merged stores
+- Retrieval helpers now available: chunk inspection, Rig/Kùzu plan inspectors

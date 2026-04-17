@@ -35,6 +35,11 @@ nu-agent is a helper for Nushell only. It is not a general-purpose coding assist
 - Tools are discovered from an explicit whitelist (`TOOL_NAMES` const in `tools.nu`).
 - Unknown tool names are rejected.
 - The runtime is a Nushell tool orchestrator only; all capabilities must be represented as Nushell-callable tools.
+- Document shredding must remain independent from vector or graph indexing.
+- Retrieval tools must return evidence, not conclusions.
+- Retrieval is deterministic; no LLM-based searching.
+- Durable contracts should live in `docs/` so they survive context resets.
+- The canonical long-lived architecture statement lives in `docs/ARCHITECTURAL_MANIFEST.md`.
 
 ## Editing Rules
 

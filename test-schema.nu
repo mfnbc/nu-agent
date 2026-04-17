@@ -12,5 +12,16 @@ export def main [] {
     error make { msg: "Expected invalid write-file schema case to fail" }
   }
 
+  let search_hits = (try {
+    run-json --calls '[{"name":"search-chunks","arguments":{"path":"build/tmp-ingest/README.chunks.jsonl","pattern":"Enrichment Contract"}}]'
+  } catch { |err|
+    print $err.msg?
+    error make { msg: "Expected search-chunks to be exposed in the tool schema" }
+  })
+
+  if (($search_hits | length) == 0) {
+    error make { msg: "Expected search-chunks schema call to return evidence" }
+  }
+
   print "Passed schema validation smoke test."
 }

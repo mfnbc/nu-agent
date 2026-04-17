@@ -27,6 +27,12 @@ const TOOL_SPECS = {
     allowed: ["pattern", "path"]
     argument_descriptions: { pattern: "Regex pattern to match.", path: "File or directory path to search." }
   }
+  "search-chunks": {
+    description: "Search ingested chunk JSONL files for matching evidence."
+    required: ["pattern", "path"]
+    allowed: ["pattern", "path"]
+    argument_descriptions: { pattern: "Regex pattern to match against chunk fields.", path: "Directory or .chunks.jsonl file to search." }
+  }
   "replace-in-file": {
     description: "Replace matching text in a file and preview the result."
     required: ["path", "pattern", "replacement"]
@@ -57,6 +63,46 @@ const TOOL_SPECS = {
     allowed: []
     argument_descriptions: {}
   }
+  "inspect-rig-plan": {
+    description: "Inspect a Rig/FastEmbed LanceDB plan file."
+    required: ["path"]
+    allowed: ["path", "table", "limit"]
+    argument_descriptions: {
+      path: "Path to the Rig plan JSON file."
+      table: "Optional table or job id to filter results."
+      limit: "Optional maximum number of jobs to return."
+    }
+  }
+  "inspect-kuzu-plan": {
+    description: "Inspect a Kùzu node/edge plan or sample rows."
+    required: ["path"]
+    allowed: ["path", "kind", "limit"]
+    argument_descriptions: {
+      path: "Path to the Kùzu plan JSON file."
+      kind: "Which portion to view: plan, nodes, or edges."
+      limit: "Optional maximum number of rows to sample."
+    }
+  }
+  "inspect-chunk": {
+    description: "Retrieve a specific chunk (and optional neighbors) from chunk JSONL files."
+    required: ["path", "id"]
+    allowed: ["path", "id", "neighbors"]
+    argument_descriptions: {
+      path: "Directory or .chunks.jsonl file to inspect."
+      id: "Chunk id to retrieve."
+      neighbors: "Include previous/next chunks when present."
+    }
+  }
+  "search-embedding-input": {
+    description: "Search embedding_input JSONL records for matching text."
+    required: ["path", "pattern"]
+    allowed: ["path", "pattern", "limit"]
+    argument_descriptions: {
+      path: "Directory or .embedding_input.jsonl file to search."
+      pattern: "Regex pattern to match against embedding_input text."
+      limit: "Optional maximum number of hits to return."
+    }
+  }
 }
 
 def command-signatures [name: string] {
@@ -71,11 +117,16 @@ def command-signatures [name: string] {
 
 def named-command-params [name: string] {
   (command-signatures $name)
-  | where parameter_type == "named"
+  | where { |p| ($p.parameter_type == "named") or ($p.parameter_type == "switch") }
   | each { |p|
+      let syntax = if $p.parameter_type == "switch" {
+        "bool"
+      } else {
+        $p.syntax_shape | into string
+      }
       {
         name: $p.parameter_name
-        syntax: ($p.syntax_shape | into string)
+        syntax: $syntax
       }
     }
 }
@@ -520,6 +571,18 @@ def invoke-tool [call] {
     "write-file" => { write-file --path $args.path --content $args.content }
     "list-files" => { list-files --path $args.path }
     "search" => { search --pattern $args.pattern --path $args.path }
+    "search-chunks" => { search-chunks --pattern $args.pattern --path $args.path }
+    "inspect-rig-plan" => { inspect-rig-plan --path $args.path --table ($args.table? | default "") --limit ($args.limit? | default 0) }
+    "inspect-kuzu-plan" => { inspect-kuzu-plan --path $args.path --kind ($args.kind? | default "plan") --limit ($args.limit? | default 10) }
+    "inspect-chunk" => {
+      let include_neighbors = ($args.neighbors? | default false)
+      if $include_neighbors {
+        inspect-chunk --path $args.path --id $args.id --neighbors
+      } else {
+        inspect-chunk --path $args.path --id $args.id
+      }
+    }
+    "search-embedding-input" => { search-embedding-input --path $args.path --pattern $args.pattern --limit ($args.limit? | default 0) }
     "replace-in-file" => { replace-in-file --path $args.path --pattern $args.pattern --replacement $args.replacement }
     "propose-edit" => { propose-edit --path $args.path --pattern $args.pattern --replacement $args.replacement }
     "apply-edit" => { apply-edit --file $args.file --after $args.after }

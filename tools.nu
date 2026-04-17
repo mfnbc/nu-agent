@@ -3,11 +3,16 @@ export const TOOL_NAMES = [
   "write-file"
   "list-files"
   "search"
+  "search-chunks"
   "replace-in-file"
   "propose-edit"
   "apply-edit"
   "check-nu-syntax"
   "self-check"
+  "inspect-rig-plan"
+  "inspect-kuzu-plan"
+  "inspect-chunk"
+  "search-embedding-input"
 ]
 
 export def tool-commands [] {
@@ -113,6 +118,296 @@ export def search [--pattern: string, --path: string] {
           }
         }
     } catch { [] }
+  }
+}
+
+export def "search-chunks" [--path: string, --pattern: string] {
+  if ($path == null) or (($path | str trim) == "") {
+    error make { msg: "Missing required path for search-chunks" }
+  }
+
+  if ($pattern == null) or (($pattern | str trim) == "") {
+    error make { msg: "Missing required pattern for search-chunks" }
+  }
+
+  let input_type = ($path | path type)
+  let files = if $input_type == 'dir' {
+    glob $"($path)/**/*.chunks.jsonl" | sort
+  } else if ($path | str ends-with ".chunks.jsonl") {
+    [$path]
+  } else {
+    error make { msg: "search-chunks expects a directory or a .chunks.jsonl file" }
+  }
+
+  if (($files | length) == 0) {
+    error make { msg: $"No chunk JSONL files found under: ($path)" }
+  }
+
+  $files
+  | each { |file|
+      try {
+        open --raw $file
+        | lines
+        | enumerate
+        | where { |row| ($row.item | str trim) != "" }
+        | each { |row|
+            let chunk = ($row.item | from json)
+            let searchable = [
+              { field: "id", value: $chunk.id }
+              { field: "identity.source", value: $chunk.identity.source }
+              { field: "identity.path", value: $chunk.identity.path }
+              { field: "identity.checksum", value: $chunk.identity.checksum }
+              { field: "hierarchy.title", value: $chunk.hierarchy.title }
+              { field: "hierarchy.heading_path", value: ($chunk.hierarchy.heading_path | str join " > ") }
+              { field: "taxonomy.chunk_type", value: ($chunk.taxonomy.chunk_type | into string) }
+              { field: "taxonomy.commands", value: ($chunk.taxonomy.commands | str join " ") }
+              { field: "taxonomy.tags", value: ($chunk.taxonomy.tags | str join " ") }
+              { field: "data.content", value: $chunk.data.content }
+              { field: "data.code_blocks", value: ($chunk.data.code_blocks | each { |block| $block.code } | str join "\n") }
+              { field: "data.links", value: ($chunk.data.links | str join " ") }
+              { field: "embedding_input", value: $chunk.embedding_input }
+            ]
+
+            let matched = ($searchable | where { |field| ($field.value | default "") =~ $pattern })
+
+            if (($matched | length) > 0) {
+              {
+                file: $file,
+                line: ($row.index + 1),
+                chunk_id: $chunk.id,
+                matched_fields: ($matched | get field),
+                chunk: $chunk
+              }
+            } else {
+              null
+            }
+          }
+        | compact
+      } catch { [] }
+    }
+  | flatten
+}
+
+export def "inspect-rig-plan" [--path: string, --table: string = "", --limit: int = 0] {
+  if (($path | default "" | str trim | str length) == 0) {
+    error make { msg: "Missing required plan path" }
+  }
+
+  if not ($path | path exists) {
+    error make { msg: $"Rig plan not found: ($path)" }
+  }
+
+  let plan_path = ($path | path expand)
+  let plan = (open --raw $plan_path | from json)
+  let jobs_all = ($plan.jobs? | default [])
+  let filtered = if (($table | str length) > 0) {
+    $jobs_all | where { |job|
+      (($job.lancedb_table? | default "") == $table) or (($job.id? | default "") == $table)
+    }
+  } else {
+    $jobs_all
+  }
+
+  let limited = if $limit > 0 { $filtered | take $limit } else { $filtered }
+
+  {
+    plan: $plan_path
+    lancedb_dir: ($plan.lancedb_dir? | default null)
+    job_total: ($filtered | length)
+    truncated: (if ($limit > 0) { ($filtered | length) > $limit } else { false })
+    jobs: $limited
+  }
+}
+
+export def "inspect-kuzu-plan" [--path: string, --kind: string = "plan", --limit: int = 10] {
+  if (($path | default "" | str trim | str length) == 0) {
+    error make { msg: "Missing required plan path" }
+  }
+
+  if not ($path | path exists) {
+    error make { msg: $"Kùzu plan not found: ($path)" }
+  }
+
+  let plan_path = ($path | path expand)
+  let plan = (open --raw $plan_path | from json)
+  let nodes_csv = ($plan.nodes_csv? | default null)
+  let edges_csv = ($plan.edges_csv? | default null)
+
+  match ($kind | str downcase) {
+    "plan" => {
+      {
+        plan: $plan_path,
+        out_dir: ($plan.out_dir? | default null),
+        node_count: ($plan.node_count? | default null),
+        edge_count: ($plan.edge_count? | default null),
+        sources: ($plan.sources? | default [])
+      }
+    }
+    "nodes" => {
+      if $nodes_csv == null {
+        error make { msg: "Plan missing nodes_csv" }
+      }
+      if not ($nodes_csv | path exists) {
+        error make { msg: $"nodes_csv not found: ($nodes_csv)" }
+      }
+      let rows = (open $nodes_csv)
+      let sample = if $limit > 0 { $rows | take $limit } else { $rows }
+      {
+        plan: $plan_path,
+        nodes_csv: ($nodes_csv | path expand),
+        limit: $limit,
+        rows: $sample
+      }
+    }
+    "edges" => {
+      if $edges_csv == null {
+        error make { msg: "Plan missing edges_csv" }
+      }
+      if not ($edges_csv | path exists) {
+        error make { msg: $"edges_csv not found: ($edges_csv)" }
+      }
+      let rows = (open $edges_csv)
+      let sample = if $limit > 0 { $rows | take $limit } else { $rows }
+      {
+        plan: $plan_path,
+        edges_csv: ($edges_csv | path expand),
+        limit: $limit,
+        rows: $sample
+      }
+    }
+    _ => {
+      error make { msg: "Invalid kind for inspect-kuzu-plan; expected plan|nodes|edges" }
+    }
+  }
+}
+
+export def "inspect-chunk" [--path: string, --id: string, --neighbors] {
+  if (($path | default "" | str trim | str length) == 0) {
+    error make { msg: "Missing required path" }
+  }
+
+  if (($id | default "" | str trim | str length) == 0) {
+    error make { msg: "Missing required chunk id" }
+  }
+
+  let input_type = ($path | path type)
+  let files = if $input_type == 'dir' {
+    glob $"($path)/**/*.chunks.jsonl" | sort
+  } else if ($path | str ends-with ".chunks.jsonl") {
+    [$path]
+  } else {
+    error make { msg: "inspect-chunk expects a directory or a .chunks.jsonl file" }
+  }
+
+  if (($files | length) == 0) {
+    error make { msg: $"No chunk JSONL files found under: ($path)" }
+  }
+
+  let found = (
+    $files
+    | each { |file|
+        let chunks = (
+          open --raw $file
+          | lines
+          | where { |line| ($line | str trim) != "" }
+          | each { |line| $line | from json }
+        )
+
+        let indexed = ($chunks | enumerate)
+        let matches = (
+          $indexed
+          | where { |row| ($row.item.id? | default "") == $id }
+        )
+
+        if (($matches | length) > 0) {
+          let hit = ($matches | first)
+          let idx = $hit.index
+          let chunk = $hit.item
+
+          let previous = if ($neighbors and $idx > 0) {
+            $chunks | get ($idx - 1)
+          } else {
+            null
+          }
+
+          let next = if ($neighbors and $idx < (($chunks | length) - 1)) {
+            $chunks | get ($idx + 1)
+          } else {
+            null
+          }
+
+          {
+            file: $file
+            chunk_index: $idx
+            chunk: $chunk
+            previous: $previous
+            next: $next
+          }
+        } else {
+          null
+        }
+      }
+    | compact
+  )
+
+  if (($found | length) == 0) {
+    error make { msg: $"Chunk id not found: ($id)" }
+  }
+
+  $found | first
+}
+
+export def "search-embedding-input" [--path: string, --pattern: string, --limit: int = 0] {
+  if (($path | default "" | str trim | str length) == 0) {
+    error make { msg: "Missing required path" }
+  }
+
+  if (($pattern | default "" | str trim | str length) == 0) {
+    error make { msg: "Missing required pattern" }
+  }
+
+  let input_type = ($path | path type)
+  let files = if $input_type == 'dir' {
+    glob $"($path)/**/*.embedding_input.jsonl" | sort
+  } else if ($path | str ends-with ".embedding_input.jsonl") {
+    [$path]
+  } else {
+    error make { msg: "search-embedding-input expects a directory or a .embedding_input.jsonl file" }
+  }
+
+  if (($files | length) == 0) {
+    error make { msg: $"No embedding_input JSONL files found under: ($path)" }
+  }
+
+  let hits = (
+    $files
+    | each { |file|
+        open --raw $file
+        | lines
+        | where { |line| ($line | str trim) != "" }
+        | each { |line|
+            let record = ($line | from json)
+            if (($record.embedding_input? | default "") =~ $pattern) {
+              {
+                file: $file
+                id: ($record.id? | default null)
+                embedding_input: $record.embedding_input
+              }
+            } else {
+              null
+            }
+          }
+        | compact
+      }
+    | flatten
+  )
+
+  let limited = if $limit > 0 { $hits | take $limit } else { $hits }
+
+  {
+    hits: $limited
+    total: ($hits | length)
+    truncated: (if $limit > 0 { ($hits | length) > $limit } else { false })
   }
 }
 

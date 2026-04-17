@@ -1,0 +1,50 @@
+# Next Session Prompt
+
+Copy and paste this into a new session to continue work:
+
+---
+
+You are helping on `nu-agent`, a strict Nushell-only orchestrator.
+
+Important contracts:
+- Do not break JSON-only tool call behavior.
+- Do not introduce arbitrary shell execution.
+- Keep Rust for document shredding / plugins only; keep orchestration in Nushell.
+- Keep the retrieval pipeline deterministic and inspectable.
+- Chunking must remain independent of embeddings or graph indexing.
+- Retrieval tools should return evidence, not conclusions.
+
+Current architecture:
+- `mod.nu`: core tool-call validation and execution
+- `api.nu`: LLM API wrapper
+- `tools.nu`: whitelist + tool implementations
+- `shredder/`: Rust `nu-shredder` semantic Markdown splitter
+- `nu-ingest.nu` / `nu-ingest`: Nushell routing script that runs the shredder and writes chunk JSONL + embedding-input jobs + manifest outputs
+- `rig_plan.nu`: reads manifests and emits LanceDB job plans for Rig/FastEmbed
+- `rig_run.nu`: consumes LanceDB job plans, builds deterministic Rig FastEmbed commands, supports dry-run/execute, and optional LanceDB validation
+- `kuzu_plan.nu`: reads chunk manifests and emits deterministic node/edge CSVs for Kùzu graph ingestion
+- `kuzu_run.nu`: converts node/edge plans into deterministic Kùzu CLI commands, supports dry-run/execute, and optional validation
+- Retrieval helpers: `search-chunks`, `inspect-chunk`, `search-embedding-input`, plan inspection tools for LanceDB and Kùzu evidence
+
+Current retrieval contracts:
+- `nu-shredder` emits Nu Doc Chunk JSONL
+- `nu-ingest` validates and persists chunk and embedding-input outputs
+- Nu Doc Chunk fields: `id`, `identity`, `hierarchy`, `taxonomy`, `data`, `embedding_input`
+- `embedding_input` is derived
+- chunk IDs must be stable
+- command extraction must be conservative
+- retrieval is deterministic; no LLM-based searching
+
+Current architectural priorities:
+- Tier 1: Rig/FastEmbed semantic recall
+- Tier 2: Kùzu structural graph and exact signatures
+- Tier 3: `nu-agent` synthesis from evidence
+- support additional corpora such as UXLC and StarLing as separate ingestion targets
+
+What I likely want next:
+- extend Kùzu validation (e.g., count checks) and add query helpers for graph inspection
+- expose retrieval as explicit nu-agent tools for code/document lookup
+- verify LanceDB + Kùzu merge workflows end-to-end
+
+Please inspect existing docs first, then implement the smallest deterministic change.
+---

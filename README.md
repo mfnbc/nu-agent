@@ -34,6 +34,9 @@ Conceptually:
 - `mod.nu` - core pipeline (schema build, parse/validate, execution)
 - `api.nu` - `http post` wrapper with strict no-prose system prompt
 - `tools.nu` - canonical Nushell tools
+- `rig_plan.nu` - deterministic LanceDB job manifest generator for Rig embedding input
+- `rig_run.nu` - Rig FastEmbed execution harness (dry-run/execute/validate)
+- `kuzu_plan.nu` - deterministic Kùzu node/edge export planner
 - `RULES.md` - hard project constraints
 - `PLAN.md` - current status and next steps
 
@@ -43,7 +46,12 @@ Conceptually:
 - `write-file --path <string> --content <string>`
 - `list-files --path <string>`
 - `search --pattern <string> --path <string>`
+- `search-chunks --path <string> --pattern <string>`
 - `replace-in-file --path <string> --pattern <string> --replacement <string>`
+- `inspect-rig-plan --path <string> [--table <string>] [--limit <int>]`
+- `inspect-kuzu-plan --path <string> [--kind <string>] [--limit <int>]`
+- `inspect-chunk --path <string> --id <string> [--neighbors]`
+- `search-embedding-input --path <string> --pattern <string> [--limit <int>]`
 - `propose-edit --path <string> --pattern <string> --replacement <string>`
 - `apply-edit --file <string> --after <string>`
 - `check-nu-syntax --path <string>`
@@ -82,6 +90,48 @@ Deterministic local execution test (no LLM):
 ```nu
 use ./mod.nu *
 run-json --calls '[{"name":"list-files","arguments":{"path":"."}}]'
+```
+
+Deterministic Markdown ingestion:
+
+```bash
+./nu-ingest README.md --out-dir build/nu-ingest
+```
+
+This writes JSONL chunks, embedding-input jobs, and a manifest under the output directory. Each Markdown file produces both `<name>.chunks.jsonl` and `<name>.embedding_input.jsonl` so Rig/FastEmbed can index the derived inputs deterministically.
+
+Generate a LanceDB ingestion plan for Rig/FastEmbed:
+
+```nu
+use ./rig_plan.nu *
+rig-plan build/nu-ingest/manifest.json --lancedb-dir build/lancedb --out build/rig-plan.json
+```
+
+Inspect (or execute) the deterministic Rig FastEmbed commands:
+
+```nu
+use ./rig_run.nu *
+rig-run build/rig-plan.json                    # dry-run (default)
+rig-run build/rig-plan.json --validate         # add dataset presence check (skips if not executed)
+# rig-run build/rig-plan.json --execute        # execute when Rig & LanceDB are available
+# rig-run build/rig-plan.json --execute --validate   # execute and verify LanceDB dataset
+```
+
+Generate Kùzu node/edge exports:
+
+```nu
+use ./kuzu_plan.nu *
+kuzu-plan build/nu-ingest/manifest.json --out-dir build/kuzu-plan --out build/kuzu-plan.json
+```
+
+Transform the plan into executable Kùzu commands (dry-run by default):
+
+```nu
+use ./kuzu_run.nu *
+kuzu-run build/kuzu-plan.json --db build/kuzu/db            # dry-run
+kuzu-run build/kuzu-plan.json --db build/kuzu/db --validate # dry-run + validation metadata
+# kuzu-run build/kuzu-plan.json --db build/kuzu/db --execute        # execute when Kùzu binary is available
+# kuzu-run build/kuzu-plan.json --db build/kuzu/db --execute --validate   # execute and verify database presence
 ```
 
 Repo-local CLI wrapper:

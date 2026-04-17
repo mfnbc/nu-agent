@@ -24,6 +24,16 @@ Implemented:
   - `apply-edit`
   - `check-nu-syntax`
   - `self-check`
+- `shredder/`
+  - Rust semantic Markdown splitter that emits Nu Doc Chunk JSONL.
+- `nu-ingest.nu` / `nu-ingest`
+  - Nushell routing script that runs the splitter, validates chunks, and writes chunk JSONL + embedding-input jobs + manifest outputs.
+- `docs/ARCHITECTURE.md`
+  - Durable architecture summary.
+- `docs/PROJECT_CONTRACTS.md`
+  - Durable contracts for chunking, ingestion, and agent behavior.
+- `docs/NEXT_SESSION_PROMPT.md`
+  - Copy/paste prompt for resuming work after a context reset.
 
 ## Product Direction
 
@@ -37,10 +47,16 @@ Primary use cases, in order:
 - Add a direct CLI path for enrichment records and schemas.
 - Add a smoke test for enrichment entrypoint behavior.
 
-2. Automation
+2. Retrieval / knowledge base
+- Deterministic ingestion from Markdown, UXLC, and StarLing.
+- Rig for local embeddings only.
+- Kùzu for exact structural/linguistic graph lookup.
+- `nu-agent` consumes evidence, not raw corpus search.
+
+3. Automation
 - Generate Nu/Rust tooling to ingest, transform, and analyze data.
 
-3. General data operations
+4. General data operations
 - Keep the actual data operations user-driven in Nu.
 
 ## Decisions Locked In
