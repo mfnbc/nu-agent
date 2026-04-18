@@ -104,7 +104,7 @@ fn run_tract(
     // Load ONNX model
     let model = tract_onnx::onnx().model_for_path(model_path)?;
     // Make the model runnable
-    let mut prog = model.into_optimized()?;
+    let prog = model.into_optimized()?;
     let runnable = prog.into_runnable()?;
 
     // For now, we'll assume the model accepts input_ids and attention_mask as i64 tensors named appropriately.

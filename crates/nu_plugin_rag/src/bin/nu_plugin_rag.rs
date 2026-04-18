@@ -49,8 +49,8 @@ fn main() -> Result<()> {
             std::fs::create_dir_all(&cache_dir).ok();
 
             // Attempt to read a local prepare catalog for approved artifacts to download.
-            let mut downloaded = false;
-            let mut fastembed_checksum: Option<String> = None;
+            let downloaded = false;
+            let fastembed_checksum: Option<String> = None;
 
             let catalog_path =
                 std::path::Path::new("crates/nu_plugin_rag/data/prepare_catalog.json");

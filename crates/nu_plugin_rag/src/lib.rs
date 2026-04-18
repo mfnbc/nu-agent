@@ -52,6 +52,7 @@ pub fn blake3_of_file(path: &std::path::Path) -> anyhow::Result<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs::File;
 
     #[test]
     fn test_deterministic_embed_len() {
