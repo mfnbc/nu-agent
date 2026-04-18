@@ -1,3 +1,31 @@
-build/
-shredder/target/
-*.nu.try
+# Rust/Cargo
+/target/
+/**/target/
+
+# Ignore Cargo.lock in workspace crates/build outputs but allow top-level if desired
+/**/Cargo.lock
+
+# Crate caches and plugin caches
+crates/**/.cache/
+crates/**/target/
+
+# Datascience / model artifacts
+*.onnx
+*.onnx.*
+
+# Rust incremental and build artifacts
+**/*.rlib
+**/*.o
+**/*.d
+
+# Local editor/IDE
+.idea/
+.vscode/
+
+# Local artifacts
+*.log
+*.tmp
+
+# Misc
+/node_modules/
+.DS_Store

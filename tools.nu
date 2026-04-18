@@ -13,12 +13,54 @@ export const TOOL_NAMES = [
   "inspect-kuzu-plan"
   "inspect-chunk"
   "search-embedding-input"
+  "resolve-command-doc"
+  "search-nu-concepts"
 ]
 
 export def tool-commands [] {
   let cmds = (scope commands)
 
   $cmds | where { |c| $c.name in $TOOL_NAMES }
+}
+
+# Wrapper to call the resolve-command-doc script and return parsed JSON
+export def resolve-command-doc [--name: string] {
+  if (($name | default "") == "") {
+    error make { msg: "Missing required --name argument" }
+  }
+
+  let result = (do { ^$nu.current-exe --no-config-file -c "use scripts/resolve-command-doc.nu; main --name \"$name\"" } | complete)
+  if $result.exit_code != 0 {
+    error make { msg: ($result.stderr | str trim) }
+  }
+
+  let out = ($result.stdout? | default "")
+  if ($out | str length) == 0 {
+    error make { msg: "resolve-command-doc produced no output" }
+  }
+
+  try { $out | from json } catch { error make { msg: "resolve-command-doc returned invalid JSON" } }
+}
+
+# Wrapper to call the search-nu-concepts script and return parsed JSON array
+export def search-nu-concepts [--query: string, --limit: int = 0] {
+  if (($query | default "") == "") {
+    error make { msg: "Missing required --query argument" }
+  }
+
+  let cmd = if $limit > 0 { ^$nu.current-exe --no-config-file -c "use scripts/search-nu-concepts.nu; main --query \"$query\" --limit $limit" } else { ^$nu.current-exe --no-config-file -c "use scripts/search-nu-concepts.nu; main --query \"$query\"" }
+  let result = (do { $cmd } | complete)
+
+  if $result.exit_code != 0 {
+    error make { msg: ($result.stderr | str trim) }
+  }
+
+  let out = ($result.stdout? | default "")
+  if ($out | str length) == 0 {
+    error make { msg: "search-nu-concepts produced no output" }
+  }
+
+  try { $out | from json } catch { error make { msg: "search-nu-concepts returned invalid JSON" } }
 }
 
 export def read-file [--path: string] {

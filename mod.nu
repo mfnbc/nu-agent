@@ -103,6 +103,21 @@ const TOOL_SPECS = {
       limit: "Optional maximum number of hits to return."
     }
   }
+  "resolve-command-doc": {
+    description: "Resolve exact command documentation from the ingested Kùzu graph (or return informative error)."
+    required: ["name"]
+    allowed: ["name"]
+    argument_descriptions: { name: "Command name to resolve (exact)." }
+  }
+  "search-nu-concepts": {
+    description: "Search ingested concept vectors (fallback to JSONL scan) for relevant documentation evidence."
+    required: ["query"]
+    allowed: ["query", "limit"]
+    argument_descriptions: {
+      query: "Search text to match against ingested docs."
+      limit: "Optional maximum number of results to return."
+    }
+  }
 }
 
 def command-signatures [name: string] {
@@ -588,6 +603,8 @@ def invoke-tool [call] {
     "apply-edit" => { apply-edit --file $args.file --after $args.after }
     "check-nu-syntax" => { check-nu-syntax --path $args.path }
     "self-check" => { self-check }
+    "resolve-command-doc" => { resolve-command-doc --name $args.name }
+    "search-nu-concepts" => { search-nu-concepts --query $args.query --limit ($args.limit? | default 0) }
     _ => { error make { msg: $"Unknown tool: ($name)" } }
   }
 }

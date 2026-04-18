@@ -209,3 +209,51 @@ let schema = (token-seed-schema)
 
 That seed record is then sent to the LLM, which fills in the missing fields while
 preserving the same JSON object shape.
+
+## RAG Pipeline & nu_plugin_rag (Upcoming)
+
+This repository now includes a documented plan and Nushell-first tooling for building
+a Retrieval-Augmented Generation (RAG) artifact from Nushell documentation and other
+corpora. The goals and orchestration are described in docs/RAG.md.
+
+Key points:
+
+- The preferred workflow is Nushell + Rust only. No Python or other scripting languages
+  are required by the core pipeline.
+- A repo-local plugin called `nu_plugin_rag` is planned to expose commands such as
+  `rag.prepare-deps`, `rag.build`, `rag.status`, and `rag.rebuild` as Nushell commands.
+- The pipeline is intentionally idempotent and safe-by-default: CSV exports for Kùzu
+  and plan files for Rig/FastEmbed are produced by default; importing into Kùzu or
+  writing a LanceDB dataset is always opt-in.
+- See docs/RAG.md for the artifact layout, command surface, caching rules, and
+  developer notes.
+
+There are lightweight Nushell wrappers in `scripts/` to help run the prep/build/import
+steps. Two simple execution modes are supported so you can pick whichever is easiest:
+
+1) Direct CLI mode (no Nushell required)
+
+   - Build the plugin binaries:
+
+     cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+
+   - Run the orchestrator (this runs the basic pipeline steps and writes a small manifest):
+
+     ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+
+   - Run the deterministic embedding runner directly (for testing):
+
+     ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.jsonl --output build/embeddings_example.jsonl --dim 16
+
+2) Nushell wrapper mode (preferred if you use Nushell interactively)
+
+   - Ensure `nu` is on PATH, then run the prep wrapper (this sources a local shim and calls the plugin binary):
+
+     nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+
+   - Use `scripts/kuzu-import.nu` to opt-in to Kùzu import if you have the `kuzu` binary:
+
+     nu scripts/kuzu-import.nu --plan build/rag/nu-docs/kuzu-plan.json --execute-kuzu
+
+The Nushell wrappers are small and call the plugin binaries under `crates/nu_plugin_rag/target/debug/`.
+If you prefer Makefile shortcuts, use `make plugin-build` and `make build`.

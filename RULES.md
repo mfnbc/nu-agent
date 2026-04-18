@@ -27,6 +27,11 @@ nu-agent is a helper for Nushell only. It is not a general-purpose coding assist
 - The agent must plan and act through Nushell tools; it must not generate workflows in other shells/languages.
 - Prefer pure Nushell pipelines and `where`-driven filtering where possible.
 
+## RAG plugin constraint
+
+- Any RAG-related automation must follow the same rule: implementation languages are Nushell for orchestration and Rust for heavy lifting (nu_plugin crates or Rust-built binaries). No other languages (Python, Node, etc.) are permitted in the core pipeline.
+- The `nu_plugin_rag` is the sanctioned extension point for RAG tasks and must expose Nushell commands that implement the pipeline steps described in docs/RAG.md.
+
 ## Architecture Rules
 
 - Core contract: `(Prompt + ToolSchema) -> JSON Calls`.
