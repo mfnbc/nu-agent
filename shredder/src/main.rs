@@ -1,6 +1,6 @@
 use blake3;
 use pulldown_cmark::{Event, Options, Parser, Tag};
-use rmp_serde::Serializer as MsgpackSerializer;
+use rmp_serde::to_vec_named;
 use serde::Deserialize;
 use serde::Serialize;
 use std::env;
@@ -209,8 +209,9 @@ fn main() -> anyhow::Result<()> {
         .and_then(|s| s.to_str())
         .unwrap_or("shred");
     let out_chunks = out_dir.join(format!("{}.chunks.msgpack", stem));
-    let mut buf: Vec<u8> = Vec::new();
-    records.serialize(&mut MsgpackSerializer::new(&mut buf))?;
+    // Serialize records as MessagePack maps (named struct fields) so downstream
+    // consumers (nushell scripts) can access fields by name (eg. $chunk.taxonomy)
+    let buf = to_vec_named(&records)?;
     fs::write(&out_chunks, buf)?;
 
     // Also write an embedding_input msgpack (array of {id, text}) for fast consumption
@@ -228,8 +229,7 @@ fn main() -> anyhow::Result<()> {
         })
         .collect();
     let out_emb = out_dir.join(format!("{}.embedding_input.msgpack", stem));
-    let mut emb_buf: Vec<u8> = Vec::new();
-    emb.serialize(&mut MsgpackSerializer::new(&mut emb_buf))?;
+    let emb_buf = to_vec_named(&emb)?;
     fs::write(&out_emb, emb_buf)?;
 
     // Print produced paths so callers can find them
