@@ -5,7 +5,7 @@ use serde::Deserialize;
 use serde::Serialize;
 use std::env;
 use std::fs;
-use std::io::{self, Write};
+use std::io::Write;
 
 #[derive(Serialize)]
 struct NuDocChunk<'a> {
@@ -157,7 +157,7 @@ fn shred_markdown<'a>(path: &'a str, md: &'a str) -> Vec<NuDocChunk<'a>> {
     chunks
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 struct OutRecord {
     path: String,
     id: String,
@@ -177,7 +177,7 @@ fn main() -> anyhow::Result<()> {
 
     let path = &args[1];
     // This shredder chooses MessagePack as the canonical machine format.
-    // It writes a per-file chunks MessagePack to build/nu_ingest/<stem>.chunks.msgpack
+    // It updates the canonical combined files under build/nu_ingest.
 
     let content = fs::read_to_string(path)?;
 
@@ -203,38 +203,69 @@ fn main() -> anyhow::Result<()> {
         std::fs::create_dir_all(out_dir)?;
     }
 
-    // Write canonical chunks msgpack file per input markdown
-    let stem = std::path::Path::new(path)
-        .file_stem()
-        .and_then(|s| s.to_str())
-        .unwrap_or("shred");
-    let out_chunks = out_dir.join(format!("{}.chunks.msgpack", stem));
-    // Serialize records as MessagePack maps (named struct fields) so downstream
-    // consumers (nushell scripts) can access fields by name (eg. $chunk.taxonomy)
-    let buf = to_vec_named(&records)?;
-    fs::write(&out_chunks, buf)?;
-
-    // Also write an embedding_input msgpack (array of {id, text}) for fast consumption
-    #[derive(Serialize)]
-    struct EmbRec<'a> {
-        id: &'a str,
-        text: &'a str,
+    // Build embedding_input records for aggregation
+    #[derive(Serialize, Deserialize, Clone)]
+    struct EmbRec {
+        id: String,
+        text: String,
     }
 
     let emb: Vec<EmbRec> = records
         .iter()
         .map(|r| EmbRec {
-            id: &r.id,
-            text: &r.embedding_input,
+            id: r.id.clone(),
+            text: r.embedding_input.clone(),
         })
         .collect();
-    let out_emb = out_dir.join(format!("{}.embedding_input.msgpack", stem));
-    let emb_buf = to_vec_named(&emb)?;
-    fs::write(&out_emb, emb_buf)?;
 
-    // Print produced paths so callers can find them
-    println!("{}", out_chunks.display());
-    println!("{}", out_emb.display());
+    // --- Aggregation: update canonical combined files in build/nu_ingest ---
+    // Read existing combined chunks.msgpack (if present), append current records,
+    // and write back as a single MessagePack array with named maps.
+    let combined_chunks_path = out_dir.join("chunks.msgpack");
+    let mut combined_records: Vec<OutRecord> = if combined_chunks_path.exists() {
+        match std::fs::read(&combined_chunks_path) {
+            Ok(data) => match rmp_serde::from_slice::<Vec<OutRecord>>(&data) {
+                Ok(mut existing) => {
+                    existing.append(&mut records.clone());
+                    existing
+                }
+                Err(_) => {
+                    // If deserialization fails, overwrite with the current records
+                    records.clone()
+                }
+            },
+            Err(_) => records.clone(),
+        }
+    } else {
+        records.clone()
+    };
+
+    let combined_buf = to_vec_named(&combined_records)?;
+    fs::write(&combined_chunks_path, combined_buf)?;
+
+    // Similarly aggregate embedding_input into build/nu_ingest/embedding_input.msgpack
+    let combined_emb_path = out_dir.join("embedding_input.msgpack");
+    let mut combined_emb: Vec<EmbRec> = if combined_emb_path.exists() {
+        match std::fs::read(&combined_emb_path) {
+            Ok(data) => match rmp_serde::from_slice::<Vec<EmbRec>>(&data) {
+                Ok(mut existing) => {
+                    existing.append(&mut emb.clone());
+                    existing
+                }
+                Err(_) => emb.clone(),
+            },
+            Err(_) => emb.clone(),
+        }
+    } else {
+        emb.clone()
+    };
+
+    let combined_emb_buf = to_vec_named(&combined_emb)?;
+    fs::write(&combined_emb_path, combined_emb_buf)?;
+
+    // Print combined paths so callers can find them
+    println!("{}", combined_chunks_path.display());
+    println!("{}", combined_emb_path.display());
 
     Ok(())
 }

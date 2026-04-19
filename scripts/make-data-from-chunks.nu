@@ -6,7 +6,7 @@ def main [] {
   if not ("build/nu_ingest" | path exists) { echo "missing build/nu_ingest; run shredder first"; return }
 
   # Prefer binary MessagePack shredder output if present
-  let chunks = if ("build/nu_ingest/chunks.msgpack" | path exists) { (open build/nu_ingest/chunks.msgpack | from msgpack) } else { (open build/nu_ingest/chunks.jsonl | lines | where { |l| ($l | str trim) != "" } | each { |l| $l | from json }) }
+  let chunks = if ("build/nu_ingest/chunks.msgpack" | path exists) { (open --raw build/nu_ingest/chunks.msgpack | from msgpack) } else if ("build/nu_ingest/chunks.nuon" | path exists) { (open build/nu_ingest/chunks.nuon | from nuon) } else { error make { msg: "No chunk corpus found; run shredder to produce build/nu_ingest/chunks.msgpack or chunks.nuon" } }
 
   # Persist chunks as the canonical binary MessagePack store and a NUON copy for Nushell-friendly reading
   $chunks | to msgpack | save -f data/nu_docs.msgpack
