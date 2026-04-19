@@ -62,9 +62,8 @@ def main [path:string = "docs/"] {
     echo "# embed_runner --input query.nuon --output query_embedding.msgpack" \
          "&& nu-search --input data/nu_docs.msgpack --query-vec query_embedding.msgpack --top-k 3 --out-format nuon | from nuon | each { |hit| open data/nu_docs.msgpack | from msgpack | where id == $hit.id | get taxonomy.commands } | flatten | uniq"
 
-    print "Step 3: Populating Kùzu (Exact Matches) and building command map..."
-    # Build an in-memory map command -> chunk_id while also populating Kùzu if present
-    # Build command_pairs from the canonical chunks / NUON corpus (not from the embedding output)
+    print "Step 3: Building command map from chunks (no Kùzu provisioning)..."
+    # Build an in-memory map command -> chunk_id from the canonical corpus (NUON or chunks)
     let corpus = if ("data/nu_docs_vectors.nuon" | path exists) { open data/nu_docs_vectors.nuon } else { $chunks }
     let command_pairs = (
         $corpus
@@ -76,13 +75,11 @@ def main [path:string = "docs/"] {
         | flatten
     )
 
-    # Populate Kùzu if available and build command_map from pairs (first-seen wins)
     let command_map = {}
     for p in $command_pairs {
         let key = ($p.cmd | str downcase)
         let existing = (try { $command_map | get $key } catch { null })
         if ($existing == null) {
-            let _ = if ((which kuzu-query | length) > 0) { kuzu-query ($"MERGE (c:Command {{name: '{($p.cmd)}'}})\nMERGE (ch:Chunk {{id: '{($p.id)}'}})\nMERGE (c)-[:DESCRIBED_IN]->(ch)") } else { null }
             let command_map = ($command_map | upsert ($key) { id: $p.id, display: $p.cmd })
         }
     }

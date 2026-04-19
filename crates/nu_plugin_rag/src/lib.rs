@@ -3,7 +3,8 @@
 
 // Re-export common helpers from nu_agent_common to keep the plugin surface small.
 pub use nu_agent_common::{
-    deterministic_embed, read_embedding_input, write_embeddings, EmbeddingOut, EmbeddingRecord,
+    deterministic_embed, read_embedding_input, write_embeddings, DocRecord, EmbeddingOut,
+    EmbeddingRecord,
 };
 
 use std::process::Command;
