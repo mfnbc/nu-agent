@@ -49,7 +49,7 @@ fn main() -> Result<()> {
             std::fs::create_dir_all(&cache_dir).ok();
 
             // Attempt to read a local prepare catalog for approved artifacts to download.
-            let downloaded = false;
+            let mut downloaded = false;
             let fastembed_checksum: Option<String> = None;
 
             let catalog_path =
@@ -243,7 +243,7 @@ fn main() -> Result<()> {
                             let stem = p.file_stem().and_then(|s| s.to_str()).unwrap_or("document");
                             let chunks_path = format!("{}/{}.chunks.jsonl", chunks_dir, stem);
                             let embedding_path =
-                                format!("{}/{}.embedding_input.jsonl", embedding_dir, stem);
+                                format!("{}/{}.embedding_input.nuon", embedding_dir, stem);
 
                             // write chunks JSONL
                             if let Ok(mut f) = std::fs::File::create(&chunks_path) {
@@ -288,10 +288,10 @@ fn main() -> Result<()> {
                     for entry in entries.flatten() {
                         let path = entry.path();
                         if let Some(ext) = path.extension().and_then(|s| s.to_str()) {
-                            if ext == "jsonl" {
+                            if ext == "msgpack" || ext == "nuon" || ext == "jsonl" {
                                 let stem =
                                     path.file_stem().and_then(|s| s.to_str()).unwrap_or("out");
-                                let out_file = format!("{}/{}.embeddings.jsonl", out_dir, stem);
+                                let out_file = format!("{}/{}.embeddings.msgpack", out_dir, stem);
                                 let embed_bin = "crates/nu_plugin_rag/target/debug/embed_runner";
                                 if std::path::Path::new(&embed_bin).exists() {
                                     let _ = std::process::Command::new(&embed_bin)

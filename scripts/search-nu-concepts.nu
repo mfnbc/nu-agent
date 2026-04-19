@@ -6,21 +6,27 @@ export def main [--query: string, --limit: int = 0] {
         error make { msg: "Missing required --query argument" }
     }
 
-    # If Lance/Rig not available, fallback to scanning data/nu_docs_vectors.jsonl
-    if (not ("data/nu_docs_vectors.jsonl" | path exists)) {
-        error make { msg: "data/nu_docs_vectors.jsonl not found; run scripts/ingest-docs.nu first" }
-    }
-
     # Simple heuristic: case-insensitive substring match against the text field
     let q = ($query | str downcase)
-    let hits = (
-        open data/nu_docs_vectors.jsonl | from json |
-        where ($it.text | str downcase) =~ $q
-    )
+    # Require NUON corpus
+    if not ("data/nu_docs_vectors.nuon" | path exists) {
+        error make { msg: "data/nu_docs_vectors.nuon or data/nu_docs.msgpack not found; run scripts/ingest-docs.nu first" }
+    }
 
+    let hits = (
+        if ("data/nu_docs.msgpack" | path exists) { open data/nu_docs.msgpack | from msgpack } else { open data/nu_docs_vectors.nuon }
+        | where { |row|
+            let txt = ($row.text? | default "")
+            let emb = ($row.embedding_input? | default "")
+            let data_content = ($row.data? | default {} | get content | default "")
+            let combined = (($txt + "\n" + $emb + "\n" + $data_content) | str downcase)
+            $combined =~ $q
+        }
+    )
     let limited = if $limit > 0 { $hits | first $limit } else { $hits | first 5 }
 
-    $limited | to json
+    # Emit NUON structured output for consumers
+    $limited | to nuon --indent 2
 }
 
 export def _main_unused [] { }

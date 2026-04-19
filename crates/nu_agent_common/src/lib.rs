@@ -1,5 +1,7 @@
 use anyhow::Result;
+use rmp_serde::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
+use std::fs;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::path::Path;
@@ -16,7 +18,41 @@ pub struct EmbeddingOut {
     pub embedding: Vec<f32>,
 }
 
+/// Canonical persisted document record produced by embed_runner and stored in
+/// data/nu_docs.msgpack. Keep this stable to ensure MessagePack compatibility
+/// between the runner and consumers like nu-search.
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct DocRecord {
+    pub id: String,
+    pub text: String,
+    pub embedding: Vec<f32>,
+    pub metadata: Option<serde_json::Value>,
+}
+
 pub fn read_embedding_input<P: AsRef<Path>>(path: P) -> Result<Vec<EmbeddingRecord>> {
+    let p = path.as_ref();
+    // infer by extension: .msgpack or .mpk => read as MessagePack array, otherwise expect JSONL
+    if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
+        if ext.eq_ignore_ascii_case("msgpack") || ext.eq_ignore_ascii_case("mpk") {
+            // Read entire file and parse as a single msgpack array of records
+            let bytes = fs::read(p)?;
+            let mut de = Deserializer::new(&bytes[..]);
+            let v: Vec<EmbeddingRecord> = Deserialize::deserialize(&mut de)?;
+            return Ok(v);
+        }
+    }
+
+    // Default: expect NUON or JSONL. If path ends with .nuon, read via Nushell-friendly JSON text.
+    if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
+        if ext.eq_ignore_ascii_case("nuon") {
+            // NUON is textual JSON-like; read as string then parse as JSON array
+            let s = std::fs::read_to_string(p)?;
+            let v: Vec<EmbeddingRecord> = serde_json::from_str(&s)?;
+            return Ok(v);
+        }
+    }
+
+    // Otherwise, JSONL
     let f = File::open(path)?;
     let reader = BufReader::new(f);
     let mut out = Vec::new();
@@ -35,6 +71,17 @@ pub fn read_embedding_input<P: AsRef<Path>>(path: P) -> Result<Vec<EmbeddingReco
 }
 
 pub fn write_embeddings<P: AsRef<Path>>(path: P, embeddings: &[EmbeddingOut]) -> Result<()> {
+    let p = path.as_ref();
+    if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
+        if ext.eq_ignore_ascii_case("msgpack") || ext.eq_ignore_ascii_case("mpk") {
+            // Serialize the entire vector as a single MessagePack array
+            let mut buf = Vec::new();
+            embeddings.serialize(&mut Serializer::new(&mut buf))?;
+            std::fs::write(p, buf)?;
+            return Ok(());
+        }
+    }
+
     let file = File::create(path)?;
     for e in embeddings {
         let s = serde_json::to_string(e)?;

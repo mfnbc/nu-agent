@@ -58,7 +58,7 @@ The Rust splitter emits one JSON object per chunk with the following shape:
 1. `nu-shredder` parses Markdown into JSONL chunks.
 2. `nu-ingest` validates chunks and writes:
    - `*.chunks.jsonl`
-   - `*.embedding_input.jsonl`
+   - `*.embedding_input.nuon` (preferred) and `*.embedding_input.msgpack` for binary exchange
    - `manifest.json`
 3. `rig_plan.nu` converts ingestion manifests into LanceDB job plans for Rig/FastEmbed.
 4. `rig_run.nu` derives deterministic Rig FastEmbed command invocations (dry-run by default, optional execution + LanceDB validation).
@@ -76,6 +76,12 @@ The Rust splitter emits one JSON object per chunk with the following shape:
 - keyword graph: exact lookup and neighbor traversal
 - reasoning LLM: synthesis from retrieved evidence
 - explicit chunk lookup: return matching chunk evidence, not conclusions
+
+## Canonical binary store
+
+- The canonical machine-first artifact for persisted ingested documents is `data/nu_docs.msgpack`.
+- This is a single MessagePack array of chunk records with fields including id, text, embedding (Vec<f32>), and metadata.
+- SurrealDB / RocksDB persistence is deferred and may be used later to bulk-load `data/nu_docs.msgpack` into a database if desired.
 
 ## Domain specializations
 

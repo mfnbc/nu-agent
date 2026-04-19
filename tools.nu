@@ -410,36 +410,55 @@ export def "search-embedding-input" [--path: string, --pattern: string, --limit:
 
   let input_type = ($path | path type)
   let files = if $input_type == 'dir' {
-    glob $"($path)/**/*.embedding_input.jsonl" | sort
-  } else if ($path | str ends-with ".embedding_input.jsonl") {
+    glob $"($path)/**/*.embedding_input.nuon" | sort
+  } else if ($path | str ends-with ".embedding_input.nuon" ) or ($path | str ends-with ".embedding_input.msgpack") {
     [$path]
   } else {
-    error make { msg: "search-embedding-input expects a directory or a .embedding_input.jsonl file" }
+    error make { msg: "search-embedding-input expects a directory or a .embedding_input.nuon/.msgpack file" }
   }
 
   if (($files | length) == 0) {
-    error make { msg: $"No embedding_input JSONL files found under: ($path)" }
+    error make { msg: $"No embedding_input NUON/MSGPACK files found under: ($path)" }
   }
 
   let hits = (
     $files
     | each { |file|
-        open --raw $file
-        | lines
-        | where { |line| ($line | str trim) != "" }
-        | each { |line|
-            let record = ($line | from json)
-            if (($record.embedding_input? | default "") =~ $pattern) {
-              {
-                file: $file
-                id: ($record.id? | default null)
-                embedding_input: $record.embedding_input
+        try {
+          if ($file | str ends-with ".msgpack") {
+            # Use Nushell's native msgpack support to decode binary to structured data
+            open $file | from msgpack
+            | each { |record|
+                if (($record.embedding_input? | default "") =~ $pattern) {
+                  {
+                    file: $file
+                    id: ($record.id? | default null)
+                    embedding_input: $record.embedding_input
+                  }
+                } else {
+                  null
+                }
               }
-            } else {
-              null
-            }
+            | compact
+          } else {
+            open --raw $file
+            | lines
+            | where { |line| ($line | str trim) != "" }
+            | each { |line|
+                let record = ($line | from json)
+                if (($record.embedding_input? | default "") =~ $pattern) {
+                  {
+                    file: $file
+                    id: ($record.id? | default null)
+                    embedding_input: $record.embedding_input
+                  }
+                } else {
+                  null
+                }
+              }
+            | compact
           }
-        | compact
+        } catch { [] }
       }
     | flatten
   )

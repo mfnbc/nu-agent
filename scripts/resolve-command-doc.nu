@@ -6,9 +6,13 @@ export def main [--name: string] {
         error make { msg: "Missing required --name argument" }
     }
 
-    let q = $"MATCH (c:Command {{name: '{($name)}'}}) OPTIONAL MATCH (c)-[:DESCRIBED_IN]->(ch:Chunk) RETURN c.signature AS signature, ch.data.content AS description, ch.data.code_blocks AS examples"
+    # Build the MATCH query without using Nushell's ${} interpolation with braces
+    # Escape single quotes in the provided name to avoid breaking the query string
+    let safe_name = ($name | str replace "'" "\\'")
+    let q = ("MATCH (c:Command {name: '" + $safe_name + "'}) OPTIONAL MATCH (c)-[:DESCRIBED_IN]->(ch:Chunk) RETURN c.signature AS signature, ch.data.content AS description, ch.data.code_blocks AS examples")
 
-    if (which kuzu-query | success) {
+    # Check for presence of the kuzu-query binary in PATH
+    if (which kuzu-query | length) > 0 {
         try {
             let rows = (kuzu-query $q | from json)
             let signature = ($rows | first 1 | get signature) | default ""
@@ -22,37 +26,41 @@ export def main [--name: string] {
         }
     }
 
-    # Fallback: use command_map.json + data/nu_docs_vectors.jsonl
-    if not ("data/command_map.json" | path exists) {
-        return { status: "error", message: "command_map.json not found; run scripts/ingest-docs.nu first", code: "missing_command_map" }
+    # Fallback: use command_map.nuon + (data/nu_docs_vectors.nuon or data/nu_docs.msgpack)
+    if not ("data/command_map.nuon" | path exists) {
+        return { status: "error", message: "data/command_map.nuon not found; run scripts/ingest-docs.nu first", code: "missing_command_map" }
     }
 
-    let cmap = (open data/command_map.json | from json)
+    # Read the command map (NUON) as a record
+    let cmap = (open data/command_map.nuon)
     let key = ($name | str downcase)
 
-    if not ((cmap | has $key)) {
+    # Try to get the entry for this key from the command map; use try to avoid errors
+    let entry = try { ($cmap | get $key) } catch { null }
+
+    if ($entry == null) {
         # Build simple fuzzy suggestions: prefer substring matches then length proximity
-        let keys = (cmap | keys)
+        let keys = (try { ($cmap | keys) } catch { [] })
 
         # Prefer compiled fuzzy binary for deterministic, faster suggestions
         let fuzzy_bin = "crates/nu_fuzzy_match/target/debug/nu_fuzzy_match"
         let run_cmd = if ("$fuzzy_bin" | path exists) {
-            ^$fuzzy_bin --query $name --map-path data/command_map.json --top 3
+            ^$fuzzy_bin --query $name --map-path data/command_map.nuon --top 3
         } else {
             # Fallback to cargo run
-            ^cargo run --manifest-path crates/nu_fuzzy_match/Cargo.toml -- --query $name --map-path data/command_map.json --top 3
+            ^cargo run --manifest-path crates/nu_fuzzy_match/Cargo.toml -- --query $name --map-path data/command_map.nuon --top 3
         }
 
-        let out = (do { $run_cmd } | complete)
-        if $out.exit_code != 0 {
+        let out = try { (do { $run_cmd } | complete) } catch { null }
+        if ($out == null) {
             # Fallback: use substring suggestions as a last resort
-            let suggestions = (cmap | keys | where { ($it | str downcase) =~ ($key | str downcase) } | first 3 | each { { name: (cmap | get $it | get display), key: $it, score: 0 } })
-            return { status: "error", message: "Command not found", name: $name, suggestions: $suggestions, note: "fuzzy binary failed" }
+            let suggestions = (try { ($cmap | keys | where { ($it | str downcase) =~ ($key | str downcase) } | first 3 | each { { name: ($cmap | get $it | get display), key: $it, score: 0 } }) } catch { [] })
+            return { status: "error", message: "Command not found", name: $name, suggestions: $suggestions, note: "fuzzy binary failed to execute" }
         }
 
         let parsed = try { ($out.stdout | from json) } catch { null }
         if $parsed == null {
-            let suggestions = (cmap | keys | where { ($it | str downcase) =~ ($key | str downcase) } | first 3 | each { { name: (cmap | get $it | get display), key: $it, score: 0 } })
+            let suggestions = (try { ($cmap | keys | where { ($it | str downcase) =~ ($key | str downcase) } | first 3 | each { { name: ($cmap | get $it | get display), key: $it, score: 0 } }) } catch { [] })
             return { status: "error", message: "Command not found", name: $name, suggestions: $suggestions, note: "fuzzy binary produced invalid JSON" }
         }
 
@@ -61,17 +69,46 @@ export def main [--name: string] {
         return { status: "error", message: "Command not found", name: $name, suggestions: $suggestions }
     }
 
-    let chunk_id = (cmap | get $key | get id)
+    let chunk_id = ($entry | get id)
 
-    if not ("data/nu_docs_vectors.jsonl" | path exists) {
-        return { status: "error", message: "nu_docs_vectors.jsonl not found; run scripts/ingest-docs.nu first", code: "missing_vectors" }
+    # Prefer NUON corpus for robust Nushell-native parsing; if NUON is missing fall back to MessagePack
+    let use_msgpack = false
+    if ("data/nu_docs_vectors.nuon" | path exists) {
+        let rows = (open data/nu_docs_vectors.nuon)
+        let hit = null
+        for r in $rows {
+            if (($r.id? | default "") == $chunk_id) { let hit = $r; break }
+        }
+    } else if ("data/nu_docs.msgpack" | path exists) {
+        # Read the MessagePack canonical store
+        let rows = (open data/nu_docs.msgpack | from msgpack)
+        let hit = null
+        for r in $rows {
+            if (($r.id? | default "") == $chunk_id) { let hit = $r; break }
+        }
+        let use_msgpack = true
+    } else {
+        return { status: "error", message: "No corpus found (data/nu_docs_vectors.nuon or data/nu_docs.msgpack); run scripts/ingest-docs.nu first", code: "missing_corpus" }
     }
 
-    let rows = (open --raw data/nu_docs_vectors.jsonl | lines | where { ($it | str trim) != "" } | each { $it | from json })
-    let hit = (rows | where { ($it.id? | default "") == $chunk_id } | first)
-
     if ($hit == null) {
-        return { status: "error", message: "Mapped chunk id not found in vectors JSONL", chunk_id: $chunk_id }
+        # Best-effort: search for mentions of the command in text/embedding_input/data.code_blocks
+        let name_lc = ($name | str downcase)
+        let alt_hit = null
+        let rows2 = if (use_msgpack) { (open data/nu_docs.msgpack | from msgpack) } else { (open data/nu_docs_vectors.nuon) }
+        for r2 in $rows2 {
+            let txt = (($r2.text? | default "") | str downcase)
+            let emb = (($r2.embedding_input? | default "") | str downcase)
+            let data_content = (($r2.data? | default {} | get content | default "") | str downcase)
+            let combined = ($txt + "\n" + $emb + "\n" + $data_content)
+            if ($combined =~ $name_lc) { let alt_hit = $r2; break }
+        }
+
+        if ($alt_hit == null) {
+            return { status: "error", message: "Mapped chunk id not found in corpus and no alternative match", chunk_id: $chunk_id }
+        }
+
+        let hit = $alt_hit
     }
 
     let sig = ($hit.signature? | default null)

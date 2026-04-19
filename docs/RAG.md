@@ -38,6 +38,23 @@ User-facing commands (nu_plugin_rag)
 - rag.rebuild --parts <shred|ingest|embed|rig|kuzu> --input --out-dir
   - Partial rebuild of specified pipeline stages.
 
+Preferred artifact formats
+-------------------------
+
+For Nushell-native tooling we prefer NUON (Nushell Object Notation) or MessagePack
+for persisted corpus artifacts. These formats preserve structured types, are
+efficient to parse from Nushell, and avoid brittle newline-delimited JSON parsing.
+
+Special cases: when a database binary is the most appropriate backing store
+(for example `sqlite` files, LanceDB/Parquet-backed indexes, or other local DB
+engines like SurrealDB), treat those as optional, opt-in artifacts. Importing
+into a binary database is allowed only when the import can be performed as a
+one-off command (e.g., a single sqlite3 invocation that loads a CSV or executes
+an import SQL script). This keeps the pipeline reproducible and avoids long-
+running services during ingestion. The pipeline will emit portable intermediary
+artifacts (NUON/MsgPack/CSV) that can be imported into these databases when the
+user explicitly requests it.
+
 Artifact layout
 ---------------
 
@@ -45,8 +62,8 @@ Default structure under <out-dir>:
 
 - sources/<name>/ (git clone or local path)
 - chunks/*.chunks.jsonl
-- embedding_input/*.embedding_input.jsonl
-- embeddings/*.embeddings.jsonl
+- embedding_input/*.embedding_input.nuon (preferred) and embeddings/*.embeddings.msgpack for embeddings
+- embeddings/*.embeddings.jsonl (fallback)
 - rig/rig-plan.json
 - rig/lancedb/ (if executed)
 - kuzu/nodes.csv

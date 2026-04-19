@@ -98,7 +98,7 @@ Deterministic Markdown ingestion:
 ./nu-ingest README.md --out-dir build/nu-ingest
 ```
 
-This writes JSONL chunks, embedding-input jobs, and a manifest under the output directory. Each Markdown file produces both `<name>.chunks.jsonl` and `<name>.embedding_input.jsonl` so Rig/FastEmbed can index the derived inputs deterministically.
+This writes JSONL chunks, embedding-input jobs, and a manifest under the output directory. Each Markdown file produces both `<name>.chunks.jsonl` and `<name>.embedding_input.nuon` (preferred) so Rig/FastEmbed can index the derived inputs deterministically.
 
 Generate a LanceDB ingestion plan for Rig/FastEmbed:
 
@@ -243,7 +243,7 @@ steps. Two simple execution modes are supported so you can pick whichever is eas
 
    - Run the deterministic embedding runner directly (for testing):
 
-     ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.jsonl --output build/embeddings_example.jsonl --dim 16
+      ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.nuon --output build/embeddings_example.msgpack --dim 16
 
 2) Nushell wrapper mode (preferred if you use Nushell interactively)
 

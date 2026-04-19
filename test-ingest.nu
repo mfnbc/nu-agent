@@ -18,7 +18,7 @@ export def main [] {
   let result = {
     manifest: ($out_dir | path join "manifest.json")
     chunks: ($out_dir | path join "README.chunks.jsonl")
-    embedding: ($out_dir | path join "README.embedding_input.jsonl")
+    embedding: ($out_dir | path join "README.embedding_input.nuon")
   }
 
   if not ($result.manifest | path exists) {

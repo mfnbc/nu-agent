@@ -98,7 +98,7 @@ const TOOL_SPECS = {
     required: ["path", "pattern"]
     allowed: ["path", "pattern", "limit"]
     argument_descriptions: {
-      path: "Directory or .embedding_input.jsonl file to search."
+      path: "Directory or .embedding_input.nuon file to search."
       pattern: "Regex pattern to match against embedding_input text."
       limit: "Optional maximum number of hits to return."
     }

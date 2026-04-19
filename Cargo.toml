@@ -3,4 +3,5 @@ members = [
     "crates/nu_plugin_rag",
     "crates/nu_fuzzy_match",
     "crates/nu_agent_common",
+    "shredder",
 ]
