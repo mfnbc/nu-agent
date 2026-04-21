@@ -1,0 +1,170 @@
+–—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bits_rol.mdÙ@9df00a9c30b4604a935deba45bfcff5e10633411ad1a8088db7c4f25b662eff4¯title: bits rol‘¤bitsÙ;
+
+
+
+
+
+
+
+
+``bits rol``
+[link: /commands/categories/bits.md] ’ÙfTitle: title: bits rol
+Path: bits
+Content:
+
+
+
+
+
+
+
+
+
+``bits rol``
+[link: /commands/categories/bits.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bits_rol.mdÙ@196149a3003f4435980052d7c88b87ea8a2d01e071a38e4aab8c1eb44c9ae301¯title: bits rol‘©Signature¾``> bits rol {flags} (bits)``
+’ÙNTitle: title: bits rol
+Path: Signature
+Content:
+``> bits rol {flags} (bits)``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bits_rol.mdÙ@5db52a0a8965b4b3c0c5bbe8d3c9a3b992f2c36e8eb9b172614baae7913a8062¯title: bits rol‘¥FlagsÙğ``--signed, -s``
+: Always treat input number as a signed number.
+``--number-bytes, -n {int}``
+: The word size in number of bytes. Must be 
+``1``
+, 
+``2``
+, 
+``4``
+, or 
+``8``
+ (defaults to the smallest of those that fits the input number).
+’ÚTitle: title: bits rol
+Path: Flags
+Content:
+``--signed, -s``
+: Always treat input number as a signed number.
+``--number-bytes, -n {int}``
+: The word size in number of bytes. Must be 
+``1``
+, 
+``2``
+, 
+``4``
+, or 
+``8``
+ (defaults to the smallest of those that fits the input number).
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bits_rol.mdÙ@743262a9f1761b4c00747a99f949d11ef092886d10cd8e460c180dedf23dd003¯title: bits rol‘ªParametersÙ*``bits``
+: Number of bits to rotate left.
+’Ù[Title: title: bits rol
+Path: Parameters
+Content:
+``bits``
+: Number of bits to rotate left.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bits_rol.mdÙ@cdef725fd8de7d236366e87e6b30dc3e98c1e1e7e521e3a8466d69b434797cce¯title: bits rol‘³Input/output types:Ùainput
+output
+int
+int
+binary
+binary
+list
+<
+int
+>
+
+list
+<
+int
+>
+
+list
+<
+binary
+>
+
+list
+<
+binary
+>
+
+’Ù›Title: title: bits rol
+Path: Input/output types:
+Content:
+input
+output
+int
+int
+binary
+binary
+list
+<
+int
+>
+
+list
+<
+int
+>
+
+list
+<
+binary
+>
+
+list
+<
+binary
+>
+
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bits_rol.mdÙ@c87577e5fdbd9a61c47f49b7646dd909986418e88a6d495f52bf939c76d48185¯title: bits rol‘¨ExamplesÚRotate left a number with 2 bits
+```Fenced(Borrowed("nu"))
+> 17 | bits rol 2
+68
+
+```
+Rotate left a list of numbers with 2 bits
+```Fenced(Borrowed("nu"))
+> [5 3 2] | bits rol 2
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ 20 â”‚
+â”‚ 1 â”‚ 12 â”‚
+â”‚ 2 â”‚  8 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â•¯
+
+
+```
+rotate left binary data
+```Fenced(Borrowed("nu"))
+> 0x[c0 ff ee] | bits rol 10
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ff bb 03                                             Ã—Ã—â€¢
+
+
+```
+’ÚATitle: title: bits rol
+Path: Examples
+Content:
+Rotate left a number with 2 bits
+```Fenced(Borrowed("nu"))
+> 17 | bits rol 2
+68
+
+```
+Rotate left a list of numbers with 2 bits
+```Fenced(Borrowed("nu"))
+> [5 3 2] | bits rol 2
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ 20 â”‚
+â”‚ 1 â”‚ 12 â”‚
+â”‚ 2 â”‚  8 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â•¯
+
+
+```
+rotate left binary data
+```Fenced(Borrowed("nu"))
+> 0x[c0 ff ee] | bits rol 10
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ff bb 03                                             Ã—Ã—â€¢
+
+
+```

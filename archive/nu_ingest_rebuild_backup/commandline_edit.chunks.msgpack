@@ -1,0 +1,65 @@
+•—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/commandline_edit.mdÙ@40623063512aaa128b8eb672e703e30e00625576c82a9efcb1be00878ad71ebc·title: commandline edit‘¤coreÙC
+
+
+
+
+
+
+
+
+``commandline edit``
+[link: /commands/categories/core.md] ’ÙvTitle: title: commandline edit
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``commandline edit``
+[link: /commands/categories/core.md] —ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/commandline_edit.mdÙ@cba4d1d8a047fcc1144277af515e9e57ab410455205464e00ca8236c671e6252·title: commandline edit‘©SignatureÙ%``> commandline edit {flags} (str)``
+’Ù]Title: title: commandline edit
+Path: Signature
+Content:
+``> commandline edit {flags} (str)``
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/commandline_edit.mdÙ@bf37daf72353f88fa07315c92bb8a149d01d0a82803d80129432d7858a2bade4·title: commandline edit‘¥FlagsÚ``--append, -a``
+: Appends the string to the end of the buffer.
+``--insert, -i``
+: Inserts the string into the buffer at the cursor position.
+``--replace, -r``
+: Replaces the current contents of the buffer (default).
+``--accept, -A``
+: Immediately executes the result after edit.
+’ÚLTitle: title: commandline edit
+Path: Flags
+Content:
+``--append, -a``
+: Appends the string to the end of the buffer.
+``--insert, -i``
+: Inserts the string into the buffer at the cursor position.
+``--replace, -r``
+: Replaces the current contents of the buffer (default).
+``--accept, -A``
+: Immediately executes the result after edit.
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/commandline_edit.mdÙ@ba1230509bf89122e3dd7b1cc4e64fcb41f7f88ed9ae1f17e607ddd9a2fd83e4·title: commandline edit‘ªParametersÙ4``str``
+: The string to perform the operation with.
+’ÙmTitle: title: commandline edit
+Path: Parameters
+Content:
+``str``
+: The string to perform the operation with.
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/commandline_edit.mdÙ@c7492debac1f113e17ad75c4450414993764fa76630bafb2ddabca725087151e·title: commandline edit‘³Input/output types:½input
+output
+nothing
+nothing
+’Ù_Title: title: commandline edit
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing

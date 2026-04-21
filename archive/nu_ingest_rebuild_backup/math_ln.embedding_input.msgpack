@@ -1,0 +1,43 @@
+”’Ù@a3660445b0d3607bf2a0d7d20bebfd621cf88becb6dc14e891f5329fec4c45a5ÙdTitle: title: math ln
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math ln``
+[link: /commands/categories/math.md] ’Ù@cb3918ef1cd7fecc08cd0fa5e08df68a38f511ebab5c6b82eba40e96f194c0ebÙFTitle: title: math ln
+Path: Signature
+Content:
+``> math ln {flags} ``
+’Ù@5bc8094800fb0a0c5b4b4696c29422fcd2de346bb28dcdb2e3b6a66f366035dcÙtTitle: title: math ln
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’Ù@46637f3c409b823ef571b88a1f979b98d1a434741daab47761dfc1196436c007Ù¡Title: title: math ln
+Path: Examples
+Content:
+Get the natural logarithm of e
+```Fenced(Borrowed("nu"))
+> 2.7182818 | math ln | math round --precision 4
+1.0
+
+```

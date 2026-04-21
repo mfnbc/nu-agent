@@ -1,0 +1,62 @@
+���@a2bfb7c9ef9536b9af6bd98bea4fe00cf60e4f7d0954f7f4d6c6352f3ddc10b9�|Title: title: polars flatten
+Path: lazyframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars flatten``
+[link: /commands/categories/lazyframe.md] ��@bd8050b2d4a52014404b9a19be6bcf3945dae983f61d7ad66923b9251d31d06f�[Title: title: polars flatten
+Path: Signature
+Content:
+``> polars flatten {flags} ...rest``
+��@31aaf88dca13742e7e1e22b605f743cdaae46d5589d81f4eaa227f13b8ba2661�yTitle: title: polars flatten
+Path: Parameters
+Content:
+``...rest``
+: Columns to flatten, only applicable for dataframes.
+��@262b4eebd726c3755bb44b8cbf0dd6074a623ae97f1e0eef75bc56f2e73b939dٓTitle: title: polars flatten
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+��@ed72be1fc813237c5ade94d17278e98900680271169b09850f008008f3b59f19��Title: title: polars flatten
+Path: Examples
+Content:
+Flatten the specified dataframe
+```Fenced(Borrowed("nu"))
+> [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]] | polars into-df | polars flatten hobbies | polars collect
+╭───┬────┬───────┬──────────╮
+│ # │ id │ name  │ hobbies  │
+├───┼────┼───────┼──────────┤
+│ 0 │  1 │ Mercy │ Cycling  │
+│ 1 │  1 │ Mercy │ Knitting │
+│ 2 │  2 │ Bob   │ Skiing   │
+│ 3 │  2 │ Bob   │ Football │
+╰───┴────┴───────┴──────────╯
+
+
+```
+Select a column and flatten the values
+```Fenced(Borrowed("nu"))
+> [[id name hobbies]; [1 Mercy [Cycling Knitting]] [2 Bob [Skiing Football]]] | polars into-df | polars select (polars col hobbies | polars flatten)
+╭───┬──────────╮
+│ # │ hobbies  │
+├───┼──────────┤
+│ 0 │ Cycling  │
+│ 1 │ Knitting │
+│ 2 │ Skiing   │
+│ 3 │ Football │
+╰───┴──────────╯
+
+
+```

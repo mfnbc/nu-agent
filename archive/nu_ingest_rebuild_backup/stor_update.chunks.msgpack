@@ -1,0 +1,101 @@
+•—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_update.mdÙ@060530e5637ae7f681482dc26f389ce47275d2c81a26185969a1fec948f30322²title: stor update‘¨databaseÙB
+
+
+
+
+
+
+
+
+``stor update``
+[link: /commands/categories/database.md] ’ÙtTitle: title: stor update
+Path: database
+Content:
+
+
+
+
+
+
+
+
+
+``stor update``
+[link: /commands/categories/database.md] —ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_update.mdÙ@cb6b27761e2373b30415af0334d510c3e6911ebce8ba9be0113ad0986c2aecb3²title: stor update‘©Signature»``> stor update {flags} ``
+’ÙNTitle: title: stor update
+Path: Signature
+Content:
+``> stor update {flags} ``
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_update.mdÙ@44b5d7f2fd4d60f799ca8c0dba7d41d0130003d5ccbb54dd3f9caa5403bbda7e²title: stor update‘¥FlagsÚ``--table-name, -t {string}``
+: Name of the table you want to insert into.
+``--update-record, -u {record}``
+: A record of column names and column values to update in the specified table.
+``--where-clause, -w {string}``
+: A sql string to use as a where clause without the WHERE keyword.
+’ÚMTitle: title: stor update
+Path: Flags
+Content:
+``--table-name, -t {string}``
+: Name of the table you want to insert into.
+``--update-record, -u {record}``
+: A record of column names and column values to update in the specified table.
+``--where-clause, -w {string}``
+: A sql string to use as a where clause without the WHERE keyword.
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_update.mdÙ@a37395749271475cf23df5698f0add0b83137b030b1611501acd5385bcb2a337²title: stor update‘³Input/output types:Ù2input
+output
+nothing
+table
+record
+table
+any
+table
+’ÙoTitle: title: stor update
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+record
+table
+any
+table
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_update.mdÙ@8d5a269db5e584501b17baaa80a392f97e4bf104b172962443a60002a008de14²title: stor update‘¨ExamplesÚ	Update the in-memory sqlite database
+```Fenced(Borrowed("nu"))
+> stor update --table-name nudb --update-record {str1: nushell datetime1: 2020-04-17}
+
+
+```
+Update the in-memory sqlite database with a where clause
+```Fenced(Borrowed("nu"))
+> stor update --table-name nudb --update-record {str1: nushell datetime1: 2020-04-17} --where-clause "bool1 = 1"
+
+
+```
+Update the in-memory sqlite database through pipeline input
+```Fenced(Borrowed("nu"))
+> {str1: nushell datetime1: 2020-04-17} | stor update --table-name nudb
+
+
+```
+’Ú;Title: title: stor update
+Path: Examples
+Content:
+Update the in-memory sqlite database
+```Fenced(Borrowed("nu"))
+> stor update --table-name nudb --update-record {str1: nushell datetime1: 2020-04-17}
+
+
+```
+Update the in-memory sqlite database with a where clause
+```Fenced(Borrowed("nu"))
+> stor update --table-name nudb --update-record {str1: nushell datetime1: 2020-04-17} --where-clause "bool1 = 1"
+
+
+```
+Update the in-memory sqlite database through pipeline input
+```Fenced(Borrowed("nu"))
+> {str1: nushell datetime1: 2020-04-17} | stor update --table-name nudb
+
+
+```

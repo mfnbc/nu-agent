@@ -1,0 +1,88 @@
+–—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/hide.mdÙ@e5370f6383841d303c538ebea531550ebbd97e02e0c2ac62ddeb65b60570b01c«title: hide‘¤coreÙ7
+
+
+
+
+
+
+
+
+``hide``
+[link: /commands/categories/core.md] ’Ù^Title: title: hide
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``hide``
+[link: /commands/categories/core.md] —ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/hide.mdÙ@a760ec0bc835ee67fa4d25c30009fb687a8f3b6aaab2ebe23e7e14ee4f9f6e84«title: hide‘©SignatureÙ&``> hide {flags} (module) (members)``
+’ÙRTitle: title: hide
+Path: Signature
+Content:
+``> hide {flags} (module) (members)``
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/hide.mdÙ@bcb382137d7e36079d226a15d1dcec0fd74a10b97d82e4599d0fef2ec1b21b1e«title: hide‘ªParametersÙW``module``
+: Module or module file.
+``members``
+: Which members of the module to hide.
+’Ù„Title: title: hide
+Path: Parameters
+Content:
+``module``
+: Module or module file.
+``members``
+: Which members of the module to hide.
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/hide.mdÙ@95149b8387d54ad680f076706513db607732154c2f65a89b2626b6e90e829d1e«title: hide‘³Input/output types:½input
+output
+nothing
+nothing
+’ÙSTitle: title: hide
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/hide.mdÙ@e4313ecdbad370393af59fca88b98a5dd3c3a83f8ed64832122e1059497a5e57«title: hide‘¨ExamplesÙ¾Hide the alias just defined.
+```Fenced(Borrowed("nu"))
+> alias lll = ls -l; hide lll
+
+
+```
+Hide a custom command.
+```Fenced(Borrowed("nu"))
+> def say-hi [] { echo 'Hi!' }; hide say-hi
+
+
+```
+’ÙéTitle: title: hide
+Path: Examples
+Content:
+Hide the alias just defined.
+```Fenced(Borrowed("nu"))
+> alias lll = ls -l; hide lll
+
+
+```
+Hide a custom command.
+```Fenced(Borrowed("nu"))
+> def say-hi [] { echo 'Hi!' }; hide say-hi
+
+
+```
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/hide.mdÙ@2fa29ca12e3e1f3cdc7628d6dafe519f69f55090b01b7aaf01c76438d8c76dd6«title: hide‘¥NotesÙ°Definitions are hidden by priority: First aliases, then custom commands.
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+’ÙØTitle: title: hide
+Path: Notes
+Content:
+Definitions are hidden by priority: First aliases, then custom commands.
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

@@ -1,0 +1,102 @@
+”’Ù@685389ee4f9b015371cc82164f1385184491559ac018f680f5d3990bf6131b4fÙ…Title: This week in Nu #123
+Path: Nushell
+Content:
+jntrnr created 
+[link: https://github.com/nushell/nushell/pull/4234] Bump to 0.42
+’Ù@8ed18775875c004f1371573d90bc6e516a9f49f0bfe26ab5a5d2a2de4fbcb0cdÙ–Title: This week in Nu #123
+Path: Nu_Scripts
+Content:
+kubouch 
+[link: https://github.com/nushell/nu_scripts/pull/117] translated fehbg.nu to engine-q
+’Ù@238705c6ffd385adc383901ad0112314104cda54107aa6e0a52adccc75a805e1Ú
+GTitle: This week in Nu #123
+Path: engine-q
+Content:
+jt 
+[link: https://github.com/nushell/engine-q/pull/634] bumped reedline
+, and 
+[link: https://github.com/nushell/engine-q/pull/627] bumped reedline
+, and 
+[link: https://github.com/nushell/engine-q/pull/624] fixed flattening of $in variable
+, and 
+[link: https://github.com/nushell/engine-q/pull/618] Preserve metatdata in where
+, and 
+[link: https://github.com/nushell/engine-q/pull/614] Don't read config in a tight loop
+, and 
+[link: https://github.com/nushell/engine-q/pull/610] Allow update to also insert
+, and 
+[link: https://github.com/nushell/engine-q/pull/606] Allow for and other commands missing positionals near keywords
+, and 
+[link: https://github.com/nushell/engine-q/pull/598] Handle external redirects better
+, and 
+[link: https://github.com/nushell/engine-q/pull/594] Require let to be a statement, move auto-cd
+, and 
+[link: https://github.com/nushell/engine-q/pull/593] Fix ls listing
+, and 
+[link: https://github.com/nushell/engine-q/pull/589] Add line ending autodetect to 'lines'
+, and 
+[link: https://github.com/nushell/engine-q/pull/584] Flush stmts
+, and 
+[link: https://github.com/nushell/engine-q/pull/583] Fix some 'open' signature stuff
+, and 
+[link: https://github.com/nushell/engine-q/pull/581] Add single tick string interpolation
+, and 
+[link: https://github.com/nushell/engine-q/pull/580] Fix custom call scope leak, refactor tests
+elferherrera 
+[link: https://github.com/nushell/engine-q/pull/605] created history file if it doesnt exit
+, and 
+[link: https://github.com/nushell/engine-q/pull/604] def argument check
+fdncred fixed 
+[link: https://github.com/nushell/engine-q/pull/633] typo in signature
+, and 
+[link: https://github.com/nushell/engine-q/pull/623] revert file_types to lowercase
+, and 
+[link: https://github.com/nushell/engine-q/pull/622] ignore .DS_Store files on Mac
+, and 
+[link: https://github.com/nushell/engine-q/pull/608] Update to the latest reedline
+, and 
+[link: https://github.com/nushell/engine-q/pull/595] add ability to specify an ansi style
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/596] fixed issue #559: to json -r serializes datetime without spaces
+Pantonshire created 
+[link: https://github.com/nushell/engine-q/pull/626] Port the 
+``every``
+ command
+nibon7 created 
+[link: https://github.com/nushell/engine-q/pull/625] Create config directory if it does not exist
+hustcer created 
+[link: https://github.com/nushell/engine-q/pull/621] Ported 
+``ignore``
+ command to engine-q
+sholderbach created 
+[link: https://github.com/nushell/engine-q/pull/592] Decode escaped newlines in history command
+’Ù@6c3b343e4d269e1d08d82cae3295f55ebbc18a5b3c5d2a7b4ed4de87a12f265bÚòTitle: This week in Nu #123
+Path: reedline
+Content:
+elferherrera 
+[link: https://github.com/nushell/reedline/pull/226] adjusted position to insert in middle
+, and 
+[link: https://github.com/nushell/reedline/pull/217] prompt moves based on hint
+, and 
+[link: https://github.com/nushell/reedline/pull/214] vi insert mode kept after enter
+, and 
+[link: https://github.com/nushell/reedline/pull/213] vi insert mode default
+, and 
+[link: https://github.com/nushell/reedline/pull/211] vi mode commands
+jt 
+[link: https://github.com/nushell/reedline/pull/227] let anims handle resize
+, and 
+[link: https://github.com/nushell/reedline/pull/225] Make StyledText easier to work with
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/224] tested and fix line buffer utils
+, and 
+[link: https://github.com/nushell/reedline/pull/219] Make the editing operations aware of multiline
+, and 
+[link: https://github.com/nushell/reedline/pull/215] Disable hints during history traversal
+, and 
+[link: https://github.com/nushell/reedline/pull/212] Improve history internals
+crowlKats 
+[link: https://github.com/nushell/reedline/pull/223] fixed: make traits 
+``Send``
+davidlattimore created 
+[link: https://github.com/nushell/reedline/pull/216] Cargo.toml: Add repository link

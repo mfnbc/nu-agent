@@ -1,0 +1,442 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-05-twin0245.mdŸ@50a3138615aa736ec3b752b5e579725ce5ae8806537b77f7cfcdab489c2092eaπThis week in Nushell #245ëßNushell⁄*sholderbach 
+[link: https://github.com/nushell/nushell/pull/12769] updated 
+``interprocess``
+ to 2.0.1
+, 
+[link: https://github.com/nushell/nushell/pull/12766] specified the required minimum 
+``chrono``
+ version
+, 
+[link: https://github.com/nushell/nushell/pull/12762] pinned 
+``base64``
+ to the fixed patch version
+, 
+[link: https://github.com/nushell/nushell/pull/12741] updated PLATFORM_SUPPORT regarding feature flags
+, 
+[link: https://github.com/nushell/nushell/pull/12740] avoided taking unnecessary ownership of intermediates
+, 
+[link: https://github.com/nushell/nushell/pull/12737] fixed 
+``clippy::wrong_self_convention``
+ in polars plugin
+, 
+[link: https://github.com/nushell/nushell/pull/12736] fixed new clippy lints
+, 
+[link: https://github.com/nushell/nushell/pull/12735] eliminated dead code in 
+``nu-explore``
+, and 
+[link: https://github.com/nushell/nushell/pull/12688] updated the bundled readme in release archives
+.
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/12761] fixed PWD not pointing to root paths
+, 
+[link: https://github.com/nushell/nushell/pull/12701] changed environment variables to be case-preserving
+, 
+[link: https://github.com/nushell/nushell/pull/12662] made path expansion no longer remove trailing slashes
+, and 
+[link: https://github.com/nushell/nushell/pull/12603] migrated to a new PWD API
+.
+devyn 
+[link: https://github.com/nushell/nushell/pull/12760] fixed trailing slash in PWD set by 
+``cd``
+, 
+[link: https://github.com/nushell/nushell/pull/12729] upgraded to interprocess 2.0.0
+, 
+[link: https://github.com/nushell/nushell/pull/12728] flushed on every plugin 
+``Data``
+ message
+, 
+[link: https://github.com/nushell/nushell/pull/12727] added 
+``toolkit release-pkg windows``
+ for Windows release pkg builds
+, 
+[link: https://github.com/nushell/nushell/pull/12714] fixed Windows Terminal profile installation
+, 
+[link: https://github.com/nushell/nushell/pull/12710] bumped version to 
+``0.93.1``
+, 
+[link: https://github.com/nushell/nushell/pull/12709] bumped version to 
+``0.93.0``
+, 
+[link: https://github.com/nushell/nushell/pull/12708] bumped 
+``reedline``
+ to 
+``0.32.0``
+, 
+[link: https://github.com/nushell/nushell/pull/12698] fixed missing local socket feature
+, and 
+[link: https://github.com/nushell/nushell/pull/12685] made 
+``bytes build``
+ accept integer values as individual bytes
+.
+ExaltedBagel 
+[link: https://github.com/nushell/nushell/pull/12759] enabled columns with spaces for into_sqlite by adding quotes to column names
+.
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12757] bumped 
+``base64``
+ to 0.22.1
+, 
+[link: https://github.com/nushell/nushell/pull/12756] refactored flattening to reduce intermediate allocations
+, 
+[link: https://github.com/nushell/nushell/pull/12752] fixed a typo
+, 
+[link: https://github.com/nushell/nushell/pull/12742] removed some macros
+, 
+[link: https://github.com/nushell/nushell/pull/12702] added 
+``fs``
+ feature to 
+``nix``
+ dependency
+, 
+[link: https://github.com/nushell/nushell/pull/12682] removed lazy records
+, and provided a 
+[link: https://github.com/nushell/nushell/pull/12524] ``ListStream``
+ touchup
+.
+szepeviktor 
+[link: https://github.com/nushell/nushell/pull/12751] minimized future false positive typos
+.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/12692] made some changes to 
+``explore``
+: adopted 
+``anyhow``
+, supported 
+``CustomValue``
+, removed help system
+.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/12721] upgraded Nu to v0.93.0 for nightly and release workflow
+.
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12720] changed wix install method from perMachine to perUser
+, 
+[link: https://github.com/nushell/nushell/pull/12694] fixed a rust-analyzer warning
+, 
+[link: https://github.com/nushell/nushell/pull/12693] restored 
+``query web --as-table``
+ to working order
+, and 
+[link: https://github.com/nushell/nushell/pull/12629] overhauled shell_integration to enable individual control over ansi escape sequences
+, and 
+[link: https://github.com/nushell/nushell/pull/9956] added raw-string literal support
+.
+maxim-uvarov 
+[link: https://github.com/nushell/nushell/pull/12719] added more tests to the 
+``polars``
+ plugin
+.
+amtoine 
+[link: https://github.com/nushell/nushell/pull/12718] added support for cell-paths to NUON
+ and 
+[link: https://github.com/nushell/nushell/pull/12717] improved NUON documentation
+.
+FilipAndersson245 
+[link: https://github.com/nushell/nushell/pull/12469] initiated Tango migration
+.
+lavafroth 
+[link: https://github.com/nushell/nushell/pull/12438] fixed a bug to prevent relative directory traversal from crashing
+.
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/12412] prevented 
+``each``
+ from swallowing errors when 
+``eval_block``
+ returns a 
+``ListStream``
+.
+rtpg 
+[link: https://github.com/nushell/nushell/pull/12033] reported errors that occur on file operations in ls
+.
+íêê⁄bTitle: This week in Nushell #245
+Path: Nushell
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/12769] updated 
+``interprocess``
+ to 2.0.1
+, 
+[link: https://github.com/nushell/nushell/pull/12766] specified the required minimum 
+``chrono``
+ version
+, 
+[link: https://github.com/nushell/nushell/pull/12762] pinned 
+``base64``
+ to the fixed patch version
+, 
+[link: https://github.com/nushell/nushell/pull/12741] updated PLATFORM_SUPPORT regarding feature flags
+, 
+[link: https://github.com/nushell/nushell/pull/12740] avoided taking unnecessary ownership of intermediates
+, 
+[link: https://github.com/nushell/nushell/pull/12737] fixed 
+``clippy::wrong_self_convention``
+ in polars plugin
+, 
+[link: https://github.com/nushell/nushell/pull/12736] fixed new clippy lints
+, 
+[link: https://github.com/nushell/nushell/pull/12735] eliminated dead code in 
+``nu-explore``
+, and 
+[link: https://github.com/nushell/nushell/pull/12688] updated the bundled readme in release archives
+.
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/12761] fixed PWD not pointing to root paths
+, 
+[link: https://github.com/nushell/nushell/pull/12701] changed environment variables to be case-preserving
+, 
+[link: https://github.com/nushell/nushell/pull/12662] made path expansion no longer remove trailing slashes
+, and 
+[link: https://github.com/nushell/nushell/pull/12603] migrated to a new PWD API
+.
+devyn 
+[link: https://github.com/nushell/nushell/pull/12760] fixed trailing slash in PWD set by 
+``cd``
+, 
+[link: https://github.com/nushell/nushell/pull/12729] upgraded to interprocess 2.0.0
+, 
+[link: https://github.com/nushell/nushell/pull/12728] flushed on every plugin 
+``Data``
+ message
+, 
+[link: https://github.com/nushell/nushell/pull/12727] added 
+``toolkit release-pkg windows``
+ for Windows release pkg builds
+, 
+[link: https://github.com/nushell/nushell/pull/12714] fixed Windows Terminal profile installation
+, 
+[link: https://github.com/nushell/nushell/pull/12710] bumped version to 
+``0.93.1``
+, 
+[link: https://github.com/nushell/nushell/pull/12709] bumped version to 
+``0.93.0``
+, 
+[link: https://github.com/nushell/nushell/pull/12708] bumped 
+``reedline``
+ to 
+``0.32.0``
+, 
+[link: https://github.com/nushell/nushell/pull/12698] fixed missing local socket feature
+, and 
+[link: https://github.com/nushell/nushell/pull/12685] made 
+``bytes build``
+ accept integer values as individual bytes
+.
+ExaltedBagel 
+[link: https://github.com/nushell/nushell/pull/12759] enabled columns with spaces for into_sqlite by adding quotes to column names
+.
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12757] bumped 
+``base64``
+ to 0.22.1
+, 
+[link: https://github.com/nushell/nushell/pull/12756] refactored flattening to reduce intermediate allocations
+, 
+[link: https://github.com/nushell/nushell/pull/12752] fixed a typo
+, 
+[link: https://github.com/nushell/nushell/pull/12742] removed some macros
+, 
+[link: https://github.com/nushell/nushell/pull/12702] added 
+``fs``
+ feature to 
+``nix``
+ dependency
+, 
+[link: https://github.com/nushell/nushell/pull/12682] removed lazy records
+, and provided a 
+[link: https://github.com/nushell/nushell/pull/12524] ``ListStream``
+ touchup
+.
+szepeviktor 
+[link: https://github.com/nushell/nushell/pull/12751] minimized future false positive typos
+.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/12692] made some changes to 
+``explore``
+: adopted 
+``anyhow``
+, supported 
+``CustomValue``
+, removed help system
+.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/12721] upgraded Nu to v0.93.0 for nightly and release workflow
+.
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12720] changed wix install method from perMachine to perUser
+, 
+[link: https://github.com/nushell/nushell/pull/12694] fixed a rust-analyzer warning
+, 
+[link: https://github.com/nushell/nushell/pull/12693] restored 
+``query web --as-table``
+ to working order
+, and 
+[link: https://github.com/nushell/nushell/pull/12629] overhauled shell_integration to enable individual control over ansi escape sequences
+, and 
+[link: https://github.com/nushell/nushell/pull/9956] added raw-string literal support
+.
+maxim-uvarov 
+[link: https://github.com/nushell/nushell/pull/12719] added more tests to the 
+``polars``
+ plugin
+.
+amtoine 
+[link: https://github.com/nushell/nushell/pull/12718] added support for cell-paths to NUON
+ and 
+[link: https://github.com/nushell/nushell/pull/12717] improved NUON documentation
+.
+FilipAndersson245 
+[link: https://github.com/nushell/nushell/pull/12469] initiated Tango migration
+.
+lavafroth 
+[link: https://github.com/nushell/nushell/pull/12438] fixed a bug to prevent relative directory traversal from crashing
+.
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/12412] prevented 
+``each``
+ from swallowing errors when 
+``eval_block``
+ returns a 
+``ListStream``
+.
+rtpg 
+[link: https://github.com/nushell/nushell/pull/12033] reported errors that occur on file operations in ls
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-05-twin0245.mdŸ@f16c5aea1b7c5364b255a7c95107187b11247d84da4775d04aa917276285d37aπThis week in Nushell #245ë≠Documentation⁄ woosaaahh 
+[link: https://github.com/nushell/nushell.github.io/pull/1390] corrected a wrong result in an example from 'lang-guide'
+.
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1389] fixed make_docs.nu for Nu v0.93.0
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1383] upgraded lefthook, shiki, and vuepress plugins
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1379] refreshed command docs for Nu v0.93
+.
+UmeSiyah 
+[link: https://github.com/nushell/nushell.github.io/pull/1386] fixed username in sys_get_nested_example.sh
+.
+devyn 
+[link: https://github.com/nushell/nushell.github.io/pull/1384] warned about Windows Installer on the 0.93.0 release notes
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1381] fixed a broken link to plugin protocol reference
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1380] clarified that 
+``plugin use``
+ is not needed in the config file
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1368] provided release notes for 0.93.0
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1367] documented the plugin management overhaul - new commands and new file format
+, along with documentation for other features.
+mandarvaze 
+[link: https://github.com/nushell/nushell.github.io/pull/1382] corrected a minor typo in background_task.md
+.
+fdncred 
+[link: https://github.com/nushell/nushell.github.io/pull/1377] wrote the 30k star blog post
+.
+YizhePKU 
+[link: https://github.com/nushell/nushell.github.io/pull/1376] explained that $env is case-insensitive
+.
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1375] nearly finished 0.93.0 release notes
+ and 
+[link: https://github.com/nushell/nushell.github.io/pull/1373] edited 
+``0.93.0``
+ release notes
+.
+ayax79 
+[link: https://github.com/nushell/nushell.github.io/pull/1374] provided release notes for Polars plugin and dataframes deprecation
+.
+tesujimath 
+[link: https://github.com/nushell/nushell.github.io/pull/1372] added a reference to Nu Plugin Tracer in the Nushell Book
+.
+íêê⁄^Title: This week in Nushell #245
+Path: Documentation
+Content:
+woosaaahh 
+[link: https://github.com/nushell/nushell.github.io/pull/1390] corrected a wrong result in an example from 'lang-guide'
+.
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1389] fixed make_docs.nu for Nu v0.93.0
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1383] upgraded lefthook, shiki, and vuepress plugins
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1379] refreshed command docs for Nu v0.93
+.
+UmeSiyah 
+[link: https://github.com/nushell/nushell.github.io/pull/1386] fixed username in sys_get_nested_example.sh
+.
+devyn 
+[link: https://github.com/nushell/nushell.github.io/pull/1384] warned about Windows Installer on the 0.93.0 release notes
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1381] fixed a broken link to plugin protocol reference
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1380] clarified that 
+``plugin use``
+ is not needed in the config file
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1368] provided release notes for 0.93.0
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1367] documented the plugin management overhaul - new commands and new file format
+, along with documentation for other features.
+mandarvaze 
+[link: https://github.com/nushell/nushell.github.io/pull/1382] corrected a minor typo in background_task.md
+.
+fdncred 
+[link: https://github.com/nushell/nushell.github.io/pull/1377] wrote the 30k star blog post
+.
+YizhePKU 
+[link: https://github.com/nushell/nushell.github.io/pull/1376] explained that $env is case-insensitive
+.
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1375] nearly finished 0.93.0 release notes
+ and 
+[link: https://github.com/nushell/nushell.github.io/pull/1373] edited 
+``0.93.0``
+ release notes
+.
+ayax79 
+[link: https://github.com/nushell/nushell.github.io/pull/1374] provided release notes for Polars plugin and dataframes deprecation
+.
+tesujimath 
+[link: https://github.com/nushell/nushell.github.io/pull/1372] added a reference to Nu Plugin Tracer in the Nushell Book
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-05-twin0245.mdŸ@109b2eaf855f7c4bf274a5a2bfd3dc1852bca72f709aaf4dda61b0c596dcf0bcπThis week in Nushell #245ë™Nu_Scripts⁄πIanManske 
+[link: https://github.com/nushell/nu_scripts/pull/828] updated the release script
+.
+dam4rus 
+[link: https://github.com/nushell/nu_scripts/pull/827] removed deprecated --redirect-stdout in git branch cleanup
+.
+rayanamal 
+[link: https://github.com/nushell/nu_scripts/pull/826] updated the README.md for background tasks
+.
+kubouch 
+[link: https://github.com/nushell/nu_scripts/pull/728] fixed the link for creating release note PR
+.
+íêê⁄ÙTitle: This week in Nushell #245
+Path: Nu_Scripts
+Content:
+IanManske 
+[link: https://github.com/nushell/nu_scripts/pull/828] updated the release script
+.
+dam4rus 
+[link: https://github.com/nushell/nu_scripts/pull/827] removed deprecated --redirect-stdout in git branch cleanup
+.
+rayanamal 
+[link: https://github.com/nushell/nu_scripts/pull/826] updated the README.md for background tasks
+.
+kubouch 
+[link: https://github.com/nushell/nu_scripts/pull/728] fixed the link for creating release note PR
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-05-twin0245.mdŸ@97e2d36362e39e32112e82f9452b263a04e4aff15e2baa13df9f701a8838a8e1πThis week in Nushell #245ë®reedlineŸfdevyn 
+[link: https://github.com/nushell/reedline/pull/785] bumped version for 
+``0.32.0``
+ release
+.
+íêêŸüTitle: This week in Nushell #245
+Path: reedline
+Content:
+devyn 
+[link: https://github.com/nushell/reedline/pull/785] bumped version for 
+``0.32.0``
+ release
+.

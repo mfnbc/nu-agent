@@ -1,0 +1,61 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-03-27-twin0083.mdŸ@9b310949f15200aae972fdece0f60dfb05594ce0ba22b3e37e4912d6869fda56≥This week in Nu #83ë≠Documentation⁄ésuzanje fixed some 
+[link: https://github.com/nushell/nushell/pull/3198] broken documentation links
+mvolkmann fixed a 
+[link: https://github.com/nushell/nushell/pull/3216] typo in the documentation
+acanalis improved 
+[link: https://github.com/nushell/nu_scripts/pull/33] documenation for the sample scripts
+John-Goff added a 
+[link: https://github.com/nushell/nu_scripts/pull/32] new sample prompt
+íêê⁄∆Title: This week in Nu #83
+Path: Documentation
+Content:
+suzanje fixed some 
+[link: https://github.com/nushell/nushell/pull/3198] broken documentation links
+mvolkmann fixed a 
+[link: https://github.com/nushell/nushell/pull/3216] typo in the documentation
+acanalis improved 
+[link: https://github.com/nushell/nu_scripts/pull/33] documenation for the sample scripts
+John-Goff added a 
+[link: https://github.com/nushell/nu_scripts/pull/32] new sample prompt
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-03-27-twin0083.mdŸ@56829931627d16d54703c9a2b2c43e2a6857ae77db623baf454019eebca15cd3≥This week in Nu #83ë≠VSCode pluginŸífdncred updated the 
+[link: https://github.com/nushell/vscode-nushell-lang/commit/d622b768d034197c2162ab178ae2d6875f491341] VSCode plugin to 0.12
+íêêŸ Title: This week in Nu #83
+Path: VSCode plugin
+Content:
+fdncred updated the 
+[link: https://github.com/nushell/vscode-nushell-lang/commit/d622b768d034197c2162ab178ae2d6875f491341] VSCode plugin to 0.12
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-03-27-twin0083.mdŸ@f8201b5ac93923b5111d9090db44fc8e9143ed311ac2ad87add8895f0812633c≥This week in Nu #83ëßNushell⁄ahkrr fixed some 
+[link: https://github.com/nushell/nushell/pull/3189] prompt-related issues
+notryanb added 
+[link: https://github.com/nushell/nushell/pull/3197] md5 hashing
+gonatz added 
+[link: https://github.com/nushell/nushell/pull/3201] forward slash completion for Windows
+donnatpanic improved 
+[link: https://github.com/nushell/nushell/pull/3207] timezone support
+fdncred improved support for 
+[link: https://github.com/nushell/nushell/pull/3210] tilde in the path
+jonathandturner fixed the 
+[link: https://github.com/nushell/nushell/pull/3214] Rust 1.51 warnings
+, experimented with some 
+[link: https://github.com/jonathandturner/enginep] new engine ideas
+andrasio updated 
+[link: https://github.com/nushell/nushell/pull/3217] the test harness to use a custom config
+íêê⁄9Title: This week in Nu #83
+Path: Nushell
+Content:
+ahkrr fixed some 
+[link: https://github.com/nushell/nushell/pull/3189] prompt-related issues
+notryanb added 
+[link: https://github.com/nushell/nushell/pull/3197] md5 hashing
+gonatz added 
+[link: https://github.com/nushell/nushell/pull/3201] forward slash completion for Windows
+donnatpanic improved 
+[link: https://github.com/nushell/nushell/pull/3207] timezone support
+fdncred improved support for 
+[link: https://github.com/nushell/nushell/pull/3210] tilde in the path
+jonathandturner fixed the 
+[link: https://github.com/nushell/nushell/pull/3214] Rust 1.51 warnings
+, experimented with some 
+[link: https://github.com/jonathandturner/enginep] new engine ideas
+andrasio updated 
+[link: https://github.com/nushell/nushell/pull/3217] the test harness to use a custom config

@@ -1,0 +1,64 @@
+���Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_url.md�@d2ebf9e58074bf2d8e9eeebb37337870d16f993fdac1749408b82c2a17ced9cc�title: from url��formats�>
+
+
+
+
+
+
+
+
+``from url``
+[link: /commands/categories/formats.md] ����lTitle: title: from url
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``from url``
+[link: /commands/categories/formats.md] ��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_url.md�@f5bce61cfcf953dd187cd4a57c1c2805976e81c80509f6161c1d7c10d277152f�title: from url��Signature�``> from url {flags} ``
+����HTitle: title: from url
+Path: Signature
+Content:
+``> from url {flags} ``
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_url.md�@145a2313e1c4be772dc7fc3a6139c887f24445c83c6c2b4c32231d06a66da1fe�title: from url��Input/output types:�input
+output
+string
+record
+����UTitle: title: from url
+Path: Input/output types:
+Content:
+input
+output
+string
+record
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_url.md�@240b0a10ea79255ac8fe4f21e0dfdfb6525fd0629335fe228937dece0c47cc2d�title: from url��Examples�}Convert url encoded string into a record
+```Fenced(Borrowed("nu"))
+> 'bread=baguette&cheese=comt%C3%A9&meat=ham&fat=butter' | from url
+╭────────┬──────────╮
+│ bread  │ baguette │
+│ cheese │ comté    │
+│ meat   │ ham      │
+│ fat    │ butter   │
+╰────────┴──────────╯
+
+```
+�����Title: title: from url
+Path: Examples
+Content:
+Convert url encoded string into a record
+```Fenced(Borrowed("nu"))
+> 'bread=baguette&cheese=comt%C3%A9&meat=ham&fat=butter' | from url
+╭────────┬──────────╮
+│ bread  │ baguette │
+│ cheese │ comté    │
+│ meat   │ ham      │
+│ fat    │ butter   │
+╰────────┴──────────╯
+
+```

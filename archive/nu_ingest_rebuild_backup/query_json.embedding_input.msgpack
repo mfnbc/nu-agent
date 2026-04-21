@@ -1,0 +1,75 @@
+���@0b39b8f0d9ae076859e9bdf315a10801cfbdc802eeee59bdb5624a2d36511a97�pTitle: title: query json
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``query json``
+[link: /commands/categories/filters.md] ��@6493fe9bdca5dc3eedb34e3789a2046db66b8f6653b9fc7d8eb463544ff4c6f0�STitle: title: query json
+Path: Signature
+Content:
+``> query json {flags} (query)``
+��@80d8e2474b7e986902e604acc702a56f06ab5fcfffda37a1d18e6860ea7caa0e�KTitle: title: query json
+Path: Parameters
+Content:
+``query``
+: Json query.
+��@f81a55b2bcdcd6304a0090b460a81a6baa498173d9d1341decc8d844765c98ab�WTitle: title: query json
+Path: Examples
+Content:
+Get a list of children from a json object
+```Fenced(Borrowed("nu"))
+> '{"children": ["Sara","Alex","Jack"]}' | query json children
+╭───┬──────╮
+│ 0 │ Sara │
+│ 1 │ Alex │
+│ 2 │ Jack │
+╰───┴──────╯
+
+
+```
+Get a list of first names of the friends from a json object
+```Fenced(Borrowed("nu"))
+> '{
+  "friends": [
+    {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb", "tw"]},
+    {"first": "Roger", "last": "Craig", "age": 68, "nets": ["fb", "tw"]},
+    {"first": "Jane", "last": "Murphy", "age": 47, "nets": ["ig", "tw"]}
+  ]
+}' | query json friends.#.first
+╭───┬───────╮
+│ 0 │ Dale  │
+│ 1 │ Roger │
+│ 2 │ Jane  │
+╰───┴───────╯
+
+
+```
+Get the key named last of the name from a json object
+```Fenced(Borrowed("nu"))
+> '{"name": {"first": "Tom", "last": "Anderson"}}' | query json name.last
+Anderson
+
+```
+Get the count of children from a json object
+```Fenced(Borrowed("nu"))
+> '{"children": ["Sara","Alex","Jack"]}' | query json children.#
+3
+
+```
+Get the first child from the children array in reverse the order using the @reverse modifier from a json object
+```Fenced(Borrowed("nu"))
+> '{"children": ["Sara","Alex","Jack"]}' | query json "children|@reverse|0"
+Jack
+
+```
+��@f463e92a437552567f1371f24db6c107bf52ff91cc4ecb6a1481addda47c790eنTitle: title: query json
+Path: Notes
+Content:
+query json uses the gjson crate https://github.com/tidwall/gjson.rs to query json data.

@@ -2,8 +2,8 @@
 """
 Simple JSONL -> NUON converter used as a pragmatic fallback.
 
-This script reads a newline-delimited JSON file (chunks.jsonl) and writes two
-NUON-shaped files under data/:
+This script reads a newline-delimited JSON file (chunks.nuon) or a chunks.nuon
+file and writes two NUON-shaped files under data/:
  - data/nu_docs_vectors.nuon  (list of chunk records)
  - data/command_map.nuon      (map from lowercase command -> { id, display })
 
@@ -16,13 +16,21 @@ from pathlib import Path
 import sys
 
 root = Path(__file__).resolve().parent.parent
-in_path = root / "build" / "nu_ingest" / "chunks.jsonl"
+# This script is an archival helper. Prefer the Rust shredder which emits .nuon/.msgpack
+# artifacts. We will look for common JSONL or NUON inputs to convert.
+possible_inputs = [root / "build" / "nu_ingest" / "chunks.nuon", root / "build" / "nu_ingest" / "chunks.nuon"]
+in_path = None
+for p in possible_inputs:
+    if p.exists():
+        in_path = p
+        break
+
 out_vectors = root / "data" / "nu_docs_vectors.nuon"
 out_command_map = root / "data" / "command_map.nuon"
 
-if not in_path.exists():
-    print(f"Input not found: {in_path}")
-    sys.exit(1)
+if in_path is None:
+    print("No chunks.nuon or chunks.nuon input found. Prefer using the Rust shredder to emit .nuon or .msgpack artifacts.")
+    sys.exit(0)
 
 out_vectors.parent.mkdir(parents=True, exist_ok=True)
 
@@ -55,3 +63,4 @@ with out_command_map.open("w", encoding="utf-8") as fh:
 
 print(f"Wrote: {len(rows)} vectors -> {out_vectors}")
 print(f"Wrote: {len(cmd_map)} command map entries -> {out_command_map}")
+print("Note: This script is archival. Consider using the Rust-based shredder pipeline that emits .msgpack/.nuon directly.")

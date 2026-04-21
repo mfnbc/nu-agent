@@ -1,0 +1,218 @@
+���Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/generate.md�@9675bc93babcbb8f8db6e84e7320e6c2e1dd306aa83fb2a4ef8b06d5b8b9482e�title: generate��generators�A
+
+
+
+
+
+
+
+
+``generate``
+[link: /commands/categories/generators.md] ����rTitle: title: generate
+Path: generators
+Content:
+
+
+
+
+
+
+
+
+
+``generate``
+[link: /commands/categories/generators.md] ��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/generate.md�@1514be79e143eb3c3a6d5414b5b6913e59b84f330f773f12178c260bbcc36d69�title: generate��Signature�+``> generate {flags} (closure) (initial)``
+����[Title: title: generate
+Path: Signature
+Content:
+``> generate {flags} (closure) (initial)``
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/generate.md�@c7f171a01c58ad2b51f9b632226bb633a8e7e30c44eef073d06140aa65629715�title: generate��Parameters�?``closure``
+: Generator function.
+``initial``
+: Initial value.
+����pTitle: title: generate
+Path: Parameters
+Content:
+``closure``
+: Generator function.
+``initial``
+: Initial value.
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/generate.md�@cd14acbe56b8a6f898092ad29ae24206487e3b0e9f0d49374b0cdb6f4fabc57e�title: generate��Input/output types:�ginput
+output
+nothing
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+table
+list
+<
+any
+>
+
+range
+list
+<
+any
+>
+
+���١Title: title: generate
+Path: Input/output types:
+Content:
+input
+output
+nothing
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+table
+list
+<
+any
+>
+
+range
+list
+<
+any
+>
+
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/generate.md�@84ce94e564ea7d1453b6204e1b2aab502ca30869c4f1f424ac8e58655a129f51�title: generate��Examples��Generate a sequence of numbers
+```Fenced(Borrowed("nu"))
+> generate {|i| if $i <= 10 { {out: $i, next: ($i + 2)} }} 0
+╭───┬────╮
+│ 0 │  0 │
+│ 1 │  2 │
+│ 2 │  4 │
+│ 3 │  6 │
+│ 4 │  8 │
+│ 5 │ 10 │
+╰───┴────╯
+
+
+```
+Generate a continuous stream of Fibonacci numbers
+```Fenced(Borrowed("nu"))
+> generate {|fib| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} } [0, 1]
+
+
+```
+Generate a continuous stream of Fibonacci numbers, using default parameters
+```Fenced(Borrowed("nu"))
+> generate {|fib=[0, 1]| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} }
+
+
+```
+Generate a running sum of the inputs
+```Fenced(Borrowed("nu"))
+> 1..5 | generate {|e, sum=0| let sum = $e + $sum; {out: $sum, next: $sum} }
+╭───┬────╮
+│ 0 │  1 │
+│ 1 │  3 │
+│ 2 │  6 │
+│ 3 │ 10 │
+│ 4 │ 15 │
+╰───┴────╯
+
+
+```
+�����Title: title: generate
+Path: Examples
+Content:
+Generate a sequence of numbers
+```Fenced(Borrowed("nu"))
+> generate {|i| if $i <= 10 { {out: $i, next: ($i + 2)} }} 0
+╭───┬────╮
+│ 0 │  0 │
+│ 1 │  2 │
+│ 2 │  4 │
+│ 3 │  6 │
+│ 4 │  8 │
+│ 5 │ 10 │
+╰───┴────╯
+
+
+```
+Generate a continuous stream of Fibonacci numbers
+```Fenced(Borrowed("nu"))
+> generate {|fib| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} } [0, 1]
+
+
+```
+Generate a continuous stream of Fibonacci numbers, using default parameters
+```Fenced(Borrowed("nu"))
+> generate {|fib=[0, 1]| {out: $fib.0, next: [$fib.1, ($fib.0 + $fib.1)]} }
+
+
+```
+Generate a running sum of the inputs
+```Fenced(Borrowed("nu"))
+> 1..5 | generate {|e, sum=0| let sum = $e + $sum; {out: $sum, next: $sum} }
+╭───┬────╮
+│ 0 │  1 │
+│ 1 │  3 │
+│ 2 │  6 │
+│ 3 │ 10 │
+│ 4 │ 15 │
+╰───┴────╯
+
+
+```
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/generate.md�@da8e0bc997a204f3c8793245f9cc887be70ab4ff24429afa015a8f930878fb85�title: generate��Notes�`The generator closure accepts a single argument and returns a record
+
+containing two optional keys: 'out' and 'next'. Each invocation, the 'out'
+
+value, if present, is added to the stream. If a 'next' key is present, it is
+
+used as the next argument to the closure, otherwise generation stops.
+Additionally, if an input stream is provided, the generator closure accepts two
+
+arguments. On each invocation an element of the input stream is provided as the
+
+first argument. The second argument is the 
+``next``
+ value from the last invocation.
+
+In this case, generation also stops when the input stream stops.
+�����Title: title: generate
+Path: Notes
+Content:
+The generator closure accepts a single argument and returns a record
+
+containing two optional keys: 'out' and 'next'. Each invocation, the 'out'
+
+value, if present, is added to the stream. If a 'next' key is present, it is
+
+used as the next argument to the closure, otherwise generation stops.
+Additionally, if an input stream is provided, the generator closure accepts two
+
+arguments. On each invocation an element of the input stream is provided as the
+
+first argument. The second argument is the 
+``next``
+ value from the last invocation.
+
+In this case, generation also stops when the input stream stops.

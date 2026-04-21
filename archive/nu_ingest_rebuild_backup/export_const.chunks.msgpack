@@ -1,0 +1,82 @@
+–—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export_const.mdÙ@d4c7260cc543ae8d772011bdec53971e5d62ca0cca256ff55f7c9e316221f168³title: export const‘¤coreÙ?
+
+
+
+
+
+
+
+
+``export const``
+[link: /commands/categories/core.md] ’ÙnTitle: title: export const
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``export const``
+[link: /commands/categories/core.md] —ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export_const.mdÙ@3ce53a10afe0bbfc4e2e182d65fae3df1127047678265470d09d0dbc96a436d7³title: export const‘©SignatureÙ8``> export const {flags} (const_name) (initial_value)``
+’ÙlTitle: title: export const
+Path: Signature
+Content:
+``> export const {flags} (const_name) (initial_value)``
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export_const.mdÙ@b7489b13d8179841ff4ab7010a7dce34d08371a1e57aa2e2f6e132a9a5e5e2ff³title: export const‘ªParametersÙu``const_name``
+: The constant name to create and export.
+``initial_value``
+: Equals sign followed by constant value.
+’ÙªTitle: title: export const
+Path: Parameters
+Content:
+``const_name``
+: The constant name to create and export.
+``initial_value``
+: Equals sign followed by constant value.
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export_const.mdÙ@8e3d97f26b9f763e98622e8afd127eefcaafecf33b033bc0958b8449bb0414cf³title: export const‘³Input/output types:½input
+output
+nothing
+nothing
+’Ù[Title: title: export const
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export_const.mdÙ@5256c02293f06bc7bcc56e9680ed713d66ebcc0e4a7e33f0922d8a28c8129d92³title: export const‘¨ExamplesÙµRe-export a constant from another module.
+```Fenced(Borrowed("nu"))
+> module spam { export const foo = 3; }
+    module eggs { export use spam foo }
+    use eggs foo
+    foo
+
+3
+
+```
+’ÙèTitle: title: export const
+Path: Examples
+Content:
+Re-export a constant from another module.
+```Fenced(Borrowed("nu"))
+> module spam { export const foo = 3; }
+    module eggs { export use spam foo }
+    use eggs foo
+    foo
+
+3
+
+```
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export_const.mdÙ@2a6d0b7dd5cc8225bb27ea6ae43e87158fada4ab7deac718081ff4c3f7c520f9³title: export const‘¥NotesÙgThis command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+’Ù—Title: title: export const
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

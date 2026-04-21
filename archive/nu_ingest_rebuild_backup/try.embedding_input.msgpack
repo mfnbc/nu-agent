@@ -1,0 +1,66 @@
+–’Ù@ef21bcbaeae120ec8d7769fd1cf9961bda499970de3a6ba7606f36d350a95b7dÙ\Title: title: try
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``try``
+[link: /commands/categories/core.md] ’Ù@770616a5eef1a0d1b226b4c62c4b304f54f17dc08bc028ec3b79a9024e004f07Ù[Title: title: try
+Path: Signature
+Content:
+``> try {flags} (try_block) (catch) (finally)``
+’Ù@402b14c05d2de2621b55b3d7f69963803912f8681a4ed7c0c7f0b963cd6f2005ÙžTitle: title: try
+Path: Parameters
+Content:
+``try_block``
+: Block to run.
+``catch``
+: Closure to run if try block fails.
+``finally``
+: Closure to run anyway.
+’Ù@51f9118f930193fcd0640c4b93d450a049fa717de1583209241a2344c2e7c459ÙJTitle: title: try
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+’Ù@e1e03d7cdb1e042fe9731aae7b0ea6e46a3518b39ea4b44b8757182cb5984580Ú4Title: title: try
+Path: Examples
+Content:
+Try to run a division by zero.
+```Fenced(Borrowed("nu"))
+> try { 1 / 0 }
+
+
+```
+Try to run a division by zero and return a string instead.
+```Fenced(Borrowed("nu"))
+> try { 1 / 0 } catch { 'divided by zero' }
+divided by zero
+
+```
+Try to run a division by zero and report the message.
+```Fenced(Borrowed("nu"))
+> try { 1 / 0 } catch { |err| $err.msg }
+
+
+```
+Try to run a division by zero, report the message, and run finally
+```Fenced(Borrowed("nu"))
+> try { 1 / 0 } catch { |err| print $err.msg } finally { 'clean' }
+
+
+```
+’Ù@1fe9c502e669e476d5534297a6b4ca435954c14192f0e791765521100f7ad24fÙŽTitle: title: try
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

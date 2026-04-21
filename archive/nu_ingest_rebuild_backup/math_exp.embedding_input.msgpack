@@ -1,0 +1,49 @@
+”’Ù@6ec27d82adaecde58a46565e87c34a73bffaf4c3ba02b88029ad7cc18bb32a0cÙfTitle: title: math exp
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math exp``
+[link: /commands/categories/math.md] ’Ù@89db40abf1ab259d57acdbfc82467c414961d240a77fe5dbb93f28d3d019b598ÙHTitle: title: math exp
+Path: Signature
+Content:
+``> math exp {flags} ``
+’Ù@90be23c503f298a303ef9d22d3f64c2c3824c0c4b74ecf6e45b2efa24cf2dd49ÙuTitle: title: math exp
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’Ù@46eacb37979d1ee2ef697fbd8817638d9c4e96bda4e2395bac3f4bce17dc9a8aÙÜTitle: title: math exp
+Path: Examples
+Content:
+Get e raised to the power of zero
+```Fenced(Borrowed("nu"))
+> 0 | math exp
+1.0
+
+```
+Get e (same as 'math e')
+```Fenced(Borrowed("nu"))
+> 1 | math exp
+2.718281828459045
+
+```

@@ -1,0 +1,185 @@
+——ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_get.mdÙ@dd4d581cb017770ea5db104afd74ca38f3ce219fdcca25670f414bf7acdf3f5e¯title: http get‘§networkÙ>
+
+
+
+
+
+
+
+
+``http get``
+[link: /commands/categories/network.md] ’ÙlTitle: title: http get
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``http get``
+[link: /commands/categories/network.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_get.mdÙ@ec7c8e157216624c9ff87d1233b6f32ace205c64bf5ad52d747f97fb56b1c5f2¯title: http get‘©Signature½``> http get {flags} (URL)``
+’ÙMTitle: title: http get
+Path: Signature
+Content:
+``> http get {flags} (URL)``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_get.mdÙ@3bc6ff07ce33f1f0b8d9366a9f29a5f8c6de29115f57cceadb0f20e633ad9dde¯title: http get‘¥FlagsÚ*``--user, -u {any}``
+: The username when authenticating.
+``--password, -p {any}``
+: The password when authenticating.
+``--max-time, -m {duration}``
+: Max duration before timeout occurs.
+``--headers, -H {any}``
+: Custom headers you want to add.
+``--raw, -r``
+: Fetch contents as text rather than a table.
+``--insecure, -k``
+: Allow insecure server connections when using SSL.
+``--full, -f``
+: Returns the full response instead of only the body.
+``--allow-errors, -e``
+: Do not fail if the server returns an error code.
+``--pool``
+: Using a global pool as a client.
+``--redirect-mode, -R {string}``
+: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+``--unix-socket, -U {path}``
+: Connect to the specified Unix socket instead of using TCP.
+’ÚVTitle: title: http get
+Path: Flags
+Content:
+``--user, -u {any}``
+: The username when authenticating.
+``--password, -p {any}``
+: The password when authenticating.
+``--max-time, -m {duration}``
+: Max duration before timeout occurs.
+``--headers, -H {any}``
+: Custom headers you want to add.
+``--raw, -r``
+: Fetch contents as text rather than a table.
+``--insecure, -k``
+: Allow insecure server connections when using SSL.
+``--full, -f``
+: Returns the full response instead of only the body.
+``--allow-errors, -e``
+: Do not fail if the server returns an error code.
+``--pool``
+: Using a global pool as a client.
+``--redirect-mode, -R {string}``
+: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+``--unix-socket, -U {path}``
+: Connect to the specified Unix socket instead of using TCP.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_get.mdÙ@76a311c09d1ff511d56191a57c93919d5470544ddf2adaf7832d329ebd8f20ad¯title: http get‘ªParametersÙ.``URL``
+: The URL to fetch the contents from.
+’Ù_Title: title: http get
+Path: Parameters
+Content:
+``URL``
+: The URL to fetch the contents from.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_get.mdÙ@44a9a8d0eb6b91bc06a36fde98e9ef86dbd871ae1a8159fd8ff69d982d99cec3¯title: http get‘³Input/output types:¹input
+output
+nothing
+any
+’ÙSTitle: title: http get
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_get.mdÙ@26be92faf98e7d132c7bc712fc086415c62a52d30f088ad74094958768a576e3¯title: http get‘¨ExamplesÚƒGet content from example.com.
+```Fenced(Borrowed("nu"))
+> http get https://www.example.com
+
+
+```
+Get content from example.com, with username and password.
+```Fenced(Borrowed("nu"))
+> http get --user myuser --password mypass https://www.example.com
+
+
+```
+Get content from example.com, with custom header using a record.
+```Fenced(Borrowed("nu"))
+> http get --headers {my-header-key: my-header-value} https://www.example.com
+
+
+```
+Get content from example.com, with custom headers using a list.
+```Fenced(Borrowed("nu"))
+> http get --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
+
+
+```
+Get the response status code.
+```Fenced(Borrowed("nu"))
+> http get https://www.example.com | metadata | get http_response.status
+
+
+```
+Check response status while streaming.
+```Fenced(Borrowed("nu"))
+> http get --allow-errors https://example.com/file | metadata access {|m| if $m.http_response.status != 200 { error make {msg: "failed"} } else { } } | lines
+
+
+```
+Get from Docker daemon via Unix socket.
+```Fenced(Borrowed("nu"))
+> http get --unix-socket /var/run/docker.sock http://localhost/containers/json
+
+
+```
+’Ú²Title: title: http get
+Path: Examples
+Content:
+Get content from example.com.
+```Fenced(Borrowed("nu"))
+> http get https://www.example.com
+
+
+```
+Get content from example.com, with username and password.
+```Fenced(Borrowed("nu"))
+> http get --user myuser --password mypass https://www.example.com
+
+
+```
+Get content from example.com, with custom header using a record.
+```Fenced(Borrowed("nu"))
+> http get --headers {my-header-key: my-header-value} https://www.example.com
+
+
+```
+Get content from example.com, with custom headers using a list.
+```Fenced(Borrowed("nu"))
+> http get --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
+
+
+```
+Get the response status code.
+```Fenced(Borrowed("nu"))
+> http get https://www.example.com | metadata | get http_response.status
+
+
+```
+Check response status while streaming.
+```Fenced(Borrowed("nu"))
+> http get --allow-errors https://example.com/file | metadata access {|m| if $m.http_response.status != 200 { error make {msg: "failed"} } else { } } | lines
+
+
+```
+Get from Docker daemon via Unix socket.
+```Fenced(Borrowed("nu"))
+> http get --unix-socket /var/run/docker.sock http://localhost/containers/json
+
+
+```
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_get.mdÙ@dacfaff78c2e77834e19d8aeafc0839b1c6fce584dcb29ee7fde11575bfb9c9a¯title: http get‘¥Notes½Performs HTTP GET operation.
+’ÙITitle: title: http get
+Path: Notes
+Content:
+Performs HTTP GET operation.

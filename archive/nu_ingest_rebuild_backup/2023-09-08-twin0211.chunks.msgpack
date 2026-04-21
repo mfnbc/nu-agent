@@ -1,0 +1,266 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-08-twin0211.mdŸ@ae1c37fd37c905667b8853e398546ac62bbb8e00ae79d1f386b3d5bbb95513a3πThis week in Nushell #211ëßNushell⁄àfdncred 
+[link: https://github.com/nushell/nushell/pull/10275] added more 
+``ps``
+ columns in Windows
+, and 
+[link: https://github.com/nushell/nushell/pull/10273] changed the right prompt to respect a users locale
+, and 
+[link: https://github.com/nushell/nushell/pull/10272] updated format date when using %x %X %r
+, and 
+[link: https://github.com/nushell/nushell/pull/10253] allowed 
+``--login``
+ to be used with nu's 
+``--commands``
+ parameter
+, and 
+[link: https://github.com/nushell/nushell/pull/10252] restored NU_LIB_DIRS and NU_PLUGIN_DIRS defaults
+, and 
+[link: https://github.com/nushell/nushell/pull/10201] added plugin path when there are no signatures
+dmatos2012 
+[link: https://github.com/nushell/nushell/pull/10097] started using uutils/coreutils cp command in place of nushell's cp command
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/10121] moved Value to helpers, separate span call
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10267] moved spellcheck config into 
+``.github``
+ folder
+, and 
+[link: https://github.com/nushell/nushell/pull/10266] removed codecov.io setup
+, and 
+[link: https://github.com/nushell/nushell/pull/10255] documented that 
+``open``
+ looks up 
+``from``
+ subcommands
+, and 
+[link: https://github.com/nushell/nushell/pull/10238] tweaked the contributor image to include more users
+, and 
+[link: https://github.com/nushell/nushell/pull/10137] updated 
+``crossterm``
+/
+``ratatui``
+/dev-
+``reedline``
+IanManske made sure we 
+[link: https://github.com/nushell/nushell/pull/10021] restore initial foreground process group on exit
+brunerm99 
+[link: https://github.com/nushell/nushell/pull/10265] added search terms for use, while, and range (#5093)
+balupton updated the readme to 
+[link: https://github.com/nushell/nushell/pull/10262] add dorothy to supported by
+stormasm 
+[link: https://github.com/nushell/nushell/pull/10254] changed LOG_FORMAT to NU_LOG_FORMAT in nu-std library
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/10247] made some UI improvements to 
+``explore``
+rgwood started tidying up 
+``explore``
+ in preparation for bigger changes: 
+[link: https://github.com/nushell/nushell/pull/10270] 1
+, 
+[link: https://github.com/nushell/nushell/pull/10259] 2
+, 
+[link: https://github.com/nushell/nushell/pull/10258] 3
+, 
+[link: https://github.com/nushell/nushell/pull/10257] 4
+amtoine 
+[link: https://github.com/nushell/nushell/pull/10240] fixed default after an empty where
+, and 
+[link: https://github.com/nushell/nushell/pull/10199] added support for tab completion cycling
+, and 
+[link: https://github.com/nushell/nushell/pull/9929] renamed the types with spaces in them to use 
+``-``
+, and 
+[link: https://github.com/nushell/nushell/pull/9678] moved math constants to standard library
+WindSoilder made a change to 
+[link: https://github.com/nushell/nushell/pull/10234] return an error when user break sleep by ctrl-c
+nanoqsh 
+[link: https://github.com/nushell/nushell/pull/10231] made 
+``append``
+/
+``prepend``
+ consistent for ranges
+dead10ck 
+[link: https://github.com/nushell/nushell/pull/10225] cleaned up trash support on Android
+, and 
+[link: https://github.com/nushell/nushell/pull/10224] fixed unit tests on Android
+, and 
+[link: https://github.com/nushell/nushell/pull/10223] upgrade nix to 0.27
+ofek 
+[link: https://github.com/nushell/nushell/pull/10220] fixed example history command pipeline
+nibon7 
+[link: https://github.com/nushell/nushell/pull/10214] auto-formatted let-else blocks
+, and 
+[link: https://github.com/nushell/nushell/pull/10213] fixed panics when encountering parsing errors
+horasal 
+[link: https://github.com/nushell/nushell/pull/10212] allowed operators in constants
+, and 
+[link: https://github.com/nushell/nushell/pull/10142] treat path contains '?' as pattern
+, and 
+[link: https://github.com/nushell/nushell/pull/10139] prevent crash when use redirection with let/mut
+alsuren 
+[link: https://github.com/nushell/nushell/pull/10193] updated keybindings help to point to the book's reedline chapter
+MasterMach50 
+[link: https://github.com/nushell/nushell/pull/10192] changed default env file to use $nu.home_path to find home
+utouto97 
+[link: https://github.com/nushell/nushell/pull/10150] refactored the input command
+íêê⁄¿Title: This week in Nushell #211
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10275] added more 
+``ps``
+ columns in Windows
+, and 
+[link: https://github.com/nushell/nushell/pull/10273] changed the right prompt to respect a users locale
+, and 
+[link: https://github.com/nushell/nushell/pull/10272] updated format date when using %x %X %r
+, and 
+[link: https://github.com/nushell/nushell/pull/10253] allowed 
+``--login``
+ to be used with nu's 
+``--commands``
+ parameter
+, and 
+[link: https://github.com/nushell/nushell/pull/10252] restored NU_LIB_DIRS and NU_PLUGIN_DIRS defaults
+, and 
+[link: https://github.com/nushell/nushell/pull/10201] added plugin path when there are no signatures
+dmatos2012 
+[link: https://github.com/nushell/nushell/pull/10097] started using uutils/coreutils cp command in place of nushell's cp command
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/10121] moved Value to helpers, separate span call
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10267] moved spellcheck config into 
+``.github``
+ folder
+, and 
+[link: https://github.com/nushell/nushell/pull/10266] removed codecov.io setup
+, and 
+[link: https://github.com/nushell/nushell/pull/10255] documented that 
+``open``
+ looks up 
+``from``
+ subcommands
+, and 
+[link: https://github.com/nushell/nushell/pull/10238] tweaked the contributor image to include more users
+, and 
+[link: https://github.com/nushell/nushell/pull/10137] updated 
+``crossterm``
+/
+``ratatui``
+/dev-
+``reedline``
+IanManske made sure we 
+[link: https://github.com/nushell/nushell/pull/10021] restore initial foreground process group on exit
+brunerm99 
+[link: https://github.com/nushell/nushell/pull/10265] added search terms for use, while, and range (#5093)
+balupton updated the readme to 
+[link: https://github.com/nushell/nushell/pull/10262] add dorothy to supported by
+stormasm 
+[link: https://github.com/nushell/nushell/pull/10254] changed LOG_FORMAT to NU_LOG_FORMAT in nu-std library
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/10247] made some UI improvements to 
+``explore``
+rgwood started tidying up 
+``explore``
+ in preparation for bigger changes: 
+[link: https://github.com/nushell/nushell/pull/10270] 1
+, 
+[link: https://github.com/nushell/nushell/pull/10259] 2
+, 
+[link: https://github.com/nushell/nushell/pull/10258] 3
+, 
+[link: https://github.com/nushell/nushell/pull/10257] 4
+amtoine 
+[link: https://github.com/nushell/nushell/pull/10240] fixed default after an empty where
+, and 
+[link: https://github.com/nushell/nushell/pull/10199] added support for tab completion cycling
+, and 
+[link: https://github.com/nushell/nushell/pull/9929] renamed the types with spaces in them to use 
+``-``
+, and 
+[link: https://github.com/nushell/nushell/pull/9678] moved math constants to standard library
+WindSoilder made a change to 
+[link: https://github.com/nushell/nushell/pull/10234] return an error when user break sleep by ctrl-c
+nanoqsh 
+[link: https://github.com/nushell/nushell/pull/10231] made 
+``append``
+/
+``prepend``
+ consistent for ranges
+dead10ck 
+[link: https://github.com/nushell/nushell/pull/10225] cleaned up trash support on Android
+, and 
+[link: https://github.com/nushell/nushell/pull/10224] fixed unit tests on Android
+, and 
+[link: https://github.com/nushell/nushell/pull/10223] upgrade nix to 0.27
+ofek 
+[link: https://github.com/nushell/nushell/pull/10220] fixed example history command pipeline
+nibon7 
+[link: https://github.com/nushell/nushell/pull/10214] auto-formatted let-else blocks
+, and 
+[link: https://github.com/nushell/nushell/pull/10213] fixed panics when encountering parsing errors
+horasal 
+[link: https://github.com/nushell/nushell/pull/10212] allowed operators in constants
+, and 
+[link: https://github.com/nushell/nushell/pull/10142] treat path contains '?' as pattern
+, and 
+[link: https://github.com/nushell/nushell/pull/10139] prevent crash when use redirection with let/mut
+alsuren 
+[link: https://github.com/nushell/nushell/pull/10193] updated keybindings help to point to the book's reedline chapter
+MasterMach50 
+[link: https://github.com/nushell/nushell/pull/10192] changed default env file to use $nu.home_path to find home
+utouto97 
+[link: https://github.com/nushell/nushell/pull/10150] refactored the input command
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-08-twin0211.mdŸ@4b31efe7e14f2d6186a6f8453575b54849dc95f4cd1143d2e130ffb95a275eb2πThis week in Nushell #211ë©ExtensionŸwadamcstephens created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/151] fix shebang/firstLine detection
+íêêŸ±Title: This week in Nushell #211
+Path: Extension
+Content:
+adamcstephens created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/151] fix shebang/firstLine detection
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-08-twin0211.mdŸ@7f1f11fb26227d18f697d8e5409b759e6a91f933b4b728145f18734d5a5650fdπThis week in Nushell #211ë≠Documentation⁄JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell.github.io/pull/1049] Simplify external completer
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1048] Document that 
+``open``
+ looks up 
+``from``
+s in scope
+stormasm created 
+[link: https://github.com/nushell/nushell.github.io/pull/1045] add a link to the contributor book at the end of the plugins chapter
+alsuren created 
+[link: https://github.com/nushell/nushell.github.io/pull/1042] Point out where command docs should be edited
+íêê⁄QTitle: This week in Nushell #211
+Path: Documentation
+Content:
+JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell.github.io/pull/1049] Simplify external completer
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1048] Document that 
+``open``
+ looks up 
+``from``
+s in scope
+stormasm created 
+[link: https://github.com/nushell/nushell.github.io/pull/1045] add a link to the contributor book at the end of the plugins chapter
+alsuren created 
+[link: https://github.com/nushell/nushell.github.io/pull/1042] Point out where command docs should be edited
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-08-twin0211.mdŸ@77f8fa5517174855e63b9ca550776bd04cb80ed8c9e8c4447cf5cda2b5f27283πThis week in Nushell #211ë™Nu_Scripts⁄0amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/595] add the 
+``random-bytes``
+ benchmark
+selfagency created 
+[link: https://github.com/nushell/nu_scripts/pull/593] Add support for fnm
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/591] Replace exa by eza aliases
+íêê⁄kTitle: This week in Nushell #211
+Path: Nu_Scripts
+Content:
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/595] add the 
+``random-bytes``
+ benchmark
+selfagency created 
+[link: https://github.com/nushell/nu_scripts/pull/593] Add support for fnm
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/591] Replace exa by eza aliases

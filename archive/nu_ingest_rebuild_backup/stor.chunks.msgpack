@@ -1,0 +1,101 @@
+•—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor.mdÙ@d8838400af5afa072c413ef542ba249c7efa3d5a4dcc0a3774d36a815411323a«title: stor‘¨databaseÙ;
+
+
+
+
+
+
+
+
+``stor``
+[link: /commands/categories/database.md] ’ÙfTitle: title: stor
+Path: database
+Content:
+
+
+
+
+
+
+
+
+
+``stor``
+[link: /commands/categories/database.md] —ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor.mdÙ@7410f2f28df3c5b483c84e7f92978524029ed65b623c8adf862c1bfee80eb86a«title: stor‘©Signature´``> stor {flags} ``
+’Ù@Title: title: stor
+Path: Signature
+Content:
+``> stor {flags} ``
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor.mdÙ@abad1f53dff1aa71859fb92bd96d7bc358cfc12426f4cce65bd3c431695ebe3a«title: stor‘³Input/output types:¼input
+output
+nothing
+string
+’ÙRTitle: title: stor
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor.mdÙ@4f59297141e4cba73d8af41e1fbece2dadd20aea6072e2ec6167f4524d6dd443«title: stor‘¥NotesÙmYou must use one of the following subcommands. Using this command as-is will only produce this help message.
+’Ù•Title: title: stor
+Path: Notes
+Content:
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor.mdÙ@b54b72a756dc6e00977fb12db8c45e5e12956da780fb8fc9543ce1c9ed3e5db5«title: stor‘¬Subcommands:Úîname
+description
+type
+[link: /commands/docs/stor_create.md] ``stor create``
+Create a table in the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_delete.md] ``stor delete``
+Delete a table or specified rows in the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_export.md] ``stor export``
+Export the in-memory sqlite database to a sqlite database file.
+built-in
+[link: /commands/docs/stor_import.md] ``stor import``
+Import a sqlite database file into the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_insert.md] ``stor insert``
+Insert information into a specified table in the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_open.md] ``stor open``
+Opens the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_reset.md] ``stor reset``
+Reset the in-memory database by dropping all tables.
+built-in
+[link: /commands/docs/stor_update.md] ``stor update``
+Update information in a specified table in the in-memory sqlite database.
+built-in
+’ÚTitle: title: stor
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/stor_create.md] ``stor create``
+Create a table in the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_delete.md] ``stor delete``
+Delete a table or specified rows in the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_export.md] ``stor export``
+Export the in-memory sqlite database to a sqlite database file.
+built-in
+[link: /commands/docs/stor_import.md] ``stor import``
+Import a sqlite database file into the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_insert.md] ``stor insert``
+Insert information into a specified table in the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_open.md] ``stor open``
+Opens the in-memory sqlite database.
+built-in
+[link: /commands/docs/stor_reset.md] ``stor reset``
+Reset the in-memory database by dropping all tables.
+built-in
+[link: /commands/docs/stor_update.md] ``stor update``
+Update information in a specified table in the in-memory sqlite database.
+built-in

@@ -1,0 +1,59 @@
+���@78b6d65bbe7012ab0fa2080ed9f01b9fbcedea1f75a2403fb04aff30902d73f5قTitle: title: polars get-second
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars get-second``
+[link: /commands/categories/dataframe.md] ��@ccd5db857c0e6768dd281360a5ae4fcbfa25997f4e13e336f6cd9fa4790211ee�ZTitle: title: polars get-second
+Path: Signature
+Content:
+``> polars get-second {flags} ``
+��@e585dd4d9e005bd923550884b2a42a57f0c740778d43fcbb6b00193101232b5fٸTitle: title: polars get-second
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@07a341f0e9b2a61f00dbe75543d925bfc323a4f10a608197ea99614c10ad311d�"Title: title: polars get-second
+Path: Examples
+Content:
+Returns second from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars get-second
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ 18 │
+│ 1 │ 18 │
+╰───┴────╯
+
+
+```
+Returns second from a date in an expression
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-second)
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ 18 │
+│ 1 │ 18 │
+╰───┴────╯
+
+
+```

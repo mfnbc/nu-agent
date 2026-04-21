@@ -1,0 +1,90 @@
+ííŸ@1c51cc7512f154eaf12520541289ca47e467d2bdcc28ee262b24df636f9575a9⁄çTitle: This week in Nushell #117
+Path: Nushell
+Content:
+jt 
+[link: https://github.com/nushell/nushell/pull/4129] released 0.40
+, and 
+[link: https://github.com/nushell/nushell/pull/4127] added 'detect columns' command
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4128] missed from_mp4, added back
+, and 
+[link: https://github.com/nushell/nushell/pull/4126] added upx and strip to mac and windows
+, 
+[link: https://github.com/nushell/nushell/pull/4125] added upx and strip
+, and 
+[link: https://github.com/nushell/nushell/pull/4124] tweaked strip ci
+, and 
+[link: https://github.com/nushell/nushell/pull/4123] updated release to allow running manually
+nmandery 
+[link: https://github.com/nushell/nushell/pull/4122] upgraded polars to 0.17
+leodutra 
+[link: https://github.com/nushell/nushell/pull/4118] updated README
+ahkrr 
+[link: https://github.com/nushell/nushell/pull/4116] upgraded dependencies
+íŸ@1f4cb23a985935f334da0a8af0dd56e52e30b25a40da7d2e00a2ee641fbfc648⁄åTitle: This week in Nushell #117
+Path: engine-q
+Content:
+luccasmmg added 
+[link: https://github.com/nushell/engine-q/pull/352] ``from xlsx``
+ 
+``from ods``
+ and 
+``from toml``
+jt 
+[link: https://github.com/nushell/engine-q/pull/351] added 
+``debug``
+ and 
+``describe``
+, 
+[link: https://github.com/nushell/engine-q/pull/350] better record types
+, 
+[link: https://github.com/nushell/engine-q/pull/348] expanded globs and filepaths
+, 
+[link: https://github.com/nushell/engine-q/pull/346] fixed term width for the table
+, 
+[link: https://github.com/nushell/engine-q/pull/341] added support for crlf for line continuations
+, 
+[link: https://github.com/nushell/engine-q/pull/336] fixed multiword imports/exports
+, added 
+[link: https://github.com/nushell/engine-q/pull/333] 'update' command
+, 
+[link: https://github.com/nushell/engine-q/pull/332] added a config variable with engine support
+, and 
+[link: https://github.com/nushell/engine-q/pull/329] fixed some nightly clippy warnings
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/349] plugins signature load
+, and 
+[link: https://github.com/nushell/engine-q/pull/343] Category option for signature
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/345] ported over the 
+``append``
+ command from nushell
+, and 
+[link: https://github.com/nushell/engine-q/pull/339] deleted row.rs in nu-protocol/value which has references to RowStream
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/344] separated Overlay into its own thing
+, and 
+[link: https://github.com/nushell/engine-q/pull/331] added environment variable support for modules
+onthebridgetonowhere 
+[link: https://github.com/nushell/engine-q/pull/342] port 
+``str startswith``
+, and 
+[link: https://github.com/nushell/engine-q/pull/337] ported 
+``str reverse``
+, and 
+[link: https://github.com/nushell/engine-q/pull/334] ported 
+``str lpad``
+ and 
+``str rpad``
+, and 
+[link: https://github.com/nushell/engine-q/pull/330] ported 
+``str length``
+ command
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/340] enabled ls_colors for the 
+``ls``
+ command
+CBenoit 
+[link: https://github.com/nushell/engine-q/pull/338] ported 
+``parse``
+ command

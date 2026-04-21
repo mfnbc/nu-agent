@@ -1,0 +1,33 @@
+”’Ù@e4f3a0d39dbc86af3815dc8ce4027862d2cd3dd0980211d42484f3f9ae48c8f7ÙrTitle: title: stor reset
+Path: database
+Content:
+
+
+
+
+
+
+
+
+
+``stor reset``
+[link: /commands/categories/database.md] ’Ù@caf0eed1ec63e2578284c59dcb7c5ae84f9bccfc5d32d3f1d4fe2c95e71f8876ÙLTitle: title: stor reset
+Path: Signature
+Content:
+``> stor reset {flags} ``
+’Ù@6174a627eb3b9b671592742706e22dc8ea8725dfdc8adb31062c6c412ddd69e5ÙWTitle: title: stor reset
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@e02034f961513df13f8974f4455feb95c21bcb7ce3ad9f5f12ce15cb5cafc839Ù‚Title: title: stor reset
+Path: Examples
+Content:
+Reset the in-memory sqlite database
+```Fenced(Borrowed("nu"))
+> stor reset
+
+
+```

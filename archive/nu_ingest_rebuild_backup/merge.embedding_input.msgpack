@@ -1,0 +1,86 @@
+���@780aefc6d000f3540e0856ebc3e4b5102fe0577310f33e279da873d3e4aef763�fTitle: title: merge
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``merge``
+[link: /commands/categories/filters.md] ��@596db7049272106a312e310ebaae31de3c209786aeb538fd46ac40db54eb9f33�ITitle: title: merge
+Path: Signature
+Content:
+``> merge {flags} (value)``
+��@fe8f4ff4c7ed525fc1c00216e0b5070cf981d3d5eff7c0d7356687a50942649f�WTitle: title: merge
+Path: Parameters
+Content:
+``value``
+: The new value to merge with.
+��@6fc95574204f95cf02a449cfe7efca67cc7e52dad7e56f962ac5d667085b915a�^Title: title: merge
+Path: Input/output types:
+Content:
+input
+output
+record
+record
+table
+table
+��@df976c58d392d8c2a51542eefd51eef66c457e38435f3747d5a4c94cc9d3a994�)Title: title: merge
+Path: Examples
+Content:
+Add an 'id' column to the input table.
+```Fenced(Borrowed("nu"))
+> [a b c] | wrap name | merge ( [47 512 618] | wrap id )
+╭───┬──────┬─────╮
+│ # │ name │ id  │
+├───┼──────┼─────┤
+│ 0 │ a    │  47 │
+│ 1 │ b    │ 512 │
+│ 2 │ c    │ 618 │
+╰───┴──────┴─────╯
+
+
+```
+Merge two records.
+```Fenced(Borrowed("nu"))
+> {a: 1, b: 2} | merge {c: 3}
+╭───┬───╮
+│ a │ 1 │
+│ b │ 2 │
+│ c │ 3 │
+╰───┴───╯
+
+```
+Merge two tables, overwriting overlapping columns.
+```Fenced(Borrowed("nu"))
+> [{columnA: A0 columnB: B0}] | merge [{columnA: 'A0*'}]
+╭───┬─────────┬─────────╮
+│ # │ columnA │ columnB │
+├───┼─────────┼─────────┤
+│ 0 │ A0*     │ B0      │
+╰───┴─────────┴─────────╯
+
+
+```
+��@6e25a1bf57e70d21594cea53780cf6bb9a7e6e39efe1531db02483f4f29e42e8��Title: title: merge
+Path: Notes
+Content:
+You may provide a column structure to merge
+When merging tables, row 0 of the input table is overwritten
+
+with values from row 0 of the provided table, then
+
+repeating this process with row 1, and so on.
+��@46e7dbc44ad492ebea155e773783993b3f690e4e731f2d614f2f61eea9073421��Title: title: merge
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/merge_deep.md] ``merge deep``
+Merge the input with a record or table, recursively merging values in matching columns.
+built-in

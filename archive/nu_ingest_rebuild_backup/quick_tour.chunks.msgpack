@@ -1,0 +1,828 @@
+���Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@5538b02c6b6c4f51ef9fd61dd828db20f4ea5b74d6f69828e3f3c4155cb68d1f�prev:��Quick Tour�
+
+[
+[
+toc
+]
+]
+����5Title: prev:
+Path: Quick Tour
+Content:
+
+
+[
+[
+toc
+]
+]
+��Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@a1f52fe9125d171e60ec8569d169755c7833fdb9365a6b9d6cafcb17036716e5�prev:��Data�The easiest way to see what Nu can do is to start with some examples, so let's dive in.
+The first thing you'll notice when you run a command like 
+[link: /commands/docs/ls.md] ``ls``
+ is that instead of a block of text coming back, you get a structured table.
+```Fenced(Borrowed("nu:no-line-numbers"))
+ls
+# => ╭────┬─────────────────────┬──────┬───────────┬──────────────╮
+# => │  # │        name         │ type │   size    │   modified   │
+# => ├────┼─────────────────────┼──────┼───────────┼──────────────┤
+# => │  0 │ CITATION.cff        │ file │     812 B │ 2 months ago │
+# => │  1 │ CODE_OF_CONDUCT.md  │ file │   3.4 KiB │ 9 months ago │
+# => │  2 │ CONTRIBUTING.md     │ file │  11.0 KiB │ 5 months ago │
+# => │  3 │ Cargo.lock          │ file │ 194.9 KiB │ 15 hours ago │
+# => │  4 │ Cargo.toml          │ file │   9.2 KiB │ 15 hours ago │
+# => │  5 │ Cross.toml          │ file │     666 B │ 6 months ago │
+# => │  6 │ LICENSE             │ file │   1.1 KiB │ 9 months ago │
+# => │  7 │ README.md           │ file │  12.0 KiB │ 15 hours ago │
+# => ...
+
+```
+This table does more than just format the output nicely. Like a spreadsheet, it allows us to work with the data 
+interactively
+.
+����1Title: prev:
+Path: Data
+Content:
+The easiest way to see what Nu can do is to start with some examples, so let's dive in.
+The first thing you'll notice when you run a command like 
+[link: /commands/docs/ls.md] ``ls``
+ is that instead of a block of text coming back, you get a structured table.
+```Fenced(Borrowed("nu:no-line-numbers"))
+ls
+# => ╭────┬─────────────────────┬──────┬───────────┬──────────────╮
+# => │  # │        name         │ type │   size    │   modified   │
+# => ├────┼─────────────────────┼──────┼───────────┼──────────────┤
+# => │  0 │ CITATION.cff        │ file │     812 B │ 2 months ago │
+# => │  1 │ CODE_OF_CONDUCT.md  │ file │   3.4 KiB │ 9 months ago │
+# => │  2 │ CONTRIBUTING.md     │ file │  11.0 KiB │ 5 months ago │
+# => │  3 │ Cargo.lock          │ file │ 194.9 KiB │ 15 hours ago │
+# => │  4 │ Cargo.toml          │ file │   9.2 KiB │ 15 hours ago │
+# => │  5 │ Cross.toml          │ file │     666 B │ 6 months ago │
+# => │  6 │ LICENSE             │ file │   1.1 KiB │ 9 months ago │
+# => │  7 │ README.md           │ file │  12.0 KiB │ 15 hours ago │
+# => ...
+
+```
+This table does more than just format the output nicely. Like a spreadsheet, it allows us to work with the data 
+interactively
+.
+��Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@8aeb0a5fc84d3e8e93a1cddc5f40d3006c4ad92a7a634d9b83b40db8c52842ee�prev:��Acting on Data��Next, let's sort this table by each file's size. To do this, we'll take the output from 
+[link: /commands/docs/ls.md] ``ls``
+ and feed it into a command that can sort tables based on the 
+values
+ in a column.
+```Fenced(Borrowed("nu:no-line-numbers"))
+ls | sort-by size | reverse
+# => ╭───┬─────────────────┬──────┬───────────┬──────────────╮
+# => │ # │      name       │ type │   size    │   modified   │
+# => ├───┼─────────────────┼──────┼───────────┼──────────────┤
+# => │ 0 │ Cargo.lock      │ file │ 194.9 KiB │ 15 hours ago │
+# => │ 1 │ toolkit.nu      │ file │  20.0 KiB │ 15 hours ago │
+# => │ 2 │ README.md       │ file │  12.0 KiB │ 15 hours ago │
+# => │ 3 │ CONTRIBUTING.md │ file │  11.0 KiB │ 5 months ago │
+# => │ 4 │ ...             │ ...  │ ...       │ ...          │
+# => │ 5 │ LICENSE         │ file │   1.1 KiB │ 9 months ago │
+# => │ 6 │ CITATION.cff    │ file │     812 B │ 2 months ago │
+# => │ 7 │ Cross.toml      │ file │     666 B │ 6 months ago │
+# => │ 8 │ typos.toml      │ file │     513 B │ 2 months ago │
+# => ╰───┴─────────────────┴──────┴───────────┴──────────────╯
+
+```
+Notice that we didn't pass commandline arguments or switches to 
+[link: /commands/docs/ls.md] ``ls``
+. Instead, we used Nushell's built-in 
+[link: /commands/docs/sort-by.md] ``sort-by``
+ command to sort the 
+output
+ of the 
+``ls``
+ command. Then, to see the largest files on top, we used 
+[link: /commands/docs/reverse.md] ``reverse``
+ on the 
+output
+ of 
+``sort-by``
+.
+::: tip Cool!
+
+If you compare the sort order closely, you might realize that the data isn't sorted alphabetically. It's not even sorted by the 
+numerical
+ values. Instead, since the 
+``size``
+ column is a 
+[link: ./types_of_data.md#file-sizes] ``filesize``
+ type
+, Nushell knows that 
+``1.1 KiB``
+ (kibibytes) is larger than 
+``812 B``
+ (bytes).
+
+:::
+����	Title: prev:
+Path: Acting on Data
+Content:
+Next, let's sort this table by each file's size. To do this, we'll take the output from 
+[link: /commands/docs/ls.md] ``ls``
+ and feed it into a command that can sort tables based on the 
+values
+ in a column.
+```Fenced(Borrowed("nu:no-line-numbers"))
+ls | sort-by size | reverse
+# => ╭───┬─────────────────┬──────┬───────────┬──────────────╮
+# => │ # │      name       │ type │   size    │   modified   │
+# => ├───┼─────────────────┼──────┼───────────┼──────────────┤
+# => │ 0 │ Cargo.lock      │ file │ 194.9 KiB │ 15 hours ago │
+# => │ 1 │ toolkit.nu      │ file │  20.0 KiB │ 15 hours ago │
+# => │ 2 │ README.md       │ file │  12.0 KiB │ 15 hours ago │
+# => │ 3 │ CONTRIBUTING.md │ file │  11.0 KiB │ 5 months ago │
+# => │ 4 │ ...             │ ...  │ ...       │ ...          │
+# => │ 5 │ LICENSE         │ file │   1.1 KiB │ 9 months ago │
+# => │ 6 │ CITATION.cff    │ file │     812 B │ 2 months ago │
+# => │ 7 │ Cross.toml      │ file │     666 B │ 6 months ago │
+# => │ 8 │ typos.toml      │ file │     513 B │ 2 months ago │
+# => ╰───┴─────────────────┴──────┴───────────┴──────────────╯
+
+```
+Notice that we didn't pass commandline arguments or switches to 
+[link: /commands/docs/ls.md] ``ls``
+. Instead, we used Nushell's built-in 
+[link: /commands/docs/sort-by.md] ``sort-by``
+ command to sort the 
+output
+ of the 
+``ls``
+ command. Then, to see the largest files on top, we used 
+[link: /commands/docs/reverse.md] ``reverse``
+ on the 
+output
+ of 
+``sort-by``
+.
+::: tip Cool!
+
+If you compare the sort order closely, you might realize that the data isn't sorted alphabetically. It's not even sorted by the 
+numerical
+ values. Instead, since the 
+``size``
+ column is a 
+[link: ./types_of_data.md#file-sizes] ``filesize``
+ type
+, Nushell knows that 
+``1.1 KiB``
+ (kibibytes) is larger than 
+``812 B``
+ (bytes).
+
+:::
+��Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@f6cba2c96ddfe6491fac2ef4c99394f173ba7de753f5bb16249fb20098d00ea7�prev:�� Command�``where``
+Nu provides many commands that can operate on the structured output of the previous command. These are usually categorized as "Filters" in Nushell.
+For example, we can use 
+[link: /commands/docs/where.md] ``where``
+ to filter the contents of the table so that it only shows files over 10 kilobytes:
+```Fenced(Borrowed("nu"))
+ls | where size > 10kb
+# => ╭───┬─────────────────┬──────┬───────────┬───────────────╮
+# => │ # │      name       │ type │   size    │   modified    │
+# => ├───┼─────────────────┼──────┼───────────┼───────────────┤
+# => │ 0 │ CONTRIBUTING.md │ file │  11.0 KiB │ 5 months ago  │
+# => │ 1 │ Cargo.lock      │ file │ 194.6 KiB │ 2 minutes ago │
+# => │ 2 │ README.md       │ file │  12.0 KiB │ 16 hours ago  │
+# => │ 3 │ toolkit.nu      │ file │  20.0 KiB │ 16 hours ago  │
+# => ╰───┴─────────────────┴──────┴───────────┴───────────────╯
+
+```
+����(Title: prev:
+Path:  Command
+Content:
+``where``
+Nu provides many commands that can operate on the structured output of the previous command. These are usually categorized as "Filters" in Nushell.
+For example, we can use 
+[link: /commands/docs/where.md] ``where``
+ to filter the contents of the table so that it only shows files over 10 kilobytes:
+```Fenced(Borrowed("nu"))
+ls | where size > 10kb
+# => ╭───┬─────────────────┬──────┬───────────┬───────────────╮
+# => │ # │      name       │ type │   size    │   modified    │
+# => ├───┼─────────────────┼──────┼───────────┼───────────────┤
+# => │ 0 │ CONTRIBUTING.md │ file │  11.0 KiB │ 5 months ago  │
+# => │ 1 │ Cargo.lock      │ file │ 194.6 KiB │ 2 minutes ago │
+# => │ 2 │ README.md       │ file │  12.0 KiB │ 16 hours ago  │
+# => │ 3 │ toolkit.nu      │ file │  20.0 KiB │ 16 hours ago  │
+# => ╰───┴─────────────────┴──────┴───────────┴───────────────╯
+
+```
+��Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@e01093003623f10e9a734848ad697ba778085f507cb540dfa7f397302305064e�prev:��More Than Just Directories�cOf course, this isn't limited to the 
+``ls``
+ command. Nushell follows the Unix philosophy where each command does one thing well and you can typically expect the output of one command to become the input of another. This allows us to mix-and-match commands in many different combinations.
+Let's look at a different command:
+```Fenced(Borrowed("nu:no-line-numbers"))
+ps
+# => ╭───┬──────┬──────┬───────────────┬──────────┬──────┬───────────┬─────────╮
+# => │ # │ pid  │ ppid │     name      │  status  │ cpu  │    mem    │ virtual │
+# => ├───┼──────┼──────┼───────────────┼──────────┼──────┼───────────┼─────────┤
+# => │ 0 │    1 │    0 │ init(void)    │ Sleeping │ 0.00 │   1.2 MiB │ 2.2 MiB │
+# => │ 1 │    8 │    1 │ init          │ Sleeping │ 0.00 │ 124.0 KiB │ 2.3 MiB │
+# => │ 2 │ 6565 │    1 │ SessionLeader │ Sleeping │ 0.00 │ 108.0 KiB │ 2.2 MiB │
+# => │ 3 │ 6566 │ 6565 │ Relay(6567)   │ Sleeping │ 0.00 │ 116.0 KiB │ 2.2 MiB │
+# => │ 4 │ 6567 │ 6566 │ nu            │ Running  │ 0.00 │  28.4 MiB │ 1.1 GiB │
+# => ╰───┴──────┴──────┴───────────────┴──────────┴──────┴───────────┴─────────╯
+
+```
+You may be familiar with the Linux/Unix 
+``ps``
+ command. It provides a list of all of the current processes running in the system along with their current status. As with 
+``ls``
+, Nushell provides a cross-platform, built-in 
+[link: /commands/docs/ps.md] ``ps``
+ command
+ that returns its results as structured data.
+::: note
+
+The traditional Unix 
+``ps``
+ only shows the current process and its parents by default. Nushell's implementation shows all of the processes on the system by default.
+Normally, running 
+``ps``
+ in Nushell uses its 
+internal
+, cross-platform command. However, it is still possible to run the 
+external
+, system-dependent version on Unix/Linux platforms by prefacing it with the 
+caret sigil
+. For example:
+```Fenced(Borrowed("nu"))
+^ps aux  # run the Unix ps command with all processes in user-oriented form
+
+```
+See 
+[link: ./running_externals.md] Running External System Commands
+ for more details.
+
+:::
+What if we wanted to just show the processes that are actively running? As with 
+``ls``
+ above, we can also work with the table that 
+``ps``
+ 
+outputs
+:
+```Fenced(Borrowed("nu"))
+ps | where status == Running
+# => ╭───┬──────┬──────┬──────┬─────────┬──────┬──────────┬─────────╮
+# => │ # │ pid  │ ppid │ name │ status  │ cpu  │   mem    │ virtual │
+# => ├───┼──────┼──────┼──────┼─────────┼──────┼──────────┼─────────┤
+# => │ 0 │ 6585 │ 6584 │ nu   │ Running │ 0.00 │ 31.9 MiB │ 1.2 GiB │
+# => ╰───┴──────┴──────┴──────┴─────────┴──────┴──────────┴─────────╯
+
+```
+::: tip
+
+Remember above, where the 
+``size``
+ column from the 
+``ls``
+ command was a 
+``filesize``
+? Here, 
+``status``
+ is really just a string, and you can use all the normal string operations and commands with it, including (as above) the 
+``==``
+ comparison.
+You can examine the types for the table's columns using:
+```Fenced(Borrowed("nu"))
+ps | describe
+# => table<pid: int, ppid: int, name: string, status: string, cpu: float, mem: filesize, virtual: filesize> (stream)
+
+```
+The 
+[link: /commands/docs/describe.md] ``describe``
+ command
+ can be used to display the output type of any command or expression.
+:::
+�����Title: prev:
+Path: More Than Just Directories
+Content:
+Of course, this isn't limited to the 
+``ls``
+ command. Nushell follows the Unix philosophy where each command does one thing well and you can typically expect the output of one command to become the input of another. This allows us to mix-and-match commands in many different combinations.
+Let's look at a different command:
+```Fenced(Borrowed("nu:no-line-numbers"))
+ps
+# => ╭───┬──────┬──────┬───────────────┬──────────┬──────┬───────────┬─────────╮
+# => │ # │ pid  │ ppid │     name      │  status  │ cpu  │    mem    │ virtual │
+# => ├───┼──────┼──────┼───────────────┼──────────┼──────┼───────────┼─────────┤
+# => │ 0 │    1 │    0 │ init(void)    │ Sleeping │ 0.00 │   1.2 MiB │ 2.2 MiB │
+# => │ 1 │    8 │    1 │ init          │ Sleeping │ 0.00 │ 124.0 KiB │ 2.3 MiB │
+# => │ 2 │ 6565 │    1 │ SessionLeader │ Sleeping │ 0.00 │ 108.0 KiB │ 2.2 MiB │
+# => │ 3 │ 6566 │ 6565 │ Relay(6567)   │ Sleeping │ 0.00 │ 116.0 KiB │ 2.2 MiB │
+# => │ 4 │ 6567 │ 6566 │ nu            │ Running  │ 0.00 │  28.4 MiB │ 1.1 GiB │
+# => ╰───┴──────┴──────┴───────────────┴──────────┴──────┴───────────┴─────────╯
+
+```
+You may be familiar with the Linux/Unix 
+``ps``
+ command. It provides a list of all of the current processes running in the system along with their current status. As with 
+``ls``
+, Nushell provides a cross-platform, built-in 
+[link: /commands/docs/ps.md] ``ps``
+ command
+ that returns its results as structured data.
+::: note
+
+The traditional Unix 
+``ps``
+ only shows the current process and its parents by default. Nushell's implementation shows all of the processes on the system by default.
+Normally, running 
+``ps``
+ in Nushell uses its 
+internal
+, cross-platform command. However, it is still possible to run the 
+external
+, system-dependent version on Unix/Linux platforms by prefacing it with the 
+caret sigil
+. For example:
+```Fenced(Borrowed("nu"))
+^ps aux  # run the Unix ps command with all processes in user-oriented form
+
+```
+See 
+[link: ./running_externals.md] Running External System Commands
+ for more details.
+
+:::
+What if we wanted to just show the processes that are actively running? As with 
+``ls``
+ above, we can also work with the table that 
+``ps``
+ 
+outputs
+:
+```Fenced(Borrowed("nu"))
+ps | where status == Running
+# => ╭───┬──────┬──────┬──────┬─────────┬──────┬──────────┬─────────╮
+# => │ # │ pid  │ ppid │ name │ status  │ cpu  │   mem    │ virtual │
+# => ├───┼──────┼──────┼──────┼─────────┼──────┼──────────┼─────────┤
+# => │ 0 │ 6585 │ 6584 │ nu   │ Running │ 0.00 │ 31.9 MiB │ 1.2 GiB │
+# => ╰───┴──────┴──────┴──────┴─────────┴──────┴──────────┴─────────╯
+
+```
+::: tip
+
+Remember above, where the 
+``size``
+ column from the 
+``ls``
+ command was a 
+``filesize``
+? Here, 
+``status``
+ is really just a string, and you can use all the normal string operations and commands with it, including (as above) the 
+``==``
+ comparison.
+You can examine the types for the table's columns using:
+```Fenced(Borrowed("nu"))
+ps | describe
+# => table<pid: int, ppid: int, name: string, status: string, cpu: float, mem: filesize, virtual: filesize> (stream)
+
+```
+The 
+[link: /commands/docs/describe.md] ``describe``
+ command
+ can be used to display the output type of any command or expression.
+:::
+��Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@cb003ca3f74ac26d78f954a8a9c7f2d81eed2cc7256dabc60f2554cc79c6a3ca�prev:��Command Arguments in a Pipeline�	pSometimes, a command takes an 
+argument
+ instead of pipeline 
+input
+. For this scenario, Nushell provides the 
+[link: ./pipelines.md#pipeline-input-and-the-special-in-variable] ``$in``
+ variable
+ that let's you use the previous command's output in variable-form. For example:
+```Fenced(Borrowed("nu:line-numbers"))
+ls
+| sort-by size
+| reverse
+| first
+| get name
+| cp $in ~
+
+```
+::: tip Nushell Design Note
+
+Whenever possible, Nushell commands are designed to act on pipeline 
+input
+. However, some commands, like 
+``cp``
+ in this example, have two (or more)
+
+arguments with different meanings. In this case, 
+``cp``
+ needs to know both the path to 
+copy
+ as well as the 
+target
+ path. As a result, this command is
+
+more ergonomic with two 
+positional parameters
+.
+
+:::
+::: tip
+
+Nushell commands can extend across multiple lines for readability. The above is the same as:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | reverse | first | get name | cp $in ~
+
+```
+See Also: 
+[link: ./line_editor.md#multi-line-editing] Multi-line Editing
+
+:::
+The first three lines are the same commands we used in the second example above, so let's examine the last three:
+The 
+[link: /commands/docs/first.md] ``first``
+ command
+ simply returns the first value from the table. In this case, that means the file with the largest size. That's the 
+``Cargo.lock``
+ file if using the directory listing from the second example above. This "file" is a 
+[link: ./types_of_data.md#records] ``record``
+ from the table which still contains its 
+``name``
+, 
+``type``
+, 
+``size``
+, and 
+``modified``
+ columns/fields.
+``get name``
+ returns the 
+value
+ of the 
+``name``
+ field from the previous command, so 
+``"Cargo.lock"``
+ (a string). This is also a simple example of a 
+[link: ./types_of_data.md#cell-paths] ``cell-path``
+ that can be used to navigate and isolate structured data.
+The last line uses the 
+``$in``
+ variable to reference the output of line 5. The result is a command that says 
+"Copy 'Cargo.lock' to the home directory"
+::: tip
+
+[link: /commands/docs/get.md] ``get``
+ and its counterpart 
+[link: /commands/docs/select.md] ``select``
+ are two of the most used filters in Nushell, but it might not be easy to
+
+spot the difference between them at first glance. When you're ready to start using them more extensively, see 
+[link: ./navigating_structured_data.md#using-get-and-select] Using 
+``get``
+ and 
+``select``
+ for a guide.
+
+:::
+����	�Title: prev:
+Path: Command Arguments in a Pipeline
+Content:
+Sometimes, a command takes an 
+argument
+ instead of pipeline 
+input
+. For this scenario, Nushell provides the 
+[link: ./pipelines.md#pipeline-input-and-the-special-in-variable] ``$in``
+ variable
+ that let's you use the previous command's output in variable-form. For example:
+```Fenced(Borrowed("nu:line-numbers"))
+ls
+| sort-by size
+| reverse
+| first
+| get name
+| cp $in ~
+
+```
+::: tip Nushell Design Note
+
+Whenever possible, Nushell commands are designed to act on pipeline 
+input
+. However, some commands, like 
+``cp``
+ in this example, have two (or more)
+
+arguments with different meanings. In this case, 
+``cp``
+ needs to know both the path to 
+copy
+ as well as the 
+target
+ path. As a result, this command is
+
+more ergonomic with two 
+positional parameters
+.
+
+:::
+::: tip
+
+Nushell commands can extend across multiple lines for readability. The above is the same as:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | reverse | first | get name | cp $in ~
+
+```
+See Also: 
+[link: ./line_editor.md#multi-line-editing] Multi-line Editing
+
+:::
+The first three lines are the same commands we used in the second example above, so let's examine the last three:
+The 
+[link: /commands/docs/first.md] ``first``
+ command
+ simply returns the first value from the table. In this case, that means the file with the largest size. That's the 
+``Cargo.lock``
+ file if using the directory listing from the second example above. This "file" is a 
+[link: ./types_of_data.md#records] ``record``
+ from the table which still contains its 
+``name``
+, 
+``type``
+, 
+``size``
+, and 
+``modified``
+ columns/fields.
+``get name``
+ returns the 
+value
+ of the 
+``name``
+ field from the previous command, so 
+``"Cargo.lock"``
+ (a string). This is also a simple example of a 
+[link: ./types_of_data.md#cell-paths] ``cell-path``
+ that can be used to navigate and isolate structured data.
+The last line uses the 
+``$in``
+ variable to reference the output of line 5. The result is a command that says 
+"Copy 'Cargo.lock' to the home directory"
+::: tip
+
+[link: /commands/docs/get.md] ``get``
+ and its counterpart 
+[link: /commands/docs/select.md] ``select``
+ are two of the most used filters in Nushell, but it might not be easy to
+
+spot the difference between them at first glance. When you're ready to start using them more extensively, see 
+[link: ./navigating_structured_data.md#using-get-and-select] Using 
+``get``
+ and 
+``select``
+ for a guide.
+
+:::
+��Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@573e0f2a364e47539c529ce8dc7cbaf326ef60ed53ab42d08c1d43dabe9764e0�prev:��Getting Help��Nushell provides an extensive, in-shell Help system. For example
+```Fenced(Borrowed("nu"))
+# help <command>
+help ls
+# Or
+ls --help
+# Also
+help operators
+help escapes
+
+```
+::: tip Cool!
+
+Press the 
+F1
+ key to access the Help 
+[link: ./line_editor.md#menus] menu
+. Search for the 
+``ps``
+ command here, but 
+don't press 
+Enter
+ just yet
+!
+Instead, press the 
+Down Arrow
+ key, and notice that you are scrolling through the Examples section. Highlight an example, 
+then
+ press 
+Enter
+ and
+
+the example will be entered at the commandline, ready to run!
+This can be a great way to explore and learn about the extensive set of Nushell commands.
+
+:::
+The Help system also has a "search" feature:
+```Fenced(Borrowed("nu"))
+help --find filesize
+# or
+help -f filesize
+
+```
+It may not surprise you by now that the Help system itself is based on structured data! Notice that the output of 
+``help -f filesize``
+ is a table.
+The Help for each command is stored as a record with the:
+Name
+Category
+Type (built-in, plugin, custom)
+Parameters it accepts
+Signatures showing what types of data it can accept as well as output
+And more
+You can view 
+all
+ commands (other than externals) as a single large table using:
+```Fenced(Borrowed("nu"))
+help commands
+
+```
+::: tip
+
+Notice that the 
+``params``
+ and 
+``input_output``
+ columns of the output above are 
+nested
+ tables. Nushell allows 
+[link: ./navigating_structured_data.md#background] arbitrarily nested data structures
+.
+
+:::
+�����Title: prev:
+Path: Getting Help
+Content:
+Nushell provides an extensive, in-shell Help system. For example
+```Fenced(Borrowed("nu"))
+# help <command>
+help ls
+# Or
+ls --help
+# Also
+help operators
+help escapes
+
+```
+::: tip Cool!
+
+Press the 
+F1
+ key to access the Help 
+[link: ./line_editor.md#menus] menu
+. Search for the 
+``ps``
+ command here, but 
+don't press 
+Enter
+ just yet
+!
+Instead, press the 
+Down Arrow
+ key, and notice that you are scrolling through the Examples section. Highlight an example, 
+then
+ press 
+Enter
+ and
+
+the example will be entered at the commandline, ready to run!
+This can be a great way to explore and learn about the extensive set of Nushell commands.
+
+:::
+The Help system also has a "search" feature:
+```Fenced(Borrowed("nu"))
+help --find filesize
+# or
+help -f filesize
+
+```
+It may not surprise you by now that the Help system itself is based on structured data! Notice that the output of 
+``help -f filesize``
+ is a table.
+The Help for each command is stored as a record with the:
+Name
+Category
+Type (built-in, plugin, custom)
+Parameters it accepts
+Signatures showing what types of data it can accept as well as output
+And more
+You can view 
+all
+ commands (other than externals) as a single large table using:
+```Fenced(Borrowed("nu"))
+help commands
+
+```
+::: tip
+
+Notice that the 
+``params``
+ and 
+``input_output``
+ columns of the output above are 
+nested
+ tables. Nushell allows 
+[link: ./navigating_structured_data.md#background] arbitrarily nested data structures
+.
+
+:::
+��Iarchive/external_nushell_repo_backup/nushell.github.io/book/quick_tour.md�@97592cc215ae292e1452090a2562b5bceb7aedbd9ed04034cc0c34ebf2d45f59�prev:��'ing from Here��``explore``
+That 
+``help commands``
+ output is quite long. You could send it to a pager like 
+``less``
+ or 
+``bat``
+, but Nushell includes a built-in 
+``explore``
+ command that lets you not only scroll, but also telescope-in to nested data. Try:
+```Fenced(Borrowed("nu"))
+help commands | explore
+
+```
+Then press the 
+Enter
+ key to access the data itself. Use the arrow keys to scroll to the 
+``cp``
+ command, and over to the 
+``params``
+ column. Hit 
+Enter
+ again to
+
+telescope in to the complete list of parameters available to the 
+``cp``
+ command.
+::: note
+
+Pressing 
+Esc
+ one time returns from Scroll-mode to the View; Pressing it a second time returns to the previous view (or exits, if already at the top view level).
+
+:::
+::: tip
+
+You can, of course, use the 
+``explore``
+ command on 
+any
+ structured data in Nushell. This might include JSON data coming from a Web API, a spreadsheet or CSV file, YAML, or anything that can be represented as structured data in Nushell.
+Try 
+``$env.config | explore``
+ for fun!
+
+:::
+����*Title: prev:
+Path: 'ing from Here
+Content:
+``explore``
+That 
+``help commands``
+ output is quite long. You could send it to a pager like 
+``less``
+ or 
+``bat``
+, but Nushell includes a built-in 
+``explore``
+ command that lets you not only scroll, but also telescope-in to nested data. Try:
+```Fenced(Borrowed("nu"))
+help commands | explore
+
+```
+Then press the 
+Enter
+ key to access the data itself. Use the arrow keys to scroll to the 
+``cp``
+ command, and over to the 
+``params``
+ column. Hit 
+Enter
+ again to
+
+telescope in to the complete list of parameters available to the 
+``cp``
+ command.
+::: note
+
+Pressing 
+Esc
+ one time returns from Scroll-mode to the View; Pressing it a second time returns to the previous view (or exits, if already at the top view level).
+
+:::
+::: tip
+
+You can, of course, use the 
+``explore``
+ command on 
+any
+ structured data in Nushell. This might include JSON data coming from a Web API, a spreadsheet or CSV file, YAML, or anything that can be represented as structured data in Nushell.
+Try 
+``$env.config | explore``
+ for fun!
+
+:::

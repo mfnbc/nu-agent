@@ -1,0 +1,101 @@
+���@c658f0814bf6b5ac37836e8e62a94ecfee49bd77de688f0dee111dd186a7510c�nTitle: title: split row
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``split row``
+[link: /commands/categories/strings.md] ��@dd625fd39422210f2756903605603f20d3701aa3f714607ff096de9aa5adfc63�UTitle: title: split row
+Path: Signature
+Content:
+``> split row {flags} (separator)``
+��@6b41219abb4fbc28179fbabaa72ea87c7c41f77377a73a8060b94b39b7ce37c6ٜTitle: title: split row
+Path: Flags
+Content:
+``--number, -n {int}``
+: Split into maximum number of items.
+``--regex, -r``
+: Use regex syntax for separator.
+��@a26737aaca49d98da566aa52ce885c23a7bffeb15f44211fbded8ad52a9b12fb�yTitle: title: split row
+Path: Parameters
+Content:
+``separator``
+: A character or regex that denotes what separates rows.
+��@cbc2e331c99bee428a9cc6dae16a3582732c40c2ed690b150ec34c4955fe62eaقTitle: title: split row
+Path: Input/output types:
+Content:
+input
+output
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+��@8b57b17f2622c0dfa34101e3c0ea998ab1bc028f5e34a41b90ecb7ea6622bc98��Title: title: split row
+Path: Examples
+Content:
+Split a string into rows of char.
+```Fenced(Borrowed("nu"))
+> 'abc' | split row ''
+╭───┬───╮
+│ 0 │   │
+│ 1 │ a │
+│ 2 │ b │
+│ 3 │ c │
+│ 4 │   │
+╰───┴───╯
+
+
+```
+Split a string into rows by the specified separator.
+```Fenced(Borrowed("nu"))
+> 'a--b--c' | split row '--'
+╭───┬───╮
+│ 0 │ a │
+│ 1 │ b │
+│ 2 │ c │
+╰───┴───╯
+
+
+```
+Split a string by '-'.
+```Fenced(Borrowed("nu"))
+> '-a-b-c-' | split row '-'
+╭───┬───╮
+│ 0 │   │
+│ 1 │ a │
+│ 2 │ b │
+│ 3 │ c │
+│ 4 │   │
+╰───┴───╯
+
+
+```
+Split a string by regex.
+```Fenced(Borrowed("nu"))
+> 'a   b       c' | split row -r '\s+'
+╭───┬───╮
+│ 0 │ a │
+│ 1 │ b │
+│ 2 │ c │
+╰───┴───╯
+
+
+```

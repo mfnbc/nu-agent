@@ -1,0 +1,184 @@
+îíŸ@b4b3980a8c213fbafe51769de53350a76d279c4d913b8928c93886b5daee65dc⁄ÅTitle: This week in Nushell #173
+Path: Nushell
+Content:
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/7497] ensured that 
+``get``
+ doesn't delve too deep in nested lists
+, and 
+[link: https://github.com/nushell/nushell/pull/7443] let 
+``UnknownFlag``
+ error list out available flags
+, and 
+[link: https://github.com/nushell/nushell/pull/7432] add interact-once switch to 
+``rm``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7480] added a 
+``--long``
+ flag to 
+``history``
+ command for sqlite history
+, and 
+[link: https://github.com/nushell/nushell/pull/7472] add missing shapes to default_config
+, and 
+[link: https://github.com/nushell/nushell/pull/7450] sort enums add missing items to parse_shape_name
+, and 
+[link: https://github.com/nushell/nushell/pull/7419] remove example missed from an earlier refactor
+, and 
+[link: https://github.com/nushell/nushell/pull/7493] add new plugins to script
+andrasio 
+[link: https://github.com/nushell/nushell/pull/7492] fixed up register-plugins.nu
+, and 
+[link: https://github.com/nushell/nushell/pull/7489] (nu_plugin_python): Send back the signature required fields.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/7500] removed unnecessary 
+``echo``
+ uses from examples
+, and 
+[link: https://github.com/nushell/nushell/pull/7482] Add helper method to check whether ctrl+c was pressed, adopt it
+, and 
+[link: https://github.com/nushell/nushell/pull/7478] Handle ctrl-c in 
+``uniq``
+ and 
+``uniq-by``
+, and 
+[link: https://github.com/nushell/nushell/pull/7466] Fix streaming page missing newline
+, and 
+[link: https://github.com/nushell/nushell/pull/7440] Make hook execution stream instead of collecting
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/7488] Use 
+``nu-path``
+ correctly in 
+``nu!``
+ test macro to make dev-dependency transitive
+, and 
+[link: https://github.com/nushell/nushell/pull/7473] Add example showing first class closure to 
+``do``
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/7487] fixed #7486
+, and 
+[link: https://github.com/nushell/nushell/pull/7446] Try to fix #7380
+, and 
+[link: https://github.com/nushell/nushell/pull/7339] nu-explore/ A few things
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/7476] refactored Nu to introduce is_external_failed to PipelineData, and simplify try logic
+, and 
+[link: https://github.com/nushell/nushell/pull/7475] break 
+``for``
+, 
+``loop``
+, 
+``while``
+ execution when external command runs to failed
+, and 
+[link: https://github.com/nushell/nushell/pull/7468] remove output, append, bin flag from fetch command
+, and 
+[link: https://github.com/nushell/nushell/pull/7433] in for, loop, while, auto print final value in each iteration
+, and 
+[link: https://github.com/nushell/nushell/pull/7413] make split row works like python and rust ways
+webbedspace 
+[link: https://github.com/nushell/nushell/pull/7470] improved help messages: edit various instances of "block" to "closure"
+, and 
+[link: https://github.com/nushell/nushell/pull/7460] Fix 
+``du``
+ error message
+, and 
+[link: https://github.com/nushell/nushell/pull/7434] Tweak "Cannot convert {x} to a string argument" error in run_external
+, and 
+[link: https://github.com/nushell/nushell/pull/7309] ``$env.config``
+ now always holds a record with only valid values
+hustcer 
+[link: https://github.com/nushell/nushell/pull/7469] added a riscv64 binary release target
+, and 
+[link: https://github.com/nushell/nushell/pull/7455] add input_output_types() to benchmark,cd and config reset
+raccmonteiro 
+[link: https://github.com/nushell/nushell/pull/7462] changed 
+``mkdir``
+'s change flag 
+``-s``
+ to 
+``-v``
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/7454] reverted "Add pipeline operators to help"
+, and 
+[link: https://github.com/nushell/nushell/pull/7452] Revert "Pipeline operators: 
+``&&``
+ and 
+``||``
+"
+, and 
+[link: https://github.com/nushell/nushell/pull/7449] Add pipeline operators to help
+, and 
+[link: https://github.com/nushell/nushell/pull/7448] Pipeline operators: 
+``&&``
+ and 
+``||``
+Kangaxx-0 
+[link: https://github.com/nushell/nushell/pull/7437] added config mutation tests
+, and 
+[link: https://github.com/nushell/nushell/pull/7417] into cellpath command
+kubouch 
+[link: https://github.com/nushell/nushell/pull/7428] replaced row conditions with closures in commands
+, and 
+[link: https://github.com/nushell/nushell/pull/7425] Simplify FILE_PWD setting in 'overlay use'
+, and 
+[link: https://github.com/nushell/nushell/pull/7424] Add FILE_PWD environment variable when running 'nu script.nu'
+, and 
+[link: https://github.com/nushell/nushell/pull/7423] Make env-related tests more resilient
+, and 
+[link: https://github.com/nushell/nushell/pull/7365] Move 'where' to parser keywords; Add 'filter' command
+metacoma 
+[link: https://github.com/nushell/nushell/pull/7422] fixed the Docker build
+gavinfoley 
+[link: https://github.com/nushell/nushell/pull/7119] fixed escaping backslashes in interpolated strings (fixes #6737)
+íŸ@6c995e9f75bea2ce7a5f99f649ce6493352094c056a629ca8387bc58fe637beeŸ∫Title: This week in Nushell #173
+Path: Extension
+Content:
+fdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/72] added 
+``and``
+ and 
+``or``
+ so they highlight properly
+íŸ@6305ec7c0472920b81808f3e0e27ee0d60e0b9267e0f37c2f3e13c841418c7cb⁄≥Title: This week in Nushell #173
+Path: Documentation
+Content:
+Tengs-Penkwe 
+[link: https://github.com/nushell/nushell.github.io/pull/703] corrected a bare word example
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/702] Correct command examples
+raccmonteiro updated 
+[link: https://github.com/nushell/nushell.github.io/pull/701] ``mkdir``
+ 
+``--show-created-paths``
+ flag replaced
+sin 
+[link: https://github.com/nushell/nushell.github.io/pull/700] fixed an error in 
+``book/dataframes.md``
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/697] optimized the make_docs script for better performance
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/694] chore: Upgrade some outdated dependencies
+WindSoilder 
+[link: https://github.com/nushell/nushell.github.io/pull/696] documented a breaking change for split row
+thara 
+[link: https://github.com/nushell/nushell.github.io/pull/695] fixed dead links
+íŸ@2365219858ba7979c613260a5e9900ad7b465a3076203d494c69e5a3b4a61df2⁄(Title: This week in Nushell #173
+Path: Nu_Scripts
+Content:
+jntrnr 
+[link: https://github.com/nushell/nu_scripts/pull/328] fixed the TWiN script
+xlittlerag 
+[link: https://github.com/nushell/nu_scripts/pull/326] fixed get-weather celsius loop
+1Kinoti 
+[link: https://github.com/nushell/nu_scripts/pull/325] fixed 
+``up``
+ command for v0.72.0
+WindSoilder 
+[link: https://github.com/nushell/nu_scripts/pull/324] fixed custom completions arg names
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/323] changed 
+``for``
+ to 
+``each``
+ in oh-my.nu

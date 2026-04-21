@@ -1,0 +1,165 @@
+•—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/plugin.mdÙ@8a8e80900f970a62b30ff43b534dd4066a92c13e2b1143f877296842ee4a3205­title: plugin‘¦pluginÙ;
+
+
+
+
+
+
+
+
+``plugin``
+[link: /commands/categories/plugin.md] ’ÙfTitle: title: plugin
+Path: plugin
+Content:
+
+
+
+
+
+
+
+
+
+``plugin``
+[link: /commands/categories/plugin.md] —ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/plugin.mdÙ@1eddd3341d9cff8ee02a948997f5698cb54eb7b44fa4610d7c2336e64b872ff0­title: plugin‘©Signature¶``> plugin {flags} ``
+’ÙDTitle: title: plugin
+Path: Signature
+Content:
+``> plugin {flags} ``
+—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/plugin.mdÙ@13391c804c0aa468e901b1b341e79266c302f3f098fa0e7262cb5c94f1bb1ecc­title: plugin‘³Input/output types:½input
+output
+nothing
+nothing
+’ÙUTitle: title: plugin
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/plugin.mdÙ@d4d228868a076eb972e1eed61303fd42f6f9ad25986c5b436f483d1e95544697­title: plugin‘¨ExamplesÚlRun the 
+``nu_plugin_inc``
+ plugin from the current directory and install its signatures.
+```Fenced(Borrowed("nu"))
+> plugin add nu_plugin_inc
+
+
+```
+Load (or reload) the 
+``inc``
+ plugin from the plugin registry file and put its
+
+commands in scope. The plugin must already be in the registry file at parse
+
+time.
+```Fenced(Borrowed("nu"))
+> plugin use inc
+
+
+```
+List installed plugins
+```Fenced(Borrowed("nu"))
+> plugin list
+
+
+```
+Stop the plugin named 
+``inc``
+.
+```Fenced(Borrowed("nu"))
+> plugin stop inc
+
+
+```
+Remove the installed signatures for the 
+``inc``
+ plugin.
+```Fenced(Borrowed("nu"))
+> plugin rm inc
+
+
+```
+’Ú™Title: title: plugin
+Path: Examples
+Content:
+Run the 
+``nu_plugin_inc``
+ plugin from the current directory and install its signatures.
+```Fenced(Borrowed("nu"))
+> plugin add nu_plugin_inc
+
+
+```
+Load (or reload) the 
+``inc``
+ plugin from the plugin registry file and put its
+
+commands in scope. The plugin must already be in the registry file at parse
+
+time.
+```Fenced(Borrowed("nu"))
+> plugin use inc
+
+
+```
+List installed plugins
+```Fenced(Borrowed("nu"))
+> plugin list
+
+
+```
+Stop the plugin named 
+``inc``
+.
+```Fenced(Borrowed("nu"))
+> plugin stop inc
+
+
+```
+Remove the installed signatures for the 
+``inc``
+ plugin.
+```Fenced(Borrowed("nu"))
+> plugin rm inc
+
+
+```
+—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/plugin.mdÙ@2e42a2e106d4e0dc1962625c55f4c22c92be8f169d726c954b646f9db67100ad­title: plugin‘¬Subcommands:Ú(name
+description
+type
+[link: /commands/docs/plugin_add.md] ``plugin add``
+Add a plugin to the plugin registry file.
+built-in
+[link: /commands/docs/plugin_list.md] ``plugin list``
+List loaded and installed plugins.
+built-in
+[link: /commands/docs/plugin_rm.md] ``plugin rm``
+Remove a plugin from the plugin registry file.
+built-in
+[link: /commands/docs/plugin_stop.md] ``plugin stop``
+Stop an installed plugin if it was running.
+built-in
+[link: /commands/docs/plugin_use.md] ``plugin use``
+Load a plugin from the plugin registry file into scope.
+keyword
+’ÚYTitle: title: plugin
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/plugin_add.md] ``plugin add``
+Add a plugin to the plugin registry file.
+built-in
+[link: /commands/docs/plugin_list.md] ``plugin list``
+List loaded and installed plugins.
+built-in
+[link: /commands/docs/plugin_rm.md] ``plugin rm``
+Remove a plugin from the plugin registry file.
+built-in
+[link: /commands/docs/plugin_stop.md] ``plugin stop``
+Stop an installed plugin if it was running.
+built-in
+[link: /commands/docs/plugin_use.md] ``plugin use``
+Load a plugin from the plugin registry file into scope.
+keyword

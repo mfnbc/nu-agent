@@ -1,0 +1,46 @@
+–’Ù@cdefc33b73d99ada20681a073d019dff63fe4cf5e0fbfd0de10e237ac028e079ÙpTitle: title: export extern
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``export extern``
+[link: /commands/categories/core.md] ’Ù@190f0dd7bb908d80fbb2ccacd823ff7dfac2247427efe623f60ac7ed1d97649aÙeTitle: title: export extern
+Path: Signature
+Content:
+``> export extern {flags} (def_name) (params)``
+’Ù@530fa56a1b57a3af6c60a9d2f6a63bb12261c54ff1396b4f05f93ddbc2fd38d1ÙÆTitle: title: export extern
+Path: Parameters
+Content:
+``def_name``
+: The name of the external command signature to define and export.
+``params``
+: The parameters for the external command signature.
+’Ù@34343ce096cf71ef69c6c7b5c97e3df0b7c1eacbcc22137c73623d2810904928Ù\Title: title: export extern
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+’Ù@91a2292fb3518f3df944c6af25fcded1dd10e855fb175f5fe0ab6f65bfc5d796Ù¦Title: title: export extern
+Path: Examples
+Content:
+Export the signature for an external command.
+```Fenced(Borrowed("nu"))
+> export extern echo [text: string]
+
+
+```
+’Ù@c964cfeecf3be2f827888e1d015c0e577633f37db292d89824892849f45378edÙ˜Title: title: export extern
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

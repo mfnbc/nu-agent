@@ -1,0 +1,59 @@
+���@51dbd25a6b0d716b812f536d509e7108d01219566a624b363e73195530c1e999�tTitle: title: polars max
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars max``
+[link: /commands/categories/dataframe.md] ��@20b1ada8ac1b9c4b3e281dc0b0fb0af53f4ed31fd3c17a132a7f2e627bc97a8f�LTitle: title: polars max
+Path: Signature
+Content:
+``> polars max {flags} ``
+��@b456cf8e701e1feffbbf3591b25457b49e3ec42a33d64086cb329d31da83f372ٱTitle: title: polars max
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@70e50dcee6e1d6b0d25f4d0f33ce6af5799acadc746a32b6c1a051d3456ff697�LTitle: title: polars max
+Path: Examples
+Content:
+Max value from columns in a dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [6 2] [1 4] [4 1]] | polars into-df | polars max
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 6 │ 4 │
+╰───┴───┴───╯
+
+
+```
+Max aggregation for a group-by
+```Fenced(Borrowed("nu"))
+> [[a b]; [one 2] [one 4] [two 1]]
+                | polars into-df
+                | polars group-by a
+                | polars agg (polars col b | polars max)
+                | polars collect
+                | polars sort-by a
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │ one │ 4 │
+│ 1 │ two │ 1 │
+╰───┴─────┴───╯
+
+
+```

@@ -1,0 +1,52 @@
+���@cc42cd5ae1962fce55fcba35fa9d21fe9f83999b78b1b30a132bca0f78191562نTitle: title: polars value-counts
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars value-counts``
+[link: /commands/categories/dataframe.md] ��@c394c912827a33411417e37958e103f5be4bb9e9ec225f37f4cb98264ff600ac�^Title: title: polars value-counts
+Path: Signature
+Content:
+``> polars value-counts {flags} ``
+��@08b7ebfa1ceb0f2bbacaab7c4f2d9b5cd4b3fdaba3cfb5fa75273dcf6c680f73�(Title: title: polars value-counts
+Path: Flags
+Content:
+``--column, -c {string}``
+: Provide a custom name for the count column.
+``--sort, -s``
+: Whether or not values should be sorted.
+``--parallel, -p``
+: Use multiple threads when processing.
+``--normalize, -n {string}``
+: Normalize the counts.
+��@d9c9742b6015a328bc86de07f3219e4d0ebffcf916f386994581bba6cc0b5c8dٖTitle: title: polars value-counts
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@6588647cfacd7e538d38b5a1d5cc73a5c49fb58deec428ce7dea11aa1f364140��Title: title: polars value-counts
+Path: Examples
+Content:
+Calculates value counts
+```Fenced(Borrowed("nu"))
+> [5 5 5 5 6 6] | polars into-df | polars value-counts | polars sort-by count
+╭───┬───┬───────╮
+│ # │ 0 │ count │
+├───┼───┼───────┤
+│ 0 │ 6 │     2 │
+│ 1 │ 5 │     4 │
+╰───┴───┴───────╯
+
+
+```

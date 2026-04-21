@@ -1,0 +1,6 @@
+List of removed files and directories moved here by the automatic cleanup.
+moved external/nushell.github.io -> archive/external_nushell_repo_backup/
+moved data/nu_docs_vectors.nuon -> archive/external_nushell_repo_backup/nu_docs_vectors.nuon
+moved build/nu_ingest -> archive/external_nushell_repo_backup/nu_ingest
+moved examples/embedding_input_example.msgpack.bak -> archive
+moved build/embeddings_example.msgpack.bak -> archive

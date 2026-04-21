@@ -1,0 +1,33 @@
+”’Ù@c12b2c5fe1837cce75c2155c520c21fc80b383ef944af97943f3ae4e6d10820fÙpTitle: title: scope aliases
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``scope aliases``
+[link: /commands/categories/core.md] ’Ù@70ded35f0c38ca642f915519b84af2319e4d569d345c2e525a5556bf4acb6a94ÙRTitle: title: scope aliases
+Path: Signature
+Content:
+``> scope aliases {flags} ``
+’Ù@8e2e8f633e8bffceb590dd35a8032b7de30f9c45cc6a4a9dd614efc3d7204b1aÙXTitle: title: scope aliases
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+’Ù@e0fd87f70bc9b6ac407f806562f477679d9ea21861871d4d00f7821470924e77Ù‹Title: title: scope aliases
+Path: Examples
+Content:
+Show the aliases in the current scope.
+```Fenced(Borrowed("nu"))
+> scope aliases
+
+
+```

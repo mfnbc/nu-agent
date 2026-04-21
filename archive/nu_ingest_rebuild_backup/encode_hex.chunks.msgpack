@@ -1,0 +1,89 @@
+•—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_hex.mdÙ@d638e341a8e016df3f80a67a68a55817de15971c95d4356b4dbceacd6ccada34±title: encode hex‘§formatsÙ@
+
+
+
+
+
+
+
+
+``encode hex``
+[link: /commands/categories/formats.md] ’ÙpTitle: title: encode hex
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``encode hex``
+[link: /commands/categories/formats.md] —ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_hex.mdÙ@6346b9d4b5d5b43f5626ef8e5633856bd6d62be0ca5eef0f758dc05bdd890cb8±title: encode hex‘©Signatureº``> encode hex {flags} ``
+’ÙLTitle: title: encode hex
+Path: Signature
+Content:
+``> encode hex {flags} ``
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_hex.mdÙ@a1b9d37cfa053e9273e5af8b3644d9aa43e0d43516b78845e9c6a4a363967395±title: encode hex‘¥FlagsÙ'``--lower``
+: Encode to lowercase hex.
+’ÙUTitle: title: encode hex
+Path: Flags
+Content:
+``--lower``
+: Encode to lowercase hex.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_hex.mdÙ@0873e7dd41f50979ea828e6228ddd93148b2bf3276eeda7e5445d432853072f9±title: encode hex‘³Input/output types:Ù)input
+output
+string
+string
+binary
+string
+’ÙeTitle: title: encode hex
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+binary
+string
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_hex.mdÙ@6a85098ebdc316def01f37b002f238c2a7450f6b5e7a324833e6ea90b4d3e5b2±title: encode hex‘¨ExamplesÚEncode a binary value
+```Fenced(Borrowed("nu"))
+> 0x[C3 06] | encode hex
+C306
+
+```
+Encode a string
+```Fenced(Borrowed("nu"))
+> "hello" | encode hex
+68656C6C6F
+
+```
+Output a Lowercase version of the encoding
+```Fenced(Borrowed("nu"))
+> 0x[AD EF] | encode hex --lower
+adef
+
+```
+’ÚETitle: title: encode hex
+Path: Examples
+Content:
+Encode a binary value
+```Fenced(Borrowed("nu"))
+> 0x[C3 06] | encode hex
+C306
+
+```
+Encode a string
+```Fenced(Borrowed("nu"))
+> "hello" | encode hex
+68656C6C6F
+
+```
+Output a Lowercase version of the encoding
+```Fenced(Borrowed("nu"))
+> 0x[AD EF] | encode hex --lower
+adef
+
+```

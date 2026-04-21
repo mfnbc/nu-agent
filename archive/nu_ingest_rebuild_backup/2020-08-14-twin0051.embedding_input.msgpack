@@ -1,0 +1,53 @@
+‘’Ù@768612fd2217f46388e523c8ab0642ce7effb6c13184b6f23749d4643c858decÚÚTitle: This week in Nu #51
+Path: This week in Nu #51
+Content:
+fdncred added 
+[link: https://github.com/nushell/nushell/pull/2308] color themes to 
+``to html``
+, added initial work on 
+[link: https://github.com/nushell/nushell/pull/2297] winget support
+, fixed some 
+[link: https://github.com/nushell/nushell/pull/2321] soft link-related issues
+, removed 
+[link: https://github.com/nushell/nushell/pull/2347] some unnecessary bat features we weren't using
+avranju added the ability to 
+[link: https://github.com/nushell/nushell/pull/2314] disable the welcome banner
+Amanita-muscaria made the 
+[link: https://github.com/nushell/nushell/pull/2320] history file location configurable
+jonathandturner released 
+[link: https://github.com/nushell/nushell/pull/2325] version 0.18
+, moved 
+[link: https://github.com/nushell/nushell/pull/2345] starship external
+, made a new 
+[link: https://github.com/nushell/nushell/pull/2348] default/extra set of features and plugins
+.
+samhedin fixed 
+[link: https://github.com/nushell/nushell/pull/2326] exit scripts when working with per-directory environments
+JosephTLyons updated the 
+[link: https://github.com/nushell/nushell/pull/2332] random dice example
+, 
+[link: https://github.com/nushell/nushell/pull/2334] removed 
+``--with-symlink-targets``
+ from 
+``ls``
+andrasio added listing the 
+[link: https://github.com/nushell/nushell/pull/2333] features Nu was built with as part of 
+``version``
+, updated 
+``update``
+ and 
+``insert``
+ to 
+[link: https://github.com/nushell/nushell/pull/2339] fully drain their optional blocks
+, 
+``histogram``
+ now can use an 
+[link: https://github.com/nushell/nushell/pull/2341] additional column for the histogram value
+, added a 
+[link: https://github.com/nushell/nushell/pull/2340] percent column to 
+``histogram``
+coolshaurya added the 
+[link: https://github.com/nushell/nushell/pull/2336] commit hash to 
+``version``
+jzaefferer added 
+[link: https://github.com/nushell/demo/pull/57] tracking client-side errors in the demo with the Sentry

@@ -1,0 +1,134 @@
+���@ba9212502bc55050f44a3d682df7ed846870a4ea3aa8ee830fb4944436acea1a�~Title: title: into filesize
+Path: conversions
+Content:
+
+
+
+
+
+
+
+
+
+``into filesize``
+[link: /commands/categories/conversions.md] ��@7b58aa0c830e74138cb4dddd1bf030cfb7bbc9f4ad66d9d7ef9bd27728c63448�YTitle: title: into filesize
+Path: Signature
+Content:
+``> into filesize {flags} ...rest``
+��@bbb2bcb5a9e5ddb55f46aed02d9ba390fccf638513e6eb138d9e398fee44a5bcنTitle: title: into filesize
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert data at the given cell paths.
+��@b9c334bfe0baf9839706b1c960f2993cc47d9a8f653c7ab0592bee60e15ded65�UTitle: title: into filesize
+Path: Input/output types:
+Content:
+input
+output
+int
+filesize
+number
+filesize
+string
+filesize
+filesize
+filesize
+table
+table
+record
+record
+list
+<
+int
+>
+
+list
+<
+filesize
+>
+
+list
+<
+number
+>
+
+list
+<
+filesize
+>
+
+list
+<
+string
+>
+
+list
+<
+filesize
+>
+
+list
+<
+filesize
+>
+
+list
+<
+filesize
+>
+
+list
+<
+any
+>
+
+list
+<
+filesize
+>
+
+��@cead978624082d751e2ef7cafb9cd846e879dbb2a2e1e881dbe64e0965932275��Title: title: into filesize
+Path: Examples
+Content:
+Convert string to filesize in table.
+```Fenced(Borrowed("nu"))
+> [[device size]; ["/dev/sda1" "200"] ["/dev/loop0" "50"]] | into filesize size
+╭───┬────────────┬───────╮
+│ # │   device   │ size  │
+├───┼────────────┼───────┤
+│ 0 │ /dev/sda1  │ 200 B │
+│ 1 │ /dev/loop0 │  50 B │
+╰───┴────────────┴───────╯
+
+
+```
+Convert string to filesize.
+```Fenced(Borrowed("nu"))
+> '2' | into filesize
+2 B
+
+```
+Convert float to filesize.
+```Fenced(Borrowed("nu"))
+> 8.3 | into filesize
+8 B
+
+```
+Convert int to filesize.
+```Fenced(Borrowed("nu"))
+> 5 | into filesize
+5 B
+
+```
+Convert file size to filesize.
+```Fenced(Borrowed("nu"))
+> 4KB | into filesize
+4.0 kB
+
+```
+Convert string with unit to filesize.
+```Fenced(Borrowed("nu"))
+> '-1KB' | into filesize
+-1.0 kB
+
+```

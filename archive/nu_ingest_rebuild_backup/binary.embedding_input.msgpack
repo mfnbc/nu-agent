@@ -1,0 +1,48 @@
+“’Ù@631cf6f4ce12183b1135048c9f99761f75759c26ac784aeec6c96a80c7bc61c9Ú¡Title: Binary
+Path: Binary
+Content:
+Description:
+
+Represents binary data
+Annotation:
+
+``binary``
+
+Literal Syntax:
+
+``0x[ffffffff]``
+ - hex-based binary representation
+``0o[1234567]``
+ - octal-based binary representation
+``0b[10101010101]``
+ - binary-based binary representation
+Casts:
+
+[link: /commands/docs/into_binary.md] ``into binary``
+See also:
+
+[link: /book/types_of_data.md#binary-data] Types of data - Binary
+’Ù@c29015a688a76339aefa560063eeaafb798f7d4b81ba741b5fc317e6abe6a1cdÙ±Title: Binary
+Path: Additional Language Notes
+Content:
+Incomplete bytes are left-padded with zeros.
+Spaces can be used to improve readability. For example, 
+``0x[ffff ffff]``
+.
+’Ù@760fdcbfdc6bbec6f8b01c7c9224c6d1940e89e19ac66b6b0500936469765065ÚTitle: Binary
+Path: Common commands that can be used with 
+Content:
+``binary``
+``into binary``
+``bits``
+ subcommands (see 
+``help bits``
+ for a list)
+``bytes``
+ subcommands (see 
+``help bytes``
+ for a list)
+``encode``
+``take``
+``chunks``
+ to split binary into individual bytes or groups

@@ -1,0 +1,81 @@
+���@1e930429046ab37f5f2328feb036c76cd20f8ab692b0bc69b430b87a2937020a�dTitle: title: move
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``move``
+[link: /commands/categories/filters.md] ��@f3e36839e9bdd4dbb57a8f636925576c4edf2f98988c346d6e6850ea7d484fc9�GTitle: title: move
+Path: Signature
+Content:
+``> move {flags} ...rest``
+��@9ca7c33dcae89f77ad4c628bf8c8de3bebb5fa93f1f2b092347292434fee6222�%Title: title: move
+Path: Flags
+Content:
+``--after {string}``
+: The column that will precede the columns moved.
+``--before {string}``
+: The column that will be the next after the columns moved.
+``--first``
+: Makes the columns be the first ones.
+``--last``
+: Makes the columns be the last ones.
+��@0075aed1f170251156e26150ac3728f373b97cda212a51d3a23314a19354ed0d�PTitle: title: move
+Path: Parameters
+Content:
+``...rest``
+: The columns to move.
+��@cdcefb5875c5e26490a38dc7c61c517d66db8d8f3a10ec39ba7283624421acb3�]Title: title: move
+Path: Input/output types:
+Content:
+input
+output
+record
+record
+table
+table
+��@b007910656866ce0b89fc4beb9a60ab593f2ec399c5bc36786229f2987e550e0��Title: title: move
+Path: Examples
+Content:
+Move a column before the first column.
+```Fenced(Borrowed("nu"))
+> [[name value index]; [foo a 1] [bar b 2] [baz c 3]] | move index --before name
+╭───┬──────┬───────╮
+│ # │ name │ value │
+├───┼──────┼───────┤
+│ 1 │ foo  │ a     │
+│ 2 │ bar  │ b     │
+│ 3 │ baz  │ c     │
+╰───┴──────┴───────╯
+
+
+```
+Move multiple columns after the last column and reorder them.
+```Fenced(Borrowed("nu"))
+> [[name value index]; [foo a 1] [bar b 2] [baz c 3]] | move value name --after index
+╭───┬───────┬──────╮
+│ # │ value │ name │
+├───┼───────┼──────┤
+│ 1 │ a     │ foo  │
+│ 2 │ b     │ bar  │
+│ 3 │ c     │ baz  │
+╰───┴───────┴──────╯
+
+
+```
+Move columns of a record.
+```Fenced(Borrowed("nu"))
+> { name: foo, value: a, index: 1 } | move name --before index
+╭───────┬─────╮
+│ value │ a   │
+│ name  │ foo │
+│ index │ 1   │
+╰───────┴─────╯
+
+```

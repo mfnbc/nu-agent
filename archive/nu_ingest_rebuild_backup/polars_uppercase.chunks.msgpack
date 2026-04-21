@@ -1,0 +1,98 @@
+���Xarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_uppercase.md�@29a7d2cedf606f5d0e3695336c2a638f8975209b15c8c3efc11f7236233d76b5�title: polars uppercase��dataframe�H
+
+
+
+
+
+
+
+
+``polars uppercase``
+[link: /commands/categories/dataframe.md] ���ـTitle: title: polars uppercase
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars uppercase``
+[link: /commands/categories/dataframe.md] ��Xarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_uppercase.md�@861f060aadaa973c39bb0e31af7b135cb2ccc53afd95eebc9807f5983a20cf75�title: polars uppercase��Signature� ``> polars uppercase {flags} ``
+����XTitle: title: polars uppercase
+Path: Signature
+Content:
+``> polars uppercase {flags} ``
+��Xarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_uppercase.md�@8ef2421d49c191f3039142bc2096aabb8937e5a404c9a542d5975b6097ca4cb4�title: polars uppercase��Input/output types:�uinput
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+���ٷTitle: title: polars uppercase
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��Xarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_uppercase.md�@c0c5ad18ef56ade97cff624e4c9b35db562c84d6007bbbf0c9b530c0b12763df�title: polars uppercase��Examples�WModifies strings in a column to uppercase
+```Fenced(Borrowed("nu"))
+> [[a]; [Abc]] | polars into-df | polars select (polars col a | polars uppercase) | polars collect
+╭───┬─────╮
+│ # │  a  │
+├───┼─────┤
+│ 0 │ ABC │
+╰───┴─────╯
+
+
+```
+Modifies strings to uppercase
+```Fenced(Borrowed("nu"))
+> [Abc aBc abC] | polars into-df | polars uppercase
+╭───┬─────╮
+│ # │  0  │
+├───┼─────┤
+│ 0 │ ABC │
+│ 1 │ ABC │
+│ 2 │ ABC │
+╰───┴─────╯
+
+
+```
+�����Title: title: polars uppercase
+Path: Examples
+Content:
+Modifies strings in a column to uppercase
+```Fenced(Borrowed("nu"))
+> [[a]; [Abc]] | polars into-df | polars select (polars col a | polars uppercase) | polars collect
+╭───┬─────╮
+│ # │  a  │
+├───┼─────┤
+│ 0 │ ABC │
+╰───┴─────╯
+
+
+```
+Modifies strings to uppercase
+```Fenced(Borrowed("nu"))
+> [Abc aBc abC] | polars into-df | polars uppercase
+╭───┬─────╮
+│ # │  0  │
+├───┼─────┤
+│ 0 │ ABC │
+│ 1 │ ABC │
+│ 2 │ ABC │
+╰───┴─────╯
+
+
+```

@@ -4,5 +4,9 @@ members = [
     "crates/nu_fuzzy_match",
     "crates/nu_agent_common",
     "shredder",
-    "tools/aggregate_chunks",
+    "tools/nu_embedder",
+    "tools/inspect_chunks",
+    "tools/make_golden",
+    "tools/flat_index",
+    "tools/agent_bridge",
 ]

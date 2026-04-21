@@ -1,0 +1,68 @@
+íóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-11-18-twin0169.mdŸ@cc5854b9cdeba7340b28a4b3df704150c22c786ecdcfc215620009b654ff528bπThis week in Nushell #169ëßNushell⁄zhiburt 
+[link: https://github.com/nushell/nushell/pull/7148] fixed #7145
+, and 
+[link: https://github.com/nushell/nushell/pull/6885] [
+WIP
+]
+ table: Change Record view in expand-mode
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7146] updated default_config.nu with display_output
+rgwood 
+[link: https://github.com/nushell/nushell/pull/7144] removed 
+``build-string``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/7123] Return errors on unexpected inputs to 
+``take``
+ and 
+``first``
+Decodetalkers 
+[link: https://github.com/nushell/nushell/pull/7143] fixed: ls not show pattern error
+raccmonteiro 
+[link: https://github.com/nushell/nushell/pull/7142] avoided test failure caused by locale thousand separator
+kubouch 
+[link: https://github.com/nushell/nushell/pull/7135] updated PR template and contributing guide
+, and 
+[link: https://github.com/nushell/nushell/pull/7134] Change parser cwd when running a file
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7080] ``to html --list``
+ now returns a table
+íêê⁄VTitle: This week in Nushell #169
+Path: Nushell
+Content:
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/7148] fixed #7145
+, and 
+[link: https://github.com/nushell/nushell/pull/6885] [
+WIP
+]
+ table: Change Record view in expand-mode
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7146] updated default_config.nu with display_output
+rgwood 
+[link: https://github.com/nushell/nushell/pull/7144] removed 
+``build-string``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/7123] Return errors on unexpected inputs to 
+``take``
+ and 
+``first``
+Decodetalkers 
+[link: https://github.com/nushell/nushell/pull/7143] fixed: ls not show pattern error
+raccmonteiro 
+[link: https://github.com/nushell/nushell/pull/7142] avoided test failure caused by locale thousand separator
+kubouch 
+[link: https://github.com/nushell/nushell/pull/7135] updated PR template and contributing guide
+, and 
+[link: https://github.com/nushell/nushell/pull/7134] Change parser cwd when running a file
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7080] ``to html --list``
+ now returns a table
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-11-18-twin0169.mdŸ@c4d7f25189f8fa8a00979ff3f1e9277a7e463c2ff7a9ff8e3572c3c8d9ddf307πThis week in Nushell #169ë™Nu_ScriptsŸhtshaynik created 
+[link: https://github.com/nushell/nu_scripts/pull/314] Add custom completions for nix
+íêêŸ£Title: This week in Nushell #169
+Path: Nu_Scripts
+Content:
+tshaynik created 
+[link: https://github.com/nushell/nu_scripts/pull/314] Add custom completions for nix

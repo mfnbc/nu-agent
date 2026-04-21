@@ -1,0 +1,107 @@
+ëóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-07-10-twin0046.mdŸ@d0538047cf0fca262283809b6cea5396fbde193062bc5e069d45e2f795e6bd42≥This week in Nu #46ë≥This week in Nu #46⁄§arashout removed a 
+[link: https://github.com/nushell/nushell/pull/2147] duplicate method in the Value API
+, cleaned up the 
+[link: https://github.com/nushell/nushell/pull/2131] ``fetch``
+ implementation
+, improved the 
+[link: https://github.com/nushell/nushell/pull/2113] ``rm``
+ command
+, better 
+[link: https://github.com/nushell/nushell/pull/2105] aligned tables for 
+``ls``
+JosephTLyons made 
+[link: https://github.com/nushell/nushell/pull/2143] ``last``
+ more iterator-friendly
+, 
+[link: https://github.com/nushell/nushell/pull/2137] ``from vcf``
+ more iterator-friendly
+, improved the logic for 
+[link: https://github.com/nushell/nushell/pull/2112] ``last``
+andrasio added some 
+[link: https://github.com/nushell/nushell/pull/2140] new ways to do 
+``str substring``
+, added a 
+[link: https://github.com/nushell/nushell/pull/2123] ``move column``
+ command
+almindor made 
+[link: https://github.com/nushell/nushell/pull/2129] path autocompletions work in more cases
+pag4k moved 
+[link: https://github.com/nushell/nushell/pull/2128] duration to nanoseconds
+ in preparation for timing commands
+fdncred cleaned up 
+[link: https://github.com/nushell/nushell/pull/2122] special characters in prompts
+jonathandturner and josephtlyons made 
+[link: https://github.com/nushell/nushell/pull/2120] ``every``
+ streamable
+jonathandturenr also 
+[link: https://github.com/nushell/nushell/pull/2111] fixed buffering in the 
+``lines``
+ command
+, fixed a 
+[link: https://github.com/nushell/nushell/pull/21080] crash in the parser
+, added an 
+[link: https://github.com/nushell/nushell/pull/2106] ``if``
+ command
+, added 
+[link: https://github.com/nushell/nushell/pull/2102] ``str length``
+, added 
+[link: https://github.com/nushell/nushell/pull/2101] ``split chars``
+, 
+[link: https://github.com/nushell/nushell/pull/2100] ``each --numbered``
+philip-peterson fixed parsing of 
+[link: https://github.com/nushell/nushell/pull/2103] barewords and words with partial quoting
+íêê⁄‚Title: This week in Nu #46
+Path: This week in Nu #46
+Content:
+arashout removed a 
+[link: https://github.com/nushell/nushell/pull/2147] duplicate method in the Value API
+, cleaned up the 
+[link: https://github.com/nushell/nushell/pull/2131] ``fetch``
+ implementation
+, improved the 
+[link: https://github.com/nushell/nushell/pull/2113] ``rm``
+ command
+, better 
+[link: https://github.com/nushell/nushell/pull/2105] aligned tables for 
+``ls``
+JosephTLyons made 
+[link: https://github.com/nushell/nushell/pull/2143] ``last``
+ more iterator-friendly
+, 
+[link: https://github.com/nushell/nushell/pull/2137] ``from vcf``
+ more iterator-friendly
+, improved the logic for 
+[link: https://github.com/nushell/nushell/pull/2112] ``last``
+andrasio added some 
+[link: https://github.com/nushell/nushell/pull/2140] new ways to do 
+``str substring``
+, added a 
+[link: https://github.com/nushell/nushell/pull/2123] ``move column``
+ command
+almindor made 
+[link: https://github.com/nushell/nushell/pull/2129] path autocompletions work in more cases
+pag4k moved 
+[link: https://github.com/nushell/nushell/pull/2128] duration to nanoseconds
+ in preparation for timing commands
+fdncred cleaned up 
+[link: https://github.com/nushell/nushell/pull/2122] special characters in prompts
+jonathandturner and josephtlyons made 
+[link: https://github.com/nushell/nushell/pull/2120] ``every``
+ streamable
+jonathandturenr also 
+[link: https://github.com/nushell/nushell/pull/2111] fixed buffering in the 
+``lines``
+ command
+, fixed a 
+[link: https://github.com/nushell/nushell/pull/21080] crash in the parser
+, added an 
+[link: https://github.com/nushell/nushell/pull/2106] ``if``
+ command
+, added 
+[link: https://github.com/nushell/nushell/pull/2102] ``str length``
+, added 
+[link: https://github.com/nushell/nushell/pull/2101] ``split chars``
+, 
+[link: https://github.com/nushell/nushell/pull/2100] ``each --numbered``
+philip-peterson fixed parsing of 
+[link: https://github.com/nushell/nushell/pull/2103] barewords and words with partial quoting

@@ -1,0 +1,50 @@
+”—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_plist.mdÙ@e5cb7227081df96f588ea5acb3ca9346cae1c6378fac0d70855ba7a9dea3c436¯title: to plist‘§formatsÙ>
+
+
+
+
+
+
+
+
+``to plist``
+[link: /commands/categories/formats.md] ’ÙlTitle: title: to plist
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to plist``
+[link: /commands/categories/formats.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_plist.mdÙ@b82228bb32854faf4d709fdf30c7a17036ec9f5c614a32e09b7aaacb396155b5¯title: to plist‘©Signature¸``> to plist {flags} ``
+’ÙHTitle: title: to plist
+Path: Signature
+Content:
+``> to plist {flags} ``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_plist.mdÙ@d40c656e6b86669782e8304db6a8b25f92769197761508ad473e7b23259f0c86¯title: to plist‘¥FlagsÙ2``--binary, -b``
+: Output plist in binary format.
+’Ù^Title: title: to plist
+Path: Flags
+Content:
+``--binary, -b``
+: Output plist in binary format.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_plist.mdÙ@3d454b0bdceb447745dc6dab56d7ddc92bcb63b3f23e047a235ce90fd6ced564¯title: to plist‘¨ExamplesÙXConvert a table into a plist file
+```Fenced(Borrowed("nu"))
+> { a: 3 } | to plist
+
+
+```
+’Ù‡Title: title: to plist
+Path: Examples
+Content:
+Convert a table into a plist file
+```Fenced(Borrowed("nu"))
+> { a: 3 } | to plist
+
+
+```

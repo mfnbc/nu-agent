@@ -1,0 +1,84 @@
+—’Ù@a8dd2dbce23f97a2d731bfe31d63bc9d40cd5ef838caab762bdcdcbdacc4f060ÙlTitle: title: plugin rm
+Path: plugin
+Content:
+
+
+
+
+
+
+
+
+
+``plugin rm``
+[link: /commands/categories/plugin.md] ’Ù@a1e01595701090c43052c56861751f95950e5223555f56d71b251ece38f056f3ÙPTitle: title: plugin rm
+Path: Signature
+Content:
+``> plugin rm {flags} (name)``
+’Ù@3134d6d5173373549c48b84e10dd9f1764abe125245d6747d584c58076080257ÙêTitle: title: plugin rm
+Path: Flags
+Content:
+``--plugin-config {path}``
+: Use a plugin registry file other than the one set in 
+``$nu.plugin-path``
+.
+``--force, -f``
+: Don't cause an error if the plugin name wasn't found in the file.
+’Ù@73b3049631c91926027cfd0f25dd9f1f90b2f1781a82b7612417aca31491dfbfÙmTitle: title: plugin rm
+Path: Parameters
+Content:
+``name``
+: The name, or filename, of the plugin to remove.
+’Ù@5956b75ecd5b2f72ce68b392025579bb7eedc888a2c95373e4fd383b67962f49ÙXTitle: title: plugin rm
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+’Ù@b3bef90b1cb46cbb69e699d5eab73f92fe1f8a22a6e3e8906d91d0e8366bf021ÚTitle: title: plugin rm
+Path: Examples
+Content:
+Remove the installed signatures for the 
+``inc``
+ plugin.
+```Fenced(Borrowed("nu"))
+> plugin rm inc
+
+
+```
+Remove the installed signatures for the plugin with the filename 
+``~/.cargo/bin/nu_plugin_inc``
+.
+```Fenced(Borrowed("nu"))
+> plugin rm ~/.cargo/bin/nu_plugin_inc
+
+
+```
+Remove the installed signatures for the 
+``polars``
+ plugin from the "polars.msgpackz" plugin registry file.
+```Fenced(Borrowed("nu"))
+> plugin rm --plugin-config polars.msgpackz polars
+
+
+```
+’Ù@1953e26af210ca26876c5d7979f5a3904b0b6ea308aa820efacb46cf8ed9ce3aÚÊTitle: title: plugin rm
+Path: Notes
+Content:
+This does not remove the plugin commands from the current scope or from 
+``plugin list``
+ in the current shell. It instead removes the plugin from the plugin
+
+registry file (by default, 
+``$nu.plugin-path``
+). The changes will be apparent the
+
+next time 
+``nu``
+ is launched with that plugin registry file.
+This can be useful for removing an invalid plugin signature, if it can't be
+
+fixed with 
+``plugin add``
+.

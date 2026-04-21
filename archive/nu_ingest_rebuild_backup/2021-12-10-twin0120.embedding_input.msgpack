@@ -1,0 +1,108 @@
+”’Ù@f6b61899eae44498d36697cebd6cfd839c015a336fcf5af1447a389937e5fe11Ú®Title: This week in Nushell #120
+Path: Nushell
+Content:
+0323pin 
+[link: https://github.com/nushell/nushell/pull/4192] fixed build on NetBSD
+hustcer 
+[link: https://github.com/nushell/nushell/pull/4189] fixed 
+``into column_path``
+ to 
+``into column-path``
+ (breaking change) (#4185)
+jt 
+[link: https://github.com/nushell/nushell/pull/4187] release 0.41
+waldyrious 
+[link: https://github.com/nushell/nushell/pull/4181] fixed Configuration section in bug report template
+ahouts 
+[link: https://github.com/nushell/nushell/pull/4178] fixed unnecessary allocation
+closetool 
+[link: https://github.com/nushell/nushell/pull/4120] fixed implicit coercion of boolean false and empty value #4094
+’Ù@c2bc9938b05454f9a5f8983e1212f8f9af39b1f001dcc445b3243f0ab6a68b86ÚRTitle: This week in Nushell #120
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/114] added timed_weather_run to run get_weather at interval
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/113] fixed weather script so it's outputting structured data appropriately.
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/112] removed a debug comment
+, and add 
+[link: https://github.com/nushell/nu_scripts/pull/111] kind of a radar looking thing that draws stars
+Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/110] added docker scripts
+’Ù@d8d69d69580aa40d0fe02508526a0651ba6bfea84a5d3608f34318c3d039b2ffÚàTitle: This week in Nushell #120
+Path: engine-q
+Content:
+luccasmmg 
+[link: https://github.com/nushell/engine-q/pull/462] added zip-support to extra
+, and 
+[link: https://github.com/nushell/engine-q/pull/453] ``To html``
+ and 
+``to md``
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/460] fixed 1 off table wrapping for help commands
+, and 
+[link: https://github.com/nushell/engine-q/pull/458] updated to latest reedline, change config point name, enable output without ansi
+, and added 
+[link: https://github.com/nushell/engine-q/pull/456] filesize formatting
+, and added ability to 
+[link: https://github.com/nushell/engine-q/pull/455] optionally remove table output color
+, and 
+[link: https://github.com/nushell/engine-q/pull/451] added default-run so cargo r works
+, and 
+[link: https://github.com/nushell/engine-q/pull/449] allowed decimals/floats to be formatted with precision
+, and 
+[link: https://github.com/nushell/engine-q/pull/448] enabled 
+``cargo build --features=extra``
+ to build plugins
+, and 
+[link: https://github.com/nushell/engine-q/pull/443] introduced 
+``gstat``
+, a new command to get the git status
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/457] dataframe commands name
+, and added a 
+[link: https://github.com/nushell/engine-q/pull/442] batch of dataframe commands
+, and 
+[link: https://github.com/nushell/engine-q/pull/439] corrected missing shellerror type
+, and 
+[link: https://github.com/nushell/engine-q/pull/437] improved labeled error from plugins
+, and 
+[link: https://github.com/nushell/engine-q/pull/430] removed unwraps with clippy check
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/454] ported over the nth command from nushell
+, and 
+[link: https://github.com/nushell/engine-q/pull/446] ported over the prepend command from nushell
+, and 
+[link: https://github.com/nushell/engine-q/pull/419] ported over the reject command from nushell
+jaeheonji 
+[link: https://github.com/nushell/engine-q/pull/452] ported 
+``network/url``
+ command
+, and 
+[link: https://github.com/nushell/engine-q/pull/440] added random-integer and random-uuid
+, and 
+[link: https://github.com/nushell/engine-q/pull/428] added random-dice
+onthebridgetonowhere 
+[link: https://github.com/nushell/engine-q/pull/447] ported uniq
+, and added 
+[link: https://github.com/nushell/engine-q/pull/429] cal command
+, and 
+[link: https://github.com/nushell/engine-q/pull/424] ported str datetime to into datetime
+jt 
+[link: https://github.com/nushell/engine-q/pull/441] update clippy to check all features
+, and 
+[link: https://github.com/nushell/engine-q/pull/431] improved running main
+, and 
+[link: https://github.com/nushell/engine-q/pull/427] added simple commandline args for scripts
+, and 
+[link: https://github.com/nushell/engine-q/pull/426] fixed the failure if the prompt breaks
+, and 
+[link: https://github.com/nushell/engine-q/pull/425] reset ansi mode more often when showing errors
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/434] added signature to $scope.commands
+’Ù@70fe13690e17d8163df5642d1f7777b4562b4e642fe84d5db24fc61f2859edbdÙ®Title: This week in Nushell #120
+Path: reedline
+Content:
+fdncred 
+[link: https://github.com/nushell/reedline/pull/197] added the ability to optionally turn off ansi coloring

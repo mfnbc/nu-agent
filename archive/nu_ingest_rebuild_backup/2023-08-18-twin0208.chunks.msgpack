@@ -1,0 +1,196 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-18-twin0208.mdŸ@3588eebe6433bd4093ea599b097b03f065dbcd3b8cc30c419291da9cd3fddd8dπThis week in Nushell #208ëßNushell⁄	5fdncred 
+[link: https://github.com/nushell/nushell/pull/10048] allowed ints as a cellpath for 
+``select``
+, and 
+[link: https://github.com/nushell/nushell/pull/9987] allowed 
+``select``
+ to take a $variable with a list of columns
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10040] removed dead code from tests
+, and 
+[link: https://github.com/nushell/nushell/pull/10039] sorted entries in 
+``scope``
+ commands; Fix usage of externs
+, and 
+[link: https://github.com/nushell/nushell/pull/10038] changed 
+``str replace``
+ to match substring by default
+, and 
+[link: https://github.com/nushell/nushell/pull/10023] refactored 
+``scope``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/10004] fixed example for 
+``extern-wrapped``
+sitiom 
+[link: https://github.com/nushell/nushell/pull/10032] changed the winget releaser job to 
+``ubuntu-latest``
+ineu 
+[link: https://github.com/nushell/nushell/pull/10022] made 
+``http -f``
+ display the request headers
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/10017] deprecate 
+``--format``
+ and 
+``--list``
+ in 
+``into datetime``
+ayax79 
+[link: https://github.com/nushell/nushell/pull/10019] exposed polars avro support
+, and 
+[link: https://github.com/nushell/nushell/pull/9951] Nushell table list columns -> dataframe list columns. Explode / Flatten dataframe support.
+3lvir4 
+[link: https://github.com/nushell/nushell/pull/10012] removed a potential panic from path join
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/10011] fixed padding 0 width issues in nu-table
+meskill 
+[link: https://github.com/nushell/nushell/pull/10007] fixed nu-parser to not update plugin.nu file on nu startup
+, and 
+[link: https://github.com/nushell/nushell/pull/9976] test: clear parent envs to prevent leakage to tests
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10000] renamed misused "deprecation" to removal
+, and 
+[link: https://github.com/nushell/nushell/pull/9998] improved I/O types of 
+``into decimal``
+(/float)
+, and 
+[link: https://github.com/nushell/nushell/pull/9996] Add search terms to 
+``reject``
+rgwood 
+[link: https://github.com/nushell/nushell/pull/9990] fixed 
+``watch``
+ not handling all file changes
+nibon7 
+[link: https://github.com/nushell/nushell/pull/9784] fixed a crash when moving the cursor after accepting a suggestion from the help menu
+íêê⁄	mTitle: This week in Nushell #208
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10048] allowed ints as a cellpath for 
+``select``
+, and 
+[link: https://github.com/nushell/nushell/pull/9987] allowed 
+``select``
+ to take a $variable with a list of columns
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10040] removed dead code from tests
+, and 
+[link: https://github.com/nushell/nushell/pull/10039] sorted entries in 
+``scope``
+ commands; Fix usage of externs
+, and 
+[link: https://github.com/nushell/nushell/pull/10038] changed 
+``str replace``
+ to match substring by default
+, and 
+[link: https://github.com/nushell/nushell/pull/10023] refactored 
+``scope``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/10004] fixed example for 
+``extern-wrapped``
+sitiom 
+[link: https://github.com/nushell/nushell/pull/10032] changed the winget releaser job to 
+``ubuntu-latest``
+ineu 
+[link: https://github.com/nushell/nushell/pull/10022] made 
+``http -f``
+ display the request headers
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/10017] deprecate 
+``--format``
+ and 
+``--list``
+ in 
+``into datetime``
+ayax79 
+[link: https://github.com/nushell/nushell/pull/10019] exposed polars avro support
+, and 
+[link: https://github.com/nushell/nushell/pull/9951] Nushell table list columns -> dataframe list columns. Explode / Flatten dataframe support.
+3lvir4 
+[link: https://github.com/nushell/nushell/pull/10012] removed a potential panic from path join
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/10011] fixed padding 0 width issues in nu-table
+meskill 
+[link: https://github.com/nushell/nushell/pull/10007] fixed nu-parser to not update plugin.nu file on nu startup
+, and 
+[link: https://github.com/nushell/nushell/pull/9976] test: clear parent envs to prevent leakage to tests
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10000] renamed misused "deprecation" to removal
+, and 
+[link: https://github.com/nushell/nushell/pull/9998] improved I/O types of 
+``into decimal``
+(/float)
+, and 
+[link: https://github.com/nushell/nushell/pull/9996] Add search terms to 
+``reject``
+rgwood 
+[link: https://github.com/nushell/nushell/pull/9990] fixed 
+``watch``
+ not handling all file changes
+nibon7 
+[link: https://github.com/nushell/nushell/pull/9784] fixed a crash when moving the cursor after accepting a suggestion from the help menu
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-18-twin0208.mdŸ@fc8941b5d958b001b5d9d9c86548c12c4aa949ce6a2071bcdc59108ef4cadfc3πThis week in Nushell #208ë©ExtensionŸ|balupton created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/149] readmde: close #148 - link extension page
+íêêŸ∂Title: This week in Nushell #208
+Path: Extension
+Content:
+balupton created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/149] readmde: close #148 - link extension page
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-18-twin0208.mdŸ@301ad70a074332afa0565529b0e14126571848da256731dd762d6ac5462cbb19πThis week in Nushell #208ë≠Documentation⁄]conqp created 
+[link: https://github.com/nushell/nushell.github.io/pull/1006] Update command to list aliases
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/1005] Finish 
+``let-env``
+ removal in Chinese translation
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1004] Finish 
+``let-env``
+ removal in German translation
+BrewingWeasel created 
+[link: https://github.com/nushell/nushell.github.io/pull/1003] Remove unused empty column
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/999] remove last mentions to 
+``let-env``
+íêê⁄õTitle: This week in Nushell #208
+Path: Documentation
+Content:
+conqp created 
+[link: https://github.com/nushell/nushell.github.io/pull/1006] Update command to list aliases
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/1005] Finish 
+``let-env``
+ removal in Chinese translation
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1004] Finish 
+``let-env``
+ removal in German translation
+BrewingWeasel created 
+[link: https://github.com/nushell/nushell.github.io/pull/1003] Remove unused empty column
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/999] remove last mentions to 
+``let-env``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-18-twin0208.mdŸ@70177b7879581b65af1059b763ca849f7243b5d4f2de1407c657cd7ba5d0b5efπThis week in Nushell #208ë™Nu_Scripts⁄Úfdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/579] update prompts scripts with new 
+``str replace``
+ syntax
+EmilySeville7cfg created 
+[link: https://github.com/nushell/nu_scripts/pull/577] Simple json schema generator
+Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/576] minor changes to nu_conda.nu and nu_msvs.nu
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/574] Update python-venv.nu so we can enter subdirectory without an error
+íêê⁄-Title: This week in Nushell #208
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/579] update prompts scripts with new 
+``str replace``
+ syntax
+EmilySeville7cfg created 
+[link: https://github.com/nushell/nu_scripts/pull/577] Simple json schema generator
+Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/576] minor changes to nu_conda.nu and nu_msvs.nu
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/574] Update python-venv.nu so we can enter subdirectory without an error

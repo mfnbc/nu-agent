@@ -1,0 +1,32 @@
+‘’Ù@3e6ca5c1e5290b66b9317b9a1183d392760c8f8a6b3def13ef8458cb3a9c1d70ÚtTitle: This week in Nu #16
+Path: This week in Nu #16
+Content:
+This week in Nu we continued to refactor the codebase to prepare for the next set of features. We've moved from the old plugin setup to the new subcrates setup for plugins and fixed some issues along the way.
+wycats landed multiple refactorings to move Nu to a multi-crate model, improve how we do syntax coloring, add a new Range primitive, and begin support for the new Signature style (
+[link: https://github.com/nushell/nushell/pull/1078] #1078
+, 
+[link: https://github.com/nushell/nushell/pull/1077] #1077
+)
+jonathandturner reorganized what is a core command and what is a plugin, and moved a set of commands to subcrates as plugins (
+[link: https://github.com/nushell/nushell/pull/1076] #1076
+, 
+[link: https://github.com/nushell/nushell/pull/1075] #1075
+, 
+[link: https://github.com/nushell/nushell/pull/1073] #1073
+, 
+[link: https://github.com/nushell/nushell/pull/1072] #1072
+, 
+[link: https://github.com/nushell/nushell/pull/1070] #1070
+, 
+[link: https://github.com/nushell/nushell/pull/1069] #1069
+, 
+[link: https://github.com/nushell/nushell/pull/1062] #1062
+)
+thibran fixed a bunch of clippy warnings (
+[link: https://github.com/nushell/nushell/pull/1066] #1066
+, 
+[link: https://github.com/nushell/nushell/pull/1061] #1061
+)
+naufraghi fixed tilde expansion (
+[link: https://github.com/nushell/nushell/pull/1060] #1060
+)

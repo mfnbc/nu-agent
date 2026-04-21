@@ -1,0 +1,269 @@
+•—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-03-18-twin0134.mdÙ@793edced2f8cd84820a3873577bf96a38cdda296d791d9e01b8e54429d99cb3b¹This week in Nushell #134‘§NushellÚ
+jt 
+[link: https://github.com/nushell/nushell/pull/4871] added an alias denylist for expansions
+, and 
+[link: https://github.com/nushell/nushell/pull/4867] Fix single quote external interpolation
+, and 
+[link: https://github.com/nushell/nushell/pull/4864] Add 
+``insert``
+ and 
+``update``
+ back
+, and 
+[link: https://github.com/nushell/nushell/pull/4858] Allow expanding aliases before keywords, improve hiding
+, and 
+[link: https://github.com/nushell/nushell/pull/4854] Fix string interpolation escaping
+, and 
+[link: https://github.com/nushell/nushell/pull/4841] Revert "Alias to keywords (eg 
+``source``
+)"
+, and 
+[link: https://github.com/nushell/nushell/pull/4835] Alias to keywords (eg 
+``source``
+)
+, and 
+[link: https://github.com/nushell/nushell/pull/4818] Nu glob
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4870] fixed a couple more tests
+, and 
+[link: https://github.com/nushell/nushell/pull/4866] add a display of what the colors look like in 
+``ansi --list``
+, and 
+[link: https://github.com/nushell/nushell/pull/4862] some tweaks to main for testing
+, and 
+[link: https://github.com/nushell/nushell/pull/4859] rename 
+``update``
+ to 
+``upsert``
+ to mirror what it really does
+, and 
+[link: https://github.com/nushell/nushell/pull/4857] added 
+``nu-utils``
+ crate, fixed issue where externals turn off vt processing
+, and 
+[link: https://github.com/nushell/nushell/pull/4856] update so that 
+``--log-level``
+ will work properly
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/4853] now that docs/commands is gone delete make_docs.nu too
+, and 
+[link: https://github.com/nushell/nushell/pull/4851] delete docs/commands now that make_docs.nu is running on website
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/4850] detached 
+``nu-ansi-term``
+ crate from main tree, switch to 
+``reedline``
+ from crates.io
+rgwood 
+[link: https://github.com/nushell/nushell/pull/4849] changed update help+examples for creating new columns
+chvck 
+[link: https://github.com/nushell/nushell/pull/4846] moved repl loop and command/script execution to nu_cli
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/4844] feat: fix and update some examples
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/4840] removed cmd from edit
+, and 
+[link: https://github.com/nushell/nushell/pull/4833] str to datetime dfr
+kubouch 
+[link: https://github.com/nushell/nushell/pull/4836] fixed reporting of 
+``which``
+ and 
+``$nu.scope``
+b333z created 
+[link: https://github.com/nushell/nushell/pull/4832] Streaming support for lines with raw streams
+’Ú
+VTitle: This week in Nushell #134
+Path: Nushell
+Content:
+jt 
+[link: https://github.com/nushell/nushell/pull/4871] added an alias denylist for expansions
+, and 
+[link: https://github.com/nushell/nushell/pull/4867] Fix single quote external interpolation
+, and 
+[link: https://github.com/nushell/nushell/pull/4864] Add 
+``insert``
+ and 
+``update``
+ back
+, and 
+[link: https://github.com/nushell/nushell/pull/4858] Allow expanding aliases before keywords, improve hiding
+, and 
+[link: https://github.com/nushell/nushell/pull/4854] Fix string interpolation escaping
+, and 
+[link: https://github.com/nushell/nushell/pull/4841] Revert "Alias to keywords (eg 
+``source``
+)"
+, and 
+[link: https://github.com/nushell/nushell/pull/4835] Alias to keywords (eg 
+``source``
+)
+, and 
+[link: https://github.com/nushell/nushell/pull/4818] Nu glob
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4870] fixed a couple more tests
+, and 
+[link: https://github.com/nushell/nushell/pull/4866] add a display of what the colors look like in 
+``ansi --list``
+, and 
+[link: https://github.com/nushell/nushell/pull/4862] some tweaks to main for testing
+, and 
+[link: https://github.com/nushell/nushell/pull/4859] rename 
+``update``
+ to 
+``upsert``
+ to mirror what it really does
+, and 
+[link: https://github.com/nushell/nushell/pull/4857] added 
+``nu-utils``
+ crate, fixed issue where externals turn off vt processing
+, and 
+[link: https://github.com/nushell/nushell/pull/4856] update so that 
+``--log-level``
+ will work properly
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/4853] now that docs/commands is gone delete make_docs.nu too
+, and 
+[link: https://github.com/nushell/nushell/pull/4851] delete docs/commands now that make_docs.nu is running on website
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/4850] detached 
+``nu-ansi-term``
+ crate from main tree, switch to 
+``reedline``
+ from crates.io
+rgwood 
+[link: https://github.com/nushell/nushell/pull/4849] changed update help+examples for creating new columns
+chvck 
+[link: https://github.com/nushell/nushell/pull/4846] moved repl loop and command/script execution to nu_cli
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/4844] feat: fix and update some examples
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/4840] removed cmd from edit
+, and 
+[link: https://github.com/nushell/nushell/pull/4833] str to datetime dfr
+kubouch 
+[link: https://github.com/nushell/nushell/pull/4836] fixed reporting of 
+``which``
+ and 
+``$nu.scope``
+b333z created 
+[link: https://github.com/nushell/nushell/pull/4832] Streaming support for lines with raw streams
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-03-18-twin0134.mdÙ@aa905a5aa7a9bbc4b425f734c9dc80641355363dcf0c1c1fe0ada4348731210b¹This week in Nushell #134‘©ExtensionÙ©fdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/49] fixed typo
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/48] fixed some bugs
+’ÙãTitle: This week in Nushell #134
+Path: Extension
+Content:
+fdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/49] fixed typo
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/48] fixed some bugs
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-03-18-twin0134.mdÙ@10b90fff3b44bb695efbb6c4df18eef2629c01b77e36d5d1a35121ecb3a7ac73¹This week in Nushell #134‘­DocumentationÚîrgwood 
+[link: https://github.com/nushell/nushell.github.io/pull/302] organized book pages by section
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/300] Book: mention 
+``help commands``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/298] Update insert/update/upsert docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/297] Update front page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/293] Search and package.json cleanup
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/292] Add links to RSS+Atom feeds
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/291] Make command reference more compact
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/285] Add command links to book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/283] Update env var docs for latest Nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/282] Remove link to demo until it's updated
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/301] temporarily remove the contributor book until we can get it updated
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/296] rename update to upsert
+jt created 
+[link: https://github.com/nushell/nushell.github.io/pull/299] rounded hero images
+PDQDakota 
+[link: https://github.com/nushell/nushell.github.io/pull/290] added Pwsh 7 && and || to operator map page
+stormasm 
+[link: https://github.com/nushell/nushell.github.io/pull/289] moved make_docs.nu from nushell to the book
+elferherrera created 
+[link: https://github.com/nushell/nushell.github.io/pull/287] Line editor page
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/286] Update docs for commands
+’Ú,Title: This week in Nushell #134
+Path: Documentation
+Content:
+rgwood 
+[link: https://github.com/nushell/nushell.github.io/pull/302] organized book pages by section
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/300] Book: mention 
+``help commands``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/298] Update insert/update/upsert docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/297] Update front page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/293] Search and package.json cleanup
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/292] Add links to RSS+Atom feeds
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/291] Make command reference more compact
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/285] Add command links to book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/283] Update env var docs for latest Nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/282] Remove link to demo until it's updated
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/301] temporarily remove the contributor book until we can get it updated
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/296] rename update to upsert
+jt created 
+[link: https://github.com/nushell/nushell.github.io/pull/299] rounded hero images
+PDQDakota 
+[link: https://github.com/nushell/nushell.github.io/pull/290] added Pwsh 7 && and || to operator map page
+stormasm 
+[link: https://github.com/nushell/nushell.github.io/pull/289] moved make_docs.nu from nushell to the book
+elferherrera created 
+[link: https://github.com/nushell/nushell.github.io/pull/287] Line editor page
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/286] Update docs for commands
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-03-18-twin0134.mdÙ@e21067f897308de78dfa9fd9830ed35eff33c3130c0b965cbaaa0d32d4dfe449¹This week in Nushell #134‘ªNu_ScriptsÚ>fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/179] added ability to detect wsl
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/178] rename uses of 
+``update``
+ to 
+``upsert``
+jt added a 
+[link: https://github.com/nushell/nu_scripts/blob/main/fun/website_builder.nu] simple website builder script
+’ÚyTitle: This week in Nushell #134
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/179] added ability to detect wsl
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/178] rename uses of 
+``update``
+ to 
+``upsert``
+jt added a 
+[link: https://github.com/nushell/nu_scripts/blob/main/fun/website_builder.nu] simple website builder script
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-03-18-twin0134.mdÙ@e3a80b10db984404d8f9017372f2a37e1b78a6646c8515d3cf5eaf2b903d8ccf¹This week in Nushell #134‘¨reedlineÚ sholderbach created 
+[link: https://github.com/nushell/reedline/pull/352] Prepare for new release
+, and 
+[link: https://github.com/nushell/reedline/pull/351] Update developer focussed documentation
+, and 
+[link: https://github.com/nushell/reedline/pull/345] Road to release: cleanup work
+’ÚYTitle: This week in Nushell #134
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/352] Prepare for new release
+, and 
+[link: https://github.com/nushell/reedline/pull/351] Update developer focussed documentation
+, and 
+[link: https://github.com/nushell/reedline/pull/345] Road to release: cleanup work

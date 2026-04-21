@@ -1,0 +1,1458 @@
+���Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@37d3aa2b356aa78c0020cbf371410d98e622493439a8e26b23ff8a2ce2348af7�title: Nushell 0.75��Nushell 0.75�
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your command line. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful command line pipelines.
+Today, we're releasing version 0.75 of Nu. This release extends our unicode support, renames some important HTTP-related commands, and improves our module system. It also contains a good amount of polish and refactoring behind the scenes.
+����;Title: title: Nushell 0.75
+Path: Nushell 0.75
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your command line. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful command line pipelines.
+Today, we're releasing version 0.75 of Nu. This release extends our unicode support, renames some important HTTP-related commands, and improves our module system. It also contains a good amount of polish and refactoring behind the scenes.
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@1fba8472d80500e10e29466b25b3208c095247eca6d9f4df4066881e83e76af2�title: Nushell 0.75��Where to get it��Nu 0.75 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.75.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+NOTE: The optional dataframe functionality is available by 
+``cargo install nu --features=dataframe``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+����4Title: title: Nushell 0.75
+Path: Where to get it
+Content:
+Nu 0.75 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.75.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+NOTE: The optional dataframe functionality is available by 
+``cargo install nu --features=dataframe``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@c6458a42a34b8a8ae276f9f87248041b72214eec816865b11766a9e13ddde68f�title: Nushell 0.75��)�E[link: https://github.com/nushell/nushell/pull/7883] ::: warning
+Breaking Change
+: You need to update escapes like 
+``"\u0043"``
+ to 
+``"\u{0043}"``
+:::
+New format:
+```Fenced(Borrowed("nu"))
+〉echo "AB\u{43}\u{044}"
+ABCD
+〉echo "Gabriel, blow your \u{1f3BA}"
+Gabriel, blow your 🎺
+
+```
+Instead of:
+```Fenced(Borrowed("nu"))
+〉echo "AB\u0043"
+ABC
+
+```
+This format allows you to insert any Unicode code point into a string by specifying its value as 1 through 6 hex digits (with or without leading zeros, upper or lower case). The maximum value is 
+``\u{10ffff}``
+, which is the largest Unicode code point defined.
+We've simply dropped support for the old format since we're pre-1.0 and didn't want to carry forward redundant syntax. You will have to change any unicode escapes in your scripts to the new format.
+Why change?
+ The old 4-digit syntax could not natively address recent extensions to Unicode standard, such as emoji, CJK extension and traditional scripts. There is a cumbersome workaround in the form of 
+[link: https://unicodebook.readthedocs.io/unicode_encodings.html#surrogates] surrogate pairs
+, but this is not intuitive.
+Why this change? The new format allows you to specify any Unicode code point with a single, predictable syntax. Rust and ECMAScript 6 support the same syntax. (Full disclosure: C++, Python and Java don't.)
+����qTitle: title: Nushell 0.75
+Path: )
+Content:
+[link: https://github.com/nushell/nushell/pull/7883] ::: warning
+Breaking Change
+: You need to update escapes like 
+``"\u0043"``
+ to 
+``"\u{0043}"``
+:::
+New format:
+```Fenced(Borrowed("nu"))
+〉echo "AB\u{43}\u{044}"
+ABCD
+〉echo "Gabriel, blow your \u{1f3BA}"
+Gabriel, blow your 🎺
+
+```
+Instead of:
+```Fenced(Borrowed("nu"))
+〉echo "AB\u0043"
+ABC
+
+```
+This format allows you to insert any Unicode code point into a string by specifying its value as 1 through 6 hex digits (with or without leading zeros, upper or lower case). The maximum value is 
+``\u{10ffff}``
+, which is the largest Unicode code point defined.
+We've simply dropped support for the old format since we're pre-1.0 and didn't want to carry forward redundant syntax. You will have to change any unicode escapes in your scripts to the new format.
+Why change?
+ The old 4-digit syntax could not natively address recent extensions to Unicode standard, such as emoji, CJK extension and traditional scripts. There is a cumbersome workaround in the form of 
+[link: https://unicodebook.readthedocs.io/unicode_encodings.html#surrogates] surrogate pairs
+, but this is not intuitive.
+Why this change? The new format allows you to specify any Unicode code point with a single, predictable syntax. Rust and ECMAScript 6 support the same syntax. (Full disclosure: C++, Python and Java don't.)
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@61b2ba14f8dbb9e79a0caaa4060233031ee54a9cf1249fae92e2b251cb390729�title: Nushell 0.75��)��``-g``
+``str length``
+``str substring``
+``str index-of``
+``split words``
+``split chars``
+[link: https://github.com/nushell/nushell/pull/7752] As you know, 
+``str length``
+, 
+``str substring``
+, 
+``str index-of``
+ and 
+``split words``
+ measure the length of strings and substrings in UTF-8 bytes, which is often very unintuitive - all non-ASCII characters are of length 2 or more, and splitting a non-ASCII character can create garbage characters as a result. A much better alternative is to measure the length in 
+extended grapheme clusters
+. In Unicode, a "grapheme cluster" tries to map as closely as possible to a single visible character. This means, among many other things:
+Non-ASCII characters, such as 
+``ん``
+, are considered single units of length 1, no matter how many UTF-8 bytes they use.
+Combined characters, such as 
+``e``
+ and 
+``◌́ ``
+ being combined to produce 
+``é``
+, are considered single units of length 1.
+Emojis, including combined emojis such as 🇯🇵, which is made of the 🇯 and 🇵 emojis plus a zero-width joiner, are considered single units of length 1. (This is a property of "extended" grapheme clusters.)
+``"\r\n"``
+ is considered a single unit of length 1.
+The new 
+``--graphemes``
+/
+``-g``
+ flag can be used with 
+``str length``
+, 
+``str substring``
+, 
+``str index-of``
+ and 
+``split words``
+ to enable these length/indexing measurements:
+```Fenced(Borrowed("nu"))
+〉'🇯🇵ほげ ふが ぴよ'   | str substring 4..6 -g
+ふが
+〉'🇯🇵ほげ ふが ぴよ'   | str length -g
+9
+〉'🇯🇵ほげ ふが ぴよ'   | str index-of 'ふが' -g
+4
+
+```
+In addition, the flag has been added to 
+``split chars``
+. Notably, this command splits on Unicode code points rather than UTF-8 bytes, so it doesn't have the issue of turning non-ASCII characters into garbage characters. However, combining emoji and combining characters do not correspond to single code points, and are split by 
+``split chars``
+. The 
+``-g``
+ flag keeps those characters intact:
+```Fenced(Borrowed("nu"))
+〉'🇯🇵ほげ' | split chars -g | to nuon
+[🇯🇵, ほ, げ]
+
+```
+These commands also have 
+``--utf-8-bytes``
+/
+``-b``
+ flags which enable the legacy behavior (and 
+``split chars``
+ has 
+``--code-points``
+/
+``-c``
+). These currently 
+do not do anything
+ and need not strictly be used, since UTF-8 byte lengths are still the default behaviour. However, if this default someday changes, then these flags will guarantee that the legacy behaviour is used.
+::: tip
+It is currently being debated whether or not grapheme clusters should be used as the default string length measurement in Nushell (making the 
+``-g``
+ flag the default behaviour for these commands), due to their intuitiveness, consistency across non-Latin scripts, and better correspondence to the length of strings displayed in the terminal (after stripping ANSI codes). Currently, the Nushell developers are uncertain what the long-term impact of such a change would be, whether existing scripts would be non-trivially harmed by it, or whether it would hinder interoperability with external programs. If you have any personal insight or opinion about this change, or about which behaviour you'd prefer not to require a flag, your input is desired!
+:::
+�����Title: title: Nushell 0.75
+Path: )
+Content:
+``-g``
+``str length``
+``str substring``
+``str index-of``
+``split words``
+``split chars``
+[link: https://github.com/nushell/nushell/pull/7752] As you know, 
+``str length``
+, 
+``str substring``
+, 
+``str index-of``
+ and 
+``split words``
+ measure the length of strings and substrings in UTF-8 bytes, which is often very unintuitive - all non-ASCII characters are of length 2 or more, and splitting a non-ASCII character can create garbage characters as a result. A much better alternative is to measure the length in 
+extended grapheme clusters
+. In Unicode, a "grapheme cluster" tries to map as closely as possible to a single visible character. This means, among many other things:
+Non-ASCII characters, such as 
+``ん``
+, are considered single units of length 1, no matter how many UTF-8 bytes they use.
+Combined characters, such as 
+``e``
+ and 
+``◌́ ``
+ being combined to produce 
+``é``
+, are considered single units of length 1.
+Emojis, including combined emojis such as 🇯🇵, which is made of the 🇯 and 🇵 emojis plus a zero-width joiner, are considered single units of length 1. (This is a property of "extended" grapheme clusters.)
+``"\r\n"``
+ is considered a single unit of length 1.
+The new 
+``--graphemes``
+/
+``-g``
+ flag can be used with 
+``str length``
+, 
+``str substring``
+, 
+``str index-of``
+ and 
+``split words``
+ to enable these length/indexing measurements:
+```Fenced(Borrowed("nu"))
+〉'🇯🇵ほげ ふが ぴよ'   | str substring 4..6 -g
+ふが
+〉'🇯🇵ほげ ふが ぴよ'   | str length -g
+9
+〉'🇯🇵ほげ ふが ぴよ'   | str index-of 'ふが' -g
+4
+
+```
+In addition, the flag has been added to 
+``split chars``
+. Notably, this command splits on Unicode code points rather than UTF-8 bytes, so it doesn't have the issue of turning non-ASCII characters into garbage characters. However, combining emoji and combining characters do not correspond to single code points, and are split by 
+``split chars``
+. The 
+``-g``
+ flag keeps those characters intact:
+```Fenced(Borrowed("nu"))
+〉'🇯🇵ほげ' | split chars -g | to nuon
+[🇯🇵, ほ, げ]
+
+```
+These commands also have 
+``--utf-8-bytes``
+/
+``-b``
+ flags which enable the legacy behavior (and 
+``split chars``
+ has 
+``--code-points``
+/
+``-c``
+). These currently 
+do not do anything
+ and need not strictly be used, since UTF-8 byte lengths are still the default behaviour. However, if this default someday changes, then these flags will guarantee that the legacy behaviour is used.
+::: tip
+It is currently being debated whether or not grapheme clusters should be used as the default string length measurement in Nushell (making the 
+``-g``
+ flag the default behaviour for these commands), due to their intuitiveness, consistency across non-Latin scripts, and better correspondence to the length of strings displayed in the terminal (after stripping ANSI codes). Currently, the Nushell developers are uncertain what the long-term impact of such a change would be, whether existing scripts would be non-trivially harmed by it, or whether it would hinder interoperability with external programs. If you have any personal insight or opinion about this change, or about which behaviour you'd prefer not to require a flag, your input is desired!
+:::
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@a7fb1409afdab5adfad6987b2f07dd4654b7cad3dbb19387e480d298ab298630�title: Nushell 0.75��)��``enumerate``
+[link: https://github.com/nushell/nushell/pull/7871] A new 
+``enumerate``
+ command will enumerate the input, and add an index and item record for each item. The index is the number of the item in the input stream, and item is the original value of the item.
+```Fenced(Borrowed(""))
+> ls | enumerate | get 14
+╭───────┬────────────────────────────╮
+│ index │ 14                         │
+│       │ ╭──────────┬─────────────╮ │
+│ item  │ │ name     │ crates      │ │
+│       │ │ type     │ dir         │ │
+│       │ │ size     │ 832 B       │ │
+│       │ │ modified │ 2 weeks ago │ │
+│       │ ╰──────────┴─────────────╯ │
+╰───────┴────────────────────────────╯
+
+```
+Rather than relying on the 
+``--numbered``
+ flags of commands like 
+``each``
+, with the 
+``enumerate``
+ command we take more modular and composable approach than hard-coding flags to our commands. (Note: The 
+``--numbered``
+ flags have not been removed yet.)
+����Title: title: Nushell 0.75
+Path: )
+Content:
+``enumerate``
+[link: https://github.com/nushell/nushell/pull/7871] A new 
+``enumerate``
+ command will enumerate the input, and add an index and item record for each item. The index is the number of the item in the input stream, and item is the original value of the item.
+```Fenced(Borrowed(""))
+> ls | enumerate | get 14
+╭───────┬────────────────────────────╮
+│ index │ 14                         │
+│       │ ╭──────────┬─────────────╮ │
+│ item  │ │ name     │ crates      │ │
+│       │ │ type     │ dir         │ │
+│       │ │ size     │ 832 B       │ │
+│       │ │ modified │ 2 weeks ago │ │
+│       │ ╰──────────┴─────────────╯ │
+╰───────┴────────────────────────────╯
+
+```
+Rather than relying on the 
+``--numbered``
+ flags of commands like 
+``each``
+, with the 
+``enumerate``
+ command we take more modular and composable approach than hard-coding flags to our commands. (Note: The 
+``--numbered``
+ flags have not been removed yet.)
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@6604662503524257b8bf1c4549a2ddca178b075a775aed506be736d8addd00f6�title: Nushell 0.75��)��[link: https://github.com/nushell/nushell/pull/7796] [link: https://github.com/nushell/nushell/pull/7702] We decided to move some of the important command for interacting with HTTP under their own 
+``http``
+ subcommands for better discoverability.
+
+The common 
+``fetch``
+ command is now 
+``http get``
+.
+Old name
+New name beginning with 
+``0.75``
+
+``fetch``
+
+``http get``
+
+``post``
+
+``http post``
+
+``to url``
+
+``url build-query``
+
+�����Title: title: Nushell 0.75
+Path: )
+Content:
+[link: https://github.com/nushell/nushell/pull/7796] [link: https://github.com/nushell/nushell/pull/7702] We decided to move some of the important command for interacting with HTTP under their own 
+``http``
+ subcommands for better discoverability.
+
+The common 
+``fetch``
+ command is now 
+``http get``
+.
+Old name
+New name beginning with 
+``0.75``
+
+``fetch``
+
+``http get``
+
+``post``
+
+``http post``
+
+``to url``
+
+``url build-query``
+
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@21c804ab18967fe63661b2c05c2d10c752477cfaa5ef13ba234c757514c49169�title: Nushell 0.75��)��``main``
+[link: https://github.com/nushell/nushell/pull/7764] Defining and exporting a 
+``main``
+command from a module allows creating a command with the same name as the module. Consider this example:
+```Fenced(Borrowed("nu"))
+# command.nu
+export def main [] { 'This is a command' }
+
+export def subcommand [] { 'This is a subcommand' }
+
+```
+Then:
+```Fenced(Borrowed("nu"))
+> use command.nu
+
+> command
+This is a command
+
+> command subcommand
+This is a subcommand
+
+```
+The same thing works 
+``overlay use``
+ as well. Note that the 
+``main``
+ command continues to work the same way as before when running a script:
+```Fenced(Borrowed("nu"))
+> nu command.nu
+This is a command
+
+```
+Combined with a 
+[link: https://github.com/nushell/nushell/pull/7830] recent bugfix
+, this feature allows for nicer way of defining known externals and custom completions.
+Before:
+```Fenced(Borrowed("nu"))
+# cargo.nu
+
+export extern cargo [--version, --color: string@cargo-color-complete]
+
+export extern `cargo check` [--quiet]
+
+def cargo-color-complete [] {
+    [ auto, always, never ]
+}
+
+```
+After:
+```Fenced(Borrowed("nu"))
+# cargo.nu
+
+export extern main [--version, --color: string@cargo-color-complete]
+
+export extern check [--quiet]
+
+def cargo-color-complete [] {
+    [ auto, always, never ]
+}
+
+```
+It is also a stepping stone towards being able to handle directories which in turn is a stepping stone towards having proper Nushell packages.
+�����Title: title: Nushell 0.75
+Path: )
+Content:
+``main``
+[link: https://github.com/nushell/nushell/pull/7764] Defining and exporting a 
+``main``
+command from a module allows creating a command with the same name as the module. Consider this example:
+```Fenced(Borrowed("nu"))
+# command.nu
+export def main [] { 'This is a command' }
+
+export def subcommand [] { 'This is a subcommand' }
+
+```
+Then:
+```Fenced(Borrowed("nu"))
+> use command.nu
+
+> command
+This is a command
+
+> command subcommand
+This is a subcommand
+
+```
+The same thing works 
+``overlay use``
+ as well. Note that the 
+``main``
+ command continues to work the same way as before when running a script:
+```Fenced(Borrowed("nu"))
+> nu command.nu
+This is a command
+
+```
+Combined with a 
+[link: https://github.com/nushell/nushell/pull/7830] recent bugfix
+, this feature allows for nicer way of defining known externals and custom completions.
+Before:
+```Fenced(Borrowed("nu"))
+# cargo.nu
+
+export extern cargo [--version, --color: string@cargo-color-complete]
+
+export extern `cargo check` [--quiet]
+
+def cargo-color-complete [] {
+    [ auto, always, never ]
+}
+
+```
+After:
+```Fenced(Borrowed("nu"))
+# cargo.nu
+
+export extern main [--version, --color: string@cargo-color-complete]
+
+export extern check [--quiet]
+
+def cargo-color-complete [] {
+    [ auto, always, never ]
+}
+
+```
+It is also a stepping stone towards being able to handle directories which in turn is a stepping stone towards having proper Nushell packages.
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@02d44894d8f5e4dfe457eb5bfec821b299b2b07a5d9206d347dc8791ba0558e5�title: Nushell 0.75��)�``save``
+[link: https://github.com/nushell/nushell/pull/7661] To watch the progress when saving large files you can now pass the 
+``--progress``
+ flag to 
+``save``
+.
+
+It gives information about the throughput and an interactive progress bar if available.
+Progress for saving a file
+����FTitle: title: Nushell 0.75
+Path: )
+Content:
+``save``
+[link: https://github.com/nushell/nushell/pull/7661] To watch the progress when saving large files you can now pass the 
+``--progress``
+ flag to 
+``save``
+.
+
+It gives information about the throughput and an interactive progress bar if available.
+Progress for saving a file
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@f5b3e9614b16df8d52310620ad56f0e5d6cb56fa336cd3e4d2efee24a26f063a�title: Nushell 0.75��Breaking changes�5Unicode escapes in strings now use and extended format 
+``\u{X...}``
+, any scripts using the old syntax 
+``\uXXXX``
+ will have to be updated. See also 
+[link: https://github.com/nushell/nushell/pull/7883] #7883
+.
+The 
+``to url``
+ command has been renamed and moved to 
+``url build-query``
+ as this better reflects is role as a nushell specific 
+``url``
+ command compared to a conversion. (
+[link: https://github.com/nushell/nushell/pull/7702] #7702
+)
+``fetch``
+ has been renamed to 
+``http get``
+ (
+[link: https://github.com/nushell/nushell/pull/7796] #7796
+)
+``post``
+ has been renamed to 
+``http post``
+ (
+[link: https://github.com/nushell/nushell/pull/7796] #7796
+)
+Quotes are trimmed when escaping to 
+``cmd.exe``
+ (
+[link: https://github.com/nushell/nushell/pull/7740] #7740
+)
+``parse -r``
+ now uses zero-indexed rows and uncapitalized columns (
+[link: https://github.com/nushell/nushell/pull/7897] #7897
+)
+``last``
+, 
+``skip``
+, 
+``drop``
+, 
+``take until``
+, 
+``take while``
+, 
+``skip until``
+, 
+``skip while``
+, 
+``where``
+, 
+``reverse``
+, 
+``shuffle``
+, 
+``append``
+, 
+``prepend``
+ and 
+``sort-by``
+ raise error when given non-lists (
+[link: https://github.com/nushell/nushell/pull/7623] #7623
+)
+``to csv``
+ and 
+``to tsv``
+ now throw error on unsupported inputs (
+[link: https://github.com/nushell/nushell/pull/7850] 7850
+)
+����pTitle: title: Nushell 0.75
+Path: Breaking changes
+Content:
+Unicode escapes in strings now use and extended format 
+``\u{X...}``
+, any scripts using the old syntax 
+``\uXXXX``
+ will have to be updated. See also 
+[link: https://github.com/nushell/nushell/pull/7883] #7883
+.
+The 
+``to url``
+ command has been renamed and moved to 
+``url build-query``
+ as this better reflects is role as a nushell specific 
+``url``
+ command compared to a conversion. (
+[link: https://github.com/nushell/nushell/pull/7702] #7702
+)
+``fetch``
+ has been renamed to 
+``http get``
+ (
+[link: https://github.com/nushell/nushell/pull/7796] #7796
+)
+``post``
+ has been renamed to 
+``http post``
+ (
+[link: https://github.com/nushell/nushell/pull/7796] #7796
+)
+Quotes are trimmed when escaping to 
+``cmd.exe``
+ (
+[link: https://github.com/nushell/nushell/pull/7740] #7740
+)
+``parse -r``
+ now uses zero-indexed rows and uncapitalized columns (
+[link: https://github.com/nushell/nushell/pull/7897] #7897
+)
+``last``
+, 
+``skip``
+, 
+``drop``
+, 
+``take until``
+, 
+``take while``
+, 
+``skip until``
+, 
+``skip while``
+, 
+``where``
+, 
+``reverse``
+, 
+``shuffle``
+, 
+``append``
+, 
+``prepend``
+ and 
+``sort-by``
+ raise error when given non-lists (
+[link: https://github.com/nushell/nushell/pull/7623] #7623
+)
+``to csv``
+ and 
+``to tsv``
+ now throw error on unsupported inputs (
+[link: https://github.com/nushell/nushell/pull/7850] 7850
+)
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@d47936a913399aa38dcb3c1c74e62583a6b09622cba415a7abdd583da50d5895�title: Nushell 0.75��Nushell�)ukubouch created 
+[link: https://github.com/nushell/nushell/pull/7927] Remove deprecated 
+``where -b``
+ parameter
+, and 
+[link: https://github.com/nushell/nushell/pull/7894] Fix panic when assigning value to $env
+, and 
+[link: https://github.com/nushell/nushell/pull/7893] Fix wrong VarId of $in variable
+, and 
+[link: https://github.com/nushell/nushell/pull/7830] Fix command name lookup for known externals
+, and 
+[link: https://github.com/nushell/nushell/pull/7764] Allow main command to define top-level module command
+, and 
+[link: https://github.com/nushell/nushell/pull/7720] Add const support for all overlay commands
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/7926] update type check so that ++ with lists works better
+, and 
+[link: https://github.com/nushell/nushell/pull/7866] with the release of rust 1.67, let's bump to 1.66.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7852] add decimal to SyntaxShape
+, and 
+[link: https://github.com/nushell/nushell/pull/7851] add some startup performance metrics
+, and 
+[link: https://github.com/nushell/nushell/pull/7831] print nushell startup time
+, and 
+[link: https://github.com/nushell/nushell/pull/7802] fix signature display in help commands
+, and 
+[link: https://github.com/nushell/nushell/pull/7772] update sqlparser dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/7771] update semver dep
+, and 
+[link: https://github.com/nushell/nushell/pull/7745] Add cursor shape configuration for each edit mode
+, and 
+[link: https://github.com/nushell/nushell/pull/7739] update base64 implementation to newer crate
+, and 
+[link: https://github.com/nushell/nushell/pull/7726] update release-pkg comments for manual runs
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/7918] Pin 
+``reedline``
+ to new 
+``0.15``
+ for release
+, and 
+[link: https://github.com/nushell/nushell/pull/7916] Apply more recent/nightly clippy lints
+, and 
+[link: https://github.com/nushell/nushell/pull/7914] Bump 
+``trash``
+ to 
+``3.0.1``
+, and 
+[link: https://github.com/nushell/nushell/pull/7906] Use variable names directly in the format strings
+, and 
+[link: https://github.com/nushell/nushell/pull/7905] Remove unused 
+``nu-test-support``
+ in 
+``nu-table``
+, and 
+[link: https://github.com/nushell/nushell/pull/7903] Update reedline for pre-release testing
+, and 
+[link: https://github.com/nushell/nushell/pull/7902] Version bump for 
+``0.75``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/7721] Bump to 
+``0.74.1``
+ development version
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/7911] Bump windows from 0.43.0 to 0.44.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7910] Bump serial_test from 0.10.0 to 1.0.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7909] Bump roxmltree from 0.16.0 to 0.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7908] Bump typetag from 0.1.8 to 0.2.5
+, and 
+[link: https://github.com/nushell/nushell/pull/7907] Bump chrono-tz from 0.6.3 to 0.8.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7840] Bump actions-rust-lang/setup-rust-toolchain from 1.3.4 to 1.3.5
+, and 
+[link: https://github.com/nushell/nushell/pull/7839] Bump sysinfo from 0.26.4 to 0.27.7
+, and 
+[link: https://github.com/nushell/nushell/pull/7838] Bump miette from 5.3.0 to 5.5.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7837] Bump shadow-rs from 0.16.3 to 0.20.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7836] Bump rayon from 1.5.3 to 1.6.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7835] Bump scraper from 0.13.0 to 0.14.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7833] Bump regex from 1.6.0 to 1.7.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7807] Bump git2 from 0.16.0 to 0.16.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7806] Bump libgit2-sys from 0.14.1+1.5.0 to 0.14.2+1.5.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7805] Bump bumpalo from 3.11.0 to 3.12.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7770] Bump actions/stale from 3 to 6
+, and 
+[link: https://github.com/nushell/nushell/pull/7769] Bump serial_test from 0.8.0 to 0.10.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7768] Bump quick-xml from 0.25.0 to 0.27.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7765] Bump dialoguer from 0.9.0 to 0.10.3
+, and 
+[link: https://github.com/nushell/nushell/pull/7734] Bump uuid from 1.1.2 to 1.2.2
+, and 
+[link: https://github.com/nushell/nushell/pull/7732] Bump once_cell from 1.16.0 to 1.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7731] Bump git2 from 0.15.0 to 0.16.0
+sophiajt created 
+[link: https://github.com/nushell/nushell/pull/7904] Use clippy-recommended simplification
+, and 
+[link: https://github.com/nushell/nushell/pull/7871] Add 'enumerate' command for enumeration
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7897] make 
+``parse -r``
+ columns return 0-indexed uncapitalised
+, and 
+[link: https://github.com/nushell/nushell/pull/7789] let 
+``find``
+ take linebreaks into account in 
+``Value::String``
+, and 
+[link: https://github.com/nushell/nushell/pull/7781] convert SyntaxShape::Table into the corresponding Type
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/7896] make help commands search term don't generate $nothing
+, and 
+[link: https://github.com/nushell/nushell/pull/7888] refactor: use 
+``input_handler::operate``
+ in ansi_strip command
+, and 
+[link: https://github.com/nushell/nushell/pull/7884] mention 
+``do``
+ in 
+``complete``
+ command's doc
+, and 
+[link: https://github.com/nushell/nushell/pull/7856] improve doc about flatten
+, and 
+[link: https://github.com/nushell/nushell/pull/7848] Let redirection keep exit code
+, and 
+[link: https://github.com/nushell/nushell/pull/7808] Fix multi-line redirection inside a block
+, and 
+[link: https://github.com/nushell/nushell/pull/7743] dependency update: update polar to 0.26.1
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell/pull/7892] Add Github Actions workflow to check for typos
+, and 
+[link: https://github.com/nushell/nushell/pull/7868] Extract 
+``gather_commandline_args``
+, and 
+[link: https://github.com/nushell/nushell/pull/7815] Reduce again the number of match calls
+, and 
+[link: https://github.com/nushell/nushell/pull/7813] Reduce number of 
+``match``
+ calls
+, and 
+[link: https://github.com/nushell/nushell/pull/7812] Extract manual 
+``PWD``
+ extraction with method 
+``current_work_dir``
+, and 
+[link: https://github.com/nushell/nushell/pull/7804] Clean up 
+``nu-cli/src/eval_file.rs``
+, and 
+[link: https://github.com/nushell/nushell/pull/7803] Move all functions of main.rs into modules
+, and 
+[link: https://github.com/nushell/nushell/pull/7801] Cleanup of 
+``src/main.rs``
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/7883] Support extended unicode escapes in strings: "\u{10fff}"
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/7879] Name threads
+, and 
+[link: https://github.com/nushell/nushell/pull/7877] Remove 🆖 comments
+, and 
+[link: https://github.com/nushell/nushell/pull/7876] Clean up 
+``cd.rs``
+, and 
+[link: https://github.com/nushell/nushell/pull/7875] Re-enable some good tests, remove some bad tests
+, and 
+[link: https://github.com/nushell/nushell/pull/7857] Fix the build after #7204
+, and 
+[link: https://github.com/nushell/nushell/pull/7740] Trim quotes when shelling out to cmd.exe
+, and 
+[link: https://github.com/nushell/nushell/pull/7722] Combine benchmarks to speed up 
+``cargo bench``
+ build times
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/7861] nu-commands/table (
+``table -e``
+) Recognize limited space better
+, and 
+[link: https://github.com/nushell/nushell/pull/7778] nu-table: Wrap last column in 
+``table -e``
+SUPERCILEX created 
+[link: https://github.com/nushell/nushell/pull/7859] Fix 
+``do``
+ swallowing all output when ignoring errors
+NotLebedev created 
+[link: https://github.com/nushell/nushell/pull/7850] To csv fix
+, and 
+[link: https://github.com/nushell/nushell/pull/7751] Ansi link
+Dorumin created 
+[link: https://github.com/nushell/nushell/pull/7834] Expose filtering by file type in glob
+michel-slm created 
+[link: https://github.com/nushell/nushell/pull/7824] [
+nu-test-support
+]
+ Gate system locale tests
+VincenzoCarlino created 
+[link: https://github.com/nushell/nushell/pull/7823] Feat/7725 url join
+zoechi created 
+[link: https://github.com/nushell/nushell/pull/7811] Fix typos
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7798] Do not list deprecated subcommands in 
+``help <cmd>``
+, and 
+[link: https://github.com/nushell/nushell/pull/7776] ``benchmark``
+ now pipes input into the closure
+, and 
+[link: https://github.com/nushell/nushell/pull/7752] ``str length``
+, 
+``str substring``
+, 
+``str index-of``
+, 
+``split words``
+ and 
+``split chars``
+ now use graphemes instead of UTF-8 bytes
+, and 
+[link: https://github.com/nushell/nushell/pull/7738] Disallow 
+``encode``
+'s silent conversion to HTML entities (and add 
+``-i``
+/
+``--ignore-errors``
+ flag to re-allow it)
+Kazuki-Ya created 
+[link: https://github.com/nushell/nushell/pull/7796] ``fetch``
+ -> 
+``http get``
+ and 
+``post``
+ -> 
+``http post``
+zschaffer created 
+[link: https://github.com/nushell/nushell/pull/7785] add magenta to ansi command as synonym for purple
+1Kinoti created 
+[link: https://github.com/nushell/nushell/pull/7784] add dedicated 
+``const in pipeline``
+, 
+``const builtin var``
+ errors
+, and 
+[link: https://github.com/nushell/nushell/pull/7759] Allow underscores in integers and floats
+Xoffio created 
+[link: https://github.com/nushell/nushell/pull/7779] Fixes Issue 7648 which crashes nushell and happens when an alias name is shorter than the alias command and the alias command is an external command.
+, and 
+[link: https://github.com/nushell/nushell/pull/7756] Add test for fix of issue #7754
+DaRacci created 
+[link: https://github.com/nushell/nushell/pull/7775] Check all user groups.
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/7773] fix some typos
+, and 
+[link: https://github.com/nushell/nushell/pull/7723] Fix generated doc for 
+``explore``
+ commands
+afetisov created 
+[link: https://github.com/nushell/nushell/pull/7755] Fix typos and use more idiomatic assertions
+nanoqsh created 
+[link: https://github.com/nushell/nushell/pull/7737] Detailed message during core dumped
+murex971 created 
+[link: https://github.com/nushell/nushell/pull/7736] Add search terms in random and expression categories
+����)�Title: title: Nushell 0.75
+Path: Nushell
+Content:
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/7927] Remove deprecated 
+``where -b``
+ parameter
+, and 
+[link: https://github.com/nushell/nushell/pull/7894] Fix panic when assigning value to $env
+, and 
+[link: https://github.com/nushell/nushell/pull/7893] Fix wrong VarId of $in variable
+, and 
+[link: https://github.com/nushell/nushell/pull/7830] Fix command name lookup for known externals
+, and 
+[link: https://github.com/nushell/nushell/pull/7764] Allow main command to define top-level module command
+, and 
+[link: https://github.com/nushell/nushell/pull/7720] Add const support for all overlay commands
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/7926] update type check so that ++ with lists works better
+, and 
+[link: https://github.com/nushell/nushell/pull/7866] with the release of rust 1.67, let's bump to 1.66.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7852] add decimal to SyntaxShape
+, and 
+[link: https://github.com/nushell/nushell/pull/7851] add some startup performance metrics
+, and 
+[link: https://github.com/nushell/nushell/pull/7831] print nushell startup time
+, and 
+[link: https://github.com/nushell/nushell/pull/7802] fix signature display in help commands
+, and 
+[link: https://github.com/nushell/nushell/pull/7772] update sqlparser dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/7771] update semver dep
+, and 
+[link: https://github.com/nushell/nushell/pull/7745] Add cursor shape configuration for each edit mode
+, and 
+[link: https://github.com/nushell/nushell/pull/7739] update base64 implementation to newer crate
+, and 
+[link: https://github.com/nushell/nushell/pull/7726] update release-pkg comments for manual runs
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/7918] Pin 
+``reedline``
+ to new 
+``0.15``
+ for release
+, and 
+[link: https://github.com/nushell/nushell/pull/7916] Apply more recent/nightly clippy lints
+, and 
+[link: https://github.com/nushell/nushell/pull/7914] Bump 
+``trash``
+ to 
+``3.0.1``
+, and 
+[link: https://github.com/nushell/nushell/pull/7906] Use variable names directly in the format strings
+, and 
+[link: https://github.com/nushell/nushell/pull/7905] Remove unused 
+``nu-test-support``
+ in 
+``nu-table``
+, and 
+[link: https://github.com/nushell/nushell/pull/7903] Update reedline for pre-release testing
+, and 
+[link: https://github.com/nushell/nushell/pull/7902] Version bump for 
+``0.75``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/7721] Bump to 
+``0.74.1``
+ development version
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/7911] Bump windows from 0.43.0 to 0.44.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7910] Bump serial_test from 0.10.0 to 1.0.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7909] Bump roxmltree from 0.16.0 to 0.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7908] Bump typetag from 0.1.8 to 0.2.5
+, and 
+[link: https://github.com/nushell/nushell/pull/7907] Bump chrono-tz from 0.6.3 to 0.8.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7840] Bump actions-rust-lang/setup-rust-toolchain from 1.3.4 to 1.3.5
+, and 
+[link: https://github.com/nushell/nushell/pull/7839] Bump sysinfo from 0.26.4 to 0.27.7
+, and 
+[link: https://github.com/nushell/nushell/pull/7838] Bump miette from 5.3.0 to 5.5.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7837] Bump shadow-rs from 0.16.3 to 0.20.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7836] Bump rayon from 1.5.3 to 1.6.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7835] Bump scraper from 0.13.0 to 0.14.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7833] Bump regex from 1.6.0 to 1.7.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7807] Bump git2 from 0.16.0 to 0.16.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7806] Bump libgit2-sys from 0.14.1+1.5.0 to 0.14.2+1.5.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7805] Bump bumpalo from 3.11.0 to 3.12.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7770] Bump actions/stale from 3 to 6
+, and 
+[link: https://github.com/nushell/nushell/pull/7769] Bump serial_test from 0.8.0 to 0.10.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7768] Bump quick-xml from 0.25.0 to 0.27.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7765] Bump dialoguer from 0.9.0 to 0.10.3
+, and 
+[link: https://github.com/nushell/nushell/pull/7734] Bump uuid from 1.1.2 to 1.2.2
+, and 
+[link: https://github.com/nushell/nushell/pull/7732] Bump once_cell from 1.16.0 to 1.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7731] Bump git2 from 0.15.0 to 0.16.0
+sophiajt created 
+[link: https://github.com/nushell/nushell/pull/7904] Use clippy-recommended simplification
+, and 
+[link: https://github.com/nushell/nushell/pull/7871] Add 'enumerate' command for enumeration
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7897] make 
+``parse -r``
+ columns return 0-indexed uncapitalised
+, and 
+[link: https://github.com/nushell/nushell/pull/7789] let 
+``find``
+ take linebreaks into account in 
+``Value::String``
+, and 
+[link: https://github.com/nushell/nushell/pull/7781] convert SyntaxShape::Table into the corresponding Type
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/7896] make help commands search term don't generate $nothing
+, and 
+[link: https://github.com/nushell/nushell/pull/7888] refactor: use 
+``input_handler::operate``
+ in ansi_strip command
+, and 
+[link: https://github.com/nushell/nushell/pull/7884] mention 
+``do``
+ in 
+``complete``
+ command's doc
+, and 
+[link: https://github.com/nushell/nushell/pull/7856] improve doc about flatten
+, and 
+[link: https://github.com/nushell/nushell/pull/7848] Let redirection keep exit code
+, and 
+[link: https://github.com/nushell/nushell/pull/7808] Fix multi-line redirection inside a block
+, and 
+[link: https://github.com/nushell/nushell/pull/7743] dependency update: update polar to 0.26.1
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell/pull/7892] Add Github Actions workflow to check for typos
+, and 
+[link: https://github.com/nushell/nushell/pull/7868] Extract 
+``gather_commandline_args``
+, and 
+[link: https://github.com/nushell/nushell/pull/7815] Reduce again the number of match calls
+, and 
+[link: https://github.com/nushell/nushell/pull/7813] Reduce number of 
+``match``
+ calls
+, and 
+[link: https://github.com/nushell/nushell/pull/7812] Extract manual 
+``PWD``
+ extraction with method 
+``current_work_dir``
+, and 
+[link: https://github.com/nushell/nushell/pull/7804] Clean up 
+``nu-cli/src/eval_file.rs``
+, and 
+[link: https://github.com/nushell/nushell/pull/7803] Move all functions of main.rs into modules
+, and 
+[link: https://github.com/nushell/nushell/pull/7801] Cleanup of 
+``src/main.rs``
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/7883] Support extended unicode escapes in strings: "\u{10fff}"
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/7879] Name threads
+, and 
+[link: https://github.com/nushell/nushell/pull/7877] Remove 🆖 comments
+, and 
+[link: https://github.com/nushell/nushell/pull/7876] Clean up 
+``cd.rs``
+, and 
+[link: https://github.com/nushell/nushell/pull/7875] Re-enable some good tests, remove some bad tests
+, and 
+[link: https://github.com/nushell/nushell/pull/7857] Fix the build after #7204
+, and 
+[link: https://github.com/nushell/nushell/pull/7740] Trim quotes when shelling out to cmd.exe
+, and 
+[link: https://github.com/nushell/nushell/pull/7722] Combine benchmarks to speed up 
+``cargo bench``
+ build times
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/7861] nu-commands/table (
+``table -e``
+) Recognize limited space better
+, and 
+[link: https://github.com/nushell/nushell/pull/7778] nu-table: Wrap last column in 
+``table -e``
+SUPERCILEX created 
+[link: https://github.com/nushell/nushell/pull/7859] Fix 
+``do``
+ swallowing all output when ignoring errors
+NotLebedev created 
+[link: https://github.com/nushell/nushell/pull/7850] To csv fix
+, and 
+[link: https://github.com/nushell/nushell/pull/7751] Ansi link
+Dorumin created 
+[link: https://github.com/nushell/nushell/pull/7834] Expose filtering by file type in glob
+michel-slm created 
+[link: https://github.com/nushell/nushell/pull/7824] [
+nu-test-support
+]
+ Gate system locale tests
+VincenzoCarlino created 
+[link: https://github.com/nushell/nushell/pull/7823] Feat/7725 url join
+zoechi created 
+[link: https://github.com/nushell/nushell/pull/7811] Fix typos
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7798] Do not list deprecated subcommands in 
+``help <cmd>``
+, and 
+[link: https://github.com/nushell/nushell/pull/7776] ``benchmark``
+ now pipes input into the closure
+, and 
+[link: https://github.com/nushell/nushell/pull/7752] ``str length``
+, 
+``str substring``
+, 
+``str index-of``
+, 
+``split words``
+ and 
+``split chars``
+ now use graphemes instead of UTF-8 bytes
+, and 
+[link: https://github.com/nushell/nushell/pull/7738] Disallow 
+``encode``
+'s silent conversion to HTML entities (and add 
+``-i``
+/
+``--ignore-errors``
+ flag to re-allow it)
+Kazuki-Ya created 
+[link: https://github.com/nushell/nushell/pull/7796] ``fetch``
+ -> 
+``http get``
+ and 
+``post``
+ -> 
+``http post``
+zschaffer created 
+[link: https://github.com/nushell/nushell/pull/7785] add magenta to ansi command as synonym for purple
+1Kinoti created 
+[link: https://github.com/nushell/nushell/pull/7784] add dedicated 
+``const in pipeline``
+, 
+``const builtin var``
+ errors
+, and 
+[link: https://github.com/nushell/nushell/pull/7759] Allow underscores in integers and floats
+Xoffio created 
+[link: https://github.com/nushell/nushell/pull/7779] Fixes Issue 7648 which crashes nushell and happens when an alias name is shorter than the alias command and the alias command is an external command.
+, and 
+[link: https://github.com/nushell/nushell/pull/7756] Add test for fix of issue #7754
+DaRacci created 
+[link: https://github.com/nushell/nushell/pull/7775] Check all user groups.
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/7773] fix some typos
+, and 
+[link: https://github.com/nushell/nushell/pull/7723] Fix generated doc for 
+``explore``
+ commands
+afetisov created 
+[link: https://github.com/nushell/nushell/pull/7755] Fix typos and use more idiomatic assertions
+nanoqsh created 
+[link: https://github.com/nushell/nushell/pull/7737] Detailed message during core dumped
+murex971 created 
+[link: https://github.com/nushell/nushell/pull/7736] Add search terms in random and expression categories
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@e387f3aa5720435baff598b43ab27fea6ebe48da8f0d0767e7c8f9ebc625973f�title: Nushell 0.75��Extension�ZHofer-Julian created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/75] Add another directory where nu might be installed
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/74] get ready for new 1.0 release
+glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/73] New syntax highlight
+�����Title: title: Nushell 0.75
+Path: Extension
+Content:
+Hofer-Julian created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/75] Add another directory where nu might be installed
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/74] get ready for new 1.0 release
+glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/73] New syntax highlight
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@ecff43d47c48515e781e7f40399daa81c5cf09dda94237c69a71d969a8f8288d�title: Nushell 0.75��Documentation��Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/757] Reflect the separation of block and closure
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/754] Add separate page for setting Nu as default shell
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/753] Add Github Actions workflow to check typos
+bobhy created 
+[link: https://github.com/nushell/nushell.github.io/pull/756] Document \u{x...} unicode escapes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/755] document 7883 for release notes
+max-nextcloud created 
+[link: https://github.com/nushell/nushell.github.io/pull/752] Update rust version requirement in installation
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/751] update doc about stdout and stderr
+webbedspace created 
+[link: https://github.com/nushell/nushell.github.io/pull/747] Add my changes
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/745] link to default config file in the "explore" page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/744] remove a broken link in "Introducing nushell" # "Plugins"
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/743] fix a typo on "language", was spelled "langauge"
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/740] Disable prefetch setting
+waldyrious created 
+[link: https://github.com/nushell/nushell.github.io/pull/738] Add two style tweaks to improve tables in code blocks
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/736] Refresh commands docs for nu v0.74
+hbt created 
+[link: https://github.com/nushell/nushell.github.io/pull/667] fix deprecated cmd
+����Title: title: Nushell 0.75
+Path: Documentation
+Content:
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/757] Reflect the separation of block and closure
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/754] Add separate page for setting Nu as default shell
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/753] Add Github Actions workflow to check typos
+bobhy created 
+[link: https://github.com/nushell/nushell.github.io/pull/756] Document \u{x...} unicode escapes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/755] document 7883 for release notes
+max-nextcloud created 
+[link: https://github.com/nushell/nushell.github.io/pull/752] Update rust version requirement in installation
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/751] update doc about stdout and stderr
+webbedspace created 
+[link: https://github.com/nushell/nushell.github.io/pull/747] Add my changes
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/745] link to default config file in the "explore" page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/744] remove a broken link in "Introducing nushell" # "Plugins"
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/743] fix a typo on "language", was spelled "langauge"
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/740] Disable prefetch setting
+waldyrious created 
+[link: https://github.com/nushell/nushell.github.io/pull/738] Add two style tweaks to improve tables in code blocks
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/736] Refresh commands docs for nu v0.74
+hbt created 
+[link: https://github.com/nushell/nushell.github.io/pull/667] fix deprecated cmd
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@016a88bfe74da5f9943768448efbec403af6bb539d8c3f4812244cbd8e39b79c�title: Nushell 0.75��Nu_Scripts��Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/367] nu_conda: Another Conda module with Better Performance
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/365] small tweaks to get panache working again
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/364] fix oh-my.nu script after 
+``do``
+ changes in nushell
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/351] fix ohmy.nu path handling on windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/349] add timed_weather that checks the weather at timed intervals
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/348] fixed a type-o in the weather script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/342] fix some bugs when on slash
+Hofer-Julian created 
+[link: https://github.com/nushell/nu_scripts/pull/363] Fix scoop completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/362] git-completions: Stop checking 
+``--force-with-lease``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/361] conda: Check if environment exists before activating
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/360] Explain how to create an alias for conda activate without a prompt
+schrieveslaach created 
+[link: https://github.com/nushell/nu_scripts/pull/359] Fix git checkout/switch completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/358] Improve git checkout/switch completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/355] Add git cherry-pick completion
+1Kinoti created 
+[link: https://github.com/nushell/nu_scripts/pull/357] add todo script
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/356] FIX: export the 
+``git cherry-pick``
+ completion
+zoechi created 
+[link: https://github.com/nushell/nu_scripts/pull/354] Change "list of values" to "list of records" with value and description
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/353] Export command to make it use-able
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/350] Add completions for Bitwarden CLI client
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/347] K8s
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/327] ssh kubernetes docker git just nvim
+fitzypop created 
+[link: https://github.com/nushell/nu_scripts/pull/346] add git_branch_cleanup.nu script and readme
+bobhy created 
+[link: https://github.com/nushell/nu_scripts/pull/345] prompt/full-line.nu -- full width prompt
+stormasm created 
+[link: https://github.com/nushell/nu_scripts/pull/344] add a Readme to the make_release directory
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/343] Add initial dependency resolver for nu release
+TornaxO7 created 
+[link: https://github.com/nushell/nu_scripts/pull/337] adding git aliases
+DrakeTDL created 
+[link: https://github.com/nushell/nu_scripts/pull/329] feat(custom-completions): add reflector completions
+ldsands created 
+[link: https://github.com/nushell/nu_scripts/pull/319] Add files needed for Poetry custom-completions
+����(Title: title: Nushell 0.75
+Path: Nu_Scripts
+Content:
+Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/367] nu_conda: Another Conda module with Better Performance
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/365] small tweaks to get panache working again
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/364] fix oh-my.nu script after 
+``do``
+ changes in nushell
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/351] fix ohmy.nu path handling on windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/349] add timed_weather that checks the weather at timed intervals
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/348] fixed a type-o in the weather script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/342] fix some bugs when on slash
+Hofer-Julian created 
+[link: https://github.com/nushell/nu_scripts/pull/363] Fix scoop completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/362] git-completions: Stop checking 
+``--force-with-lease``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/361] conda: Check if environment exists before activating
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/360] Explain how to create an alias for conda activate without a prompt
+schrieveslaach created 
+[link: https://github.com/nushell/nu_scripts/pull/359] Fix git checkout/switch completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/358] Improve git checkout/switch completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/355] Add git cherry-pick completion
+1Kinoti created 
+[link: https://github.com/nushell/nu_scripts/pull/357] add todo script
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/356] FIX: export the 
+``git cherry-pick``
+ completion
+zoechi created 
+[link: https://github.com/nushell/nu_scripts/pull/354] Change "list of values" to "list of records" with value and description
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/353] Export command to make it use-able
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/350] Add completions for Bitwarden CLI client
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/347] K8s
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/327] ssh kubernetes docker git just nvim
+fitzypop created 
+[link: https://github.com/nushell/nu_scripts/pull/346] add git_branch_cleanup.nu script and readme
+bobhy created 
+[link: https://github.com/nushell/nu_scripts/pull/345] prompt/full-line.nu -- full width prompt
+stormasm created 
+[link: https://github.com/nushell/nu_scripts/pull/344] add a Readme to the make_release directory
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/343] Add initial dependency resolver for nu release
+TornaxO7 created 
+[link: https://github.com/nushell/nu_scripts/pull/337] adding git aliases
+DrakeTDL created 
+[link: https://github.com/nushell/nu_scripts/pull/329] feat(custom-completions): add reflector completions
+ldsands created 
+[link: https://github.com/nushell/nu_scripts/pull/319] Add files needed for Poetry custom-completions
+��Varchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-31-nushell_0_75.md�@8f4a74efe0ce0b219787eff021a7081ccb2f849d940a77f6492533096c96d9fc�title: Nushell 0.75��reedline�8sholderbach created 
+[link: https://github.com/nushell/reedline/pull/533] Remove unstable rustdoc lint
+, and 
+[link: https://github.com/nushell/reedline/pull/532] Bump version for 
+``0.15``
+ release
+dgkf created 
+[link: https://github.com/nushell/reedline/pull/531] Allow configuration of multiline prompt color
+����kTitle: title: Nushell 0.75
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/533] Remove unstable rustdoc lint
+, and 
+[link: https://github.com/nushell/reedline/pull/532] Bump version for 
+``0.15``
+ release
+dgkf created 
+[link: https://github.com/nushell/reedline/pull/531] Allow configuration of multiline prompt color

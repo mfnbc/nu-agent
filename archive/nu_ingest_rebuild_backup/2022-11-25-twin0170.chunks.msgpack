@@ -1,0 +1,330 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-11-25-twin0170.mdŸ@03f4a0db1697fde934b318d72044080a08dd6d324ffd4f988b778c5333a9f446πThis week in Nushell #170ëßNushell⁄	kubouch 
+[link: https://github.com/nushell/nushell/pull/7231] reordered export-env eval and allowed reloading an overlay
+jntrnr created 
+[link: https://github.com/nushell/nushell/pull/7230] New commands: 
+``break``
+, 
+``continue``
+, 
+``return``
+, and 
+``loop``
+, and 
+[link: https://github.com/nushell/nushell/pull/7229] Remove And and Or pipeline elements
+, and 
+[link: https://github.com/nushell/nushell/pull/7221] Add try/catch functionality
+, and 
+[link: https://github.com/nushell/nushell/pull/7219] A set of fixes for stderr redirect
+, and 
+[link: https://github.com/nushell/nushell/pull/7206] Don't redirect stdout when only redirecting stderr
+, and 
+[link: https://github.com/nushell/nushell/pull/7185] Stdout/Stderr redirection
+, and 
+[link: https://github.com/nushell/nushell/pull/7180] Move dataframe out of extra
+, and 
+[link: https://github.com/nushell/nushell/pull/7172] Add auto-expanding table view to default config
+rgwood 
+[link: https://github.com/nushell/nushell/pull/7228] made catch block a closure w/ access to error
+, and 
+[link: https://github.com/nushell/nushell/pull/7182] Feature cleanup
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7227] pinned to a version of zstd that doesn't break dataframe compilation
+dmatos2012 
+[link: https://github.com/nushell/nushell/pull/7215] fixed color_config crashing on nonstring data
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/7214] removed the 
+``samples/wasm``
+ folder
+, and 
+[link: https://github.com/nushell/nushell/pull/7186] Error on negative argument of 
+``first``
+, and 
+[link: https://github.com/nushell/nushell/pull/7184] Error on negative argument to 
+``last``
+webbedspace 
+[link: https://github.com/nushell/nushell/pull/7213] fixed 
+``fetch``
+/
+``post``
+ not erroring on 4xx and 5xx statuses
+, and 
+[link: https://github.com/nushell/nushell/pull/7199] Fix 
+``sort-by``
+, 
+``path join``
+ and 
+``size``
+ error arrows
+, and 
+[link: https://github.com/nushell/nushell/pull/7198] Change all 
+``--insensitive``
+ flags to 
+``--ignore-case``
+, and 
+[link: https://github.com/nushell/nushell/pull/7197] Fix 
+``mv``
+ error message issues (arrows, Windows paths)
+, and 
+[link: https://github.com/nushell/nushell/pull/7194] Fix 
+``glob``
+ error arrows
+, and 
+[link: https://github.com/nushell/nushell/pull/7179] Remove erroneous test introduced in #6994
+, and 
+[link: https://github.com/nushell/nushell/pull/7176] Rename dataframe 
+``describe``
+ to 
+``summary``
+ so that the normal 
+``describe``
+ isn't overloaded
+, and 
+[link: https://github.com/nushell/nushell/pull/7170] Bugfix: add table_index_mode check that was missing from #6983
+, and 
+[link: https://github.com/nushell/nushell/pull/7165] Edit 
+``rm``
+ help messages
+, and 
+[link: https://github.com/nushell/nushell/pull/7164] Improve CantFindColumn and ColumnAlreadyExists errors
+, and 
+[link: https://github.com/nushell/nushell/pull/7056] Fix needs_quotes() in 
+``to nuon``
+ (closes #6989)
+, and 
+[link: https://github.com/nushell/nushell/pull/6994] Allow iteration blocks to have an optional extra index parameter (alternative to 
+``-n``
+ flags)
+, and 
+[link: https://github.com/nushell/nushell/pull/6983] Grouped config commands better (closes #6911)
+michel-slm 
+[link: https://github.com/nushell/nushell/pull/7212] added binstall metadata
+raccmonteiro fixed 
+[link: https://github.com/nushell/nushell/pull/7209] ``uniq -i``
+ does not convert to lowercase (#7192)
+, and 
+[link: https://github.com/nushell/nushell/pull/7188] ``uniq``
+ code refactoring
+, and 
+[link: https://github.com/nushell/nushell/pull/7124] new command 
+``url parse``
+ (#6854) and 
+``url``
+ subcommands tests
+kamirr 
+[link: https://github.com/nushell/nushell/pull/7195] fixed while ctrlc behavior
+, and 
+[link: https://github.com/nushell/nushell/pull/7178] Fix 
+``last``
+ memory use
+nibon7 
+[link: https://github.com/nushell/nushell/pull/7193] applied a clippy fix
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/7177] removde block input support from merge
+, and 
+[link: https://github.com/nushell/nushell/pull/7163] Plugin: make friendly error message when python is not found
+, and 
+[link: https://github.com/nushell/nushell/pull/7156] Make external command substitution works friendly(like fish shell, trailing ending newlines)
+, and 
+[link: https://github.com/nushell/nushell/pull/7079] add signature information when get help on one command
+nanoqsh 
+[link: https://github.com/nushell/nushell/pull/7175] fixed JSON parsing
+SUPERCILEX 
+[link: https://github.com/nushell/nushell/pull/7122] restored original do -i behavior and add flags to break down shell vs program errors
+Decodetalkers created 
+[link: https://github.com/nushell/nushell/pull/7082] feat: Use Raw text to save if pipeline data is ExternalStream or String
+Kixunil 
+[link: https://github.com/nushell/nushell/pull/7010] made JSON require string and pass around metadata
+íêê⁄ATitle: This week in Nushell #170
+Path: Nushell
+Content:
+kubouch 
+[link: https://github.com/nushell/nushell/pull/7231] reordered export-env eval and allowed reloading an overlay
+jntrnr created 
+[link: https://github.com/nushell/nushell/pull/7230] New commands: 
+``break``
+, 
+``continue``
+, 
+``return``
+, and 
+``loop``
+, and 
+[link: https://github.com/nushell/nushell/pull/7229] Remove And and Or pipeline elements
+, and 
+[link: https://github.com/nushell/nushell/pull/7221] Add try/catch functionality
+, and 
+[link: https://github.com/nushell/nushell/pull/7219] A set of fixes for stderr redirect
+, and 
+[link: https://github.com/nushell/nushell/pull/7206] Don't redirect stdout when only redirecting stderr
+, and 
+[link: https://github.com/nushell/nushell/pull/7185] Stdout/Stderr redirection
+, and 
+[link: https://github.com/nushell/nushell/pull/7180] Move dataframe out of extra
+, and 
+[link: https://github.com/nushell/nushell/pull/7172] Add auto-expanding table view to default config
+rgwood 
+[link: https://github.com/nushell/nushell/pull/7228] made catch block a closure w/ access to error
+, and 
+[link: https://github.com/nushell/nushell/pull/7182] Feature cleanup
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7227] pinned to a version of zstd that doesn't break dataframe compilation
+dmatos2012 
+[link: https://github.com/nushell/nushell/pull/7215] fixed color_config crashing on nonstring data
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/7214] removed the 
+``samples/wasm``
+ folder
+, and 
+[link: https://github.com/nushell/nushell/pull/7186] Error on negative argument of 
+``first``
+, and 
+[link: https://github.com/nushell/nushell/pull/7184] Error on negative argument to 
+``last``
+webbedspace 
+[link: https://github.com/nushell/nushell/pull/7213] fixed 
+``fetch``
+/
+``post``
+ not erroring on 4xx and 5xx statuses
+, and 
+[link: https://github.com/nushell/nushell/pull/7199] Fix 
+``sort-by``
+, 
+``path join``
+ and 
+``size``
+ error arrows
+, and 
+[link: https://github.com/nushell/nushell/pull/7198] Change all 
+``--insensitive``
+ flags to 
+``--ignore-case``
+, and 
+[link: https://github.com/nushell/nushell/pull/7197] Fix 
+``mv``
+ error message issues (arrows, Windows paths)
+, and 
+[link: https://github.com/nushell/nushell/pull/7194] Fix 
+``glob``
+ error arrows
+, and 
+[link: https://github.com/nushell/nushell/pull/7179] Remove erroneous test introduced in #6994
+, and 
+[link: https://github.com/nushell/nushell/pull/7176] Rename dataframe 
+``describe``
+ to 
+``summary``
+ so that the normal 
+``describe``
+ isn't overloaded
+, and 
+[link: https://github.com/nushell/nushell/pull/7170] Bugfix: add table_index_mode check that was missing from #6983
+, and 
+[link: https://github.com/nushell/nushell/pull/7165] Edit 
+``rm``
+ help messages
+, and 
+[link: https://github.com/nushell/nushell/pull/7164] Improve CantFindColumn and ColumnAlreadyExists errors
+, and 
+[link: https://github.com/nushell/nushell/pull/7056] Fix needs_quotes() in 
+``to nuon``
+ (closes #6989)
+, and 
+[link: https://github.com/nushell/nushell/pull/6994] Allow iteration blocks to have an optional extra index parameter (alternative to 
+``-n``
+ flags)
+, and 
+[link: https://github.com/nushell/nushell/pull/6983] Grouped config commands better (closes #6911)
+michel-slm 
+[link: https://github.com/nushell/nushell/pull/7212] added binstall metadata
+raccmonteiro fixed 
+[link: https://github.com/nushell/nushell/pull/7209] ``uniq -i``
+ does not convert to lowercase (#7192)
+, and 
+[link: https://github.com/nushell/nushell/pull/7188] ``uniq``
+ code refactoring
+, and 
+[link: https://github.com/nushell/nushell/pull/7124] new command 
+``url parse``
+ (#6854) and 
+``url``
+ subcommands tests
+kamirr 
+[link: https://github.com/nushell/nushell/pull/7195] fixed while ctrlc behavior
+, and 
+[link: https://github.com/nushell/nushell/pull/7178] Fix 
+``last``
+ memory use
+nibon7 
+[link: https://github.com/nushell/nushell/pull/7193] applied a clippy fix
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/7177] removde block input support from merge
+, and 
+[link: https://github.com/nushell/nushell/pull/7163] Plugin: make friendly error message when python is not found
+, and 
+[link: https://github.com/nushell/nushell/pull/7156] Make external command substitution works friendly(like fish shell, trailing ending newlines)
+, and 
+[link: https://github.com/nushell/nushell/pull/7079] add signature information when get help on one command
+nanoqsh 
+[link: https://github.com/nushell/nushell/pull/7175] fixed JSON parsing
+SUPERCILEX 
+[link: https://github.com/nushell/nushell/pull/7122] restored original do -i behavior and add flags to break down shell vs program errors
+Decodetalkers created 
+[link: https://github.com/nushell/nushell/pull/7082] feat: Use Raw text to save if pipeline data is ExternalStream or String
+Kixunil 
+[link: https://github.com/nushell/nushell/pull/7010] made JSON require string and pass around metadata
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-11-25-twin0170.mdŸ@aa55ab9be40aacce712cca986740d28ad7ef55e3001f6b2dd40740af9a08bf41πThis week in Nushell #170ë≠Documentation⁄’WindSoilder 
+[link: https://github.com/nushell/nushell.github.io/pull/681] removed the 
+``Subexpressions with external commands``
+ section
+dmatos2012 
+[link: https://github.com/nushell/nushell.github.io/pull/680] expanded the docs on using use with export-env
+webbedspace added 
+[link: https://github.com/nushell/nushell.github.io/pull/678] Release Notes: add note about 
+``--ignore-case``
+raccmonteiro 
+[link: https://github.com/nushell/nushell.github.io/pull/677] documented the 
+``url parse``
+ command
+casidiablo 
+[link: https://github.com/nushell/nushell.github.io/pull/676] fixed a typo in advanced.md page
+remlse 
+[link: https://github.com/nushell/nushell.github.io/pull/674] fixed the variable path expression example
+íêê⁄Title: This week in Nushell #170
+Path: Documentation
+Content:
+WindSoilder 
+[link: https://github.com/nushell/nushell.github.io/pull/681] removed the 
+``Subexpressions with external commands``
+ section
+dmatos2012 
+[link: https://github.com/nushell/nushell.github.io/pull/680] expanded the docs on using use with export-env
+webbedspace added 
+[link: https://github.com/nushell/nushell.github.io/pull/678] Release Notes: add note about 
+``--ignore-case``
+raccmonteiro 
+[link: https://github.com/nushell/nushell.github.io/pull/677] documented the 
+``url parse``
+ command
+casidiablo 
+[link: https://github.com/nushell/nushell.github.io/pull/676] fixed a typo in advanced.md page
+remlse 
+[link: https://github.com/nushell/nushell.github.io/pull/674] fixed the variable path expression example
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-11-25-twin0170.mdŸ@c6be951e6283417112ea86a6bd79f6ac9e3a8c0a8cfaa18b2edba2c588f0e733πThis week in Nushell #170ë™Nu_ScriptsŸ∑Joxtacy 
+[link: https://github.com/nushell/nu_scripts/pull/317] added zellij completions
+Emilgardis 
+[link: https://github.com/nushell/nu_scripts/pull/316] improved Cargo completions
+íêêŸÚTitle: This week in Nushell #170
+Path: Nu_Scripts
+Content:
+Joxtacy 
+[link: https://github.com/nushell/nu_scripts/pull/317] added zellij completions
+Emilgardis 
+[link: https://github.com/nushell/nu_scripts/pull/316] improved Cargo completions
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-11-25-twin0170.mdŸ@75e58f5b25657807a374f4716b10e22a373bdf6f05683cdfdd124de2a2623716πThis week in Nushell #170ë®reedlineŸdrgwood created 
+[link: https://github.com/nushell/reedline/pull/517] Fix example in CONTRIBUTING.md
+íêêŸùTitle: This week in Nushell #170
+Path: reedline
+Content:
+rgwood created 
+[link: https://github.com/nushell/reedline/pull/517] Fix example in CONTRIBUTING.md

@@ -1,0 +1,64 @@
+���@81cdd43da930f20203d87b0b5d1067bb31cea6e448f194ac17be00456e7aa432�tTitle: title: str distance
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str distance``
+[link: /commands/categories/strings.md] ��@52a78f70dda117356048898e125f4d3340d2b91842a4f1fe6c8541c8928d22e5�hTitle: title: str distance
+Path: Signature
+Content:
+``> str distance {flags} (compare-string) ...rest``
+��@80701f899ebb5213409a2a16a0848b43213411e4a4fea61571d0f8e499d3f5be��Title: title: str distance
+Path: Parameters
+Content:
+``compare-string``
+: The first string to compare.
+``...rest``
+: For a data structure input, check strings at the given cell paths, and replace with result.
+��@36e4997120f0600f889d52e1d6c93bf18bcfb28a3ed93672e1c154a254164061�pTitle: title: str distance
+Path: Input/output types:
+Content:
+input
+output
+string
+int
+table
+table
+record
+record
+��@0fde7033b37b94a2671f2807ce5e26b7295452821962f6b71aaa612a36b29843�	Title: title: str distance
+Path: Examples
+Content:
+Get the edit distance between two strings.
+```Fenced(Borrowed("nu"))
+> 'nushell' | str distance 'nutshell'
+1
+
+```
+Compute edit distance between strings in table and another string, using cell paths.
+```Fenced(Borrowed("nu"))
+> [{a: 'nutshell' b: 'numetal'}] | str distance 'nushell' 'a' 'b'
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 4 │
+╰───┴───┴───╯
+
+
+```
+Compute edit distance between strings in record and another string, using cell paths.
+```Fenced(Borrowed("nu"))
+> {a: 'nutshell' b: 'numetal'} | str distance 'nushell' a b
+╭───┬───╮
+│ a │ 1 │
+│ b │ 4 │
+╰───┴───╯
+
+```

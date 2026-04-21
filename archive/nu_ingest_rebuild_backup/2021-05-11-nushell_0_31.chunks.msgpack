@@ -1,0 +1,212 @@
+™—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@269feffe152baab4ef5578644bee134d984307233dd41238dd25b159597ebbf6³title: Nushell 0.31‘¬Nushell 0.31Úy
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.31 of Nu. This release includes continued polish of the engine and commands.
+’Ú°Title: title: Nushell 0.31
+Path: Nushell 0.31
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.31 of Nu. This release includes continued polish of the engine and commands.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@08c43ca95237a2bac61aef1670c20cd0a8533e96246afab3286653d78ebe25bf³title: Nushell 0.31‘¯Where to get itÚiNu 0.31 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.31.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+If you'd like to try the experimental paging feature in this release, you can install with 
+``cargo install nu --features=table-pager``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+’Ú£Title: title: Nushell 0.31
+Path: Where to get it
+Content:
+Nu 0.31 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.31.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+If you'd like to try the experimental paging feature in this release, you can install with 
+``cargo install nu --features=table-pager``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@00dfa6f69ea3c6704b7b887bcdd6cf352c49f66883f2a7f42e8a6caa7c6496e7³title: Nushell 0.31‘ªWhat's NewÙãThis release is largely around polish. We've continued to improve Nushell's engine to work in the more streamlined style, improved the performance of commands like 
+``ps``
+ and the appearance of commands like 
+``binaryview``
+.
+’ÚTitle: title: Nushell 0.31
+Path: What's New
+Content:
+This release is largely around polish. We've continued to improve Nushell's engine to work in the more streamlined style, improved the performance of commands like 
+``ps``
+ and the appearance of commands like 
+``binaryview``
+.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@d1f14f8577d231898cf908566c861614b01703877b1fa12f3b2f6277cc9d3cbb³title: Nushell 0.31‘¶New commands (fdncred)ÙÉ[link: https://github.com/nushell/nushell/issues/3403] ``into string``
+ to convert values to strings
+[link: https://github.com/nushell/nushell/issues/3370] ``into binary``
+ to convert values to binary
+’Ú
+Title: title: Nushell 0.31
+Path: New commands (fdncred)
+Content:
+[link: https://github.com/nushell/nushell/issues/3403] ``into string``
+ to convert values to strings
+[link: https://github.com/nushell/nushell/issues/3370] ``into binary``
+ to convert values to binary
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@9504df6e71ebc1f50816bfee69acdb4c2b9a4d3f4503fec4dc0385cddd968f0e³title: Nushell 0.31‘§NushellÚ¤natemara fixed 
+[link: https://github.com/nushell/nushell/pull/3407] a slowness in the 
+``ps``
+ command
+elferherrera, kubouch, stormasm, LhKipp ported commands to the new engine-p style
+fdncred improved 
+[link: https://github.com/nushell/nushell/issues/3370] binaryview
+, 
+[link: https://github.com/nushell/nushell/issues/3375] added check for endian-ness, added a bytes and skip
+, 
+[link: https://github.com/nushell/nushell/issues/3374] added ability to change "#" color using header_color
+, 
+[link: https://github.com/nushell/nushell/issues/3367] tweaked the error handling to show specific errors
+, 
+[link: https://github.com/nushell/nushell/issues/3366] updated to a quicker Levenshtein implementation
+, and 
+[link: https://github.com/nushell/nushell/issues/3351] allowed start to handle urls
+kubouch 
+[link: https://github.com/nushell/nushell/issues/3359] fixed table-pager feature compilation
+Azgrom created a 
+[link: https://github.com/nushell/nushell/issues/3388] features cargo installer wrapper
+jgoday added 
+[link: https://github.com/nushell/nushell/issues/3387] ignore-case and duplicated options to 
+``uniq``
+ command 
+, and fixed a 
+[link: https://github.com/nushell/nushell/issues/3354] reduce --numbered bug
+ammkrn fixed a panic in the 
+[link: https://github.com/nushell/nushell/issues/3382] rustyline helper
+Sciencentistguy fixed an 
+[link: https://github.com/nushell/nushell/issues/3358] array index out of bounds error in nu_protocol::value::levenshtein_distance()
+ccde177b5fb9b8c55078417b4c9fee removed 
+[link: https://github.com/nushell/nushell/issues/3349] ichwh
+LhKipp fixed an issue 
+[link: https://github.com/nushell/nushell/issues/3344] in nu-env if 
+``cd``
+ with shortcuts
+’ÚÖTitle: title: Nushell 0.31
+Path: Nushell
+Content:
+natemara fixed 
+[link: https://github.com/nushell/nushell/pull/3407] a slowness in the 
+``ps``
+ command
+elferherrera, kubouch, stormasm, LhKipp ported commands to the new engine-p style
+fdncred improved 
+[link: https://github.com/nushell/nushell/issues/3370] binaryview
+, 
+[link: https://github.com/nushell/nushell/issues/3375] added check for endian-ness, added a bytes and skip
+, 
+[link: https://github.com/nushell/nushell/issues/3374] added ability to change "#" color using header_color
+, 
+[link: https://github.com/nushell/nushell/issues/3367] tweaked the error handling to show specific errors
+, 
+[link: https://github.com/nushell/nushell/issues/3366] updated to a quicker Levenshtein implementation
+, and 
+[link: https://github.com/nushell/nushell/issues/3351] allowed start to handle urls
+kubouch 
+[link: https://github.com/nushell/nushell/issues/3359] fixed table-pager feature compilation
+Azgrom created a 
+[link: https://github.com/nushell/nushell/issues/3388] features cargo installer wrapper
+jgoday added 
+[link: https://github.com/nushell/nushell/issues/3387] ignore-case and duplicated options to 
+``uniq``
+ command 
+, and fixed a 
+[link: https://github.com/nushell/nushell/issues/3354] reduce --numbered bug
+ammkrn fixed a panic in the 
+[link: https://github.com/nushell/nushell/issues/3382] rustyline helper
+Sciencentistguy fixed an 
+[link: https://github.com/nushell/nushell/issues/3358] array index out of bounds error in nu_protocol::value::levenshtein_distance()
+ccde177b5fb9b8c55078417b4c9fee removed 
+[link: https://github.com/nushell/nushell/issues/3349] ichwh
+LhKipp fixed an issue 
+[link: https://github.com/nushell/nushell/issues/3344] in nu-env if 
+``cd``
+ with shortcuts
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@27e278cca82dc0664866f9940915b0de3d823ed52e1b9f27a31bfbb511bf3562³title: Nushell 0.31‘©ExtensionÙqfdncred fixed 
+[link: https://github.com/nushell/vscode-nushell-lang/issues/32] a bug in the syntax highlighting
+’Ù¥Title: title: Nushell 0.31
+Path: Extension
+Content:
+fdncred fixed 
+[link: https://github.com/nushell/vscode-nushell-lang/issues/32] a bug in the syntax highlighting
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@6c0c916131455e3bb92a1f5f34ef92ffcb7d6bbe1690769c0ad8a7c0a656de6b³title: Nushell 0.31‘­DocumentationÚ3nalpine fixed 
+[link: https://github.com/nushell/nushell.github.io/issues/126] dead links
+ChristopherBiscardi updated 
+[link: https://github.com/nushell/nushell.github.io/issues/125] starship prompt integration
+ammkrn updated 
+[link: https://github.com/nushell/nushell.github.io/issues/123] ls -f -> ls -la
+’ÚkTitle: title: Nushell 0.31
+Path: Documentation
+Content:
+nalpine fixed 
+[link: https://github.com/nushell/nushell.github.io/issues/126] dead links
+ChristopherBiscardi updated 
+[link: https://github.com/nushell/nushell.github.io/issues/125] starship prompt integration
+ammkrn updated 
+[link: https://github.com/nushell/nushell.github.io/issues/123] ls -f -> ls -la
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@e7aec7f3886cf5f5bab5eeeae8960bbfd60bc57a2bcc4720d411242e4155a822³title: Nushell 0.31‘ªNu ScriptsÚşfdncred created 
+[link: https://github.com/nushell/nu_scripts/issues/48] table grouping experiment, update twin to support single user per row
+, 
+[link: https://github.com/nushell/nu_scripts/issues/46] twin weeknum guess
+, and a 
+[link: https://github.com/nushell/nu_scripts/issues/44] prototype of TWiN automation script
+efx added 
+[link: https://github.com/nushell/nu_scripts/issues/47] a one liner to parse aws s3 ls output
+sophiajt fixed 
+[link: https://github.com/nushell/nu_scripts/issues/45] TWiN range
+’Ú3Title: title: Nushell 0.31
+Path: Nu Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/issues/48] table grouping experiment, update twin to support single user per row
+, 
+[link: https://github.com/nushell/nu_scripts/issues/46] twin weeknum guess
+, and a 
+[link: https://github.com/nushell/nu_scripts/issues/44] prototype of TWiN automation script
+efx added 
+[link: https://github.com/nushell/nu_scripts/issues/47] a one liner to parse aws s3 ls output
+sophiajt fixed 
+[link: https://github.com/nushell/nu_scripts/issues/45] TWiN range
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-11-nushell_0_31.mdÙ@06e95c1014fdca9c4f1d9c8ce7bd7bdecb0177f4d4a379701480a21bcbd019f0³title: Nushell 0.31‘­Looking aheadÚComing soon after the 0.31 release, we'll be landing 
+[link: https://github.com/nushell/nushell/pull/3389] some improvements
+ to Nushell's syntax. These fixes will be breaking changes, but they're for a good reason. The simplification of the syntax will make Nushell both more consistent and more approachable for new users and experienced users alike.
+We're also continuing to improve the command implementations. If you'd like to help, you can join in by 
+[link: https://github.com/nushell/nushell/issues/3390] signing up here
+.
+’ÚKTitle: title: Nushell 0.31
+Path: Looking ahead
+Content:
+Coming soon after the 0.31 release, we'll be landing 
+[link: https://github.com/nushell/nushell/pull/3389] some improvements
+ to Nushell's syntax. These fixes will be breaking changes, but they're for a good reason. The simplification of the syntax will make Nushell both more consistent and more approachable for new users and experienced users alike.
+We're also continuing to improve the command implementations. If you'd like to help, you can join in by 
+[link: https://github.com/nushell/nushell/issues/3390] signing up here
+.

@@ -1,0 +1,141 @@
+‘’Ù@a0a5857e04ff65ff1ab3f3326d4537068da363b8dff886d4a8bf919a2090bf9aÚ›Title: Nu Map from Functional Languages
+Path: Nu Map from Functional Languages
+Content:
+The idea behind this table is to help you understand how Nu builtins and plugins relate to functional languages. We've tried to produce a map of relevant Nu commands and what their equivalents are in other languages. Contributions are welcome.
+Note: this table assumes Nu 0.43 or later.
+Nushell
+Clojure
+Tablecloth (Ocaml / Elm)
+Haskell
+[link: ../commands/docs/append.md] append
+conj, into, concat
+append, (++), concat, concatMap
+(++)
+[link: ../commands/docs/into_binary.md] into binary
+Integer/toHexString
+showHex
+[link: ../commands/docs/length.md] length
+count
+length, size
+length, size
+[link: ../commands/docs/date.md] date
+java.time.LocalDate/now
+[link: ../commands/docs/each.md] each
+map, mapv, iterate
+map, forEach
+map, mapM
+[link: ../commands/docs/each.md] exit
+System/exit
+[link: ../commands/docs/first.md] first
+first
+head
+head
+[link: ../commands/docs/format.md] format
+format
+Text.Printf.printf
+[link: ../commands/docs/group-by.md] group-by
+group-by
+group, groupBy
+[link: ../cookbook/help.md] help
+doc
+[link: ../commands/docs/is-empty.md] is-empty
+empty?
+isEmpty
+[link: ../commands/docs/last.md] last
+last, peek, take-last
+last
+last
+[link: ../commands/docs/lines.md] lines
+lines, words, split-with
+[link: ../commands/docs/match.md] match
+match (Ocaml), case (Elm)
+case
+[link: ../commands/docs/select.md] select
+nth
+Array.get
+lookup
+[link: ../commands/docs/open.md] open
+with-open
+[link: ../commands/docs/transpose.md] transpose
+(apply mapv vector matrix)
+transpose
+[link: ../commands/docs/prepend.md] prepend
+cons
+cons, ::
+::
+[link: ../commands/docs/print.md] print
+println
+putStrLn, print
+[link: ../commands/docs/slice.md] slice
+, 1..10
+range
+range
+1..10, 'a'..'f'
+[link: ../commands/docs/reduce.md] reduce
+reduce, reduce-kv
+foldr
+foldr
+[link: ../commands/docs/reverse.md] reverse
+reverse, rseq
+reverse, reverseInPlace
+reverse
+[link: ../commands/docs/select.md] select
+select-keys
+[link: ../commands/docs/shuffle.md] shuffle
+shuffle
+[link: ../commands/docs/length.md] length
+count
+size, length
+[link: ../commands/docs/skip.md] skip
+rest
+tail
+tail
+[link: ../commands/docs/skip_until.md] skip until
+drop-while
+[link: ../commands/docs/skip_while.md] skip while
+drop-while
+dropWhile
+dropWhile, dropWhileEnd
+[link: ../commands/docs/sort-by.md] sort-by
+sort, sort-by, sorted-set-by
+sort, sortBy, sortWith
+sort, sortBy
+[link: ../commands/docs/split_row.md] split row
+split, split-{at,with,lines}
+split, words, lines
+split, words, lines
+[link: ../commands/docs/str.md] str
+clojure.string functions
+String functions
+[link: ../commands/docs/str_join.md] str join
+join
+concat
+intercalate
+[link: ../commands/docs/str_trim.md] str trim
+trim, triml, trimr
+trim, trimLeft, trimRight
+strip
+[link: ../commands/docs/math_sum.md] math sum
+apply +
+sum
+sum
+[link: ../commands/docs/take.md] take
+take, drop-last, pop
+take, init
+take, init
+[link: ../commands/docs/take_until.md] take until
+take-while
+takeWhile
+takeWhile
+[link: ../commands/docs/take_while.md] take while
+take-while
+takeWhile
+takeWhile
+[link: ../commands/docs/uniq.md] uniq
+set
+Set.empty
+Data.Set
+[link: ../commands/docs/where.md] where
+filter, filterv, select
+filter, filterMap
+filter

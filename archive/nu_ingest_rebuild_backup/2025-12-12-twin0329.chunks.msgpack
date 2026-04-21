@@ -1,0 +1,137 @@
+óóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-12-twin0329.mdŸ@0afe08a4c6d40d9596cf52582c531d428ba43a0e76fb7a05444b5fda3313c725Ÿ"title: 'This week in Nushell #329'ëπThis Week in Nushell #329Ÿj
+
+
+
+Published Saturday, 2025-12-13, including PRs merged Friday, 2025-12-05 through Thursday, 2025-12-11.
+íêêŸΩTitle: title: 'This week in Nushell #329'
+Path: This Week in Nushell #329
+Content:
+
+
+
+
+Published Saturday, 2025-12-13, including PRs merged Friday, 2025-12-05 through Thursday, 2025-12-11.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-12-twin0329.mdŸ@b805a43b4058fc6291798ce1628af5e9ebf277bb1e03502c5b657f7b0cff4209Ÿ"title: 'This week in Nushell #329'ëßNushell⁄œ@fdncred:
+[link: https://github.com/nushell/nushell/pull/17149] updated explore regex command to look more helpful and professional (#17149)
+[link: https://github.com/nushell/nushell/pull/17133] bumped the rust-toolchain to 1.90.0 (#17133)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/17139] bumped bytesize from 2.1.0 to 2.3.1 (#17139)
+@andrewgazelka:
+[link: https://github.com/nushell/nushell/pull/17132] added $history variable and structured response format (#17132)
+[link: https://github.com/nushell/nushell/pull/17121] added REPL-style state persistence across evaluations (#17121)
+[link: https://github.com/nushell/nushell/pull/17120] refactored mcp to extract tool descriptions to markdown files (#17120)
+[link: https://github.com/nushell/nushell/pull/17119] switched mcp to output NUON format instead of expanded string (#17119)
+@hustcer:
+[link: https://github.com/nushell/nushell/pull/17131] upgraded nushell to 0.109.1 for release and nightly workflow (#17131)
+[link: https://github.com/nushell/nushell/pull/17126] fixed 
+``table -i false``
+ panic when there is an index column (#17126)
+[link: https://github.com/nushell/nushell/pull/17125] fixed http DNS resolution 'Service not supported' error in Docker containers (#17125)
+@WindSoilder:
+[link: https://github.com/nushell/nushell/pull/17130] prevented merge_predecl from moving all predecls to overlay (#17130)
+[link: https://github.com/nushell/nushell/pull/17103] made --env-config and --config errors lead to error status code when running nu scripts (#17103)
+[link: https://github.com/nushell/nushell/pull/17052] fixed pipefail behavior inside try block (#17052)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell/pull/17129] changed home-path/temp-path to home-dir/temp-dir (#17129)
+[link: https://github.com/nushell/nushell/pull/17127] added record conversion to 
+``into list``
+ (#17127)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/17116] added Azure blob storage support for polars (#17116)
+@KaiSforza:
+[link: https://github.com/nushell/nushell/pull/17084] updated flake.lock and added 
+``latest``
+ devshell variant (#17084)
+@sgvictorino:
+[link: https://github.com/nushell/nushell/pull/17058] used 
+``Stack::get_config()``
+ in more places (#17058)
+íêê⁄	Title: title: 'This week in Nushell #329'
+Path: Nushell
+Content:
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/17149] updated explore regex command to look more helpful and professional (#17149)
+[link: https://github.com/nushell/nushell/pull/17133] bumped the rust-toolchain to 1.90.0 (#17133)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/17139] bumped bytesize from 2.1.0 to 2.3.1 (#17139)
+@andrewgazelka:
+[link: https://github.com/nushell/nushell/pull/17132] added $history variable and structured response format (#17132)
+[link: https://github.com/nushell/nushell/pull/17121] added REPL-style state persistence across evaluations (#17121)
+[link: https://github.com/nushell/nushell/pull/17120] refactored mcp to extract tool descriptions to markdown files (#17120)
+[link: https://github.com/nushell/nushell/pull/17119] switched mcp to output NUON format instead of expanded string (#17119)
+@hustcer:
+[link: https://github.com/nushell/nushell/pull/17131] upgraded nushell to 0.109.1 for release and nightly workflow (#17131)
+[link: https://github.com/nushell/nushell/pull/17126] fixed 
+``table -i false``
+ panic when there is an index column (#17126)
+[link: https://github.com/nushell/nushell/pull/17125] fixed http DNS resolution 'Service not supported' error in Docker containers (#17125)
+@WindSoilder:
+[link: https://github.com/nushell/nushell/pull/17130] prevented merge_predecl from moving all predecls to overlay (#17130)
+[link: https://github.com/nushell/nushell/pull/17103] made --env-config and --config errors lead to error status code when running nu scripts (#17103)
+[link: https://github.com/nushell/nushell/pull/17052] fixed pipefail behavior inside try block (#17052)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell/pull/17129] changed home-path/temp-path to home-dir/temp-dir (#17129)
+[link: https://github.com/nushell/nushell/pull/17127] added record conversion to 
+``into list``
+ (#17127)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/17116] added Azure blob storage support for polars (#17116)
+@KaiSforza:
+[link: https://github.com/nushell/nushell/pull/17084] updated flake.lock and added 
+``latest``
+ devshell variant (#17084)
+@sgvictorino:
+[link: https://github.com/nushell/nushell/pull/17058] used 
+``Stack::get_config()``
+ in more places (#17058)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-12-twin0329.mdŸ@1472a38a8205eee389a89538ce37b5684aced53068ecf911c79dda867917f02aŸ"title: 'This week in Nushell #329'ë™Nu_Scripts⁄›@Minhir:
+[link: https://github.com/nushell/nu_scripts/pull/1192] simplified fnm config and made it respect package.json (#1192)
+@fdncred:
+[link: https://github.com/nushell/nu_scripts/pull/1191] tweaked a variety of scripts (#1191)
+@CAESIUS-TIM:
+[link: https://github.com/nushell/nu_scripts/pull/1190] fixed grt in git-aliases (#1190)
+@ehdevries:
+[link: https://github.com/nushell/nu_scripts/pull/1188] fixed bugs in panache-git showing modified files and non-home dirs (#1188)
+íêê⁄!Title: title: 'This week in Nushell #329'
+Path: Nu_Scripts
+Content:
+@Minhir:
+[link: https://github.com/nushell/nu_scripts/pull/1192] simplified fnm config and made it respect package.json (#1192)
+@fdncred:
+[link: https://github.com/nushell/nu_scripts/pull/1191] tweaked a variety of scripts (#1191)
+@CAESIUS-TIM:
+[link: https://github.com/nushell/nu_scripts/pull/1190] fixed grt in git-aliases (#1190)
+@ehdevries:
+[link: https://github.com/nushell/nu_scripts/pull/1188] fixed bugs in panache-git showing modified files and non-home dirs (#1188)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-12-twin0329.mdŸ@54dff7c4e2fd7d64ec70349eb42a74d4418b0eb11c7f9cb3974f07c1a0c8d411Ÿ"title: 'This week in Nushell #329'ë≠New nu-parserŸj@AucaCoyan:
+[link: https://github.com/nushell/new-nu-parser/pull/61] updated rust-toolchain to 1.90 (#61)
+íêêŸ±Title: title: 'This week in Nushell #329'
+Path: New nu-parser
+Content:
+@AucaCoyan:
+[link: https://github.com/nushell/new-nu-parser/pull/61] updated rust-toolchain to 1.90 (#61)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-12-twin0329.mdŸ@30005becc36d68476acbf64265d650ec9da98a0b4c61797705f214b9eb4b71d8Ÿ"title: 'This week in Nushell #329'ë™Awesome NuŸi@InnocentZero:
+[link: https://github.com/nushell/awesome-nu/pull/141] added supac to Integrations (#141)
+íêêŸ≠Title: title: 'This week in Nushell #329'
+Path: Awesome Nu
+Content:
+@InnocentZero:
+[link: https://github.com/nushell/awesome-nu/pull/141] added supac to Integrations (#141)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-12-twin0329.mdŸ@06ceebfbac32e6aed60d6c244aaddc358cc9ba201b43ed9e5005df291af9371aŸ"title: 'This week in Nushell #329'ë≠DocumentationŸÛ@luk3953:
+[link: https://github.com/nushell/nushell.github.io/pull/2091] added 'Coming from PowerShell' guide to the Nushell Book (#2091)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/2090] published TWiN 328 (#2090)
+íêê⁄:Title: title: 'This week in Nushell #329'
+Path: Documentation
+Content:
+@luk3953:
+[link: https://github.com/nushell/nushell.github.io/pull/2091] added 'Coming from PowerShell' guide to the Nushell Book (#2091)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/2090] published TWiN 328 (#2090)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-12-twin0329.mdŸ@c6b17d50dbbca9b634bce7c3a07485e2fad8212f725bc4ca5200c0d0527e7315Ÿ"title: 'This week in Nushell #329'ë´Tree-sitterŸr@mkatychev:
+[link: https://github.com/nushell/tree-sitter-nu/pull/236] removed indirection for punctuation (#236)
+íêêŸ∑Title: title: 'This week in Nushell #329'
+Path: Tree-sitter
+Content:
+@mkatychev:
+[link: https://github.com/nushell/tree-sitter-nu/pull/236] removed indirection for punctuation (#236)

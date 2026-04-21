@@ -1,0 +1,154 @@
+ñóŸNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_xml.mdŸ@9228d78f7e8eb9c504b4d83a37d88c1ad4a50dca928c66fbe231ad344f639e11≠title: to xmlëßformatsŸ<
+
+
+
+
+
+
+
+
+``to xml``
+[link: /commands/categories/formats.md] íêêŸhTitle: title: to xml
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to xml``
+[link: /commands/categories/formats.md] óŸNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_xml.mdŸ@c247ada5973eaab64320b59ad19b3785ba7136409b90558300d478e76ccc5017≠title: to xmlë©Signature∂``> to xml {flags} ``
+íêêŸDTitle: title: to xml
+Path: Signature
+Content:
+``> to xml {flags} ``
+óŸNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_xml.mdŸ@4615a228f4381f0b2a7a64f304e29240d81ade1905295759a5194ff6893956b6≠title: to xmlë•FlagsŸ‰``--indent, -i {int}``
+: Formats the XML text with the provided indentation setting.
+``--partial-escape, -p``
+: Only escape mandatory characters in text and attributes.
+``--self-closed, -s``
+: Output empty tags as self closing.
+íêê⁄Title: title: to xml
+Path: Flags
+Content:
+``--indent, -i {int}``
+: Formats the XML text with the provided indentation setting.
+``--partial-escape, -p``
+: Only escape mandatory characters in text and attributes.
+``--self-closed, -s``
+: Output empty tags as self closing.
+óŸNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_xml.mdŸ@e70f6e17f9dccef9618e43be833ab1a068075d85dead3f7f2176ce8daec6c55e≠title: to xmlë≥Input/output types:ªinput
+output
+record
+string
+íêêŸSTitle: title: to xml
+Path: Input/output types:
+Content:
+input
+output
+record
+string
+óŸNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_xml.mdŸ@3ed6b801afc9ce8e3fa37dfa74c7ddc5c82b9bce226d8cbff2ce881a3e6d4357≠title: to xmlë®Examples⁄MOutputs an XML string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> {tag: note attributes: {} content : [{tag: remember attributes: {} content : [{tag: null attributes: null content : Event}]}]} | to xml
+<note><remember>Event</remember></note>
+
+```
+When formatting xml null and empty record fields can be omitted and strings can be written without a wrapping record.
+```Fenced(Borrowed("nu"))
+> {tag: note content : [{tag: remember content : [Event]}]} | to xml
+<note><remember>Event</remember></note>
+
+```
+Optionally, formats the text with a custom indentation setting.
+```Fenced(Borrowed("nu"))
+> {tag: note content : [{tag: remember content : [Event]}]} | to xml --indent 3
+<note>
+   <remember>Event</remember>
+</note>
+
+```
+Produce less escaping sequences in resulting xml.
+```Fenced(Borrowed("nu"))
+> {tag: note attributes: {a: "'qwe'\\"} content: ["\"'"]} | to xml --partial-escape
+<note a="'qwe'\">"'</note>
+
+```
+Save space using self-closed tags.
+```Fenced(Borrowed("nu"))
+> {tag: root content: [[tag]; [a] [b] [c]]} | to xml --self-closed
+<root><a/><b/><c/></root>
+
+```
+íêê⁄zTitle: title: to xml
+Path: Examples
+Content:
+Outputs an XML string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> {tag: note attributes: {} content : [{tag: remember attributes: {} content : [{tag: null attributes: null content : Event}]}]} | to xml
+<note><remember>Event</remember></note>
+
+```
+When formatting xml null and empty record fields can be omitted and strings can be written without a wrapping record.
+```Fenced(Borrowed("nu"))
+> {tag: note content : [{tag: remember content : [Event]}]} | to xml
+<note><remember>Event</remember></note>
+
+```
+Optionally, formats the text with a custom indentation setting.
+```Fenced(Borrowed("nu"))
+> {tag: note content : [{tag: remember content : [Event]}]} | to xml --indent 3
+<note>
+   <remember>Event</remember>
+</note>
+
+```
+Produce less escaping sequences in resulting xml.
+```Fenced(Borrowed("nu"))
+> {tag: note attributes: {a: "'qwe'\\"} content: ["\"'"]} | to xml --partial-escape
+<note a="'qwe'\">"'</note>
+
+```
+Save space using self-closed tags.
+```Fenced(Borrowed("nu"))
+> {tag: root content: [[tag]; [a] [b] [c]]} | to xml --self-closed
+<root><a/><b/><c/></root>
+
+```
+óŸNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_xml.mdŸ@6335231d4d9929837bfb889d361c0bab12b60e6078f57f5ca96b62a5577796d9≠title: to xmlë•Notes⁄ÇEvery XML entry is represented via a record with tag, attribute and content fields.
+
+To represent different types of entries different values must be written to this fields:
+Tag entry: 
+``{tag: <tag name> attributes: {<attr name>: "<string value>" ...} content: [<entries>]}``
+Comment entry: 
+``{tag: '!' attributes: null content: "<comment string>"}``
+Processing instruction (PI): 
+``{tag: '?<pi name>' attributes: null content: "<pi content string>"}``
+Text: 
+``{tag: null attributes: null content: "<text>"}``
+. Or as plain 
+``<text>``
+ instead of record.
+Additionally any field which is: empty record, empty list or null, can be omitted.
+íêê⁄¨Title: title: to xml
+Path: Notes
+Content:
+Every XML entry is represented via a record with tag, attribute and content fields.
+
+To represent different types of entries different values must be written to this fields:
+Tag entry: 
+``{tag: <tag name> attributes: {<attr name>: "<string value>" ...} content: [<entries>]}``
+Comment entry: 
+``{tag: '!' attributes: null content: "<comment string>"}``
+Processing instruction (PI): 
+``{tag: '?<pi name>' attributes: null content: "<pi content string>"}``
+Text: 
+``{tag: null attributes: null content: "<text>"}``
+. Or as plain 
+``<text>``
+ instead of record.
+Additionally any field which is: empty record, empty list or null, can be omitted.

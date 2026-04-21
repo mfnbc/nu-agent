@@ -1,0 +1,52 @@
+���@65658fbaeae9d2cd1c74dbba61efff533ee9055e620b9a109f849a68e88a3e39�nTitle: title: math product
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math product``
+[link: /commands/categories/math.md] ��@c05ace609510512592872619ecdd735f471050ba7c6d56262c286d7e8759253e�PTitle: title: math product
+Path: Signature
+Content:
+``> math product {flags} ``
+��@6010179cfddf0df38c7aae24e66241fe6f868406510db122e38cfb7df4b69e5bًTitle: title: math product
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+number
+>
+
+number
+range
+number
+table
+record
+record
+record
+��@c5f00d633860771aa3d13c142db4b2e5f61932f082e6236c670406e2fce77cb2�fTitle: title: math product
+Path: Examples
+Content:
+Compute the product of a list of numbers.
+```Fenced(Borrowed("nu"))
+> [2 3 3 4] | math product
+72
+
+```
+Compute the product of each column in a table.
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | math product
+╭───┬───╮
+│ a │ 3 │
+│ b │ 8 │
+╰───┴───╯
+
+```

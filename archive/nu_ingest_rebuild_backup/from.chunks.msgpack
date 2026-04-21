@@ -1,0 +1,173 @@
+ïóŸLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from.mdŸ@d577564c3d98ad7c28f25dd75f987917a3219efe7fbb0b97e0cd3825ba783f46´title: fromëßformatsŸ:
+
+
+
+
+
+
+
+
+``from``
+[link: /commands/categories/formats.md] íêêŸdTitle: title: from
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``from``
+[link: /commands/categories/formats.md] óŸLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from.mdŸ@6731b152dac302cedb5c8978b30ebccb6f81f97c549c0ff7944e1c09c55a02ea´title: fromë©Signature¥``> from {flags} ``
+íêêŸ@Title: title: from
+Path: Signature
+Content:
+``> from {flags} ``
+óŸLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from.mdŸ@44b008c6ecfc2a07f9c4796b5d95a6012fb48d52f16f67739f4c344d07a0a221´title: fromë≥Input/output types:ºinput
+output
+nothing
+string
+íêêŸRTitle: title: from
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+óŸLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from.mdŸ@df4e982f9cfa224433c8d6cf5b622b64ace18bc52955ce3a2600c5542b3d8797´title: fromë•NotesŸmYou must use one of the following subcommands. Using this command as-is will only produce this help message.
+íêêŸïTitle: title: from
+Path: Notes
+Content:
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+óŸLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from.mdŸ@0b7731f78bbf95d82007ce39848a46096b4e98ad174ae093228e81a357531230´title: fromë¨Subcommands:⁄,name
+description
+type
+[link: /commands/docs/from_csv.md] ``from csv``
+Parse text as .csv and create table.
+built-in
+[link: /commands/docs/from_eml.md] ``from eml``
+Parse text as .eml and create record.
+plugin
+[link: /commands/docs/from_ics.md] ``from ics``
+Parse text as .ics and create table.
+plugin
+[link: /commands/docs/from_ini.md] ``from ini``
+Parse text as .ini and create table.
+plugin
+[link: /commands/docs/from_json.md] ``from json``
+Convert JSON text into structured data.
+built-in
+[link: /commands/docs/from_md.md] ``from md``
+Convert markdown text into structured data.
+built-in
+[link: /commands/docs/from_msgpack.md] ``from msgpack``
+Convert MessagePack data into Nu values.
+built-in
+[link: /commands/docs/from_msgpackz.md] ``from msgpackz``
+Convert brotli-compressed MessagePack data into Nu values.
+built-in
+[link: /commands/docs/from_nuon.md] ``from nuon``
+Convert from nuon to structured data.
+built-in
+[link: /commands/docs/from_ods.md] ``from ods``
+Parse OpenDocument Spreadsheet(.ods) data and create table.
+built-in
+[link: /commands/docs/from_plist.md] ``from plist``
+Convert plist to Nushell values
+plugin
+[link: /commands/docs/from_ssv.md] ``from ssv``
+Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
+built-in
+[link: /commands/docs/from_toml.md] ``from toml``
+Parse text as .toml and create record.
+built-in
+[link: /commands/docs/from_tsv.md] ``from tsv``
+Parse text as .tsv and create table.
+built-in
+[link: /commands/docs/from_url.md] ``from url``
+Parse url-encoded string as a record.
+built-in
+[link: /commands/docs/from_vcf.md] ``from vcf``
+Parse text as .vcf and create table.
+plugin
+[link: /commands/docs/from_xlsx.md] ``from xlsx``
+Parse binary Excel(.xlsx) data and create table.
+built-in
+[link: /commands/docs/from_xml.md] ``from xml``
+Parse text as .xml and create record.
+built-in
+[link: /commands/docs/from_yaml.md] ``from yaml``
+Parse text as .yaml/.yml and create table.
+built-in
+[link: /commands/docs/from_yml.md] ``from yml``
+Parse text as .yaml/.yml and create table.
+built-in
+íêê⁄[Title: title: from
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/from_csv.md] ``from csv``
+Parse text as .csv and create table.
+built-in
+[link: /commands/docs/from_eml.md] ``from eml``
+Parse text as .eml and create record.
+plugin
+[link: /commands/docs/from_ics.md] ``from ics``
+Parse text as .ics and create table.
+plugin
+[link: /commands/docs/from_ini.md] ``from ini``
+Parse text as .ini and create table.
+plugin
+[link: /commands/docs/from_json.md] ``from json``
+Convert JSON text into structured data.
+built-in
+[link: /commands/docs/from_md.md] ``from md``
+Convert markdown text into structured data.
+built-in
+[link: /commands/docs/from_msgpack.md] ``from msgpack``
+Convert MessagePack data into Nu values.
+built-in
+[link: /commands/docs/from_msgpackz.md] ``from msgpackz``
+Convert brotli-compressed MessagePack data into Nu values.
+built-in
+[link: /commands/docs/from_nuon.md] ``from nuon``
+Convert from nuon to structured data.
+built-in
+[link: /commands/docs/from_ods.md] ``from ods``
+Parse OpenDocument Spreadsheet(.ods) data and create table.
+built-in
+[link: /commands/docs/from_plist.md] ``from plist``
+Convert plist to Nushell values
+plugin
+[link: /commands/docs/from_ssv.md] ``from ssv``
+Parse text as space-separated values and create a table. The default minimum number of spaces counted as a separator is 2.
+built-in
+[link: /commands/docs/from_toml.md] ``from toml``
+Parse text as .toml and create record.
+built-in
+[link: /commands/docs/from_tsv.md] ``from tsv``
+Parse text as .tsv and create table.
+built-in
+[link: /commands/docs/from_url.md] ``from url``
+Parse url-encoded string as a record.
+built-in
+[link: /commands/docs/from_vcf.md] ``from vcf``
+Parse text as .vcf and create table.
+plugin
+[link: /commands/docs/from_xlsx.md] ``from xlsx``
+Parse binary Excel(.xlsx) data and create table.
+built-in
+[link: /commands/docs/from_xml.md] ``from xml``
+Parse text as .xml and create record.
+built-in
+[link: /commands/docs/from_yaml.md] ``from yaml``
+Parse text as .yaml/.yml and create table.
+built-in
+[link: /commands/docs/from_yml.md] ``from yml``
+Parse text as .yaml/.yml and create table.
+built-in

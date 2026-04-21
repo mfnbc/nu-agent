@@ -1,0 +1,22 @@
+“’Ù@9c88448f52c2fc047a67a1accfd6a931fb9857c18767f22600237307629105cfÙbTitle: title: pwd
+Path: default
+Content:
+
+
+
+
+
+
+
+
+
+``pwd``
+[link: /commands/categories/default.md] ’Ù@94e9e4ce6367254654ebef06f6cd95d3dfdb2323b09b10690645a88e1591e4a7Ù>Title: title: pwd
+Path: Signature
+Content:
+``> pwd {flags} ``
+’Ù@74721d2e0b6ee5ec89d62c0ae3bbc8ad64eb77220705ad9cf600216ff8ae1f5cÙSTitle: title: pwd
+Path: Flags
+Content:
+``--physical, -P``
+: Resolve symbolic links

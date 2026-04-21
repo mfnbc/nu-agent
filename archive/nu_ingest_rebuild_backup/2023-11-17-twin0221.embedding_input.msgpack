@@ -1,0 +1,161 @@
+•’Ù@8cbd69517a68bdeab15aa3fcd65fe5aad385dd1417ac577869539f9e2dd9978aÚ
+1Title: This week in Nushell #221
+Path: Nushell
+Content:
+schrieveslaach 
+[link: https://github.com/nushell/nushell/pull/10941] implemented LSP Text Document Synchronization
+kubouch 
+[link: https://github.com/nushell/nushell/pull/11080] made a fix to uu_cp
+fdncred 
+[link: https://github.com/nushell/nushell/pull/11079] bumped rust-toolchain to 1.72.1
+, 
+[link: https://github.com/nushell/nushell/pull/11076] optimized/cleaned up a few of the 
+``table``
+ changes
+, 
+[link: https://github.com/nushell/nushell/pull/11074] corrected table example syntax
+, 
+[link: https://github.com/nushell/nushell/pull/11072] added a "default" table theme
+, 
+[link: https://github.com/nushell/nushell/pull/11071] tweaked 
+``table``
+ example/parameter text
+, and 
+[link: https://github.com/nushell/nushell/pull/11051] allowed parsing of human readable datetimes
+sophiajt 
+[link: https://github.com/nushell/nushell/pull/11077] fixed the output type for 'view files'
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/11070] added a cross platform null-device name to std
+, 
+[link: https://github.com/nushell/nushell/pull/11043] fixed custom commands' default value
+, and 
+[link: https://github.com/nushell/nushell/pull/11024] made 
+``reject``
+ support list input directly
+dead10ck 
+[link: https://github.com/nushell/nushell/pull/11068] fixed 
+``into binary -c``
+ to return 0 as single byte
+, and 
+[link: https://github.com/nushell/nushell/pull/10692] improved testing support
+IanManske 
+[link: https://github.com/nushell/nushell/pull/11064] fixed 
+``rm``
+ path handling
+zhiburt made improvements+fixes to table rendering: 
+[link: https://github.com/nushell/nushell/pull/11058] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11054] 2
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11045] moved to a clearer reedline keyboard enhancement API
+ and did lots of version bumping: 
+[link: https://github.com/nushell/nushell/pull/11056] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11053] 2
+, 
+[link: https://github.com/nushell/nushell/pull/11044] 3
+, 
+[link: https://github.com/nushell/nushell/pull/11031] 4
+nibon7 
+[link: https://github.com/nushell/nushell/pull/11083] applied nightly clippy fixes
+FMotalleb 
+[link: https://github.com/nushell/nushell/pull/11026] fixed the use of 
+``HTTP_PROXY``
+ in 
+``http get``
+amtoine removed lots of unused/obsolete functionality: 
+[link: https://github.com/nushell/nushell/pull/11000] 1
+, 
+[link: https://github.com/nushell/nushell/pull/10839] 2
+, 
+[link: https://github.com/nushell/nushell/pull/10784] 3
+, 
+[link: https://github.com/nushell/nushell/pull/10773] 4
+’Ù@8be666636be9f22a037bbabd13784a9b7a32d8c7c0aab0ccd12a3ac61f3e9604Ù»Title: This week in Nushell #221
+Path: Extension
+Content:
+EmilyGraceSeville7cf created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/165] More conditional and loop snippets
+’Ù@9af3618fa4034e7f25941509b5b10c211a61704d85d9658c2114f499aabd31d4ÚÒTitle: This week in Nushell #221
+Path: Documentation
+Content:
+github-actions
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/1147] Compressed Images
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/1144] Refresh command docs for Nu v0.87
+sophiajt created 
+[link: https://github.com/nushell/nushell.github.io/pull/1143] Add 2023 survey results
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/1141] Rename back from 
+``Changelog``
+ to 
+``Blog``
+MarikaChlebowska created 
+[link: https://github.com/nushell/nushell.github.io/pull/1140] Fix broken link
+Traister101 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1139] Clarify Dumping files into directory
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/1115] add a few fixes for the release note of 0.86.0
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1114] Release notes for 
+``0.87.0``
+’Ù@8aed78ecd1f54132dd5e327f300f0c1f08e4a998b5989917ac0fb9e64c9be5a7Ú»Title: This week in Nushell #221
+Path: Nu_Scripts
+Content:
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/670] remove null-stream
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/669] cwdhist: can place the path anywhere in the buffer
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/661] cwdhist: remove sqlite3 dependency
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/668] Update 
+``nu_release.nu``
+ for 0.87 release
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/667] Change 
+``nu-deps``
+ script to not care about waves
+Abdillah created 
+[link: https://github.com/nushell/nu_scripts/pull/666] completions/git: fix support for path relative to current directory
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/664] fix the TOC of the release note template
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/663] fix the indentation of the comments in the release note template...
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/662] add a command to get last release date in the release note template
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/642] add a few enhancements to the 
+``create-pr``
+ script for releases
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/637] complete the release note template
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/636] make 
+``list-merged-prs``
+ a module and add template example
+’Ù@4ff711acc78587dfc2546850436257ddcc9508154fc402382b25edbaac80918eÚÏTitle: This week in Nushell #221
+Path: reedline
+Content:
+Hofer-Julian created 
+[link: https://github.com/nushell/reedline/pull/666] Also run clippy on examples
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/664] Bump version for 
+``0.26.0``
+ release
+, and 
+[link: https://github.com/nushell/reedline/pull/659] Properly handle optional event modes
+ClementNerma created 
+[link: https://github.com/nushell/reedline/pull/662] Add more derive impl for HistoryItemId
+, and 
+[link: https://github.com/nushell/reedline/pull/661] Make 
+``Result``
+ and 
+``ReedlineError``
+ public
+p00f created 
+[link: https://github.com/nushell/reedline/pull/656] CwdAwareHinter: remove cwd filter when there are no results

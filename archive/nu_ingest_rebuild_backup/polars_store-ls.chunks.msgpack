@@ -1,0 +1,45 @@
+“—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-ls.mdÙ@d1406693abf870c038c958c4d2d9c4e853d2c66d214ff8fe1c9692cc0db53e0a¶title: polars store-ls‘©dataframeÙG
+
+
+
+
+
+
+
+
+``polars store-ls``
+[link: /commands/categories/dataframe.md] ’Ù~Title: title: polars store-ls
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars store-ls``
+[link: /commands/categories/dataframe.md] —ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-ls.mdÙ@513fa92758de88abed0ab306905163e72f07df47e3abcd4c5dffa4fd83da6934¶title: polars store-ls‘©Signature¿``> polars store-ls {flags} ``
+’ÙVTitle: title: polars store-ls
+Path: Signature
+Content:
+``> polars store-ls {flags} ``
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-ls.mdÙ@4e7c5bb22a9d05ab2d4e99f8b9cb81aea5b076cddff132cda18a309510bf3ca8¶title: polars store-ls‘¨ExamplesÙ¤Creates a new dataframe and shows it in the dataframe list
+```Fenced(Borrowed("nu"))
+> let test = ([[a b];[1 2] [3 4]] | polars into-df);
+    polars store-ls
+
+
+```
+’ÙÚTitle: title: polars store-ls
+Path: Examples
+Content:
+Creates a new dataframe and shows it in the dataframe list
+```Fenced(Borrowed("nu"))
+> let test = ([[a b];[1 2] [3 4]] | polars into-df);
+    polars store-ls
+
+
+```

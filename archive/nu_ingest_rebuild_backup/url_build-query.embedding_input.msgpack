@@ -1,0 +1,57 @@
+”’Ù@0d8cf64b1351d96fad5d42aa4c3b8f667164b36ce81e032ffca62b841fc15c5bÙzTitle: title: url build-query
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``url build-query``
+[link: /commands/categories/network.md] ’Ù@db0e86f295b5eb5e84c922ee5b21af3d2073f09c7102ed0c0ff305999419b707ÙVTitle: title: url build-query
+Path: Signature
+Content:
+``> url build-query {flags} ``
+’Ù@bb9fcb06e68f59c305418e7b0df51f40c74bc2a9a453e7c04bd6868d68ee9812ÙƒTitle: title: url build-query
+Path: Input/output types:
+Content:
+input
+output
+record
+string
+table
+<
+key: any, value: any
+>
+
+string
+’Ù@b1b3a73a7e38f7d9f810f59fa98a0075e21049ca62b9496fdeb9e640f9488a8fÚ_Title: title: url build-query
+Path: Examples
+Content:
+Outputs a query string representing the contents of this record.
+```Fenced(Borrowed("nu"))
+> { mode:normal userid:31415 } | url build-query
+mode=normal&userid=31415
+
+```
+Outputs a query string representing the contents of this record, with a value that needs to be URL-encoded.
+```Fenced(Borrowed("nu"))
+> {a:"AT&T", b: "AT T"} | url build-query
+a=AT%26T&b=AT+T
+
+```
+Outputs a query string representing the contents of this record, "exploding" the list into multiple parameters.
+```Fenced(Borrowed("nu"))
+> {a: ["one", "two"], b: "three"} | url build-query
+a=one&a=two&b=three
+
+```
+Outputs a query string representing the contents of this table containing key-value pairs.
+```Fenced(Borrowed("nu"))
+> [[key, value]; [a, one], [a, two], [b, three], [a, four]] | url build-query
+a=one&a=two&b=three&a=four
+
+```

@@ -8,10 +8,11 @@ build:
 	@nu -c "scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git"
 
 kuzu-import:
-	@nu scripts/kuzu-import.nu --plan build/rag/nu-docs/kuzu-plan.json --execute-kuzu
+	@echo "Kùzu import target removed. Kùzu integration is archival and intentionally omitted from the default pipeline."
 
 plugin-build:
 	@cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 
 embed-example:
-	@./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.jsonl --output build/embeddings_example.jsonl --dim 16
+	# Example invocation updated for MessagePack-first policy. Use .msgpack input/output when possible.
+	@./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.msgpack --output build/embeddings_example.msgpack --dim 16

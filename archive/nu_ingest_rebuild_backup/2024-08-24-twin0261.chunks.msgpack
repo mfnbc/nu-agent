@@ -1,0 +1,196 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-24-twin0261.mdŸ@4b04323c2a133647cad783b2a572c018e79a2aab55db8814f170d08c95de9df9πThis week in Nushell #261ëßNushell⁄˛KAAtheWiseGit 
+[link: https://github.com/nushell/nushell/pull/13683] fixed some encode/decode todo's
+, 
+[link: https://github.com/nushell/nushell/pull/13678] removed the unused 
+``same-file``
+ workspace dependency
+, and added 
+[link: https://github.com/nushell/nushell/pull/13428] ``encode``
+/
+``decode``
+ for multiple alphabets
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/13673] fixed 
+``bits ror``
+/
+``bits rol``
+ implementation
+, 
+[link: https://github.com/nushell/nushell/pull/13666] bumped version to 0.97.2
+, 
+[link: https://github.com/nushell/nushell/pull/13663] fixed bugs and UB in bit shifting ops
+, and 
+[link: https://github.com/nushell/nushell/pull/13598] changed the usage misnomer to "description"
+devyn 
+[link: https://github.com/nushell/nushell/pull/13659] bumped version to 
+``0.97.1``
+, and 
+[link: https://github.com/nushell/nushell/pull/13637] changed behavior of 
+``into record``
+ on lists to be more useful
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/13658] fixed a range typechecking bug introduced by #13595
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13655] bumped version number to 0.97
+fdncred 
+[link: https://github.com/nushell/nushell/pull/13650] added more granularity for into record with dates
+cptpiepmatz 
+[link: https://github.com/nushell/nushell/pull/13647] changed expected type for derived 
+``FromValue``
+ implementations via attribute
+, and 
+[link: https://github.com/nushell/nushell/pull/13641] improved working with 
+``IntoValue``
+ and 
+``FromValue``
+ for byte collections
+IanManske 
+[link: https://github.com/nushell/nushell/pull/13646] made 
+``reduce``
+ args and input explicit
+, and 
+[link: https://github.com/nushell/nushell/pull/13645] fixed clippy lints
+poliorcetics 
+[link: https://github.com/nushell/nushell/pull/13644] fixed broken doc links
+gwenya 
+[link: https://github.com/nushell/nushell/pull/13445] improved help output for scripts
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/13430] made a fix for emoji, wrapping issues in table printing
+íêê⁄6Title: This week in Nushell #261
+Path: Nushell
+Content:
+KAAtheWiseGit 
+[link: https://github.com/nushell/nushell/pull/13683] fixed some encode/decode todo's
+, 
+[link: https://github.com/nushell/nushell/pull/13678] removed the unused 
+``same-file``
+ workspace dependency
+, and added 
+[link: https://github.com/nushell/nushell/pull/13428] ``encode``
+/
+``decode``
+ for multiple alphabets
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/13673] fixed 
+``bits ror``
+/
+``bits rol``
+ implementation
+, 
+[link: https://github.com/nushell/nushell/pull/13666] bumped version to 0.97.2
+, 
+[link: https://github.com/nushell/nushell/pull/13663] fixed bugs and UB in bit shifting ops
+, and 
+[link: https://github.com/nushell/nushell/pull/13598] changed the usage misnomer to "description"
+devyn 
+[link: https://github.com/nushell/nushell/pull/13659] bumped version to 
+``0.97.1``
+, and 
+[link: https://github.com/nushell/nushell/pull/13637] changed behavior of 
+``into record``
+ on lists to be more useful
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/13658] fixed a range typechecking bug introduced by #13595
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13655] bumped version number to 0.97
+fdncred 
+[link: https://github.com/nushell/nushell/pull/13650] added more granularity for into record with dates
+cptpiepmatz 
+[link: https://github.com/nushell/nushell/pull/13647] changed expected type for derived 
+``FromValue``
+ implementations via attribute
+, and 
+[link: https://github.com/nushell/nushell/pull/13641] improved working with 
+``IntoValue``
+ and 
+``FromValue``
+ for byte collections
+IanManske 
+[link: https://github.com/nushell/nushell/pull/13646] made 
+``reduce``
+ args and input explicit
+, and 
+[link: https://github.com/nushell/nushell/pull/13645] fixed clippy lints
+poliorcetics 
+[link: https://github.com/nushell/nushell/pull/13644] fixed broken doc links
+gwenya 
+[link: https://github.com/nushell/nushell/pull/13445] improved help output for scripts
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/13430] made a fix for emoji, wrapping issues in table printing
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-24-twin0261.mdŸ@ee8f0200f7c5af14d8a73ccada87abc0a7378eb312c7d6f19805219abd03f4e9πThis week in Nushell #261ë≠Documentation⁄ayax79 
+[link: https://github.com/nushell/nushell.github.io/pull/1522] updated dataframes documentation
+evpeople 
+[link: https://github.com/nushell/nushell.github.io/pull/1521] fixed a typo in doc
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1520] refreshed command docs for Nu 0.97.1
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1519] generated plugin banner for all plugin commands
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1518] made docs: Run in different Nu with plugins
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1513] replaced 
+``inc``
+ in pipelines example
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1512] updated and fixed CONTRIBUTING
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1511] fixed 13541 description
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1510] started 0.97.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1509] added release notes for 
+``0.97.1``
+íêê⁄UTitle: This week in Nushell #261
+Path: Documentation
+Content:
+ayax79 
+[link: https://github.com/nushell/nushell.github.io/pull/1522] updated dataframes documentation
+evpeople 
+[link: https://github.com/nushell/nushell.github.io/pull/1521] fixed a typo in doc
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1520] refreshed command docs for Nu 0.97.1
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1519] generated plugin banner for all plugin commands
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1518] made docs: Run in different Nu with plugins
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1513] replaced 
+``inc``
+ in pipelines example
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1512] updated and fixed CONTRIBUTING
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1511] fixed 13541 description
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1510] started 0.97.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1509] added release notes for 
+``0.97.1``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-24-twin0261.mdŸ@814c600f9930d959ca3e9f88b0840cbbdeb0a16e74b2c8a3cb75c231dfd8c1a4πThis week in Nushell #261ë™Nu_Scripts⁄'sylvainOL 
+[link: https://github.com/nushell/nu_scripts/pull/936] made op completion work with latest nushell
+A1c0 
+[link: https://github.com/nushell/nu_scripts/pull/935] added catppuccin macchiato theme
+TechWatching 
+[link: https://github.com/nushell/nu_scripts/pull/934] updated direnv config
+íêê⁄bTitle: This week in Nushell #261
+Path: Nu_Scripts
+Content:
+sylvainOL 
+[link: https://github.com/nushell/nu_scripts/pull/936] made op completion work with latest nushell
+A1c0 
+[link: https://github.com/nushell/nu_scripts/pull/935] added catppuccin macchiato theme
+TechWatching 
+[link: https://github.com/nushell/nu_scripts/pull/934] updated direnv config
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-24-twin0261.mdŸ@2786bdc1f638b867a4edd55d52ab2f22cca60d27b2571c25cf346266bf86f6afπThis week in Nushell #261ë®reedlineŸΩayax79 
+[link: https://github.com/nushell/reedline/pull/818] bumped version number to 0.34
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/817] bumped crossterm to 
+``0.28.1``
+íêêŸˆTitle: This week in Nushell #261
+Path: reedline
+Content:
+ayax79 
+[link: https://github.com/nushell/reedline/pull/818] bumped version number to 0.34
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/817] bumped crossterm to 
+``0.28.1``

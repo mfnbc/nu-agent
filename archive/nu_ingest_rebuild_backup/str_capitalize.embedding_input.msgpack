@@ -1,0 +1,69 @@
+���@774c130484c59536b491c47c96859702b06f45888c61a1f91fedf0f036b50e23�xTitle: title: str capitalize
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str capitalize``
+[link: /commands/categories/strings.md] ��@064560c0d9fa1dbe680b15c571d8f6e8008c7124b1bf08f0e059f949b434ce36�[Title: title: str capitalize
+Path: Signature
+Content:
+``> str capitalize {flags} ...rest``
+��@e057724ffff7ea4d5b56cb1fdd1d375ebd7bb2e1a8bc9b66e04fba35a136948aيTitle: title: str capitalize
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert strings at the given cell paths.
+��@8aa7c2b66a40b69e31f77ceecc456cc0873b216a05a145a5bb58a5529dca586dٗTitle: title: str capitalize
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+��@ff5181926f3b5e4b866e1ad7525e47239282ce3c631814487e82261fea552998�cTitle: title: str capitalize
+Path: Examples
+Content:
+Capitalize contents.
+```Fenced(Borrowed("nu"))
+> 'good day' | str capitalize
+Good day
+
+```
+Capitalize contents.
+```Fenced(Borrowed("nu"))
+> 'anton' | str capitalize
+Anton
+
+```
+Capitalize a column in a table.
+```Fenced(Borrowed("nu"))
+> [[lang, gems]; [nu_test, 100]] | str capitalize lang
+╭───┬─────────┬──────╮
+│ # │  lang   │ gems │
+├───┼─────────┼──────┤
+│ 0 │ Nu_test │  100 │
+╰───┴─────────┴──────╯
+
+
+```

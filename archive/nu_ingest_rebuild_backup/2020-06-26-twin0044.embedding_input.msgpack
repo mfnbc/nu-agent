@@ -1,0 +1,45 @@
+‘’Ù@bb7d0f0e34b1558ef03af0cef6f28451b39fd8c7f9a29cd2abd40c2b45d91073Ú7Title: This week in Nu #44
+Path: This week in Nu #44
+Content:
+charlespierce, fdncred, and jonathandturner got a new release pipeline working to build the 
+[link: https://github.com/nushell/nushell/pull/2048] binaries for each release
+jonathandturner landed 
+[link: https://github.com/nushell/nushell/pull/2015] ``nu-table``
+ and new table drawing algorithms
+fdncred added 
+[link: https://github.com/nushell/nushell/pull/2010] config for the bat-based text viewing
+, fixed bugs with 
+[link: https://github.com/nushell/nushell/pull/2035] linked externals
+, added 
+[link: https://github.com/nushell/nushell/pull/2054] wix support
+JosephTLyons renamed 
+``math average``
+ to 
+[link: https://github.com/nushell/nushell/pull/2014] ``math avg``
+, 
+[link: https://github.com/nushell/nushell/pull/2019] bumped heim
+, 
+[link: https://github.com/nushell/nushell/pull/2031] formatted project markdown
+, improved the 
+[link: https://github.com/nushell/nushell/pull/2040] ``cal``
+ command
+, added 
+[link: https://github.com/nushell/nushell/pull/2050] ``random uuid``
+, and added 
+[link: https://github.com/nushell/nushell/pull/2061] ``random bool``
+andrasio improved supporting for 
+[link: https://github.com/nushell/nushell/pull/2016] ``math median``
+siedentop added 
+[link: https://github.com/nushell/nushell/pull/2017] ``--count``
+ to 
+``uniq``
+HiranmayaGundu added tests for 
+[link: https://github.com/nushell/nushell/pull/2022] Windows drive letters
+bailey-layzer added errors for 
+[link: https://github.com/nushell/nushell/pull/2030] division by zero
+arashout added tests for the 
+[link: https://github.com/nushell/nushell/pull/2037] new math functionality
+amousa11 added 
+[link: https://github.com/nushell/nushell/pull/2043] ``math mode``
+zombie110year translated more book chapters to 
+[link: https://github.com/nushell/book/pull/108] Simplified Chinese

@@ -1,0 +1,93 @@
+•—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arcsin.mdÙ@2fa9ec36dab7c6947409cfe6a81a48d1e04155ac0f2458d7f26e9dec4b1411f6²title: math arcsin‘¤mathÙ>
+
+
+
+
+
+
+
+
+``math arcsin``
+[link: /commands/categories/math.md] ’ÙlTitle: title: math arcsin
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math arcsin``
+[link: /commands/categories/math.md] —ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arcsin.mdÙ@5a0006fe97cede7ff2df9549f0bb088ea9fc29416ea781fb68c5db0cffef28d6²title: math arcsin‘©Signature»``> math arcsin {flags} ``
+’ÙNTitle: title: math arcsin
+Path: Signature
+Content:
+``> math arcsin {flags} ``
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arcsin.mdÙ@c8caf065e6b162450998b87bd0dcad3319a62499ac72105ad65c3bb45faaaf50²title: math arcsin‘¥FlagsÙ7``--degrees, -d``
+: Return degrees instead of radians.
+’ÙfTitle: title: math arcsin
+Path: Flags
+Content:
+``--degrees, -d``
+: Return degrees instead of radians.
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arcsin.mdÙ@3f16530af3c58dbf91a21c593cbb85f9052b872e0b1193e01797a42a95bff21c²title: math arcsin‘³Input/output types:Ù;input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’ÙxTitle: title: math arcsin
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arcsin.mdÙ@c8bb431f096507be1cd0bdac819ac1486acbfc0b24bbefdf2efa9fb467acd831²title: math arcsin‘¨ExamplesÙ¹Get the arcsine of 1
+```Fenced(Borrowed("nu"))
+> 1 | math arcsin
+1.5707963267948966
+
+```
+Get the arcsine of 1 in degrees
+```Fenced(Borrowed("nu"))
+> 1 | math arcsin --degrees
+90.0
+
+```
+’ÙëTitle: title: math arcsin
+Path: Examples
+Content:
+Get the arcsine of 1
+```Fenced(Borrowed("nu"))
+> 1 | math arcsin
+1.5707963267948966
+
+```
+Get the arcsine of 1 in degrees
+```Fenced(Borrowed("nu"))
+> 1 | math arcsin --degrees
+90.0
+
+```

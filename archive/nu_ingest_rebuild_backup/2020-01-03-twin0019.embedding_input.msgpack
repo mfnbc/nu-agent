@@ -1,0 +1,44 @@
+‘’Ù@85668e77c49e659a38806139c304106847ca512ffb65df302f8d77f925d443afÚ%Title: This week in Nu #19
+Path: This week in Nu #19
+Content:
+Happy Nu year!
+We wrote up a 
+[link: https://www.nushell.sh/blog/2019/12/31/happy-nu-year-2020.html] year-in-review post
+notryanb added a new 
+``uniq``
+ command (
+[link: https://github.com/nushell/nushell/pull/1132] #1132
+)
+quebin31 updated some of our internal structures names to be more consistent (
+[link: https://github.com/nushell/nushell/pull/1133] #1133
+)
+andrasio refactored some plugin code and continued to improve tests (
+[link: https://github.com/nushell/nushell/pull/1135] #1135
+)
+miller-time fixed how Nu handled single-quotes in external commands (
+[link: https://github.com/nushell/nushell/pull/1139] #1139
+)
+vorot93 and jonathandturner finished the move to using clippy, which is now enabled on CI (
+[link: https://github.com/nushell/nushell/pull/1136] #1136
+, 
+[link: https://github.com/nushell/nushell/pull/1142] #1142
+)
+Aloso added support for moving a word-at-a-time with ctrl-left and ctrl-right (
+[link: https://github.com/nushell/nushell/pull/1141] #1141
+)
+avendesa replaced the 
+``which``
+ command with an upgraded version (
+[link: https://github.com/nushell/nushell/pull/1144] #1144
+)
+jonathandturner has been improving stability and removing unwraps, going from 204 to 86 (
+[link: https://github.com/nushell/nushell/pull/1147] #1147
+, 
+[link: https://github.com/nushell/nushell/pull/1148] #1148
+, 
+[link: https://github.com/nushell/nushell/pull/1149] #1149
+, 
+[link: https://github.com/nushell/nushell/pull/1150] #1150
+, 
+[link: https://github.com/nushell/nushell/pull/1152] #1152
+)

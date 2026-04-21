@@ -1,0 +1,48 @@
+���@75d0eae8a0852f92a6a86e2d68ab741004f5ba1cd0815fe890638baffe0ed437ِTitle: title: polars selector numeric
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars selector numeric``
+[link: /commands/categories/expression.md] ��@6cd90af3c365f721f9f16f9858e5d91f8238fe6336c1ab397fd32add4b240cce�fTitle: title: polars selector numeric
+Path: Signature
+Content:
+``> polars selector numeric {flags} ``
+��@f1c291e56d02bf6e173fce5abf3699f93ff8ef86364496e238a32884a550f584�jTitle: title: polars selector numeric
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_selector
+��@1e0b7e948be426e442cbe5cfce34a7c7f981d1da6e86f9d4bd5df44a093fede4��Title: title: polars selector numeric
+Path: Examples
+Content:
+Select all numeric columns
+```Fenced(Borrowed("nu"))
+> {
+        "foo": ["x", "y"],
+        "bar": [123, 456],
+        "baz": [2.0, 5.5],
+        "zap": [0, 0],
+    } |
+    polars into-df --as-columns |
+    polars select (polars selector numeric) |
+    polars sort-by bar baz zap |
+    polars collect
+╭───┬─────┬──────┬─────╮
+│ # │ bar │ baz  │ zap │
+├───┼─────┼──────┼─────┤
+│ 0 │ 123 │ 2.00 │   0 │
+│ 1 │ 456 │ 5.50 │   0 │
+╰───┴─────┴──────┴─────╯
+
+
+```

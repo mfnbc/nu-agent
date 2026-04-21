@@ -1,0 +1,173 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-15-twin0112.mdŸ@e03d7ec41e901b4d28a825946e952c7f476cb6a6571f0a7cef72fa52e73785a5πThis week in Nushell #112ëßNushellŸPfdncred 
+[link: https://github.com/nushell/nushell/pull/4073] updated stale.yml
+íêêŸàTitle: This week in Nushell #112
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4073] updated stale.yml
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-15-twin0112.mdŸ@755338d728bab70c72cc472ac3a0fa76242bb5e9bd40d6cee79e7208d730fa56πThis week in Nushell #112ë≠DocumentationŸìoscard0m created 
+[link: https://github.com/nushell/nushell.github.io/pull/205] docs(configuration): remove 'header_bold' option from config table
+íêêŸ—Title: This week in Nushell #112
+Path: Documentation
+Content:
+oscard0m created 
+[link: https://github.com/nushell/nushell.github.io/pull/205] docs(configuration): remove 'header_bold' option from config table
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-15-twin0112.mdŸ@562d675c0ba0335285ae918724085641861b800bbcb901caf7cece51de54310eπThis week in Nushell #112ë™Nu_ScriptsŸßefx 
+[link: https://github.com/nushell/nu_scripts/pull/100] condensed sample data folders
+jt 
+[link: https://github.com/nushell/nu_scripts/pull/99] created netstat.nu
+íêêŸ‚Title: This week in Nushell #112
+Path: Nu_Scripts
+Content:
+efx 
+[link: https://github.com/nushell/nu_scripts/pull/100] condensed sample data folders
+jt 
+[link: https://github.com/nushell/nu_scripts/pull/99] created netstat.nu
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-15-twin0112.mdŸ@b091077dd0198bddc57a8bbe0492800900ea3b1067766949604b928417383b4bπThis week in Nushell #112ë®engine-q⁄Njt created 
+[link: https://github.com/nushell/engine-q/pull/237] little cleanup
+, and 
+[link: https://github.com/nushell/engine-q/pull/236] changed to select completions from dialoguer
+, and 
+[link: https://github.com/nushell/engine-q/pull/233] Remove bad fixmes
+, and 
+[link: https://github.com/nushell/engine-q/pull/232] Add help flag
+, and 
+[link: https://github.com/nushell/engine-q/pull/231] Load config
+, and 
+[link: https://github.com/nushell/engine-q/pull/133] Clarify todo/fixmes
+, and 
+[link: https://github.com/nushell/engine-q/pull/131] Prevent invalid var names
+, and 
+[link: https://github.com/nushell/engine-q/pull/130] Custom switch support
+, and 
+[link: https://github.com/nushell/engine-q/pull/129] Do rest args
+, and 
+[link: https://github.com/nushell/engine-q/pull/128] Fix missing param error and custom flag values
+, and 
+[link: https://github.com/nushell/engine-q/pull/127] Add the remaining missing operators
+, and 
+[link: https://github.com/nushell/engine-q/pull/126] Give error on missing column during cell path
+, and 
+[link: https://github.com/nushell/engine-q/pull/125] Earlier errors
+, and 
+[link: https://github.com/nushell/engine-q/pull/124] Try #2 - Mac/Windows CI
+, and 
+[link: https://github.com/nushell/engine-q/pull/120] Add serialize/deserialize for streams
+, and 
+[link: https://github.com/nushell/engine-q/pull/119] Error improvement
+, and 
+[link: https://github.com/nushell/engine-q/pull/117] Conversions
+, and 
+[link: https://github.com/nushell/engine-q/pull/113] Add a couple more tests to for, add stream/list PartialEq
+, and 
+[link: https://github.com/nushell/engine-q/pull/112] Fix the for loop to create vars
+, and 
+[link: https://github.com/nushell/engine-q/pull/110] Add map and flat_map to value
+, and 
+[link: https://github.com/nushell/engine-q/pull/109] Port split column and split row
+, and 
+[link: https://github.com/nushell/engine-q/pull/108] Port help and start porting split
+GabrielBG0 created 
+[link: https://github.com/nushell/engine-q/pull/235] cp, mv, and rm commands need to support -i flag
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/234] cleaned up some todo comments in grid
+, 
+[link: https://github.com/nushell/engine-q/pull/134] added ability to parse strings like "100kib" and "100 kib"
+, 
+[link: https://github.com/nushell/engine-q/pull/122] fixed to allow windows to compile
+, and fixed 
+[link: https://github.com/nushell/engine-q/pull/118] type-o in code
+xiuxiu62 
+[link: https://github.com/nushell/engine-q/pull/230] added size command
+, and 
+[link: https://github.com/nushell/engine-q/pull/114] added 
+``rm``
+kubouch created 
+[link: https://github.com/nushell/engine-q/pull/115] Hiding rehaul
+elferherrera added an 
+[link: https://github.com/nushell/engine-q/pull/111] example unit test
+arthur-targaryen 
+[link: https://github.com/nushell/engine-q/pull/107] added 
+``in``
+ and 
+``not-in``
+ operators support
+íêê⁄áTitle: This week in Nushell #112
+Path: engine-q
+Content:
+jt created 
+[link: https://github.com/nushell/engine-q/pull/237] little cleanup
+, and 
+[link: https://github.com/nushell/engine-q/pull/236] changed to select completions from dialoguer
+, and 
+[link: https://github.com/nushell/engine-q/pull/233] Remove bad fixmes
+, and 
+[link: https://github.com/nushell/engine-q/pull/232] Add help flag
+, and 
+[link: https://github.com/nushell/engine-q/pull/231] Load config
+, and 
+[link: https://github.com/nushell/engine-q/pull/133] Clarify todo/fixmes
+, and 
+[link: https://github.com/nushell/engine-q/pull/131] Prevent invalid var names
+, and 
+[link: https://github.com/nushell/engine-q/pull/130] Custom switch support
+, and 
+[link: https://github.com/nushell/engine-q/pull/129] Do rest args
+, and 
+[link: https://github.com/nushell/engine-q/pull/128] Fix missing param error and custom flag values
+, and 
+[link: https://github.com/nushell/engine-q/pull/127] Add the remaining missing operators
+, and 
+[link: https://github.com/nushell/engine-q/pull/126] Give error on missing column during cell path
+, and 
+[link: https://github.com/nushell/engine-q/pull/125] Earlier errors
+, and 
+[link: https://github.com/nushell/engine-q/pull/124] Try #2 - Mac/Windows CI
+, and 
+[link: https://github.com/nushell/engine-q/pull/120] Add serialize/deserialize for streams
+, and 
+[link: https://github.com/nushell/engine-q/pull/119] Error improvement
+, and 
+[link: https://github.com/nushell/engine-q/pull/117] Conversions
+, and 
+[link: https://github.com/nushell/engine-q/pull/113] Add a couple more tests to for, add stream/list PartialEq
+, and 
+[link: https://github.com/nushell/engine-q/pull/112] Fix the for loop to create vars
+, and 
+[link: https://github.com/nushell/engine-q/pull/110] Add map and flat_map to value
+, and 
+[link: https://github.com/nushell/engine-q/pull/109] Port split column and split row
+, and 
+[link: https://github.com/nushell/engine-q/pull/108] Port help and start porting split
+GabrielBG0 created 
+[link: https://github.com/nushell/engine-q/pull/235] cp, mv, and rm commands need to support -i flag
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/234] cleaned up some todo comments in grid
+, 
+[link: https://github.com/nushell/engine-q/pull/134] added ability to parse strings like "100kib" and "100 kib"
+, 
+[link: https://github.com/nushell/engine-q/pull/122] fixed to allow windows to compile
+, and fixed 
+[link: https://github.com/nushell/engine-q/pull/118] type-o in code
+xiuxiu62 
+[link: https://github.com/nushell/engine-q/pull/230] added size command
+, and 
+[link: https://github.com/nushell/engine-q/pull/114] added 
+``rm``
+kubouch created 
+[link: https://github.com/nushell/engine-q/pull/115] Hiding rehaul
+elferherrera added an 
+[link: https://github.com/nushell/engine-q/pull/111] example unit test
+arthur-targaryen 
+[link: https://github.com/nushell/engine-q/pull/107] added 
+``in``
+ and 
+``not-in``
+ operators support
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-15-twin0112.mdŸ@dcd625c24465dd77c3a080cbcc3647ee9b3681b6919e35087a9338fb3099ceb1πThis week in Nushell #112ë®reedlineŸMjt exposed 
+[link: https://github.com/nushell/reedline/pull/165] line buffer
+íêêŸÜTitle: This week in Nushell #112
+Path: reedline
+Content:
+jt exposed 
+[link: https://github.com/nushell/reedline/pull/165] line buffer

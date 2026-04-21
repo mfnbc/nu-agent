@@ -1,0 +1,89 @@
+•—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_upcase.mdÙ@f4c418a6e229d97c672441f43b5e8c0448b5494b62b2a1f73b7ab3523c6f525d±title: str upcase‘§stringsÙ@
+
+
+
+
+
+
+
+
+``str upcase``
+[link: /commands/categories/strings.md] ’ÙpTitle: title: str upcase
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str upcase``
+[link: /commands/categories/strings.md] —ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_upcase.mdÙ@89986f280e8fa7b68aceea0aba39950394c61aaee0e3f9217b938ec97b606e73±title: str upcase‘©SignatureÙ!``> str upcase {flags} ...rest``
+’ÙSTitle: title: str upcase
+Path: Signature
+Content:
+``> str upcase {flags} ...rest``
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_upcase.mdÙ@0e00e8ad084e79a50132bdd31e78526d3bf4415e927c6b8249ac3a22a3e417dd±title: str upcase‘ªParametersÙS``...rest``
+: For a data structure input, convert strings at the given cell paths.
+’Ù†Title: title: str upcase
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert strings at the given cell paths.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_upcase.mdÙ@4d3a6cd32a0431bb139c4a23421409d50fa815f96ad2d89a97ba42bfef71762c±title: str upcase‘³Input/output types:ÙWinput
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+’Ù“Title: title: str upcase
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_upcase.mdÙ@e4b18f48e51cfb36e7f7f9eb2622478b95a25a437475e250f7675bc0ce2957c8±title: str upcase‘¨ExamplesÙGUpcase contents.
+```Fenced(Borrowed("nu"))
+> 'nu' | str upcase
+NU
+
+```
+’ÙxTitle: title: str upcase
+Path: Examples
+Content:
+Upcase contents.
+```Fenced(Borrowed("nu"))
+> 'nu' | str upcase
+NU
+
+```

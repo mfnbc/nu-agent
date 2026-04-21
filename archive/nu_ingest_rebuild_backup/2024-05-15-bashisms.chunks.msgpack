@@ -1,0 +1,48 @@
+”—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-15-bashisms.mdÙ@ee246bf6bd0319336eece2df8fc079da13b5e0dc77325eee96f72eca7ce5d56d·title: Nushell Bashisms‘¨BashismsÙ
+
+
+
+A frequently asked question is, "What bashims does Nushell support?". Frequently these questions revolve around bang bang functionality.
+’ÙÄTitle: title: Nushell Bashisms
+Path: Bashisms
+Content:
+
+
+
+
+A frequently asked question is, "What bashims does Nushell support?". Frequently these questions revolve around bang bang functionality.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-15-bashisms.mdÙ@5fa349523a25407033f1b8d8a6deaae39c3660b372e5b52538f67cc657d41173·title: Nushell Bashisms‘±What is a bashismÙ^A bashism is a command, operator, or syntax in the repl that most people associate with bash.
+’ÙTitle: title: Nushell Bashisms
+Path: What is a bashism
+Content:
+A bashism is a command, operator, or syntax in the repl that most people associate with bash.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-15-bashisms.mdÙ@e4158a52ca3500725fe58ec2c5c7ef18489b13356071ba715222f87a876f0923·title: Nushell Bashisms‘°Bang Bang syntaxÚ^In reedline we support these bashisms.
+``!!``
+ - Repeat the last command.
+``!n``
+ - Repeat the nth command from your nushell history.
+``!-n``
+ - Repeat the nth command from your last history entry.
+``!$``
+ - Get the last spatially separated token from the last command in your history.
+``!term``
+ - Repeat the last command match a strings beginning.
+’ÚTitle: title: Nushell Bashisms
+Path: Bang Bang syntax
+Content:
+In reedline we support these bashisms.
+``!!``
+ - Repeat the last command.
+``!n``
+ - Repeat the nth command from your nushell history.
+``!-n``
+ - Repeat the nth command from your last history entry.
+``!$``
+ - Get the last spatially separated token from the last command in your history.
+``!term``
+ - Repeat the last command match a strings beginning.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-05-15-bashisms.mdÙ@8bb7aaa8123d31b84db7563ab5af5058dafff10c32073bfe7218d53a2feec69f·title: Nushell Bashisms‘¾How to invoke bang bang syntaxÙ¦In nushell when you type a bang command, it performs that functionality and places the result in the nushell command line buffer in the repl. It does not execute it.
+’ÙóTitle: title: Nushell Bashisms
+Path: How to invoke bang bang syntax
+Content:
+In nushell when you type a bang command, it performs that functionality and places the result in the nushell command line buffer in the repl. It does not execute it.

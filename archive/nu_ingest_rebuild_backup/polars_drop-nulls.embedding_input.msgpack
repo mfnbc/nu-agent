@@ -1,0 +1,64 @@
+���@6c3e047a5e549753f1ca545736a8e603ee6a753c5ff7f7ea3705dddd779d8519قTitle: title: polars drop-nulls
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars drop-nulls``
+[link: /commands/categories/dataframe.md] ��@194627659005f556fd7ace215f132ae58f60376cc95b9ba23a5f5273fb5448cc�bTitle: title: polars drop-nulls
+Path: Signature
+Content:
+``> polars drop-nulls {flags} (subset)``
+��@8221a71d182e9f886da36a16e9a0ec6a293d9251a7396ee716ea0b527828233d�hTitle: title: polars drop-nulls
+Path: Parameters
+Content:
+``subset``
+: Subset of columns to drop nulls.
+��@a07972d65df73a45a1d3d3759ced0c9564626c09a20c79403b6861bfeba41511ٔTitle: title: polars drop-nulls
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@112f3c3b89cbbf151f5801bf0086b4a527478fe85e06372d06978d9123e7dece��Title: title: polars drop-nulls
+Path: Examples
+Content:
+drop null values in dataframe
+```Fenced(Borrowed("nu"))
+> let df = ([[a b]; [1 2] [3 0] [1 2]] | polars into-df);
+    let res = ($df.b / $df.b);
+    let a = ($df | polars with-column $res --name res);
+    $a | polars drop-nulls
+╭───┬───┬───┬─────╮
+│ # │ a │ b │ res │
+├───┼───┼───┼─────┤
+│ 0 │ 1 │ 2 │   1 │
+│ 1 │ 1 │ 2 │   1 │
+╰───┴───┴───┴─────╯
+
+
+```
+drop null values in dataframe
+```Fenced(Borrowed("nu"))
+> let s = ([1 2 0 0 3 4] | polars into-df);
+    ($s / $s) | polars drop-nulls
+╭───┬─────────╮
+│ # │ div_0_0 │
+├───┼─────────┤
+│ 0 │       1 │
+│ 1 │       1 │
+│ 2 │       1 │
+│ 3 │       1 │
+╰───┴─────────╯
+
+
+```

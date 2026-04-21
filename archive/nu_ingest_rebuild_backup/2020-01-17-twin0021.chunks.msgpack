@@ -1,0 +1,95 @@
+ëóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-01-17-twin0021.mdŸ@5216c2016fbc9292b9bfdbf0fc4ff8199df8640549533770a69e5a8e520dca0c≥This week in Nu #21ë≥This week in Nu #21⁄Îthegedge and andrasio have been hard at work at improving how externals are spawned and handled inside of the pipeline builder (
+[link: https://github.com/nushell/nushell/pull/1231] #1231
+, 
+[link: https://github.com/nushell/nushell/pull/1230] #1230
+, 
+[link: https://github.com/nushell/nushell/pull/1211] #1211
+, 
+[link: https://github.com/nushell/nushell/pull/1182] #1182
+)
+jonathandturner has begun commenting the codebase (
+[link: https://github.com/nushell/nushell/pull/1229] #1229
+, 
+[link: https://github.com/nushell/nushell/pull/1228] #1228
+, 
+[link: https://github.com/nushell/nushell/pull/1225] #1225
+)
+jonathandturner also improved 
+``ls``
+ to be simpler (
+[link: https://github.com/nushell/nushell/pull/1195] #1195
+, 
+[link: https://github.com/nushell/nushell/pull/1194] #1194
+, 
+[link: https://github.com/nushell/nushell/pull/1192] #1192
+)
+koenaad added support for sending more value types as $it to externals (
+[link: https://github.com/nushell/nushell/pull/1218] #1218
+, 
+[link: https://github.com/nushell/nushell/pull/1220] #1220
+, 
+[link: https://github.com/nushell/nushell/pull/1210] #1210
+)
+jonathandturner and andrasio improved testing (
+[link: https://github.com/nushell/nushell/pull/1200] #1200
+, 
+[link: https://github.com/nushell/nushell/pull/1198] #1198
+)
+andrasio extended 
+``pick``
+ to allow column paths and not just column names (
+[link: https://github.com/nushell/nushell/pull/1191] #1191
+) and improved 
+``get``
+ errors (
+[link: https://github.com/nushell/nushell/pull/1185] #1185
+)
+íêê⁄)Title: This week in Nu #21
+Path: This week in Nu #21
+Content:
+thegedge and andrasio have been hard at work at improving how externals are spawned and handled inside of the pipeline builder (
+[link: https://github.com/nushell/nushell/pull/1231] #1231
+, 
+[link: https://github.com/nushell/nushell/pull/1230] #1230
+, 
+[link: https://github.com/nushell/nushell/pull/1211] #1211
+, 
+[link: https://github.com/nushell/nushell/pull/1182] #1182
+)
+jonathandturner has begun commenting the codebase (
+[link: https://github.com/nushell/nushell/pull/1229] #1229
+, 
+[link: https://github.com/nushell/nushell/pull/1228] #1228
+, 
+[link: https://github.com/nushell/nushell/pull/1225] #1225
+)
+jonathandturner also improved 
+``ls``
+ to be simpler (
+[link: https://github.com/nushell/nushell/pull/1195] #1195
+, 
+[link: https://github.com/nushell/nushell/pull/1194] #1194
+, 
+[link: https://github.com/nushell/nushell/pull/1192] #1192
+)
+koenaad added support for sending more value types as $it to externals (
+[link: https://github.com/nushell/nushell/pull/1218] #1218
+, 
+[link: https://github.com/nushell/nushell/pull/1220] #1220
+, 
+[link: https://github.com/nushell/nushell/pull/1210] #1210
+)
+jonathandturner and andrasio improved testing (
+[link: https://github.com/nushell/nushell/pull/1200] #1200
+, 
+[link: https://github.com/nushell/nushell/pull/1198] #1198
+)
+andrasio extended 
+``pick``
+ to allow column paths and not just column names (
+[link: https://github.com/nushell/nushell/pull/1191] #1191
+) and improved 
+``get``
+ errors (
+[link: https://github.com/nushell/nushell/pull/1185] #1185
+)

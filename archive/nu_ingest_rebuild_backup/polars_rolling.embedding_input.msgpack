@@ -1,0 +1,64 @@
+���@1330da62619495a336cb1673b24b051e08d6bbacee29bf63ea9ebceda133bbb1�|Title: title: polars rolling
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars rolling``
+[link: /commands/categories/dataframe.md] ��@7c80b44f48bceb8dbc9d37761f4b879d8f8e24a1feac4b2df625f5cef1ec24e0�cTitle: title: polars rolling
+Path: Signature
+Content:
+``> polars rolling {flags} (type) (window)``
+��@f9f14be27cb030d142aea98b1863d9a3ec964a591052d519301a910d3b7072b8�{Title: title: polars rolling
+Path: Parameters
+Content:
+``type``
+: Rolling operation.
+``window``
+: Window size for rolling.
+��@1bf01823404d38ffa536bc49e38c8aeac21f0bdfa294bd9935922e2fb7c9850eّTitle: title: polars rolling
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@9d46ae1ae137e8cb2d3224a3286a30968e25a7f015d9259ddaa0a9effb4e894d��Title: title: polars rolling
+Path: Examples
+Content:
+Rolling sum for a series
+```Fenced(Borrowed("nu"))
+> [1 2 3 4 5] | polars into-df | polars rolling sum 2 | polars drop-nulls
+╭───┬───────────────╮
+│ # │ 0_rolling_sum │
+├───┼───────────────┤
+│ 0 │             3 │
+│ 1 │             5 │
+│ 2 │             7 │
+│ 3 │             9 │
+╰───┴───────────────╯
+
+
+```
+Rolling max for a series
+```Fenced(Borrowed("nu"))
+> [1 2 3 4 5] | polars into-df | polars rolling max 2 | polars drop-nulls
+╭───┬───────────────╮
+│ # │ 0_rolling_max │
+├───┼───────────────┤
+│ 0 │             2 │
+│ 1 │             3 │
+│ 2 │             4 │
+│ 3 │             5 │
+╰───┴───────────────╯
+
+
+```

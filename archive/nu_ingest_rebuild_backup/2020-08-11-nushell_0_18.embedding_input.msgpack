@@ -1,0 +1,144 @@
+—’Ù@e92a125641637f52790ae7a1c772bade8c1890082d67435babaf0dd932dbfa4fÚjTitle: title: Nushell 0.18
+Path: Nushell 0.18
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.18 of Nu. The focus of this release was largely to polish what is already there, ensuring that internally parts work together better, are more consistent, and are easier to maintain. We've also added new commands for working with paths, URLs, strings, and lists.
+’Ù@f405f0d6ae70ecbd0132f378dcb5342fbe0d965d62d8339717dd0751d55585dfÚ“Title: title: Nushell 0.18
+Path: Where to get it
+Content:
+Nu 0.18 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.18.1] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want more goodies, you can install 
+``cargo install nu --features=stable``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+Please note:
+ as part of last minute changes, we had to bump the first release version of 0.18 to 0.18.1 instead of 0.18.0.
+’Ù@3befc6d6778bc2c441e18c751bb446488765d826ffb6b3c6d9a93fa9ec1486a9Ú	»Title: title: Nushell 0.18
+Path: Command improvements
+Content:
+New:
+ 
+[link: https://github.com/nushell/nushell/pull/2292] ``reduce``
+ command
+ to reduce a list of values into a value (bailey-layzer)
+New:
+ 
+[link: https://github.com/nushell/nushell/pull/2255] ``path basename``
+, 
+``path extension``
+, 
+``path expand``
+ for working with path values (mattyhall)
+New:
+ 
+[link: https://github.com/nushell/nushell/pull/2264] ``path type``
+ and 
+``path exists``
+ for more path-related functionality (mattyhall)
+New:
+ 
+[link: https://github.com/nushell/nushell/pull/2262] ``str ltrim``
+ and 
+``str rtrim``
+ to trim off left-hand and right-hand characters (k-brk)
+New:
+ 
+[link: https://github.com/nushell/nushell/pull/2269] ``str starts-with``
+ and 
+``str ends-with``
+ to check if a string begins or ends with a given substring (k-brk)
+New:
+ the 
+[link: https://github.com/nushell/nushell/pull/2274] ``url``
+ subcommands
+ for dealing with URLs (mattyhall)
+The history file path is 
+[link: https://github.com/nushell/nushell/pull/2320] now configurable
+ (Amanita-muscaria)
+The startup banner can now be 
+[link: https://github.com/nushell/nushell/pull/2314] turned off
+ (avranju)
+``version``
+ now contains the 
+[link: https://github.com/nushell/nushell/pull/2333] features
+ that Nu was built with (andrasio)
+``math stddev``
+ and 
+``math variance``
+ can now 
+[link: https://github.com/nushell/nushell/pull/2310] sample the input
+ (andrasio)
+``do -i``
+ will also 
+[link: https://github.com/nushell/nushell/pull/2309] ignore stderr output
+ from external commands (sophiajt)
+``to html``
+ now has 
+[link: https://github.com/nushell/nushell/pull/2308] many themes to choose from
+ (fdncred)
+``to html``
+ also now has 
+[link: https://github.com/nushell/nushell/pull/2273] list output
+ (coolshaurya)
+More of the line editor settings are 
+[link: https://github.com/nushell/nushell/pull/2238] now configurable
+ (fdncred)
+``str to-datetime``
+ can now 
+[link: https://github.com/nushell/nushell/pull/2303] parse many more date formats
+ (nmandery)
+``str join``
+ now optionally takes 
+[link: https://github.com/nushell/nushell/pull/2289] a separator value
+ (coolshaurya)
+``histogram``
+ can now 
+[link: https://github.com/nushell/nushell/pull/2300] work with simple values
+ (andrasio)
+``ls -al``
+ (and 
+``ps -l``
+) are now the preferred way of getting a full listing (JosephTLyons)
+``insert``
+ now 
+[link: https://github.com/nushell/nushell/pull/2265] takes a block
+ to do the work of inserting values (coolshaurya)
+’Ù@6fe5623de8351a39a77957689050d60156e42e421dc4b9755783701734df2790Ú,Title: title: Nushell 0.18
+Path: Breaking changes
+Content:
+The flags for --full in 
+``ls``
+ and 
+``ps``
+ has been changed to --long (-l) to better align with habits from other shells.
+Line editor config settings have 
+[link: https://github.com/nushell/nushell/pull/2238] moved to their own section
+.
+’Ù@af41c0cb127565cfc307d86fcec6f06a94dff192db64ef648bb1a6e05e4d8d4fÙäTitle: title: Nushell 0.18
+Path: Demo site (jzaefferer, sophiajt)
+Content:
+There have been a number of improvements to the new wasm-based demo site, including new colors, command improvements, pivoting of long tables, and more.
+’Ù@4113ba79a9d1888b434df73261a613e3262af39796b82c50081ee30c5255fb84ÚtTitle: title: Nushell 0.18
+Path: Bugfixes (fdncred, kornelski, JosephTLyons, andrasio, thegedge, sophiajt, jzaefferer, warrenseine, coolshaurya)
+Content:
+Fixed issues with different types of symlinks on Windows, Nu will now used the support app_dirs crate, lots of internal match logic cleanup, internal representation of data summaries got a cleanup, getting ready to add a winget package, the first wave of parser cleanups ahead of future completion work, cleaned up unnecessary extra build steps, new command examples, improvements to the new 
+``path``
+ command errors, fixed histogram example, and consistency improvements.
+’Ù@9598ee4b82dcd9c2e1438e5850b9aae75f7731a5cc5505ee0c8a40ed0c5b7109ÚBTitle: title: Nushell 0.18
+Path: Looking forward
+Content:
+We're nearly to the first birthday for Nu! In the near future, we'll continue to improve completions, work on a possible new 
+[link: https://github.com/nushell/rfcs/pull/3] data frames
+ implementation, continuing to push the wasm implementation further, and more.

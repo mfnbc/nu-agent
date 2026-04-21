@@ -1,0 +1,53 @@
+���@849494af92ece500a6fd6ddccebd88aa0d1fd7cdc0aabd1558f39dc20127f8a8ـTitle: title: polars all-false
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars all-false``
+[link: /commands/categories/dataframe.md] ��@cc10fc4d3680713d703a9cd971360ed53bd689035c2bc5ac3570c9349884cc9f�XTitle: title: polars all-false
+Path: Signature
+Content:
+``> polars all-false {flags} ``
+��@8785587a59ea7adab56640c859d2626a2db2d25ea4a1db467b07102c5e57e497ٓTitle: title: polars all-false
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@ea1f469c7fbad2a539711f0d1d836911ef7fbf9e63df9662430784ddd88cc835��Title: title: polars all-false
+Path: Examples
+Content:
+Returns true if all values are false
+```Fenced(Borrowed("nu"))
+> [false false false] | polars into-df | polars all-false
+╭───┬───────────╮
+│ # │ all_false │
+├───┼───────────┤
+│ 0 │ true      │
+╰───┴───────────╯
+
+
+```
+Checks the result from a comparison
+```Fenced(Borrowed("nu"))
+> let s = ([5 6 2 10] | polars into-df);
+    let res = ($s > 9);
+    $res | polars all-false
+╭───┬───────────╮
+│ # │ all_false │
+├───┼───────────┤
+│ 0 │ false     │
+╰───┴───────────╯
+
+
+```

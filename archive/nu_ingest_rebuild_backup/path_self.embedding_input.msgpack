@@ -1,0 +1,50 @@
+•’Ù@1c3049abdba1f1b4c1d81d7a4c6c6490cdfb151cb100bd1211d17a2a4df0e2b2ÙhTitle: title: path self
+Path: path
+Content:
+
+
+
+
+
+
+
+
+
+``path self``
+[link: /commands/categories/path.md] ’Ù@0060b1d4f6d4594f216024a33e596f6128c6183992febed861c1a166bb9647c5ÙPTitle: title: path self
+Path: Signature
+Content:
+``> path self {flags} (path)``
+’Ù@91a6cb793ab4029f92380b27db34a5f3e01c6856f532269eb434a30208780b20ÙfTitle: title: path self
+Path: Parameters
+Content:
+``path``
+: Path to get instead of the current file.
+’Ù@7404b50213736e40ab2f1a02e03508da3d92e2e6ca8682778b54bfa6d4ba335fÙWTitle: title: path self
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+’Ù@8d8e36d49fd7d720232b009cf7c15b37664a63b797da43c06bf35815c671c1c7Ú—Title: title: path self
+Path: Examples
+Content:
+Get the path of the current file.
+```Fenced(Borrowed("nu"))
+> const current_file = path self
+
+
+```
+Get the path of the directory containing the current file.
+```Fenced(Borrowed("nu"))
+> const current_file = path self .
+
+
+```
+Get the absolute form of a path relative to the current file.
+```Fenced(Borrowed("nu"))
+> const current_file = path self ../foo
+
+
+```

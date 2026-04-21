@@ -1,0 +1,157 @@
+”’Ù@fd3f88de282f288a8cec8bb5dd0744c40e292167049b3d871de9f81df4a82b5fÚàTitle: This week in Nushell #249
+Path: Nushell
+Content:
+IanManske 
+[link: https://github.com/nushell/nushell/pull/13009] disallowed more characters in arguments for Windows internal 
+``cmd``
+ commands
+, 
+[link: https://github.com/nushell/nushell/pull/13006] restored 
+``path type``
+ behavior
+, 
+[link: https://github.com/nushell/nushell/pull/12986] disabled a reedline patch for 0.94.0
+, and 
+[link: https://github.com/nushell/nushell/pull/12970] fixed a panic when redirecting nothing
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/13002] fixed 
+``do``
+ closures with required, options, and rest args
+devyn 
+[link: https://github.com/nushell/nushell/pull/13001] restored tilde expansion on external command names
+, and 
+[link: https://github.com/nushell/nushell/pull/12988] bumped the version to 
+``0.94.1``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12994] fixed a bug in OSC9;9 execution
+kubouch 
+[link: https://github.com/nushell/nushell/pull/12987] bumped the version to 0.94.0
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/12976] fixed 
+``touch --reference``
+ using PWD from the environment
+, and 
+[link: https://github.com/nushell/nushell/pull/12975] fixed 
+``path type``
+ using PWD from the environment
+’Ù@c57c92c957b58ba63efd11522c0406d4cd85d0061798427e950a7692630c84e1Ù¯Title: This week in Nushell #249
+Path: Extension
+Content:
+ajhall 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/186] removed 
+``/``
+ and 
+``\``
+ from wordPattern
+’Ù@3718ccfcf422fa692d05a3dde17bd398eff0fc19ba7ac723926071478b6c6e87Ú‹Title: This week in Nushell #249
+Path: Documentation
+Content:
+Kissaki created 
+[link: https://github.com/nushell/nushell.github.io/pull/1430] Fix link references in translated books
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1426] Change inline code to code blocks
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1425] Update cheat_sheet.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1424] Fix configuration cell-path link reference
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1420] Fix text typo in 0.94.0 release post
+IanManske created 
+[link: https://github.com/nushell/nushell.github.io/pull/1429] Edit 0.94.0 release notes for 
+``parse``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1428] Add release note for changes to 
+``parse``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1421] Fix typo in 0.94.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1415] Edit 0.94.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1412] Edit 0.94.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1387] Update docs for 
+``sys``
+ deprecation in 0.94.0
+devyn created 
+[link: https://github.com/nushell/nushell.github.io/pull/1427] Release notes for 
+``0.94.1``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1417] Add some release notes targeted at plugin developers
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1416] Plugin protocol reference updates for 0.94.0
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1378] Release notes for 
+``0.94.0``
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/1419] Refresh command docs for Nu v0.94
+maxim-uvarov created 
+[link: https://github.com/nushell/nushell.github.io/pull/1414] Dataframes chapter update to reflect the latest changes
+veeven created 
+[link: https://github.com/nushell/nushell.github.io/pull/1413] Delete wrong vi motion command 
+``d``
+NotTheDr01ds created 
+[link: https://github.com/nushell/nushell.github.io/pull/1398] Initial 
+``$in``
+ language reference
+’Ù@e86c4995a7335af1a2ac1a61822921adc7518dc5ae96d25663b53282e219e846ÚòTitle: This week in Nushell #249
+Path: Nu_Scripts
+Content:
+maxim-uvarov created 
+[link: https://github.com/nushell/nu_scripts/pull/859] improve 
+``std bench``
+ and add 
+``significant-digits``
+ddanier created 
+[link: https://github.com/nushell/nu_scripts/pull/858] Support whitespace before target name for make completions
+IanManske created 
+[link: https://github.com/nushell/nu_scripts/pull/857] Remove 
+``nu-cmd-dataframe``
+ from release script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/853] Edit release notes template
+OJarrisonn created 
+[link: https://github.com/nushell/nu_scripts/pull/856] feat: 
+``git clone``
+ completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/855] feat: add 
+``./gradlew``
+ completions
+laisnuto created 
+[link: https://github.com/nushell/nu_scripts/pull/854] Add git coommit completions
+39555 created 
+[link: https://github.com/nushell/nu_scripts/pull/852] Port 
+``before_v0.60/with_externals``
+ and cleanup 
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/851] Port 
+``before_v0.60/config_management``
+ 
+``before_v0.60/language``
+ 
+``before_v0.60/prompt``
+ 
+``before_v0.60/tests``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/850] Port 
+``before_v0.60/stdlib_candidate``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/849] Port 
+``before v0.60/virtual_environments``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/847] Port 
+``before_v0.60/data_extraction``
+ 
+``before_v0.60/examples``
+ 
+``before_v0.60/duplicates``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/845] Port 
+``before_v0.60/fuzzy``
+, 
+``before_v0.60/ls-mods``
+ and 
+``before_v0.60/nu_101``
+ 
+Schweber created 
+[link: https://github.com/nushell/nu_scripts/pull/848] modules/nix: init activation-script

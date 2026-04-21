@@ -1,0 +1,70 @@
+���@7bb573ae9bd0730214530bb67c922335103a0736fc2f15713732dde5621cd35b�pTitle: title: roll right
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``roll right``
+[link: /commands/categories/filters.md] ��@9215293debed0365567dfd0b63593883f6bf1b6207e2e9d2b76f34b69d0257fc�LTitle: title: roll right
+Path: Signature
+Content:
+``> roll right {flags} ``
+��@0a255d583eaea221890385d2d86f5db071d2a3cd3942ea3e86c36d4e71a0c9b4ٜTitle: title: roll right
+Path: Flags
+Content:
+``--by, -b {int}``
+: Number of columns to roll.
+``--cells-only, -c``
+: Rotates columns leaving headers fixed.
+��@50a4db25ecc887f81c34aab8e60dad2b50fa7b43525c6e68e7dde813fa861d6f�cTitle: title: roll right
+Path: Input/output types:
+Content:
+input
+output
+record
+record
+table
+table
+��@45d9e73633825e45727ff52702769ed0357cceac35942e8aba04c80cf0c7d12f��Title: title: roll right
+Path: Examples
+Content:
+Rolls columns of a record to the right
+```Fenced(Borrowed("nu"))
+> {a:1 b:2 c:3} | roll right
+╭───┬───╮
+│ c │ 3 │
+│ a │ 1 │
+│ b │ 2 │
+╰───┴───╯
+
+```
+Rolls columns to the right
+```Fenced(Borrowed("nu"))
+> [[a b c]; [1 2 3] [4 5 6]] | roll right
+╭───┬───┬───┬───╮
+│ # │ c │ a │ b │
+├───┼───┼───┼───┤
+│ 0 │ 3 │ 1 │ 2 │
+│ 1 │ 6 │ 4 │ 5 │
+╰───┴───┴───┴───╯
+
+
+```
+Rolls columns to the right with fixed headers
+```Fenced(Borrowed("nu"))
+> [[a b c]; [1 2 3] [4 5 6]] | roll right --cells-only
+╭───┬───┬───┬───╮
+│ # │ a │ b │ c │
+├───┼───┼───┼───┤
+│ 0 │ 3 │ 1 │ 2 │
+│ 1 │ 6 │ 4 │ 5 │
+╰───┴───┴───┴───╯
+
+
+```

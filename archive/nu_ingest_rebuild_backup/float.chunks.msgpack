@@ -1,0 +1,52 @@
+’—Ùearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/basic_types/float.mdÙ@7945da62fa463dcc9d3a205e31fadb964f72a38a67d2d0c3df44f72f30033dd6¥Float‘¥FloatÚGDescription:
+
+Numbers with some fractional component
+Annotation:
+
+``float``
+
+Literal syntax:
+
+A decimal numeric value including a decimal place. E.g., 
+``1.5``
+, 
+``2.0``
+, 
+``-15.333``
+
+Casts:
+
+[link: /commands/docs/into_float.md] ``into float``
+See also:
+
+[link: /book/types_of_data.md#floatsdecimals] Types of Data - Floats
+’ÚiTitle: Float
+Path: Float
+Content:
+Description:
+
+Numbers with some fractional component
+Annotation:
+
+``float``
+
+Literal syntax:
+
+A decimal numeric value including a decimal place. E.g., 
+``1.5``
+, 
+``2.0``
+, 
+``-15.333``
+
+Casts:
+
+[link: /commands/docs/into_float.md] ``into float``
+See also:
+
+[link: /book/types_of_data.md#floatsdecimals] Types of Data - Floats
+—Ùearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/basic_types/float.mdÙ@f765a46ddfbbf6414fed02592e5fe5f8f5af920969d34af33fa52f8962d859fa¥Float‘¹Additional language notesÙLFloats are internally represented as IEEE-754 floats with 64 bit precision.
+’Ù‚Title: Float
+Path: Additional language notes
+Content:
+Floats are internally represented as IEEE-754 floats with 64 bit precision.

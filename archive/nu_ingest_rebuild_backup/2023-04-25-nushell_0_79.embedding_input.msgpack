@@ -1,0 +1,836 @@
+Ÿ’Ù@ff300b377a1080197ba93f0510ef359e0d85b2f0ab63a4fd22da507ed1cefe2eÚËTitle: title: Nushell 0.79
+Path: Nushell 0.79
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your command line. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful command line pipelines.
+Today, we're releasing version 0.79 of Nu. This release adds a standard library written in nu itself and enhanced IDE support.
+’Ù@e33187bfb4aa2276ee0d0be675182747133e0ecbad8e2e41edcec7d9dca6d669Ú4Title: title: Nushell 0.79
+Path: Where to get it
+Content:
+Nu 0.79 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.79.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+NOTE: The optional dataframe functionality is available by 
+``cargo install nu --features=dataframe``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+’Ù@a1538a059a8fb76026904db5699b6bd6f6f2f5e83253a2bf99b64c60bb747e4cÚTitle: title: Nushell 0.79
+Path: )
+Content:
+[link: https://github.com/nushell/nushell/pulls?q=is%3Aclosed+is%3Apr+label%3Astd-library] This is it. We finally release the standard library with this 
+``0.79``
+!
+
+It's been on the mind of the core team of Nushell for some time and it was made real between the two releases.
+But first of all... 
+what is the 
+standard library
+?
+The nushell standard library is a 
+collection of nushell scripts
+ that are 
+automatically loaded
+ in the nushell binary
+
+and 
+reachable via the 
+``use``
+ command
+ without any additional setup.
+:bulb: 
+Note
+
+some of the commands from the standard library are 
+``use``
+d without human intervention as part of what we call
+
+the 
+prelude
+.
+As said above, the other commands are available with the 
+``use``
+ command.
+
+The goal of this library is, as its name suggests, to provide a 
+standard
+ experience and a 
+standardized
+ set of commands and tools to any Nushell user.
+
+In 
+``std``
+, one can find things like
+a test framework to write robust Nushell scripts, modules and libraries
+implementation of builtin commands once written in 
+``rust``
+logging commands with several log levels
+...
+:bulb: 
+Note
+
+yes, you heard right, in the future, the standard library might become a sanctuary for non-time-critical commands that were once written in 
+``rust``
+
+as part of the built-in set of commands!
+Right now, we are actively trying to move the 
+``help``
+ commands from the 
+``nushell``
+ core implementation to the library.
+With this release, the library comes with the following custom commands:
+
+| module | description | commands |
+
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+| 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-std/lib/testing.nu] ``std assert``
+ | a set of commands to write tests | 
+``assert``
+, 
+``assert equal``
+, 
+``assert error``
+, 
+``assert greater``
+, 
+``assert greater or equal``
+, 
+``assert length``
+, 
+``assert less``
+, 
+``assert less or equal``
+, 
+``assert not equal``
+, 
+``assert skip``
+, 
+``assert str contains``
+ |
+
+| 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-std/lib/dirs.nu] ``std dirs``
+ | a re-implementation of the 
+``shells``
+ commands | 
+``dirs add``
+, 
+``dirs drop``
+, 
+``dirs next``
+, 
+``dirs prev``
+, 
+``dirs show``
+ |
+
+| 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-std/lib/help.nu] ``std help``
+ | a Nushell implementation of the built-in commands | 
+``help``
+, 
+``help aliases``
+, 
+``help commands``
+, 
+``help externs``
+, 
+``help modules``
+, 
+``help operators``
+ |
+
+| 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-std/lib/iter.nu] ``std iter``
+ | an extension of built-in commands to iterate over data | 
+``iter filter-map``
+, 
+``iter find``
+, 
+``iter intersperse``
+, 
+``iter scan``
+ |
+
+| 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-std/lib/log.nu] ``std log``
+ | never miss something in your scripts | 
+``log critical``
+, 
+``log debug``
+, 
+``log error``
+, 
+``log info``
+, 
+``log warning``
+ |
+
+| 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-std/lib/xml.nu] ``xml``
+ module
+ | tools to interact with Xml data | 
+``xaccess``
+, 
+``xinsert``
+, 
+``xtype``
+, 
+``xupdate``
+ |
+some other commands live under the 
+``std``
+ namespace, without any module: 
+``clip``
+, 
+``path add``
+ and 
+``run-tests``
+’Ù@45d7012019c87d9816a8cc2f64f517be1a5f607b5af2c9e959770adf9ad69240Ú–Title: title: Nushell 0.79
+Path: TL;DR
+Content:
+As there has been quite a lot of contributions already (see the 
+[link: https://github.com/nushell/nushell/pulls?q=is%3Aclosed+is%3Apr+label%3Astd-library] 50 closed PRs
+ at the time i'm writing this :o),
+
+i'm just gonna give some hints and links in this release note, leaving the rest to the amazing work of other contributors who wrote parts of the lib and its documents (shout out to
+
+[link: https://github.com/bobhy] @bobhy
+,
+
+[link: https://github.com/fdncred] @fdncred
+ and
+
+[link: https://github.com/presidento] @presidento
+the library can be used and tested with
+```Fenced(Borrowed("nushell"))
+use std   # will load the whole library under the `std` namespace
+use std * #   -    -   -    -      -    without the `std` prefix
+
+```
+or use direct imports, such as
+```Fenced(Borrowed("nushell"))
+use std 'dirs show'
+
+```
+one can follow the activity of the library in the 
+[link: https://github.com/nushell/nushell/issues/8450] roadmap
+the library comes with a test framework; see the 
+[link: https://www.nushell.sh/book/testing.html] Testing your Nushell code
+ chapter of the book
+the long term information, changelog and updates shall be found in the 
+[link: https://www.nushell.sh/book/standard_library.html] Standard library
+ chapter of the Nushell book
+if you are a contributor willing to help out, everything happens in the 
+[link: https://github.com/nushell/nushell/tree/main/crates/nu-std] ``nu-std``
+ crate
+, especially the
+
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-std/CONTRIBUTING.md] ``CONTRIBUTING.md``
+ document
+ which explains all there is to know about "
+developing with 
+``std``
+"
+
+in great details.
+If, for some reason, you want to load Nushell without the standard library, start 
+``nu``
+ with the 
+``--no-std-lib``
+. This can be the case if you find the startup times much longer than before. We're aiming to improve the loading speed in the future.
+’Ù@adeb67296718ff9bf13d282c6537fb3d39365ef0d974b5a63f1c2b2bf57e89c4Ú<Title: title: Nushell 0.79
+Path: )
+Content:
+[link: https://github.com/nushell/nushell/pull/8745] [link: https://github.com/nushell/vscode-nushell-lang/pull/89] IDE support
+Nushell now has a first 
+[link: https://en.wikipedia.org/wiki/Language_Server_Protocol] LSP (Language Server Protocol)
+ implementation with a VSCode integration. If you install the latest version of our 
+[link: https://github.com/nushell/vscode-nushell-lang] VSCode plugin
+, you'll see hovers, inlays, tooltips, error squigglies and other features. We are still very early in the LSP development, but the extension is already very usable and definitely moves the experience of writing Nu code to another level!
+While currently we have only VSCode integration, the server itself is standalone and we welcome projects adding the LSP support to more editors.
+’Ù@75e7cd747289f7d5302159dc87a4349e750b5afde3c86aa285f998ab1da8ed55Ú;Title: title: Nushell 0.79
+Path: supports Nushell
+Content:
+``atuin``
+[link: https://atuin.sh/blog/release-v14] Thanks to 
+[link: https://github.com/stevenxxiu] @stevenxxiu
+ you can now use 
+``atuin``
+ with Nushell. We are happy to see Nushell supported by more projects and we welcome PRs adding more integrations.
+’Ù@8ca0ad081cf738cdee9c08de77de66a83f52d6a0d3339741e3dc902a39173086Ú6Title: title: Nushell 0.79
+Path: )
+Content:
+[link: https://github.com/nushell/nushell/pull/8846] We listened to your feedback around the syntax changes introduced with 0.78 and decided to revert to the old behavior around the parsing rules for numeric literals as well as the compulsory 
+``||``
+ for closures.
+’Ù@4ac07fc713661ab1843317c2062c1b92cb9b61a77e6a74b9e5bcb65f72b847b9ÚsTitle: title: Nushell 0.79
+Path: )
+Content:
+[link: https://github.com/nushell/nushell/pull/8797] While there are still some missing pieces, we removed the old alias implementation. This means that 
+``old-alias``
+ is no longer available. We decided to remove it to clean up the code. It makes further fixes to aliases easier as you do not need to remember which alias implementation a piece of code belongs to.
+There are two notable missing features from the old aliases:
+Missing completions with external completers.
+Most parser keywords (such as 
+``source``
+) cannot be aliased but adding support for aliasing them should be possible in most cases.
+Not possible to alias with environment shorthands (e.g., 
+``alias foo = FOO=bar spam``
+)
+Some presentation issues, such as the output of 
+``which``
+ and the alias 
+``usage``
+ pointing at the aliased call instead of the alias itself.
+’Ù@ed4de7c8714b88f6afd1e1c38a86cacd3c16555219db9839096ab0605249cfe1ÚTitle: title: Nushell 0.79
+Path: )
+Content:
+[link: https://github.com/nushell/nushell/pull/8792] [link: https://github.com/nushell/nushell/issues/8887] ``$nu.config-path``
+ and 
+``$nu.env-path``
+ are now set based on 
+``--config``
+ and 
+``--env-config``
+ flags passed to Nushell and also use the path after resolving symlinks. This means that they no longer guarantee pointing at the default Nushell's config directory. To be able to refer to the default config directory, 
+``$nu.default-config-dir``
+ was added and used in default 
+``env.nu``
+ to always point 
+``NU_LIB_DIRS``
+ to the 
+``scripts``
+ directory under the default config directory.
+Related to that, 
+[link: https://github.com/nushell/nushell/pull/8861] ``$env.CURRENT_FILE``
+ was added to be able to show the currently evaluated file.
+’Ù@f5e6b6dcdecb51585862802fdb39dc35f7b355ccfe578d910619f5521a3bb9c3Ú:Title: title: Nushell 0.79
+Path: Breaking changes
+Content:
+[link: https://github.com/nushell/nushell/pull/8797] #8797
+ 
+``old-alias``
+ is no longer available
+[link: https://github.com/nushell/nushell/pull/8724] #8724
+ 
+``str index-of -r``
+ now uses ranges
+[link: https://github.com/nushell/nushell/pull/8792] #8792
+ 
+``config nu``
+ and 
+``config env``
+ now open 
+``$nu.config-path``
+ and 
+``$nu.env-path``
+, respectively.
+[link: https://github.com/nushell/nushell/pull/8779] #8779
+ Aliasing math expressions now shows error immediately instead of failing silently and showing a confusing error later.
+[link: https://github.com/nushell/nushell/pull/8917] #8917
+ 
+``exec``
+ inherits Nushell's environment variables
+[link: https://github.com/nushell/nushell/pull/8887] #8887
+ 
+``NU_LIB_DIRS``
+ definition in 
+``env.nu``
+ changed
+’Ù@2fdb4b9611e642415576ff02bb9f0d5394e0c604980b90183fa21e57df3b884eÚ+&Title: title: Nushell 0.79
+Path: Nushell
+Content:
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/8998] Bump to 
+``0.79.1``
+ dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/8996] Pin 
+``reedline``
+ to 
+``0.19.0``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/8980] Bump version for 
+``0.79.0``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/8876] Run coverage immediately
+, and 
+[link: https://github.com/nushell/nushell/pull/8867] Reenable CI coverage
+, and 
+[link: https://github.com/nushell/nushell/pull/8866] Fix span of multibyte short flags
+, and 
+[link: https://github.com/nushell/nushell/pull/8832] Move CLI related commands to 
+``nu-cli``
+, and 
+[link: https://github.com/nushell/nushell/pull/8822] Follow up #8758 with a style fix
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/8982] Add npm installation instruction
+, and 
+[link: https://github.com/nushell/nushell/pull/8840] Upgrade to nu v0.78 for binaries release workflow
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/8971] Tweak run-external signature so command must be a string
+, and 
+[link: https://github.com/nushell/nushell/pull/8905] Upgrade 
+``open``
+ crate to fix WSL bug
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/8961] use record separator 
+``\x1e``
+ for 
+``include_path``
+, and 
+[link: https://github.com/nushell/nushell/pull/8937] allow 
+``find``
+ command to look in specified columns only
+, and 
+[link: https://github.com/nushell/nushell/pull/8921] fix reedline breaking changes due to PR562
+, and 
+[link: https://github.com/nushell/nushell/pull/8915] fix bug with include_path -I parameter
+, and 
+[link: https://github.com/nushell/nushell/pull/8910] allow custom commands to show up in 
+``$nu.scope.commands``
+ better
+, and 
+[link: https://github.com/nushell/nushell/pull/8909] remove debug print bug
+, and 
+[link: https://github.com/nushell/nushell/pull/8901] Update issue templates
+, and 
+[link: https://github.com/nushell/nushell/pull/8875] limit the ide-check error amount
+, and 
+[link: https://github.com/nushell/nushell/pull/8873] change include dirs separator to colon
+, and 
+[link: https://github.com/nushell/nushell/pull/8801] make inlays show type instead of shape
+pingiun created 
+[link: https://github.com/nushell/nushell/pull/8957] Set override locale in toolkit
+, and 
+[link: https://github.com/nushell/nushell/pull/8917] Set env in exec command
+, and 
+[link: https://github.com/nushell/nushell/pull/8861] Add $env.CURRENT_FILE variable
+, and 
+[link: https://github.com/nushell/nushell/pull/8789] Add $nu.current-exe variable
+, and 
+[link: https://github.com/nushell/nushell/pull/8768] Add ppid example for ps
+stevenxxiu created 
+[link: https://github.com/nushell/nushell/pull/8955] fix: set the initial repl cursor pos, fixes #8943
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/8952] using ratatui instead of tui
+, and 
+[link: https://github.com/nushell/nushell/pull/8871] ``rm``
+: enable trash flag on android and ios platrofm
+, and 
+[link: https://github.com/nushell/nushell/pull/8860] optimize hash md5 for binary input
+, and 
+[link: https://github.com/nushell/nushell/pull/8843] Remove autoprinting of 
+``for``
+ loop
+, and 
+[link: https://github.com/nushell/nushell/pull/8623] Update crossterm version to 0.26
+, and 
+[link: https://github.com/nushell/nushell/pull/8610] ``update``
+ command: make 
+``$in``
+(in closure body) takes cell path
+sophiajt created 
+[link: https://github.com/nushell/nushell/pull/8949] Reuse the cached parse results of parsed files
+, and 
+[link: https://github.com/nushell/nushell/pull/8913] Hopefully speedup startup
+, and 
+[link: https://github.com/nushell/nushell/pull/8903] Allocate less when doing a capture discovery
+, and 
+[link: https://github.com/nushell/nushell/pull/8881] Improve hovers, including for custom commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8864] Make -I take in a ;-delimited list
+, and 
+[link: https://github.com/nushell/nushell/pull/8857] Adds multi-file support to IDE support
+, and 
+[link: https://github.com/nushell/nushell/pull/8846] Relax the closure syntax, highlight differently
+, and 
+[link: https://github.com/nushell/nushell/pull/8845] Revert numberlike parsing restriction
+, and 
+[link: https://github.com/nushell/nushell/pull/8833] Add option to not load std-lib. Default tests to not use std-lib
+, and 
+[link: https://github.com/nushell/nushell/pull/8830] Only add the std lib files once
+, and 
+[link: https://github.com/nushell/nushell/pull/8800] improve operation mismatch errors
+, and 
+[link: https://github.com/nushell/nushell/pull/8798] Fix parser recovery after error
+, and 
+[link: https://github.com/nushell/nushell/pull/8765] Refactor to support multiple parse errors
+1Kinoti created 
+[link: https://github.com/nushell/nushell/pull/8944] unify the 
+``*-BuiltinVar``
+ parser errors
+, and 
+[link: https://github.com/nushell/nushell/pull/8926] add 
+``filter-map``
+ command to 
+``std iter``
+, and 
+[link: https://github.com/nushell/nushell/pull/8899] add 
+``iter``
+ module to standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/8897] rename toolkit's 
+``set-git-hooks``
+ to 
+``setup-git-hooks``
+, and 
+[link: https://github.com/nushell/nushell/pull/8886] use 
+``let-else``
+ syntax where possible
+, and 
+[link: https://github.com/nushell/nushell/pull/8758] allow register to accept a const argument
+presidento created 
+[link: https://github.com/nushell/nushell/pull/8932] Fix 
+``into decimal``
+ command category
+, and 
+[link: https://github.com/nushell/nushell/pull/8877] std: remove logging example
+, and 
+[link: https://github.com/nushell/nushell/pull/8850] Move unit test runner to standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/8776] stdlib test runner: implement 
+``setup``
+ and 
+``teardown``
+ commands to unit tests
+, and 
+[link: https://github.com/nushell/nushell/pull/8766] Stdlib: use default color for info log level
+, and 
+[link: https://github.com/nushell/nushell/pull/8748] stdlib: add 
+``assert skip``
+ command to skip test case
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8912] refactor the 
+``CONTRIBUTING.md``
+ guidelines for 
+``nu-std``
+, and 
+[link: https://github.com/nushell/nushell/pull/8898] stdlib: fix the 
+``clip``
+ command with integer values
+, and 
+[link: https://github.com/nushell/nushell/pull/8855] FEATURE: do not use theme-independent colors in the default configs
+, and 
+[link: https://github.com/nushell/nushell/pull/8841] stdlib: make helper modules available in std
+, and 
+[link: https://github.com/nushell/nushell/pull/8816] remove the "MODULE NOT FOUND" print from the parser
+, and 
+[link: https://github.com/nushell/nushell/pull/8815] stdlib: refactor into a multi-module library
+, and 
+[link: https://github.com/nushell/nushell/pull/8811] stdlib: use the loaded library in tests and update 
+``README``
+, and 
+[link: https://github.com/nushell/nushell/pull/8799] stdlib: add completion to 
+``help``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8795] FEATURE: make the link in the 
+``ansi``
+ extra usage an ANSI link
+, and 
+[link: https://github.com/nushell/nushell/pull/8794] add the standard 
+``help``
+ to the prelude as 
+``std help ...``
+, and 
+[link: https://github.com/nushell/nushell/pull/8774] FIX: load the library before anything else
+, and 
+[link: https://github.com/nushell/nushell/pull/8770] stdlib: make the library a standalone crate
+, and 
+[link: https://github.com/nushell/nushell/pull/8708] DEV: make all "comments" real md comments in the PR template
+vaishaag created 
+[link: https://github.com/nushell/nushell/pull/8906] Fix strange error on unbalanced curly braces
+, and 
+[link: https://github.com/nushell/nushell/pull/8868] Correct error description for unknown external commands
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/8895] ``std run-tests``
+: Rename --command switch to --test; and likewise in --list output
+, and 
+[link: https://github.com/nushell/nushell/pull/8894] Replace #8824: CONTRIBUTING.md for standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/8805] Pick up fix in dtparse for nanosec truncation noted at bottom of #8337
+Mehrbod2002 created 
+[link: https://github.com/nushell/nushell/pull/8889] Apply 
+``continue``
+ to 
+``each``
+ito-hiroki created 
+[link: https://github.com/nushell/nushell/pull/8887] Change 
+``NU_LIB_DIRS``
+ not to depend on 
+``$nu.config-path``
+, and 
+[link: https://github.com/nushell/nushell/pull/8792] Fix 
+``config {nu,env}``
+ to open 
+``$nu.{config,env}-file``
+federicoviscomi created 
+[link: https://github.com/nushell/nushell/pull/8849] Parser panic for signature with multibyte char for short flag #8821
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/8842] Fix process_range on 32-bit platforms
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/8838] Bump sys-locale from 0.2.4 to 0.3.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8837] Bump winreg from 0.11.0 to 0.50.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8836] Bump rstest from 0.16.0 to 0.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8835] Bump umask from 2.0.0 to 2.1.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8720] Bump miette from 5.6.0 to 5.7.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8719] Bump tempfile from 3.4.0 to 3.5.0
+MariaSolOs created 
+[link: https://github.com/nushell/nushell/pull/8820] Add git hooks for formatting and running 
+``clippy``
+, and 
+[link: https://github.com/nushell/nushell/pull/8818] Use 
+``pretty_assertions``
+ in the root crate
+, and 
+[link: https://github.com/nushell/nushell/pull/8808] Allow arguments for the last flag in short flag batch 
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/8807] remove nu_cli crate dependency from nu_std
+, and 
+[link: https://github.com/nushell/nushell/pull/8803] add LICENSE to nu-std
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/8797] Remove old alias implementation
+, and 
+[link: https://github.com/nushell/nushell/pull/8780] Remove parser keywords label from commands that do not need it
+, and 
+[link: https://github.com/nushell/nushell/pull/8779] Aliasing math expression shows error earlier
+, and 
+[link: https://github.com/nushell/nushell/pull/8777] Allow multi-word aliases
+harshalchaudhari35 created 
+[link: https://github.com/nushell/nushell/pull/8793] fix(nu-command/tests): further remove unnecessary pipeline() and cwd()
+fnordpig created 
+[link: https://github.com/nushell/nushell/pull/8707] Add regex separators for split row/list/column
+Sygmei created 
+[link: https://github.com/nushell/nushell/pull/8640] feat: added 
+``items``
+ command for Records
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8505] standard library: implement 
+``help``
+ commands with 
+``$nu``
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/8382] range operator accepts bot..=top as well as bot..top
+’Ù@b847d9b13bd8c0fd169002d49ec61669b01b33e9ae34df57b78c51eb63892b60Ú
+TTitle: title: Nushell 0.79
+Path: Extension
+Content:
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/115] update changelog
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/114] update syntax for 0.79.0
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/113] change the 
+``:``
+ separator to a record separator 
+``\x1e``
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/111] add folding regions
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/110] rename to match readme
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/109] update readme
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/107] update example generation script and examples
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/106] add a throttle timeout so that we don't update to frequently
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/105] add timing to more server functions
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/103] update vscode launch json so we can see debug messages from client
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/101] update files to model after jakt
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/98] limit the amount of errors returned by ide-check
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/97] respect the setting to enable or disable hints/inlays
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/96] change include dir separator from semicolon to colon
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/95] revert vscodeignore changes
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/94] add include dirs setting to extension
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/89] utilize nushell IDE features with built-in vscode LSP functionality
+glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/108] Add underscore separator in numbers
+sophiajt created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/102] Have launch build instead of watch
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/100] Delete tmp file on exit
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/99] Limit buffer calculation to buffer size not text size
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/93] Move runCompiler to be in charge of the script include flag
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/92] Add support for -I call to nushell
+’Ù@f3e4f51515acc836c923e68542847845b40cf2f0cb694675e831183a73c11228Ú|Title: title: Nushell 0.79
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/889] Refresh command docs for nu v0.79.0
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/882] Add npm installation instruction
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/867] Fix i18n script for nu v0.78
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/863] Update some docs for nu v0.78
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/888] Bump yaml from 2.1.3 to 2.2.2
+Ifthel created 
+[link: https://github.com/nushell/nushell.github.io/pull/887] Use explicit printing in custom_commands.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/886] Improve 
+``insert``
+ and 
+``update``
+ examples in working_with_lists.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/878] Update dataframe examples
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/877] Fix ranges in 
+``str substring``
+ examples
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/885] add the note about the standard library
+kai-tub created 
+[link: https://github.com/nushell/nushell.github.io/pull/883] Update standard_library.md
+MariaSolOs created 
+[link: https://github.com/nushell/nushell.github.io/pull/881] Fix some typos and other nits to the variable documentation
+1Kinoti created 
+[link: https://github.com/nushell/nushell.github.io/pull/880] update variable documentation
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/879] Mention optional cell path members
+presidento created 
+[link: https://github.com/nushell/nushell.github.io/pull/876] Dataframes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/870] Add info about echo, print and log commands to the book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/868] Update testing chapter
+maxim-uvarov created 
+[link: https://github.com/nushell/nushell.github.io/pull/875] fixing typo in 2023-04-04-nushell_0_78.md
+D3V1LC0D3R created 
+[link: https://github.com/nushell/nushell.github.io/pull/874] Update working_with_tables.md to include reject
+Kissaki created 
+[link: https://github.com/nushell/nushell.github.io/pull/873] Improve misleading text format on note
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/872] Release notes for 
+``0.79.0``
+ release.
+uselesspseudo created 
+[link: https://github.com/nushell/nushell.github.io/pull/871] Fix old keybding for help menu
+efulleratindeed created 
+[link: https://github.com/nushell/nushell.github.io/pull/865] Fix syntax error in blog post
+pingiun created 
+[link: https://github.com/nushell/nushell.github.io/pull/864] Add ppid to ps examples
+SamirTalwar created 
+[link: https://github.com/nushell/nushell.github.io/pull/852] Update the Direnv recipe to use a block, rather than 
+``code:``
+’Ù@cd153e9dedd94ca0e406344c86e7b7d954aeb321e92ea8314a780e1f9154fbfaÚ
+ñTitle: title: Nushell 0.79
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/463] some cleanup
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/457] update progress meter to work with latest nushell
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/456] update sg.nu to print again
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/449] some fun iterm2 drawing
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/448] update range syntax in str substring usage
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/445] move assets so they're more accessible
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/444] a little cleanup
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/441] fix some quoting bugs that the lsp found
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/462] Include 
+``nu-std``
+ in the release script
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/461] prompt powerline support color theme
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/460] refactor: unified configuration environment variables
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/455] prompt
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/438] upgrade to 0.78: git, ssh, docker, kubernetes
+Darkness9724 created 
+[link: https://github.com/nushell/nu_scripts/pull/459] Fix wolframalpha.nu
+RickCogley created 
+[link: https://github.com/nushell/nu_scripts/pull/458] Enhance by getting length of symbol string
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/450] Add nupass.nu password generator
+nils-degroot created 
+[link: https://github.com/nushell/nu_scripts/pull/454] Added completions for pass
+D3V1LC0D3R created 
+[link: https://github.com/nushell/nu_scripts/pull/453] Update nuschiit.nu (used deprecated fetch)
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/452] a small query web showcase with unscramble.me
+TuffenDuffen created 
+[link: https://github.com/nushell/nu_scripts/pull/451] Fix issue with open in yarn completions
+Hofer-Julian created 
+[link: https://github.com/nushell/nu_scripts/pull/447] conda: Add 
+``||``
+ to closure
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/442] Speeding up activating conda environment
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/446] Add --all aliases for exa
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/440] Add exa aliases
+Kissaki created 
+[link: https://github.com/nushell/nu_scripts/pull/443] Fix winget-completions.nu for nushell v0.78 closure syntax change
+Tiggax created 
+[link: https://github.com/nushell/nu_scripts/pull/439] Fixed support for env files
+melMass created 
+[link: https://github.com/nushell/nu_scripts/pull/418] refactor: âœ¨ 
+’Ù@91777c57621d93aff874316930e58875f83395705715f27e1ca3ddca7dd72f0cÚsTitle: title: Nushell 0.79
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/575] Bump version for 0.19 release
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/574] Restore the cursor shape when reedline exits
+stevenxxiu created 
+[link: https://github.com/nushell/reedline/pull/573] feat: add 
+``current_insertion_point()``
+ to return the current insertion point of the input buffer
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/571] support bracketed paste
+, and 
+[link: https://github.com/nushell/reedline/pull/560] Update crossterm to version 0.26.1
+xiuxiu62 created 
+[link: https://github.com/nushell/reedline/pull/569] re-export crossterm::style::Color for custom prompt implementations
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/562] Allow history searching via session id

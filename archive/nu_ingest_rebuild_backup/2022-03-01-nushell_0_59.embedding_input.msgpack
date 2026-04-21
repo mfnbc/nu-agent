@@ -1,0 +1,81 @@
+˜’Ù@4dc8a04033ce7c4bbb9cb74efb76a8004ff3c92d45961238bae2f5ceb1d8b226ÚîTitle: title: Nushell 0.59 (aka 0.60 beta)
+Path: Nushell 0.59 (aka 0.60 beta)
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing a beta release of 0.60 of Nu. This is to get early feedback on 0.60 before it's full release in three weeks.
+’Ù@358017211047ef184b46692f2f10ff452085cbf0cb3e5620cd26fbc4fb0b4224ÚCTitle: title: Nushell 0.59 (aka 0.60 beta)
+Path: What's new
+Content:
+We'll wait until the full release for the final set of features going into 0.60, but suffice to say it's a 
+lot
+.
+Some of the main things we want to cover for this beta release: the new engine, language improvements, new plugin infrastructure, and more.
+’Ù@a86cae480ed4b2ded86f2f83ba2f0ec75b548889ce83ee9b66394e63cac20767Ú5Title: title: Nushell 0.59 (aka 0.60 beta)
+Path: New Engine
+Content:
+You can now try out the improvements that came with engine-q as part of a Nushell release. The engine offers a lot of improvements over the previous one. You can now get much better errors, run code in parallel, run code generally faster, and more correctly.
+We'll be talking about this more in the full release announcement, but we'd also love your help in testing the engine as you port your code over to it. Crashes, incorrect answers, or just plain weirdness are things we'd like to work on.
+’Ù@14e9791a59e082e362cf9f233ec24668c48f145bb460f1b4a0fd82dcfe1f53f6Ú1Title: title: Nushell 0.59 (aka 0.60 beta)
+Path: Language improvements
+Content:
+We've made a bunch of improvements to the language, from the change to 
+``if``
+ to allow 
+``else``
+, to modules and imports, operator short-circuiting, and much more.
+We're working to bring the 
+[link: https://www.nushell.sh/book/] book up to date
+, and it's a good place to find explanations of these improvements. Be sure to also look at the 
+[link: https://www.nushell.sh/book/command_reference.html] updated command documentation
+ for more information on the updated commands.
+’Ù@ce90b60d0d336c70a2ed298537fc013859e364563c9e382176e05ace4f8d8443ÚÇTitle: title: Nushell 0.59 (aka 0.60 beta)
+Path: New plugin architecture
+Content:
+The new plugin architecture is now multi-protocol, allowing you to pick the right protocol for your plugin. We currently support json and capnp.
+Rather that scanning for all new plugins on startup like we did with 0.44, there is also a new 
+``register``
+ command you use a plugin for use:
+```Fenced(Borrowed(""))
+> register -e capnp ~/.cargo/bin/nu_plugin_extra_query
+
+```
+’Ù@0f3f132b777c4d2c2fc9471628567eeeadf92c402bd37bcb517f0ed7c5d0215dÚÂTitle: title: Nushell 0.59 (aka 0.60 beta)
+Path: And more
+Content:
+We're still hard at work finishing up the 0.60 release, and we're excited to tell you everything it can do. You'll notice some new chapters in the 
+[link: https://www.nushell.sh/book/] book
+ on some of these, including: support for exit codes, better stderr support, new language literals for dates and binary data, a whole new line editor with an improved interface, and much more.
+’Ù@163ccb3846e038b0967f9ce4acdf2f341cfab1ff70eb47ea8f47d8febd45af43ÚHTitle: title: Nushell 0.59 (aka 0.60 beta)
+Path: One more thing
+Content:
+Before we go, we thought we should mention that Nushell now supports completions for external commands. When you first start up nushell, you'll notice that it asks if you want to create a default configuration. If you say yes, and look at the file, you'll see a few of these:
+```Fenced(Borrowed(""))
+def "nu-complete git branches" [] {
+  ^git branch | lines | each { |line| $line | str find-replace "\* " "" | str trim }
+}
+
+def "nu-complete git remotes" [] {
+  ^git remote | lines | each { |line| $line | str trim }
+}
+
+extern "git checkout" [
+  branch?: string@"nu-complete git branches" # name of the branch to checkout
+  -b: string                                 # create and checkout a new branch
+  -B: string                                 # create/reset and checkout a branch
+
+```
+These are completions for external commands (here 
+``git checkout``
+) written all in Nushell. We're already getting contributions for 
+[link: https://github.com/nushell/nu_scripts/tree/main/custom-completions] other completions
+, too!
+’Ù@def159f692a8d971664e0f426ffe186e6a6ca2574b3fc2bafa22de40016abc2aÚnTitle: title: Nushell 0.59 (aka 0.60 beta)
+Path: Looking forward
+Content:
+It's time to polish 0.60 and get it to a nice shine. Your help in testing this beta release is invaluable to help making that happen. If you'd like to help us with docs, samples, code, or anything else that crosses your mind, come join us on the 
+[link: https://discord.gg/NtAbbGn] discord
+.

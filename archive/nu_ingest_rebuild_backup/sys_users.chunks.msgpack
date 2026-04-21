@@ -1,0 +1,54 @@
+”—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_users.mdÙ@daeff2776b445055883906b2a0ee1c9dc263e33ba59bca1123259823813e2f36°title: sys users‘¦systemÙ>
+
+
+
+
+
+
+
+
+``sys users``
+[link: /commands/categories/system.md] ’ÙlTitle: title: sys users
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``sys users``
+[link: /commands/categories/system.md] —ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_users.mdÙ@e9a11458d65a2433349d5a52b43dfebb06352ea234179ec95b535d7d9be650fe°title: sys users‘©Signature¹``> sys users {flags} ``
+’ÙJTitle: title: sys users
+Path: Signature
+Content:
+``> sys users {flags} ``
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_users.mdÙ@ee95742f319f7f8a71ed04b529d7b912630c27c785bc8fd870985c149e00686b°title: sys users‘³Input/output types:»input
+output
+nothing
+table
+’ÙVTitle: title: sys users
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_users.mdÙ@ab30dd44437eae159fdb1ae4f168ec2468350ea7753e30ff01778ccd295ac96c°title: sys users‘¨ExamplesÙMShow info about the system users
+```Fenced(Borrowed("nu"))
+> sys users
+
+
+```
+’Ù}Title: title: sys users
+Path: Examples
+Content:
+Show info about the system users
+```Fenced(Borrowed("nu"))
+> sys users
+
+
+```

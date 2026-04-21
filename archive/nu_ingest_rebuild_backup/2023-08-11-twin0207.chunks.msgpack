@@ -1,0 +1,216 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-11-twin0207.mdŸ@cc2959249aedff3edb8c990ad2eba90cb2661ef553cf3747de07b45e4f2c2eedßNushellëßNushell⁄jzhiburt 
+[link: https://github.com/nushell/nushell/pull/9983] added 
+``table.padding``
+ configuration
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9978] moved 
+``format duration``
+/
+``filesize``
+ back into core
+, and 
+[link: https://github.com/nushell/nushell/pull/9974] fixed up dataframe build after #9971
+amtoine 
+[link: https://github.com/nushell/nushell/pull/9977] fixed the signature of 
+``input list``
+, and 
+[link: https://github.com/nushell/nushell/pull/9967] fixed panic with 
+``lines``
+ on an error
+, and 
+[link: https://github.com/nushell/nushell/pull/9962] fix the default config for 
+``explore``
+, and 
+[link: https://github.com/nushell/nushell/pull/9947] forced version to update when installing with toolkit
+, and 
+[link: https://github.com/nushell/nushell/pull/9941] add a test to make sure "nothing" shows up as "nothing" in help
+, and 
+[link: https://github.com/nushell/nushell/pull/9840] remove old deprecated commands
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/9972] fixed cross-compiling with cross-rs
+, and 
+[link: https://github.com/nushell/nushell/pull/9971] put heavy dataframe dependencies behind feature flag
+, and 
+[link: https://github.com/nushell/nushell/pull/9961] fixed 
+``match``
+ example whitespace
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9970] updated 
+``strip-ansi-escapes``
+ to 0.2.0 and the latest reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/9958] update 
+``strip-ansi-escapes``
+ to use new api
+, and 
+[link: https://github.com/nushell/nushell/pull/9930] add keybinding for search-history
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/9955] fixed the Cargo.lock file
+, and 
+[link: https://github.com/nushell/nushell/pull/9949] move 
+``help commands``
+ to use more structure in signatures
+, and 
+[link: https://github.com/nushell/nushell/pull/9948] rename 
+``main``
+ to script name when running scripts
+, and 
+[link: https://github.com/nushell/nushell/pull/9936] fixed a couple clippy warnings
+, and 
+[link: https://github.com/nushell/nushell/pull/9934] auto-expand table based on terminal width
+, and 
+[link: https://github.com/nushell/nushell/pull/9933] added tests for script subcommands
+panicbit created 
+[link: https://github.com/nushell/nushell/pull/9950] parse: collect external stream chunks before matching
+, and 
+[link: https://github.com/nushell/nushell/pull/9925] do not emit None mid-stream during parse
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/9946] Categorification: move commands histogram and version out of the default category
+, and 
+[link: https://github.com/nushell/nushell/pull/9945] Categorification: move from Default category to Filters
+, and 
+[link: https://github.com/nushell/nushell/pull/9937] Categorification: move Path commands out of the default category
+, and 
+[link: https://github.com/nushell/nushell/pull/9932] Categorification: graduate nuon --- from the experimental category to the formats category
+, and 
+[link: https://github.com/nushell/nushell/pull/9931] Categorification: move uncategorized String commands to Category::Strings
+, and 
+[link: https://github.com/nushell/nushell/pull/9926] Cratification: move some str case commands to nu-cmd-extra
+atahabaki created 
+[link: https://github.com/nushell/nushell/pull/9940] str-expand: update bracoxide to v0.1.2, fixes #9913
+NotLebedev created a new 
+[link: https://github.com/nushell/nushell/pull/9935] Nothing return type
+IanManske 
+[link: https://github.com/nushell/nushell/pull/9927] made 
+``Value::columns``
+ return slice instead of cloned Vec
+bobhy 
+[link: https://github.com/nushell/nushell/pull/9632] fixed duration type to not report months or years
+íêê⁄êTitle: Nushell
+Path: Nushell
+Content:
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/9983] added 
+``table.padding``
+ configuration
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9978] moved 
+``format duration``
+/
+``filesize``
+ back into core
+, and 
+[link: https://github.com/nushell/nushell/pull/9974] fixed up dataframe build after #9971
+amtoine 
+[link: https://github.com/nushell/nushell/pull/9977] fixed the signature of 
+``input list``
+, and 
+[link: https://github.com/nushell/nushell/pull/9967] fixed panic with 
+``lines``
+ on an error
+, and 
+[link: https://github.com/nushell/nushell/pull/9962] fix the default config for 
+``explore``
+, and 
+[link: https://github.com/nushell/nushell/pull/9947] forced version to update when installing with toolkit
+, and 
+[link: https://github.com/nushell/nushell/pull/9941] add a test to make sure "nothing" shows up as "nothing" in help
+, and 
+[link: https://github.com/nushell/nushell/pull/9840] remove old deprecated commands
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/9972] fixed cross-compiling with cross-rs
+, and 
+[link: https://github.com/nushell/nushell/pull/9971] put heavy dataframe dependencies behind feature flag
+, and 
+[link: https://github.com/nushell/nushell/pull/9961] fixed 
+``match``
+ example whitespace
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9970] updated 
+``strip-ansi-escapes``
+ to 0.2.0 and the latest reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/9958] update 
+``strip-ansi-escapes``
+ to use new api
+, and 
+[link: https://github.com/nushell/nushell/pull/9930] add keybinding for search-history
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/9955] fixed the Cargo.lock file
+, and 
+[link: https://github.com/nushell/nushell/pull/9949] move 
+``help commands``
+ to use more structure in signatures
+, and 
+[link: https://github.com/nushell/nushell/pull/9948] rename 
+``main``
+ to script name when running scripts
+, and 
+[link: https://github.com/nushell/nushell/pull/9936] fixed a couple clippy warnings
+, and 
+[link: https://github.com/nushell/nushell/pull/9934] auto-expand table based on terminal width
+, and 
+[link: https://github.com/nushell/nushell/pull/9933] added tests for script subcommands
+panicbit created 
+[link: https://github.com/nushell/nushell/pull/9950] parse: collect external stream chunks before matching
+, and 
+[link: https://github.com/nushell/nushell/pull/9925] do not emit None mid-stream during parse
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/9946] Categorification: move commands histogram and version out of the default category
+, and 
+[link: https://github.com/nushell/nushell/pull/9945] Categorification: move from Default category to Filters
+, and 
+[link: https://github.com/nushell/nushell/pull/9937] Categorification: move Path commands out of the default category
+, and 
+[link: https://github.com/nushell/nushell/pull/9932] Categorification: graduate nuon --- from the experimental category to the formats category
+, and 
+[link: https://github.com/nushell/nushell/pull/9931] Categorification: move uncategorized String commands to Category::Strings
+, and 
+[link: https://github.com/nushell/nushell/pull/9926] Cratification: move some str case commands to nu-cmd-extra
+atahabaki created 
+[link: https://github.com/nushell/nushell/pull/9940] str-expand: update bracoxide to v0.1.2, fixes #9913
+NotLebedev created a new 
+[link: https://github.com/nushell/nushell/pull/9935] Nothing return type
+IanManske 
+[link: https://github.com/nushell/nushell/pull/9927] made 
+``Value::columns``
+ return slice instead of cloned Vec
+bobhy 
+[link: https://github.com/nushell/nushell/pull/9632] fixed duration type to not report months or years
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-11-twin0207.mdŸ@fcdf56d959783db3dab41bc5e697be69049e8a9ae6e63a99fb88d6cc3141765aßNushellë≠Documentation⁄*rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/1001] Cookbook cleanup
+rprtr258 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1000] Update explore.md
+oatovar created 
+[link: https://github.com/nushell/nushell.github.io/pull/997] Update testing examples
+íêê⁄VTitle: Nushell
+Path: Documentation
+Content:
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/1001] Cookbook cleanup
+rprtr258 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1000] Update explore.md
+oatovar created 
+[link: https://github.com/nushell/nushell.github.io/pull/997] Update testing examples
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-11-twin0207.mdŸ@afee35732c0c72d9d991c08cdab66f576546e249fd34c238081cd0121a670378ßNushellë™Nu_ScriptsŸyuroybd created 
+[link: https://github.com/nushell/nu_scripts/pull/573] feat(completions): ‚ú® add PDM custom completions
+íêêŸ¢Title: Nushell
+Path: Nu_Scripts
+Content:
+uroybd created 
+[link: https://github.com/nushell/nu_scripts/pull/573] feat(completions): ‚ú® add PDM custom completions
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-08-11-twin0207.mdŸ@0f8bb737c7029aedda97f5098e03b0524429965030766f4835eea1c03f6da77fßNushellë®reedlineŸŸfdncred created 
+[link: https://github.com/nushell/reedline/pull/618] update to strip-ansi-escapes 0.2.0
+, and 
+[link: https://github.com/nushell/reedline/pull/617] update 
+``strip-ansi-escapes``
+ to their latest api
+íêê⁄ Title: Nushell
+Path: reedline
+Content:
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/618] update to strip-ansi-escapes 0.2.0
+, and 
+[link: https://github.com/nushell/reedline/pull/617] update 
+``strip-ansi-escapes``
+ to their latest api

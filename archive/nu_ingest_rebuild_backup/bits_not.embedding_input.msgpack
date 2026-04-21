@@ -1,0 +1,97 @@
+���@52221b557e0ee6385613f48885ed2cd41bb089ff6c82006752ed1a9d81d41f73�fTitle: title: bits not
+Path: bits
+Content:
+
+
+
+
+
+
+
+
+
+``bits not``
+[link: /commands/categories/bits.md] ��@b36ae4b41fe2f435c220fe983235724832883f453de48029593641ec84d206f3�HTitle: title: bits not
+Path: Signature
+Content:
+``> bits not {flags} ``
+��@5379b5ea7a2bb8767c8bf187bd3f15d03b83e7c895bacc15e6d80755603f366a��Title: title: bits not
+Path: Flags
+Content:
+``--signed, -s``
+: Always treat input number as a signed number.
+``--number-bytes, -n {int}``
+: The size of unsigned number in bytes, it can be 1, 2, 4, 8, auto.
+��@1eacc28b00960b0ca02aaed25e97b9a9810997133eced5037509bbd1b7c984ecٛTitle: title: bits not
+Path: Input/output types:
+Content:
+input
+output
+int
+int
+binary
+binary
+list
+<
+int
+>
+
+list
+<
+int
+>
+
+list
+<
+binary
+>
+
+list
+<
+binary
+>
+
+��@d306dcc1bd029c92c2f29e0100e783d53c4a79b88ba80ea2ee964d341e5d649e�Title: title: bits not
+Path: Examples
+Content:
+Apply logical negation to a list of numbers
+```Fenced(Borrowed("nu"))
+> [4 3 2] | bits not
+╭───┬─────╮
+│ 0 │ 251 │
+│ 1 │ 252 │
+│ 2 │ 253 │
+╰───┴─────╯
+
+
+```
+Apply logical negation to a list of numbers, treat input as 2 bytes number
+```Fenced(Borrowed("nu"))
+> [4 3 2] | bits not --number-bytes 2
+╭───┬───────╮
+│ 0 │ 65531 │
+│ 1 │ 65532 │
+│ 2 │ 65533 │
+╰───┴───────╯
+
+
+```
+Apply logical negation to a list of numbers, treat input as signed number
+```Fenced(Borrowed("nu"))
+> [4 3 2] | bits not --signed
+╭───┬────╮
+│ 0 │ -5 │
+│ 1 │ -4 │
+│ 2 │ -3 │
+╰───┴────╯
+
+
+```
+Apply logical negation to binary data
+```Fenced(Borrowed("nu"))
+> 0x[ff 00 7f] | bits not
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   00 ff 80                                             0××
+
+
+```

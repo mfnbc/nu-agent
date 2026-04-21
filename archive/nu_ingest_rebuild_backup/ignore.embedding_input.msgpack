@@ -1,0 +1,33 @@
+”’Ù@2f92b0f506942ce6edb120cd92829ec71178c2e5216d36ff65274f7d3b37d98bÙbTitle: title: ignore
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``ignore``
+[link: /commands/categories/core.md] ’Ù@316e981822c885cc18f6989d999678ebb4a1e79b79bf263e339552327cfcfaabÙDTitle: title: ignore
+Path: Signature
+Content:
+``> ignore {flags} ``
+’Ù@4714895188374a59ce2fc70e1881621f21bc6abbf917f63d249b75dbac63d36aÙQTitle: title: ignore
+Path: Input/output types:
+Content:
+input
+output
+any
+nothing
+’Ù@cd87619546b29f955e0a35e7f105150524eea767a9c6ff77958a2d17907e0381ÙˆTitle: title: ignore
+Path: Examples
+Content:
+Ignore the output of an echo command.
+```Fenced(Borrowed("nu"))
+> echo done | ignore
+
+
+```

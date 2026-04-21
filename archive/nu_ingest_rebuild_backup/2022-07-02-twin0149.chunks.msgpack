@@ -1,0 +1,163 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-02-twin0149.mdŸ@fa0bfa9460685adcebe5397c4b16e607ff2b5f8d8b42088643cf7b87cd71fba2πThis week in Nushell #149ëßNushell⁄Ôstormasm 
+[link: https://github.com/nushell/nushell/pull/5919] updated crate thiserror to version 1.0.31 in four crates
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5916] ensured 
+``required``
+ positionals don't show up as 
+``optional``
+ when 
+``help``
+, and 
+[link: https://github.com/nushell/nushell/pull/5890] Better error handling using 
+``do``
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/5913] make module imports in scripts used for relative path.
+, and 
+[link: https://github.com/nushell/nushell/pull/5886] make path exists work on expanded path
+Kangaxx-0 
+[link: https://github.com/nushell/nushell/pull/5911] added all flag to nu-check command
+, and 
+[link: https://github.com/nushell/nushell/pull/5864] Introduce new command - nu check
+Yethal 
+[link: https://github.com/nushell/nushell/pull/5910] slimmed down Dockerfile
+CBenoit created 
+[link: https://github.com/nushell/nushell/pull/5909] docs: clarify 
+``print``
+ and 
+``echo``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5889] build: update 
+``miette``
+ dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/5885] feat: add 
+``--binary(-b)``
+ option to 
+``hash``
+ commands
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/5908] Return error when external command core dumped
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5905] fixed bug where 
+``thin``
+ theme wasn't getting applied correctly
+, and 
+[link: https://github.com/nushell/nushell/pull/5901] fix excessive ansi escape sequences
+, and 
+[link: https://github.com/nushell/nushell/pull/5881] update encode decode with new signature
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5896] Header filtering out of for loop
+, and 
+[link: https://github.com/nushell/nushell/pull/5892] Dataframe with real index
+, and 
+[link: https://github.com/nushell/nushell/pull/5891] Remove extra print
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/5893] Make sort logic available outside sort-by
+íêê⁄'Title: This week in Nushell #149
+Path: Nushell
+Content:
+stormasm 
+[link: https://github.com/nushell/nushell/pull/5919] updated crate thiserror to version 1.0.31 in four crates
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5916] ensured 
+``required``
+ positionals don't show up as 
+``optional``
+ when 
+``help``
+, and 
+[link: https://github.com/nushell/nushell/pull/5890] Better error handling using 
+``do``
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/5913] make module imports in scripts used for relative path.
+, and 
+[link: https://github.com/nushell/nushell/pull/5886] make path exists work on expanded path
+Kangaxx-0 
+[link: https://github.com/nushell/nushell/pull/5911] added all flag to nu-check command
+, and 
+[link: https://github.com/nushell/nushell/pull/5864] Introduce new command - nu check
+Yethal 
+[link: https://github.com/nushell/nushell/pull/5910] slimmed down Dockerfile
+CBenoit created 
+[link: https://github.com/nushell/nushell/pull/5909] docs: clarify 
+``print``
+ and 
+``echo``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5889] build: update 
+``miette``
+ dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/5885] feat: add 
+``--binary(-b)``
+ option to 
+``hash``
+ commands
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/5908] Return error when external command core dumped
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5905] fixed bug where 
+``thin``
+ theme wasn't getting applied correctly
+, and 
+[link: https://github.com/nushell/nushell/pull/5901] fix excessive ansi escape sequences
+, and 
+[link: https://github.com/nushell/nushell/pull/5881] update encode decode with new signature
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5896] Header filtering out of for loop
+, and 
+[link: https://github.com/nushell/nushell/pull/5892] Dataframe with real index
+, and 
+[link: https://github.com/nushell/nushell/pull/5891] Remove extra print
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/5893] Make sort logic available outside sort-by
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-02-twin0149.mdŸ@834d199d5c088e5d2b927d3c0d9dee6bbfb46f0e7d438a598767892712cc416eπThis week in Nushell #149ë≠Documentation⁄^relby created 
+[link: https://github.com/nushell/nushell.github.io/pull/524] Fix outdated 
+``$false``
+ value
+toastal created 
+[link: https://github.com/nushell/nushell.github.io/pull/523] Syntax highlighting as 
+``console``
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/522] Links 
+``types_of_data``
+ page to 
+``describe``
+ command
+petrisch created 
+[link: https://github.com/nushell/nushell.github.io/pull/521] DE translation for working with lists and tables
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/520] Translate overlays.md to Chinese
+íêê⁄úTitle: This week in Nushell #149
+Path: Documentation
+Content:
+relby created 
+[link: https://github.com/nushell/nushell.github.io/pull/524] Fix outdated 
+``$false``
+ value
+toastal created 
+[link: https://github.com/nushell/nushell.github.io/pull/523] Syntax highlighting as 
+``console``
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/522] Links 
+``types_of_data``
+ page to 
+``describe``
+ command
+petrisch created 
+[link: https://github.com/nushell/nushell.github.io/pull/521] DE translation for working with lists and tables
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/520] Translate overlays.md to Chinese
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-02-twin0149.mdŸ@eb087586c397b9aeca82bba552c39f95494feabc18d2799cdfda2f6ed1b752a6πThis week in Nushell #149ë™Nu_ScriptsŸÿfdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/260] add stargazer script to monitor nushell stars
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/259] add turtle benchmark and reorganize
+íêê⁄Title: This week in Nushell #149
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/260] add stargazer script to monitor nushell stars
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/259] add turtle benchmark and reorganize

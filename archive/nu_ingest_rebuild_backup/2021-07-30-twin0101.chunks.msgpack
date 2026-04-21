@@ -1,0 +1,146 @@
+”—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-07-30-twin0101.mdÙ@c63a9e6d3b3829da63b1a5be13697b7c19cf5f61ef0892ac0e0f24742495e318¹This week in Nushell #101‘§NushellÚ	Zfdncred 
+[link: https://github.com/nushell/nushell/pull/3866] fixed interpolated strings when using unicode
+, 
+[link: https://github.com/nushell/nushell/pull/3854] added performance metrics for measuring startup time
+, and 
+[link: https://github.com/nushell/nushell/pull/3845] added the ability to compare time units like 
+``1hr < 2hr``
+, and 
+[link: https://github.com/nushell/nushell/pull/3832] change describe so it doesn't output colored strings
+jt 
+[link: https://github.com/nushell/nushell/pull/3865] fixed clippy lint and disable broken lint
+, 
+[link: https://github.com/nushell/nushell/pull/3863] added named positionals to all
+, and 
+[link: https://github.com/nushell/nushell/pull/3835] bumped to 0.34.1
+elferherrera improved 
+[link: https://github.com/nushell/nushell/pull/3864] the existing dataframe support to handle more data types
+, 
+[link: https://github.com/nushell/nushell/pull/3853] removed dependencies
+, added 
+[link: https://github.com/nushell/nushell/pull/3839] append dataframes
+, and further 
+[link: https://github.com/nushell/nushell/pull/3812] extended dataframe support
+efx 
+[link: https://github.com/nushell/nushell/pull/3862] documented no openssl building
+realcundo 
+[link: https://github.com/nushell/nushell/pull/3857] fixed select to insert nulls in sparse tables instead of ignoring absent values
+, 
+[link: https://github.com/nushell/nushell/pull/3841] improved md5 and sha256 code
+, and 
+[link: https://github.com/nushell/nushell/pull/3836] added sha256 to the hash command
+therealprof 
+[link: https://github.com/nushell/nushell/pull/3855] unified use of the 
+``surf``
+ crate
+margguo 
+[link: https://github.com/nushell/nushell/pull/3848] updated implementing_a_command.md
+zkat 
+[link: https://github.com/nushell/nushell/pull/3834] switched to using chrono_humanize for datetime formatting
+, and 
+[link: https://github.com/nushell/nushell/pull/3833] added 
+``date humanize``
+ command
+nathom 
+[link: https://github.com/nushell/nushell/pull/3829] fixed wrong path separator
+kubouch added 
+[link: https://github.com/nushell/nushell/pull/3828] support for other variables than PATH in pathvar (2nd attempt)
+jafriyie1 
+[link: https://github.com/nushell/nushell/pull/3821] added parse fix for power operator error on negative integers and deâ€¦
+soumil-07 added the 
+[link: https://github.com/nushell/nushell/pull/3763] ability to read from standard input in 
+``rm``
+’Ú	’Title: This week in Nushell #101
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3866] fixed interpolated strings when using unicode
+, 
+[link: https://github.com/nushell/nushell/pull/3854] added performance metrics for measuring startup time
+, and 
+[link: https://github.com/nushell/nushell/pull/3845] added the ability to compare time units like 
+``1hr < 2hr``
+, and 
+[link: https://github.com/nushell/nushell/pull/3832] change describe so it doesn't output colored strings
+jt 
+[link: https://github.com/nushell/nushell/pull/3865] fixed clippy lint and disable broken lint
+, 
+[link: https://github.com/nushell/nushell/pull/3863] added named positionals to all
+, and 
+[link: https://github.com/nushell/nushell/pull/3835] bumped to 0.34.1
+elferherrera improved 
+[link: https://github.com/nushell/nushell/pull/3864] the existing dataframe support to handle more data types
+, 
+[link: https://github.com/nushell/nushell/pull/3853] removed dependencies
+, added 
+[link: https://github.com/nushell/nushell/pull/3839] append dataframes
+, and further 
+[link: https://github.com/nushell/nushell/pull/3812] extended dataframe support
+efx 
+[link: https://github.com/nushell/nushell/pull/3862] documented no openssl building
+realcundo 
+[link: https://github.com/nushell/nushell/pull/3857] fixed select to insert nulls in sparse tables instead of ignoring absent values
+, 
+[link: https://github.com/nushell/nushell/pull/3841] improved md5 and sha256 code
+, and 
+[link: https://github.com/nushell/nushell/pull/3836] added sha256 to the hash command
+therealprof 
+[link: https://github.com/nushell/nushell/pull/3855] unified use of the 
+``surf``
+ crate
+margguo 
+[link: https://github.com/nushell/nushell/pull/3848] updated implementing_a_command.md
+zkat 
+[link: https://github.com/nushell/nushell/pull/3834] switched to using chrono_humanize for datetime formatting
+, and 
+[link: https://github.com/nushell/nushell/pull/3833] added 
+``date humanize``
+ command
+nathom 
+[link: https://github.com/nushell/nushell/pull/3829] fixed wrong path separator
+kubouch added 
+[link: https://github.com/nushell/nushell/pull/3828] support for other variables than PATH in pathvar (2nd attempt)
+jafriyie1 
+[link: https://github.com/nushell/nushell/pull/3821] added parse fix for power operator error on negative integers and deâ€¦
+soumil-07 added the 
+[link: https://github.com/nushell/nushell/pull/3763] ability to read from standard input in 
+``rm``
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-07-30-twin0101.mdÙ@3d8db24d7a58dba6b6e1efbb403be2e2a4b9062b4908b1b34f11ef91463589f0¹This week in Nushell #101‘­DocumentationÙäprrao87 
+[link: https://github.com/nushell/nushell.github.io/pull/176] fixed typos + minor style changes
+yaahc 
+[link: https://github.com/nushell/nushell.github.io/pull/175] updated book mentions of edit_mode to use proper path
+’Ú"Title: This week in Nushell #101
+Path: Documentation
+Content:
+prrao87 
+[link: https://github.com/nushell/nushell.github.io/pull/176] fixed typos + minor style changes
+yaahc 
+[link: https://github.com/nushell/nushell.github.io/pull/175] updated book mentions of edit_mode to use proper path
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-07-30-twin0101.mdÙ@8f3152fc7c575ae097f42372b06ed48d7c179678b8eefbcf455405d8635bb7b2¹This week in Nushell #101‘¤WasmÙ'jt updated the wasm demo to the latest
+’Ù\Title: This week in Nushell #101
+Path: Wasm
+Content:
+jt updated the wasm demo to the latest
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-07-30-twin0101.mdÙ@18992ef592c4c6f4972dcd0879d37ab01b53bda64418cd0f51e8ae49af20b46d¹This week in Nushell #101‘ªNu_ScriptsÚ³naefl 
+[link: https://github.com/nushell/nu_scripts/pull/80] updated script for Windows compat
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/79] added fuzzy commands
+zkat created 
+[link: https://github.com/nushell/nu_scripts/pull/78] readme for with_externals
+, 
+[link: https://github.com/nushell/nu_scripts/pull/77] added parse dates into datetimes
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/76] added loc.nu
+’ÚîTitle: This week in Nushell #101
+Path: Nu_Scripts
+Content:
+naefl 
+[link: https://github.com/nushell/nu_scripts/pull/80] updated script for Windows compat
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/79] added fuzzy commands
+zkat created 
+[link: https://github.com/nushell/nu_scripts/pull/78] readme for with_externals
+, 
+[link: https://github.com/nushell/nu_scripts/pull/77] added parse dates into datetimes
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/76] added loc.nu

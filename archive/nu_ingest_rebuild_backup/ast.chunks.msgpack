@@ -1,0 +1,240 @@
+���Karchive/external_nushell_repo_backup/nushell.github.io/commands/docs/ast.md�@c9f1ed95929d4af7ae682fbff76c6dcfcea9822ea50bd91c7f46baa5b262514e�title: ast��debug�7
+
+
+
+
+
+
+
+
+``ast``
+[link: /commands/categories/debug.md] ����^Title: title: ast
+Path: debug
+Content:
+
+
+
+
+
+
+
+
+
+``ast``
+[link: /commands/categories/debug.md] ��Karchive/external_nushell_repo_backup/nushell.github.io/commands/docs/ast.md�@53c18c497fc6085560fb78e818e7fe996b0d63cdc9e8930bd1e47214638e4b21�title: ast��Signature�``> ast {flags} (pipeline)``
+����HTitle: title: ast
+Path: Signature
+Content:
+``> ast {flags} (pipeline)``
+��Karchive/external_nushell_repo_backup/nushell.github.io/commands/docs/ast.md�@13b98e821b900215c9768d55506a70e81e45313492258c028f62354836b21410�title: ast��Flagsّ``--json, -j``
+: Serialize to json.
+``--minify, -m``
+: Minify the nuon or json output.
+``--flatten, -f``
+: An easier to read version of the ast.
+���ٸTitle: title: ast
+Path: Flags
+Content:
+``--json, -j``
+: Serialize to json.
+``--minify, -m``
+: Minify the nuon or json output.
+``--flatten, -f``
+: An easier to read version of the ast.
+��Karchive/external_nushell_repo_backup/nushell.github.io/commands/docs/ast.md�@2df69f18ed4f93d1600bff14c08efe2e10675c37e022b2b9cf9be02e8495bc0f�title: ast��Parameters�2``pipeline``
+: The pipeline to print the ast for.
+����^Title: title: ast
+Path: Parameters
+Content:
+``pipeline``
+: The pipeline to print the ast for.
+��Karchive/external_nushell_repo_backup/nushell.github.io/commands/docs/ast.md�@72b35f60bdd053972732bb9c4c5a22f7cb871a4a209a7385702cd535eb6500f1�title: ast��Input/output types:�9input
+output
+nothing
+table
+nothing
+record
+nothing
+string
+����nTitle: title: ast
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+nothing
+record
+nothing
+string
+��Karchive/external_nushell_repo_backup/nushell.github.io/commands/docs/ast.md�@1278c873a78b5cf2ea6c224719f9c303c1a7098e920bacd5421644a2e7ce970c�title: ast��Examples��Print the ast of a string.
+```Fenced(Borrowed("nu"))
+> ast 'hello'
+
+
+```
+Print the ast of a pipeline.
+```Fenced(Borrowed("nu"))
+> ast 'ls | where name =~ README'
+
+
+```
+Print the ast of a pipeline with an error.
+```Fenced(Borrowed("nu"))
+> ast 'for x in 1..10 { echo $x '
+
+
+```
+Print the ast of a pipeline with an error, as json, in a nushell table.
+```Fenced(Borrowed("nu"))
+> ast 'for x in 1..10 { echo $x ' --json | get block | from json
+
+
+```
+Print the ast of a pipeline with an error, as json, minified.
+```Fenced(Borrowed("nu"))
+> ast 'for x in 1..10 { echo $x ' --json --minify
+
+
+```
+Print the ast of a string flattened.
+```Fenced(Borrowed("nu"))
+> ast "'hello'" --flatten
+╭───┬─────────┬──────────────┬───────────────╮
+│ # │ content │    shape     │     span      │
+├───┼─────────┼──────────────┼───────────────┤
+│ 0 │ 'hello' │ shape_string │ ╭───────┬───╮ │
+│   │         │              │ │ start │ 0 │ │
+│   │         │              │ │ end   │ 7 │ │
+│   │         │              │ ╰───────┴───╯ │
+╰───┴─────────┴──────────────┴───────────────╯
+
+
+```
+Print the ast of a string flattened, as json, minified.
+```Fenced(Borrowed("nu"))
+> ast "'hello'" --flatten --json --minify
+[{"content":"'hello'","shape":"shape_string","span":{"start":0,"end":7}}]
+
+```
+Print the ast of a pipeline flattened.
+```Fenced(Borrowed("nu"))
+> ast 'ls | sort-by type name -i' --flatten
+╭───┬─────────┬────────────────────┬────────────────╮
+│ # │ content │       shape        │      span      │
+├───┼─────────┼────────────────────┼────────────────┤
+│ 0 │ ls      │ shape_internalcall │ ╭───────┬───╮  │
+│   │         │                    │ │ start │ 0 │  │
+│   │         │                    │ │ end   │ 2 │  │
+│   │         │                    │ ╰───────┴───╯  │
+│ 1 │ |       │ shape_pipe         │ ╭───────┬───╮  │
+│   │         │                    │ │ start │ 3 │  │
+│   │         │                    │ │ end   │ 4 │  │
+│   │         │                    │ ╰───────┴───╯  │
+│ 2 │ sort-by │ shape_internalcall │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 5  │ │
+│   │         │                    │ │ end   │ 12 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 3 │ type    │ shape_string       │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 13 │ │
+│   │         │                    │ │ end   │ 17 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 4 │ name    │ shape_string       │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 18 │ │
+│   │         │                    │ │ end   │ 22 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 5 │ -i      │ shape_flag         │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 23 │ │
+│   │         │                    │ │ end   │ 25 │ │
+│   │         │                    │ ╰───────┴────╯ │
+╰───┴─────────┴────────────────────┴────────────────╯
+
+
+```
+�����Title: title: ast
+Path: Examples
+Content:
+Print the ast of a string.
+```Fenced(Borrowed("nu"))
+> ast 'hello'
+
+
+```
+Print the ast of a pipeline.
+```Fenced(Borrowed("nu"))
+> ast 'ls | where name =~ README'
+
+
+```
+Print the ast of a pipeline with an error.
+```Fenced(Borrowed("nu"))
+> ast 'for x in 1..10 { echo $x '
+
+
+```
+Print the ast of a pipeline with an error, as json, in a nushell table.
+```Fenced(Borrowed("nu"))
+> ast 'for x in 1..10 { echo $x ' --json | get block | from json
+
+
+```
+Print the ast of a pipeline with an error, as json, minified.
+```Fenced(Borrowed("nu"))
+> ast 'for x in 1..10 { echo $x ' --json --minify
+
+
+```
+Print the ast of a string flattened.
+```Fenced(Borrowed("nu"))
+> ast "'hello'" --flatten
+╭───┬─────────┬──────────────┬───────────────╮
+│ # │ content │    shape     │     span      │
+├───┼─────────┼──────────────┼───────────────┤
+│ 0 │ 'hello' │ shape_string │ ╭───────┬───╮ │
+│   │         │              │ │ start │ 0 │ │
+│   │         │              │ │ end   │ 7 │ │
+│   │         │              │ ╰───────┴───╯ │
+╰───┴─────────┴──────────────┴───────────────╯
+
+
+```
+Print the ast of a string flattened, as json, minified.
+```Fenced(Borrowed("nu"))
+> ast "'hello'" --flatten --json --minify
+[{"content":"'hello'","shape":"shape_string","span":{"start":0,"end":7}}]
+
+```
+Print the ast of a pipeline flattened.
+```Fenced(Borrowed("nu"))
+> ast 'ls | sort-by type name -i' --flatten
+╭───┬─────────┬────────────────────┬────────────────╮
+│ # │ content │       shape        │      span      │
+├───┼─────────┼────────────────────┼────────────────┤
+│ 0 │ ls      │ shape_internalcall │ ╭───────┬───╮  │
+│   │         │                    │ │ start │ 0 │  │
+│   │         │                    │ │ end   │ 2 │  │
+│   │         │                    │ ╰───────┴───╯  │
+│ 1 │ |       │ shape_pipe         │ ╭───────┬───╮  │
+│   │         │                    │ │ start │ 3 │  │
+│   │         │                    │ │ end   │ 4 │  │
+│   │         │                    │ ╰───────┴───╯  │
+│ 2 │ sort-by │ shape_internalcall │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 5  │ │
+│   │         │                    │ │ end   │ 12 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 3 │ type    │ shape_string       │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 13 │ │
+│   │         │                    │ │ end   │ 17 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 4 │ name    │ shape_string       │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 18 │ │
+│   │         │                    │ │ end   │ 22 │ │
+│   │         │                    │ ╰───────┴────╯ │
+│ 5 │ -i      │ shape_flag         │ ╭───────┬────╮ │
+│   │         │                    │ │ start │ 23 │ │
+│   │         │                    │ │ end   │ 25 │ │
+│   │         │                    │ ╰───────┴────╯ │
+╰───┴─────────┴────────────────────┴────────────────╯
+
+
+```

@@ -1,0 +1,73 @@
+”’Ù@045037cc89ed1c441f32f6658b52d3974547c09a82cfdc21b681034795f51f12Ú…Title: This week in Nushell #115
+Path: Nushell
+Content:
+ahkrr 
+[link: https://github.com/nushell/nushell/pull/4107] fixed panic! during parsing
+jt 
+[link: https://github.com/nushell/nushell/pull/4106] updated stale.yml
+, and 
+[link: https://github.com/nushell/nushell/pull/4102] Update stale.yml
+oscard0m 
+[link: https://github.com/nushell/nushell/pull/4076] got rid of header bold option
+’Ù@9c1c48ff08d7c5a7fc041db084e3a7bd8d6ce6f432574b73db1173742fed25a9ÙçTitle: This week in Nushell #115
+Path: Nu_Scripts
+Content:
+efx created 
+[link: https://github.com/nushell/nu_scripts/pull/104] ls mod: hidden files
+Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/103] updated scraping.nu
+’Ù@8620b5086e45350aa368898a26ac9001469eb9b669df34b8aa83557ad03d05cdÚÒTitle: This week in Nushell #115
+Path: engine-q
+Content:
+luccasmmg created 
+[link: https://github.com/nushell/engine-q/pull/292] Last three math commands, 
+``eval``
+, 
+``variance``
+ and 
+``stddev``
+, and 
+[link: https://github.com/nushell/engine-q/pull/282] math: floor, ceil, median and mode
+, and 
+[link: https://github.com/nushell/engine-q/pull/273] New math commands(product, round, sqrt and sum)
+, and 
+[link: https://github.com/nushell/engine-q/pull/266] Added math and min commands
+jt 
+[link: https://github.com/nushell/engine-q/pull/290] added updating cell paths
+, 
+[link: https://github.com/nushell/engine-q/pull/285] added env shorthand
+, 
+[link: https://github.com/nushell/engine-q/pull/281] added more api docs
+, 
+[link: https://github.com/nushell/engine-q/pull/279] documented some code and doing cleanups
+, 
+[link: https://github.com/nushell/engine-q/pull/276] fixed some machine epsilon warnings
+, 
+[link: https://github.com/nushell/engine-q/pull/275] added zip command
+, and 
+[link: https://github.com/nushell/engine-q/pull/274] added a simple scope variable
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/288] Multiple commands per plugin
+, and 
+[link: https://github.com/nushell/engine-q/pull/270] Plugins for engine q
+onthebridgetonowhere 
+[link: https://github.com/nushell/engine-q/pull/284] added back binary support for the first command
+, 
+[link: https://github.com/nushell/engine-q/pull/278] ported into string command
+, 
+[link: https://github.com/nushell/engine-q/pull/277] ported first command
+, and 
+[link: https://github.com/nushell/engine-q/pull/268] ported date commands to enqine-q
+aslynatilla 
+[link: https://github.com/nushell/engine-q/pull/283] ported format
+, and 
+[link: https://github.com/nushell/engine-q/pull/271] ported echo command
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/267] ported the filter command range from nushell
+kubouch created 
+[link: https://github.com/nushell/engine-q/pull/243] Loading modules from files
+’Ù@969161cd5add96fb4dee8abfe930f0c59a0a4a20dea13271ca1efd126feb60ecÙ°Title: This week in Nushell #115
+Path: reedline
+Content:
+josh-59 created 
+[link: https://github.com/nushell/reedline/pull/168] Builder to customize and disable idle animations

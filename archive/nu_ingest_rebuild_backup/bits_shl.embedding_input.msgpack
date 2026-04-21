@@ -1,0 +1,106 @@
+–’Ù@8e1c0f87f90135ebe7238cee8abd6d77c8be66c209f52cdfc643fa812a609f62ÙfTitle: title: bits shl
+Path: bits
+Content:
+
+
+
+
+
+
+
+
+
+``bits shl``
+[link: /commands/categories/bits.md] ’Ù@6b1c6a0cb7121f7a9f05baf8a4b1f5e34978da54edecad717ca2d1fa9a5aeee1ÙNTitle: title: bits shl
+Path: Signature
+Content:
+``> bits shl {flags} (bits)``
+’Ù@ccc5bc6971229e07e6e51446803ac350e3029588076eb755191ca890d4dbed75ÚTitle: title: bits shl
+Path: Flags
+Content:
+``--signed, -s``
+: Always treat input number as a signed number.
+``--number-bytes, -n {int}``
+: The word size in number of bytes. Must be 
+``1``
+, 
+``2``
+, 
+``4``
+, or 
+``8``
+ (defaults to the smallest of those that fits the input number).
+’Ù@6676fff72d0bbfc8e7b49676ce7e1f0164849b0c3278b6e6239d09ffadb95b4fÙZTitle: title: bits shl
+Path: Parameters
+Content:
+``bits``
+: Number of bits to shift left.
+’Ù@1a4ce3db602142ad51eb7e5967c791864b6154c599aeada29ce964a7fe642039Ù›Title: title: bits shl
+Path: Input/output types:
+Content:
+input
+output
+int
+int
+binary
+binary
+list
+<
+int
+>
+
+list
+<
+int
+>
+
+list
+<
+binary
+>
+
+list
+<
+binary
+>
+
+’Ù@62b2f8c199a6473f2c30221fa4d53f47526c6ade942d276ab193e7d5c8e8c7a2ÚûTitle: title: bits shl
+Path: Examples
+Content:
+Shift left a number by 7 bits
+```Fenced(Borrowed("nu"))
+> 2 | bits shl 7
+0
+
+```
+Shift left a number with 2 byte by 7 bits
+```Fenced(Borrowed("nu"))
+> 2 | bits shl 7 --number-bytes 2
+256
+
+```
+Shift left a signed number by 1 bit
+```Fenced(Borrowed("nu"))
+> 0x7F | bits shl 1 --signed
+-2
+
+```
+Shift left a list of numbers
+```Fenced(Borrowed("nu"))
+> [5 3 2] | bits shl 2
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ 20 â”‚
+â”‚ 1 â”‚ 12 â”‚
+â”‚ 2 â”‚  8 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â•¯
+
+
+```
+Shift left a binary value
+```Fenced(Borrowed("nu"))
+> 0x[4f f4] | bits shl 4
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ff 40                                                Ã—@
+
+
+```

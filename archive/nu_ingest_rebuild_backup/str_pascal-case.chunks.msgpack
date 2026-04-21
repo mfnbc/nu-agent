@@ -1,0 +1,135 @@
+���Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_pascal-case.md�@d591f7da62be20e5747cd274519e73768eae0dfe5166a9fab7903bbc66f3d85e�title: str pascal-case��strings�E
+
+
+
+
+
+
+
+
+``str pascal-case``
+[link: /commands/categories/strings.md] ����zTitle: title: str pascal-case
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str pascal-case``
+[link: /commands/categories/strings.md] ��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_pascal-case.md�@a2aa9eab5a3d6ffa5394290abb259fc3df24d95bb206259e4510e10ff3a09928�title: str pascal-case��Signature�&``> str pascal-case {flags} ...rest``
+����]Title: title: str pascal-case
+Path: Signature
+Content:
+``> str pascal-case {flags} ...rest``
+��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_pascal-case.md�@64f4d221cb79bd87e42b1d2ef7193c4b77bd0bf5dfd0426783a6ef218a15c481�title: str pascal-case��Parameters�S``...rest``
+: For a data structure input, convert strings at the given cell paths.
+���ًTitle: title: str pascal-case
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert strings at the given cell paths.
+��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_pascal-case.md�@6fd10e5e393116512b6ebd4caf6f984aad138b02cd229c1ce8a1d55fe9ad79a5�title: str pascal-case��Input/output types:�Winput
+output
+string
+string
+table
+table
+record
+record
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+���٘Title: title: str pascal-case
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+table
+table
+record
+record
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_pascal-case.md�@75c19c87a965d5d3510d836e09e4ef108e5fc7ba9e33f483d61f9eb8b4075df9�title: str pascal-case��Examples��convert a string to PascalCase
+```Fenced(Borrowed("nu"))
+> 'nu-shell' | str pascal-case
+NuShell
+
+```
+convert a string to PascalCase
+```Fenced(Borrowed("nu"))
+> 'this-is-the-first-case' | str pascal-case
+ThisIsTheFirstCase
+
+```
+convert a string to PascalCase
+```Fenced(Borrowed("nu"))
+> 'this_is_the_second_case' | str pascal-case
+ThisIsTheSecondCase
+
+```
+convert a column from a table to PascalCase
+```Fenced(Borrowed("nu"))
+> [[lang, gems]; [nu_test, 100]] | str pascal-case lang
+╭───┬────────┬──────╮
+│ # │  lang  │ gems │
+├───┼────────┼──────┤
+│ 0 │ NuTest │  100 │
+╰───┴────────┴──────╯
+
+
+```
+����Title: title: str pascal-case
+Path: Examples
+Content:
+convert a string to PascalCase
+```Fenced(Borrowed("nu"))
+> 'nu-shell' | str pascal-case
+NuShell
+
+```
+convert a string to PascalCase
+```Fenced(Borrowed("nu"))
+> 'this-is-the-first-case' | str pascal-case
+ThisIsTheFirstCase
+
+```
+convert a string to PascalCase
+```Fenced(Borrowed("nu"))
+> 'this_is_the_second_case' | str pascal-case
+ThisIsTheSecondCase
+
+```
+convert a column from a table to PascalCase
+```Fenced(Borrowed("nu"))
+> [[lang, gems]; [nu_test, 100]] | str pascal-case lang
+╭───┬────────┬──────╮
+│ # │  lang  │ gems │
+├───┼────────┼──────┤
+│ 0 │ NuTest │  100 │
+╰───┴────────┴──────╯
+
+
+```

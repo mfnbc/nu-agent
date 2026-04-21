@@ -1,0 +1,60 @@
+•’Ù@0767e3120a73d8c160d4b18fcaefadd10f401d35bbaee0f181bc515b3641d15aÙ¾Title: title: 'This week in Nushell #324'
+Path: This Week in Nushell #324
+Content:
+
+
+
+
+Published Wednesday, 2025-11-19, including PRs merged Friday, 2025-10-31 through Thursday, 2025-11-06.
+’Ù@2fe5cc0197c67cba25e1f6002636065bb4189a372f937a786c419e9c5a6f0996ÚâTitle: title: 'This week in Nushell #324'
+Path: Nushell
+Content:
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/16985] added winresource metadata to cargo.toml (#16985)
+[link: https://github.com/nushell/nushell/pull/16975] updated reedline and crossterm (#16975)
+[link: https://github.com/nushell/nushell/pull/16965] added name and description to the plugin list command (#16965)
+[link: https://github.com/nushell/nushell/pull/16958] bumped rust-toolchain to 1.89 (#16958)
+@sholderbach:
+[link: https://github.com/nushell/nushell/pull/16984] fixed README mention of Nu support in 3rd party product (#16984)
+[link: https://github.com/nushell/nushell/pull/16983] bumped 
+``sysinfo``
+ to latest 0.37.2 (#16983)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/16979] upgraded to polars 0.52 (#16979)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/16978] bumped crate-ci/typos from 1.38.1 to 1.39.0 (#16978)
+@cablehead:
+[link: https://github.com/nushell/nushell/pull/16976] added closure parameter to 
+``metadata set``
+ (#16976)
+[link: https://github.com/nushell/nushell/pull/16954] added -U short flag for --unix-socket to HTTP builtins (#16954)
+@blindFS:
+[link: https://github.com/nushell/nushell/pull/16967] fixed regression on flags without a long name (#16967)
+@pguerin3:
+[link: https://github.com/nushell/nushell/pull/16953] updated README.md to add windmill as a supported utility (#16953)
+@KaiSforza:
+[link: https://github.com/nushell/nushell/pull/16848] added nix flake to 
+``scripts/nix/``
+ (#16848)
+@hustcer:
+[link: https://github.com/nushell/nushell/pull/16348] fixed memory leaks in REPL (#16348)
+@ysthakur:
+[link: https://github.com/nushell/nushell/pull/15888] allowed setting span in custom/extern completers (#15888)
+’Ù@c625445f764f2b0427a29b59f1418872ce6da036017db0322a02f0aefc898e01Ú1Title: title: 'This week in Nushell #324'
+Path: Documentation
+Content:
+@Kissaki:
+[link: https://github.com/nushell/nushell.github.io/pull/2064] fixed wrong/outdated color config references (#2064)
+[link: https://github.com/nushell/nushell.github.io/pull/2063] fixed use_ls_colors config reference (#2063)
+’Ù@ac7c81ea9e48133261e2ed4d477691c53c783df04e58b218568cefd9f4f9e7c1Ù±Title: title: 'This week in Nushell #324'
+Path: reedline
+Content:
+@lu-zero:
+[link: https://github.com/nushell/reedline/pull/966] updated dependencies to use rustix-1.1.2 (#966)
+’Ù@acdb19d7ff56e39c2eb0d8bb5d83c4b504fb60b0690aa9a75cc62b3168662375ÙºTitle: title: 'This week in Nushell #324'
+Path: Nu_Scripts
+Content:
+@Tyarel8:
+[link: https://github.com/nushell/nu_scripts/pull/1184] trimmed 
+``|``
+ from the closure in task.nu (#1184)

@@ -1,0 +1,105 @@
+“’Ù@a2ec2538c284953f64b6c572ac8712b942270225671b9e7e32b2a63977b0ec31Ú
+6Title: This week in Nushell #271
+Path: Nushell
+Content:
+Kissaki 
+[link: https://github.com/nushell/nushell/pull/14230] improved comment wording in run_external.rs
+, and 
+[link: https://github.com/nushell/nushell/pull/14229] fixed comment typos in run_external.rs
+vyadh 
+[link: https://github.com/nushell/nushell/pull/14225] added tests for new Alpine and Debian image builds
+, and 
+[link: https://github.com/nushell/nushell/pull/14193] added a Debian Dockerfile
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14210] prevented subcommand execution when surrounded with backtick quotes
+hustcer 
+[link: https://github.com/nushell/nushell/pull/14209] added a RELEASE_QUERY_API build arg for Dockerfiles
+, and 
+[link: https://github.com/nushell/nushell/pull/14191] updated the dockerfile for Alpine
+hacker-DOM 
+[link: https://github.com/nushell/nushell/pull/14201] allowed using function keys F21-F35 for keybindings
+aionescu 
+[link: https://github.com/nushell/nushell/pull/14198] dropped 
+``once_cell``
+ dependency
+, 
+[link: https://github.com/nushell/nushell/pull/14197] improved 
+``CellPath``
+ display output
+, 
+[link: https://github.com/nushell/nushell/pull/14180] fixed quoting in 
+``to nuon``
+ and refactored quoting functions
+, and 
+[link: https://github.com/nushell/nushell/pull/14042] added 
+``?``
+ for optional entries when displaying 
+``CellPath``
+s
+NotTheDr01ds did a bunch of work related to escape sequences: 
+[link: https://github.com/nushell/nushell/pull/14196] added previews of attributes to 
+``ansi -l``
+ (e.g., bold, dimmed, blink, etc.)
+, 
+[link: https://github.com/nushell/nushell/pull/14184] fixed the name for 
+``ansi clear_entire_screen_plus_buffer``
+, and 
+[link: https://github.com/nushell/nushell/pull/14181] sent both 2J and 3J on clear
+ofek 
+[link: https://github.com/nushell/nushell/pull/14192] ensured default config files end with a new line
+sgvictorino 
+[link: https://github.com/nushell/nushell/pull/14190] added support for table literal syntax in 
+``join``
+ right-table argument
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14187] allowed OEM code pages to be used to decode text
+friaes 
+[link: https://github.com/nushell/nushell/pull/14175] updated 
+``stor insert``
+ to accept lists
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14173] provided a common implementation for query string conversions in 
+``url join``
+ and 
+``url build-query``
+qfel 
+[link: https://github.com/nushell/nushell/pull/14083] added the history import command (again)
+blindFS 
+[link: https://github.com/nushell/nushell/pull/14002] fixed LSP non-ASCII character offset issues
+’Ù@11b5ebc31badb553ecc8894c8b31a8f515f2c73d9004253bac7f6bc4f6dcf4bbÚTitle: This week in Nushell #271
+Path: Documentation
+Content:
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1612] changed "local environment" example (yet again!)
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1610] fixed Creating Modules code example (a bit further)
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1600] updated "Working with Tables" - added info on "index renaming" and the table command
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1598] fixed type signatures on custom commands
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1597] rewrote Module chapter
+Kissaki 
+[link: https://github.com/nushell/nushell.github.io/pull/1609] fixed 'Creating Modules' code examples
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1607] improved Nerd Fonts docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1606] fixed typo in code example
+vyadh 
+[link: https://github.com/nushell/nushell.github.io/pull/1601] added candidate naming convention to the style guide
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1594] added example showing discovery and running of test commands
+amkhlv 
+[link: https://github.com/nushell/nushell.github.io/pull/1599] wrapped script in "def main 
+[
+]
+ {...}"
+kubouch 
+[link: https://github.com/nushell/nushell.github.io/pull/1596] removed unsupported syntax from type signatures
+victorhck 
+[link: https://github.com/nushell/nushell.github.io/pull/1589] updated spanish Readme translation
+’Ù@477bc0e81515db4f9d6ca4133f560b453d5682caaab368eda4e9a206940a9181Ù›Title: This week in Nushell #271
+Path: Nu_Scripts
+Content:
+lizclipse 
+[link: https://github.com/nushell/nu_scripts/pull/978] fixed network/sockets command

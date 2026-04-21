@@ -1,0 +1,57 @@
+“—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-08-13-twin0103.mdÙ@c72f94b25400263ac77ef81b6d844cd7c1d5785379b04a2bbb53c3fdd6a0cf7c¹This week in Nushell #103‘§NushellÚµandrasio added 
+[link: https://github.com/nushell/nushell/pull/3917] flexible dropping of rows (by desired row number)
+lily-mara fixed 
+[link: https://github.com/nushell/nushell/pull/3916] some long-standing Rustyline issues
+baoyachi 
+[link: https://github.com/nushell/nushell/pull/3914] fixed time format without timezone bug. enhance,optimize suggest upgrade.
+elferherrera added a 
+[link: https://github.com/nushell/nushell/pull/3907] Describe command
+hedonihilist added a way to 
+[link: https://github.com/nushell/nushell/pull/3902] count the size of the directories when calculating the size in DirInfo
+efx 
+[link: https://github.com/nushell/nushell/pull/3868] documented engine-p porting
+’ÚíTitle: This week in Nushell #103
+Path: Nushell
+Content:
+andrasio added 
+[link: https://github.com/nushell/nushell/pull/3917] flexible dropping of rows (by desired row number)
+lily-mara fixed 
+[link: https://github.com/nushell/nushell/pull/3916] some long-standing Rustyline issues
+baoyachi 
+[link: https://github.com/nushell/nushell/pull/3914] fixed time format without timezone bug. enhance,optimize suggest upgrade.
+elferherrera added a 
+[link: https://github.com/nushell/nushell/pull/3907] Describe command
+hedonihilist added a way to 
+[link: https://github.com/nushell/nushell/pull/3902] count the size of the directories when calculating the size in DirInfo
+efx 
+[link: https://github.com/nushell/nushell/pull/3868] documented engine-p porting
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-08-13-twin0103.mdÙ@86e8b52ca2126706a0447f1a877b09b207476f97fee10dfb7b90657c43dd6383¹This week in Nushell #103‘­DocumentationÚˆhedonihilist 
+[link: https://github.com/nushell/nushell.github.io/pull/187] added doc for 
+``filesize_metric``
+ config
+jafriyie1 
+[link: https://github.com/nushell/nushell.github.io/pull/186] added config path argument to first paragraph of configuration.md file
+dywedir created 
+[link: https://github.com/nushell/nushell.github.io/pull/184] 2021-08-03-nushell_0_35.md: Fix typo data -> date
+’ÚÆTitle: This week in Nushell #103
+Path: Documentation
+Content:
+hedonihilist 
+[link: https://github.com/nushell/nushell.github.io/pull/187] added doc for 
+``filesize_metric``
+ config
+jafriyie1 
+[link: https://github.com/nushell/nushell.github.io/pull/186] added config path argument to first paragraph of configuration.md file
+dywedir created 
+[link: https://github.com/nushell/nushell.github.io/pull/184] 2021-08-03-nushell_0_35.md: Fix typo data -> date
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-08-13-twin0103.mdÙ@b0a4d6d80ff204088c0b02d40d0fa626e7f78f425bf95ab8d7c3f37654489b5f¹This week in Nushell #103‘ªNu_ScriptsÙ¢Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/88] updated filesize.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/87] Create filesize.nu
+’ÙİTitle: This week in Nushell #103
+Path: Nu_Scripts
+Content:
+Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/88] updated filesize.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/87] Create filesize.nu

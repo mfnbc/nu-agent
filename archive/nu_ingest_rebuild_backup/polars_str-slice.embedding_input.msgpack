@@ -1,0 +1,80 @@
+���@2d45d6654fe96ef1a765b3854bc36178ced54e6721ccfaaba7d0e5e1796fbc31ـTitle: title: polars str-slice
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars str-slice``
+[link: /commands/categories/dataframe.md] ��@f19842c85d9bbecfbae01d56dd48bfbf0cc9a09c502488157d0f75ed858680a1�_Title: title: polars str-slice
+Path: Signature
+Content:
+``> polars str-slice {flags} (start)``
+��@91c03212db16eb2fbda6099b207f94aeb23d88c93df17b961b7aefc1d6566f44�^Title: title: polars str-slice
+Path: Flags
+Content:
+``--length, -l {int}``
+: Optional length.
+��@31457429f6f7a8fd0d0ac6331cb2eb626c7c04fd808fb04863350ce329afa955�UTitle: title: polars str-slice
+Path: Parameters
+Content:
+``start``
+: Start of slice.
+��@dfb99028ef9a80d600f57f8b2fe9c0af1be44851c0b3649616c007d1548d4ac9ٷTitle: title: polars str-slice
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@cc5f717d681db2b8ee3f264e301cfc2edb0e1bef7e0732b4b50ef760dadf8007�4Title: title: polars str-slice
+Path: Examples
+Content:
+Creates slices from the strings in a specified column
+```Fenced(Borrowed("nu"))
+> [[a]; [abcded] [abc321] [abc123]] | polars into-df | polars select (polars col a | polars str-slice 1 --length 2) | polars collect
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │ bc │
+│ 1 │ bc │
+│ 2 │ bc │
+╰───┴────╯
+
+
+```
+Creates slices from the strings
+```Fenced(Borrowed("nu"))
+> [abcded abc321 abc123] | polars into-df | polars str-slice 1 --length 2
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ bc │
+│ 1 │ bc │
+│ 2 │ bc │
+╰───┴────╯
+
+
+```
+Creates slices from the strings without length
+```Fenced(Borrowed("nu"))
+> [abcded abc321 abc123] | polars into-df | polars str-slice 1
+╭───┬───────╮
+│ # │   0   │
+├───┼───────┤
+│ 0 │ bcded │
+│ 1 │ bc321 │
+│ 2 │ bc123 │
+╰───┴───────╯
+
+
+```

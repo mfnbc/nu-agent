@@ -1,0 +1,77 @@
+•’Ù@c1f0fbe1c4dbaddb3824ff27f7b3b13c24b55bfe4eafc6a95fdef1d98dc2e277Ù½Title: title: 'This week in Nushell #327'
+Path: This Week in Nushell #327
+Content:
+
+
+
+
+Published Saturday, 2025-11-29, including PRs merged Friday, 2025-11-21 through Thursday, 2025-11-27.
+’Ù@c7b0e91dbbfbc2f302414971e693474236c73c5535677ed0a77c5a05d8cd2595Ù¹Title: title: 'This week in Nushell #327'
+Path: Integrations
+Content:
+@hustcer:
+[link: https://github.com/nushell/integrations/pull/74] used explicit key for Debian / Ubuntu repo (#74)
+’Ù@17fa28626fb8407d0c1086db6b32ca2e14376aff6021b8e1d00b341fa2565ee9ÚîTitle: title: 'This week in Nushell #327'
+Path: Documentation
+Content:
+@xav-ie:
+[link: https://github.com/nushell/nushell.github.io/pull/2082] fixed carapace examples (#2082)
+[link: https://github.com/nushell/nushell.github.io/pull/2078] updated vuepress plugins (fix CMD/Ctrl+K!) (#2078)
+@hongquan:
+[link: https://github.com/nushell/nushell.github.io/pull/2080] used explicit key for Debian / Ubuntu repo (#2080)
+@hustcer:
+[link: https://github.com/nushell/nushell.github.io/pull/2079] fixed missing sidebar config in /blog/
+* build output (#2079)
+[link: https://github.com/nushell/nushell.github.io/pull/2076] updated GitHub actions and node to 22 (#2076)
+[link: https://github.com/nushell/nushell.github.io/pull/2075] fixed warning about vuepress plugins being used multiple times (#2075)
+[link: https://github.com/nushell/nushell.github.io/pull/2074] upgraded vuepress and related plugins (#2074)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/2073] published TWiN 326 (#2073)
+’Ù@a4e59a9699dcdb250409854e3f55cc891cb6e46459ca0cad01301943329d9ff5ÚÒTitle: title: 'This week in Nushell #327'
+Path: Nushell
+Content:
+@blackhat-hemsworth:
+[link: https://github.com/nushell/nushell/pull/17067] adjusted polars/slice command to return lazy output on lazy input (#17067)
+@WindSoilder:
+[link: https://github.com/nushell/nushell/pull/17066] added 
+``--strict``
+ flag to 
+``first``
+ and 
+``last``
+ commands to raise error on empty list (#17066)
+@Tyarel8:
+[link: https://github.com/nushell/nushell/pull/17064] fixed 
+``split column``
+ to use 0-index like other commands (#17064)
+[link: https://github.com/nushell/nushell/pull/17055] made 
+``update``
+ not error on optional cellpaths (#17055)
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/17054] made 
+``first``
+ and 
+``last``
+ return 
+``nothing``
+ on empty results (#17054)
+@blindFS:
+[link: https://github.com/nushell/nushell/pull/17049] allowed overriding half of the span in custom/external completer (#17049)
+[link: https://github.com/nushell/nushell/pull/17044] fixed flag values with spaces & wrong position arg for custom completion without placeholder (#17044)
+@sgvictorino:
+[link: https://github.com/nushell/nushell/pull/17048] allowed streaming to commands with union-typed pipeline input (#17048)
+@KaiSforza:
+[link: https://github.com/nushell/nushell/pull/17013] prevented 
+``nu-table``
+ from adding empty column when there's only 1 column (#17013)
+@ItsHarper:
+[link: https://github.com/nushell/nushell/pull/16886] added 
+``--optional``
+ flag to 
+``std-rfc/iter only``
+ (#16886)
+’Ù@cbd98e323c41404b0574aa0f89a5df8d3ca1d4ae94e89a25f8bc2504a1d82078Ù¯Title: title: 'This week in Nushell #327'
+Path: Nu_Scripts
+Content:
+@NotTheDr01ds:
+[link: https://github.com/nushell/nu_scripts/pull/1084] removed direnv hook example (#1084)

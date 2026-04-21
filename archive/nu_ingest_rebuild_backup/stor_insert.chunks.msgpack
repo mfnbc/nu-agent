@@ -1,0 +1,125 @@
+•—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_insert.mdÙ@ac3ca69d1c4f349467f056a65e516b3d4aa9f926e28966f04c97b14599c949e4²title: stor insert‘¨databaseÙB
+
+
+
+
+
+
+
+
+``stor insert``
+[link: /commands/categories/database.md] ’ÙtTitle: title: stor insert
+Path: database
+Content:
+
+
+
+
+
+
+
+
+
+``stor insert``
+[link: /commands/categories/database.md] —ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_insert.mdÙ@58390eed745ec3cdb199322e372ef77014ecac92f67a66fad370552372ad5918²title: stor insert‘©Signature»``> stor insert {flags} ``
+’ÙNTitle: title: stor insert
+Path: Signature
+Content:
+``> stor insert {flags} ``
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_insert.mdÙ@7523fbd2c9da482abe94996400c0e0966b5b8c2bd0c8bb8e99c46cc36bb2d17a²title: stor insert‘¥FlagsÙ»``--table-name, -t {string}``
+: Name of the table you want to insert into.
+``--data-record, -d {record}``
+: A record of column names and column values to insert into the specified table.
+’ÙêTitle: title: stor insert
+Path: Flags
+Content:
+``--table-name, -t {string}``
+: Name of the table you want to insert into.
+``--data-record, -d {record}``
+: A record of column names and column values to insert into the specified table.
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_insert.mdÙ@0c8c51a0c2db3f6d5b8a7011732c8cf6fda98a563f45ce45968dff2a17a5a7b7²title: stor insert‘³Input/output types:Ù>input
+output
+nothing
+table
+record
+table
+table
+table
+any
+table
+’Ù{Title: title: stor insert
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+record
+table
+table
+table
+any
+table
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/stor_insert.mdÙ@1e9f4c532ce5bcd152b0dbd6c81094e4adcb16c1f0cfd7d36c26d0d95308f699²title: stor insert‘¨ExamplesÚInsert data in the in-memory sqlite database using a data-record of column-name and column-value pairs
+```Fenced(Borrowed("nu"))
+> stor insert --table-name nudb --data-record {bool1: true, int1: 5, float1: 1.1, str1: fdncred, datetime1: 2023-04-17}
+
+
+```
+Insert data through pipeline input as a record of column-name and column-value pairs
+```Fenced(Borrowed("nu"))
+> {bool1: true, int1: 5, float1: 1.1, str1: fdncred, datetime1: 2023-04-17} | stor insert --table-name nudb
+
+
+```
+Insert data through pipeline input as a table literal
+```Fenced(Borrowed("nu"))
+> [[bool1 int1 float1]; [true 5 1.1], [false 8 3.14]] | stor insert --table-name nudb
+
+
+```
+Insert ls entries
+```Fenced(Borrowed("nu"))
+> ls | stor insert --table-name files
+
+
+```
+Insert nu records as json data
+```Fenced(Borrowed("nu"))
+> ls -l | each {{file: $in.name, metadata: ($in | reject name)}} | stor insert --table-name files_with_md
+
+
+```
+’Ú¿Title: title: stor insert
+Path: Examples
+Content:
+Insert data in the in-memory sqlite database using a data-record of column-name and column-value pairs
+```Fenced(Borrowed("nu"))
+> stor insert --table-name nudb --data-record {bool1: true, int1: 5, float1: 1.1, str1: fdncred, datetime1: 2023-04-17}
+
+
+```
+Insert data through pipeline input as a record of column-name and column-value pairs
+```Fenced(Borrowed("nu"))
+> {bool1: true, int1: 5, float1: 1.1, str1: fdncred, datetime1: 2023-04-17} | stor insert --table-name nudb
+
+
+```
+Insert data through pipeline input as a table literal
+```Fenced(Borrowed("nu"))
+> [[bool1 int1 float1]; [true 5 1.1], [false 8 3.14]] | stor insert --table-name nudb
+
+
+```
+Insert ls entries
+```Fenced(Borrowed("nu"))
+> ls | stor insert --table-name files
+
+
+```
+Insert nu records as json data
+```Fenced(Borrowed("nu"))
+> ls -l | each {{file: $in.name, metadata: ($in | reject name)}} | stor insert --table-name files_with_md
+
+
+```

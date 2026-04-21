@@ -1,0 +1,59 @@
+���@07b6aff09a391dc88a4f2c7e80f9d0c1da983b7e996150b4488dcce389d2f7dbيTitle: title: polars selector last
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars selector last``
+[link: /commands/categories/expression.md] ��@db82d902d22968505136279733e0fb62a63b5d304c8c67f2752eddb1f3a39837�cTitle: title: polars selector last
+Path: Signature
+Content:
+``> polars selector last {flags} (n)``
+��@48df5f817dd7c37ef33bdbf769b9d8309a5258f24195995b87577d6a5684c930�|Title: title: polars selector last
+Path: Parameters
+Content:
+``n``
+: Number of columns to select from the end (default: 1).
+��@52a227fcc173942f387dd4c83c626d23ba7d49356fdf6cd0f879de4e1a859782�gTitle: title: polars selector last
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_selector
+��@4597c72862fbb26a0634b8dc9d86993deb9e116403a5c2c373483d7b599acd53��Title: title: polars selector last
+Path: Examples
+Content:
+Create a selector for the last column
+```Fenced(Borrowed("nu"))
+> polars selector last
+
+
+```
+Create a selector for the last 3 columns
+```Fenced(Borrowed("nu"))
+> polars selector last 3
+
+
+```
+Create a new column from the last column using with-column
+```Fenced(Borrowed("nu"))
+> [[a b c]; [1 2 3] [4 5 6]]
+                    | polars into-df
+                    | polars with-column ((polars selector last) * 100 | polars as c_times_100)
+                    | polars collect
+╭───┬───┬───┬───┬─────────────╮
+│ # │ a │ b │ c │ c_times_100 │
+├───┼───┼───┼───┼─────────────┤
+│ 0 │ 1 │ 2 │ 3 │         300 │
+│ 1 │ 4 │ 5 │ 6 │         600 │
+╰───┴───┴───┴───┴─────────────╯
+
+
+```

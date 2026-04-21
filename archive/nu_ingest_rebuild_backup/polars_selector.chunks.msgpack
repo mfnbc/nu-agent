@@ -1,0 +1,60 @@
+”—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector.mdÙ@5ee8a914338689752e5f1fe15ef2652aa1813741ed95a9bb4eeb51fc713a6186¶title: polars selector‘ªexpressionÙH
+
+
+
+
+
+
+
+
+``polars selector``
+[link: /commands/categories/expression.md] ’Ù€Title: title: polars selector
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars selector``
+[link: /commands/categories/expression.md] —ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector.mdÙ@7970fc8b26edfc4c652fb1a79b67958d76ae5cf2de817563e581109c4672231b¶title: polars selector‘©Signature¿``> polars selector {flags} ``
+’ÙVTitle: title: polars selector
+Path: Signature
+Content:
+``> polars selector {flags} ``
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector.mdÙ@921ef8a2b112485518e107e91bc3c6fc2690c4cc3cb17fd45e14b37e452cb960¶title: polars selector‘³Input/output types:¼input
+output
+nothing
+string
+’Ù]Title: title: polars selector
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector.mdÙ@d0243d2886cf88e405129f5b456ef8993254dd92eefda010807ea072527f659f¶title: polars selector‘¥NotesÚ]You must use one of the subcommands below. Using this command as-is will only produce this help message.
+Selectors are expressions that can be used to select columns in dataframes based on various criteria.
+
+These selectors can be used with commands that accept column expressions, such as 
+``polars select``
+,
+
+``polars with-column``
+, and others.
+’ÚTitle: title: polars selector
+Path: Notes
+Content:
+You must use one of the subcommands below. Using this command as-is will only produce this help message.
+Selectors are expressions that can be used to select columns in dataframes based on various criteria.
+
+These selectors can be used with commands that accept column expressions, such as 
+``polars select``
+,
+
+``polars with-column``
+, and others.

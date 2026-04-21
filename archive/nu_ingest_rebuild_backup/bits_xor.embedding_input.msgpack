@@ -1,0 +1,100 @@
+–’Ù@d8946db9a7f799b949a9de647e25251ee1dfcbab5767eb3bb59b3d433aa635c0ÙfTitle: title: bits xor
+Path: bits
+Content:
+
+
+
+
+
+
+
+
+
+``bits xor``
+[link: /commands/categories/bits.md] ’Ù@f743f60786f841d78934861509f0e58b572e0bc6c1c8c3fb163ea30f27fa32afÙPTitle: title: bits xor
+Path: Signature
+Content:
+``> bits xor {flags} (target)``
+’Ù@5a97b9a2458d2f8d16a856ca501645b7a95571455f255235ba49ed870d742914ÙTitle: title: bits xor
+Path: Flags
+Content:
+``--endian, -e {string}``
+: Byte encode endian, available options: native(default), little, big.
+’Ù@119c37b1ecbe63e081aa3b4417960845824fb6238d0b75b402d5ee090e7b9057Ù`Title: title: bits xor
+Path: Parameters
+Content:
+``target``
+: Right-hand side of the operation.
+’Ù@45666b164e2d599bd8a3a2a5beb29abd317b2ba42b80b499e51249f54f977d2fÙ›Title: title: bits xor
+Path: Input/output types:
+Content:
+input
+output
+int
+int
+binary
+binary
+list
+<
+int
+>
+
+list
+<
+int
+>
+
+list
+<
+binary
+>
+
+list
+<
+binary
+>
+
+’Ù@4cf1f643625a11eb84e1d30b8badfaea1c1f79c52f28e3e52c0deb781279086dÚTitle: title: bits xor
+Path: Examples
+Content:
+Apply bits xor to two numbers
+```Fenced(Borrowed("nu"))
+> 2 | bits xor 2
+0
+
+```
+Apply bitwise xor to a list of numbers
+```Fenced(Borrowed("nu"))
+> [8 3 2] | bits xor 2
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ 10 â”‚
+â”‚ 1 â”‚  1 â”‚
+â”‚ 2 â”‚  0 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â•¯
+
+
+```
+Apply bitwise xor to binary data
+```Fenced(Borrowed("nu"))
+> 0x[ca fe] | bits xor 0x[ba be]
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   70 40                                                p@
+
+
+```
+Apply bitwise xor to binary data of varying lengths with specified endianness
+```Fenced(Borrowed("nu"))
+> 0x[ca fe] | bits xor 0x[aa] --endian big
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ca 54                                                Ã—T
+
+
+```
+Apply bitwise xor to input binary data smaller than the operand
+```Fenced(Borrowed("nu"))
+> 0x[ff] | bits xor 0x[12 34 56] --endian little
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ed 34 56                                             Ã—4V
+
+
+```

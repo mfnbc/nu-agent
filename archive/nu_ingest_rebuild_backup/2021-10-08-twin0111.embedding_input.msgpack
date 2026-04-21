@@ -1,0 +1,110 @@
+îíŸ@7778ee6fcd7d3d3c51189bc4cbf6e13d95b015ede4bbf2502c5f17f5f0da1846⁄êTitle: This week in Nushell #111
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4069] removed history file after clearing it
+jt 
+[link: https://github.com/nushell/nushell/pull/4067] updated LICENSE
+, 
+[link: https://github.com/nushell/nushell/pull/4064] released 0.38
+, 
+[link: https://github.com/nushell/nushell/pull/4063] remove the broken scrolling support
+, and 
+[link: https://github.com/nushell/nushell/pull/4061] updated wasm deps
+waldyrious created 
+[link: https://github.com/nushell/nushell/pull/4066] stale.yml: mention time to close in stale message
+JoshCheek 
+[link: https://github.com/nushell/nushell/pull/4062] added 
+``-c``
+ flag to 
+``select``
+ command
+hedonihilist added 
+[link: https://github.com/nushell/nushell/pull/4052] expand tilde when reading plugin_dirs
+hojjatabdollahi 
+[link: https://github.com/nushell/nushell/pull/4051] fixed two typos in the tutor.
+íŸ@7e2c683c4b22d5b7f59d52602d48ec592d4c23ea31020117567e833ee5192c01⁄;Title: This week in Nushell #111
+Path: Documentation
+Content:
+thomasaarholt 
+[link: https://github.com/nushell/nushell.github.io/pull/202] fixed typo in "config set" instructions
+raboof created 
+[link: https://github.com/nushell/nushell.github.io/pull/200] Coming from bash: 
+``echo $FOO``
+ = 
+``echo $nu.env.FOO``
+íŸ@5bfb7cf34038c9aa614a87c66afaf7069146f395a9cef2058ed75b9a47912938⁄ÏTitle: This week in Nushell #111
+Path: engine-q
+Content:
+jt 
+[link: https://github.com/nushell/engine-q/pull/104] improved the alias expansion
+, 
+[link: https://github.com/nushell/engine-q/pull/100] created LICENSE
+, added 
+[link: https://github.com/nushell/engine-q/pull/99] Source command
+, added 
+[link: https://github.com/nushell/engine-q/pull/95] Variable completions and better ls
+, 
+[link: https://github.com/nushell/engine-q/pull/93] added unit parsing and eval support
+, added 
+[link: https://github.com/nushell/engine-q/pull/92] better completions for external args
+, changed to 
+[link: https://github.com/nushell/engine-q/pull/91] use list completions and better expansion
+, 
+[link: https://github.com/nushell/engine-q/pull/90] added path completions
+, fixed so 
+[link: https://github.com/nushell/engine-q/pull/87] lines shouldn't trim
+, 
+[link: https://github.com/nushell/engine-q/pull/86] added simple cd
+, fixed to 
+[link: https://github.com/nushell/engine-q/pull/83] let strings be cell paths
+, 
+[link: https://github.com/nushell/engine-q/pull/82] added select
+, and 
+[link: https://github.com/nushell/engine-q/pull/81] added wrap and get and cell_path parsing
+fdncred created 
+[link: https://github.com/nushell/engine-q/pull/103] allow one to specify a custom separator for the grid
+, and 
+[link: https://github.com/nushell/engine-q/pull/102] respect lscolors env var; measure width minus ansi
+, and 
+[link: https://github.com/nushell/engine-q/pull/96] output 
+``ls``
+ as a grid vs table
+xiuxiu62 
+[link: https://github.com/nushell/engine-q/pull/101] added touch command
+, 
+[link: https://github.com/nushell/engine-q/pull/98] ported 
+``cp``
+ to fs commands
+, and 
+[link: https://github.com/nushell/engine-q/pull/88] ported the mv command
+stormasm created 
+[link: https://github.com/nushell/engine-q/pull/97] The signature of the get command was mistakenly named wrap
+, and 
+[link: https://github.com/nushell/engine-q/pull/85] added serde derive to Cargo.toml so nu-protocol compiles standalone
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/89] added import patterns to 'hide'
+, and 
+[link: https://github.com/nushell/engine-q/pull/74] Modules: export & hide
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/84] prompt with env variable
+íŸ@20ea99becf4e2985708c37744219b53ad96ab67f44c97b923efecded23a69df8⁄ŒTitle: This week in Nushell #111
+Path: reedline
+Content:
+jt 
+[link: https://github.com/nushell/reedline/pull/163] updated LICENSE
+, and 
+[link: https://github.com/nushell/reedline/pull/162] added list style completions
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/161] Fix README badges
+, and 
+[link: https://github.com/nushell/reedline/pull/160] Clarify method names for undo-interface
+, and 
+[link: https://github.com/nushell/reedline/pull/159] Simplify and document history trait
+, and 
+[link: https://github.com/nushell/reedline/pull/155] fixed CtrlD/CtrlC and reverse-history-search + stuff
+mzanrosso created 
+[link: https://github.com/nushell/reedline/pull/143] [
+BugFix
+]
+ undo function

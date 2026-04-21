@@ -1,0 +1,60 @@
+”—ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_into-schema.mdÙ@b8f0ee518ce55b8608ea4c926c00a79edac1ba5868f5f3adbae708c85dadda26¹title: polars into-schema‘©dataframeÙJ
+
+
+
+
+
+
+
+
+``polars into-schema``
+[link: /commands/categories/dataframe.md] ’Ù„Title: title: polars into-schema
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars into-schema``
+[link: /commands/categories/dataframe.md] —ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_into-schema.mdÙ@94c5e61bd0b0dfce35000c3fa940be94f8508b38b5c3622dd178284e89a27a4b¹title: polars into-schema‘©SignatureÙ"``> polars into-schema {flags} ``
+’Ù\Title: title: polars into-schema
+Path: Signature
+Content:
+``> polars into-schema {flags} ``
+—ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_into-schema.mdÙ@7999e0c3bffa58ed713b7940e56890180d3cde2220e86df1f4d1a80d62e7caba¹title: polars into-schema‘³Input/output types:¿input
+output
+any
+polars_schema
+’ÙcTitle: title: polars into-schema
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_schema
+—ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_into-schema.mdÙ@dae4efc6aab841e4fe4b24cb2b2303a202e7392fd249518a3b2a3d64711d67c7¹title: polars into-schema‘¨ExamplesÙöConvert a record into a schema and back to a nu object
+```Fenced(Borrowed("nu"))
+> {a: str, b: u8} | polars into-schema | polars into-nu
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â•®
+â”‚ a â”‚ str â”‚
+â”‚ b â”‚ u8  â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â•¯
+
+```
+’Ú/Title: title: polars into-schema
+Path: Examples
+Content:
+Convert a record into a schema and back to a nu object
+```Fenced(Borrowed("nu"))
+> {a: str, b: u8} | polars into-schema | polars into-nu
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â•®
+â”‚ a â”‚ str â”‚
+â”‚ b â”‚ u8  â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â•¯
+
+```

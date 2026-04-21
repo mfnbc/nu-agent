@@ -1,0 +1,592 @@
+˜—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@50733944bf0ff5950a8720970fc567bbf6727422d7a25b210fadb83c7f2b978aµTrabajando con tablas‘µTrabajando con tablasÚ˜Una de las maneras comunes de mirar datos en Nu es a travÃ©s de una tabla. Nu viene con una serie de comandos que trabajan con tablas para que pueda ser mÃ¡s conveniente encontrar lo que estÃ¡s buscando y para limitar los datos a solo lo que necesites.
+Para empezar, consigamos una tabla que podamos usar:
+```Fenced(Borrowed("nu"))
+ls
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  2 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  3 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  6 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  7 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  8 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  9 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+’ÚÚTitle: Trabajando con tablas
+Path: Trabajando con tablas
+Content:
+Una de las maneras comunes de mirar datos en Nu es a travÃ©s de una tabla. Nu viene con una serie de comandos que trabajan con tablas para que pueda ser mÃ¡s conveniente encontrar lo que estÃ¡s buscando y para limitar los datos a solo lo que necesites.
+Para empezar, consigamos una tabla que podamos usar:
+```Fenced(Borrowed("nu"))
+ls
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  2 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  3 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  6 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  7 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  8 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  9 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@722704581b553f7f3e059e8652779fad2aed1ef37e746e2c949132c07ea7da4dµTrabajando con tablas‘³Ordenando los datosÚ×Podemos ordenar la tabla llamando el comando 
+``sort-by``
+ e indicÃ¡ndole quÃ© columnas queremos usar al ordenar. Digamos que deseamos ordenar nuestra tabla por tamaÃ±o de archivo:
+```Fenced(Borrowed("nu"))
+ls | sort-by size
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  1 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  4 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  5 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  6 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  7 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  8 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  9 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+Podemos ordenar una tabla con cualquier columna que pueda ser comparada. Por ejemplo, tambiÃ©n pudimos haber ordenador usando las columnas "name", "accessed", o "modified".
+’ÚTitle: Trabajando con tablas
+Path: Ordenando los datos
+Content:
+Podemos ordenar la tabla llamando el comando 
+``sort-by``
+ e indicÃ¡ndole quÃ© columnas queremos usar al ordenar. Digamos que deseamos ordenar nuestra tabla por tamaÃ±o de archivo:
+```Fenced(Borrowed("nu"))
+ls | sort-by size
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  1 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  4 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  5 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  6 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  7 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  8 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  9 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+Podemos ordenar una tabla con cualquier columna que pueda ser comparada. Por ejemplo, tambiÃ©n pudimos haber ordenador usando las columnas "name", "accessed", o "modified".
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@f7f6951bf5e4b22ecbc81af05790dce0f9444b2384bd56fdf9461c15ac5d0f92µTrabajando con tablas‘Ù#Seleccionando los datos que quieresÚ£Podemos seleccionar datos de una tabla seleccionando columnas o filas especÃ­ficas. Escojamos algunas columnas de nuestra tabla para usar:
+```Fenced(Borrowed("nu"))
+ls | select name size
+# => ---+---------------+---------
+# =>  # | name          | size
+# => ---+---------------+---------
+# =>  0 | add.rs        | 2.7 KB
+# =>  1 | sum.rs        | 3.0 KB
+# =>  2 | inc.rs        | 11.8 KB
+# =>  3 | str.rs        | 21.4 KB
+# =>  4 | skip.rs       | 1.7 KB
+# =>  5 | textview.rs   | 9.4 KB
+# =>  6 | binaryview.rs | 13.0 KB
+# =>  7 | edit.rs       | 2.7 KB
+# =>  8 | tree.rs       | 3.0 KB
+# =>  9 | sys.rs        | 9.2 KB
+# => ---+---------------+---------
+
+```
+Esto ayuda a crear una table mÃ¡s enfocada para lo que necesitamos. Siguiente, digamos que queremos ver los 5 archivos mÃ¡s livianos de este directorio:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | skip.rs | File |          | 1.7 KB | 2 days ago | 2 days ago
+# =>  1 | add.rs  | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  2 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  3 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  4 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+NotarÃ¡s que primero ordenamos la tabla por tamaÃ±o para llegar hasta el archivo mÃ¡s pequeÃ±o y luego usamos 
+``first 5``
+ que nos devuelve las primeras 5 filas de la tabla.
+TambiÃ©n puedes saltarte filas con 
+``skip``
+ que no deseas. Saltemos las primeras dos de las 5 filas que obtuvimos arriba:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5 | skip 2
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  1 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  2 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+Hemos reducido a tres filas que nos interesa.
+Veamos algunos otros comandos para seleccionar datos. Es posible que te hayas preguntado por quÃ© las filas de la tabla son nÃºmeros. Esto actÃºa como una forma prÃ¡ctica de llegar a una sola fila. Ordenemos nuestra tabla por el nombre del archivo y luego escojamos una de las filas con el comando 
+``n-th``
+ usando el nÃºmero de fila:
+```Fenced(Borrowed("nu"))
+ls | sort-by name
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  6 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  7 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  8 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  9 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+---+---------------+------+----------+---------+------------+------------
+
+ls | sort-by name | nth 5
+# => --------+------+----------+---------+------------+------------
+# =>  name   | type | readonly | size    | accessed   | modified
+# => --------+------+----------+---------+------------+------------
+# =>  str.rs | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => --------+------+----------+---------+------------+------------
+
+```
+’ÚóTitle: Trabajando con tablas
+Path: Seleccionando los datos que quieres
+Content:
+Podemos seleccionar datos de una tabla seleccionando columnas o filas especÃ­ficas. Escojamos algunas columnas de nuestra tabla para usar:
+```Fenced(Borrowed("nu"))
+ls | select name size
+# => ---+---------------+---------
+# =>  # | name          | size
+# => ---+---------------+---------
+# =>  0 | add.rs        | 2.7 KB
+# =>  1 | sum.rs        | 3.0 KB
+# =>  2 | inc.rs        | 11.8 KB
+# =>  3 | str.rs        | 21.4 KB
+# =>  4 | skip.rs       | 1.7 KB
+# =>  5 | textview.rs   | 9.4 KB
+# =>  6 | binaryview.rs | 13.0 KB
+# =>  7 | edit.rs       | 2.7 KB
+# =>  8 | tree.rs       | 3.0 KB
+# =>  9 | sys.rs        | 9.2 KB
+# => ---+---------------+---------
+
+```
+Esto ayuda a crear una table mÃ¡s enfocada para lo que necesitamos. Siguiente, digamos que queremos ver los 5 archivos mÃ¡s livianos de este directorio:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | skip.rs | File |          | 1.7 KB | 2 days ago | 2 days ago
+# =>  1 | add.rs  | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  2 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  3 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  4 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+NotarÃ¡s que primero ordenamos la tabla por tamaÃ±o para llegar hasta el archivo mÃ¡s pequeÃ±o y luego usamos 
+``first 5``
+ que nos devuelve las primeras 5 filas de la tabla.
+TambiÃ©n puedes saltarte filas con 
+``skip``
+ que no deseas. Saltemos las primeras dos de las 5 filas que obtuvimos arriba:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5 | skip 2
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  1 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  2 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+Hemos reducido a tres filas que nos interesa.
+Veamos algunos otros comandos para seleccionar datos. Es posible que te hayas preguntado por quÃ© las filas de la tabla son nÃºmeros. Esto actÃºa como una forma prÃ¡ctica de llegar a una sola fila. Ordenemos nuestra tabla por el nombre del archivo y luego escojamos una de las filas con el comando 
+``n-th``
+ usando el nÃºmero de fila:
+```Fenced(Borrowed("nu"))
+ls | sort-by name
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  6 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  7 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  8 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  9 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+---+---------------+------+----------+---------+------------+------------
+
+ls | sort-by name | nth 5
+# => --------+------+----------+---------+------------+------------
+# =>  name   | type | readonly | size    | accessed   | modified
+# => --------+------+----------+---------+------------+------------
+# =>  str.rs | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => --------+------+----------+---------+------------+------------
+
+```
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@ac2f71aaa3ceb1ee606197270a3b02572906918d1d640e36ef04ad626b29a361µTrabajando con tablas‘½Obteniendo datos de una tablaÚHasta ahora hemos trabajado con tablas reduciendo la tabla a solo lo que necesitamos. A veces es posible que queramos ir un paso mÃ¡s allÃ¡ y solo mirar los valores en las celdas en lugar the tomar una columna completa. Digamos, por ejemplo, que queramos obtener una lista de los nombres de los archivos. Para esto usamos el comando 
+``get``
+:
+```Fenced(Borrowed("nu"))
+ls | get name
+# => ---+---------------
+# =>  # | value
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+Ahora tenemos los valores de cada nombre de los archivos.
+Puede parecerse al comando 
+``select``
+ que vimos previamente, probemos 
+``select``
+ para comparar los dos:
+```Fenced(Borrowed("nu"))
+ls | select name
+# => ---+---------------
+# =>  # | name
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+Â¡Se ven muy similares! Veamos si podemos explicar la diferencia entre estos dos comandos para aclarar:
+``select``
+ - crea una tabla donde incluye Ãºnicamente las columnas indicadas
+``get``
+ - devuelve los valores dentro de la columna indicada
+La manera de distinguirlas mirando la tabla de forma caracterÃ­stica es con el nombre de columna 
+``value``
+ que nos permite saber que serÃ¡ una lista de valores con la que podemos trabajar.
+El comando 
+``get``
+ puede ir mÃ¡s allÃ¡ y tomar una ruta para datos mÃ¡s profundos en la tabla. Esto simplifica trabajar con datos mÃ¡s complejos como las estructuras que podrÃ­as encontrar en archivos .json.
+’ÚQTitle: Trabajando con tablas
+Path: Obteniendo datos de una tabla
+Content:
+Hasta ahora hemos trabajado con tablas reduciendo la tabla a solo lo que necesitamos. A veces es posible que queramos ir un paso mÃ¡s allÃ¡ y solo mirar los valores en las celdas en lugar the tomar una columna completa. Digamos, por ejemplo, que queramos obtener una lista de los nombres de los archivos. Para esto usamos el comando 
+``get``
+:
+```Fenced(Borrowed("nu"))
+ls | get name
+# => ---+---------------
+# =>  # | value
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+Ahora tenemos los valores de cada nombre de los archivos.
+Puede parecerse al comando 
+``select``
+ que vimos previamente, probemos 
+``select``
+ para comparar los dos:
+```Fenced(Borrowed("nu"))
+ls | select name
+# => ---+---------------
+# =>  # | name
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+Â¡Se ven muy similares! Veamos si podemos explicar la diferencia entre estos dos comandos para aclarar:
+``select``
+ - crea una tabla donde incluye Ãºnicamente las columnas indicadas
+``get``
+ - devuelve los valores dentro de la columna indicada
+La manera de distinguirlas mirando la tabla de forma caracterÃ­stica es con el nombre de columna 
+``value``
+ que nos permite saber que serÃ¡ una lista de valores con la que podemos trabajar.
+El comando 
+``get``
+ puede ir mÃ¡s allÃ¡ y tomar una ruta para datos mÃ¡s profundos en la tabla. Esto simplifica trabajar con datos mÃ¡s complejos como las estructuras que podrÃ­as encontrar en archivos .json.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@fcae9f87c46cbc8179aafa5cea3a31585f08f5e9ac5230ba7cd21054314d938eµTrabajando con tablas‘¼Cambiando datos de una tablaÚ(AdemÃ¡s de seleccionar datos de una tabla, tambiÃ©n podemos actualizar lo que contiene una tabla. Es posible que queramos agregar nuevas columnas o editar el contenido de una celda. En Nu, en lugar la misma tabla, cada uno de los comandos en la secciÃ³n devolvera una nueva tabla en la tuberÃ­a.
+’ÚqTitle: Trabajando con tablas
+Path: Cambiando datos de una tabla
+Content:
+AdemÃ¡s de seleccionar datos de una tabla, tambiÃ©n podemos actualizar lo que contiene una tabla. Es posible que queramos agregar nuevas columnas o editar el contenido de una celda. En Nu, en lugar la misma tabla, cada uno de los comandos en la secciÃ³n devolvera una nueva tabla en la tuberÃ­a.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@8eadc0cd71f107437d20a8ff81b0b1aa92b9969d65d8e175e2b268489c3d6bcdµTrabajando con tablas‘»Agregando una nueva columnaÚ1Podemos utilizar el comando 
+``add``
+ para agregar una nueva columna a la tabla. Veamos un ejemplo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+Agreguemos una columna llamada "next_edition" con el valor 2021:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+Observa que si abrimos el archivo original el contenido permanece igual:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+Los cambios en Nu son cambios funcionales, lo que significa que funcionan en los valores mismos en vez de causar cambios permanentes. Esto nos permite realizar diferentes tipos de trabajo en nuestra tuberÃ­a hasta que estemos listos para grabar los resultados con cualquier cambio que nos gustarÃ­a si asÃ­ decidimos. AquÃ­ podrÃ­amos grabar los resultados usando el comando 
+``save``
+:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
+open rustfmt2.toml
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+’ÚyTitle: Trabajando con tablas
+Path: Agregando una nueva columna
+Content:
+Podemos utilizar el comando 
+``add``
+ para agregar una nueva columna a la tabla. Veamos un ejemplo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+Agreguemos una columna llamada "next_edition" con el valor 2021:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+Observa que si abrimos el archivo original el contenido permanece igual:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+Los cambios en Nu son cambios funcionales, lo que significa que funcionan en los valores mismos en vez de causar cambios permanentes. Esto nos permite realizar diferentes tipos de trabajo en nuestra tuberÃ­a hasta que estemos listos para grabar los resultados con cualquier cambio que nos gustarÃ­a si asÃ­ decidimos. AquÃ­ podrÃ­amos grabar los resultados usando el comando 
+``save``
+:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
+open rustfmt2.toml
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@897ed1b0257f6404ae7a61bf50e591ee8aaaa2976415784de97a5837e12086e9µTrabajando con tablas‘´Editando una columnaÚSimilarmente al comando 
+``add``
+, tambiÃ©n podemos usar el comando 
+``edit``
+ para cambiar el contenido de una columna a un nuevo valor. Abramos el mismo archivo para verlo en acciÃ³n:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+y ahora, actualizemos la ediciÃ³n y que apunte a la siguiente ediciÃ³n que esperamos soportar:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | edit edition 2021
+# => ---------
+# =>  edition
+# => ---------
+# =>  2021
+# => ---------
+
+```
+’Ú\Title: Trabajando con tablas
+Path: Editando una columna
+Content:
+Similarmente al comando 
+``add``
+, tambiÃ©n podemos usar el comando 
+``edit``
+ para cambiar el contenido de una columna a un nuevo valor. Abramos el mismo archivo para verlo en acciÃ³n:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+y ahora, actualizemos la ediciÃ³n y que apunte a la siguiente ediciÃ³n que esperamos soportar:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | edit edition 2021
+# => ---------
+# =>  edition
+# => ---------
+# =>  2021
+# => ---------
+
+```
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/es/book/trabajando_con_tablas.mdÙ@64098acde54d1935096c806aa5e63b5a609e645640e9bf8e26b0b49143b4eab5µTrabajando con tablas‘µIncrementando valoresÚPHay un comando mÃ¡s en Nu que nos ayudarÃ¡ a trabajar con nÃºmeros y versiones: 
+``inc``
+.
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+open rustfmt.toml | inc edition
+# => ---------
+# =>  edition
+# => ---------
+# =>  2019
+# => ---------
+
+```
+Como el valor en "edition" es un nÃºmero, podemos usar 
+``inc``
+ para actualizarlo. 
+``inc``
+ realmente brilla cuando trabajamos con versiones:
+```Fenced(Borrowed("nu"))
+open Cargo.toml | get package.version
+# => 0.1.3
+open Cargo.toml | inc package.version --minor | get package.version
+# => 0.2.0
+
+```
+Cuando trabajamos con versiones podemos usar banderas e indicar cÃ³mo incrementar la versiÃ³n:
+--major
+ - incrementar major (0.1.3 -> 1.0.0)
+--minor
+ - incrementar minor (0.1.3 -> 0.2.0)
+--patch
+ - incrementar patch (0.1.3 -> 0.1.4)
+’Ú’Title: Trabajando con tablas
+Path: Incrementando valores
+Content:
+Hay un comando mÃ¡s en Nu que nos ayudarÃ¡ a trabajar con nÃºmeros y versiones: 
+``inc``
+.
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+open rustfmt.toml | inc edition
+# => ---------
+# =>  edition
+# => ---------
+# =>  2019
+# => ---------
+
+```
+Como el valor en "edition" es un nÃºmero, podemos usar 
+``inc``
+ para actualizarlo. 
+``inc``
+ realmente brilla cuando trabajamos con versiones:
+```Fenced(Borrowed("nu"))
+open Cargo.toml | get package.version
+# => 0.1.3
+open Cargo.toml | inc package.version --minor | get package.version
+# => 0.2.0
+
+```
+Cuando trabajamos con versiones podemos usar banderas e indicar cÃ³mo incrementar la versiÃ³n:
+--major
+ - incrementar major (0.1.3 -> 1.0.0)
+--minor
+ - incrementar minor (0.1.3 -> 0.2.0)
+--patch
+ - incrementar patch (0.1.3 -> 0.1.4)

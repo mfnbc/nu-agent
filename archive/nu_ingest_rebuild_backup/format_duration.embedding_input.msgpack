@@ -1,0 +1,68 @@
+���@b8483706e99da473ae204bb735a624971d4908f0ab28866bf13fe30c129b29e9�zTitle: title: format duration
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``format duration``
+[link: /commands/categories/strings.md] ��@635425cf1f8cfbb38865c0eb6d7ddcb4daa4c93567eba757c4c2cabf52b4cbde�lTitle: title: format duration
+Path: Signature
+Content:
+``> format duration {flags} (format value) ...rest``
+��@dec394e8478c7592852415f90036ab4d5dd56bae1c9e888b56b848d1aaf81f33��Title: title: format duration
+Path: Parameters
+Content:
+``format value``
+: The unit in which to display the duration.
+``...rest``
+: For a data structure input, format duration at the given cell paths.
+��@baaf6fd2d01f9c3dec240da9f9203648f7028dc3a8946144589e8fbc932a0729َTitle: title: format duration
+Path: Input/output types:
+Content:
+input
+output
+duration
+string
+list
+<
+duration
+>
+
+list
+<
+string
+>
+
+table
+table
+��@d19f4f89f8649c2d413dc2c3666181562dbc4f08794de724cb26d2fd1c9574a4�ZTitle: title: format duration
+Path: Examples
+Content:
+Convert µs duration to the requested second duration as a string.
+```Fenced(Borrowed("nu"))
+> 1000000µs | format duration sec
+1 sec
+
+```
+Convert durations to µs duration as strings.
+```Fenced(Borrowed("nu"))
+> [1sec 2sec] | format duration µs
+╭───┬────────────╮
+│ 0 │ 1000000 µs │
+│ 1 │ 2000000 µs │
+╰───┴────────────╯
+
+
+```
+Convert duration to µs as a string if unit asked for was us.
+```Fenced(Borrowed("nu"))
+> 1sec | format duration us
+1000000 µs
+
+```

@@ -1,0 +1,152 @@
+–—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_trim.mdÙ@779df418ff9914ef532970cdf2256feec459ddb9b05415ad5d8ceef091856682¯title: str trim‘§stringsÙ>
+
+
+
+
+
+
+
+
+``str trim``
+[link: /commands/categories/strings.md] ’ÙlTitle: title: str trim
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str trim``
+[link: /commands/categories/strings.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_trim.mdÙ@d2e0ac03cb37b1e0798b108fd449534acbbeb9e91cce148047cb9d89740dc18f¯title: str trim‘©Signature¿``> str trim {flags} ...rest``
+’ÙOTitle: title: str trim
+Path: Signature
+Content:
+``> str trim {flags} ...rest``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_trim.mdÙ@70e519aa80714101ccf21320a3f59bc9f284b7903999fcbd3e9030668654326d¯title: str trim‘¥FlagsÙĞ``--char, -c {string}``
+: Character to trim (default: whitespace).
+``--left, -l``
+: Trims characters only from the beginning of the string.
+``--right, -r``
+: Trims characters only from the end of the string.
+’ÙüTitle: title: str trim
+Path: Flags
+Content:
+``--char, -c {string}``
+: Character to trim (default: whitespace).
+``--left, -l``
+: Trims characters only from the beginning of the string.
+``--right, -r``
+: Trims characters only from the end of the string.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_trim.mdÙ@51ca1f6bd8d48eb838957b11faf56b549e3fad4f067aa63ba81082633069ba27¯title: str trim‘ªParametersÙP``...rest``
+: For a data structure input, trim strings at the given cell paths.
+’ÙTitle: title: str trim
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, trim strings at the given cell paths.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_trim.mdÙ@0d7da6d67001b6d357b9d38422a1413fd2af19aee4dbe5b48fe5764821224c14¯title: str trim‘³Input/output types:ÙWinput
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+’Ù‘Title: title: str trim
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/str_trim.mdÙ@46499d5428f06d939bc932bb02dc1975f30e4a6a45574bcc77d884ccb93cfb87¯title: str trim‘¨ExamplesÚZTrim whitespace.
+```Fenced(Borrowed("nu"))
+> 'Nu shell ' | str trim
+Nu shell
+
+```
+Trim a specific character (not the whitespace).
+```Fenced(Borrowed("nu"))
+> '=== Nu shell ===' | str trim --char '='
+ Nu shell
+
+```
+Trim whitespace from the beginning of string.
+```Fenced(Borrowed("nu"))
+> ' Nu shell ' | str trim --left
+Nu shell
+
+```
+Trim whitespace from the end of string.
+```Fenced(Borrowed("nu"))
+> ' Nu shell ' | str trim --right
+ Nu shell
+
+```
+Trim a specific character only from the end of the string.
+```Fenced(Borrowed("nu"))
+> '=== Nu shell ===' | str trim --right --char '='
+=== Nu shell
+
+```
+’Ú‰Title: title: str trim
+Path: Examples
+Content:
+Trim whitespace.
+```Fenced(Borrowed("nu"))
+> 'Nu shell ' | str trim
+Nu shell
+
+```
+Trim a specific character (not the whitespace).
+```Fenced(Borrowed("nu"))
+> '=== Nu shell ===' | str trim --char '='
+ Nu shell
+
+```
+Trim whitespace from the beginning of string.
+```Fenced(Borrowed("nu"))
+> ' Nu shell ' | str trim --left
+Nu shell
+
+```
+Trim whitespace from the end of string.
+```Fenced(Borrowed("nu"))
+> ' Nu shell ' | str trim --right
+ Nu shell
+
+```
+Trim a specific character only from the end of the string.
+```Fenced(Borrowed("nu"))
+> '=== Nu shell ===' | str trim --right --char '='
+=== Nu shell
+
+```

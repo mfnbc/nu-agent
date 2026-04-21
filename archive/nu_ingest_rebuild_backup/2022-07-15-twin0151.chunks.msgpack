@@ -1,0 +1,186 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-15-twin0151.mdŸ@997f7c3c681dbe5539585f87237821aa23b377c0c130e96cf1507fe27b71e4c2πThis week in Nushell #151ëßNushell⁄Gmerelymyself 
+[link: https://github.com/nushell/nushell/pull/6056] added 
+``wc``
+ search term for 
+``size``
+ and 
+``length``
+, and 
+[link: https://github.com/nushell/nushell/pull/6041] allow for easy reset of config files with a single command
+, and 
+[link: https://github.com/nushell/nushell/pull/6019] make auto-cd change 
+``$env.OLDPWD``
+, and 
+[link: https://github.com/nushell/nushell/pull/6017] add 
+``unspanned``
+ flag to error make, add tests
+, and 
+[link: https://github.com/nushell/nushell/pull/6000] throw parser error when multiple short flags are defined without whitespace
+fdncred 
+[link: https://github.com/nushell/nushell/pull/6054] ensured users colors are maintained when highlighting find matches
+, and 
+[link: https://github.com/nushell/nushell/pull/6053] allow 
+``into int``
+ to convert octal numbers and 0 padded strings
+, and 
+[link: https://github.com/nushell/nushell/pull/6033] add ability to do into int on floats using a radix
+, and 
+[link: https://github.com/nushell/nushell/pull/6031] fix small bug converting string to int
+, and 
+[link: https://github.com/nushell/nushell/pull/6012] fixes ansi escape leakage from ill-behaved externals, again!
+, and 
+[link: https://github.com/nushell/nushell/pull/6009] update some dependencies
+Benjamin-L 
+[link: https://github.com/nushell/nushell/pull/6052] fixed documentation of plugin encodings
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/6050] Cargo.lock was not checked in on typetag revert
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/6049] refactored nu_table
+, and 
+[link: https://github.com/nushell/nushell/pull/6038] nu-table: Bump tabled to master
+, and 
+[link: https://github.com/nushell/nushell/pull/6037] nu-table: Use all available termwidth
+, and 
+[link: https://github.com/nushell/nushell/pull/6036] nu-table: Restore atty check
+, and 
+[link: https://github.com/nushell/nushell/pull/6035] nu-table: Don't show empty header
+, and 
+[link: https://github.com/nushell/nushell/pull/6028] nu_table: Fix truncating logic
+, and 
+[link: https://github.com/nushell/nushell/pull/6025] nu_table: Fix style of tables with no header
+, and 
+[link: https://github.com/nushell/nushell/pull/5999] Move wrap responsibility on tabled
+nibon7 
+[link: https://github.com/nushell/nushell/pull/6047] fixed ps command on linux
+, and 
+[link: https://github.com/nushell/nushell/pull/6034] Fix panic when opening symlink which points to an inaccessible directory
+Kangaxx-0 
+[link: https://github.com/nushell/nushell/pull/6044] downgraded typetag to 0.1.8
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/6040] load default env when user don't specified env path
+, and 
+[link: https://github.com/nushell/nushell/pull/6008] Add bytes collect, bytes remove, bytes build cmd
+jt 
+[link: https://github.com/nushell/nushell/pull/6016] used simpler reedline
+kubouch 
+[link: https://github.com/nushell/nushell/pull/6007] allowed keeping selected environment variables from removed overlay
+, and 
+[link: https://github.com/nushell/nushell/pull/6006] Fix load order of config files
+, and 
+[link: https://github.com/nushell/nushell/pull/6005] Split merging of parser delta and stack environment
+, and 
+[link: https://github.com/nushell/nushell/pull/6002] Revert "make module imports in scripts used for relative path."
+, and 
+[link: https://github.com/nushell/nushell/pull/5982] Expand Hooks Functionality
+íêê⁄Title: This week in Nushell #151
+Path: Nushell
+Content:
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/6056] added 
+``wc``
+ search term for 
+``size``
+ and 
+``length``
+, and 
+[link: https://github.com/nushell/nushell/pull/6041] allow for easy reset of config files with a single command
+, and 
+[link: https://github.com/nushell/nushell/pull/6019] make auto-cd change 
+``$env.OLDPWD``
+, and 
+[link: https://github.com/nushell/nushell/pull/6017] add 
+``unspanned``
+ flag to error make, add tests
+, and 
+[link: https://github.com/nushell/nushell/pull/6000] throw parser error when multiple short flags are defined without whitespace
+fdncred 
+[link: https://github.com/nushell/nushell/pull/6054] ensured users colors are maintained when highlighting find matches
+, and 
+[link: https://github.com/nushell/nushell/pull/6053] allow 
+``into int``
+ to convert octal numbers and 0 padded strings
+, and 
+[link: https://github.com/nushell/nushell/pull/6033] add ability to do into int on floats using a radix
+, and 
+[link: https://github.com/nushell/nushell/pull/6031] fix small bug converting string to int
+, and 
+[link: https://github.com/nushell/nushell/pull/6012] fixes ansi escape leakage from ill-behaved externals, again!
+, and 
+[link: https://github.com/nushell/nushell/pull/6009] update some dependencies
+Benjamin-L 
+[link: https://github.com/nushell/nushell/pull/6052] fixed documentation of plugin encodings
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/6050] Cargo.lock was not checked in on typetag revert
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/6049] refactored nu_table
+, and 
+[link: https://github.com/nushell/nushell/pull/6038] nu-table: Bump tabled to master
+, and 
+[link: https://github.com/nushell/nushell/pull/6037] nu-table: Use all available termwidth
+, and 
+[link: https://github.com/nushell/nushell/pull/6036] nu-table: Restore atty check
+, and 
+[link: https://github.com/nushell/nushell/pull/6035] nu-table: Don't show empty header
+, and 
+[link: https://github.com/nushell/nushell/pull/6028] nu_table: Fix truncating logic
+, and 
+[link: https://github.com/nushell/nushell/pull/6025] nu_table: Fix style of tables with no header
+, and 
+[link: https://github.com/nushell/nushell/pull/5999] Move wrap responsibility on tabled
+nibon7 
+[link: https://github.com/nushell/nushell/pull/6047] fixed ps command on linux
+, and 
+[link: https://github.com/nushell/nushell/pull/6034] Fix panic when opening symlink which points to an inaccessible directory
+Kangaxx-0 
+[link: https://github.com/nushell/nushell/pull/6044] downgraded typetag to 0.1.8
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/6040] load default env when user don't specified env path
+, and 
+[link: https://github.com/nushell/nushell/pull/6008] Add bytes collect, bytes remove, bytes build cmd
+jt 
+[link: https://github.com/nushell/nushell/pull/6016] used simpler reedline
+kubouch 
+[link: https://github.com/nushell/nushell/pull/6007] allowed keeping selected environment variables from removed overlay
+, and 
+[link: https://github.com/nushell/nushell/pull/6006] Fix load order of config files
+, and 
+[link: https://github.com/nushell/nushell/pull/6005] Split merging of parser delta and stack environment
+, and 
+[link: https://github.com/nushell/nushell/pull/6002] Revert "make module imports in scripts used for relative path."
+, and 
+[link: https://github.com/nushell/nushell/pull/5982] Expand Hooks Functionality
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-15-twin0151.mdŸ@8d1c9d4c3ba88c7ee8db3f8bc5d207c8a966d975cb668092c6f1795d6b51e225πThis week in Nushell #151ë≠DocumentationŸ‡merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/533] Remove entry for 
+``count``
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/532] add light theme relative doc
+íêê⁄Title: This week in Nushell #151
+Path: Documentation
+Content:
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/533] Remove entry for 
+``count``
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/532] add light theme relative doc
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-15-twin0151.mdŸ@9a8cba732f20305bdaad8b7998da2001fa4bd5bf31578a5dc470d2c76c1e0bf1πThis week in Nushell #151ë™Nu_ScriptsŸnWindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/264] fix env.PATH after conda activate
+íêêŸ©Title: This week in Nushell #151
+Path: Nu_Scripts
+Content:
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/264] fix env.PATH after conda activate
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-15-twin0151.mdŸ@332078566570715d3520d79f5e705468d66c616f5be65bd2e73f598110c822fdπThis week in Nushell #151ë®reedline⁄3drbrain created 
+[link: https://github.com/nushell/reedline/pull/452] Support swtiching the case of a char with ~ in vi
+, and 
+[link: https://github.com/nushell/reedline/pull/450] Support vi mode ; and , motions
+jt 
+[link: https://github.com/nushell/reedline/pull/451] removed animations and resize repaint
+íêê⁄lTitle: This week in Nushell #151
+Path: reedline
+Content:
+drbrain created 
+[link: https://github.com/nushell/reedline/pull/452] Support swtiching the case of a char with ~ in vi
+, and 
+[link: https://github.com/nushell/reedline/pull/450] Support vi mode ; and , motions
+jt 
+[link: https://github.com/nushell/reedline/pull/451] removed animations and resize repaint

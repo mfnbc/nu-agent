@@ -1,0 +1,42 @@
+���@c87e3091fd679e45faa187c4ed4f439663ff5a1c3e0a9c198b3b7256311a3480�|Title: title: polars implode
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars implode``
+[link: /commands/categories/dataframe.md] ��@b13474bed25235462bf068652497c8edccb0ca86559389d3f726129cf06a5ac9�TTitle: title: polars implode
+Path: Signature
+Content:
+``> polars implode {flags} ``
+��@cc515a541566530b6b6080f8b8d19b0ea30e8835ab3819024c666eda421b26ed�qTitle: title: polars implode
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+��@2bed02d31d64372332ff42b000506f63cf992e5a056b56400d52d8f5c27b2a38�`Title: title: polars implode
+Path: Examples
+Content:
+Create two lists for columns a and b with all the rows as values.
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 4] [2 5] [3 6]] | polars into-df | polars select (polars col '*' | polars implode) | polars collect
+╭───┬───────────┬───────────╮
+│ # │     a     │     b     │
+├───┼───────────┼───────────┤
+│ 0 │ ╭───┬───╮ │ ╭───┬───╮ │
+│   │ │ 0 │ 1 │ │ │ 0 │ 4 │ │
+│   │ │ 1 │ 2 │ │ │ 1 │ 5 │ │
+│   │ │ 2 │ 3 │ │ │ 2 │ 6 │ │
+│   │ ╰───┴───╯ │ ╰───┴───╯ │
+╰───┴───────────┴───────────╯
+
+
+```

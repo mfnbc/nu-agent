@@ -1,0 +1,52 @@
+•’Ù@2e9fcb87767d53483dbe86971e93d043de33936ed7b15117d1564b2e48fe249fÙbTitle: title: url
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``url``
+[link: /commands/categories/network.md] ’Ù@120c61ada1e63f46eb1d10e849ee73344d5a234b5295af8e46f2bbb807de49ecÙ>Title: title: url
+Path: Signature
+Content:
+``> url {flags} ``
+’Ù@d004c696a183aba028e89593874e7c4396e49cbbbbc8510d2d4b28c7e7734ddcÙQTitle: title: url
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+’Ù@0eb5da6bff99b86114ef85af65078d3f558bab7f2e588819618ddb76d7d661deÙ”Title: title: url
+Path: Notes
+Content:
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+’Ù@7ea107eba26cc3e67723b552a8a82501751326f7adc54554fdbcb62ab282c184ÚýTitle: title: url
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/url_build-query.md] ``url build-query``
+Converts record or table into query string applying percent-encoding.
+built-in
+[link: /commands/docs/url_decode.md] ``url decode``
+Converts a percent-encoded web safe string to a string.
+built-in
+[link: /commands/docs/url_encode.md] ``url encode``
+Converts a string to a percent encoded web safe string.
+built-in
+[link: /commands/docs/url_join.md] ``url join``
+Convert a record to a URL string.
+built-in
+[link: /commands/docs/url_parse.md] ``url parse``
+Parse a URL string into structured data.
+built-in
+[link: /commands/docs/url_split-query.md] ``url split-query``
+Converts query string into table applying percent-decoding.
+built-in

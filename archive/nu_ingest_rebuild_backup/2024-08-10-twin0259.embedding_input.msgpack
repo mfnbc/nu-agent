@@ -1,0 +1,108 @@
+”’Ù@a213a329b27c058fd6fa17b2ed368dbdc3184877382abf0d85512632d6d4d5b6Ú	@Title: This week in Nushell #259
+Path: Nushell
+Content:
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/13311] added a new 
+``completions.sort``
+ option
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13568] merged 
+``polars sink``
+ and 
+``polars to-*``
+ into 
+``polars save``
+, 
+[link: https://github.com/nushell/nushell/pull/13562] added 
+``polars sink``
+ command for streaming collect
+, 
+[link: https://github.com/nushell/nushell/pull/13556] made 
+``polars open``
+ open a lazy frame by default
+, 
+[link: https://github.com/nushell/nushell/pull/13555] updated 
+``polars first``
+ and 
+``polars last``
+ to handle lazy frames natively
+, 
+[link: https://github.com/nushell/nushell/pull/13545] added plist support
+, and 
+[link: https://github.com/nushell/nushell/pull/13521] attempted to guess file content type when opening with --raw
+Qnbie 
+[link: https://github.com/nushell/nushell/pull/13566] made the math commands const
+qfel 
+[link: https://github.com/nushell/nushell/pull/13574] cleaned up key event handling in 
+``explore``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/13563] updated typo definitions
+ and 
+[link: https://github.com/nushell/nushell/pull/13531] reworked 
+``help``
+ generation internals
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/13561] added a type signature example for 
+``def command``
+ and 
+[link: https://github.com/nushell/nushell/pull/13541] allowed 
+``int``
+ input when using a formatstring in 
+``into datetime``
+kurokirasama 
+[link: https://github.com/nushell/nushell/pull/13550] added nu_plugin_polars to build and install scripts
+KAAtheWiseGit 
+[link: https://github.com/nushell/nushell/pull/13548] fixed a typo in an example
+ and 
+[link: https://github.com/nushell/nushell/pull/13542] created a 
+``random binary``
+ command
+fdncred 
+[link: https://github.com/nushell/nushell/pull/13540] updated to latest reedline commit 919292e
+jameschensmith 
+[link: https://github.com/nushell/nushell/pull/13538] included empty table data cells in 
+``query web``
+ tables
+weirdan 
+[link: https://github.com/nushell/nushell/pull/13532] added multipart/form-data uploads
+cablehead 
+[link: https://github.com/nushell/nushell/pull/13510] fixed relay Signals reset to plugins
+lavafroth 
+[link: https://github.com/nushell/nushell/pull/13302] added feature to prefer exact match when completion mode is prefix
+’Ù@1797ad3e467ccce0f73a29e7775cf290fa9181f1b0274d5764c8deccb7c8ed8dÚàTitle: This week in Nushell #259
+Path: Documentation
+Content:
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1502] added History and keybindings in Coming from Bash
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1500] added Bash 
+``for``
+ command mapping
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1499] removed dead snippets from translated Installation chapters
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1498] fixed missing links due to changed command names
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1497] mapped for PowerShell ForEach-Object
+weirdan 
+[link: https://github.com/nushell/nushell.github.io/pull/1496] added docs for file uploads
+danyx23 
+[link: https://github.com/nushell/nushell.github.io/pull/1495] fixed line numbers having different line height in code blocks
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1494] upgraded shiki, vuepress and related plugins
+’Ù@1ed1949004b5cae1914ac7269ed642b666bfffb0bcf20c8a272736a5d8e2b78bÚTitle: This week in Nushell #259
+Path: Nu_Scripts
+Content:
+phoenixr-codes 
+[link: https://github.com/nushell/nu_scripts/pull/926] added Top commands one-liner
+devyn 
+[link: https://github.com/nushell/nu_scripts/pull/912] added warning to release checklist for nu-ansi-term
+’Ù@0ea75d1af649b1cf0dbf272222f20a673feb4800c96125529b9176398a8eb8bbÚbTitle: This week in Nushell #259
+Path: reedline
+Content:
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/814] removed out of date YouTube links
+tisonkun 
+[link: https://github.com/nushell/reedline/pull/812] ensured lockfile is up-to-date
+adaschma 
+[link: https://github.com/nushell/reedline/pull/807] fixed vi mode change not being pastable

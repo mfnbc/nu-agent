@@ -1,0 +1,27 @@
+‘—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-04-03-twin0032.mdÙ@e478ada9708198b1525c0aa270705a095ffab74b3933fa438f190cc2acaf1511³This week in Nu #32‘³This week in Nu #32ÚÎDrSensor worked on the docker builds (#1540)
+jonathandturner released 0.12.0 (#1538), changed 
+``get``
+ to remove blanks (#1534)
+Amanita-muscaria added the ability to configure table headers (#1537)
+thegedge fixed the error message for bad permissions when executing commands (#1535), improved the 
+``du``
+ command (#1533), added interruptible streams (#1531)
+samhedin added the 
+``headers``
+ command (#1530)
+jonstodle added support for CARGO_TARGET_DIR (#1528)
+’ÚTitle: This week in Nu #32
+Path: This week in Nu #32
+Content:
+DrSensor worked on the docker builds (#1540)
+jonathandturner released 0.12.0 (#1538), changed 
+``get``
+ to remove blanks (#1534)
+Amanita-muscaria added the ability to configure table headers (#1537)
+thegedge fixed the error message for bad permissions when executing commands (#1535), improved the 
+``du``
+ command (#1533), added interruptible streams (#1531)
+samhedin added the 
+``headers``
+ command (#1530)
+jonstodle added support for CARGO_TARGET_DIR (#1528)

@@ -1,0 +1,43 @@
+“’Ù@44fc0f817cac30d519a581f1ab8e455982c3d759a8f639cf0d75e69a030597d4ÙfTitle: title: query
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``query``
+[link: /commands/categories/filters.md] ’Ù@759f3a06088af55791fe0dd7b7bffd3d963bd3756672558e67759da912d12251ÙBTitle: title: query
+Path: Signature
+Content:
+``> query {flags} ``
+’Ù@29d7d1c48e9df348def51d18efdfd0b125244399efa8d5ff35ad0cd82b5c7707ÚÅTitle: title: query
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/query_db.md] ``query db``
+Query a SQLite database with SQL statements.
+built-in
+[link: /commands/docs/query_json.md] ``query json``
+execute json query on json file (open --raw 
+\
+<
+file
+\> 
+| query json 'query string')
+plugin
+[link: /commands/docs/query_web.md] ``query web``
+execute selector query on html/web
+plugin
+[link: /commands/docs/query_webpage-info.md] ``query webpage-info``
+uses the webpage crate to extract info from html: title, description, language, links, RSS feeds, Opengraph, Schema.org, and more
+plugin
+[link: /commands/docs/query_xml.md] ``query xml``
+Execute XPath 1.0 query on XML input
+plugin

@@ -75,8 +75,9 @@ explicitly runs the prep step.
   opt-in. This is correct for safe, auditable behavior. Use CSVs as canonical
   exports for Kùzu.
 
-Recommendation: Emit kuzu-plan.json with CSV paths, header schema, and a small
-  `scripts/kuzu-import.nu` utility (added) for opt-in imports.
+Recommendation: Emit plan JSON with CSV paths and header schema for any external
+import adapters. Kùzu import helpers were removed from this repository; implement
+DB import utilities as separate opt-in adapters.
 
 7) Tests & CI
 -------------

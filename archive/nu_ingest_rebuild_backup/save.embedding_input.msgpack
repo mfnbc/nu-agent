@@ -1,0 +1,90 @@
+–’Ù@25478d2fa23c52f7143201c47ebd03bf2491c7d9e81dc07d086cf48c098bc871ÙjTitle: title: save
+Path: filesystem
+Content:
+
+
+
+
+
+
+
+
+
+``save``
+[link: /commands/categories/filesystem.md] ’Ù@3baf6416b26e208235e1e4a1a1edd1ced745752332d23ab45163516b91e13918ÙJTitle: title: save
+Path: Signature
+Content:
+``> save {flags} (filename)``
+’Ù@69eb4e172037cb5d206c5be8e79b1ee7b6144dcf798ae0dc7a266462aa731822Ú;Title: title: save
+Path: Flags
+Content:
+``--stderr, -e {path}``
+: The filename used to save stderr, only works with 
+``-r``
+ flag.
+``--raw, -r``
+: Save file as raw binary.
+``--append, -a``
+: Append input to the end of the file.
+``--force, -f``
+: Overwrite the destination.
+``--progress, -p``
+: Enable progress bar.
+’Ù@34569dfa4f9ad9f84a69bce874b78d03cfccc783235398e4b8145e222868784aÙQTitle: title: save
+Path: Parameters
+Content:
+``filename``
+: The filename to use.
+’Ù@d386a9bbceda4098124daea803330d47bb7b02b41fa5e412c44b1cd2e2861dbbÙOTitle: title: save
+Path: Input/output types:
+Content:
+input
+output
+any
+nothing
+’Ù@2cba0ca2056b4c257bb53104c4a1860cfea8722a2c703446d63c9e83352a4bb0ÚžTitle: title: save
+Path: Examples
+Content:
+Save a string to foo.txt in the current directory.
+```Fenced(Borrowed("nu"))
+> 'save me' | save foo.txt
+
+
+```
+Append a string to the end of foo.txt.
+```Fenced(Borrowed("nu"))
+> 'append me' | save --append foo.txt
+
+
+```
+Save a record to foo.json in the current directory.
+```Fenced(Borrowed("nu"))
+> { a: 1, b: 2 } | save foo.json
+
+
+```
+Save a running program's stderr to foo.txt.
+```Fenced(Borrowed("nu"))
+> do -i {} | save foo.txt --stderr foo.txt
+
+
+```
+Save a running program's stderr to separate file.
+```Fenced(Borrowed("nu"))
+> do -i {} | save foo.txt --stderr bar.txt
+
+
+```
+Show the extensions for which the 
+``save``
+ command will automatically serialize.
+```Fenced(Borrowed("nu"))
+> scope commands
+    | where name starts-with "to "
+    | insert extension { get name | str replace -r "^to " "" | $"*.($in)" }
+    | select extension name
+    | rename extension command
+
+
+
+```

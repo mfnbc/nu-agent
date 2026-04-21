@@ -1,0 +1,150 @@
+•’Ù@032d1b3187de9ba311ca9f29bba0b9af23fea8c5de74473b591b7a8cb4d83c9fÚ	ÚTitle: This week in Nushell #135
+Path: Nushell
+Content:
+jt 
+[link: https://github.com/nushell/nushell/pull/4959] fixed path join on streams
+, and 
+[link: https://github.com/nushell/nushell/pull/4951] fixed 4946
+, and 
+[link: https://github.com/nushell/nushell/pull/4947] Fix operator precedence parser
+, and 
+[link: https://github.com/nushell/nushell/pull/4925] Don't assume external 
+``ls``
+, and 
+[link: https://github.com/nushell/nushell/pull/4893] Add licenses
+, and 
+[link: https://github.com/nushell/nushell/pull/4892] Bump to 0.60
+, and 
+[link: https://github.com/nushell/nushell/pull/4889] Externals shouldn't expand aliases
+, and 
+[link: https://github.com/nushell/nushell/pull/4881] Allow 'error make' to make simple errors
+stormasm 
+[link: https://github.com/nushell/nushell/pull/4957] bumped cargo crate sys-locale to the latest version
+, and 
+[link: https://github.com/nushell/nushell/pull/4949] align all of the serde_json crates to the same version
+, and 
+[link: https://github.com/nushell/nushell/pull/4939] bump csv crate to the latest version 1.1.6
+hustcer 
+[link: https://github.com/nushell/nushell/pull/4948] fixed #4942, and add a table sorting example for 
+``sort-by``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/4904] chore: Update default register examples
+bowlofeggs 
+[link: https://github.com/nushell/nushell/pull/4940] set the minimum Rust version to 1.59
+uasi 
+[link: https://github.com/nushell/nushell/pull/4928] fixed parse_string_strict() to detect unbalanced quotes properly
+jmoore34 created 
+[link: https://github.com/nushell/nushell/pull/4926] CantConvert improvements
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4915] updated link
+, and 
+[link: https://github.com/nushell/nushell/pull/4912] rename export def to export alias
+, and 
+[link: https://github.com/nushell/nushell/pull/4896] add ability to execute on demand
+, and 
+[link: https://github.com/nushell/nushell/pull/4891] update comments, add other targets
+, and 
+[link: https://github.com/nushell/nushell/pull/4887] created an alternate way to determine line count
+, and 
+[link: https://github.com/nushell/nushell/pull/4885] update 
+``size``
+ command to be more accurate
+vishalsodani 
+[link: https://github.com/nushell/nushell/pull/4908] added missing metadata for drop and uniq #4763
+LebsterFace 
+[link: https://github.com/nushell/nushell/pull/4903] passed 
+``/D``
+ flag to 
+``cmd.exe``
+ to disable AutoRun
+unional 
+[link: https://github.com/nushell/nushell/pull/4882] fixed typo in default config
+’Ù@b48d4a54e45b0f87768ae4331783c6b80e697f2555fbec318d7ba4816dd6f3e7ÚTitle: This week in Nushell #135
+Path: Extension
+Content:
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/51] update keywords and indentation rules
+jt 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/50] added a few more keywords
+’Ù@10123f8fc90c5c1457f41da689ae40e2b8d117b989faaafa15e45b495856aa01Ú
+>Title: This week in Nushell #135
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/340] Update examples for sort-by, fix some examples
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/336] Fix broken table rendering for epub book, close #199
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/334] Update oh-my-posh setup guide for mac users
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/331] Update plugin register examples and regenerate docs for all commands
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/318] Update make_docs.nu, add directory check
+Coordinate-Cat created 
+[link: https://github.com/nushell/nushell.github.io/pull/339] Fix Typo Starship URL
+TyPR124 created 
+[link: https://github.com/nushell/nushell.github.io/pull/338] Fix starship config to handle negative exit codes
+jt 
+[link: https://github.com/nushell/nushell.github.io/pull/337] added larger starship example
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/330] 0.60 blog post
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/325] fix up pipeline chapter
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/323] Add externs and custom completions
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/320] A couple wording fixes in intro
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/319] Add simple error to make_docs.nu
+davidkna created 
+[link: https://github.com/nushell/nushell.github.io/pull/335] Starship: add session key instructions & correct typos
+vishalsodani created 
+[link: https://github.com/nushell/nushell.github.io/pull/333] Fixed a spelling mistake
+senden9 created 
+[link: https://github.com/nushell/nushell.github.io/pull/332] Fix Scoped 
+``cd``
+ example in 0.60 release blog post
+EjPlatzer created 
+[link: https://github.com/nushell/nushell.github.io/pull/329] Fix minor typos and clarify 
+``Parsing and evaluation...``
+ section
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/328] Update Plugins page in book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/327] Mention source + shebangs on Scripts page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/326] Fix up Parameterizing Scripts
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/324] Sort commands alphabetically
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/309] Clean up commands
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/322] updated default config link
+’Ù@baf7982dab58b801c7d3cab0c473a650fdfd210be0ea4e8cc3548afcb6c38db2ÚbTitle: This week in Nushell #135
+Path: Nu_Scripts
+Content:
+skelly37 
+[link: https://github.com/nushell/nu_scripts/pull/189] ported scripts to 0.60
+Inky-developer 
+[link: https://github.com/nushell/nu_scripts/pull/188] added cargo search script
+Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/187] added completions for npm
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/185] initial make support
+jt 
+[link: https://github.com/nushell/nu_scripts/pull/186] updated nu release script
+efx created 
+[link: https://github.com/nushell/nu_scripts/pull/184] parse fish command history for git usage
+’Ù@9ce62feb524ab13125bb9bb53d4b28923d5efb921d43d1c786e2bb0224eddc22Ú€Title: This week in Nushell #135
+Path: reedline
+Content:
+jmoore34 
+[link: https://github.com/nushell/reedline/pull/355] fixed typo 
+[
+skip ci
+]
+jbr created 
+[link: https://github.com/nushell/reedline/pull/354] end/control-e selects the current completion if there is one
+, and 
+[link: https://github.com/nushell/reedline/pull/353] add missing alt-f for parity with the existing alt-b

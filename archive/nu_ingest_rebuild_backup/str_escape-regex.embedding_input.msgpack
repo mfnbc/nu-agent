@@ -1,0 +1,74 @@
+���@c131b164565855fd25e4e15d1c0ecfd710ddd803e7ff635c16e9596abfc9d255�|Title: title: str escape-regex
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str escape-regex``
+[link: /commands/categories/strings.md] ��@d44cc94ca2884178dd98ea26dc3550d7063c7f5ff7375c8ac4c4d83f832091ff�_Title: title: str escape-regex
+Path: Signature
+Content:
+``> str escape-regex {flags} ...rest``
+��@c454724f1528fd4f16a1f51ec5e321235c2b4012a5bb3ffd7361a57abe02233aًTitle: title: str escape-regex
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, escape strings at the given cell paths.
+��@e5ce808367dfc8d4af05ddc778911355187dab82649e18c29a46e2729ca0f7c0ٙTitle: title: str escape-regex
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+��@7f566c505dc9262abe0a7b444c07aaab70faa4afa70ad60d1c9e739f407eaeab�'Title: title: str escape-regex
+Path: Examples
+Content:
+Escape dots in an IP address.
+```Fenced(Borrowed("nu"))
+> '192.168.1.1' | str escape-regex
+192\.168\.1\.1
+
+```
+Escape a list of strings containing special characters.
+```Fenced(Borrowed("nu"))
+> ['(abc)', '1 + 1'] | str escape-regex
+╭───┬─────────╮
+│ 0 │ \(abc\) │
+│ 1 │ 1 \+ 1  │
+╰───┴─────────╯
+
+
+```
+Escape characters in a specific column of a table.
+```Fenced(Borrowed("nu"))
+> [[pattern]; ['find.me'] ['(group)']] | str escape-regex pattern
+╭───┬───────────╮
+│ # │  pattern  │
+├───┼───────────┤
+│ 0 │ find\.me  │
+│ 1 │ \(group\) │
+╰───┴───────────╯
+
+
+```

@@ -4,17 +4,14 @@ use nu_plugin_rag::read_embedding_input;
 use serde_json::Value;
 use std::fs;
 
-// fastembed + surrealdb
+// fastembed for local embeddings; persist MessagePack as canonical output
 use fastembed::text::TextEmbedding;
-use surrealdb::engine::local::Db;
-use surrealdb::opt::auth::Root;
-use surrealdb::Surreal;
 
 #[derive(Parser, Debug)]
-#[command(
+    #[command(
     author,
     version,
-    about = "Embed runner: generates embeddings with fastembed and persists to SurrealDB"
+    about = "Embed runner: generates embeddings with fastembed and writes MessagePack output"
 )]
 struct Args {
     /// Input corpus (.nuon preferred)
@@ -58,36 +55,7 @@ async fn main() -> Result<()> {
     // Init fastembed model (sync). Use defaults — fastembed will pick a reasonable local model.
     let model = TextEmbedding::try_new(Default::default())?;
 
-    // Attempt to start SurrealDB embedded. If that fails we will fall back to
-    // writing a MessagePack file with embeddings. This keeps the runner portable.
-    let mut use_surreal = true;
-    let db_res = (|| async {
-        let engine = Db::new("")?; // empty path -> in-memory/default
-        let db = Surreal::new(engine).await?;
-        db.signin(Root {
-            username: "root",
-            password: "root",
-        })
-        .await?;
-        db.use_ns("nu_agent", "data").await?;
-        Ok::<Surreal<Db>, anyhow::Error>(db)
-    })
-    .await;
-
-    let db = match db_res {
-        Ok(db) => Some(db),
-        Err(e) => {
-            eprintln!(
-                "warning: SurrealDB init failed, falling back to msgpack output: {}",
-                e
-            );
-            use_surreal = false;
-            None
-        }
-    };
-
-    // Ensure "chunk" table exists implicitly by inserting
-    // Collect embeddings so we can write them out as a single MessagePack array if needed.
+    // Collect embeddings so we can write them out as a single MessagePack array.
     let mut produced = Vec::with_capacity(chunks.len());
 
     for chunk in chunks.iter() {
@@ -135,14 +103,7 @@ async fn main() -> Result<()> {
         obj.insert("commands".to_string(), commands);
         obj.insert("embedding".to_string(), serde_json::to_value(embedding)?);
 
-        if use_surreal {
-            // Use CREATE to insert a new chunk record. Let Surreal assign a Thing id.
-            if let Some(ref db) = db {
-                let _res = db.create("chunk").content(Value::Object(obj)).await?;
-            }
-        }
-
-        // Always record the produced embedding for fallback output.
+        // Always record the produced embedding for persistence.
         let mut meta = serde_json::Map::new();
         meta.insert(
             "path".to_string(),
@@ -172,19 +133,13 @@ async fn main() -> Result<()> {
         produced.push(rec);
     }
 
-    // If Surreal wasn't used, write out the produced embeddings as a MessagePack array
-    if !use_surreal {
-        // Ensure output dir exists
-        if let Some(p) = std::path::Path::new(&args.output).parent() {
-            std::fs::create_dir_all(p)?;
-        }
-        // Serialize produced Vec<Value> as MessagePack array
-        let mut buf = Vec::new();
-        rmp_serde::encode::write(&mut buf, &produced)?;
-        std::fs::write(&args.output, buf)?;
-        println!("wrote: {} (msgpack)", &args.output);
-    } else {
-        println!("wrote: (surreal)");
+    // Write out the produced embeddings as a MessagePack array
+    if let Some(p) = std::path::Path::new(&args.output).parent() {
+        std::fs::create_dir_all(p)?;
     }
+    let mut buf = Vec::new();
+    rmp_serde::encode::write(&mut buf, &produced)?;
+    std::fs::write(&args.output, buf)?;
+    println!("wrote: {} (msgpack)", &args.output);
     Ok(())
 }

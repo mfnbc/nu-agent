@@ -1,0 +1,73 @@
+•—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/random_bool.mdÙ@e7fe8e33a8fa2469cd6aecdd95326199b22db40e01a39693c13f7e6ce824b476²title: random bool‘¦randomÙ@
+
+
+
+
+
+
+
+
+``random bool``
+[link: /commands/categories/random.md] ’ÙpTitle: title: random bool
+Path: random
+Content:
+
+
+
+
+
+
+
+
+
+``random bool``
+[link: /commands/categories/random.md] —ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/random_bool.mdÙ@ba29716953590aa5eed02eeed17381829034dd3cc0dce8d85781e7a987f08eb9²title: random bool‘©Signature»``> random bool {flags} ``
+’ÙNTitle: title: random bool
+Path: Signature
+Content:
+``> random bool {flags} ``
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/random_bool.mdÙ@d93327f6855e06118b203fc2c44dd92024bb7f0e95eba5a8d57c1b63aaffc3b9²title: random bool‘¥FlagsÙG``--bias, -b {number}``
+: Adjusts the probability of a "true" outcome.
+’ÙvTitle: title: random bool
+Path: Flags
+Content:
+``--bias, -b {number}``
+: Adjusts the probability of a "true" outcome.
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/random_bool.mdÙ@eea712c2c67de74edf37e176c9537f2b398964b5d11de50eb451b2fe3052db36²title: random bool‘³Input/output types:ºinput
+output
+nothing
+bool
+’ÙWTitle: title: random bool
+Path: Input/output types:
+Content:
+input
+output
+nothing
+bool
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/random_bool.mdÙ@cd3d63cf9ca738b8094ec0dab41b81022237b90b2c87f3a422a87e1ddb2826ea²title: random bool‘¨ExamplesÙÆGenerate a random boolean value.
+```Fenced(Borrowed("nu"))
+> random bool
+
+
+```
+Generate a random boolean value with a 75% chance of "true".
+```Fenced(Borrowed("nu"))
+> random bool --bias 0.75
+
+
+```
+’ÙøTitle: title: random bool
+Path: Examples
+Content:
+Generate a random boolean value.
+```Fenced(Borrowed("nu"))
+> random bool
+
+
+```
+Generate a random boolean value with a 75% chance of "true".
+```Fenced(Borrowed("nu"))
+> random bool --bias 0.75
+
+
+```

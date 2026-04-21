@@ -1,0 +1,66 @@
+”’Ù@49d29b9a0d3c040ec29781c907ab2a13eaaccbcfbc4a2f5fb7c631c9b354fbb6ÚTitle: This week in Nushell #102
+Path: Nushell
+Content:
+jntrnr created 
+[link: https://github.com/nushell/nushell/pull/3906] in/not-in for strings
+, 
+[link: https://github.com/nushell/nushell/pull/3884] released to 0.35
+soumil-07 created 
+[link: https://github.com/nushell/nushell/pull/3905] use bigdecimal-rs patch
+, and 
+[link: https://github.com/nushell/nushell/pull/3883] sourced config from $NU_CONFIG_DIR if it exists
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3895] added officially supported by section
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/3894] datetime commands
+, and 
+[link: https://github.com/nushell/nushell/pull/3875] better representation in nested dataframes
+, and 
+[link: https://github.com/nushell/nushell/pull/3874] simplified contains
+waldyrious created 
+[link: https://github.com/nushell/nushell/pull/3891] normalize capitalization in issue templates
+, and 
+[link: https://github.com/nushell/nushell/pull/3890] fixed typo: patter â†’ pattern
+realcundo 
+[link: https://github.com/nushell/nushell/pull/3888] implemented PartialEq for ReturnSuccess
+lily-mara 
+[link: https://github.com/nushell/nushell/pull/3880] reimplemented parsers with nu-serde
+, and 
+[link: https://github.com/nushell/nushell/pull/3878] added the nu-serde crate
+’Ù@997fd3066652066fee4ff49689a47fdffe8166d290ab94f2ea4db05f9b45a072ÚlTitle: This week in Nushell #102
+Path: Extension
+Content:
+fdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/37] updated npm dependencies
+, 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/36] updated regex to match new syntax
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/35] updated to 0.4.0, removed intellisense
+’Ù@a02d7f8981d55231db959adfe3dea05fd066492e24840385034e9fc45173a739ÚÙTitle: This week in Nushell #102
+Path: Documentation
+Content:
+hedonihilist 
+[link: https://github.com/nushell/nushell.github.io/pull/183] fixed typo
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/182] updated plugin discovery section of the doc
+bbkane 
+[link: https://github.com/nushell/nushell.github.io/pull/180] mentioned using environmental variables with scripts
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/179] added concatenating tables subsection
+, added 
+[link: https://github.com/nushell/nushell.github.io/pull/178] demo multiline pipelines as subexpressions in docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/177] Refer to "Working with Strings" in String section
+’Ù@ad16df35d210e920b459dc22bbef679473a74b899a3628427152dd16661572a2Ú Title: This week in Nushell #102
+Path: Nu_Scripts
+Content:
+lily-mara created 
+[link: https://github.com/nushell/nu_scripts/pull/86] added nu-serde to nu_release.nu
+Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/85] updated scraping.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/83] added webscraping example
+filaretov added 
+[link: https://github.com/nushell/nu_scripts/pull/84] Conda and Python venv environment scripts
+skelly37 
+[link: https://github.com/nushell/nu_scripts/pull/81] createed cdpath-implementation.nu

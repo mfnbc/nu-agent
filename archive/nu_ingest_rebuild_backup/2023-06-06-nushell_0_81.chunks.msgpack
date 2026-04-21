@@ -1,0 +1,638 @@
+öóŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@6411655e2af1666f68d7f9b20fdc3dd786f763af51506e83c578da582155bf43≥title: Nushell 0.81ë¨Nushell 0.81⁄w
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your command line. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful command line pipelines.
+Today, we're releasing version 0.81 of Nu. This release focuses on polishing the user experience.
+íêê⁄ÆTitle: title: Nushell 0.81
+Path: Nushell 0.81
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your command line. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful command line pipelines.
+Today, we're releasing version 0.81 of Nu. This release focuses on polishing the user experience.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@abf77afd5fb4a5c6e2efd02a22abad4c34b6540f95f62823c842cb18ee0ec540≥title: Nushell 0.81ëØWhere to get it⁄˙Nu 0.81 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.81.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+NOTE: The optional dataframe functionality is available by 
+``cargo install nu --features=dataframe``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+íêê⁄4Title: title: Nushell 0.81
+Path: Where to get it
+Content:
+Nu 0.81 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.81.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+NOTE: The optional dataframe functionality is available by 
+``cargo install nu --features=dataframe``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@b65282bbae7cd7bc031a311a4c2d97eb7b0195e3511564fd8001e4766d284142≥title: Nushell 0.81ë∏Polishing the experience⁄?This release focuses on improving the user experience, fixing some long-standing bugs, and adding a few helpful features.
+One of the bugs that was fixed for 0.81 was a long-standing issue with reedline, Nushell's line editor. Now, Nushell will prefer to move to make room for text that had been output rather than risking writing over top of it. This maybe improve the general experience of working in the terminal, resizing, and more.
+There have also been fixes to 
+[link: https://github.com/nushell/nushell/pull/9304] table printing
+ to make it work better for more cases.
+íêê⁄ÇTitle: title: Nushell 0.81
+Path: Polishing the experience
+Content:
+This release focuses on improving the user experience, fixing some long-standing bugs, and adding a few helpful features.
+One of the bugs that was fixed for 0.81 was a long-standing issue with reedline, Nushell's line editor. Now, Nushell will prefer to move to make room for text that had been output rather than risking writing over top of it. This maybe improve the general experience of working in the terminal, resizing, and more.
+There have also been fixes to 
+[link: https://github.com/nushell/nushell/pull/9304] table printing
+ to make it work better for more cases.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@69d9f0b0407800bc5d4a8a4d7af3bdef21ca843d2900e36d3c7d1a3ea08f4fdf≥title: Nushell 0.81ëπStartup time improvementsŸÚStartup times have also been improved. Through a combination of various fixes to both how the standard library files were handles and how the parser worked, we've been able to see significant improvements, sometimes as high as 30-50% faster.
+íêê⁄6Title: title: Nushell 0.81
+Path: Startup time improvements
+Content:
+Startup times have also been improved. Through a combination of various fixes to both how the standard library files were handles and how the parser worked, we've been able to see significant improvements, sometimes as high as 30-50% faster.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@80678c810bc069d50eabb5fa5c9738db4eb0916f7d4a789d746538771fdf00f6≥title: Nushell 0.81ë∞Breaking changes⁄∫We had to remove ARMv7 and RISC-V from this release due to a breaking change in one of the dependencies. We hope to resolve this for future releases.
+Exclude globs now 
+[link: https://github.com/nushell/nushell/pull/9343] need square brackets
+``view source``
+ now works over 
+[link: https://github.com/nushell/nushell/pull/9247] rest arguments
+``alias``
+ calls are now 
+[link: https://github.com/nushell/nushell/pull/9244] position dependent
+íêê⁄ıTitle: title: Nushell 0.81
+Path: Breaking changes
+Content:
+We had to remove ARMv7 and RISC-V from this release due to a breaking change in one of the dependencies. We hope to resolve this for future releases.
+Exclude globs now 
+[link: https://github.com/nushell/nushell/pull/9343] need square brackets
+``view source``
+ now works over 
+[link: https://github.com/nushell/nushell/pull/9247] rest arguments
+``alias``
+ calls are now 
+[link: https://github.com/nushell/nushell/pull/9244] position dependent
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@52c30665a3a3e07548c0b930b5759f7c514236f9b2aa6ca4771a99938f7047b7≥title: Nushell 0.81ëßNushell⁄fsophiajt created 
+[link: https://github.com/nushell/nushell/pull/9376] remove arm v7, which also is broken
+, and 
+[link: https://github.com/nushell/nushell/pull/9375] remove more of the risc release
+, and 
+[link: https://github.com/nushell/nushell/pull/9374] bump to 0.81
+, and 
+[link: https://github.com/nushell/nushell/pull/9283] move over to reedline git version
+, and 
+[link: https://github.com/nushell/nushell/pull/9282] Fix clippy warnings (upcoming)
+, and 
+[link: https://github.com/nushell/nushell/pull/9280] Cut down on unnecessary parsing for SyntaxShape::Any
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/9370] Pin 
+``reedline``
+ to 0.20.0 release
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/9353] Fix config creation during printing
+, and 
+[link: https://github.com/nushell/nushell/pull/9245] Add virtual path abstraction layer
+, and 
+[link: https://github.com/nushell/nushell/pull/9244] Make aliased call not look up predeclarations
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/9350] fix is-admin example
+, and 
+[link: https://github.com/nushell/nushell/pull/9346] bump rust toolchain to 1.68.2
+, and 
+[link: https://github.com/nushell/nushell/pull/9343] add the ability to have a list of glob excludes
+, and 
+[link: https://github.com/nushell/nushell/pull/9332] Some tests added with github copilot preview
+, and 
+[link: https://github.com/nushell/nushell/pull/9296] update most dependencies except where deeper code changes are needed
+, and 
+[link: https://github.com/nushell/nushell/pull/9286] if --no-config-file(-n) is passed, do not load config files with -c
+, and 
+[link: https://github.com/nushell/nushell/pull/9270] some minor color fixups
+, and 
+[link: https://github.com/nushell/nushell/pull/9230] remove unused dependencies
+SUPERCILEX created 
+[link: https://github.com/nushell/nushell/pull/9345] Explain how to do time based bash watch
+ShinyZero0 created 
+[link: https://github.com/nushell/nushell/pull/9334] stdlib: add termux clipboard support for clip
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/9333] include the nu-cmd-extra crate in the version command features
+, and 
+[link: https://github.com/nushell/nushell/pull/9327] nu-cmd-extra crate infrastructure in place with the Bits command as the model for adding other commands
+, and 
+[link: https://github.com/nushell/nushell/pull/9241] move dataframe commands to nu-cmd-dataframe
+solodov created 
+[link: https://github.com/nushell/nushell/pull/9326] use "search_result" style to colorize matching strings (fixes #9275)
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/9323] make insert, update, upsert support lazy records
+, and 
+[link: https://github.com/nushell/nushell/pull/9214] add -u flag to cp, mv command
+wolimst created 
+[link: https://github.com/nushell/nushell/pull/9322] Change install context of windows terminal profile to 
+``per-user``
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/9321] nu-explore/ Fix recursive table issue;
+, and 
+[link: https://github.com/nushell/nushell/pull/9304] Merge stack before printing
+carterisonline created 
+[link: https://github.com/nushell/nushell/pull/9316] fix padding when running 
+``input list``
+ on tables
+skelly37 created 
+[link: https://github.com/nushell/nushell/pull/9315] Logger constants refactored, 
+``format``
+ argument added, better formatting of failed (non) equality assertions
+, and 
+[link: https://github.com/nushell/nushell/pull/9235] Added 
+``assert not``
+ command (assertion that the value/expression is 
+``false``
+)
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/9314] restore cursor shape when exits
+1Kinoti created 
+[link: https://github.com/nushell/nushell/pull/9309] fix conflict between filesize and hexadecimal numbers
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/9303] REFACTOR: move 
+``run-tests``
+ and fix the 
+``std assert``
+ namespace
+, and 
+[link: https://github.com/nushell/nushell/pull/9289] refactor the 
+``lib.rs``
+ of 
+``nu-std``
+ after the new virtual files PR
+, and 
+[link: https://github.com/nushell/nushell/pull/9288] add a new 
+``toolkit install``
+ command with 
+``--features``
+ support
+, and 
+[link: https://github.com/nushell/nushell/pull/9253] REFACTOR: build help pages instead of printing them
+, and 
+[link: https://github.com/nushell/nushell/pull/9252] stdlib: fix the names of the 
+``help``
+ commands in 
+``help.nu``
+, and 
+[link: https://github.com/nushell/nushell/pull/9251] CI: disable 
+``nu-coverage``
+, and 
+[link: https://github.com/nushell/nushell/pull/9231] REFACTOR: clean the root of the repo
+, and 
+[link: https://github.com/nushell/nushell/pull/9193] FEATURE: fix the namespace of the standard library (not testing)
+michel-slm created 
+[link: https://github.com/nushell/nushell/pull/9297] [
+nu-explore
+]
+ fix Cargo description
+ayax79 created 
+[link: https://github.com/nushell/nushell/pull/9291] Adding JSON lines file support to dataframes
+fnordpig created 
+[link: https://github.com/nushell/nushell/pull/9285] Add a datepart expression for dfr to be used with dfr with-column
+, and 
+[link: https://github.com/nushell/nushell/pull/9262] Fix version to show build features after crateification
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/9267] std dirs simply stays in sync with CD changes to PWD
+Tiggax created 
+[link: https://github.com/nushell/nushell/pull/9259] throw an error instead of a panic if no input is provided to 
+``inspect``
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/9257] upserting data of a cellpath that doesn't exist into a record creates the cellpath
+, and 
+[link: https://github.com/nushell/nushell/pull/9247] allow 
+``view-source``
+ to read rest arguments
+, and 
+[link: https://github.com/nushell/nushell/pull/9242] Allow 
+``input``
+ to take a specified number of characters
+MariaSolOs created 
+[link: https://github.com/nushell/nushell/pull/9249] Allow duration defaults
+melMass created 
+[link: https://github.com/nushell/nushell/pull/9240] docs: üìù "http get", add an example with more than one header
+, and 
+[link: https://github.com/nushell/nushell/pull/9238] feat: ‚ú® (stdlib) add os record support to path add
+maxim-uvarov created 
+[link: https://github.com/nushell/nushell/pull/9216] add the 
+``no-strip``
+ flag to the clip command
+simdimdim created 
+[link: https://github.com/nushell/nushell/pull/9181] Adding more math constants (and a small correction to the description of an existing one)
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/9162] Add aarch64-pc-windows-msvc building target for nu binaries
+Decodetalkers created 
+[link: https://github.com/nushell/nushell/pull/9117] check if is homedir first when rm
+íêê⁄òTitle: title: Nushell 0.81
+Path: Nushell
+Content:
+sophiajt created 
+[link: https://github.com/nushell/nushell/pull/9376] remove arm v7, which also is broken
+, and 
+[link: https://github.com/nushell/nushell/pull/9375] remove more of the risc release
+, and 
+[link: https://github.com/nushell/nushell/pull/9374] bump to 0.81
+, and 
+[link: https://github.com/nushell/nushell/pull/9283] move over to reedline git version
+, and 
+[link: https://github.com/nushell/nushell/pull/9282] Fix clippy warnings (upcoming)
+, and 
+[link: https://github.com/nushell/nushell/pull/9280] Cut down on unnecessary parsing for SyntaxShape::Any
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/9370] Pin 
+``reedline``
+ to 0.20.0 release
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/9353] Fix config creation during printing
+, and 
+[link: https://github.com/nushell/nushell/pull/9245] Add virtual path abstraction layer
+, and 
+[link: https://github.com/nushell/nushell/pull/9244] Make aliased call not look up predeclarations
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/9350] fix is-admin example
+, and 
+[link: https://github.com/nushell/nushell/pull/9346] bump rust toolchain to 1.68.2
+, and 
+[link: https://github.com/nushell/nushell/pull/9343] add the ability to have a list of glob excludes
+, and 
+[link: https://github.com/nushell/nushell/pull/9332] Some tests added with github copilot preview
+, and 
+[link: https://github.com/nushell/nushell/pull/9296] update most dependencies except where deeper code changes are needed
+, and 
+[link: https://github.com/nushell/nushell/pull/9286] if --no-config-file(-n) is passed, do not load config files with -c
+, and 
+[link: https://github.com/nushell/nushell/pull/9270] some minor color fixups
+, and 
+[link: https://github.com/nushell/nushell/pull/9230] remove unused dependencies
+SUPERCILEX created 
+[link: https://github.com/nushell/nushell/pull/9345] Explain how to do time based bash watch
+ShinyZero0 created 
+[link: https://github.com/nushell/nushell/pull/9334] stdlib: add termux clipboard support for clip
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/9333] include the nu-cmd-extra crate in the version command features
+, and 
+[link: https://github.com/nushell/nushell/pull/9327] nu-cmd-extra crate infrastructure in place with the Bits command as the model for adding other commands
+, and 
+[link: https://github.com/nushell/nushell/pull/9241] move dataframe commands to nu-cmd-dataframe
+solodov created 
+[link: https://github.com/nushell/nushell/pull/9326] use "search_result" style to colorize matching strings (fixes #9275)
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/9323] make insert, update, upsert support lazy records
+, and 
+[link: https://github.com/nushell/nushell/pull/9214] add -u flag to cp, mv command
+wolimst created 
+[link: https://github.com/nushell/nushell/pull/9322] Change install context of windows terminal profile to 
+``per-user``
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/9321] nu-explore/ Fix recursive table issue;
+, and 
+[link: https://github.com/nushell/nushell/pull/9304] Merge stack before printing
+carterisonline created 
+[link: https://github.com/nushell/nushell/pull/9316] fix padding when running 
+``input list``
+ on tables
+skelly37 created 
+[link: https://github.com/nushell/nushell/pull/9315] Logger constants refactored, 
+``format``
+ argument added, better formatting of failed (non) equality assertions
+, and 
+[link: https://github.com/nushell/nushell/pull/9235] Added 
+``assert not``
+ command (assertion that the value/expression is 
+``false``
+)
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/9314] restore cursor shape when exits
+1Kinoti created 
+[link: https://github.com/nushell/nushell/pull/9309] fix conflict between filesize and hexadecimal numbers
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/9303] REFACTOR: move 
+``run-tests``
+ and fix the 
+``std assert``
+ namespace
+, and 
+[link: https://github.com/nushell/nushell/pull/9289] refactor the 
+``lib.rs``
+ of 
+``nu-std``
+ after the new virtual files PR
+, and 
+[link: https://github.com/nushell/nushell/pull/9288] add a new 
+``toolkit install``
+ command with 
+``--features``
+ support
+, and 
+[link: https://github.com/nushell/nushell/pull/9253] REFACTOR: build help pages instead of printing them
+, and 
+[link: https://github.com/nushell/nushell/pull/9252] stdlib: fix the names of the 
+``help``
+ commands in 
+``help.nu``
+, and 
+[link: https://github.com/nushell/nushell/pull/9251] CI: disable 
+``nu-coverage``
+, and 
+[link: https://github.com/nushell/nushell/pull/9231] REFACTOR: clean the root of the repo
+, and 
+[link: https://github.com/nushell/nushell/pull/9193] FEATURE: fix the namespace of the standard library (not testing)
+michel-slm created 
+[link: https://github.com/nushell/nushell/pull/9297] [
+nu-explore
+]
+ fix Cargo description
+ayax79 created 
+[link: https://github.com/nushell/nushell/pull/9291] Adding JSON lines file support to dataframes
+fnordpig created 
+[link: https://github.com/nushell/nushell/pull/9285] Add a datepart expression for dfr to be used with dfr with-column
+, and 
+[link: https://github.com/nushell/nushell/pull/9262] Fix version to show build features after crateification
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/9267] std dirs simply stays in sync with CD changes to PWD
+Tiggax created 
+[link: https://github.com/nushell/nushell/pull/9259] throw an error instead of a panic if no input is provided to 
+``inspect``
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/9257] upserting data of a cellpath that doesn't exist into a record creates the cellpath
+, and 
+[link: https://github.com/nushell/nushell/pull/9247] allow 
+``view-source``
+ to read rest arguments
+, and 
+[link: https://github.com/nushell/nushell/pull/9242] Allow 
+``input``
+ to take a specified number of characters
+MariaSolOs created 
+[link: https://github.com/nushell/nushell/pull/9249] Allow duration defaults
+melMass created 
+[link: https://github.com/nushell/nushell/pull/9240] docs: üìù "http get", add an example with more than one header
+, and 
+[link: https://github.com/nushell/nushell/pull/9238] feat: ‚ú® (stdlib) add os record support to path add
+maxim-uvarov created 
+[link: https://github.com/nushell/nushell/pull/9216] add the 
+``no-strip``
+ flag to the clip command
+simdimdim created 
+[link: https://github.com/nushell/nushell/pull/9181] Adding more math constants (and a small correction to the description of an existing one)
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/9162] Add aarch64-pc-windows-msvc building target for nu binaries
+Decodetalkers created 
+[link: https://github.com/nushell/nushell/pull/9117] check if is homedir first when rm
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@a91393edc3f76a40d4f26f6e7ed79ffa820bc75474842a15f3c2a53dd716ee42≥title: Nushell 0.81ë©Extension⁄gaetschwartz created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/133] Use unique labels for 
+``durationLogWrapper``
+EmilySeville7cfg created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/130] feat(snippets): support regex groups
+íêê⁄7Title: title: Nushell 0.81
+Path: Extension
+Content:
+gaetschwartz created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/133] Use unique labels for 
+``durationLogWrapper``
+EmilySeville7cfg created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/130] feat(snippets): support regex groups
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@102e232e55d2a1282b27235937170e24289a5062d866a5c0233a04cab123c041≥title: Nushell 0.81ë≠Documentation⁄	\Omochice created 
+[link: https://github.com/nushell/nushell.github.io/pull/942] Fix missing 
+``|``
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/940] Bump vite from 4.0.4 to 4.0.5
+guilt created 
+[link: https://github.com/nushell/nushell.github.io/pull/938] Update Documentation for Configuration.
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/937] Update deploy.yml so that the site can be DEPLOYED WITHOUT GH-PAGES 
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/932] Try to compress image on push to main
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/931] Add a new image for compress test
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/930] Try to add a new workflow to compress images on new pull request
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/929] Lossless compression of image assets
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/926] Nushell Docs Repo Cleanup Plan
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/925] Remove unnecessary 0.59 binaries
+avi-cenna created 
+[link: https://github.com/nushell/nushell.github.io/pull/934] Update table.md - Correct 
+``table``
+ examples
+github-actions
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/933] Compressed Images
+damiancarrillo created 
+[link: https://github.com/nushell/nushell.github.io/pull/927] Update types_of_data.md
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/923] FIX: out of date external completion examples
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/918] FIX: add 
+``| table``
+ to folded tables
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/915] refactor minor things in the modules chapter
+BrianLondon created 
+[link: https://github.com/nushell/nushell.github.io/pull/921] update plugins.md in contributor-book
+casually-blue created 
+[link: https://github.com/nushell/nushell.github.io/pull/920] Fix references to match in the "coming from" pages to reflect its current usage in Nu
+lavafroth created 
+[link: https://github.com/nushell/nushell.github.io/pull/919] Supply table instead of closure to merge command in tables.md
+mrkkrp created 
+[link: https://github.com/nushell/nushell.github.io/pull/914] Minor improvements to the installation chapter
+íêê⁄	îTitle: title: Nushell 0.81
+Path: Documentation
+Content:
+Omochice created 
+[link: https://github.com/nushell/nushell.github.io/pull/942] Fix missing 
+``|``
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/940] Bump vite from 4.0.4 to 4.0.5
+guilt created 
+[link: https://github.com/nushell/nushell.github.io/pull/938] Update Documentation for Configuration.
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/937] Update deploy.yml so that the site can be DEPLOYED WITHOUT GH-PAGES 
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/932] Try to compress image on push to main
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/931] Add a new image for compress test
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/930] Try to add a new workflow to compress images on new pull request
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/929] Lossless compression of image assets
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/926] Nushell Docs Repo Cleanup Plan
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/925] Remove unnecessary 0.59 binaries
+avi-cenna created 
+[link: https://github.com/nushell/nushell.github.io/pull/934] Update table.md - Correct 
+``table``
+ examples
+github-actions
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/933] Compressed Images
+damiancarrillo created 
+[link: https://github.com/nushell/nushell.github.io/pull/927] Update types_of_data.md
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/923] FIX: out of date external completion examples
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/918] FIX: add 
+``| table``
+ to folded tables
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/915] refactor minor things in the modules chapter
+BrianLondon created 
+[link: https://github.com/nushell/nushell.github.io/pull/921] update plugins.md in contributor-book
+casually-blue created 
+[link: https://github.com/nushell/nushell.github.io/pull/920] Fix references to match in the "coming from" pages to reflect its current usage in Nu
+lavafroth created 
+[link: https://github.com/nushell/nushell.github.io/pull/919] Supply table instead of closure to merge command in tables.md
+mrkkrp created 
+[link: https://github.com/nushell/nushell.github.io/pull/914] Minor improvements to the installation chapter
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@1ce0d06a8683125cd7dff198778d98917ccb1e4c124558750564074502e2a857≥title: Nushell 0.81ë™Nu_Scripts⁄Gfj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/523] kubernetes: fix 
+``-n``
+ in completion context
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/504] more precise parsing of cmd through the information in 
+``nu.scope.comm‚Ä¶](https://github.com/nushell/nu_scripts/pull/522), and [kubernetes: normalize-column-names](https://github.com/nushell/nu_scripts/pull/518), and [update docker, git-v2, kubernetes](https://github.com/nushell/nu_scripts/pull/517), and [refactor: introduce ``
+spr
+``and``
+sprb
+`
+ for spread
+stormasm created 
+[link: https://github.com/nushell/nu_scripts/pull/521] update release script for most recent crate addition nu-cmd-extra
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/520] add missing colors to the themes
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/512] FEATURE: add some fuzzy keybindings
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/508] add completion for 
+``toipe``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/506] FEATURE: add release note PR script to 
+``make_release/``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/500] FEATURE: add 
+``term-dark``
+ and 
+``term-light``
+ themes from main 
+``nushell``
+Tiggax created 
+[link: https://github.com/nushell/nu_scripts/pull/516] bm fix to add Windows support
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/511] Added missing ?
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/509] Added bookmark module
+ShinyZero0 created 
+[link: https://github.com/nushell/nu_scripts/pull/515] Case insensitive and reformatted make completions
+hyiltiz created 
+[link: https://github.com/nushell/nu_scripts/pull/513] auto-venv for python: update to be compatible with nu 0.80
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/507] Add dataframe crate to the release
+íêê⁄|Title: title: Nushell 0.81
+Path: Nu_Scripts
+Content:
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/523] kubernetes: fix 
+``-n``
+ in completion context
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/504] more precise parsing of cmd through the information in 
+``nu.scope.comm‚Ä¶](https://github.com/nushell/nu_scripts/pull/522), and [kubernetes: normalize-column-names](https://github.com/nushell/nu_scripts/pull/518), and [update docker, git-v2, kubernetes](https://github.com/nushell/nu_scripts/pull/517), and [refactor: introduce ``
+spr
+``and``
+sprb
+`
+ for spread
+stormasm created 
+[link: https://github.com/nushell/nu_scripts/pull/521] update release script for most recent crate addition nu-cmd-extra
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/520] add missing colors to the themes
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/512] FEATURE: add some fuzzy keybindings
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/508] add completion for 
+``toipe``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/506] FEATURE: add release note PR script to 
+``make_release/``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/500] FEATURE: add 
+``term-dark``
+ and 
+``term-light``
+ themes from main 
+``nushell``
+Tiggax created 
+[link: https://github.com/nushell/nu_scripts/pull/516] bm fix to add Windows support
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/511] Added missing ?
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/509] Added bookmark module
+ShinyZero0 created 
+[link: https://github.com/nushell/nu_scripts/pull/515] Case insensitive and reformatted make completions
+hyiltiz created 
+[link: https://github.com/nushell/nu_scripts/pull/513] auto-venv for python: update to be compatible with nu 0.80
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/507] Add dataframe crate to the release
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-06-nushell_0_81.mdŸ@a715632aafd7c60c160bef6b341c8074df7c2284ffd8f2b72aa7f6398a15ee8e≥title: Nushell 0.81ë®reedline⁄≥sholderbach created 
+[link: https://github.com/nushell/reedline/pull/590] Revert removal of patch versions
+, and 
+[link: https://github.com/nushell/reedline/pull/581] Bump to 
+``0.20.0``
+ for release
+fnordpig created 
+[link: https://github.com/nushell/reedline/pull/588] Update to make work with new lines embedded in sent string.
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/587] update cargo.lock
+, and 
+[link: https://github.com/nushell/reedline/pull/586] update dependencies
+sophiajt created 
+[link: https://github.com/nushell/reedline/pull/585] bump reedline version
+Banyc created 
+[link: https://github.com/nushell/reedline/pull/578] fix: prompt position on resize
+íêê⁄ÊTitle: title: Nushell 0.81
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/590] Revert removal of patch versions
+, and 
+[link: https://github.com/nushell/reedline/pull/581] Bump to 
+``0.20.0``
+ for release
+fnordpig created 
+[link: https://github.com/nushell/reedline/pull/588] Update to make work with new lines embedded in sent string.
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/587] update cargo.lock
+, and 
+[link: https://github.com/nushell/reedline/pull/586] update dependencies
+sophiajt created 
+[link: https://github.com/nushell/reedline/pull/585] bump reedline version
+Banyc created 
+[link: https://github.com/nushell/reedline/pull/578] fix: prompt position on resize

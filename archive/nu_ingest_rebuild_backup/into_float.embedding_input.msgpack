@@ -1,0 +1,85 @@
+���@83040b9d68091ab0cf01cf2fb2c7a9a7f48a3773da1ceed8fe889c7809f050b3�xTitle: title: into float
+Path: conversions
+Content:
+
+
+
+
+
+
+
+
+
+``into float``
+[link: /commands/categories/conversions.md] ��@71245d7a5f95901f1ba9dc93e3bc455722d34343a504a6e78aebb333625913b0�STitle: title: into float
+Path: Signature
+Content:
+``> into float {flags} ...rest``
+��@9129798494a6295200bfdf9e18fa9a3ee87681a1bbd6c95e8745b72b268b581dكTitle: title: into float
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert data at the given cell paths.
+��@26e90bb6f045afecfe1ca4ab80ed37ea76b481b8ffbdc8301858db30b9f05742ٯTitle: title: into float
+Path: Input/output types:
+Content:
+input
+output
+int
+float
+string
+float
+bool
+float
+float
+float
+table
+table
+record
+record
+list
+<
+any
+>
+
+list
+<
+float
+>
+
+��@1020581e4d60e1b977bf1d257c27b4f2052bd5d99bace1a9e1122ef2c4fe1bf2��Title: title: into float
+Path: Examples
+Content:
+Convert string to float in table.
+```Fenced(Borrowed("nu"))
+> [[num]; ['5.01']] | into float num
+╭───┬──────╮
+│ # │ num  │
+├───┼──────┤
+│ 0 │ 5.01 │
+╰───┴──────╯
+
+
+```
+Convert string to floating point number.
+```Fenced(Borrowed("nu"))
+> '1.345' | into float
+1.345
+
+```
+Coerce list of ints and floats to float.
+```Fenced(Borrowed("nu"))
+> [4 -5.9] | into float
+╭───┬───────╮
+│ 0 │  4.00 │
+│ 1 │ -5.90 │
+╰───┴───────╯
+
+
+```
+Convert boolean to float.
+```Fenced(Borrowed("nu"))
+> true | into float
+1.0
+
+```

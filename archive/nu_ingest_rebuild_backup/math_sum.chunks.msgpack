@@ -1,0 +1,128 @@
+”—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sum.mdÙ@055ea61f1d8c1a201c16593300a4281a549d99e5aa3af962cfde280b5c3f8d71¯title: math sum‘¤mathÙ;
+
+
+
+
+
+
+
+
+``math sum``
+[link: /commands/categories/math.md] ’ÙfTitle: title: math sum
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math sum``
+[link: /commands/categories/math.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sum.mdÙ@eba43884a340eee45d5d0b979d55592dfd6dc6bd74ad7740b66f869801b269eb¯title: math sum‘©Signature¸``> math sum {flags} ``
+’ÙHTitle: title: math sum
+Path: Signature
+Content:
+``> math sum {flags} ``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sum.mdÙ@8cab5a6d360ac2c4af99b502a1e334aa116fa407cd9683cce80596f5a9ee462e¯title: math sum‘³Input/output types:Ù…input
+output
+list
+<
+number
+>
+
+number
+list
+<
+duration
+>
+
+duration
+list
+<
+filesize
+>
+
+filesize
+range
+number
+table
+record
+record
+record
+’Ù¿Title: title: math sum
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+number
+>
+
+number
+list
+<
+duration
+>
+
+duration
+list
+<
+filesize
+>
+
+filesize
+range
+number
+table
+record
+record
+record
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sum.mdÙ@475cdda97f088b621bad52c0faaadd667a10419d4c020b83591a302d9c9c4d60¯title: math sum‘¨ExamplesÚzSum a list of numbers.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | math sum
+6
+
+```
+Get the disk usage for the current directory.
+```Fenced(Borrowed("nu"))
+> ls | get size | math sum
+
+
+```
+Compute the sum of each column in a table.
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | math sum
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ a â”‚ 4 â”‚
+â”‚ b â”‚ 6 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+```
+’Ú©Title: title: math sum
+Path: Examples
+Content:
+Sum a list of numbers.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | math sum
+6
+
+```
+Get the disk usage for the current directory.
+```Fenced(Borrowed("nu"))
+> ls | get size | math sum
+
+
+```
+Compute the sum of each column in a table.
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | math sum
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ a â”‚ 4 â”‚
+â”‚ b â”‚ 6 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+```

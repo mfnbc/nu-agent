@@ -1,0 +1,67 @@
+—’Ù@422a241bb4daaa6fa6462dc5bb76d1b2bdebe54fef1f395259cbb0fb77a18450ÙbTitle: title: tee
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``tee``
+[link: /commands/categories/filters.md] ’Ù@b887c54d3d5794ccfa5b5f76163bc11f6b0a90a20a9574e19866baa2f3afb044ÙGTitle: title: tee
+Path: Signature
+Content:
+``> tee {flags} (closure)``
+’Ù@ae44e287e414478c69f891b51876b04e2f0f02fe8c09881d42ee5dc5924ecf66ÙyTitle: title: tee
+Path: Flags
+Content:
+``--stderr, -e``
+: For external commands: copy the standard error stream instead.
+’Ù@92ec0c70495b20c22eeb76cb143ca4a6c88d54417e84960efd29e17315aae8bdÙcTitle: title: tee
+Path: Parameters
+Content:
+``closure``
+: The other command to send the stream to.
+’Ù@7ab667ac64e3d1db339e1c3290d1289b675c4e2ad468456ef954a38e7913f6f8ÙJTitle: title: tee
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+’Ù@09c40c846a6ab315bd21f8f96180a723b901e8aaf39c73534d7fb73f3ff85a32ÚTitle: title: tee
+Path: Examples
+Content:
+Save a webpage to a file while also printing it.
+```Fenced(Borrowed("nu"))
+> http get http://example.org/ | tee { save example.html }
+
+
+```
+Save error messages from an external command to a file without redirecting them.
+```Fenced(Borrowed("nu"))
+> nu -c 'print -e error; print ok' | tee --stderr { save error.log } | complete
+
+
+```
+Print numbers and their sum.
+```Fenced(Borrowed("nu"))
+> 1..100 | tee { each { print } } | math sum | wrap sum
+
+
+```
+Do something with a value on another thread, while also passing through the value.
+```Fenced(Borrowed("nu"))
+> 10000 | tee { 1..$in | print } | $in * 5
+50000
+
+```
+’Ù@8dbee6932a6601888fb8e03729418019eff6675d14f54d958aa26ba0d54f8ec3Ù‘Title: title: tee
+Path: Notes
+Content:
+This is useful for doing something else with a stream while still continuing to
+
+use it in your pipeline.

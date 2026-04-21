@@ -1,0 +1,238 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-03-twin0145.mdŸ@056be13af6373b3da66ae38d1b997487fef6e2982d8d12d234ce21baa21efa94πThis week in Nushell #145ëßNushell⁄ﬁsholderbach 
+[link: https://github.com/nushell/nushell/pull/5708] used search terms in the help menu search
+, and 
+[link: https://github.com/nushell/nushell/pull/5706] Update nu-ansi-term to remove 
+``Deref``
+ impl
+, and 
+[link: https://github.com/nushell/nushell/pull/5704] Improve internal documentation of 
+``save``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/5678] Update reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/5677] Clarify error message for 
+``let``
+ in pipeline
+VergeDX 
+[link: https://github.com/nushell/nushell/pull/5705] fixed: Panic when passthru small number of 
+``table -w``
+.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/5703] fixed 
+``ls``
+ for Windows system files
+PerBothner created 
+[link: https://github.com/nushell/nushell/pull/5701] Minor fixes to shell integation in repl.
+, and 
+[link: https://github.com/nushell/nushell/pull/5699] Improve table output of 'to html',
+Yethal 
+[link: https://github.com/nushell/nushell/pull/5700] added completions for nu
+kubouch 
+[link: https://github.com/nushell/nushell/pull/5698] fixed wrong 
+``path``
+ help message
+hustcer 
+[link: https://github.com/nushell/nushell/pull/5696] fixed doc building for vuepress-next, avoid using angle brackets
+, and 
+[link: https://github.com/nushell/nushell/pull/5685] feat: Add sensitive flag to get, fix #4295
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/5693] Small typo fix in 
+``signature.rs``
+, and 
+[link: https://github.com/nushell/nushell/pull/5676] prevent panic with 
+``let``
+ alone in pipeline
+, and 
+[link: https://github.com/nushell/nushell/pull/5673] Add '-o'/
+``--output``
+ flag to 
+``fetch``
+ to download to file
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/5692] expanded env for path
+, and 
+[link: https://github.com/nushell/nushell/pull/5691] make ls works better with glob
+, and 
+[link: https://github.com/nushell/nushell/pull/5680] base64 command more friendly
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5687] Lazy dataframes
+mjclements 
+[link: https://github.com/nushell/nushell/pull/5667] differentiated internal signature from external signature w.r.t. help
+Kangaxx-0 
+[link: https://github.com/nushell/nushell/pull/5642] fixed cp bug
+íêê⁄	Title: This week in Nushell #145
+Path: Nushell
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/5708] used search terms in the help menu search
+, and 
+[link: https://github.com/nushell/nushell/pull/5706] Update nu-ansi-term to remove 
+``Deref``
+ impl
+, and 
+[link: https://github.com/nushell/nushell/pull/5704] Improve internal documentation of 
+``save``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/5678] Update reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/5677] Clarify error message for 
+``let``
+ in pipeline
+VergeDX 
+[link: https://github.com/nushell/nushell/pull/5705] fixed: Panic when passthru small number of 
+``table -w``
+.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/5703] fixed 
+``ls``
+ for Windows system files
+PerBothner created 
+[link: https://github.com/nushell/nushell/pull/5701] Minor fixes to shell integation in repl.
+, and 
+[link: https://github.com/nushell/nushell/pull/5699] Improve table output of 'to html',
+Yethal 
+[link: https://github.com/nushell/nushell/pull/5700] added completions for nu
+kubouch 
+[link: https://github.com/nushell/nushell/pull/5698] fixed wrong 
+``path``
+ help message
+hustcer 
+[link: https://github.com/nushell/nushell/pull/5696] fixed doc building for vuepress-next, avoid using angle brackets
+, and 
+[link: https://github.com/nushell/nushell/pull/5685] feat: Add sensitive flag to get, fix #4295
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/5693] Small typo fix in 
+``signature.rs``
+, and 
+[link: https://github.com/nushell/nushell/pull/5676] prevent panic with 
+``let``
+ alone in pipeline
+, and 
+[link: https://github.com/nushell/nushell/pull/5673] Add '-o'/
+``--output``
+ flag to 
+``fetch``
+ to download to file
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/5692] expanded env for path
+, and 
+[link: https://github.com/nushell/nushell/pull/5691] make ls works better with glob
+, and 
+[link: https://github.com/nushell/nushell/pull/5680] base64 command more friendly
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5687] Lazy dataframes
+mjclements 
+[link: https://github.com/nushell/nushell/pull/5667] differentiated internal signature from external signature w.r.t. help
+Kangaxx-0 
+[link: https://github.com/nushell/nushell/pull/5642] fixed cp bug
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-03-twin0145.mdŸ@d17431aa88cc8e6ebe8c55102245a948663256636579aadc005eac2006ba9443πThis week in Nushell #145ë≠Documentation⁄ähustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/479] Update prettier config and run code format
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/478] fix feed plugin add atom support
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/477] Fix search box style, make it wider
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/476] Fix search box style, make it align left
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/475] Trigger deploy workflow
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/474] Fix command detail page, update make_docs.nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/465] Upgrade vuepress to v2 and add dark mode support
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/471] Add documentation for switch flags
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/470] remove file paths since they're not a thing any longer
+jgollenz created 
+[link: https://github.com/nushell/nushell.github.io/pull/469] Add 'Reading environment variables' section
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/462] typos
+Yethal created 
+[link: https://github.com/nushell/nushell.github.io/pull/467] Update dataframes.md
+elferherrera created 
+[link: https://github.com/nushell/nushell.github.io/pull/466] lazyframes section
+íêê⁄»Title: This week in Nushell #145
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/479] Update prettier config and run code format
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/478] fix feed plugin add atom support
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/477] Fix search box style, make it wider
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/476] Fix search box style, make it align left
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/475] Trigger deploy workflow
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/474] Fix command detail page, update make_docs.nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/465] Upgrade vuepress to v2 and add dark mode support
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/471] Add documentation for switch flags
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/470] remove file paths since they're not a thing any longer
+jgollenz created 
+[link: https://github.com/nushell/nushell.github.io/pull/469] Add 'Reading environment variables' section
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/462] typos
+Yethal created 
+[link: https://github.com/nushell/nushell.github.io/pull/467] Update dataframes.md
+elferherrera created 
+[link: https://github.com/nushell/nushell.github.io/pull/466] lazyframes section
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-03-twin0145.mdŸ@6fcde690a4f2fb5f80116de8aeb5eef6b12124a3cec954fd4f9a7b1854f67788πThis week in Nushell #145ë™Nu_Scripts⁄Kehdevries created 
+[link: https://github.com/nushell/nu_scripts/pull/240] Improve panache-git performance for changes with many files
+Yethal created 
+[link: https://github.com/nushell/nu_scripts/pull/239] Update remoting.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/238] Update ssh script for 0.63.0
+Jacobious52 created 
+[link: https://github.com/nushell/nu_scripts/pull/237] generated nu completions from fish
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/236] autogenerate from Fish shell completions
+Dan-Gamin created 
+[link: https://github.com/nushell/nu_scripts/pull/235] Add pwd-short to cool-oneliners
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/233] Add more cargo completions
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/234] Script to gather test coverage for nushell
+íêê⁄ÜTitle: This week in Nushell #145
+Path: Nu_Scripts
+Content:
+ehdevries created 
+[link: https://github.com/nushell/nu_scripts/pull/240] Improve panache-git performance for changes with many files
+Yethal created 
+[link: https://github.com/nushell/nu_scripts/pull/239] Update remoting.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/238] Update ssh script for 0.63.0
+Jacobious52 created 
+[link: https://github.com/nushell/nu_scripts/pull/237] generated nu completions from fish
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/236] autogenerate from Fish shell completions
+Dan-Gamin created 
+[link: https://github.com/nushell/nu_scripts/pull/235] Add pwd-short to cool-oneliners
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/233] Add more cargo completions
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/234] Script to gather test coverage for nushell
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-03-twin0145.mdŸ@5915d59ddee471c594933ccd70a1779e43d586ddf4b272dabb2f225560ec2f35πThis week in Nushell #145ë®reedline⁄”sholderbach created 
+[link: https://github.com/nushell/reedline/pull/437] Update nu-ansi-term/update crate patch versions
+, and 
+[link: https://github.com/nushell/reedline/pull/435] Fix clippy lints that will become warnings
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/436] Don't panic when parent directory does not exist
+Artturin created 
+[link: https://github.com/nushell/reedline/pull/434] Move ctrl+a & ctrl+e to common navigation binds
+íêê⁄Title: This week in Nushell #145
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/437] Update nu-ansi-term/update crate patch versions
+, and 
+[link: https://github.com/nushell/reedline/pull/435] Fix clippy lints that will become warnings
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/436] Don't panic when parent directory does not exist
+Artturin created 
+[link: https://github.com/nushell/reedline/pull/434] Move ctrl+a & ctrl+e to common navigation binds

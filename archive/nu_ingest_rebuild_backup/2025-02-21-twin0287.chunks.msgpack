@@ -1,0 +1,176 @@
+ñóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-02-21-twin0287.mdŸ@0e84dd4b2419ebab77abea057a85c5471f4a0eb3251ecc856b5f4374a7e166dbŸ"title: 'This week in Nushell #287'ëπThis week in Nushell #287Ÿ!
+
+
+
+Published Friday, 2025-02-21
+íêêŸtTitle: title: 'This week in Nushell #287'
+Path: This week in Nushell #287
+Content:
+
+
+
+
+Published Friday, 2025-02-21
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-02-21-twin0287.mdŸ@4cffde2406d664b697b16223872d2295aec2fed77dbff1cc57c5f0d4d56f0590Ÿ"title: 'This week in Nushell #287'ë™Highlights⁄≈With this week's TWiN, we start reporting on a few more repositories. That is, commits to almost
+
+all
+ 
+[link: https://github.com/nushell] Nushell repos
+ will now be included in your curated weekly reading below.
+Changes in recent nightlys and main include additional use of the new Custom Attributes feature to assign
+
+a category to your custom commands. You 
+did
+ read about Custom Attributes in last week's TWiN, right?!
+Also, @fdcred brought the latest Reedline into Nushell, so the new Vi-mode features you read about last week
+
+are now available for dogfooding.
+Last, but not least, thanks to @Kissaki for improving multiple codeblocks throughout the doc this week!
+All commits in the most recent week:
+íêê⁄	Title: title: 'This week in Nushell #287'
+Path: Highlights
+Content:
+With this week's TWiN, we start reporting on a few more repositories. That is, commits to almost
+
+all
+ 
+[link: https://github.com/nushell] Nushell repos
+ will now be included in your curated weekly reading below.
+Changes in recent nightlys and main include additional use of the new Custom Attributes feature to assign
+
+a category to your custom commands. You 
+did
+ read about Custom Attributes in last week's TWiN, right?!
+Also, @fdcred brought the latest Reedline into Nushell, so the new Vi-mode features you read about last week
+
+are now available for dogfooding.
+Last, but not least, thanks to @Kissaki for improving multiple codeblocks throughout the doc this week!
+All commits in the most recent week:
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-02-21-twin0287.mdŸ@4f0fd856f59fe0542b796e540ce820c3b07ca60ac2fb45a229ee01af81495118Ÿ"title: 'This week in Nushell #287'ëßNushell⁄≥cosineblast 
+[link: https://github.com/nushell/nushell/pull/15151] made 
+``transpose``
+ reject streams with non-record values
+fdncred:
+[link: https://github.com/nushell/nushell/pull/15148] bumped the Rust toolchain to 1.83.0
+[link: https://github.com/nushell/nushell/pull/15139] updated to the latest reedline
+[link: https://github.com/nushell/nushell/pull/15137] added 
+``attr category``
+ and 
+``@category``
+ to custom command attributes
+ayax79:
+[link: https://github.com/nushell/nushell/pull/15145] exposed a flag to not maintain order in 
+``polars concat``
+[link: https://github.com/nushell/nushell/pull/15144] cleaned up minor Polars code
+NotTheDr01ds:
+[link: https://github.com/nushell/nushell/pull/15143] removed the BACKTRACE message for non-panic errors
+[link: https://github.com/nushell/nushell/pull/15130] removed inheritance for PROMPT variables in 
+``default_env.nu``
+[link: https://github.com/nushell/nushell/pull/15129] replaced "function" with "command" in several user-facing docs
+[link: https://github.com/nushell/nushell/pull/15123] fixed a failing test for man version 2.13.0
+[link: https://github.com/nushell/nushell/pull/15122] added a 
+``buffer_editor``
+ example with arguments in 
+``config nu --doc``
+atahabaki 
+[link: https://github.com/nushell/nushell/pull/15125] added zero padding for numeric ranges in Bracoxide
+hongquan 
+[link: https://github.com/nushell/nushell/pull/15057] added more directory autocomplete for 
+``overlay use``
+íêê⁄ÙTitle: title: 'This week in Nushell #287'
+Path: Nushell
+Content:
+cosineblast 
+[link: https://github.com/nushell/nushell/pull/15151] made 
+``transpose``
+ reject streams with non-record values
+fdncred:
+[link: https://github.com/nushell/nushell/pull/15148] bumped the Rust toolchain to 1.83.0
+[link: https://github.com/nushell/nushell/pull/15139] updated to the latest reedline
+[link: https://github.com/nushell/nushell/pull/15137] added 
+``attr category``
+ and 
+``@category``
+ to custom command attributes
+ayax79:
+[link: https://github.com/nushell/nushell/pull/15145] exposed a flag to not maintain order in 
+``polars concat``
+[link: https://github.com/nushell/nushell/pull/15144] cleaned up minor Polars code
+NotTheDr01ds:
+[link: https://github.com/nushell/nushell/pull/15143] removed the BACKTRACE message for non-panic errors
+[link: https://github.com/nushell/nushell/pull/15130] removed inheritance for PROMPT variables in 
+``default_env.nu``
+[link: https://github.com/nushell/nushell/pull/15129] replaced "function" with "command" in several user-facing docs
+[link: https://github.com/nushell/nushell/pull/15123] fixed a failing test for man version 2.13.0
+[link: https://github.com/nushell/nushell/pull/15122] added a 
+``buffer_editor``
+ example with arguments in 
+``config nu --doc``
+atahabaki 
+[link: https://github.com/nushell/nushell/pull/15125] added zero padding for numeric ranges in Bracoxide
+hongquan 
+[link: https://github.com/nushell/nushell/pull/15057] added more directory autocomplete for 
+``overlay use``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-02-21-twin0287.mdŸ@92a051620358ef669b292e421aefb0ff24211cde8dca9145c37242b411638f28Ÿ"title: 'This week in Nushell #287'ë™Nu_Scripts⁄⁄fnuttens 
+[link: https://github.com/nushell/nu_scripts/pull/1052] added Zig Version Manager (zvm)
+hongquan:
+[link: https://github.com/nushell/nu_scripts/pull/1050] improved SSH completion speed
+[link: https://github.com/nushell/nu_scripts/pull/1048] added autocomplete for 
+``git merge``
+NotTheDr01ds:
+[link: https://github.com/nushell/nu_scripts/pull/1049] fixed failing lints on source files
+[link: https://github.com/nushell/nu_scripts/pull/1047] updated the TWiN script
+íêê⁄Title: title: 'This week in Nushell #287'
+Path: Nu_Scripts
+Content:
+fnuttens 
+[link: https://github.com/nushell/nu_scripts/pull/1052] added Zig Version Manager (zvm)
+hongquan:
+[link: https://github.com/nushell/nu_scripts/pull/1050] improved SSH completion speed
+[link: https://github.com/nushell/nu_scripts/pull/1048] added autocomplete for 
+``git merge``
+NotTheDr01ds:
+[link: https://github.com/nushell/nu_scripts/pull/1049] fixed failing lints on source files
+[link: https://github.com/nushell/nu_scripts/pull/1047] updated the TWiN script
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-02-21-twin0287.mdŸ@100bc0639cb4f268babf62d81fdcc66affe72b4e61f3d7680f417bf2a5b54d22Ÿ"title: 'This week in Nushell #287'ë´Tree-sitterŸ]blindFS 
+[link: https://github.com/nushell/tree-sitter-nu/pull/182] added attributes support
+íêêŸ¢Title: title: 'This week in Nushell #287'
+Path: Tree-sitter
+Content:
+blindFS 
+[link: https://github.com/nushell/tree-sitter-nu/pull/182] added attributes support
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-02-21-twin0287.mdŸ@0d71511b1fb76b7e55621c8de71fe4ab13fab66b774237be1bb54b42b6236f3bŸ"title: 'This week in Nushell #287'ë≠Documentation⁄wKissaki:
+[link: https://github.com/nushell/nushell.github.io/pull/1807] updated docs to consistent use 
+``nu``
+ as the code block language
+[link: https://github.com/nushell/nushell.github.io/pull/1805] fixed an outdated 
+``config path``
+ code block
+[link: https://github.com/nushell/nushell.github.io/pull/1804] combined command and output code blocks
+[link: https://github.com/nushell/nushell.github.io/pull/1803] formatted code output and added code block language
+NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/1810] added a 
+``buffer_editor``
+ example with arguments to the Quickstart
+[link: https://github.com/nushell/nushell.github.io/pull/1809] fixed a typo in TWiN 286
+[link: https://github.com/nushell/nushell.github.io/pull/1808] published TWiN #0286
+[link: https://github.com/nushell/nushell.github.io/pull/1801] fixed a bad localhost link in TWiN 285
+íêê⁄æTitle: title: 'This week in Nushell #287'
+Path: Documentation
+Content:
+Kissaki:
+[link: https://github.com/nushell/nushell.github.io/pull/1807] updated docs to consistent use 
+``nu``
+ as the code block language
+[link: https://github.com/nushell/nushell.github.io/pull/1805] fixed an outdated 
+``config path``
+ code block
+[link: https://github.com/nushell/nushell.github.io/pull/1804] combined command and output code blocks
+[link: https://github.com/nushell/nushell.github.io/pull/1803] formatted code output and added code block language
+NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/1810] added a 
+``buffer_editor``
+ example with arguments to the Quickstart
+[link: https://github.com/nushell/nushell.github.io/pull/1809] fixed a typo in TWiN 286
+[link: https://github.com/nushell/nushell.github.io/pull/1808] published TWiN #0286
+[link: https://github.com/nushell/nushell.github.io/pull/1801] fixed a bad localhost link in TWiN 285

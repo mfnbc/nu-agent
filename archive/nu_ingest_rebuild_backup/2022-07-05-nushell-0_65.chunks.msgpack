@@ -1,0 +1,726 @@
+œ—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@af9894d2d092e3fc0c9f440a116c825acaa94a04ed92d691ccca4222d35f95d7³title: Nushell 0.65‘¬Nushell 0.65ÚĞ
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing version 0.65 of Nu. This release includes better support for binary data, a new way of checking source files for correctness, improved command unification, and more.
+’ÚTitle: title: Nushell 0.65
+Path: Nushell 0.65
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing version 0.65 of Nu. This release includes better support for binary data, a new way of checking source files for correctness, improved command unification, and more.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@5807743650f508c32a7aece2de3fce178a9f913a144ea09f6bd043adeb151d0a³title: Nushell 0.65‘¯Where to get itÚñNu 0.65 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.65.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the built-in goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+’Ú+Title: title: Nushell 0.65
+Path: Where to get it
+Content:
+Nu 0.65 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.65.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the built-in goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@c1ac91507bb8524355cb8b8b954f651195dce905881b234d89af8788866e15f7³title: Nushell 0.65‘Ù;Better support for binary data (hustcer, sophiajt, CBenoit)Ú·Binary support in Nushell has steadily improved, and in this release, it's gotten a strong push forward. New features include:
+New operators 
+``bit-and``
+, 
+``bit-or``
+, 
+``bit-xor``
+, as well as renamed 
+``bit-shl``
+ and 
+``bit-shr``
+. These correspond to bitwise and, or, exclusive or, shift left, and shift right.
+A new 
+``encode``
+ command as well as binary support for 
+``hash``
+Improved binary support for 
+``skip``
+ and 
+``take``
+.
+’ÚTitle: title: Nushell 0.65
+Path: Better support for binary data (hustcer, sophiajt, CBenoit)
+Content:
+Binary support in Nushell has steadily improved, and in this release, it's gotten a strong push forward. New features include:
+New operators 
+``bit-and``
+, 
+``bit-or``
+, 
+``bit-xor``
+, as well as renamed 
+``bit-shl``
+ and 
+``bit-shr``
+. These correspond to bitwise and, or, exclusive or, shift left, and shift right.
+A new 
+``encode``
+ command as well as binary support for 
+``hash``
+Improved binary support for 
+``skip``
+ and 
+``take``
+.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@2e1ccfab535b9afeff0a8c247b60cd4c375796db826d3d8e91ffe37b73a6a02b³title: Nushell 0.65‘´Nu-check (Kangaxx-0)ÚfStarting with this release, Nushell now provides a 
+``nu-check``
+ command which can do a check over a source file for potential parsing and typechecking errors. This will make it easier for script authors to check their scripts without running them. In the future, this may also be an easy way for editors to check a script and return errors during editing.
+’Ú¥Title: title: Nushell 0.65
+Path: Nu-check (Kangaxx-0)
+Content:
+Starting with this release, Nushell now provides a 
+``nu-check``
+ command which can do a check over a source file for potential parsing and typechecking errors. This will make it easier for script authors to check their scripts without running them. In the future, this may also be an easy way for editors to check a script and return errors during editing.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@3f0d5142cd166653961f445a21eaa687d2c943c49f87f207188581d692a9eed3³title: Nushell 0.65‘Ù$Unification continues (elferherrera)Ú´In 0.65, we've also continued the process to unify commands for different datatypes. In this release, 
+``db``
+ and mysql support has simplified, bringing it closer to the already existing dataframe support.
+Before:
+```Fenced(Borrowed(""))
+open myfile.db
+| db select a
+| db from table_1
+| db where ((db col a) > 1 | db and ((db col a) < 10))
+
+```
+Now:
+```Fenced(Borrowed(""))
+open myfile.db
+| select a
+| from table_1
+| where ((field a) > 1 | and ((field a) < 10))
+
+```
+Like the dataframe support, this is built on the new support to overload commands based on their input type. This will allow Nushell to have a nice, uniform syntax that just works over a variety of data types in the future.
+’ÚTitle: title: Nushell 0.65
+Path: Unification continues (elferherrera)
+Content:
+In 0.65, we've also continued the process to unify commands for different datatypes. In this release, 
+``db``
+ and mysql support has simplified, bringing it closer to the already existing dataframe support.
+Before:
+```Fenced(Borrowed(""))
+open myfile.db
+| db select a
+| db from table_1
+| db where ((db col a) > 1 | db and ((db col a) < 10))
+
+```
+Now:
+```Fenced(Borrowed(""))
+open myfile.db
+| select a
+| from table_1
+| where ((field a) > 1 | and ((field a) < 10))
+
+```
+Like the dataframe support, this is built on the new support to overload commands based on their input type. This will allow Nushell to have a nice, uniform syntax that just works over a variety of data types in the future.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@2361f6c433cd8349ea35117fb576270abadd7efc533801ae25624b55999e8e9a³title: Nushell 0.65‘·Additional new commandsÙVYou can now use the 
+``port``
+ command to find the next available port. (WindSoilder)
+’Ù˜Title: title: Nushell 0.65
+Path: Additional new commands
+Content:
+You can now use the 
+``port``
+ command to find the next available port. (WindSoilder)
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@595cc9f6676f68516309b96a470b394d1d02e66555c8a4c6605309e805d8624f³title: Nushell 0.65‘­Looking aheadÚ:With 0.65, Nushell continues to move towards a more polished, more full-featured language that can handle a wider range of datatypes well. We're continuing to work towards this goal and find ways to continue to unify the language, allowing you to learn one language and apply that knowledge to many types of data.
+’ÚrTitle: title: Nushell 0.65
+Path: Looking ahead
+Content:
+With 0.65, Nushell continues to move towards a more polished, more full-featured language that can handle a wider range of datatypes well. We're continuing to work towards this goal and find ways to continue to unify the language, allowing you to learn one language and apply that knowledge to many types of data.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@4213b4a72deb58e02396474497e74957676c498fdba373f7ba848fb0be1815e8³title: Nushell 0.65‘§NushellÚ/sholderbach created 
+[link: https://github.com/nushell/nushell/pull/5954] Pin reedline to new 0.8.0 release
+sophiajt created 
+[link: https://github.com/nushell/nushell/pull/5952] bump to 0.65
+, and 
+[link: https://github.com/nushell/nushell/pull/5943] Fix 'skip' support for binary streams
+, and 
+[link: https://github.com/nushell/nushell/pull/5942] Make 
+``take``
+ work like 
+``first``
+, and 
+[link: https://github.com/nushell/nushell/pull/5941] Binary into int
+, and 
+[link: https://github.com/nushell/nushell/pull/5937] Rename bitwise operators for readability
+, and 
+[link: https://github.com/nushell/nushell/pull/5880] Move input/output type from Command to Signature
+, and 
+[link: https://github.com/nushell/nushell/pull/5879] Clippy and remove unused is_binary
+, and 
+[link: https://github.com/nushell/nushell/pull/5865] Bump to 0.64.1 dev version
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/5950] add bytes starts-with command
+, and 
+[link: https://github.com/nushell/nushell/pull/5945] add bytes length command
+, and 
+[link: https://github.com/nushell/nushell/pull/5935] add -e flag to print, to print the value to stderr
+, and 
+[link: https://github.com/nushell/nushell/pull/5925] change default keybinding in default config
+, and 
+[link: https://github.com/nushell/nushell/pull/5913] make module imports in scripts used for relative path.
+, and 
+[link: https://github.com/nushell/nushell/pull/5886] make path exists work on expanded path
+, and 
+[link: https://github.com/nushell/nushell/pull/5883] simplify error make
+, and 
+[link: https://github.com/nushell/nushell/pull/5871] fix plugin path with whitespace
+, and 
+[link: https://github.com/nushell/nushell/pull/5849] Port command
+, and 
+[link: https://github.com/nushell/nushell/pull/5835] fix exit code
+, and 
+[link: https://github.com/nushell/nushell/pull/5807] add notes for def_env
+, and 
+[link: https://github.com/nushell/nushell/pull/5804] add light theme to default_config
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/5940] Add bit operator: 
+``bit-xor``
+, and 
+[link: https://github.com/nushell/nushell/pull/5936] Add 
+``band``
+ and 
+``bor``
+ operator for bit operations
+, and 
+[link: https://github.com/nushell/nushell/pull/5928] Update #4202: Add shift operator bshl and bshr for integers
+, and 
+[link: https://github.com/nushell/nushell/pull/5874] Add an example for 
+``default``
+ command to get an env var with fallback
+, and 
+[link: https://github.com/nushell/nushell/pull/5873] Fix less.exe downloading for windows release pkgs, close #5868
+, and 
+[link: https://github.com/nushell/nushell/pull/5843] feat: Update dockerfile for latest nu release
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/5939] add search terms for 
+``is-admin``
+, and 
+[link: https://github.com/nushell/nushell/pull/5916] ensure 
+``required``
+ positionals don't show up as 
+``optional``
+ when 
+``help``
+, and 
+[link: https://github.com/nushell/nushell/pull/5890] Better error handling using 
+``do``
+, and 
+[link: https://github.com/nushell/nushell/pull/5866] Errors when 
+``let in``
+, 
+``let env``
+ and similar commands are passed.
+, and 
+[link: https://github.com/nushell/nushell/pull/5859] Finish git fetch custom completions to allow for completing branch
+, and 
+[link: https://github.com/nushell/nushell/pull/5840] Prevents duplicate fields in 
+``transpose -r``
+, and 
+[link: https://github.com/nushell/nushell/pull/5827] Calculate history duration properly (sqlite)
+, and 
+[link: https://github.com/nushell/nushell/pull/5818] Fixes 
+``to nuon``
+ for 
+``inf``
+, 
+``-inf``
+, and 
+``NaN``
+, and 
+[link: https://github.com/nushell/nushell/pull/5805] Attempts to fix file completions for 
+``open``
+, 
+``rm``
+ and 
+``ls``
+ (and other filesystem commands)
+IsaacKhor created 
+[link: https://github.com/nushell/nushell/pull/5938] Change C-u and C-k to be readline compatible, move old C-u to C-s
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/5932] Fix 
+``to md --pretty``
+ when rendering a list
+, and 
+[link: https://github.com/nushell/nushell/pull/5908] Return error when external command core dumped
+, and 
+[link: https://github.com/nushell/nushell/pull/5808] Fix drop nth with open end range on 32-bit platforms
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/5926] fix parse_failure_due_conflicted_flags test
+, and 
+[link: https://github.com/nushell/nushell/pull/5905] fix bug where 
+``thin``
+ theme wasn't getting applied correctly
+, and 
+[link: https://github.com/nushell/nushell/pull/5901] fix excessive ansi escape sequences
+, and 
+[link: https://github.com/nushell/nushell/pull/5881] update encode decode with new signature
+, and 
+[link: https://github.com/nushell/nushell/pull/5876] add ability to convert timestamp_millis()
+, and 
+[link: https://github.com/nushell/nushell/pull/5852] cleanup 
+``$config``
+ as a built-in
+, and 
+[link: https://github.com/nushell/nushell/pull/5845] update reedline config based on recent reedline changes
+, and 
+[link: https://github.com/nushell/nushell/pull/5822] first stab at minimizing ansi escapes
+, and 
+[link: https://github.com/nushell/nushell/pull/5817] add more columns to the history command when using sqlite history
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/5919] update crate thiserror to version 1.0.31 in four crates
+, and 
+[link: https://github.com/nushell/nushell/pull/5813] Move the history and tutor commands out of core_commands
+Kangaxx-0 created 
+[link: https://github.com/nushell/nushell/pull/5911] Add all flag to nu-check command
+, and 
+[link: https://github.com/nushell/nushell/pull/5864] Introduce new command - nu check
+, and 
+[link: https://github.com/nushell/nushell/pull/5847] Remove external nu from nu config
+, and 
+[link: https://github.com/nushell/nushell/pull/5826] Add more tests for completion
+, and 
+[link: https://github.com/nushell/nushell/pull/5814] Fix alias completion crash
+Yethal created 
+[link: https://github.com/nushell/nushell/pull/5910] Slim down Dockerfile
+CBenoit created 
+[link: https://github.com/nushell/nushell/pull/5909] docs: clarify 
+``print``
+ and 
+``echo``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5889] build: update 
+``miette``
+ dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/5885] feat: add 
+``--binary(-b)``
+ option to 
+``hash``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5863] Deprecate 
+``hash base64``
+, extend 
+``decode``
+ and add 
+``encode``
+ commands
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5896] Header filtering out of for loop
+, and 
+[link: https://github.com/nushell/nushell/pull/5892] Dataframe with real index
+, and 
+[link: https://github.com/nushell/nushell/pull/5891] Remove extra print
+, and 
+[link: https://github.com/nushell/nushell/pull/5846] Remove quotes from external args
+, and 
+[link: https://github.com/nushell/nushell/pull/5844] Allow type comparison
+, and 
+[link: https://github.com/nushell/nushell/pull/5839] Exclude ./... from expansion
+, and 
+[link: https://github.com/nushell/nushell/pull/5838] Db commands without DB
+, and 
+[link: https://github.com/nushell/nushell/pull/5800] Standardise to commands
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/5893] Make sort logic available outside sort-by
+, and 
+[link: https://github.com/nushell/nushell/pull/5820] Fix parser panic
+skelly37 created 
+[link: https://github.com/nushell/nushell/pull/5836] root/admin prompt is red now
+wolimst created 
+[link: https://github.com/nushell/nushell/pull/5812] Add Windows Terminal profile and icon in Windows control panel
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/5809] Add test requirements to PR template
+’ÚaTitle: title: Nushell 0.65
+Path: Nushell
+Content:
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/5954] Pin reedline to new 0.8.0 release
+sophiajt created 
+[link: https://github.com/nushell/nushell/pull/5952] bump to 0.65
+, and 
+[link: https://github.com/nushell/nushell/pull/5943] Fix 'skip' support for binary streams
+, and 
+[link: https://github.com/nushell/nushell/pull/5942] Make 
+``take``
+ work like 
+``first``
+, and 
+[link: https://github.com/nushell/nushell/pull/5941] Binary into int
+, and 
+[link: https://github.com/nushell/nushell/pull/5937] Rename bitwise operators for readability
+, and 
+[link: https://github.com/nushell/nushell/pull/5880] Move input/output type from Command to Signature
+, and 
+[link: https://github.com/nushell/nushell/pull/5879] Clippy and remove unused is_binary
+, and 
+[link: https://github.com/nushell/nushell/pull/5865] Bump to 0.64.1 dev version
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/5950] add bytes starts-with command
+, and 
+[link: https://github.com/nushell/nushell/pull/5945] add bytes length command
+, and 
+[link: https://github.com/nushell/nushell/pull/5935] add -e flag to print, to print the value to stderr
+, and 
+[link: https://github.com/nushell/nushell/pull/5925] change default keybinding in default config
+, and 
+[link: https://github.com/nushell/nushell/pull/5913] make module imports in scripts used for relative path.
+, and 
+[link: https://github.com/nushell/nushell/pull/5886] make path exists work on expanded path
+, and 
+[link: https://github.com/nushell/nushell/pull/5883] simplify error make
+, and 
+[link: https://github.com/nushell/nushell/pull/5871] fix plugin path with whitespace
+, and 
+[link: https://github.com/nushell/nushell/pull/5849] Port command
+, and 
+[link: https://github.com/nushell/nushell/pull/5835] fix exit code
+, and 
+[link: https://github.com/nushell/nushell/pull/5807] add notes for def_env
+, and 
+[link: https://github.com/nushell/nushell/pull/5804] add light theme to default_config
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/5940] Add bit operator: 
+``bit-xor``
+, and 
+[link: https://github.com/nushell/nushell/pull/5936] Add 
+``band``
+ and 
+``bor``
+ operator for bit operations
+, and 
+[link: https://github.com/nushell/nushell/pull/5928] Update #4202: Add shift operator bshl and bshr for integers
+, and 
+[link: https://github.com/nushell/nushell/pull/5874] Add an example for 
+``default``
+ command to get an env var with fallback
+, and 
+[link: https://github.com/nushell/nushell/pull/5873] Fix less.exe downloading for windows release pkgs, close #5868
+, and 
+[link: https://github.com/nushell/nushell/pull/5843] feat: Update dockerfile for latest nu release
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/5939] add search terms for 
+``is-admin``
+, and 
+[link: https://github.com/nushell/nushell/pull/5916] ensure 
+``required``
+ positionals don't show up as 
+``optional``
+ when 
+``help``
+, and 
+[link: https://github.com/nushell/nushell/pull/5890] Better error handling using 
+``do``
+, and 
+[link: https://github.com/nushell/nushell/pull/5866] Errors when 
+``let in``
+, 
+``let env``
+ and similar commands are passed.
+, and 
+[link: https://github.com/nushell/nushell/pull/5859] Finish git fetch custom completions to allow for completing branch
+, and 
+[link: https://github.com/nushell/nushell/pull/5840] Prevents duplicate fields in 
+``transpose -r``
+, and 
+[link: https://github.com/nushell/nushell/pull/5827] Calculate history duration properly (sqlite)
+, and 
+[link: https://github.com/nushell/nushell/pull/5818] Fixes 
+``to nuon``
+ for 
+``inf``
+, 
+``-inf``
+, and 
+``NaN``
+, and 
+[link: https://github.com/nushell/nushell/pull/5805] Attempts to fix file completions for 
+``open``
+, 
+``rm``
+ and 
+``ls``
+ (and other filesystem commands)
+IsaacKhor created 
+[link: https://github.com/nushell/nushell/pull/5938] Change C-u and C-k to be readline compatible, move old C-u to C-s
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/5932] Fix 
+``to md --pretty``
+ when rendering a list
+, and 
+[link: https://github.com/nushell/nushell/pull/5908] Return error when external command core dumped
+, and 
+[link: https://github.com/nushell/nushell/pull/5808] Fix drop nth with open end range on 32-bit platforms
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/5926] fix parse_failure_due_conflicted_flags test
+, and 
+[link: https://github.com/nushell/nushell/pull/5905] fix bug where 
+``thin``
+ theme wasn't getting applied correctly
+, and 
+[link: https://github.com/nushell/nushell/pull/5901] fix excessive ansi escape sequences
+, and 
+[link: https://github.com/nushell/nushell/pull/5881] update encode decode with new signature
+, and 
+[link: https://github.com/nushell/nushell/pull/5876] add ability to convert timestamp_millis()
+, and 
+[link: https://github.com/nushell/nushell/pull/5852] cleanup 
+``$config``
+ as a built-in
+, and 
+[link: https://github.com/nushell/nushell/pull/5845] update reedline config based on recent reedline changes
+, and 
+[link: https://github.com/nushell/nushell/pull/5822] first stab at minimizing ansi escapes
+, and 
+[link: https://github.com/nushell/nushell/pull/5817] add more columns to the history command when using sqlite history
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/5919] update crate thiserror to version 1.0.31 in four crates
+, and 
+[link: https://github.com/nushell/nushell/pull/5813] Move the history and tutor commands out of core_commands
+Kangaxx-0 created 
+[link: https://github.com/nushell/nushell/pull/5911] Add all flag to nu-check command
+, and 
+[link: https://github.com/nushell/nushell/pull/5864] Introduce new command - nu check
+, and 
+[link: https://github.com/nushell/nushell/pull/5847] Remove external nu from nu config
+, and 
+[link: https://github.com/nushell/nushell/pull/5826] Add more tests for completion
+, and 
+[link: https://github.com/nushell/nushell/pull/5814] Fix alias completion crash
+Yethal created 
+[link: https://github.com/nushell/nushell/pull/5910] Slim down Dockerfile
+CBenoit created 
+[link: https://github.com/nushell/nushell/pull/5909] docs: clarify 
+``print``
+ and 
+``echo``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5889] build: update 
+``miette``
+ dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/5885] feat: add 
+``--binary(-b)``
+ option to 
+``hash``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5863] Deprecate 
+``hash base64``
+, extend 
+``decode``
+ and add 
+``encode``
+ commands
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5896] Header filtering out of for loop
+, and 
+[link: https://github.com/nushell/nushell/pull/5892] Dataframe with real index
+, and 
+[link: https://github.com/nushell/nushell/pull/5891] Remove extra print
+, and 
+[link: https://github.com/nushell/nushell/pull/5846] Remove quotes from external args
+, and 
+[link: https://github.com/nushell/nushell/pull/5844] Allow type comparison
+, and 
+[link: https://github.com/nushell/nushell/pull/5839] Exclude ./... from expansion
+, and 
+[link: https://github.com/nushell/nushell/pull/5838] Db commands without DB
+, and 
+[link: https://github.com/nushell/nushell/pull/5800] Standardise to commands
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/5893] Make sort logic available outside sort-by
+, and 
+[link: https://github.com/nushell/nushell/pull/5820] Fix parser panic
+skelly37 created 
+[link: https://github.com/nushell/nushell/pull/5836] root/admin prompt is red now
+wolimst created 
+[link: https://github.com/nushell/nushell/pull/5812] Add Windows Terminal profile and icon in Windows control panel
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/5809] Add test requirements to PR template
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@a3e1d3049ea9f6d96f0089f5f7dec845272e1dfe02eb14230846e00fa3d77e44³title: Nushell 0.65‘©ExtensionÙischuelermine created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/55] Fix typo in Snippet
+’ÙTitle: title: Nushell 0.65
+Path: Extension
+Content:
+schuelermine created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/55] Fix typo in Snippet
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@5758c056cb6c3958f34dd0f8822179668569bac6300044c140fb77e661c7b074³title: Nushell 0.65‘­DocumentationÚ.petrisch created 
+[link: https://github.com/nushell/nushell.github.io/pull/526] DE translation for pipelines and scripts
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/521] DE translation for working with lists and tables
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/512] DE translation for loading data and working with strings
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/525] Changes misleading example
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/522] Links 
+``types_of_data``
+ page to 
+``describe``
+ command
+relby created 
+[link: https://github.com/nushell/nushell.github.io/pull/524] Fix outdated 
+``$false``
+ value
+toastal created 
+[link: https://github.com/nushell/nushell.github.io/pull/523] Syntax highlighting as 
+``console``
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/520] Translate overlays.md to Chinese
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/518] Fix broken images in README.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/517] fix broken table rendering for operators
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/516] Update zh_CN translation of dataframes and working_with_strings
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/515] Update doc template for commands
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/514] Update zh_CN translation for nu books
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/513] feat: update some zh_CN translations of nu book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/508] Remove old_book related stuffs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/505] Fix command overlapping for 
+``make_docs.nu``
+ and Refresh commands for v0.64
+elferherrera created 
+[link: https://github.com/nushell/nushell.github.io/pull/511] Standard command name
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/506] Remove MS CRT info now that we're statically linking it
+’ÚfTitle: title: Nushell 0.65
+Path: Documentation
+Content:
+petrisch created 
+[link: https://github.com/nushell/nushell.github.io/pull/526] DE translation for pipelines and scripts
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/521] DE translation for working with lists and tables
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/512] DE translation for loading data and working with strings
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/525] Changes misleading example
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/522] Links 
+``types_of_data``
+ page to 
+``describe``
+ command
+relby created 
+[link: https://github.com/nushell/nushell.github.io/pull/524] Fix outdated 
+``$false``
+ value
+toastal created 
+[link: https://github.com/nushell/nushell.github.io/pull/523] Syntax highlighting as 
+``console``
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/520] Translate overlays.md to Chinese
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/518] Fix broken images in README.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/517] fix broken table rendering for operators
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/516] Update zh_CN translation of dataframes and working_with_strings
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/515] Update doc template for commands
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/514] Update zh_CN translation for nu books
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/513] feat: update some zh_CN translations of nu book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/508] Remove old_book related stuffs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/505] Fix command overlapping for 
+``make_docs.nu``
+ and Refresh commands for v0.64
+elferherrera created 
+[link: https://github.com/nushell/nushell.github.io/pull/511] Standard command name
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/506] Remove MS CRT info now that we're statically linking it
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@1671807045913883f1a2281b84aa75330c26a1fdb1876dddea605d302c4d2b71³title: Nushell 0.65‘ªNu ScriptsÚLfdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/261] update get_weather to use the new error make
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/260] add stargazer script to monitor nushell stars
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/259] add turtle benchmark and reorganize
+Yethal created 
+[link: https://github.com/nushell/nu_scripts/pull/255] Added delete-merged-branches.nu
+skelly37 created 
+[link: https://github.com/nushell/nu_scripts/pull/254] maths refactor
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/252] up.nu fixed
+’ÚTitle: title: Nushell 0.65
+Path: Nu Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/261] update get_weather to use the new error make
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/260] add stargazer script to monitor nushell stars
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/259] add turtle benchmark and reorganize
+Yethal created 
+[link: https://github.com/nushell/nu_scripts/pull/255] Added delete-merged-branches.nu
+skelly37 created 
+[link: https://github.com/nushell/nu_scripts/pull/254] maths refactor
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/252] up.nu fixed
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-05-nushell-0_65.mdÙ@ab87a18d81095b0467290667c7f91d9d769acc2fcf09a3e00736d13ae74214bb³title: Nushell 0.65‘¨ReedlineÚÎsholderbach created 
+[link: https://github.com/nushell/reedline/pull/448] Prepare the 0.8.0 release
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/446] Avoid subtraction overflow when using usize.
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/445] introduce LastCommand variant for parse bang result
+, and 
+[link: https://github.com/nushell/reedline/pull/444] fix double bang
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/443] add impl Display to HistoryItemId and HistorySessionId
+drbrain created 
+[link: https://github.com/nushell/reedline/pull/442] Add vi r (replace)
+, and 
+[link: https://github.com/nushell/reedline/pull/441] Add vi WORD motions B, E, W
+’ÚTitle: title: Nushell 0.65
+Path: Reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/448] Prepare the 0.8.0 release
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/446] Avoid subtraction overflow when using usize.
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/445] introduce LastCommand variant for parse bang result
+, and 
+[link: https://github.com/nushell/reedline/pull/444] fix double bang
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/443] add impl Display to HistoryItemId and HistorySessionId
+drbrain created 
+[link: https://github.com/nushell/reedline/pull/442] Add vi r (replace)
+, and 
+[link: https://github.com/nushell/reedline/pull/441] Add vi WORD motions B, E, W

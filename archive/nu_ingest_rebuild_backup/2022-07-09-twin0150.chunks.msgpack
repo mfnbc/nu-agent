@@ -1,0 +1,170 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-09-twin0150.mdŸ@79035d3428713ce5b036960ee15d8451119633a30e2663200621e0b9775d9abbπThis week in Nushell #150ëßNushell⁄
+¡zhiburt created 
+[link: https://github.com/nushell/nushell/pull/5993] nu-table: Remove a error prone assertion
+, and 
+[link: https://github.com/nushell/nushell/pull/5969] Give tabled a try
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5992] added the ability to highlight with regular expressiosn
+, and 
+[link: https://github.com/nushell/nushell/pull/5981] tweak the find hit highlighting
+, and 
+[link: https://github.com/nushell/nushell/pull/5980] make history.txt and history.sqlite3 tables have same command column
+, and 
+[link: https://github.com/nushell/nushell/pull/5979] add the ability to highlight searched for terms
+, and 
+[link: https://github.com/nushell/nushell/pull/5956] add bytes root command
+valdaarhun 
+[link: https://github.com/nushell/nushell/pull/5990] added search terms to 'math' commands
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/5989] added more bytes cmd
+, and 
+[link: https://github.com/nushell/nushell/pull/5974] compatible with old rustc version
+, and 
+[link: https://github.com/nushell/nushell/pull/5967] Add some bytes relative cmd
+, and 
+[link: https://github.com/nushell/nushell/pull/5950] add bytes starts-with command
+, and 
+[link: https://github.com/nushell/nushell/pull/5945] add bytes length command
+rgwood 
+[link: https://github.com/nushell/nushell/pull/5987] reverted "Return error when external command core dumped (#5908)"
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5977] added better error for failed string-to-duration conversions
+, and 
+[link: https://github.com/nushell/nushell/pull/5955] allow 
+``where``
+ to work with variables
+, and 
+[link: https://github.com/nushell/nushell/pull/5939] add search terms for 
+``is-admin``
+dependabot created 
+[link: https://github.com/nushell/nushell/pull/5971] Bump openssl-src from 111.20.0+1.1.1o to 111.22.0+1.1.1q
+moxuze 
+[link: https://github.com/nushell/nushell/pull/5970] added --directory (-D) flag to ls, list the directory itself instead of its contents
+hustcer 
+[link: https://github.com/nushell/nushell/pull/5962] bumped to 0.65.1 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/5940] Add bit operator: 
+``bit-xor``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/5954] pin reedline to new 0.8.0 release
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/5952] bumped to 0.65
+, and 
+[link: https://github.com/nushell/nushell/pull/5943] Fix 'skip' support for binary streams
+, and 
+[link: https://github.com/nushell/nushell/pull/5942] Make 
+``take``
+ work like 
+``first``
+, and 
+[link: https://github.com/nushell/nushell/pull/5941] Binary into int
+IsaacKhor 
+[link: https://github.com/nushell/nushell/pull/5938] changed C-u and C-k to be readline compatible, move old C-u to C-s
+íêê⁄
+˘Title: This week in Nushell #150
+Path: Nushell
+Content:
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/5993] nu-table: Remove a error prone assertion
+, and 
+[link: https://github.com/nushell/nushell/pull/5969] Give tabled a try
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5992] added the ability to highlight with regular expressiosn
+, and 
+[link: https://github.com/nushell/nushell/pull/5981] tweak the find hit highlighting
+, and 
+[link: https://github.com/nushell/nushell/pull/5980] make history.txt and history.sqlite3 tables have same command column
+, and 
+[link: https://github.com/nushell/nushell/pull/5979] add the ability to highlight searched for terms
+, and 
+[link: https://github.com/nushell/nushell/pull/5956] add bytes root command
+valdaarhun 
+[link: https://github.com/nushell/nushell/pull/5990] added search terms to 'math' commands
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/5989] added more bytes cmd
+, and 
+[link: https://github.com/nushell/nushell/pull/5974] compatible with old rustc version
+, and 
+[link: https://github.com/nushell/nushell/pull/5967] Add some bytes relative cmd
+, and 
+[link: https://github.com/nushell/nushell/pull/5950] add bytes starts-with command
+, and 
+[link: https://github.com/nushell/nushell/pull/5945] add bytes length command
+rgwood 
+[link: https://github.com/nushell/nushell/pull/5987] reverted "Return error when external command core dumped (#5908)"
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5977] added better error for failed string-to-duration conversions
+, and 
+[link: https://github.com/nushell/nushell/pull/5955] allow 
+``where``
+ to work with variables
+, and 
+[link: https://github.com/nushell/nushell/pull/5939] add search terms for 
+``is-admin``
+dependabot created 
+[link: https://github.com/nushell/nushell/pull/5971] Bump openssl-src from 111.20.0+1.1.1o to 111.22.0+1.1.1q
+moxuze 
+[link: https://github.com/nushell/nushell/pull/5970] added --directory (-D) flag to ls, list the directory itself instead of its contents
+hustcer 
+[link: https://github.com/nushell/nushell/pull/5962] bumped to 0.65.1 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/5940] Add bit operator: 
+``bit-xor``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/5954] pin reedline to new 0.8.0 release
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/5952] bumped to 0.65
+, and 
+[link: https://github.com/nushell/nushell/pull/5943] Fix 'skip' support for binary streams
+, and 
+[link: https://github.com/nushell/nushell/pull/5942] Make 
+``take``
+ work like 
+``first``
+, and 
+[link: https://github.com/nushell/nushell/pull/5941] Binary into int
+IsaacKhor 
+[link: https://github.com/nushell/nushell/pull/5938] changed C-u and C-k to be readline compatible, move old C-u to C-s
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-09-twin0150.mdŸ@1d1c3f586cbbbc8e8729dd9c7e03e0813815a1da2630a2efea460f116f9fec9aπThis week in Nushell #150ë≠Documentation⁄merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/531] Add helpful links
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/530] add some new operators
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/529] Refresh commands' docs for v0.65
+jntrnr created 
+[link: https://github.com/nushell/nushell.github.io/pull/528] Add 0.65 release notes
+petrisch created 
+[link: https://github.com/nushell/nushell.github.io/pull/526] DE translation for pipelines and scripts
+íêê⁄XTitle: This week in Nushell #150
+Path: Documentation
+Content:
+merelymyself created 
+[link: https://github.com/nushell/nushell.github.io/pull/531] Add helpful links
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/530] add some new operators
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/529] Refresh commands' docs for v0.65
+jntrnr created 
+[link: https://github.com/nushell/nushell.github.io/pull/528] Add 0.65 release notes
+petrisch created 
+[link: https://github.com/nushell/nushell.github.io/pull/526] DE translation for pipelines and scripts
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-09-twin0150.mdŸ@dc17a5147d6659cbbe6a0a1d758972f40bc855935a7a98b2d925dbd486bb0e99πThis week in Nushell #150ë™Nu_ScriptsŸãEun created 
+[link: https://github.com/nushell/nu_scripts/pull/262] ``select-aws-profile.nu``
+ an alias to select an aws profile with ease
+íêêŸ∆Title: This week in Nushell #150
+Path: Nu_Scripts
+Content:
+Eun created 
+[link: https://github.com/nushell/nu_scripts/pull/262] ``select-aws-profile.nu``
+ an alias to select an aws profile with ease
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-09-twin0150.mdŸ@30962675f9b6b927cdc362ff9a1d1a015db6ed6b7bd616ff036af0b497153c2bπThis week in Nushell #150ë®reedlineŸΩsholderbach created 
+[link: https://github.com/nushell/reedline/pull/448] Prepare the 0.8.0 release
+drbrain created 
+[link: https://github.com/nushell/reedline/pull/442] Add vi r (replace)
+íêêŸˆTitle: This week in Nushell #150
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/448] Prepare the 0.8.0 release
+drbrain created 
+[link: https://github.com/nushell/reedline/pull/442] Add vi r (replace)

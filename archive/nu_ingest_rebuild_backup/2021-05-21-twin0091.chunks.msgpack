@@ -1,0 +1,112 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-21-twin0091.mdŸ@4b0e290d6ddfc3b43b668f3b7131910181efb258debebba5e953f3da353cbc42∏This week in Nushell #91ëßNushell⁄Dfdncred added 
+[link: https://api.github.com/repos/nushell/nushell/issues/3459] nothing converted to string should return nothing and not fail
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3457] add addition characters that can be hard to work with in nushell
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3451] updated round to support i64
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3439] updated to the latest rustyline
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3438] don't let externals break ansi escapes
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3429] re-enable ansi support when externals break it
+jonathandturner did 
+[link: https://api.github.com/repos/nushell/nushell/issues/3455] a bit more cleanup of block params
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3453] split unit into duration and filesize
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3452] changed to paren interpolation
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3450] improved block params
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3444] added explicit block params
+, and did a fix to 
+[link: https://api.github.com/repos/nushell/nushell/issues/3442] treat u64 like i64 for now
+kubouch 
+[link: https://api.github.com/repos/nushell/nushell/issues/3449] removed rest_args() from evaluated CommandArgs
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3441] fixed path join argument type and a typo
+elferherrera added the ability to 
+[link: https://api.github.com/repos/nushell/nushell/issues/3437] load parquet and json files
+, moved 
+[link: https://api.github.com/repos/nushell/nushell/issues/3426] commands to engine p
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3425] added new dataframe commands
+schrieveslaach 
+[link: https://api.github.com/repos/nushell/nushell/issues/3432] added Support for Partial Completions
+alexshadley 
+[link: https://api.github.com/repos/nushell/nushell/issues/3427] added negative indexing for range
+íêê⁄{Title: This week in Nushell #91
+Path: Nushell
+Content:
+fdncred added 
+[link: https://api.github.com/repos/nushell/nushell/issues/3459] nothing converted to string should return nothing and not fail
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3457] add addition characters that can be hard to work with in nushell
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3451] updated round to support i64
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3439] updated to the latest rustyline
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3438] don't let externals break ansi escapes
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3429] re-enable ansi support when externals break it
+jonathandturner did 
+[link: https://api.github.com/repos/nushell/nushell/issues/3455] a bit more cleanup of block params
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3453] split unit into duration and filesize
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3452] changed to paren interpolation
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3450] improved block params
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3444] added explicit block params
+, and did a fix to 
+[link: https://api.github.com/repos/nushell/nushell/issues/3442] treat u64 like i64 for now
+kubouch 
+[link: https://api.github.com/repos/nushell/nushell/issues/3449] removed rest_args() from evaluated CommandArgs
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3441] fixed path join argument type and a typo
+elferherrera added the ability to 
+[link: https://api.github.com/repos/nushell/nushell/issues/3437] load parquet and json files
+, moved 
+[link: https://api.github.com/repos/nushell/nushell/issues/3426] commands to engine p
+, and 
+[link: https://api.github.com/repos/nushell/nushell/issues/3425] added new dataframe commands
+schrieveslaach 
+[link: https://api.github.com/repos/nushell/nushell/issues/3432] added Support for Partial Completions
+alexshadley 
+[link: https://api.github.com/repos/nushell/nushell/issues/3427] added negative indexing for range
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-21-twin0091.mdŸ@e147b69c2ae4798cfebf2298d717702f81cf4db55b88fc850ed1fd36edc7fb1a∏This week in Nushell #91ë≠DocumentationŸ”eduardocanellas 
+[link: https://api.github.com/repos/nushell/nushell.github.io/issues/129] translated home to pt-BR
+tupini07 
+[link: https://api.github.com/repos/nushell/nushell.github.io/issues/128] fixed typo
+íêê⁄Title: This week in Nushell #91
+Path: Documentation
+Content:
+eduardocanellas 
+[link: https://api.github.com/repos/nushell/nushell.github.io/issues/129] translated home to pt-BR
+tupini07 
+[link: https://api.github.com/repos/nushell/nushell.github.io/issues/128] fixed typo
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-21-twin0091.mdŸ@01ff3336eb169a2cd30b541c7c837f1bad0aff0f1224851f31f1e42a9f1a02f4∏This week in Nushell #91ë§WasmŸemoonrise-tk fixed 
+[link: https://api.github.com/repos/nushell/demo/issues/68] build or rustc 1.52.1
+íêêŸôTitle: This week in Nushell #91
+Path: Wasm
+Content:
+moonrise-tk fixed 
+[link: https://api.github.com/repos/nushell/demo/issues/68] build or rustc 1.52.1
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-05-21-twin0091.mdŸ@ff793f27390a03958a6116eb04957e33f04651c9b3d113a3a65a15a24f511ac0∏This week in Nushell #91ë™Nu_Scripts⁄Oefx 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/55] renamed git script for consistency
+, and added a 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/54] gentle git gone script
+agateau 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/51] added a script to list git branches and their age
+íêê⁄âTitle: This week in Nushell #91
+Path: Nu_Scripts
+Content:
+efx 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/55] renamed git script for consistency
+, and added a 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/54] gentle git gone script
+agateau 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/51] added a script to list git branches and their age

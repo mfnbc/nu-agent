@@ -1,0 +1,338 @@
+–’Ù@450f838ff17aaba09c282c471f6fc5b8a6111c403d3cbeab497266e70f6cd165ÙŒTitle: The last 2 weeks in Nushell #239
+Path: The last 2 weeks in Nushell #239
+Content:
+(we were busy and missed last week's update, sorry)
+’Ù@f2724d867a68360a0d78e2c637f11317d3c2f97a6ef6ef5a6334020f47decf6eÚ!¨Title: The last 2 weeks in Nushell #239
+Path: Nushell
+Content:
+devyn made a LOT of improvements, mostly around plugins:
+[link: https://github.com/nushell/nushell/pull/12236] introduced better generic errors for plugins (and perhaps scripts)
+[link: https://github.com/nushell/nushell/pull/12204] allowed plugins to set environment variables in their caller's scope
+[link: https://github.com/nushell/nushell/pull/12244] refactored 
+``PluginCustomValue::render_to_base_value_in``
+[link: https://github.com/nushell/nushell/pull/12234] merged stream_example into the example plugin and cleaned up names
+[link: https://github.com/nushell/nushell/pull/12218] added 
+``Value::recurse_mut()``
+ to save duplicated code in 
+``PluginCustomValue``
+[link: https://github.com/nushell/nushell/pull/12213] supported custom values in plugin examples
+[link: https://github.com/nushell/nushell/pull/12185] made more robustness improvements to plugin persistence tests
+[link: https://github.com/nushell/nushell/pull/12177] disabled plugin GC tests on macOS
+[link: https://github.com/nushell/nushell/pull/12170] reorganized plugin API around commands
+[link: https://github.com/nushell/nushell/pull/12166] added environment engine calls for plugins
+[link: https://github.com/nushell/nushell/pull/12153] made the plugin persistence GC delay test more reliable
+[link: https://github.com/nushell/nushell/pull/12152] synced with the plugin garbage collector when setting config
+[link: https://github.com/nushell/nushell/pull/12144] fixed an unused IntoSpanned warning in nu_parser::parse_keywords when 'plugin' feature not enabled
+[link: https://github.com/nushell/nushell/pull/12182] fixed locking soundness in PersistentPlugin
+[link: https://github.com/nushell/nushell/pull/12122] improved the error message for a plugin version mismatch
+[link: https://github.com/nushell/nushell/pull/12088] supported all custom value operations on plugin custom values
+[link: https://github.com/nushell/nushell/pull/12064] kept plugins persistently running in the background
+[link: https://github.com/nushell/nushell/pull/12029] added support for engine calls from plugins
+.
+[link: https://github.com/nushell/nushell/pull/12183] improved handling of EOF in MsgPack deserializer
+[link: https://github.com/nushell/nushell/pull/12266] miscellaneous documentation fixes
+[link: https://github.com/nushell/nushell/pull/12248] refactored PipelineDataHeader â‡„ PipelineData
+[link: https://github.com/nushell/nushell/pull/12237] fixed a broken build by replacing value_string() straggler
+[link: https://github.com/nushell/nushell/pull/12231] added support for 
+``into string for custom values``
+[link: https://github.com/nushell/nushell/pull/12230] made custom value type handling more consistent
+made EngineState clone cheaper with Arc on all heavy objects (
+[link: https://github.com/nushell/nushell/pull/12229] 1
+, 
+[link: https://github.com/nushell/nushell/pull/12242] 2
+)
+[link: https://github.com/nushell/nushell/pull/12216] fixed zip signature to mention closure input type
+[link: https://github.com/nushell/nushell/pull/12120] changed the ignore command to use drain() instead of collecting a value
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12258] bumped the rust-toolchain to 1.75.0
+, and 
+[link: https://github.com/nushell/nushell/pull/12196] removed stdlib logging environment variables
+.
+JoaoFidalgo1403 
+[link: https://github.com/nushell/nushell/pull/12251] fixed usage of the --tabs flag while converting to json
+.
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/12241] removed the str escape-glob command
+, 
+[link: https://github.com/nushell/nushell/pull/12202] cleaned cp tests
+, 
+[link: https://github.com/nushell/nushell/pull/12201] removed test warnings
+, 
+[link: https://github.com/nushell/nushell/pull/12086] fixed ls with an empty string
+, and 
+[link: https://github.com/nushell/nushell/pull/12056] made closure in 
+``do``
+ command support default parameters and type checking
+.
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/12240] refactored source cache into the 
+``CachedFile``
+ struct
+, 
+[link: https://github.com/nushell/nushell/pull/12198] updated contributor image generation with new upper bound
+, 
+[link: https://github.com/nushell/nushell/pull/12178] bumped 
+``arboard``
+ from 
+``3.3.0``
+ to 
+``3.3.2``
+, 
+[link: https://github.com/nushell/nushell/pull/12174] responded to nightly clippy
+, 
+[link: https://github.com/nushell/nushell/pull/12173] removed the rarely used std-lib issue template
+, 
+[link: https://github.com/nushell/nushell/pull/12172] minor refactored in 
+``to html``
+, 
+[link: https://github.com/nushell/nushell/pull/12171] refactored benches for more command benchmarks
+, 
+[link: https://github.com/nushell/nushell/pull/12165] included benchmarks in the CI clippy run
+, 
+[link: https://github.com/nushell/nushell/pull/12162] bumped 
+``iana-time-zone``
+ due to yanked locked version
+, 
+[link: https://github.com/nushell/nushell/pull/12158] removed outdated doccomment on 
+``EngineState``
+, 
+[link: https://github.com/nushell/nushell/pull/12151] disabled 
+``fmt``
+ feature of 
+``polars(-core)``
+, 
+[link: https://github.com/nushell/nushell/pull/12150] bumped 
+``reedline``
+ to dev (and 
+``strum``
+)
+, 
+[link: https://github.com/nushell/nushell/pull/12140] removed feat 
+``extra``
+
+and included it in default
+, and 
+[link: https://github.com/nushell/nushell/pull/11917] restructured 
+``nu-protocol``
+ into more meaningful units
+.
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/12238] fixed a missing parse error when extra tokens were given to let bindings
+, and 
+[link: https://github.com/nushell/nushell/pull/12235] fixed
+
+inaccurate sleep duration
+.
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12228] used the rest argument in 
+``export use``
+ to match 
+``use``
+, 
+[link: https://github.com/nushell/nushell/pull/12227] fixed wrong stdout with 
+``e>|``
+, 
+[link: https://github.com/nushell/nushell/pull/12209] fixed 
+``$in``
+ value for 
+``insert``
+ closure
+, 
+[link: https://github.com/nushell/nushell/pull/12160] fixed ignored clippy lints
+, 
+[link: https://github.com/nushell/nushell/pull/12139] fixed clippy lints
+, and
+
+[link: https://github.com/nushell/nushell/pull/11934] overhauled IO and redirection
+.
+sarubo 
+[link: https://github.com/nushell/nushell/pull/12207] adjusted permissions using 
+``umask``
+ in 
+``mkdir``
+.
+thomassimmer 
+[link: https://github.com/nushell/nushell/pull/12197] fixed a histogram error message
+.
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/12184] used hex-dump for binary data in nu-explore
+.
+Tastaturtaste 
+[link: https://github.com/nushell/nushell/pull/12179] used the system clipboard only for explicit copy/paste operations, addressing issue 11907
+.
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/12167] canonicalized each component of config files
+, 
+[link: https://github.com/nushell/nushell/pull/12136] canonicalized the config dir
+, 
+[link: https://github.com/nushell/nushell/pull/12134] updated tests Playground
+, and 
+[link: https://github.com/nushell/nushell/pull/12118] used XDG_CONFIG_HOME before the default config directory
+.
+nils-degroot 
+[link: https://github.com/nushell/nushell/pull/12149] improved the error message for 
+``into sqlite``
+ with empty records
+.
+kubouch 
+[link: https://github.com/nushell/nushell/pull/12137] refactored nu-check
+, and 
+[link: https://github.com/nushell/nushell/pull/11441] continued to experiment with the debugger
+.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/12135] upgraded actions/checkout and softprops/action-gh-release
+, 
+[link: https://github.com/nushell/nushell/pull/12119] fixed Nu release packages
+
+after upgrading to Nu v0.91
+, and 
+[link: https://github.com/nushell/nushell/pull/12114] upgraded Nu to v0.91 for release and nightly workflow
+.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/12130] fixed up ctrl+C handling in 
+``into_sqlite``
+.
+NowackiPatryk 
+[link: https://github.com/nushell/nushell/pull/12128] fixed unexpected sqlite insert behavior (attempt 2)
+.
+wellweek 
+[link: https://github.com/nushell/nushell/pull/12117] removed a repetitive word
+.
+FilipAndersson245 
+[link: https://github.com/nushell/nushell/pull/12025] dived into extra benchmarks
+.
+dannou812 
+[link: https://github.com/nushell/nushell/pull/11948] fixed 
+``to json -r``
+ not removing whitespaces
+.
+rtpg 
+[link: https://github.com/nushell/nushell/pull/11654] allowed for stacks to have parents
+.
+lavafroth 
+[link: https://github.com/nushell/nushell/pull/11090] used environment variables to prevent the command_not_found from recursing
+.
+’Ù@fb9eb160a824dc49ea92fa16d5b3b44be74236af881bcc5179d2c997ea9554faÚ	,Title: The last 2 weeks in Nushell #239
+Path: Documentation
+Content:
+IanManske created 
+[link: https://github.com/nushell/nushell.github.io/pull/1308] Edit release notes
+qdm12 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1307] fix(files.md): override Cargo.toml in example
+devyn created 
+[link: https://github.com/nushell/nushell.github.io/pull/1306] Release notes for 0.92.0 for @devyn so far
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1305] Plugin command api doc updates
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1302] Env var plugin engine calls docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1300] Custom value ops documentation
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1295] Add "Contrib" link to the navbar
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1291] Documentation for plugin persistence
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1290] Documentation for engine calls
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/1304] a few more tweaks
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1303] some formatting tweaks to the language guide
+gdennie created 
+[link: https://github.com/nushell/nushell.github.io/pull/1299] ensure showing of back ticks in 
+``<code />``
+ block example
+zerfix created 
+[link: https://github.com/nushell/nushell.github.io/pull/1298] Document dynamic command arguments
+jweckman created 
+[link: https://github.com/nushell/nushell.github.io/pull/1297] Update plugins.md (#12146)
+ysthakur created 
+[link: https://github.com/nushell/nushell.github.io/pull/1296] Add info on XDG_CONFIG_HOME
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1294] Remove feature 
+``extra``
+ detection from make_docs.nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1293] Fix release note toc
+remmycat created 
+[link: https://github.com/nushell/nushell.github.io/pull/1292] Add cookbook chapter on how to read env vars from foreign shell scripts
+Gremious created 
+[link: https://github.com/nushell/nushell.github.io/pull/1287] Clarify pipeline arguments/output in book
+edhowland created 
+[link: https://github.com/nushell/nushell.github.io/pull/1285] Added missing types in Basic Types section.
+’Ù@725d168d49706843476f0dc41e923b165dbbbf2f77c2409dc3732988c21e560cÚ½Title: The last 2 weeks in Nushell #239
+Path: Nu_Scripts
+Content:
+texastoland created 
+[link: https://github.com/nushell/nu_scripts/pull/797] [
+stdlib-candidate
+]
+ Clean up 
+``str append``
+/
+``prepend``
+ a little
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/791] Refactor toolkit.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/790] Refactor stdlib-candidate for nupm
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/787] [
+stdlib-candidate
+]
+ 
+``set-env``
+AucaCoyan created 
+[link: https://github.com/nushell/nu_scripts/pull/794] :sparkles: add 
+``gh gist``
+ and gh repo 
+``list``
+ and 
+``view``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/792] :sparkles: add 
+``flutter``
+ completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/783] :bug: fix more parser errors
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/782] :bug: fix a couple of parser errors
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/781] :sparkles: 
+``clone all``
+ script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/780] :bug: fix 
+``scoop``
+ completinos (an extra 
+``)``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/771] âœ¨ add a 
+``nu-check``
+ verification CI
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/788] Add chezmoi aliases
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/786] standardized parameter naming for 
+``--help``
+ and fix regex capture
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/778] nu-complete docker containers: show all containers
+neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/784] fix: update modules/virtual_environments/nu_msvs to work with nushell 0.91.0
+’Ù@1a8e867e4c69104edf3379fb75abb55e92f9c42ff09cbfba7f0588ce3eada8f7Ú·Title: The last 2 weeks in Nushell #239
+Path: reedline
+Content:
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/773] Revert "Move left when exiting insert mode"
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/768] Bump version of 
+``strum``
+/
+``strum_macros``
+Tastaturtaste created 
+[link: https://github.com/nushell/reedline/pull/761] Use the OS clipboard only for explicit cut/copy/paste operations
+’Ù@2a2fdd1276e40784a8e26069b0a7d82f4e8613a0ab246590c83e2b7770aabaeeÙ¼Title: The last 2 weeks in Nushell #239
+Path: Nana
+Content:
+cablehead created 
+[link: https://github.com/nushell/nana/pull/80] fix: collect LazyRecords before attempting to serialize them

@@ -1,0 +1,91 @@
+óóŸOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/collect.mdŸ@674b8ddba77533f6b6e078c5acb38e9a63f013ee468a8e3f42a36cbec49b9b41Ætitle: collectë§coreŸ:
+
+
+
+
+
+
+
+
+``collect``
+[link: /commands/categories/core.md] íêêŸdTitle: title: collect
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``collect``
+[link: /commands/categories/core.md] óŸOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/collect.mdŸ@698616efb6efb310749dc774b5738fa3fd996ff9474618605ddc0118c273b8deÆtitle: collectë©SignatureŸ ``> collect {flags} (closure)``
+íêêŸOTitle: title: collect
+Path: Signature
+Content:
+``> collect {flags} (closure)``
+óŸOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/collect.mdŸ@2b3c3fa2e08117971fddfe99a21ea9b478a53537cc58cb426ce397d9ea9d5dc8Ætitle: collectë•FlagsŸ?``--keep-env``
+: Let the closure affect environment variables.
+íêêŸjTitle: title: collect
+Path: Flags
+Content:
+``--keep-env``
+: Let the closure affect environment variables.
+óŸOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/collect.mdŸ@f2e3b1ae22a64d893b4dc31c6ca60ede7a9d5cf3b0c7d5ca01967a2755c408f8Ætitle: collectë™ParametersŸ?``closure``
+: The closure to run once the stream is collected.
+íêêŸoTitle: title: collect
+Path: Parameters
+Content:
+``closure``
+: The closure to run once the stream is collected.
+óŸOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/collect.mdŸ@60812ff6b88af660273477c0b012a946634cc3bef9dd1f13726a58adff33f088Ætitle: collectë≥Input/output types:µinput
+output
+any
+any
+íêêŸNTitle: title: collect
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+óŸOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/collect.mdŸ@4771e7e88642e5547870d942f46fe5d1a43dfbaf88d36cec09403af3229e7e0aÆtitle: collectë®ExamplesŸ‘Use the second value in the stream.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | collect { |x| $x.1 }
+2
+
+```
+Read and write to the same file.
+```Fenced(Borrowed("nu"))
+> open file.txt | collect | save -f file.txt
+
+
+```
+íêê⁄Title: title: collect
+Path: Examples
+Content:
+Use the second value in the stream.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | collect { |x| $x.1 }
+2
+
+```
+Read and write to the same file.
+```Fenced(Borrowed("nu"))
+> open file.txt | collect | save -f file.txt
+
+
+```
+óŸOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/collect.mdŸ@edd3276cc4fa6014b3ddd1fdd8e927b0de8876931eeccba90ecfbae96ba25a87Ætitle: collectë•NotesŸ«If provided, run a closure with the collected value as input.
+The entire stream will be collected into one value in memory, so if the stream
+
+is particularly large, this can cause high memory usage.
+íêêŸÚTitle: title: collect
+Path: Notes
+Content:
+If provided, run a closure with the collected value as input.
+The entire stream will be collected into one value in memory, so if the stream
+
+is particularly large, this can cause high memory usage.

@@ -1,0 +1,45 @@
+���@01b0ef8d7648994885d5c5a308e94d2da9f0e948be6390b0c48885289e83e578�jTitle: title: roll up
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``roll up``
+[link: /commands/categories/filters.md] ��@8172ff46b33074c15c168a8aa1dc04159ebe11b48081eafbacd05eb545710f8d�FTitle: title: roll up
+Path: Signature
+Content:
+``> roll up {flags} ``
+��@c35ed839f608d11a4be490a71f17e4644cddf7ee2db2e2a9856fb8696a1ce78f�XTitle: title: roll up
+Path: Flags
+Content:
+``--by, -b {int}``
+: Number of rows to roll.
+��@4aa0b41b4964a113f625b600df7cdfb42f66f8fea7dbe8ca912f7ab8a28a6043�RTitle: title: roll up
+Path: Input/output types:
+Content:
+input
+output
+table
+table
+��@39173ba3965697ca5d29663d861fbef4edd660a03b579d0b3eccde0e4408f69b�STitle: title: roll up
+Path: Examples
+Content:
+Rolls rows up
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4] [5 6]] | roll up
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 3 │ 4 │
+│ 1 │ 5 │ 6 │
+│ 2 │ 1 │ 2 │
+╰───┴───┴───╯
+
+
+```

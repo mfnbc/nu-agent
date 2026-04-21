@@ -1,0 +1,80 @@
+”—Ùharchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector_unsigned-integer.mdÙ@7abaca4b2f55948d65f107fcf7d49079b9b3ef14228dc841a85aac7bcffa6a36Ù'title: polars selector unsigned-integer‘ªexpressionÙY
+
+
+
+
+
+
+
+
+``polars selector unsigned-integer``
+[link: /commands/categories/expression.md] ’Ù¢Title: title: polars selector unsigned-integer
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars selector unsigned-integer``
+[link: /commands/categories/expression.md] —Ùharchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector_unsigned-integer.mdÙ@a4cb2955131f08956572453f3bad697b573a2f70bc9fd34a9fe9f4b9af2bfab4Ù'title: polars selector unsigned-integer‘©SignatureÙ0``> polars selector unsigned-integer {flags} ``
+’ÙxTitle: title: polars selector unsigned-integer
+Path: Signature
+Content:
+``> polars selector unsigned-integer {flags} ``
+—Ùharchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector_unsigned-integer.mdÙ@457b6b8360a0f02af0cea3ec444c1277d564f701c070bf4c9a50294953abd015Ù'title: polars selector unsigned-integer‘³Input/output types:Ù!input
+output
+any
+polars_selector
+’ÙsTitle: title: polars selector unsigned-integer
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_selector
+—Ùharchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_selector_unsigned-integer.mdÙ@e820ed7ce7c54d15b8632f99d123845ac6e3f2cc73d39889b247dd505c97c25aÙ'title: polars selector unsigned-integer‘¨ExamplesÚÉSelect all unsigned integer columns
+```Fenced(Borrowed("nu"))
+> {
+        "foo": ["x", "y"],
+        "bar": [123, 200],
+        "baz": [2.0, 5.5],
+    } |
+    polars into-df --as-columns -s {foo: str, bar: u8, baz: f32}|
+    polars select (polars selector unsigned-integer) |
+    polars collect
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â•®
+â”‚ # â”‚ bar â”‚
+â”œâ”€â”€â”€â”¼â”€â”€â”€â”€â”€â”¤
+â”‚ 0 â”‚ 123 â”‚
+â”‚ 1 â”‚ 200 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â•¯
+
+
+```
+’ÚTitle: title: polars selector unsigned-integer
+Path: Examples
+Content:
+Select all unsigned integer columns
+```Fenced(Borrowed("nu"))
+> {
+        "foo": ["x", "y"],
+        "bar": [123, 200],
+        "baz": [2.0, 5.5],
+    } |
+    polars into-df --as-columns -s {foo: str, bar: u8, baz: f32}|
+    polars select (polars selector unsigned-integer) |
+    polars collect
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â•®
+â”‚ # â”‚ bar â”‚
+â”œâ”€â”€â”€â”¼â”€â”€â”€â”€â”€â”¤
+â”‚ 0 â”‚ 123 â”‚
+â”‚ 1 â”‚ 200 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â•¯
+
+
+```

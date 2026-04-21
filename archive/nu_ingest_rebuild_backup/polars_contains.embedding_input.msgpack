@@ -1,0 +1,64 @@
+���@faff6f0f86ee7511ccb410dc3bb2724c372b498690f991b0d9d3d8129ccfcdf5�~Title: title: polars contains
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars contains``
+[link: /commands/categories/dataframe.md] ��@7718d1ecc269ce631cf1ca5d0fe6c9ce1b514ab180dd072e2890f3ac8adf9c9f�_Title: title: polars contains
+Path: Signature
+Content:
+``> polars contains {flags} (pattern)``
+��@b37457d2939c4800ac6082edd9df642abc339d16fff44d0abb659b10c866ed64�dTitle: title: polars contains
+Path: Parameters
+Content:
+``pattern``
+: Regex pattern to be searched.
+��@924ce0166e1bae90436c828eac1541c1a1460587facf7b1694fafdde9e1c2d31ٶTitle: title: polars contains
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@b3d1b069802f1c355a4bfb3e09f173ff3a1c06b3cb3cf24595e711462737a924�nTitle: title: polars contains
+Path: Examples
+Content:
+Returns boolean indicating if pattern was found in a column
+```Fenced(Borrowed("nu"))
+> let df = [[a]; [abc] [acb] [acb]] | polars into-df;
+                let df2 = $df | polars with-column [(polars col a | polars contains ab | polars as b)] | polars collect;
+                $df2.b
+╭───┬───────╮
+│ # │   b   │
+├───┼───────┤
+│ 0 │ true  │
+│ 1 │ false │
+│ 2 │ false │
+╰───┴───────╯
+
+
+```
+Returns boolean indicating if pattern was found
+```Fenced(Borrowed("nu"))
+> [abc acb acb] | polars into-df | polars contains ab
+╭───┬───────╮
+│ # │   0   │
+├───┼───────┤
+│ 0 │ true  │
+│ 1 │ false │
+│ 2 │ false │
+╰───┴───────╯
+
+
+```

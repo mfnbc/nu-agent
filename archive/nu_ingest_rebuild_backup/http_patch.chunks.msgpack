@@ -1,0 +1,181 @@
+——ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_patch.mdÙ@21f5c892b8239399a3b8774ec623fb600f3954e9ef398118c56e0895ec2669c2±title: http patch‘§networkÙ@
+
+
+
+
+
+
+
+
+``http patch``
+[link: /commands/categories/network.md] ’ÙpTitle: title: http patch
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``http patch``
+[link: /commands/categories/network.md] —ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_patch.mdÙ@1d7a65e63bec90040930c3d8b12ed97a1e80e9581098c5f701d3331cd5841b15±title: http patch‘©SignatureÙ&``> http patch {flags} (URL) (data)``
+’ÙXTitle: title: http patch
+Path: Signature
+Content:
+``> http patch {flags} (URL) (data)``
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_patch.mdÙ@e58b466e60409e45e5024d132a6f060bacea1efa204df12adf107bcae73a09aa±title: http patch‘¥FlagsÚm``--user, -u {any}``
+: The username when authenticating.
+``--password, -p {any}``
+: The password when authenticating.
+``--content-type, -t {any}``
+: The MIME type of content to post.
+``--max-time, -m {duration}``
+: Max duration before timeout occurs.
+``--headers, -H {any}``
+: Custom headers you want to add.
+``--raw, -r``
+: Return values as a string instead of a table.
+``--insecure, -k``
+: Allow insecure server connections when using SSL.
+``--full, -f``
+: Returns the full response instead of only the body.
+``--allow-errors, -e``
+: Do not fail if the server returns an error code.
+``--pool``
+: Using a global pool as a client.
+``--redirect-mode, -R {string}``
+: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+``--unix-socket, -U {path}``
+: Connect to the specified Unix socket instead of using TCP.
+’Ú›Title: title: http patch
+Path: Flags
+Content:
+``--user, -u {any}``
+: The username when authenticating.
+``--password, -p {any}``
+: The password when authenticating.
+``--content-type, -t {any}``
+: The MIME type of content to post.
+``--max-time, -m {duration}``
+: Max duration before timeout occurs.
+``--headers, -H {any}``
+: Custom headers you want to add.
+``--raw, -r``
+: Return values as a string instead of a table.
+``--insecure, -k``
+: Allow insecure server connections when using SSL.
+``--full, -f``
+: Returns the full response instead of only the body.
+``--allow-errors, -e``
+: Do not fail if the server returns an error code.
+``--pool``
+: Using a global pool as a client.
+``--redirect-mode, -R {string}``
+: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+``--unix-socket, -U {path}``
+: Connect to the specified Unix socket instead of using TCP.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_patch.mdÙ@c4aeb899e25735f65762da403d83c5941bc966e03af4d3cb3897bbe6d65f6f29±title: http patch‘ªParametersÙH``URL``
+: The URL to post to.
+``data``
+: The contents of the post body.
+’Ù{Title: title: http patch
+Path: Parameters
+Content:
+``URL``
+: The URL to post to.
+``data``
+: The contents of the post body.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_patch.mdÙ@f78748523557cad115198a2e17253de83d4bffd400ee8c8023a8744379ce9551±title: http patch‘³Input/output types:µinput
+output
+any
+any
+’ÙQTitle: title: http patch
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_patch.mdÙ@b9be078e892959060103d29f237707fadbb1171e1b00606b7b437163939b2a0f±title: http patch‘¨ExamplesÚÇPatch content to example.com.
+```Fenced(Borrowed("nu"))
+> http patch https://www.example.com 'body'
+
+
+```
+Patch content to example.com, with username and password.
+```Fenced(Borrowed("nu"))
+> http patch --user myuser --password mypass https://www.example.com 'body'
+
+
+```
+Patch content to example.com, with custom header using a record.
+```Fenced(Borrowed("nu"))
+> http patch --headers {my-header-key: my-header-value} https://www.example.com
+
+
+```
+Patch content to example.com, with custom header using a list.
+```Fenced(Borrowed("nu"))
+> http patch --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
+
+
+```
+Patch content to example.com, with JSON body.
+```Fenced(Borrowed("nu"))
+> http patch --content-type application/json https://www.example.com { field: value }
+
+
+```
+Patch JSON content from a pipeline to example.com.
+```Fenced(Borrowed("nu"))
+> open --raw foo.json | http patch https://www.example.com
+
+
+```
+’ÚøTitle: title: http patch
+Path: Examples
+Content:
+Patch content to example.com.
+```Fenced(Borrowed("nu"))
+> http patch https://www.example.com 'body'
+
+
+```
+Patch content to example.com, with username and password.
+```Fenced(Borrowed("nu"))
+> http patch --user myuser --password mypass https://www.example.com 'body'
+
+
+```
+Patch content to example.com, with custom header using a record.
+```Fenced(Borrowed("nu"))
+> http patch --headers {my-header-key: my-header-value} https://www.example.com
+
+
+```
+Patch content to example.com, with custom header using a list.
+```Fenced(Borrowed("nu"))
+> http patch --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
+
+
+```
+Patch content to example.com, with JSON body.
+```Fenced(Borrowed("nu"))
+> http patch --content-type application/json https://www.example.com { field: value }
+
+
+```
+Patch JSON content from a pipeline to example.com.
+```Fenced(Borrowed("nu"))
+> open --raw foo.json | http patch https://www.example.com
+
+
+```
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/http_patch.mdÙ@448546b4b379a240ccf8809490ea32e53d46a4062b54dda17ba06898982806be±title: http patch‘¥Notes¿Performs HTTP PATCH operation.
+’ÙMTitle: title: http patch
+Path: Notes
+Content:
+Performs HTTP PATCH operation.

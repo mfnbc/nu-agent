@@ -1,0 +1,43 @@
+���@c03a5dd5cbc6551f45337fdf27f703157f56c12b3dd5eeb2dc90933e275407d9�|Title: title: polars decimal
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars decimal``
+[link: /commands/categories/dataframe.md] ��@f99162471a1ddaa371c4b536cd3fde14ab1d52c3182d68638044f765a3c6c954�bTitle: title: polars decimal
+Path: Signature
+Content:
+``> polars decimal {flags} (infer_length)``
+��@70f2154f4d6e76bba5addbb935961911949c6a2cb382f7970975b5027852273a�mTitle: title: polars decimal
+Path: Parameters
+Content:
+``infer_length``
+: Number of decimal points to infer.
+��@c4d8ec9de8e42bfcc9361364c790d4cc6cdfeb1a15868b1d7c61aec488a058aa�qTitle: title: polars decimal
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+��@02cc883b48ccaddef5170566635fbf8a81146d9c49dcd028e2e5fd61cf83d9b2�pTitle: title: polars decimal
+Path: Examples
+Content:
+Modifies strings to decimal
+```Fenced(Borrowed("nu"))
+> [[a b]; [1, '2.4']] | polars into-df | polars select (polars col b | polars decimal 2) | polars collect
+╭───┬──────╮
+│ # │  b   │
+├───┼──────┤
+│ 0 │ 2.40 │
+╰───┴──────╯
+
+
+```

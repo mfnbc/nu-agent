@@ -1,0 +1,50 @@
+–’Ù@d4c7260cc543ae8d772011bdec53971e5d62ca0cca256ff55f7c9e316221f168ÙnTitle: title: export const
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``export const``
+[link: /commands/categories/core.md] ’Ù@3ce53a10afe0bbfc4e2e182d65fae3df1127047678265470d09d0dbc96a436d7ÙlTitle: title: export const
+Path: Signature
+Content:
+``> export const {flags} (const_name) (initial_value)``
+’Ù@b7489b13d8179841ff4ab7010a7dce34d08371a1e57aa2e2f6e132a9a5e5e2ffÙªTitle: title: export const
+Path: Parameters
+Content:
+``const_name``
+: The constant name to create and export.
+``initial_value``
+: Equals sign followed by constant value.
+’Ù@8e3d97f26b9f763e98622e8afd127eefcaafecf33b033bc0958b8449bb0414cfÙ[Title: title: export const
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+’Ù@5256c02293f06bc7bcc56e9680ed713d66ebcc0e4a7e33f0922d8a28c8129d92ÙèTitle: title: export const
+Path: Examples
+Content:
+Re-export a constant from another module.
+```Fenced(Borrowed("nu"))
+> module spam { export const foo = 3; }
+    module eggs { export use spam foo }
+    use eggs foo
+    foo
+
+3
+
+```
+’Ù@2a6d0b7dd5cc8225bb27ea6ae43e87158fada4ab7deac718081ff4c3f7c520f9Ù—Title: title: export const
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

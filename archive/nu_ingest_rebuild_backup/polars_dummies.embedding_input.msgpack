@@ -1,0 +1,65 @@
+���@dd27441a602202c9cafb92caa1c4ba254fc4a7d057670ecd6fa88a0138f9a206�|Title: title: polars dummies
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars dummies``
+[link: /commands/categories/dataframe.md] ��@c15cd2655367fc83ea12dfe547f4b4a8e471aa62af511ef1c488aa02ec353796�TTitle: title: polars dummies
+Path: Signature
+Content:
+``> polars dummies {flags} ``
+��@5989835cfc44c4aae2b0ed8d7553434092bb5428ca9f0d68b08cd9e3e7e708c5٦Title: title: polars dummies
+Path: Flags
+Content:
+``--drop-first, -d``
+: Drop first row.
+``--drop-nulls, -n``
+: Drop nulls.
+``--separator, -s``
+: Optional separator.
+��@e831d681ccdefa44dc9f84283d264d6f30d5c4e7b39bcbe759d41793fe64e2caّTitle: title: polars dummies
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@171959818bcb2efcea86cc4a9c0f8b9b01b388a38e08aea5e09f53c653fe5bbd�uTitle: title: polars dummies
+Path: Examples
+Content:
+Create new dataframe with dummy variables from a dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars dummies
+╭───┬─────┬─────┬─────┬─────╮
+│ # │ a_1 │ a_3 │ b_2 │ b_4 │
+├───┼─────┼─────┼─────┼─────┤
+│ 0 │   1 │   0 │   1 │   0 │
+│ 1 │   0 │   1 │   0 │   1 │
+╰───┴─────┴─────┴─────┴─────╯
+
+
+```
+Create new dataframe with dummy variables from a series
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-df | polars dummies
+╭───┬─────┬─────┬─────╮
+│ # │ 0_1 │ 0_2 │ 0_3 │
+├───┼─────┼─────┼─────┤
+│ 0 │   1 │   0 │   0 │
+│ 1 │   0 │   1 │   0 │
+│ 2 │   0 │   1 │   0 │
+│ 3 │   0 │   0 │   1 │
+│ 4 │   0 │   0 │   1 │
+╰───┴─────┴─────┴─────╯
+
+
+```

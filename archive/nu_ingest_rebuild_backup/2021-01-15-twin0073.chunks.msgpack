@@ -1,0 +1,133 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-01-15-twin0073.mdŸ@6d31c6a1e853705fbe7294e06845e41eaa6d195ca4e0d10925c75d94683f86fb≥This week in Nu #73ë§Docs⁄Xeoinkelly updated 
+[link: https://github.com/nushell/nushell.github.io/pull/82] an example
+lpil updated 
+[link: https://github.com/nushell/nushell/pull/2917] the alias docs
+LhKipp also updated 
+[link: https://github.com/nushell/nushell/pull/2925] the alias docs
+, and updated 
+[link: https://github.com/nushell/nushell/pull/2939] ``def``
+ docs
+íêê⁄áTitle: This week in Nu #73
+Path: Docs
+Content:
+eoinkelly updated 
+[link: https://github.com/nushell/nushell.github.io/pull/82] an example
+lpil updated 
+[link: https://github.com/nushell/nushell/pull/2917] the alias docs
+LhKipp also updated 
+[link: https://github.com/nushell/nushell/pull/2925] the alias docs
+, and updated 
+[link: https://github.com/nushell/nushell/pull/2939] ``def``
+ docs
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-01-15-twin0073.mdŸ@cd461b5919fca2d073cb8796b0c2ab99361363b9004dc2bf27796606afa331bd≥This week in Nu #73ë∞VSCode extension⁄•waldyrious improved the 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/13] README for the VSCode extension
+fdncred cleaned up the 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/14] VSCode extension assets
+, improved the 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/15] extension highlighting
+, improved 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/16] vsix versioning
+, and more improvements to the VSCode extension (
+[link: https://github.com/nushell/vscode-nushell-lang/pull/17] 1
+, 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/18] 2
+, 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/19] 3
+)
+íêê⁄‡Title: This week in Nu #73
+Path: VSCode extension
+Content:
+waldyrious improved the 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/13] README for the VSCode extension
+fdncred cleaned up the 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/14] VSCode extension assets
+, improved the 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/15] extension highlighting
+, improved 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/16] vsix versioning
+, and more improvements to the VSCode extension (
+[link: https://github.com/nushell/vscode-nushell-lang/pull/17] 1
+, 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/18] 2
+, 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/19] 3
+)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-01-15-twin0073.mdŸ@82441c2a1b68a965f2cd0eeaffde30755099e4190bf69f8967b97e7f2db020b9≥This week in Nu #73ëßNushell⁄Gymea added 
+[link: https://github.com/nushell/nushell/pull/2894] the text of the alias to 
+``which``
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2915] the print of descriptions when none were present
+, added 
+[link: https://github.com/nushell/nushell/pull/2922] dirs support to nu-engine
+fdncred allowed 
+[link: https://github.com/nushell/nushell/pull/2906] comparing string and filepaths
+, removed 
+[link: https://github.com/nushell/nushell/pull/2924] ``set``
+ from the Windows built-ins
+, optimized a 
+[link: https://github.com/nushell/nushell/pull/2937] use of regex
+jonathandturner split 
+[link: https://github.com/nushell/nushell/pull/2898] nu-cli into nu-cli and nu-engine
+, 
+[link: https://github.com/nushell/nushell/pull/2908] bumped to 0.25.2
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2919] the wasm build
+,
+LhKipp added 
+[link: https://github.com/nushell/nushell/pull/2905] descriptions for custom commands and their arguments
+stormasm split 
+[link: https://github.com/nushell/nushell/pull/2907] nu-cli into nu-cli and nu-command
+ and 
+[link: https://github.com/nushell/nushell/pull/2910] here
+,
+gillespiecd added support for 
+[link: https://github.com/nushell/nushell/pull/2913] backward range iteration
+DivineGod moved 
+[link: https://github.com/nushell/nushell/pull/2927] keybinding-path to nu-data
+baoyachi removed 
+[link: https://github.com/nushell/nushell/pull/2935] dependencies on git for current branch and hash
+andrasio removed 
+[link: https://github.com/nushell/nushell/pull/2940] the 
+``str set``
+ command
+íêê⁄ETitle: This week in Nu #73
+Path: Nushell
+Content:
+Gymea added 
+[link: https://github.com/nushell/nushell/pull/2894] the text of the alias to 
+``which``
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2915] the print of descriptions when none were present
+, added 
+[link: https://github.com/nushell/nushell/pull/2922] dirs support to nu-engine
+fdncred allowed 
+[link: https://github.com/nushell/nushell/pull/2906] comparing string and filepaths
+, removed 
+[link: https://github.com/nushell/nushell/pull/2924] ``set``
+ from the Windows built-ins
+, optimized a 
+[link: https://github.com/nushell/nushell/pull/2937] use of regex
+jonathandturner split 
+[link: https://github.com/nushell/nushell/pull/2898] nu-cli into nu-cli and nu-engine
+, 
+[link: https://github.com/nushell/nushell/pull/2908] bumped to 0.25.2
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2919] the wasm build
+,
+LhKipp added 
+[link: https://github.com/nushell/nushell/pull/2905] descriptions for custom commands and their arguments
+stormasm split 
+[link: https://github.com/nushell/nushell/pull/2907] nu-cli into nu-cli and nu-command
+ and 
+[link: https://github.com/nushell/nushell/pull/2910] here
+,
+gillespiecd added support for 
+[link: https://github.com/nushell/nushell/pull/2913] backward range iteration
+DivineGod moved 
+[link: https://github.com/nushell/nushell/pull/2927] keybinding-path to nu-data
+baoyachi removed 
+[link: https://github.com/nushell/nushell/pull/2935] dependencies on git for current branch and hash
+andrasio removed 
+[link: https://github.com/nushell/nushell/pull/2940] the 
+``str set``
+ command

@@ -1,0 +1,216 @@
+–’Ù@3fc8ba3cd2c1b2d213bb1eea95a3751c2c67b7a6da326979b81035f84693bc47ÙtTitle: title: 'This week in Nushell #286'
+Path: This Week in Nushell #286
+Content:
+
+
+
+
+Published Friday, 2025-02-14
+’Ù@b70dc201293d445497169e627ab478cb8f90c56357751bb0e2dff6a7f8516146Ú$Title: title: 'This week in Nushell #286'
+Path: Highlights
+Content:
+Happy Valentine's Day from TWiN!
+Some exciting changes this week in 
+``main``
+ and nightlies include the first drop of a new Custom Attributes feature - Thanks @Bahex!
+
+This has been a much anticipated (and discussed) feature. Attributes can now be defined and assigned to custom commands.
+
+Custom Attributes are currently being used to attach nicely-formatted examples to the custom commands in the Standard Library (
+``std``
+),
+
+define test cases for the those commands, and even assign new search terms to the help. And there's more to come!
+In addition, 
+``std-rfc``
+ has been moved into Nushell-proper (and updated with custom attributes as well). These "early look"/preview
+
+commands can now be used out-of-the-box with 
+``use std-rfc/<submodule>``
+. We welcome your feedback on these commands as we consider
+
+whether and when to promote them to the Standard Library.
+And those who have already wasted far too much time theming their shell can now also custom-theme the Welcome Banner.
+’Ù@77d230c5978341e80ce136e772817d2d9472ac246df5a81bcb16450bf04fc041Ú™Title: title: 'This week in Nushell #286'
+Path: Nushell
+Content:
+Bahex
+[link: https://github.com/nushell/nushell/pull/14906] Added custom command attributes
+[link: https://github.com/nushell/nushell/pull/15117] Made 
+``chunks``
+ easier to discover for binary data
+[link: https://github.com/nushell/nushell/pull/15113] Fixed scanning tests being affected by user config
+[link: https://github.com/nushell/nushell/pull/15097] Updated 
+``std-rfc docs``
+ with actual examples
+[link: https://github.com/nushell/nushell/pull/15082] Implemented 
+``run_const``
+ for 
+``const``
+[link: https://github.com/nushell/nushell/pull/15081] Exposed constants with 
+``overlay use``
+[link: https://github.com/nushell/nushell/pull/15080] Retained state in subshells or with exec-restarts in 
+``std/dirs``
+[link: https://github.com/nushell/nushell/pull/15079] Switched to 0-indexing in 
+``explore``
+[link: https://github.com/nushell/nushell/pull/15078] Fixed block spans for the 
+``module``
+ keyword
+blindFS
+[link: https://github.com/nushell/nushell/pull/15115] Added hover showing manpages for external commands in LSP
+[link: https://github.com/nushell/nushell/pull/15071] Fixed inlay hints span issue with user config scripts
+[link: https://github.com/nushell/nushell/pull/15051] Fixed LSP exit on 
+``null root_dir``
+[link: https://github.com/nushell/nushell/pull/15033] Refactored variable/cell_path completion to be expression-based
+sholderbach
+[link: https://github.com/nushell/nushell/pull/15111] Reverted 
+``/``
+ vi binding due to priority bug
+[link: https://github.com/nushell/nushell/pull/15109] Bumped Ubuntu runners to 22.04 LTS for tests
+[link: https://github.com/nushell/nushell/pull/15090] Bumped yanked dependencies
+[link: https://github.com/nushell/nushell/pull/15089] Fixed 
+``match``
+ blocks in 
+``std-rfc/kv``
+ implementation
+[link: https://github.com/nushell/nushell/pull/15088] Bumped 
+``bytesize``
+ to fix 
+``into filesize``
+[link: https://github.com/nushell/nushell/pull/15073] Refactored/fixed tests affecting the whole command set
+[link: https://github.com/nushell/nushell/pull/15046] Used 
+``build_target``
+ information in startup banner
+[link: https://github.com/nushell/nushell/pull/15041] Fixed usages of 
+``fmt``
+ to 
+``format number``
+[link: https://github.com/nushell/nushell/pull/15037] Triggered tests for patch release branch pushes
+[link: https://github.com/nushell/nushell/pull/15036] Implemented fuzzing more realistically with keyword const eval
+hustcer
+[link: https://github.com/nushell/nushell/pull/15108] Refactored 
+``kv``
+ commands to replace inline params in SQL queries
+dependabot
+[
+bot
+]
+[link: https://github.com/nushell/nushell/pull/15101] Bumped 
+``data-encoding``
+ from 2.7.0 to 2.8.0
+NotTheDr01ds
+[link: https://github.com/nushell/nushell/pull/15042] Moved 
+``std-rfc``
+ into Nushell
+[link: https://github.com/nushell/nushell/pull/15098] Updated 
+``std-rfc``
+ tests to use 
+``@test``
+ attributes
+[link: https://github.com/nushell/nushell/pull/15095] Enabled theming the Welcome Banner
+[link: https://github.com/nushell/nushell/pull/15066] Added 
+``std-rfc``
+ README
+[link: https://github.com/nushell/nushell/pull/15065] Fixed 
+``char lsep``
+ assignment
+[link: https://github.com/nushell/nushell/pull/15059] Added platform-agnostic EoL separator to 
+``char``
+ command
+[link: https://github.com/nushell/nushell/pull/15045] Removed 
+``--no-default-features``
+ for 
+``std-lib-and-python-virtualenv``
+ CI
+cptpiepmatz
+[link: https://github.com/nushell/nushell/pull/15093] Switched to 
+``proc-macro-error2``
+ from 
+``proc-macro-error``
+[link: https://github.com/nushell/nushell/pull/15056] Replaced 
+``IoError::new_with_additional_context``
+ calls with proper spans
+WindSoilder
+[link: https://github.com/nushell/nushell/pull/15084] Made plugin compatible with nightly Nushell version
+[link: https://github.com/nushell/nushell/pull/15058] Fixed "missing required overlay" error
+[link: https://github.com/nushell/nushell/pull/15054] Allowed 
+``export alias``
+ in REPL
+sgvictorino
+[link: https://github.com/nushell/nushell/pull/15062] Fixed ranges over zero-length input
+[link: https://github.com/nushell/nushell/pull/15047] Removed 
+``nu-check``
+ examples with the 
+``--all``
+ flag
+132ikl
+[link: https://github.com/nushell/nushell/pull/15032] Fixed 
+``match``
+ running closures as blocks
+ysthakur
+[link: https://github.com/nushell/nushell/pull/15023] Fixed spread operator lexing in records
+IanManske
+[link: https://github.com/nushell/nushell/pull/14429] Reworked operator type errors
+’Ù@cdc11cf00254d72c6126c7772d7d3fb5b8c90391c165f27af9e8cf9578276168Ú:Title: title: 'This week in Nushell #286'
+Path: Documentation
+Content:
+Tyarel8
+[link: https://github.com/nushell/nushell.github.io/pull/1802] Fixed typo in 
+``custom_commands``
+NotTheDr01ds
+[link: https://github.com/nushell/nushell.github.io/pull/1801] Fixed bad localhost link in TWiN 285
+[link: https://github.com/nushell/nushell.github.io/pull/1792] Added 
+``def --wrapped``
+ documentation
+[link: https://github.com/nushell/nushell.github.io/pull/1791] Published This Week in Nushell #285
+Bahex
+[link: https://github.com/nushell/nushell.github.io/pull/1800] Removed mention of 
+``build-string``
+ from 
+``coloring_and_theming.md``
+Kissaki
+[link: https://github.com/nushell/nushell.github.io/pull/1799] Combined command and output code blocks
+[link: https://github.com/nushell/nushell.github.io/pull/1798] Made code examples executable
+[link: https://github.com/nushell/nushell.github.io/pull/1797] Fixed code block spacing
+[link: https://github.com/nushell/nushell.github.io/pull/1796] Fixed typos and CI failure caused by typos
+[link: https://github.com/nushell/nushell.github.io/pull/1795] Added missing code block language
+[link: https://github.com/nushell/nushell.github.io/pull/1794] Dropped empty closing line from code blocks
+massongit
+[link: https://github.com/nushell/nushell.github.io/pull/1793] Fixed typo in Japanese README
+’Ù@32d12438386fb2e4a4d72aea0afd6741d9ac14e682e1cca3f578be053be646e2Ú5Title: title: 'This week in Nushell #286'
+Path: Nu_Scripts
+Content:
+hongquan
+[link: https://github.com/nushell/nu_scripts/pull/1046] Updated 
+``toolkit.nu``
+ per removal of 
+``stdlib-candidate``
+[link: https://github.com/nushell/nu_scripts/pull/1044] Provided completion for git subcommands
+[link: https://github.com/nushell/nu_scripts/pull/1040] Added autocomplete for "docker image rm"
+hustcer
+[link: https://github.com/nushell/nu_scripts/pull/1045] Fixed 
+``from env``
+ custom command
+NotTheDr01ds
+[link: https://github.com/nushell/nu_scripts/pull/1042] Deprecated the 
+``nu_scripts``
+ version of 
+``stdlib-candidate``
+[link: https://github.com/nushell/nu_scripts/pull/1032] Added 
+``std-rfc/conversions``
+flying-sheep
+[link: https://github.com/nushell/nu_scripts/pull/1039] Added subcommand list to 
+``task``
+ module
+’Ù@86e61f4bd574b35967255280f275aa3f1a2b0268f5169c56b51b855a4aa6ed03ÚpTitle: title: 'This week in Nushell #286'
+Path: reedline
+Content:
+thomasschafer
+[link: https://github.com/nushell/reedline/pull/878] Implemented clearing the selection when exiting visual mode
+[link: https://github.com/nushell/reedline/pull/877] Added Vi 
+``o``
+ command to swap anchor and cursor
+deephbz
+[link: https://github.com/nushell/reedline/pull/874] Added atomic unified commands for ChangeInside/DeleteInside in Vi-Mode
+[link: https://github.com/nushell/reedline/pull/868] Implemented vi-mode "Yank" (copy)
+[link: https://github.com/nushell/reedline/pull/867] Improved Visual Mode Selection and Command Consistency

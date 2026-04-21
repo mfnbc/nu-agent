@@ -1,0 +1,120 @@
+—’Ù@f9c7239b566548c9964bab6e8f9b88cb6e67850d8b16e6e623f87f373d7ab2dfÙ»Title: title: 'This week in Nushell #343'
+Path: This Week in Nushell #343
+Content:
+
+
+
+
+Published Sunday, 2026-03-29, including PRs merged Friday, 2026-03-13 through Thursday, 2026-03-19.
+’Ù@67c9b0932050f327791731666b417fc8baaabe92a5aeda4b68b0fd02b4b7481bÚúTitle: title: 'This week in Nushell #343'
+Path: Nushell
+Content:
+@smartcoder0777:
+[link: https://github.com/nushell/nushell/pull/17837] fixed 
+``group-by``
+ behavior for lists/records (#17837)
+[link: https://github.com/nushell/nushell/pull/17833] added --base support to 
+``url parse``
+ (#17833)
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/17836] upgraded rmcp to version 1.2.0 (#17836)
+[link: https://github.com/nushell/nushell/pull/17835] upgraded 
+``glob``
+ to use wax crate v0.7.0 (#17835)
+[link: https://github.com/nushell/nushell/pull/17819] swapped order of user and default library directories, const $NU_LIB_DIRS (#17819)
+[link: https://github.com/nushell/nushell/pull/17800] updated command docs to include command types (#17800)
+@ysthakur:
+[link: https://github.com/nushell/nushell/pull/17834] bumped reedline to latest main (#17834)
+@musicinmybrain:
+[link: https://github.com/nushell/nushell/pull/17832] updated lscolors from 0.20 to 0.21 (#17832)
+@cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/17825] fixed clippy issues (#17825)
+[link: https://github.com/nushell/nushell/pull/17822] warned on 
+``clippy::needless_raw_strings``
+ (#17822)
+[link: https://github.com/nushell/nushell/pull/17820] refactored more command integration tests (#17820)
+[link: https://github.com/nushell/nushell/pull/17813] bumped 
+``toml``
+ crate to 1.0 (#17813)
+[link: https://github.com/nushell/nushell/pull/17805] warned on 
+``clippy::push_format_string``
+ (#17805)
+[link: https://github.com/nushell/nushell/pull/17804] gave 
+``http get``
+ tests with socks proxy more execution time (#17804)
+[link: https://github.com/nushell/nushell/pull/17803] enabled 
+``env_shlvl_in_repl``
+ and 
+``env_shlvl_in_exec_repl``
+ tests (#17803)
+[link: https://github.com/nushell/nushell/pull/17801] refactored 
+``test_examples``
+ usage with centralized testing (#17801)
+[link: https://github.com/nushell/nushell/pull/17794] fixed 
+``http``
+ not respecting proxy vars like 
+``ALL_PROXY``
+ (#17794)
+@hustcer:
+[link: https://github.com/nushell/nushell/pull/17821] excluded nu-test-support for loongarch64 to fix release script (#17821)
+@Rohan5commit:
+[link: https://github.com/nushell/nushell/pull/17818] fixed devdocs wording (#17818)
+@zhiburt:
+[link: https://github.com/nushell/nushell/pull/17812] adjusted width estimation for header_on_border in nu-table (#17812)
+@tauanbinato:
+[link: https://github.com/nushell/nushell/pull/17811] fixed output type signatures for 
+``hash md5``
+ and 
+``hash sha256``
+ (#17811)
+@Bahex:
+[link: https://github.com/nushell/nushell/pull/17797] added 
+``test_record!``
+ convenience macro (#17797)
+@ymcx:
+[link: https://github.com/nushell/nushell/pull/17791] dropped mode preservation to fix copying read-only dirs (#17791)
+@weirdan:
+[link: https://github.com/nushell/nushell/pull/17788] added completions for 
+``into binary --endian``
+ (#17788)
+@pickx:
+[link: https://github.com/nushell/nushell/pull/17787] added 
+``group-by``
+ flag to delete column after grouping (#17787)
+@blackhat-hemsworth:
+[link: https://github.com/nushell/nushell/pull/17783] added duplicate histogram output column check (#17783)
+@stuartcarnie:
+[link: https://github.com/nushell/nushell/pull/17566] added configurable external hinter closure to repl (#17566)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/17831] bumped winreg from 0.55.0 to 0.56.0 (#17831)
+[link: https://github.com/nushell/nushell/pull/17830] bumped scraper from 0.25.0 to 0.26.0 (#17830)
+[link: https://github.com/nushell/nushell/pull/17774] bumped sqlparser from 0.60.0 to 0.61.0 (#17774)
+’Ù@3bbdd50c3302bd467596f949142800854771a6b71cd9d911930bc288a4d075f4Ù¬Title: title: 'This week in Nushell #343'
+Path: nufmt
+Content:
+@fvsch:
+[link: https://github.com/nushell/nufmt/pull/91] removed 
+``cargo install nufmt``
+ from README (#91)
+’Ù@a77b5836c287e6150885288c4e5d7534fee553240f4b4053bcf6c1c5373338d2Ú$Title: title: 'This week in Nushell #343'
+Path: Documentation
+Content:
+@app/dependabot:
+[link: https://github.com/nushell/nushell.github.io/pull/2137] bumped undici from 7.16.0 to 7.24.1 (#2137)
+@c-git:
+[link: https://github.com/nushell/nushell.github.io/pull/2131] fixed minor typos (#2131)
+’Ù@4a618d487683eb4ce3aadd536b90f2536c93414ebaf575230f8f66d4390f31f7ÙãTitle: title: 'This week in Nushell #343'
+Path: Awesome Nu
+Content:
+@SuaveIV:
+[link: https://github.com/nushell/awesome-nu/pull/163] added nu_plugin_audio, nu_script_time_sync, nu_script_world_time; alphabetized entries (#163)
+’Ù@836a37f403f97d68dcd4e754c69e8f8b96731922b7e2b61025070769b507678fÙ½Title: title: 'This week in Nushell #343'
+Path: Tree-sitter
+Content:
+@app/dependabot:
+[link: https://github.com/nushell/tree-sitter-nu/pull/246] bumped minimatch from 3.1.2 to 3.1.5 (#246)
+’Ù@e87107a6ce084ae04d03b0754f6f838a6ae926b215f3c4f33b1ee7173be17b74ÙÉTitle: title: 'This week in Nushell #343'
+Path: reedline
+Content:
+@ysthakur:
+[link: https://github.com/nushell/reedline/pull/1040] fixed ANSI stripping for suggestion width in completion menus (#1040)

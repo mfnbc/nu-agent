@@ -1,0 +1,30 @@
+”’Ù@4cbca78b80af4db62bde7988ebe752bb5071dd490327ade541c5ff867703cc17ÙvTitle: title: config use-colors
+Path: env
+Content:
+
+
+
+
+
+
+
+
+
+``config use-colors``
+[link: /commands/categories/env.md] ’Ù@4fb47b2262ddc72cf38b934c6cad78ab3f1369a7903a845f7f599d7f5e7d4390ÙZTitle: title: config use-colors
+Path: Signature
+Content:
+``> config use-colors {flags} ``
+’Ù@e176c65de1839509f8981bcb7fb988cbf1233b643564c3cca508ac5730e6324dÙ]Title: title: config use-colors
+Path: Input/output types:
+Content:
+input
+output
+nothing
+bool
+’Ù@432be0a5c8435008e5f70bd61f18b1b22782072acbfcb006b1a50f73fbed14caÙâTitle: title: config use-colors
+Path: Notes
+Content:
+Use this command instead of checking 
+``$env.config.use_ansi_coloring``
+ to properly handle the "auto" setting, including environment variables that influence its behavior.

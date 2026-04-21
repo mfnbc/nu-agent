@@ -1,0 +1,56 @@
+‘’Ù@a8bc519c1d006b85dd98a84c585809645c5759a0c64ba235692986151ad80035Ú<Title: This week in Nu #55
+Path: This week in Nu #55
+Content:
+itn3000 added support for 
+[link: https://github.com/nushell/nushell/pull/2526] multiple variables in 
+``with-env``
+, added 
+[link: https://github.com/nushell/nushell/pull/2530] tables for multiple variables in 
+``with-env``
+thegedge fixed 
+[link: https://github.com/nushell/nushell/pull/2525] path completions with 
+``cd``
+, improved 
+[link: https://github.com/nushell/nushell/pull/2503] completions for 
+``~``
+, and additional 
+[link: https://github.com/nushell/nushell/pull/2498] completion fixes
+gillespiecd cleaned up some of the 
+[link: https://github.com/nushell/nushell/pull/2522] duration conversions
+, added 
+[link: https://github.com/nushell/nushell/pull/2507] cpu time to 
+``ps -l``
+, added 
+[link: https://github.com/nushell/nushell/pull/2496] number of links column in 
+``ls -l``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/2517] updated dependencies
+ and 
+[link: https://github.com/nushell/nushell/pull/2520] removed unused dependences
+, added 
+[link: https://github.com/nushell/nushell/pull/2502] weather symbols to 
+``char``
+jonathandturner added support for 
+[link: https://github.com/nushell/nushell/pull/2509] decimals as range boundaries
+, improved 
+[link: https://github.com/nushell/nushell/pull/2506] range parsing
+, added 
+[link: https://github.com/nushell/nushell/pull/2505] modulo operator and renamed 
+``in``
+ and 
+``not-in``
+ritobanrc added 
+[link: https://github.com/nushell/nushell/pull/2508] ``each windows``
+ and 
+``each group``
+ for working with multiple rows at a time
+defstryker improved 
+[link: https://github.com/nushell/nushell/pull/2499] ranges for substrings
+almindor added support for 
+[link: https://github.com/nushell/nushell/pull/2495] ``exec``
+andrasio updated the 
+[link: https://github.com/nushell/book/pull/131] Spanish introduction chapter of the book
+ and 
+[link: https://github.com/nushell/book/pull/130] Spanish installation instructions if the book
+Jorn improved the 
+[link: https://github.com/nushell/demo/commit/3088ee0579dbbbd65ab33b7eafc86a5253a22573] wasm demo error checking

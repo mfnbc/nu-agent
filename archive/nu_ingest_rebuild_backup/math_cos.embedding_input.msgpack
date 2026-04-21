@@ -1,0 +1,61 @@
+���@84fcdf8ef9415d72008e17c7b01297ab06f5abd0a6b017722c28754802ca3b1a�fTitle: title: math cos
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math cos``
+[link: /commands/categories/math.md] ��@be33fe5636f80330344dca0391145b3d76c583b8169c4a0df16d35c58a527dcd�HTitle: title: math cos
+Path: Signature
+Content:
+``> math cos {flags} ``
+��@0738c713215fe4e784ebb7d55ff89c88753d6df14bbdd33a7254900d14b85228�`Title: title: math cos
+Path: Flags
+Content:
+``--degrees, -d``
+: Use degrees instead of radians.
+��@08203a1caa8b5fdcc2f50b0373640309c97ae2cfe46b83374dbea5d344df6662�uTitle: title: math cos
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+��@90ecdcd4b780dad7306f79599cdeaa997f9f90232996ee15a878c0f39eb9d4eb��Title: title: math cos
+Path: Examples
+Content:
+Apply the cosine to π
+```Fenced(Borrowed("nu"))
+> 3.141592 | math cos | math round --precision 4
+-1.0
+
+```
+Apply the cosine to a list of angles in degrees
+```Fenced(Borrowed("nu"))
+> [0 90 180 270 360] | math cos --degrees
+╭───┬───────╮
+│ 0 │  1.00 │
+│ 1 │  0.00 │
+│ 2 │ -1.00 │
+│ 3 │  0.00 │
+│ 4 │  1.00 │
+╰───┴───────╯
+
+
+```

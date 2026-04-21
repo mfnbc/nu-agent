@@ -1,0 +1,107 @@
+•—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sin.mdÙ@70bacbaf4a97d3a72cc3c99f952b59937d462843d483f8ae3fb8816b09bd0393¯title: math sin‘¤mathÙ;
+
+
+
+
+
+
+
+
+``math sin``
+[link: /commands/categories/math.md] ’ÙfTitle: title: math sin
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math sin``
+[link: /commands/categories/math.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sin.mdÙ@f6d657937a1a38801125a70fa0c04c2750cae0b8edd6abf334d3daa98afd9459¯title: math sin‘©Signature¸``> math sin {flags} ``
+’ÙHTitle: title: math sin
+Path: Signature
+Content:
+``> math sin {flags} ``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sin.mdÙ@d77ec86f690a41410e2329bd49ef33dabb8994bdf580ceadcab0fe992639346a¯title: math sin‘¥FlagsÙ4``--degrees, -d``
+: Use degrees instead of radians.
+’Ù`Title: title: math sin
+Path: Flags
+Content:
+``--degrees, -d``
+: Use degrees instead of radians.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sin.mdÙ@931050b0d162bf810a7a91fe0be36b83716e7380e887648fc064d100584fb83b¯title: math sin‘³Input/output types:Ù;input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’ÙuTitle: title: math sin
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sin.mdÙ@bac692d12f921f8da6b441a8a0a168eb4390758386f2c6ab7ee5adce8143870e¯title: math sin‘¨ExamplesÚ¯Apply the sine to Ï€/2
+```Fenced(Borrowed("nu"))
+> 3.141592 / 2 | math sin | math round --precision 4
+1.0
+
+```
+Apply the sine to a list of angles in degrees
+```Fenced(Borrowed("nu"))
+> [0 90 180 270 360] | math sin -d | math round --precision 4
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚  0.00 â”‚
+â”‚ 1 â”‚  1.00 â”‚
+â”‚ 2 â”‚  0.00 â”‚
+â”‚ 3 â”‚ -1.00 â”‚
+â”‚ 4 â”‚  0.00 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â•¯
+
+
+```
+’ÚŞTitle: title: math sin
+Path: Examples
+Content:
+Apply the sine to Ï€/2
+```Fenced(Borrowed("nu"))
+> 3.141592 / 2 | math sin | math round --precision 4
+1.0
+
+```
+Apply the sine to a list of angles in degrees
+```Fenced(Borrowed("nu"))
+> [0 90 180 270 360] | math sin -d | math round --precision 4
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚  0.00 â”‚
+â”‚ 1 â”‚  1.00 â”‚
+â”‚ 2 â”‚  0.00 â”‚
+â”‚ 3 â”‚ -1.00 â”‚
+â”‚ 4 â”‚  0.00 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â•¯
+
+
+```

@@ -1,0 +1,112 @@
+���@b2cb899f635587ff57297cfd066c481c6fbdd850c6ef4d2134c4bdce60c22f58�dTitle: title: take
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``take``
+[link: /commands/categories/filters.md] ��@c9f0e56c958453e7f1943fca03b2df7a1179dc03b2e90c08b33ffd6fe49d15a6�CTitle: title: take
+Path: Signature
+Content:
+``> take {flags} (n)``
+��@0e8f6a1817dc04cbdec267d4bbee85071808d6683d944ec60a3df47aff7f5316�pTitle: title: take
+Path: Parameters
+Content:
+``n``
+: Starting from the front, the number of elements to return.
+��@b60ff257046400dfaec8130ff3922fedc506edffd3e85a3513b34669b9b4a465ِTitle: title: take
+Path: Input/output types:
+Content:
+input
+output
+table
+table
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+binary
+binary
+range
+list
+<
+number
+>
+
+��@714ce8dd8d5b0f6275e68433696162e8c16c76f2cf66ad3496839ea6a3c85840��Title: title: take
+Path: Examples
+Content:
+Return the first item of a list/table.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | take 1
+╭───┬───╮
+│ 0 │ 1 │
+╰───┴───╯
+
+
+```
+Return the first 2 items of a list/table.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | take 2
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+╰───┴───╯
+
+
+```
+Return the first two rows of a table.
+```Fenced(Borrowed("nu"))
+> [[editions]; [2015] [2018] [2021]] | take 2
+╭───┬──────────╮
+│ # │ editions │
+├───┼──────────┤
+│ 0 │     2015 │
+│ 1 │     2018 │
+╰───┴──────────╯
+
+
+```
+Return the first 2 bytes of a binary value.
+```Fenced(Borrowed("nu"))
+> 0x[01 23 45] | take 2
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 23                                                •#
+
+
+```
+Return the first 3 elements of a range.
+```Fenced(Borrowed("nu"))
+> 1..10 | take 3
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+╰───┴───╯
+
+
+```
+��@58d892071a93a6700c3c8ed2234c6d2b0dab461e2566a1e8978f00ea4954f8df�+Title: title: take
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/take_until.md] ``take until``
+Take elements of the input until a predicate is true.
+built-in
+[link: /commands/docs/take_while.md] ``take while``
+Take elements of the input while a predicate is true.
+built-in

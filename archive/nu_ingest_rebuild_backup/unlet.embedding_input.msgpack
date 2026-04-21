@@ -1,0 +1,56 @@
+•’Ù@d3c0ce841defc3500ffb119889bc807a4feb14eddf37175b5a9c2cdddd11e8cfÙpTitle: title: unlet
+Path: experimental
+Content:
+
+
+
+
+
+
+
+
+
+``unlet``
+[link: /commands/categories/experimental.md] ’Ù@c57fc064588a58118174f18fb969c93cad6e2b6f47d509be29b8ecf6a4018bdeÙITitle: title: unlet
+Path: Signature
+Content:
+``> unlet {flags} ...rest``
+’Ù@960de9a600ce188691897b1a9132495cb84d3fa5bc1e12ad294f676e121102bbÙnTitle: title: unlet
+Path: Parameters
+Content:
+``...rest``
+: The variables to delete (pass as $variable_name).
+’Ù@e3bf4b21afc272801c27c471f1af05cbe62109ae4ad828bd52a5b89dca321c94ÙTTitle: title: unlet
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+’Ù@2ca05c5bc230cace4cb83c753a3dd2332acd1996db0a319e5fd49f1bc8527973ÚŸTitle: title: unlet
+Path: Examples
+Content:
+Delete a variable from memory.
+```Fenced(Borrowed("nu"))
+> let x = 42; unlet $x
+
+
+```
+Delete multiple variables from memory.
+```Fenced(Borrowed("nu"))
+> let x = 1; let y = 2; unlet $x $y
+
+
+```
+Attempting to delete a built-in variable fails.
+```Fenced(Borrowed("nu"))
+> unlet $nu
+
+
+```
+Attempting to delete a non-variable fails.
+```Fenced(Borrowed("nu"))
+> unlet 42
+
+
+```

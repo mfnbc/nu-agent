@@ -1,0 +1,41 @@
+‘’Ù@93fa0a259cbc2edfcb046801d3c87036a7827820610a3c5d553a3f48c3b445a0ÚTitle: This week in Nu #42
+Path: This week in Nu #42
+Content:
+utam0k added an option to 
+``mkdir``
+ to 
+[link: https://github.com/nushell/nushell/pull/1932] show the paths being created
+JosephTLyons 
+[link: https://github.com/nushell/nushell/pull/1940] removed async_stream from some commands
+ (
+[link: https://github.com/nushell/nushell/pull/1951] 2
+), fixed 
+[link: https://github.com/nushell/nushell/pull/1944] spaces in test paths
+, 
+[link: https://github.com/nushell/nushell/pull/1945] updated 
+``cal``
+,
+samhedin added support for 
+[link: https://github.com/nushell/nushell/pull/1943] per-directory environment variables
+arashout improved 
+``to toml``
+ to 
+[link: https://github.com/nushell/nushell/pull/1946] disallow top-level values
+daschl made 
+[link: https://github.com/nushell/nushell/pull/1952] interruptible streams public
+jonathandturner renamed the ".env" file to 
+[link: https://github.com/nushell/nushell/pull/1953] ".nu-env"
+, 
+[link: https://github.com/nushell/nushell/pull/1955] released 0.15.0
+, fixed a bug with 
+[link: https://github.com/nushell/nushell/pull/1966] operator precedence
+, add support for 
+[link: https://github.com/nushell/nushell/pull/1967] readonly config files
+, and move a 
+[link: https://github.com/nushell/nushell/pull/1970] batch of commands off async_stream
+svartalf fixed an issue with process usage and 
+[link: https://github.com/nushell/nushell/pull/1954] bumped the heim dependency
+Also!
+We've added our 
+[link: https://github.com/nushell/rfcs] initial RFC process
+. Come let us know what you think.

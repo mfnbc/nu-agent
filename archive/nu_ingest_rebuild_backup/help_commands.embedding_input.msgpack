@@ -1,0 +1,34 @@
+•’Ù@7e6151934441391fa2e5e67eb2da1be8dbe42aacee32d8b1d505a9caddea1809ÙpTitle: title: help commands
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``help commands``
+[link: /commands/categories/core.md] ’Ù@5be354f5c45baf2a2a13f665db73abb87859490688e6f1bce89b4bd2558b47e3ÙYTitle: title: help commands
+Path: Signature
+Content:
+``> help commands {flags} ...rest``
+’Ù@7d6d2936b77c0860d6ab83f60169b33174569d7fee68d1ab627c5dde46a07421ÙŒTitle: title: help commands
+Path: Flags
+Content:
+``--find, -f {string}``
+: String to find in command names, descriptions, and search terms.
+’Ù@fa8504317e20aff86f84b671c920544325b0c6e5185dbf4d84e868f6cfa7e34bÙhTitle: title: help commands
+Path: Parameters
+Content:
+``...rest``
+: The name of command to get help on.
+’Ù@045c5afb1c25296b6b419a26fb22d6f4dcf440d3af45a5b7ef62c733397647b7ÙZTitle: title: help commands
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table

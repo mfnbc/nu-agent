@@ -1,0 +1,103 @@
+���@ece915d8b60857f92d1d255b5eaa9b4f6247d4998725ed63b5610be84821bf6d�lTitle: title: par-each
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``par-each``
+[link: /commands/categories/filters.md] ��@0102e69d1e38568685c831681fa9751a8bbe0097316b7559043b278e20a62bd3�QTitle: title: par-each
+Path: Signature
+Content:
+``> par-each {flags} (closure)``
+��@a4442b4445341a25add036ff747817d87f02e64333352f2f45728b69bc73a88eٯTitle: title: par-each
+Path: Flags
+Content:
+``--threads, -t {int}``
+: The number of threads to use.
+``--keep-order, -k``
+: Keep sequence of output same as the order of input.
+��@a16eaf977c45f9e12e63cdf762c110c138e2c4feaafab6288bd38d766d8c44e6�STitle: title: par-each
+Path: Parameters
+Content:
+``closure``
+: The closure to run.
+��@cc90255c872a95f90926063c080d86cec3629702bfa03199ad922ca1687bc0d8�Title: title: par-each
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+table
+list
+<
+any
+>
+
+any
+any
+��@4e48ee3282bd39722eb4bdb1159880aae248afbaca337f4aa8019a05617efcbe�%Title: title: par-each
+Path: Examples
+Content:
+Multiplies each number. Note that the list will become arbitrarily disordered.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | par-each {|e| $e * 2 }
+
+
+```
+Multiplies each number, keeping an original order.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | par-each --keep-order {|e| $e * 2 }
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 4 │
+│ 2 │ 6 │
+╰───┴───╯
+
+
+```
+Enumerate and sort-by can be used to reconstruct the original order.
+```Fenced(Borrowed("nu"))
+> 1..3 | enumerate | par-each {|p| update item ($p.item * 2)} | sort-by item | get item
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 4 │
+│ 2 │ 6 │
+╰───┴───╯
+
+
+```
+Output can still be sorted afterward.
+```Fenced(Borrowed("nu"))
+> [foo bar baz] | par-each {|e| $e + '!' } | sort
+╭───┬──────╮
+│ 0 │ bar! │
+│ 1 │ baz! │
+│ 2 │ foo! │
+╰───┴──────╯
+
+
+```
+Iterate over each element, producing a list showing indexes of any 2s.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | enumerate | par-each { |e| if $e.item == 2 { $"found 2 at ($e.index)!"} }
+╭───┬───────────────╮
+│ 0 │ found 2 at 1! │
+╰───┴───────────────╯
+
+
+```

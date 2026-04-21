@@ -1,0 +1,283 @@
+ôóŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@58a785f2562ef9b7eb783decbce018e6d9635dad5a1f6d707ff4cf7f46db03fd¨Contributingë¨Contributing⁄‹If you want to contribute to Nushell itself, see 
+[link: https://github.com/nushell/nushell/blob/master/CONTRIBUTING.md] nushell/nushell/CONTRIBUTING.md
+ and the 
+[link: https://www.nushell.sh/contributor-book/] contributor-book
+.
+If you want to contribute to the Nushell documentation and website, this is the right place.
+While most documentation is updated via commits to this repository, an important exception is the 
+``help``
+ 
+[link: /commands] documentation for all commands
+.
+
+These pages are generated automatically from the internal help in each command's 
+``.rs``
+ file. Please see the 
+[link: https://github.com/nushell/nushell] main Nushell repo
+ and submit pull requests for changes to 
+command
+ documentation there.
+íêê⁄Title: Contributing
+Path: Contributing
+Content:
+If you want to contribute to Nushell itself, see 
+[link: https://github.com/nushell/nushell/blob/master/CONTRIBUTING.md] nushell/nushell/CONTRIBUTING.md
+ and the 
+[link: https://www.nushell.sh/contributor-book/] contributor-book
+.
+If you want to contribute to the Nushell documentation and website, this is the right place.
+While most documentation is updated via commits to this repository, an important exception is the 
+``help``
+ 
+[link: /commands] documentation for all commands
+.
+
+These pages are generated automatically from the internal help in each command's 
+``.rs``
+ file. Please see the 
+[link: https://github.com/nushell/nushell] main Nushell repo
+ and submit pull requests for changes to 
+command
+ documentation there.
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@df13fb111cbde1323ca832dc3b8c679638417e248f0188ad5bd2455179100c7f¨Contributingë±Local DevelopmentŸ#This website is based on VuePress.
+íêêŸXTitle: Contributing
+Path: Local Development
+Content:
+This website is based on VuePress.
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@f0411ead79a6b2809fcfbe5178c54ce26fa25d783352d06c8291a0d512255c36¨ContributingëÆOne-time Setup⁄·[link: https://github.com/nushell/nushell.github.io/fork] Fork the website repository
+Clone the doc repo locally:
+```Fenced(Borrowed("nu"))
+git clone git@github.com:nushell/nushell.github.io.git nu-docs
+
+```
+[link: https://nodejs.org/en/download/] Install Node.js
+ (minimum version required: v18.12.0)
+Run 
+``npm install``
+ in the root of the local repo after cloning to install the required dependencies for the dev server. This will also be necessary if any dependencies change.
+íêê⁄Title: Contributing
+Path: One-time Setup
+Content:
+[link: https://github.com/nushell/nushell.github.io/fork] Fork the website repository
+Clone the doc repo locally:
+```Fenced(Borrowed("nu"))
+git clone git@github.com:nushell/nushell.github.io.git nu-docs
+
+```
+[link: https://nodejs.org/en/download/] Install Node.js
+ (minimum version required: v18.12.0)
+Run 
+``npm install``
+ in the root of the local repo after cloning to install the required dependencies for the dev server. This will also be necessary if any dependencies change.
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@6bc527d8d75b2db8f568e6abe0b790aeca499ecc64cfc61c98a39960c86a828b¨ContributingëπFor each group of changes⁄qSync your fork on GitHub
+``git pull``
+ the latest changes
+Run 
+``npm run dev``
+Pay close attention to the messages when starting the server, as this will inform you of any broken links and other errors that might need to be fixed.
+Create a branch for your changes using a short, descriptive name:
+```Fenced(Borrowed("nu"))
+git checkout -b my_changes
+
+```
+If you're adding a new page to the book, to make it appear, put it also to 
+``.vuepress/configs/sidebar/{locale}.ts``
+.
+Make changes
+Verify your local changes render correctly by opening 
+[link: http://localhost:8080/] http://localhost:8080/
+ in a web browser and navigating to the new or changed pages
+Commit and push your changes
+```Fenced(Borrowed("nu"))
+git commit -m "Commit Message"
+
+git push --set-upstream origin my_changes
+
+```
+(Where 
+``my_changes``
+ is the current branch)
+Create a pull request in this GitHub repo
+íêê⁄ÆTitle: Contributing
+Path: For each group of changes
+Content:
+Sync your fork on GitHub
+``git pull``
+ the latest changes
+Run 
+``npm run dev``
+Pay close attention to the messages when starting the server, as this will inform you of any broken links and other errors that might need to be fixed.
+Create a branch for your changes using a short, descriptive name:
+```Fenced(Borrowed("nu"))
+git checkout -b my_changes
+
+```
+If you're adding a new page to the book, to make it appear, put it also to 
+``.vuepress/configs/sidebar/{locale}.ts``
+.
+Make changes
+Verify your local changes render correctly by opening 
+[link: http://localhost:8080/] http://localhost:8080/
+ in a web browser and navigating to the new or changed pages
+Commit and push your changes
+```Fenced(Borrowed("nu"))
+git commit -m "Commit Message"
+
+git push --set-upstream origin my_changes
+
+```
+(Where 
+``my_changes``
+ is the current branch)
+Create a pull request in this GitHub repo
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@a021eceebc3916712a5b4096a08e0f99b3508934f742f17748593ab28a0abda0¨ContributingëŸ%Enabling a Preview URL From Your ForkŸ|Just enable GitHub actions in your repo settings. That's all! It will start deploying the next time you push to 
+``main``
+.
+íêêŸ≈Title: Contributing
+Path: Enabling a Preview URL From Your Fork
+Content:
+Just enable GitHub actions in your repo settings. That's all! It will start deploying the next time you push to 
+``main``
+.
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@93b4e2fd99ba1114d222e0ebeccafd7648bc8d183632fdef70602e528404dd06¨ContributingëŸ1Display Nu Code Snippets With Syntax Highlighting⁄LTo display Nushell code snippets with syntax highlighting support you can wrap the Nu codes with 
+`````nu `````
+ or 
+`````nushell `````
+, for example:
+```Fenced(Borrowed("plain"))
+```nu
+# List the top five largest files
+ls | where type == file | sort-by -r size | first 5
+```
+
+```
+The preferred form for consistency is 
+`````nu``
+.
+íêê⁄°Title: Contributing
+Path: Display Nu Code Snippets With Syntax Highlighting
+Content:
+To display Nushell code snippets with syntax highlighting support you can wrap the Nu codes with 
+`````nu `````
+ or 
+`````nushell `````
+, for example:
+```Fenced(Borrowed("plain"))
+```nu
+# List the top five largest files
+ls | where type == file | sort-by -r size | first 5
+```
+
+```
+The preferred form for consistency is 
+`````nu``
+.
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@710f280e57db38f7d7069c9d6329e9b92df727b8304ef2275801527b5dda51c1¨Contributingë±Translation GuideŸ7Follow the steps above for each group of translations.
+íêêŸlTitle: Contributing
+Path: Translation Guide
+Content:
+Follow the steps above for each group of translations.
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@f9f9356d989b755261b32e5135c87fd77830046162b207fcd828fef88b5d4512¨ContributingëŸ+Adding to or updating existing translations⁄#Check outdated translations. A helper script is provided for this. From the repository root, run:
+```Fenced(Borrowed("nu"))
+nu tools/i18n.nu outdated zh-CN
+
+```
+This will provide a list of all files that have been changed or added since the last translation update for the specified locale.
+íêê⁄rTitle: Contributing
+Path: Adding to or updating existing translations
+Content:
+Check outdated translations. A helper script is provided for this. From the repository root, run:
+```Fenced(Borrowed("nu"))
+nu tools/i18n.nu outdated zh-CN
+
+```
+This will provide a list of all files that have been changed or added since the last translation update for the specified locale.
+óŸFarchive/external_nushell_repo_backup/nushell.github.io/CONTRIBUTING.mdŸ@b9da4bb79c0f20bb6601b13c8c4014b5aa367c62da9813c6ae46594445da3824¨Contributingë∫Creating a new translation⁄7Add a book dir for the specified locale in the docs' root folder, say 
+``zh-CN``
+.
+Create a 
+``book``
+ child folder for all your translated documents and a README.md for the home page of your locale
+Modify the VuePress config file 
+``.vuepress/config.js``
+ and add 
+``zh-CN``
+ related configs.
+Here is an 
+[link: https://github.com/nushell/nushell.github.io/commit/46d1672] example commit
+ for reference.
+Add a 
+``README.md``
+ in the 
+``book``
+ dir which will be the default introduction page of Nushell.
+::: warning Important
+
+Please 
+DO NOT
+ translate the file name of the docs.
+
+:::
+Run 
+``npm run dev``
+, then open 
+[link: http://localhost:8080/] http://localhost:8080/
+ in your browser
+Switch to the language you are going to translate into, and you will see the introduction page you have just created. You can translate the docs and save them to get a preview in the browser.
+Update the 
+``i18n-meta.json``
+ file by filling in the locale value of the doc you have just finished. It's recommended to use 
+``commit_id@author``
+ or simply a 
+``commit_id``
+ to indicate your translation end to the specified commit.
+Commit your changes. It's recommended to squash all your commits in one commit with a commit message like this: 
+``Translate your_doc_file.md to zh-CN from commit: f3dc86d3d``
+;
+Push your changes as documented above
+íêê⁄uTitle: Contributing
+Path: Creating a new translation
+Content:
+Add a book dir for the specified locale in the docs' root folder, say 
+``zh-CN``
+.
+Create a 
+``book``
+ child folder for all your translated documents and a README.md for the home page of your locale
+Modify the VuePress config file 
+``.vuepress/config.js``
+ and add 
+``zh-CN``
+ related configs.
+Here is an 
+[link: https://github.com/nushell/nushell.github.io/commit/46d1672] example commit
+ for reference.
+Add a 
+``README.md``
+ in the 
+``book``
+ dir which will be the default introduction page of Nushell.
+::: warning Important
+
+Please 
+DO NOT
+ translate the file name of the docs.
+
+:::
+Run 
+``npm run dev``
+, then open 
+[link: http://localhost:8080/] http://localhost:8080/
+ in your browser
+Switch to the language you are going to translate into, and you will see the introduction page you have just created. You can translate the docs and save them to get a preview in the browser.
+Update the 
+``i18n-meta.json``
+ file by filling in the locale value of the doc you have just finished. It's recommended to use 
+``commit_id@author``
+ or simply a 
+``commit_id``
+ to indicate your translation end to the specified commit.
+Commit your changes. It's recommended to squash all your commits in one commit with a commit message like this: 
+``Translate your_doc_file.md to zh-CN from commit: f3dc86d3d``
+;
+Push your changes as documented above

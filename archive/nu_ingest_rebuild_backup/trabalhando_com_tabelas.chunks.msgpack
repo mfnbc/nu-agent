@@ -1,0 +1,593 @@
+˜—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@c307e4e55d0b7675eb8577d4cf06a2ed15a97d15cdb7c6780325eb94be87b17f·Trabalhando com tabelas‘·Trabalhando com tabelasÚwUma forma comum de ver os dados no Nu Ã© por meio de uma tabela. O Nu traz um conjunto de comandos para se trabalhar com tabelas, facilitar a localizaÃ§Ã£o do que vocÃª procura e restringir os dados apenas ao que vocÃª precisa.
+Para comeÃ§ar, vamos usar a seguinte tabela:
+```Fenced(Borrowed("nu"))
+ls
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  2 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  3 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  6 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  7 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  8 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  9 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+’Ú½Title: Trabalhando com tabelas
+Path: Trabalhando com tabelas
+Content:
+Uma forma comum de ver os dados no Nu Ã© por meio de uma tabela. O Nu traz um conjunto de comandos para se trabalhar com tabelas, facilitar a localizaÃ§Ã£o do que vocÃª procura e restringir os dados apenas ao que vocÃª precisa.
+Para comeÃ§ar, vamos usar a seguinte tabela:
+```Fenced(Borrowed("nu"))
+ls
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  2 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  3 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  6 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  7 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  8 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  9 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@abe058e313ec59980089bc937b80d04e116579544385e78353d40e15d1a41712·Trabalhando com tabelas‘²Ordenando os dadosÚæPodemos ordenar uma tabela chamando o comando 
+``sort-by``
+ e informando quais colunas queremos usar na ordenaÃ§Ã£o. Digamos que queremos ordenar nossa tabela pelo tamanho do arquivo:
+```Fenced(Borrowed("nu"))
+ls | sort-by size
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  1 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  4 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  5 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  6 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  7 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  8 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  9 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+Podemos ordenar uma tabela por qualquer coluna que possa ser comparada. Por exemplo, poderÃ­amos tambÃ©m ter ordenado a tabela acima usando as colunas "name", "accessed" ou "modified".
+’Ú'Title: Trabalhando com tabelas
+Path: Ordenando os dados
+Content:
+Podemos ordenar uma tabela chamando o comando 
+``sort-by``
+ e informando quais colunas queremos usar na ordenaÃ§Ã£o. Digamos que queremos ordenar nossa tabela pelo tamanho do arquivo:
+```Fenced(Borrowed("nu"))
+ls | sort-by size
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  1 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  4 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  5 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  6 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  7 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  8 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  9 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+```
+Podemos ordenar uma tabela por qualquer coluna que possa ser comparada. Por exemplo, poderÃ­amos tambÃ©m ter ordenado a tabela acima usando as colunas "name", "accessed" ou "modified".
+—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@88bc8a587160855cde9ed91d0885e98d36c1265e8614e0707c5ac99ca2311569·Trabalhando com tabelas‘Ù Selecionando os dados que desejaÚ|Podemos selecionar dados de uma tabela escolhendo colunas ou linhas especÃ­ficas. Vamos escolher algumas colunas da nossa tabela:
+```Fenced(Borrowed("nu"))
+ls | select name size
+# => ---+---------------+---------
+# =>  # | name          | size
+# => ---+---------------+---------
+# =>  0 | add.rs        | 2.7 KB
+# =>  1 | sum.rs        | 3.0 KB
+# =>  2 | inc.rs        | 11.8 KB
+# =>  3 | str.rs        | 21.4 KB
+# =>  4 | skip.rs       | 1.7 KB
+# =>  5 | textview.rs   | 9.4 KB
+# =>  6 | binaryview.rs | 13.0 KB
+# =>  7 | edit.rs       | 2.7 KB
+# =>  8 | tree.rs       | 3.0 KB
+# =>  9 | sys.rs        | 9.2 KB
+# => ---+---------------+---------
+
+```
+Isso ajuda a criar uma tabela mais focada no que precisamos. A seguir, digamos que queremos ver apenas os 5 menores arquivos do diretÃ³rio:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | skip.rs | File |          | 1.7 KB | 2 days ago | 2 days ago
+# =>  1 | add.rs  | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  2 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  3 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  4 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+Note que primeiro ordenamos a tabela por tamanho e depois usamos o 
+``first 5``
+ para retornar as primeiras 5 linhas da tabela.
+VocÃª tambÃ©m pode usar 
+``skip``
+ para pular as linhas que nÃ£o quiser. Vamos pular as duas primeiras das 5 linhas que retornamos acima:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5 | skip 2
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  1 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  2 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+Restringimos os dados Ã s 3 linhas que nos interessam.
+Vamos examinar alguns outros comandos para selecionar dados. VocÃª pode ter se perguntado por que as linhas da tabela sÃ£o numeradas. Isso serve como uma maneira prÃ¡tica de acessar uma linha especÃ­fica. Vamos ordenar nossa tabela pelo nome do arquivo e entÃ£o escolher uma das linhas com o comando 
+``nth``
+, usando o nÃºmero da linha:
+```Fenced(Borrowed("nu"))
+ls | sort-by name
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  6 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  7 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  8 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  9 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+ls | sort-by name | nth 5
+# => --------+------+----------+---------+------------+------------
+# =>  name   | type | readonly | size    | accessed   | modified
+# => --------+------+----------+---------+------------+------------
+# =>  str.rs | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => --------+------+----------+---------+------------+------------
+
+```
+’ÚËTitle: Trabalhando com tabelas
+Path: Selecionando os dados que deseja
+Content:
+Podemos selecionar dados de uma tabela escolhendo colunas ou linhas especÃ­ficas. Vamos escolher algumas colunas da nossa tabela:
+```Fenced(Borrowed("nu"))
+ls | select name size
+# => ---+---------------+---------
+# =>  # | name          | size
+# => ---+---------------+---------
+# =>  0 | add.rs        | 2.7 KB
+# =>  1 | sum.rs        | 3.0 KB
+# =>  2 | inc.rs        | 11.8 KB
+# =>  3 | str.rs        | 21.4 KB
+# =>  4 | skip.rs       | 1.7 KB
+# =>  5 | textview.rs   | 9.4 KB
+# =>  6 | binaryview.rs | 13.0 KB
+# =>  7 | edit.rs       | 2.7 KB
+# =>  8 | tree.rs       | 3.0 KB
+# =>  9 | sys.rs        | 9.2 KB
+# => ---+---------------+---------
+
+```
+Isso ajuda a criar uma tabela mais focada no que precisamos. A seguir, digamos que queremos ver apenas os 5 menores arquivos do diretÃ³rio:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | skip.rs | File |          | 1.7 KB | 2 days ago | 2 days ago
+# =>  1 | add.rs  | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  2 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  3 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  4 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+Note que primeiro ordenamos a tabela por tamanho e depois usamos o 
+``first 5``
+ para retornar as primeiras 5 linhas da tabela.
+VocÃª tambÃ©m pode usar 
+``skip``
+ para pular as linhas que nÃ£o quiser. Vamos pular as duas primeiras das 5 linhas que retornamos acima:
+```Fenced(Borrowed("nu"))
+ls | sort-by size | first 5 | skip 2
+# => ---+---------+------+----------+--------+------------+------------
+# =>  # | name    | type | readonly | size   | accessed   | modified
+# => ---+---------+------+----------+--------+------------+------------
+# =>  0 | edit.rs | File |          | 2.7 KB | 2 days ago | 2 days ago
+# =>  1 | sum.rs  | File |          | 3.0 KB | 2 days ago | 2 days ago
+# =>  2 | tree.rs | File |          | 3.0 KB | 2 days ago | 2 days ago
+# => ---+---------+------+----------+--------+------------+------------
+
+```
+Restringimos os dados Ã s 3 linhas que nos interessam.
+Vamos examinar alguns outros comandos para selecionar dados. VocÃª pode ter se perguntado por que as linhas da tabela sÃ£o numeradas. Isso serve como uma maneira prÃ¡tica de acessar uma linha especÃ­fica. Vamos ordenar nossa tabela pelo nome do arquivo e entÃ£o escolher uma das linhas com o comando 
+``nth``
+, usando o nÃºmero da linha:
+```Fenced(Borrowed("nu"))
+ls | sort-by name
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  # | name          | type | readonly | size    | accessed   | modified
+# => ---+---------------+------+----------+---------+------------+------------
+# =>  0 | add.rs        | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  1 | binaryview.rs | File |          | 13.0 KB | a day ago  | a day ago
+# =>  2 | edit.rs       | File |          | 2.7 KB  | 2 days ago | 2 days ago
+# =>  3 | inc.rs        | File |          | 11.8 KB | 2 days ago | 2 days ago
+# =>  4 | skip.rs       | File |          | 1.7 KB  | 2 days ago | 2 days ago
+# =>  5 | str.rs        | File |          | 21.4 KB | 2 days ago | 2 days ago
+# =>  6 | sum.rs        | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# =>  7 | sys.rs        | File |          | 9.2 KB  | 2 days ago | 2 days ago
+# =>  8 | textview.rs   | File |          | 9.4 KB  | 2 days ago | 2 days ago
+# =>  9 | tree.rs       | File |          | 3.0 KB  | 2 days ago | 2 days ago
+# => ---+---------------+------+----------+---------+------------+------------
+
+ls | sort-by name | nth 5
+# => --------+------+----------+---------+------------+------------
+# =>  name   | type | readonly | size    | accessed   | modified
+# => --------+------+----------+---------+------------+------------
+# =>  str.rs | File |          | 21.4 KB | 2 days ago | 2 days ago
+# => --------+------+----------+---------+------------+------------
+
+```
+—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@e7f484d082a4cbddc59162dda62675088516747b3088d5e0df39aebd77f13e28·Trabalhando com tabelas‘»Obtendo dados de uma tabelaÚëAtÃ© agora, trabalhamos as tabelas reduzindo-as para somente o que precisamos. Ã€s vezes queremos ir um passo alÃ©m e sÃ³ ver os valores das cÃ©lulas e nÃ£o de uma coluna toda. Digamos, por exemplo, que queremos somente uma lista com os nomes do arquivos. Para isso, usamos o comando 
+``get``
+:
+```Fenced(Borrowed("nu"))
+ls | get name
+# => ---+---------------
+# =>  # | value
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+Agora temos os valores para cada um dos nomes de arquivo.
+Parece muito com o comando 
+``select``
+ que vimos antes, entÃ£o vamos colocÃ¡-lo aqui de novo para compararmos os dois:
+```Fenced(Borrowed("nu"))
+ls | select name
+# => ---+---------------
+# =>  # | name
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+SÃ£o muito parecidos! Vamos tentar explicar a diferenÃ§a entre esses dois comandos para esclarecer:
+``select``
+ - cria uam nova tabela que inclui apenas as colunas especificadas
+``get``
+ - retorna os valores dentro da coluna especificada
+A Ãºnica maneira de diferenciÃ¡-los olhando para a tabela Ã© o nome caracterÃ­stico da coluna 
+``value``
+, que nos permite saber que se trata de uma lista de valores com a qual podemos trabalhar.
+O comando 
+``get``
+ pode ir um passo alÃ©m e receber um caminho para os dados mais profundos na tabela. Isso simplifica o trabalho com dados mais complexos, como as estruturas que vocÃª pode encontrar num arquivo .json.
+’Ú5Title: Trabalhando com tabelas
+Path: Obtendo dados de uma tabela
+Content:
+AtÃ© agora, trabalhamos as tabelas reduzindo-as para somente o que precisamos. Ã€s vezes queremos ir um passo alÃ©m e sÃ³ ver os valores das cÃ©lulas e nÃ£o de uma coluna toda. Digamos, por exemplo, que queremos somente uma lista com os nomes do arquivos. Para isso, usamos o comando 
+``get``
+:
+```Fenced(Borrowed("nu"))
+ls | get name
+# => ---+---------------
+# =>  # | value
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+Agora temos os valores para cada um dos nomes de arquivo.
+Parece muito com o comando 
+``select``
+ que vimos antes, entÃ£o vamos colocÃ¡-lo aqui de novo para compararmos os dois:
+```Fenced(Borrowed("nu"))
+ls | select name
+# => ---+---------------
+# =>  # | name
+# => ---+---------------
+# =>  0 | add.rs
+# =>  1 | sum.rs
+# =>  2 | inc.rs
+# =>  3 | str.rs
+# =>  4 | skip.rs
+# =>  5 | textview.rs
+# =>  6 | binaryview.rs
+# =>  7 | edit.rs
+# =>  8 | tree.rs
+# =>  9 | sys.rs
+# => ---+---------------
+
+```
+SÃ£o muito parecidos! Vamos tentar explicar a diferenÃ§a entre esses dois comandos para esclarecer:
+``select``
+ - cria uam nova tabela que inclui apenas as colunas especificadas
+``get``
+ - retorna os valores dentro da coluna especificada
+A Ãºnica maneira de diferenciÃ¡-los olhando para a tabela Ã© o nome caracterÃ­stico da coluna 
+``value``
+, que nos permite saber que se trata de uma lista de valores com a qual podemos trabalhar.
+O comando 
+``get``
+ pode ir um passo alÃ©m e receber um caminho para os dados mais profundos na tabela. Isso simplifica o trabalho com dados mais complexos, como as estruturas que vocÃª pode encontrar num arquivo .json.
+—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@87e8c46299976a78a93460e0caee4722f3372fa9086da05fece46c60d47c96bf·Trabalhando com tabelas‘¿Modificando dados em uma tabelaÚ
+AlÃ©m de selecionar dados de uma tabela, podemos tambÃ©m alterar o que a tabela traz. Podemos querer adicionar novas colunas ou editar o conteÃºdo de uma cÃ©lula. No Nu, em vez de editar localmente, cada comando nesta seÃ§Ã£o retornarÃ¡ uma nova tabela no pipeline.
+’ÚXTitle: Trabalhando com tabelas
+Path: Modificando dados em uma tabela
+Content:
+AlÃ©m de selecionar dados de uma tabela, podemos tambÃ©m alterar o que a tabela traz. Podemos querer adicionar novas colunas ou editar o conteÃºdo de uma cÃ©lula. No Nu, em vez de editar localmente, cada comando nesta seÃ§Ã£o retornarÃ¡ uma nova tabela no pipeline.
+—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@47f20bd6d877cc7cd749f4daf0684b8e32d7536089067f55969ea211ec37bcdb·Trabalhando com tabelas‘»Adicionando uma nova colunaÚ/Podemos usar o comando 
+``add``
+ para adicionar uma nova coluna na tabela. Vejamos um exemplo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+Vamos adicionar uma coluna chamada "next_edition" com o valor 2021:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+Note que, se abrirmos o arquivo original, seu conteÃºdo permanece o mesmo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+AlteraÃ§Ãµes no Nu sÃ£o alteraÃ§Ãµes funcionais, isto Ã©, atuam sobre os valores em si ao invÃ©s de tentar causar uma alteraÃ§Ã£o permanente, o que nos permite executar muitos tipos diferentes de aÃ§Ãµes no nosso pipeline atÃ© que estejamos prontos para escrever o resultado com quaisquer mudanÃ§as, se assim quisermos. Aqui poderÃ­amos salvar o resultado usando o comando 
+``save``
+:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
+open rustfmt2.toml
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+’ÚyTitle: Trabalhando com tabelas
+Path: Adicionando uma nova coluna
+Content:
+Podemos usar o comando 
+``add``
+ para adicionar uma nova coluna na tabela. Vejamos um exemplo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+Vamos adicionar uma coluna chamada "next_edition" com o valor 2021:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+Note que, se abrirmos o arquivo original, seu conteÃºdo permanece o mesmo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+
+```
+AlteraÃ§Ãµes no Nu sÃ£o alteraÃ§Ãµes funcionais, isto Ã©, atuam sobre os valores em si ao invÃ©s de tentar causar uma alteraÃ§Ã£o permanente, o que nos permite executar muitos tipos diferentes de aÃ§Ãµes no nosso pipeline atÃ© que estejamos prontos para escrever o resultado com quaisquer mudanÃ§as, se assim quisermos. Aqui poderÃ­amos salvar o resultado usando o comando 
+``save``
+:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | add next_edition 2021 | save rustfmt2.toml
+open rustfmt2.toml
+# => ---------+--------------
+# =>  edition | next_edition
+# => ---------+--------------
+# =>  2018    | 2021
+# => ---------+--------------
+
+```
+—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@ddf9431d7cd80d5276add927f6dda5d9f434bc30e87ea4b5c3ce2f2145eb65ec·Trabalhando com tabelas‘³Editando uma colunaÚSemelhante ao comando 
+``add``
+, podemos usar o comando 
+``edit``
+ para alterar o conteÃºdo de uma coluna para um novo valor. Para ver isso funcionando, vamos abrir o mesmo arquivo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+---------
+ edition
+---------
+ 2018
+---------
+
+```
+E agora vamos alterar a coluna 
+``edition``
+ para mostrar a prÃ³xima ediÃ§Ã£o Ã  qual esperamos dar suporte:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | edit edition 2021
+# => ---------
+# =>  edition
+# => ---------
+# =>  2021
+# => ---------
+
+```
+’ÚNTitle: Trabalhando com tabelas
+Path: Editando uma coluna
+Content:
+Semelhante ao comando 
+``add``
+, podemos usar o comando 
+``edit``
+ para alterar o conteÃºdo de uma coluna para um novo valor. Para ver isso funcionando, vamos abrir o mesmo arquivo:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+---------
+ edition
+---------
+ 2018
+---------
+
+```
+E agora vamos alterar a coluna 
+``edition``
+ para mostrar a prÃ³xima ediÃ§Ã£o Ã  qual esperamos dar suporte:
+```Fenced(Borrowed("nu"))
+open rustfmt.toml | edit edition 2021
+# => ---------
+# =>  edition
+# => ---------
+# =>  2021
+# => ---------
+
+```
+—Ù\archive/external_nushell_repo_backup/nushell.github.io/pt-BR/book/trabalhando_com_tabelas.mdÙ@a39302456decb26906d3528bf3865027f32d2d0f95682d83ddf4deab820ae970·Trabalhando com tabelas‘µIncrementando valoresÚExiste mais um comando do Nu que nos ajudarÃ¡ a trabalhar com nÃºmeros e versÃµes: 
+``inc``
+.
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+open rustfmt.toml | inc edition
+# => ---------
+# =>  edition
+# => ---------
+# =>  2019
+# => ---------
+
+```
+Como o valor em "edition" Ã© um nÃºmero, podemos usar 
+``inc``
+ para alterÃ¡-lo. Onde 
+``inc``
+ realmente se destaca Ã© trabalhando com versÃµes:
+```Fenced(Borrowed("nu"))
+open Cargo.toml | get package.version
+# => 0.1.3
+open Cargo.toml | inc package.version --minor | get package.version
+# => 0.2.0
+
+```
+Quando estamos trabalhando com versÃµes, podemos usar um dos modificadores a seguir para informar como incrementar a versÃ£o:
+--major
+ - incrementa a versÃ£o major (0.1.3 -> 1.0.0)
+--minor
+ - incrementa a versÃ£o minor (0.1.3 -> 0.2.0)
+--patch
+ - incrementa a versÃ£o patch (0.1.3 -> 0.1.4)
+’ÚÓTitle: Trabalhando com tabelas
+Path: Incrementando valores
+Content:
+Existe mais um comando do Nu que nos ajudarÃ¡ a trabalhar com nÃºmeros e versÃµes: 
+``inc``
+.
+```Fenced(Borrowed("nu"))
+open rustfmt.toml
+# => ---------
+# =>  edition
+# => ---------
+# =>  2018
+# => ---------
+open rustfmt.toml | inc edition
+# => ---------
+# =>  edition
+# => ---------
+# =>  2019
+# => ---------
+
+```
+Como o valor em "edition" Ã© um nÃºmero, podemos usar 
+``inc``
+ para alterÃ¡-lo. Onde 
+``inc``
+ realmente se destaca Ã© trabalhando com versÃµes:
+```Fenced(Borrowed("nu"))
+open Cargo.toml | get package.version
+# => 0.1.3
+open Cargo.toml | inc package.version --minor | get package.version
+# => 0.2.0
+
+```
+Quando estamos trabalhando com versÃµes, podemos usar um dos modificadores a seguir para informar como incrementar a versÃ£o:
+--major
+ - incrementa a versÃ£o major (0.1.3 -> 1.0.0)
+--minor
+ - incrementa a versÃ£o minor (0.1.3 -> 0.2.0)
+--patch
+ - incrementa a versÃ£o patch (0.1.3 -> 0.1.4)

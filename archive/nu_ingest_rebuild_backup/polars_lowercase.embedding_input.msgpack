@@ -1,0 +1,55 @@
+���@76d938c02f76137d81df5fda2e8205f55e324bc53ec61dacba50b274eed2b92aـTitle: title: polars lowercase
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars lowercase``
+[link: /commands/categories/dataframe.md] ��@14258e33ed95efcfbfa156634c8aef31ec3b80f7abe8ee9f43034f799e7ad814�XTitle: title: polars lowercase
+Path: Signature
+Content:
+``> polars lowercase {flags} ``
+��@2ba9d015177b7e258d190764b74e258d722b863eb20584261e1788221885db32ٷTitle: title: polars lowercase
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@5339be9b54be37ec6f4770c5836474ee3c41cf876de52a78404a944f35affb1d��Title: title: polars lowercase
+Path: Examples
+Content:
+Modifies strings in a column to lowercase
+```Fenced(Borrowed("nu"))
+> [[a]; [Abc]] | polars into-df | polars select (polars col a | polars lowercase) | polars collect
+╭───┬─────╮
+│ # │  a  │
+├───┼─────┤
+│ 0 │ abc │
+╰───┴─────╯
+
+
+```
+Modifies strings to lowercase
+```Fenced(Borrowed("nu"))
+> [Abc aBc abC] | polars into-df | polars lowercase
+╭───┬─────╮
+│ # │  0  │
+├───┼─────┤
+│ 0 │ abc │
+│ 1 │ abc │
+│ 2 │ abc │
+╰───┴─────╯
+
+
+```

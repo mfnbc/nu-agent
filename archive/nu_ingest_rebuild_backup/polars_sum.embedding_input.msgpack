@@ -1,0 +1,59 @@
+���@bc42dfc9af004597f1198c0d799731e0c5a4738cc42cbfa5123c20fe1623c055�tTitle: title: polars sum
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars sum``
+[link: /commands/categories/dataframe.md] ��@f67c5400520ce09c124764ee87476d92115783907aa22227b5b4d5e2bbbb81d1�LTitle: title: polars sum
+Path: Signature
+Content:
+``> polars sum {flags} ``
+��@a1fbc2fd0509bfb114dd8bf22e2f2ce07c3b4c688bbf8e990a4ad81851f633edٱTitle: title: polars sum
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@69b749c512dc63b2a7308da79e0130dc7e1c631df5328c92d1a15b88711df92e�vTitle: title: polars sum
+Path: Examples
+Content:
+Sums all columns in a dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [6 2] [1 4] [4 1]] | polars into-df | polars sum | polars collect
+╭───┬────┬───╮
+│ # │ a  │ b │
+├───┼────┼───┤
+│ 0 │ 11 │ 7 │
+╰───┴────┴───╯
+
+
+```
+Sum aggregation for a group-by
+```Fenced(Borrowed("nu"))
+> [[a b]; [one 2] [one 4] [two 1]]
+                    | polars into-df
+                    | polars group-by a
+                    | polars agg (polars col b | polars sum)
+                    | polars collect
+                    | polars sort-by a
+╭───┬─────┬───╮
+│ # │  a  │ b │
+├───┼─────┼───┤
+│ 0 │ one │ 6 │
+│ 1 │ two │ 1 │
+╰───┴─────┴───╯
+
+
+```

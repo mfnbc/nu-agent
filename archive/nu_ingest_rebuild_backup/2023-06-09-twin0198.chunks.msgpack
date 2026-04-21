@@ -1,0 +1,191 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-09-twin0198.mdŸ@77261e5891121f7d7691627afb11316dada97fafb749adc62373de28a7e6fd56πThis week in Nushell #198ëßNushell⁄Óhustcer 
+[link: https://github.com/nushell/nushell/pull/9385] trid to add a nightly-build workflow
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9381] applied nightly clippy fixes
+, and 
+[link: https://github.com/nushell/nushell/pull/9379] Bump to 0.81.1 as development version
+, and 
+[link: https://github.com/nushell/nushell/pull/9378] Fix internal module reexports
+, and 
+[link: https://github.com/nushell/nushell/pull/9370] Pin 
+``reedline``
+ to 0.20.0 release
+jt 
+[link: https://github.com/nushell/nushell/pull/9376] removed arm v7, which also is broken
+, and 
+[link: https://github.com/nushell/nushell/pull/9375] remove more of the risc release
+, and 
+[link: https://github.com/nushell/nushell/pull/9374] bump to 0.81
+nibon7 
+[link: https://github.com/nushell/nushell/pull/9372] fixed typos
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9365] added 
+``http options``
+ command
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/9361] Bump criterion from 0.4.0 to 0.5.1
+, and 
+[link: https://github.com/nushell/nushell/pull/9358] Bump serial_test from 1.0.0 to 2.0.0
+gdhuper 
+[link: https://github.com/nushell/nushell/pull/9356] added a check for empty params for 
+``url join``
+kubouch 
+[link: https://github.com/nushell/nushell/pull/9353] fixed config creation during printing
+skelly37 created 
+[link: https://github.com/nushell/nushell/pull/9315] Logger constants refactored, 
+``format``
+ argument added, better formatting of failed (non) equality assertions
+íêê⁄&Title: This week in Nushell #198
+Path: Nushell
+Content:
+hustcer 
+[link: https://github.com/nushell/nushell/pull/9385] trid to add a nightly-build workflow
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9381] applied nightly clippy fixes
+, and 
+[link: https://github.com/nushell/nushell/pull/9379] Bump to 0.81.1 as development version
+, and 
+[link: https://github.com/nushell/nushell/pull/9378] Fix internal module reexports
+, and 
+[link: https://github.com/nushell/nushell/pull/9370] Pin 
+``reedline``
+ to 0.20.0 release
+jt 
+[link: https://github.com/nushell/nushell/pull/9376] removed arm v7, which also is broken
+, and 
+[link: https://github.com/nushell/nushell/pull/9375] remove more of the risc release
+, and 
+[link: https://github.com/nushell/nushell/pull/9374] bump to 0.81
+nibon7 
+[link: https://github.com/nushell/nushell/pull/9372] fixed typos
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9365] added 
+``http options``
+ command
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/9361] Bump criterion from 0.4.0 to 0.5.1
+, and 
+[link: https://github.com/nushell/nushell/pull/9358] Bump serial_test from 1.0.0 to 2.0.0
+gdhuper 
+[link: https://github.com/nushell/nushell/pull/9356] added a check for empty params for 
+``url join``
+kubouch 
+[link: https://github.com/nushell/nushell/pull/9353] fixed config creation during printing
+skelly37 created 
+[link: https://github.com/nushell/nushell/pull/9315] Logger constants refactored, 
+``format``
+ argument added, better formatting of failed (non) equality assertions
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-09-twin0198.mdŸ@9e61c4ad98a17043190290e702e32f5e534534a13f3f97eb811a082cec6b6644πThis week in Nushell #198ë©ExtensionŸÑgaetschwartz created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/133] Use unique labels for 
+``durationLogWrapper``
+íêêŸæTitle: This week in Nushell #198
+Path: Extension
+Content:
+gaetschwartz created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/133] Use unique labels for 
+``durationLogWrapper``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-09-twin0198.mdŸ@b0c90a6c729cc9afa47f25c49e82144e437b44439ab31bfbbe239fbb076871d3πThis week in Nushell #198ë≠Documentation⁄∫hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/944] Refresh command docs for Nu v0.81.0
+Omochice created 
+[link: https://github.com/nushell/nushell.github.io/pull/942] Fix missing 
+``|``
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/940] Bump vite from 4.0.4 to 4.0.5
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/916] Release notes for 
+``0.81``
+íêê⁄¯Title: This week in Nushell #198
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/944] Refresh command docs for Nu v0.81.0
+Omochice created 
+[link: https://github.com/nushell/nushell.github.io/pull/942] Fix missing 
+``|``
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/940] Bump vite from 4.0.4 to 4.0.5
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/916] Release notes for 
+``0.81``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-09-twin0198.mdŸ@b370f7a71c346da1e18cd0696278c0b19ea8226f256529c7e47eca9aa7f48bcaπThis week in Nushell #198ë™Nu_Scripts⁄ fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/527] parse name of positional args in 
+``parse cmd``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/523] kubernetes: fix 
+``-n``
+ in completion context
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/522] more precise parsing of cmd through the information in 
+`
+nu.scope.comm‚Ä¶
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/526] add a "command not found" hook
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/525] REFACTOR: rewrite the release note scripts
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/524] fix the 
+``std log``
+ import in 
+``make_release/create-website-release-note-pr``
+íêê⁄Title: This week in Nushell #198
+Path: Nu_Scripts
+Content:
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/527] parse name of positional args in 
+``parse cmd``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/523] kubernetes: fix 
+``-n``
+ in completion context
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/522] more precise parsing of cmd through the information in 
+`
+nu.scope.comm‚Ä¶
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/526] add a "command not found" hook
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/525] REFACTOR: rewrite the release note scripts
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/524] fix the 
+``std log``
+ import in 
+``make_release/create-website-release-note-pr``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-09-twin0198.mdŸ@d95ef0ae1712f1db17ddbd31d4970c0f351c6d7df8601f217f053e327ca31d7fπThis week in Nushell #198ë®reedline⁄úfdncred created 
+[link: https://github.com/nushell/reedline/pull/593] update .typos.toml for bui
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/592] add a new disable_bracketed_paste method
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/590] Revert removal of patch versions
+, and 
+[link: https://github.com/nushell/reedline/pull/581] Bump to 
+``0.20.0``
+ for release
+íêê⁄’Title: This week in Nushell #198
+Path: reedline
+Content:
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/593] update .typos.toml for bui
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/592] add a new disable_bracketed_paste method
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/590] Revert removal of patch versions
+, and 
+[link: https://github.com/nushell/reedline/pull/581] Bump to 
+``0.20.0``
+ for release

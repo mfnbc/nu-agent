@@ -1,0 +1,50 @@
+ñíŸ@cadc66d3a3afa06caa1c1f5b98bcaf777b51c80a13eb0be93ac6d6043971d1d6ŸbTitle: title: exec
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``exec``
+[link: /commands/categories/system.md] íŸ@642995e47b263f3daa8e347cdcbc60771000f7da34b823153be7c0ef21ad693aŸGTitle: title: exec
+Path: Signature
+Content:
+``> exec {flags} ...rest``
+íŸ@228b643193cb2113d0f4da31c4e1c03829658118f60c6ae27b486a3c52d7a140ŸdTitle: title: exec
+Path: Parameters
+Content:
+``...rest``
+: External command to run, with arguments.
+íŸ@75a63740af2550fd328a53ebc6982464c30e9209b949f916facdc2629188f8b0ŸOTitle: title: exec
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+íŸ@a8827134c237fc84da0f2dcbcf4e2e3eb16fac12f8b694f740c49a9a45ab0817ŸªTitle: title: exec
+Path: Examples
+Content:
+Execute external 'ps aux' tool
+```Fenced(Borrowed("nu"))
+> exec ps aux
+
+
+```
+Execute 'nautilus'
+```Fenced(Borrowed("nu"))
+> exec nautilus
+
+
+```
+íŸ@004fc5890523a08387e1256299f20874d6dfdd219c572fd21c7f31e7978eaf04Ÿ‰Title: title: exec
+Path: Notes
+Content:
+On Unix-based systems, the current process is replaced with the command.
+
+On Windows based systems, Nushell will wait for the command to finish and then exit with the command's exit code.

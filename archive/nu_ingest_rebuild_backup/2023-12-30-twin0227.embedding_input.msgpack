@@ -1,0 +1,99 @@
+”’Ù@b80dd381b846d7696839b37dea586c521264444e704b40d1b536cb751e933571Ú×Title: This week in Nushell #227
+Path: Nushell
+Content:
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/11423] added more specific errors for missing values in records
+, and 
+[link: https://github.com/nushell/nushell/pull/11289] allowed spreading arguments to commands
+nibon7 
+[link: https://github.com/nushell/nushell/pull/11422] fixed a panic when 
+``http_client``
+ fails
+, and improved redirection: 
+[link: https://github.com/nushell/nushell/pull/11421] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11384] 2
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11416] simplified the feature gates for 
+``stor``
+ commands
+, 
+[link: https://github.com/nushell/nushell/pull/11415] made polars deps optional for 
+``cargo test --all``
+, and 
+[link: https://github.com/nushell/nushell/pull/11414] limited direct construction of 
+``Record``
+, 
+[link: https://github.com/nushell/nushell/pull/11409] added a check for clean repo after tests
+, 
+[link: https://github.com/nushell/nushell/pull/11407] fixed sandboxing of redirection tests
+, and 
+[link: https://github.com/nushell/nushell/pull/11406] bumped the reedline development version
+fdncred 
+[link: https://github.com/nushell/nushell/pull/11425] reverted "Bump reedline development version"
+SebastianIonel 
+[link: https://github.com/nushell/nushell/pull/11428] fixed a bug with "bytes remove --end" .
+IanManske 
+[link: https://github.com/nushell/nushell/pull/11424] removed the unnecessary 
+``replace_in_variable``
+lavafroth implemented 
+[link: https://github.com/nushell/nushell/pull/11403] fix: prevent greedy matching of directory names
+cyradotpink 
+[link: https://github.com/nushell/nushell/pull/11329] allowed 
+``http``
+ commands' automatic redirect-following to be disabled
+’Ù@6f24db5d6f3363bdd29680acbdd7401a49b8b258bbff82158c72873bab3548a6ÚTitle: This week in Nushell #227
+Path: Documentation
+Content:
+frogshead created 
+[link: https://github.com/nushell/nushell.github.io/pull/1185] fix typo
+ysthakur created 
+[link: https://github.com/nushell/nushell.github.io/pull/1176] Add information on spread operator
+’Ù@613cba364f08eb4757c62aa82d444c4eb7c7437966b02ad32a8a35de11f4e89eÚÐTitle: This week in Nushell #227
+Path: Nu_Scripts
+Content:
+AucaCoyan created 
+[link: https://github.com/nushell/nu_scripts/pull/721] :bug: fix 
+``(default)``
+ and 
+``(installed)``
+ on rustup completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/720] :bug: rename 
+``yarn``
+ for 
+``yarn-v4``
+ and add 
+``run``
+ cmpl
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/719] :sparkles: 
+``code``
+ completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/714] :sparkles: add completion to 
+``gh pr checkout <tab>``
+frogshead created 
+[link: https://github.com/nushell/nu_scripts/pull/718] fix broken links in modules readme
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/716] fix broken link on README.md
+edhowland created 
+[link: https://github.com/nushell/nu_scripts/pull/717] Adds Modules/recursion : Examples of Fun with Recursive functions in Nu
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/715] comma test runner
+’Ù@0a79b368a48a3ef58338437b62bd9972ded1c2786e1d5aee6ddc39f942b6e49bÚªTitle: This week in Nushell #227
+Path: reedline
+Content:
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/688] Fix 
+``prompt_start_row``
+ reset to 0 when opening a file without newline in Nushell
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/687] Fix clippy from the future
+, and 
+[link: https://github.com/nushell/reedline/pull/686] Bump 
+``itertools``
+ to 
+``0.12.0``
+ from 
+``0.10.x``

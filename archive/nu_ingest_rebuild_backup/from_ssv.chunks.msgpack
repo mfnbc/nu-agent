@@ -1,0 +1,107 @@
+���Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_ssv.md�@d96d80dd4bf296dd49265d9e4e1a567d3abc73081ccd44f7f0afb543d8cbbaf8�title: from ssv��formats�>
+
+
+
+
+
+
+
+
+``from ssv``
+[link: /commands/categories/formats.md] ����lTitle: title: from ssv
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``from ssv``
+[link: /commands/categories/formats.md] ��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_ssv.md�@110bba8dbcc56f2e22854e2ef9a61f1203ab3a4ae1b71714d82e47be0f07b7e7�title: from ssv��Signature�``> from ssv {flags} ``
+����HTitle: title: from ssv
+Path: Signature
+Content:
+``> from ssv {flags} ``
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_ssv.md�@7c4fb4f160929ed8e465b333fa8ff686f46e330e607f85337bc76b6fb776ffce�title: from ssv��Flags��``--noheaders, -n``
+: Don't treat the first row as column names.
+``--aligned-columns, -a``
+: Assume columns are aligned.
+``--minimum-spaces, -m {int}``
+: The minimum spaces to separate columns.
+�����Title: title: from ssv
+Path: Flags
+Content:
+``--noheaders, -n``
+: Don't treat the first row as column names.
+``--aligned-columns, -a``
+: Assume columns are aligned.
+``--minimum-spaces, -m {int}``
+: The minimum spaces to separate columns.
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_ssv.md�@594316e45c348dbb14c1eb54a65195a4b8df23f31b518ffc7fe1dc1b07a589fd�title: from ssv��Input/output types:�input
+output
+string
+table
+����TTitle: title: from ssv
+Path: Input/output types:
+Content:
+input
+output
+string
+table
+��Parchive/external_nushell_repo_backup/nushell.github.io/commands/docs/from_ssv.md�@7cd8b87f6b7be2596fa184b7f3ff9065e003c36c899e4e2f24bb4b35d5102d7f�title: from ssv��Examples�#Converts ssv formatted string to table.
+```Fenced(Borrowed("nu"))
+> 'FOO   BAR
+1   2' | from ssv
+╭───┬─────┬─────╮
+│ # │ FOO │ BAR │
+├───┼─────┼─────┤
+│ 0 │ 1   │ 2   │
+╰───┴─────┴─────╯
+
+
+```
+Converts ssv formatted string to table but not treating the first row as column names.
+```Fenced(Borrowed("nu"))
+> 'FOO   BAR
+1   2' | from ssv --noheaders
+╭───┬─────────┬─────────╮
+│ # │ column0 │ column1 │
+├───┼─────────┼─────────┤
+│ 0 │ FOO     │ BAR     │
+│ 1 │ 1       │ 2       │
+╰───┴─────────┴─────────╯
+
+
+```
+����RTitle: title: from ssv
+Path: Examples
+Content:
+Converts ssv formatted string to table.
+```Fenced(Borrowed("nu"))
+> 'FOO   BAR
+1   2' | from ssv
+╭───┬─────┬─────╮
+│ # │ FOO │ BAR │
+├───┼─────┼─────┤
+│ 0 │ 1   │ 2   │
+╰───┴─────┴─────╯
+
+
+```
+Converts ssv formatted string to table but not treating the first row as column names.
+```Fenced(Borrowed("nu"))
+> 'FOO   BAR
+1   2' | from ssv --noheaders
+╭───┬─────────┬─────────╮
+│ # │ column0 │ column1 │
+├───┼─────────┼─────────┤
+│ 0 │ FOO     │ BAR     │
+│ 1 │ 1       │ 2       │
+╰───┴─────────┴─────────╯
+
+
+```

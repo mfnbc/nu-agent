@@ -1,0 +1,49 @@
+–’Ù@eb4c50c9985db101769772d3b9c34549e5564655d8212af9d7071f678d3cad1aÙtTitle: title: polars cut
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars cut``
+[link: /commands/categories/dataframe.md] ’Ù@0c35322862f1f81fdac024ce3ea9246fbf1a36c551bb70c475897a1a360258b8ÙTTitle: title: polars cut
+Path: Signature
+Content:
+``> polars cut {flags} (breaks)``
+’Ù@65094f7077a494900179025a528612f342a9148d7b460799ebe6e0caf06f1d27Ú¾Title: title: polars cut
+Path: Flags
+Content:
+``--labels, -l {list<string>}``
+: Names of the categories. The number of labels must be equal to the number of cut points plus one.
+``--left_closed, -c``
+: Set the intervals to be left-closed instead of right-closed.
+``--include_breaks, -b``
+: Include a column with the right endpoint of the bin each observation falls in. This will change the data type of the output from a Categorical to a Struct.
+’Ù@e158340336de28c8c3c4e5a3c766750426cc8387c8d99ffd7af6261a643b7dceÙwTitle: title: polars cut
+Path: Parameters
+Content:
+``breaks``
+: Dataframe that contains a series of unique cut points.
+’Ù@1a244773fb59e630657a064dc0cf8bca34b1b378ac6d5ce36f55ac0be5774df0ÙTitle: title: polars cut
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+’Ù@dcb142ba1786c745c59c95cc689eea558d78c76393c95c60c06458e9d51b18a3ÙÍTitle: title: polars cut
+Path: Examples
+Content:
+Divide the column into three categories.
+```Fenced(Borrowed("nu"))
+> [-2, -1, 0, 1, 2] | polars into-df | polars cut [-1, 1] --labels ["a", "b", "c"]
+
+
+```

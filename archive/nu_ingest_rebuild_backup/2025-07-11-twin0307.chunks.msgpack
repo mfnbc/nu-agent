@@ -1,0 +1,128 @@
+ñóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-11-twin0307.mdŸ@9db669af1d75408ea148d53c2abd661198ba4a678fd6a17865c69704c441104aŸ"title: 'This week in Nushell #307'ëπThis Week in Nushell #307Ÿh
+
+
+
+Published Monday, 2025-08-18, including PRs merged Friday, 2025-07-04 through Thursday, 2025-07-10.
+íêêŸªTitle: title: 'This week in Nushell #307'
+Path: This Week in Nushell #307
+Content:
+
+
+
+
+Published Monday, 2025-08-18, including PRs merged Friday, 2025-07-04 through Thursday, 2025-07-10.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-11-twin0307.mdŸ@1b1ba633551997c068b582e170a89cf259fb7f9fcf7a72588f854da4046e15d8Ÿ"title: 'This week in Nushell #307'ëßNushell⁄¬@echasnovski
+[link: https://github.com/nushell/nushell/pull/16153] fixed 
+``gstat``
+ making 
+``state``
+ entry lowercase (#16153)
+@ryanxcharles
+[link: https://github.com/nushell/nushell/pull/16152] fixed typo in pipe documentation (#16152)
+@132ikl
+[link: https://github.com/nushell/nushell/pull/16146] used Severity::Warning for miette warnings (#16146)
+[link: https://github.com/nushell/nushell/pull/16107] fixed type checking for assignment operators (#16107)
+@app/dependabot
+[link: https://github.com/nushell/nushell/pull/16136] bumped indicatif from 0.17.9 to 0.17.11 (#16136)
+@dead10ck
+[link: https://github.com/nushell/nushell/pull/16133] fixed polars datetime type conversion (#16133)
+@ayax79
+[link: https://github.com/nushell/nushell/pull/16132] added flag limit for 
+``polars arg-sort``
+ (#16132)
+@blindFS
+[link: https://github.com/nushell/nushell/pull/16122] fixed panic when using if command as constant expr by bringing back 
+``Type::Block``
+ (#16122)
+@cptpiepmatz
+[link: https://github.com/nushell/nushell/pull/16121] added 
+``all``
+ flag to enable all active experimental options (#16121)
+@fdncred
+[link: https://github.com/nushell/nushell/pull/16113] fixed missing new items in 
+``ansi --list``
+ (#16113)
+@hustcer
+[link: https://github.com/nushell/nushell/pull/16026] updated winget default INSTALLDIR for per-machine install path (#16026)
+@zhiburt
+[link: https://github.com/nushell/nushell/pull/15900] optimized nu-table creation and width functions (#15900)
+íêê⁄Title: title: 'This week in Nushell #307'
+Path: Nushell
+Content:
+@echasnovski
+[link: https://github.com/nushell/nushell/pull/16153] fixed 
+``gstat``
+ making 
+``state``
+ entry lowercase (#16153)
+@ryanxcharles
+[link: https://github.com/nushell/nushell/pull/16152] fixed typo in pipe documentation (#16152)
+@132ikl
+[link: https://github.com/nushell/nushell/pull/16146] used Severity::Warning for miette warnings (#16146)
+[link: https://github.com/nushell/nushell/pull/16107] fixed type checking for assignment operators (#16107)
+@app/dependabot
+[link: https://github.com/nushell/nushell/pull/16136] bumped indicatif from 0.17.9 to 0.17.11 (#16136)
+@dead10ck
+[link: https://github.com/nushell/nushell/pull/16133] fixed polars datetime type conversion (#16133)
+@ayax79
+[link: https://github.com/nushell/nushell/pull/16132] added flag limit for 
+``polars arg-sort``
+ (#16132)
+@blindFS
+[link: https://github.com/nushell/nushell/pull/16122] fixed panic when using if command as constant expr by bringing back 
+``Type::Block``
+ (#16122)
+@cptpiepmatz
+[link: https://github.com/nushell/nushell/pull/16121] added 
+``all``
+ flag to enable all active experimental options (#16121)
+@fdncred
+[link: https://github.com/nushell/nushell/pull/16113] fixed missing new items in 
+``ansi --list``
+ (#16113)
+@hustcer
+[link: https://github.com/nushell/nushell/pull/16026] updated winget default INSTALLDIR for per-machine install path (#16026)
+@zhiburt
+[link: https://github.com/nushell/nushell/pull/15900] optimized nu-table creation and width functions (#15900)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-11-twin0307.mdŸ@1b0d1b7f0e2217b08029f6c945e189b9b5033820caefb7761d1ec990da684ff1Ÿ"title: 'This week in Nushell #307'ë™Nu_ScriptsŸa@lucascherzer
+[link: https://github.com/nushell/nu_scripts/pull/1142] fixed url encoding (#1142)
+íêêŸ•Title: title: 'This week in Nushell #307'
+Path: Nu_Scripts
+Content:
+@lucascherzer
+[link: https://github.com/nushell/nu_scripts/pull/1142] fixed url encoding (#1142)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-11-twin0307.mdŸ@175125ed850a8148d39b3ab89c0b261ca429a5e9d96531890269b1df7ac15acdŸ"title: 'This week in Nushell #307'ë¨IntegrationsŸw@hustcer
+[link: https://github.com/nushell/integrations/pull/63] added workflow for winget install/upgrade tests (#63)
+íêêŸΩTitle: title: 'This week in Nushell #307'
+Path: Integrations
+Content:
+@hustcer
+[link: https://github.com/nushell/integrations/pull/63] added workflow for winget install/upgrade tests (#63)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-11-twin0307.mdŸ@f652a7ddfedbdd80187baf72775707d8593529631e7796e8346e5887bbaed15dŸ"title: 'This week in Nushell #307'ë≠Documentation⁄8@lucascherzer
+[link: https://github.com/nushell/nushell.github.io/pull/1968] added link to issue (#1968)
+@NotTheDr01ds
+[link: https://github.com/nushell/nushell.github.io/pull/1967] twin 0303.md (#1967)
+@azarmadr
+[link: https://github.com/nushell/nushell.github.io/pull/1966] added link to where command (#1966)
+íêê⁄Title: title: 'This week in Nushell #307'
+Path: Documentation
+Content:
+@lucascherzer
+[link: https://github.com/nushell/nushell.github.io/pull/1968] added link to issue (#1968)
+@NotTheDr01ds
+[link: https://github.com/nushell/nushell.github.io/pull/1967] twin 0303.md (#1967)
+@azarmadr
+[link: https://github.com/nushell/nushell.github.io/pull/1966] added link to where command (#1966)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-11-twin0307.mdŸ@4cba94a59c86679b3137eff9ec844d635376b5f67ea5913b78713e906b2f51c7Ÿ"title: 'This week in Nushell #307'ë´Tree-sitter⁄-@blindFS
+[link: https://github.com/nushell/tree-sitter-nu/pull/214] fixed unexpected spaces at token head (#214)
+[link: https://github.com/nushell/tree-sitter-nu/pull/213] updated CI workflow (#213)
+@Bahex
+[link: https://github.com/nushell/tree-sitter-nu/pull/211] improved language injections (#211)
+íêê⁄rTitle: title: 'This week in Nushell #307'
+Path: Tree-sitter
+Content:
+@blindFS
+[link: https://github.com/nushell/tree-sitter-nu/pull/214] fixed unexpected spaces at token head (#214)
+[link: https://github.com/nushell/tree-sitter-nu/pull/213] updated CI workflow (#213)
+@Bahex
+[link: https://github.com/nushell/tree-sitter-nu/pull/211] improved language injections (#211)

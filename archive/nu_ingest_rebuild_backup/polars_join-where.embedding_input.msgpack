@@ -1,0 +1,51 @@
+���@5c3d9f99b138b84b6c1d278dd24aac63be89165668ccb477223381467f4ab4efقTitle: title: polars join-where
+Path: lazyframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars join-where``
+[link: /commands/categories/lazyframe.md] ��@a66272359501434b31b6af1f68f9936050484d627035f558609757b495e01dff�mTitle: title: polars join-where
+Path: Signature
+Content:
+``> polars join-where {flags} (other) (condition)``
+��@5045c30f58312a3c12487749a5851fe53b0e8694d0d16a56a840db1e9549e862�yTitle: title: polars join-where
+Path: Parameters
+Content:
+``other``
+: LazyFrame to join with.
+``condition``
+: Condition.
+��@7ad598e3015e7b332b6910df6e5454fcd634a72a21b04836edb23b57060f69f0ٔTitle: title: polars join-where
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@c3f1f0ed2b54b79917bc2f4e633760025a35f5dd05a4f126c568266e190670b9�gTitle: title: polars join-where
+Path: Examples
+Content:
+Join two lazy dataframes with a condition
+```Fenced(Borrowed("nu"))
+> let df_a = ([[name cash];[Alice 5] [Bob 10]] | polars into-lazy)
+    let df_b = ([[item price];[A 3] [B 7] [C 12]] | polars into-lazy)
+    $df_a | polars join-where $df_b ((polars col cash) > (polars col price)) | polars collect
+╭───┬───────┬──────┬──────┬───────╮
+│ # │ name  │ cash │ item │ price │
+├───┼───────┼──────┼──────┼───────┤
+│ 0 │ Bob   │   10 │ B    │     7 │
+│ 1 │ Bob   │   10 │ A    │     3 │
+│ 2 │ Alice │    5 │ A    │     3 │
+╰───┴───────┴──────┴──────┴───────╯
+
+
+```

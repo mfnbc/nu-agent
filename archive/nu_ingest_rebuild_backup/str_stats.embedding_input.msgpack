@@ -1,0 +1,66 @@
+���@e7ba4695d19c61a60f8ccc07570299e4ff80a386722026bb51723cf9bdfd14a2�nTitle: title: str stats
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str stats``
+[link: /commands/categories/strings.md] ��@af332d729de9a069080e760134fb76ff3c2e0083b47c4c545ab6f575ae0fa6b4�JTitle: title: str stats
+Path: Signature
+Content:
+``> str stats {flags} ``
+��@9f2c152a5a90f5b31dadd4ab47f768c546949092f55664e29d891c880b1ebd99�VTitle: title: str stats
+Path: Input/output types:
+Content:
+input
+output
+string
+record
+��@4838b911c8c9abe30871d859eb01dcbe80060cd9f88b25b1c40a333086ce7da4�Title: title: str stats
+Path: Examples
+Content:
+Count the number of words in a string.
+```Fenced(Borrowed("nu"))
+> "There are seven words in this sentence" | str stats
+╭───────────────┬────╮
+│ lines         │ 1  │
+│ words         │ 7  │
+│ bytes         │ 38 │
+│ chars         │ 38 │
+│ graphemes     │ 38 │
+│ unicode-width │ 38 │
+╰───────────────┴────╯
+
+```
+Counts unicode characters.
+```Fenced(Borrowed("nu"))
+> '今天天气真好' | str stats
+╭───────────────┬────╮
+│ lines         │ 1  │
+│ words         │ 6  │
+│ bytes         │ 18 │
+│ chars         │ 6  │
+│ graphemes     │ 6  │
+│ unicode-width │ 12 │
+╰───────────────┴────╯
+
+```
+Counts Unicode characters correctly in a string.
+```Fenced(Borrowed("nu"))
+> "Amélie Amelie" | str stats
+╭───────────────┬────╮
+│ lines         │ 1  │
+│ words         │ 2  │
+│ bytes         │ 15 │
+│ chars         │ 14 │
+│ graphemes     │ 13 │
+│ unicode-width │ 13 │
+╰───────────────┴────╯
+
+```

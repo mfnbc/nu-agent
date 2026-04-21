@@ -1,0 +1,80 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-26-twin0331.mdŸ@416515fe31e8efb6a4b02a8320d5cfcea81a76f80df1a797d5e00caf7eebe101Ÿ"title: 'This week in Nushell #331'ëπThis Week in Nushell #331Ÿh
+
+
+
+Published Friday, 2025-12-26, including PRs merged Friday, 2025-12-19 through Thursday, 2025-12-25.
+íêêŸªTitle: title: 'This week in Nushell #331'
+Path: This Week in Nushell #331
+Content:
+
+
+
+
+Published Friday, 2025-12-26, including PRs merged Friday, 2025-12-19 through Thursday, 2025-12-25.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-26-twin0331.mdŸ@5eaa574f59da0aa86bd3c10056d87b888bda5795753baef9dc1756900ff92979Ÿ"title: 'This week in Nushell #331'ë™HighlightsŸƒPolars hits the trifecta with AWS, Azure, and now, thanks to @ayax79 - Google Cloud Platform!
+You can now both time a command and return its output using 
+``timeit --output``
+ thanks to @Tyarel8!
+íêê⁄Title: title: 'This week in Nushell #331'
+Path: Highlights
+Content:
+Polars hits the trifecta with AWS, Azure, and now, thanks to @ayax79 - Google Cloud Platform!
+You can now both time a command and return its output using 
+``timeit --output``
+ thanks to @Tyarel8!
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-26-twin0331.mdŸ@05138b8387b08331638cfb5759340c417c3cbfefca4b7765b46ee75d1ddca56cŸ"title: 'This week in Nushell #331'ëßNushell⁄@fdncred:
+[link: https://github.com/nushell/nushell/pull/17223] Increased help menu description rows from 10 to 15 (#17223)
+[link: https://github.com/nushell/nushell/pull/17219] Used graphemes instead of byte indexes in 
+``explore regegx``
+ (#17219)
+@Jan9103:
+[link: https://github.com/nushell/nushell/pull/17204] Made bytes length available at const-time (#17204)
+@Tyarel8:
+[link: https://github.com/nushell/nushell/pull/17202] Added 
+``--output``
+ flag to 
+``timeit``
+ (#17202)
+@andrewgazelka:
+[link: https://github.com/nushell/nushell/pull/17171] Added par-each preference to mcp instructions (#17171)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/17135] Added Google Cloud support to Polars (#17135)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/17227] Bumped mach2 from 0.4.3 to 0.6.0 (#17227)
+[link: https://github.com/nushell/nushell/pull/17225] Bumped toml from 0.8.19 to 0.9.10+spec-1.1.0 (#17225)
+[link: https://github.com/nushell/nushell/pull/17224] Bumped rmcp from 0.8.1 to 0.8.5 (#17224)
+íêê⁄GTitle: title: 'This week in Nushell #331'
+Path: Nushell
+Content:
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/17223] Increased help menu description rows from 10 to 15 (#17223)
+[link: https://github.com/nushell/nushell/pull/17219] Used graphemes instead of byte indexes in 
+``explore regegx``
+ (#17219)
+@Jan9103:
+[link: https://github.com/nushell/nushell/pull/17204] Made bytes length available at const-time (#17204)
+@Tyarel8:
+[link: https://github.com/nushell/nushell/pull/17202] Added 
+``--output``
+ flag to 
+``timeit``
+ (#17202)
+@andrewgazelka:
+[link: https://github.com/nushell/nushell/pull/17171] Added par-each preference to mcp instructions (#17171)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/17135] Added Google Cloud support to Polars (#17135)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/17227] Bumped mach2 from 0.4.3 to 0.6.0 (#17227)
+[link: https://github.com/nushell/nushell/pull/17225] Bumped toml from 0.8.19 to 0.9.10+spec-1.1.0 (#17225)
+[link: https://github.com/nushell/nushell/pull/17224] Bumped rmcp from 0.8.1 to 0.8.5 (#17224)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-12-26-twin0331.mdŸ@bb073ebb445663579bf6c997616c4da87e3291982160200ed955263db9ddfe72Ÿ"title: 'This week in Nushell #331'ë≠DocumentationŸÓ@Paul-16098:
+[link: https://github.com/nushell/nushell.github.io/pull/2097] Clarified user defined menu layout in zh-cn docs (#2097)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/2095] Published TWiN 330 (#2095)
+íêê⁄5Title: title: 'This week in Nushell #331'
+Path: Documentation
+Content:
+@Paul-16098:
+[link: https://github.com/nushell/nushell.github.io/pull/2097] Clarified user defined menu layout in zh-cn docs (#2097)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/2095] Published TWiN 330 (#2095)

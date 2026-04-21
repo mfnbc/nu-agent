@@ -1,0 +1,117 @@
+“’Ù@b41c81b2676e38a998b8e068bdceb80463971c2603bc49a078652389efab7bc4Ú©Title: This week in Nushell #176
+Path: Nushell
+Content:
+webbedspace made 
+[link: https://github.com/nushell/nushell/pull/7650] Primitives now use color closures when printed on the command line
+, and 
+[link: https://github.com/nushell/nushell/pull/7647] Make 
+``get``
+ hole errors and cell path hole errors identical (improvement on #7002)
+, and 
+[link: https://github.com/nushell/nushell/pull/7624] ``def``
+: make various punctuation misuses into errors
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7580] a new 
+``start``
+ command to open anything and everything
+MehulG created 
+[link: https://github.com/nushell/nushell/pull/7664] a url-encoding command
+rgwood added 
+[link: https://github.com/nushell/nushell/pull/7688] benchmarks for evaluating default env+config
+, and 
+[link: https://github.com/nushell/nushell/pull/7686] Add Criterion benchmarks for parser
+, and 
+[link: https://github.com/nushell/nushell/pull/7681] Upgrade all remaining crates to Rust 2021
+, and 
+[link: https://github.com/nushell/nushell/pull/7672] Reorder flags in 
+``nu --help``
+, and 
+[link: https://github.com/nushell/nushell/pull/7670] Clarify 
+``url``
+ base command
+, and 
+[link: https://github.com/nushell/nushell/pull/7668] Delete unused files
+, and 
+[link: https://github.com/nushell/nushell/pull/7646] Tweak new input type error message
+, and 
+[link: https://github.com/nushell/nushell/pull/7589] Make stream info visible to users in 
+``describe``
+kubouch 
+[link: https://github.com/nushell/nushell/pull/7687] removed environment variable hiding from 
+``hide``
+Mehrbod2002 fixed 
+[link: https://github.com/nushell/nushell/pull/7683] Continue and Break on Try/Catch 
+, and 
+[link: https://github.com/nushell/nushell/pull/7657] Recursion def
+hikilaka implemented 
+[link: https://github.com/nushell/nushell/pull/7680] Make 
+``user``
+ parameter optional in 
+``fetch``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/7679] cleaned up the 
+``where``
+ implementation
+, and 
+[link: https://github.com/nushell/nushell/pull/7638] Try to use the latest tagged virtualenv
+, and 
+[link: https://github.com/nushell/nushell/pull/7284] Remove 
+``math eval``
+ command
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7677] fixed register-plugins script
+xxnuo 
+[link: https://github.com/nushell/nushell/pull/7674] fixed build-all-windows.cmd
+aniou 
+[link: https://github.com/nushell/nushell/pull/7669] extended config support from F1-F12 to F1-F20, #7666
+WindSoilder made type checking stricter for 
+[link: https://github.com/nushell/nushell/pull/7623] last, skip, drop, take until, take while, skip until, skip while, where, reverse, shuffle, append, prepend and sort-by
+TornaxO7 
+[link: https://github.com/nushell/nushell/pull/7649] added a link to list of nu-plugins
+Decodetalkers 
+[link: https://github.com/nushell/nushell/pull/7643] fixed a ci problem
+, and 
+[link: https://github.com/nushell/nushell/pull/7639] fix: empty cell in select
+, and 
+[link: https://github.com/nushell/nushell/pull/7002] return Error if get meet nothing and without "i"
+Yethal 
+[link: https://github.com/nushell/nushell/pull/7636] simplified register-plugins.nu
+Kangaxx-0 created 
+[link: https://github.com/nushell/nushell/pull/7618] early return for parsing closure and block with interchanged shape
+NotLebedev 
+[link: https://github.com/nushell/nushell/pull/7608] fixed 
+``save``
+ error handling
+raccmonteiro 
+[link: https://github.com/nushell/nushell/pull/7534] optimized 
+``uniq``
+ and 
+``uniq-by``
+’Ù@6457df448148770d7f655f3e1883143ea0fd2eb49af39bc50dbc436760d668bbÚ:Title: This week in Nushell #176
+Path: Documentation
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell.github.io/pull/731] fixed #705: sidebar links German
+WindSoilder 
+[link: https://github.com/nushell/nushell.github.io/pull/732] rename from blog text to changeLog
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/729] fixed i18n.nu script and update i18n-meta conf
+webbedspace 
+[link: https://github.com/nushell/nushell.github.io/pull/727] documented breaking changes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/652] Fixed various issues in make_docs.nu
+TornaxO7 
+[link: https://github.com/nushell/nushell.github.io/pull/724] updated plugins.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/723] Update custom_completions.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/722] Update aliases.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/720] Fix syntax error fdor menu
+kubouch 
+[link: https://github.com/nushell/nushell.github.io/pull/721] fixed wrong PATH append example
+’Ù@cb3082ec15f771772075ef956b23651b2f7a2efee48d1311596fdbe4ba65041fÙ•Title: This week in Nushell #176
+Path: Nu_Scripts
+Content:
+kubouch 
+[link: https://github.com/nushell/nu_scripts/pull/338] fixed broken conda prompt

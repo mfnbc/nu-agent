@@ -1,0 +1,158 @@
+ñóŸVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explore_config.mdŸ@953cb53336750447b12fee189d686f758a76b03b11f32f0fe0a90b3f5e409611µtitle: explore configëßviewersŸD
+
+
+
+
+
+
+
+
+``explore config``
+[link: /commands/categories/viewers.md] íêêŸxTitle: title: explore config
+Path: viewers
+Content:
+
+
+
+
+
+
+
+
+
+``explore config``
+[link: /commands/categories/viewers.md] óŸVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explore_config.mdŸ@4672a9274c7cd2994441eba97bdf621212c7481468e90e4c787de141ece317bdµtitle: explore configë©Signatureæ``> explore config {flags} ``
+íêêŸTTitle: title: explore config
+Path: Signature
+Content:
+``> explore config {flags} ``
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explore_config.mdŸ@92fa8a2c03ccb3f7c395234c8e1129ca388c0bfedfac7aa247aad790aa9cc21cµtitle: explore configë•FlagsŸ˛``--use-example-data, -e``
+: Show the nushell configuration TUI using example data.
+``--tree, -t``
+: Do not show the TUI, just show a tree structure of the data.
+``--output, -o {string}``
+: Optional output file to save changes to (default: output.json).
+íêê⁄0Title: title: explore config
+Path: Flags
+Content:
+``--use-example-data, -e``
+: Show the nushell configuration TUI using example data.
+``--tree, -t``
+: Do not show the TUI, just show a tree structure of the data.
+``--output, -o {string}``
+: Optional output file to save changes to (default: output.json).
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explore_config.mdŸ@d388c33ef5f096e107a0cdbb9a5dfc78e1928ba56c7a93ebcb9505fc9ac3988cµtitle: explore configë≥Input/output types:Ÿ*input
+output
+nothing
+string
+string
+string
+íêêŸjTitle: title: explore config
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+string
+string
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explore_config.mdŸ@c9c6cee81bf85140af7a24fa84991b8c86500c0a59e8a0f7e3a4e4f5068d67dfµtitle: explore configë®Examples⁄GOpen the nushell configuration in an interactive TUI editor
+```Fenced(Borrowed("nu"))
+> explore config
+
+
+```
+Explore JSON data interactively
+```Fenced(Borrowed("nu"))
+> open --raw data.json | explore config
+
+
+```
+Explore with example data to see TUI features
+```Fenced(Borrowed("nu"))
+> explore config --use-example-data
+
+
+```
+íêê⁄|Title: title: explore config
+Path: Examples
+Content:
+Open the nushell configuration in an interactive TUI editor
+```Fenced(Borrowed("nu"))
+> explore config
+
+
+```
+Explore JSON data interactively
+```Fenced(Borrowed("nu"))
+> open --raw data.json | explore config
+
+
+```
+Explore with example data to see TUI features
+```Fenced(Borrowed("nu"))
+> explore config --use-example-data
+
+
+```
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explore_config.mdŸ@49bbe55b5d7605707c64959eb790fe786a5c0ca5737bd3fe37203cd6ae7fd40fµtitle: explore configë•Notes⁄By default, opens the current nushell configuration ($env.config) in the TUI.
+
+Changes made in config mode are applied to the running session when you quit.
+You can also pipe JSON data to explore arbitrary data structures, or use
+
+--use-example-data to see sample configuration data.
+TUI Keybindings:
+
+Tab           Switch between tree and editor panes
+
+‚Üë‚Üì            Navigate tree / scroll editor
+
+‚Üê‚Üí            Collapse/Expand tree nodes
+
+Enter/Space   Toggle tree node expansion
+
+Enter/Space   On leaf nodes, open editor pane and start editing
+
+Enter/e       Start editing (in editor pane)
+
+Ctrl+S        Apply edit
+
+Alt+Enter     Apply edit (alternative)
+
+Esc           Cancel edit
+
+q             Quit (applies config changes if modified)
+
+Ctrl+C        Force quit without saving
+íêê⁄JTitle: title: explore config
+Path: Notes
+Content:
+By default, opens the current nushell configuration ($env.config) in the TUI.
+
+Changes made in config mode are applied to the running session when you quit.
+You can also pipe JSON data to explore arbitrary data structures, or use
+
+--use-example-data to see sample configuration data.
+TUI Keybindings:
+
+Tab           Switch between tree and editor panes
+
+‚Üë‚Üì            Navigate tree / scroll editor
+
+‚Üê‚Üí            Collapse/Expand tree nodes
+
+Enter/Space   Toggle tree node expansion
+
+Enter/Space   On leaf nodes, open editor pane and start editing
+
+Enter/e       Start editing (in editor pane)
+
+Ctrl+S        Apply edit
+
+Alt+Enter     Apply edit (alternative)
+
+Esc           Cancel edit
+
+q             Quit (applies config changes if modified)
+
+Ctrl+C        Force quit without saving

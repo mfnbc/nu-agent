@@ -1,0 +1,100 @@
+ñíŸ@397812caca900bf8ef5a0041bfc1c703e728baccbf6cc74c9fb1e87c7e852504⁄¶Title: title: ssh-agent
+Path: Manage SSH passphrases
+Content:
+``eval``
+ is not available in nushell, so run:
+```Fenced(Borrowed("nu"))
+^ssh-agent -c
+    | lines
+    | first 2
+    | parse "setenv {name} {value};"
+    | transpose -r
+    | into record
+    | load-env
+
+```
+::: warning
+
+Adding this to your 
+``env.nu``
+ will however start a new ssh-agent process every time you start a new terminal.
+
+See the workarounds.
+
+:::
+íŸ@4a8b8703de7a242829b096fc00a58398852c0e7f8f7bb796f285b615a92b5f96⁄DTitle: title: ssh-agent
+Path: Workarounds
+Content:
+You can work around this behavior by checking if a ssh-agent is already running on your user, and start one if none is:
+```Fenced(Borrowed("nu"))
+do --env {
+    let ssh_agent_file = (
+        $nu.temp-dir | path join $"ssh-agent-(whoami).nuon"
+    )
+
+    if ($ssh_agent_file | path exists) {
+        let ssh_agent_env = open ($ssh_agent_file)
+        if ($"/proc/($ssh_agent_env.SSH_AGENT_PID)" | path exists) {
+            load-env $ssh_agent_env
+            return
+        } else {
+            rm $ssh_agent_file
+        }
+    }
+
+    let ssh_agent_env = ^ssh-agent -c
+        | lines
+        | first 2
+        | parse "setenv {name} {value};"
+        | transpose --header-row
+        | into record
+    load-env $ssh_agent_env
+    $ssh_agent_env | save --force $ssh_agent_file
+}
+
+```
+íŸ@cd86f717c408ce8f310b1f6822623e7c4703ff50df2ba0b8cc88548a5408d503⁄VTitle: title: ssh-agent
+Path: Keychain
+Content:
+[link: https://www.funtoo.org/Funtoo:Keychain] ```Fenced(Borrowed("nu"))
+keychain --eval --quiet <your ssh keys, eg. id_ed25519>
+    | lines
+    | where not ($it | is-empty)
+    | parse "{k}={v}; export {k2};"
+    | select k v
+    | transpose --header-row
+    | into record
+    | load-env
+
+```
+íŸ@7ab1dcb25a7c708eda436e2e971f65ce06a8dc2b55839ff7bfd2d5807c5075f3ŸıTitle: title: ssh-agent
+Path: Non-nushell workarounds
+Content:
+However, the commonly recommended approach involves running an ssh-agent so it establishes an user-wide socket for processes to connect to.
+Here are two common ways to achieve this.
+íŸ@dcfbb7f3171649e111173932449e1c4c59632096e905fe4b8aaaf433e9f95ccd⁄«Title: title: ssh-agent
+Path: DE/WM config
+Content:
+You can incorporate it into your Desktop Environment (DE) or Compositor's configuration using the following command:
+```Fenced(Borrowed("sh"))
+ssh-agent -D -a /run/user/1000/ssh-agent.socket
+# You can also set this socket path as an environment variable using the same config file
+
+```
+This a good option for you if you're using a Windows Manager or a Compositor since you're likely to know its syntax.
+íŸ@933f357e226bc69ec56c85cfa58cea35b226388be25adfc28679f3e0403f5651⁄êTitle: title: ssh-agent
+Path: As a service
+Content:
+Alternatively, you can enable it as an 
+user service
+. OpenSSH typically includes a systemd service and the 
+[link: https://wiki.archlinux.org/title/Systemd/User] ArchLinux wiki systemd/User
+ page covers how to enable services per user with systemd.
+However, if you're using a different service manager, please refer its own documentation to create a user service that utilizes the aforementioned command.
+To enable Nushell to access this socket, you need to add its path as 
+``$env.SSH_AUTH_SOCK``
+ like so:
+```Fenced(Borrowed("nu"))
+$env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent.socket"
+
+```

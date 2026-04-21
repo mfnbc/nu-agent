@@ -1,0 +1,89 @@
+”’Ù@fc8cefbfeb1d0f98c39a73df51d7ab0204ee242fb5a51e2240275320a8fc508fÚšTitle: title: Nushell 0.104.1
+Path: Nushell 0.104.1
+Content:
+
+
+
+
+Today, we're releasing version 
+0.104.1
+ of Nu. This release fixes some issues related to the Windows MSI installer and the Nushell winget package. macOS and Linux users are not affected.
+Thank you to all those who have contributed to this release through the PRs below, issues and suggestions leading to those changes, and Discord discussions.
+’Ù@e817c946f3ccdc089c31c911a95464965db9c92489b2c059bcc4bc208885576aÚÎTitle: title: Nushell 0.104.1
+Path: Where to get it
+Content:
+Nu 0.104.1 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.104.1] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+As part of this release, we also publish a set of optional 
+[link: https://www.nushell.sh/book/plugins.html] plugins
+ you can install and use with Nushell.
+’Ù@056364383063c0d1a0ab9803c00da0a4756d28ec075ad0fd62d702e8bfdbe756ÚPTitle: title: Nushell 0.104.1
+Path: Highlights and themes of this release
+Content:
+In recent days, we have completely rewritten the Wix code responsible for building the Nushell MSI package and upgraded Wix to the latest 6.0 version. This overhaul has resolved many issues related to the 
+MSI
+ installer and installing Nushell via 
+``winget``
+, while also reducing the maintenance burden of the related codebase.
+With this release, Nushell can now be installed via 
+``winget``
+ with both 
+user
+ and 
+machine
+ scopes. By default, the installation uses the 
+user scope
+. (Be sure you are installing Nu 
+0.104.1
+ from the winget CLI, typically, there is a one-to-two-day delay for Nushell releases to appear in the winget repository.):
+To install for the current user: 
+``winget install Nushell.Nushell``
+To install for all users (machine scope): 
+``winget install Nushell.Nushell --override 'ALLUSERS=1'``
+Note: The 
+``--scope``
+ flag for 
+``winget install``
+ is not supported; please use 
+``--override``
+ as shown above.
+If you have downloaded the MSI locally and want to install it using 
+``msiexec``
+:
+User scope: 
+``msiexec /i nu-0.104.1-x86_64-pc-windows-msvc.msi /quiet /qn``
+Machine scope: 
+``msiexec /i nu-0.104.1-x86_64-pc-windows-msvc.msi ALLUSERS=1``
+Default installation directories:
+User scope: 
+``$'($nu.home-path)\AppData\Local\Programs\nu\'``
+;
+Machine scope: 
+``C:\Program Files\nu\``
+;
+When a standard user runs the installer and selects "Install for everyone" (per-machine installation), Windows will automatically prompt for administrator credentials. After entering the credentials, the installation will continue with elevated privileges.
+We have also fixed the Nushell binaries for Windows arm64 architecture. As a result, 
+[link: https://github.com/hustcer/setup-nu] hustcer/setup-nu
+ should now work properly on GitHub 
+``windows-11-arm``
+ runners.
+’Ù@d419e38482644fe7ad989ed22d2478ed7020b12273c1953cb5536f712a547c2aÚTitle: title: Nushell 0.104.1
+Path: Full changelog
+Content:
+author
+title
+link
+[link: https://github.com/hustcer] @hustcer
+Use nushell's fork for winget-pkgs publishing category
+[link: https://github.com/nushell/nushell/pull/15808] #15808
+[link: https://github.com/hustcer] @hustcer
+Fix Windows arm64 release binaries and winget related issues
+[link: https://github.com/nushell/nushell/pull/15690] #15690
+[link: https://github.com/ysthakur] @ysthakur
+Bump to 0.104.1 dev version
+[link: https://github.com/nushell/nushell/pull/15669] #15669

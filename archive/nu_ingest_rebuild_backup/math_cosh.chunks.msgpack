@@ -1,0 +1,74 @@
+”—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_cosh.mdÙ@84b8f4ddfa4a22a4110bf961f3bb7f7644161c95de559bf33319d24451cb4a3d°title: math cosh‘¤mathÙ<
+
+
+
+
+
+
+
+
+``math cosh``
+[link: /commands/categories/math.md] ’ÙhTitle: title: math cosh
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math cosh``
+[link: /commands/categories/math.md] —ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_cosh.mdÙ@2b8ec06a72f3ec375f90366771eeeb1733a804c7a033f2bd0d8fc41ea0ea76e5°title: math cosh‘©Signature¹``> math cosh {flags} ``
+’ÙJTitle: title: math cosh
+Path: Signature
+Content:
+``> math cosh {flags} ``
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_cosh.mdÙ@adae40da309c4b8790da58ad486914dc812991936e9a9322a3e8ef83af4143ac°title: math cosh‘³Input/output types:Ù;input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’ÙvTitle: title: math cosh
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_cosh.mdÙ@6e7b4ad0e3d6fcd0e6c3eb9ab24b164c6aa28ae66e94aa4283e3f9ebd8ae1e2e°title: math cosh‘¨ExamplesÙcApply the hyperbolic cosine to 1
+```Fenced(Borrowed("nu"))
+> 1 | math cosh
+1.5430806348152435
+
+```
+’Ù“Title: title: math cosh
+Path: Examples
+Content:
+Apply the hyperbolic cosine to 1
+```Fenced(Borrowed("nu"))
+> 1 | math cosh
+1.5430806348152435
+
+```

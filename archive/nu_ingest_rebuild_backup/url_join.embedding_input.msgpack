@@ -1,0 +1,93 @@
+”’Ù@563d7f02e1e73aa5a08f3b62356621de8136f475b9310891741f9603c3820d6bÙlTitle: title: url join
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``url join``
+[link: /commands/categories/network.md] ’Ù@77a2feaa535d5387e32c32fc9ef7579193f693250da0bcbf8b555001fba25724ÙHTitle: title: url join
+Path: Signature
+Content:
+``> url join {flags} ``
+’Ù@5b190bc516250a491a9794662f40ff6f37f5a5132e70cfc6401ff3cc54085d73ÙUTitle: title: url join
+Path: Input/output types:
+Content:
+input
+output
+record
+string
+’Ù@43c073ba8ddfd1c5980a30fa581ea17a372fb896a0f60c55059b8eda9998dcefÚTitle: title: url join
+Path: Examples
+Content:
+Outputs a URL representing the contents of this record, 
+``params``
+ and 
+``query``
+ fields must be equivalent.
+```Fenced(Borrowed("nu"))
+> {
+        "scheme": "http",
+        "username": "",
+        "password": "",
+        "host": "www.pixiv.net",
+        "port": "",
+        "path": "/member_illust.php",
+        "query": "mode=medium&illust_id=99260204",
+        "fragment": "",
+        "params":
+        {
+            "mode": "medium",
+            "illust_id": "99260204"
+        }
+    } | url join
+http://www.pixiv.net/member_illust.php?mode=medium&illust_id=99260204
+
+```
+Outputs a URL representing the contents of this record, "exploding" the list in 
+``params``
+ into multiple parameters.
+```Fenced(Borrowed("nu"))
+> {
+        "scheme": "http",
+        "username": "user",
+        "password": "pwd",
+        "host": "www.pixiv.net",
+        "port": "1234",
+        "params": {a: ["one", "two"], b: "three"},
+        "fragment": ""
+    } | url join
+http://user:pwd@www.pixiv.net:1234?a=one&a=two&b=three
+
+```
+Outputs a URL representing the contents of this record.
+```Fenced(Borrowed("nu"))
+> {
+        "scheme": "http",
+        "username": "user",
+        "password": "pwd",
+        "host": "www.pixiv.net",
+        "port": "1234",
+        "query": "test=a",
+        "fragment": ""
+    } | url join
+http://user:pwd@www.pixiv.net:1234?test=a
+
+```
+Outputs a URL representing the contents of this record.
+```Fenced(Borrowed("nu"))
+> {
+        "scheme": "http",
+        "host": "www.pixiv.net",
+        "port": "1234",
+        "path": "user",
+        "fragment": "frag"
+    } | url join
+http://www.pixiv.net:1234/user#frag
+
+```

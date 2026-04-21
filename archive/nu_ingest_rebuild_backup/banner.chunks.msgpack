@@ -1,0 +1,35 @@
+“—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/banner.mdÙ@e2d76b5e0b979f576665a0e171e1c4ede4545cc55876f5948486d9c036cc9be1­title: banner‘§defaultÙ<
+
+
+
+
+
+
+
+
+``banner``
+[link: /commands/categories/default.md] ’ÙhTitle: title: banner
+Path: default
+Content:
+
+
+
+
+
+
+
+
+
+``banner``
+[link: /commands/categories/default.md] —ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/banner.mdÙ@688e68a96cf943e89faf33b9c8c8a1685ebab47d3667386aab76b125e431c292­title: banner‘©Signature¶``> banner {flags} ``
+’ÙDTitle: title: banner
+Path: Signature
+Content:
+``> banner {flags} ``
+—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/banner.mdÙ@899c92e8159b46f172fa240778f54ee134d419fcbd9d30606e3838032d9f7c7c­title: banner‘¥FlagsÙ%``--short``
+: Only show startup time
+’ÙOTitle: title: banner
+Path: Flags
+Content:
+``--short``
+: Only show startup time

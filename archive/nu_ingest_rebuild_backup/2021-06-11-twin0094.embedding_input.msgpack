@@ -1,0 +1,91 @@
+“’Ù@6da9d1b703c10396cf384f8a0e190b7d699ce58d10666acbee030390c326de1eÚžTitle: This week in Nushell #94
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3606] enabled theming of the command line syntax
+, 
+[link: https://github.com/nushell/nushell/pull/3601] added single quote and double quote to char command
+, and 
+[link: https://github.com/nushell/nushell/pull/3581] change command duration env var to emit duration in milliseconds
+, and 
+[link: https://github.com/nushell/nushell/pull/3570] added 
+``ansi gradient``
+ in the spirit of fun
+jonathandturner created 
+[link: https://github.com/nushell/nushell/pull/3604] Remove EvaluationContext::from_args
+, and 
+[link: https://github.com/nushell/nushell/pull/3603] Make arg eval lazy, remove old arg evaluation code
+, and 
+[link: https://github.com/nushell/nushell/pull/3598] Further improve arg errors
+, and 
+[link: https://github.com/nushell/nushell/pull/3597] Improve the errors for arg types
+, and 
+[link: https://github.com/nushell/nushell/pull/3595] Add help flag support to alias
+, and 
+[link: https://github.com/nushell/nushell/pull/3594] Improve alias highlighting/completions
+, and 
+[link: https://github.com/nushell/nushell/pull/3589] Enable syntax/completions for source
+, and 
+[link: https://github.com/nushell/nushell/pull/3586] Fix a bunch of future clippy warnings
+, and 
+[link: https://github.com/nushell/nushell/pull/3584] Improve expr parse
+, and 
+[link: https://github.com/nushell/nushell/pull/3583] Fix #3582
+, and 
+[link: https://github.com/nushell/nushell/pull/3579] Improve external quoting logic
+, and 
+[link: https://github.com/nushell/nushell/pull/3577] Improve quoted completions
+, and 
+[link: https://github.com/nushell/nushell/pull/3575] Improve completions inside of a pipeline
+, and 
+[link: https://github.com/nushell/nushell/pull/3574] Fix completion crash
+, and 
+[link: https://github.com/nushell/nushell/pull/3571] Add support for subcommand completions
+, and 
+[link: https://github.com/nushell/nushell/pull/3568] Rename the use of invocation to subexpression
+, and 
+[link: https://github.com/nushell/nushell/pull/3567] Remove the CI canaries
+, and 
+[link: https://github.com/nushell/nushell/pull/3566] Simpler parse improvement
+, and 
+[link: https://github.com/nushell/nushell/pull/3564] Improve partial completion/highlight
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/3602] Series arithmetic
+, and 
+[link: https://github.com/nushell/nushell/pull/3572] Column selector using FullColumnPath
+Garfield96 added 
+[link: https://github.com/nushell/nushell/pull/3600] from xlsx/ods: Add parameter --sheets
+, and 
+[link: https://github.com/nushell/nushell/pull/3599] from sqlite: Add test case for table selection
+kubouch 
+[link: https://github.com/nushell/nushell/pull/3588] clarified 
+``exec``
+ help message; Update to engine-p
+, and 
+[link: https://github.com/nushell/nushell/pull/3580] Def cleanup
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/3573] fixed duration literals in 
+``where``
+ docs
+’Ù@41c098e7a70472cd03ef631537da694ff01f61c62c0097fe9715316598d2a6ecÚmTitle: This week in Nushell #94
+Path: Documentation
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell.github.io/pull/146] fixed duration literals in docs
+apatrushev added 
+[link: https://github.com/nushell/nushell.github.io/pull/145] Convert list to table example
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/144] Fix list examples
+’Ù@8cc817594ca1dca87c2cf792322050f3bb5ed2e5537f5547db6c68aead395ae1ÚGTitle: This week in Nushell #94
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/64] added a bogus temp command so completions work better
+, 
+[link: https://github.com/nushell/nu_scripts/pull/62] updated cmd_duration to cmd_duration_ms
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/60] added a new 256 color test pattern script in bash and nu
+jonathandturner 
+[link: https://github.com/nushell/nu_scripts/pull/63] added a lisp mode
+efx created 
+[link: https://github.com/nushell/nu_scripts/pull/61] oneliner: combine two files into one

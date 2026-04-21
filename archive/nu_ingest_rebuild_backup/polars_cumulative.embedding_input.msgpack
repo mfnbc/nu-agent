@@ -1,0 +1,89 @@
+���@99ece633eb4486e4681a9bffa3a24b41a72479d73e0beab19ccfe62bca51c993قTitle: title: polars cumulative
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars cumulative``
+[link: /commands/categories/dataframe.md] ��@e232c9232d7a74b04d7d77d1a3231ee6040e9c95ff2754a635400de9051fceb6�`Title: title: polars cumulative
+Path: Signature
+Content:
+``> polars cumulative {flags} (type)``
+��@8cb829c053f27d6df82bd19a4c2a00aeff8721d2ba8380aa1e32facde8ee7ffd�iTitle: title: polars cumulative
+Path: Flags
+Content:
+``--reverse, -r``
+: Reverse cumulative calculation.
+��@e17aea48c2200fef529a3c628953d174e398cb5b2068f6abe0a8da729274f1d0قTitle: title: polars cumulative
+Path: Parameters
+Content:
+``type``
+: Rolling operation. Values of min, max, and sum are accepted.
+��@aa40d1ddc7a667d70bda717f6bf16008646fa517096b6833cab17623f45c7186ٸTitle: title: polars cumulative
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@e3d56746177400d6146e7b49bbb5f363355b53187430e4e8e023891b06812fd9�STitle: title: polars cumulative
+Path: Examples
+Content:
+Cumulative sum for a column
+```Fenced(Borrowed("nu"))
+> [[a]; [1] [2] [3] [4] [5]]
+                    | polars into-df
+                    | polars select (polars col a | polars cumulative sum | polars as cum_a)
+                    | polars collect
+╭───┬───────╮
+│ # │ cum_a │
+├───┼───────┤
+│ 0 │     1 │
+│ 1 │     3 │
+│ 2 │     6 │
+│ 3 │    10 │
+│ 4 │    15 │
+╰───┴───────╯
+
+
+```
+Cumulative sum for a series
+```Fenced(Borrowed("nu"))
+> [1 2 3 4 5] | polars into-df | polars cumulative sum
+╭───┬──────────────────╮
+│ # │ 0_cumulative_sum │
+├───┼──────────────────┤
+│ 0 │                1 │
+│ 1 │                3 │
+│ 2 │                6 │
+│ 3 │               10 │
+│ 4 │               15 │
+╰───┴──────────────────╯
+
+
+```
+Cumulative sum for a series in reverse order
+```Fenced(Borrowed("nu"))
+> [1 2 3 4 5] | polars into-df | polars cumulative sum --reverse
+╭───┬──────────────────╮
+│ # │ 0_cumulative_sum │
+├───┼──────────────────┤
+│ 0 │               15 │
+│ 1 │               14 │
+│ 2 │               12 │
+│ 3 │                9 │
+│ 4 │                5 │
+╰───┴──────────────────╯
+
+
+```

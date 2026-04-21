@@ -1,0 +1,54 @@
+’’Ù@4c4b72ffa6426994c112c5d753470b64bbc998b6fc98acd57bc93a47961be189ÙÎTitle: CustomValue
+Path: CustomValue
+Content:
+Description:
+
+An opaque data type that is only used internally in Nushell by built-in commands or plugins.
+Annotation:
+
+None
+Literal syntax:
+
+None
+Casts:
+
+None
+’Ù@c06721ed592c29850922f85a2e49f25c3b042b2b557690d65fd394e3f3e350ecÚ‚Title: CustomValue
+Path: Additional Language Notes
+Content:
+Custom values are those that might be created by Nushell internal commands or plugins. For instance, a plugin might generate a custom value that encodes data in a binary format or some other data type like structured data used by the Polars plugin or SQLite.
+Example - SQLite:
+```Fenced(Borrowed("nu"))
+[[a b]; [c d] [e f]] | into sqlite test.db
+
+open test.db | describe
+
+# => SQLiteDatabase
+
+```
+The output from describe is 
+``SQLiteDatabase``
+, which is a CustomValue data type.
+Example - Polars Plugin (formerly DataFrame)
+Note: The 
+``nu_plugin_polars``
+ plugin is required for the following example to work - See 
+[link: https://www.nushell.sh/blog/2024-04-30-nushell_0_93_0.html#installation] the Polars release announcement
+ or 
+[link: https://www.nushell.sh/book/plugins.html#downloading-and-installing-a-plugin] The Book
+ for instructions on installing and registering.
+```Fenced(Borrowed("nu"))
+ls | polars into-df | describe
+
+# => NuDataFrameCustomValue
+
+```
+Values used by external commands (e.g., 
+``curl``
+) are 
+not
+ of the 
+``CustomValue``
+ type.
+You might encounter a custom value in your interaction with parts of Nushell. Depending on the specific example, you should let the command handle it as described in the help documentation for that command or plugin.
+There is not necessarily a string representation of any custom value.

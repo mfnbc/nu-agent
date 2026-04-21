@@ -1,0 +1,78 @@
+���@61e179eb614f1b3730fc3c211d2c2b4fa57adf4425c7b581e030504b0f8de796�xTitle: title: polars first
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars first``
+[link: /commands/categories/dataframe.md] ��@3561c0abcc45dda8f026f15b0e87cb630ce2962eba3c242d9b7fb7c9634e2434�VTitle: title: polars first
+Path: Signature
+Content:
+``> polars first {flags} (rows)``
+��@d70c106c55275beb7b0aa9d3cd045ebf798406aeb27f6faffaf88cf66e4b15c2�wTitle: title: polars first
+Path: Parameters
+Content:
+``rows``
+: Starting from the front, the number of rows to return.
+��@25cf98d829edb353c0b3aa2c17494ca1269cccd0a7acd5a6f83815bf11563eceٳTitle: title: polars first
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@72e7cf3131e04f6dc8dfba77258b63a2ff74848fcce8d042ca930824feab73ed�.Title: title: polars first
+Path: Examples
+Content:
+Return the first row of a dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars first
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+╰───┴───┴───╯
+
+
+```
+Return the first two rows of a dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars first 2
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
+
+
+```
+Creates a first expression from a column
+```Fenced(Borrowed("nu"))
+> polars col a | polars first
+
+
+```
+Aggregate the first values in the group.
+```Fenced(Borrowed("nu"))
+> [[a b c d]; [1 0.5 true Apple] [2 0.5 true Orange] [2 4 true Apple] [3 10 false Apple] [4 13 false Banana] [5 14 true Banana]] | polars into-df -s {a: u8, b: f32, c: bool, d: str} | polars group-by d | polars first | polars sort-by [a] | polars collect
+╭───┬────────┬───┬───────┬───────╮
+│ # │   d    │ a │   b   │   c   │
+├───┼────────┼───┼───────┼───────┤
+│ 0 │ Apple  │ 1 │  0.50 │ true  │
+│ 1 │ Orange │ 2 │  0.50 │ true  │
+│ 2 │ Banana │ 4 │ 13.00 │ false │
+╰───┴────────┴───┴───────┴───────╯
+
+
+```

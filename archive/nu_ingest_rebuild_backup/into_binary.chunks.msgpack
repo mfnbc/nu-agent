@@ -1,0 +1,234 @@
+–—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_binary.mdÙ@97219f5a30d87040a69f2a342dd7889320e23c54c8dff65c10c40dba56cbfb53²title: into binary‘«conversionsÙE
+
+
+
+
+
+
+
+
+``into binary``
+[link: /commands/categories/conversions.md] ’ÙzTitle: title: into binary
+Path: conversions
+Content:
+
+
+
+
+
+
+
+
+
+``into binary``
+[link: /commands/categories/conversions.md] —ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_binary.mdÙ@0dc7177bdb22c6b34c68a6f640426cf7a1ed5f03508d963f80eb0c38079fa90b²title: into binary‘©SignatureÙ"``> into binary {flags} ...rest``
+’ÙUTitle: title: into binary
+Path: Signature
+Content:
+``> into binary {flags} ...rest``
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_binary.mdÙ@def5d59269d5c10b2c65fb27a8a417368015f9e87f31aa278527c8df64ae3737²title: into binary‘¥FlagsÙñ``--compact, -c``
+: Output without padding zeros.
+``--endian, -e {string}``
+: Byte encode endian. Does not affect string, date or binary. In containers, only individual elements are affected. Available options: native(default), little, big.
+’Ú Title: title: into binary
+Path: Flags
+Content:
+``--compact, -c``
+: Output without padding zeros.
+``--endian, -e {string}``
+: Byte encode endian. Does not affect string, date or binary. In containers, only individual elements are affected. Available options: native(default), little, big.
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_binary.mdÙ@50fa74ad8eb5b13d596b3e875da7bf6c1553d6c7c02c80072355cb0e9a92e9a2²title: into binary‘ªParametersÙP``...rest``
+: For a data structure input, convert data at the given cell paths.
+’Ù„Title: title: into binary
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert data at the given cell paths.
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_binary.mdÙ@0357439213a36e6172d4f6238eb9e4246134b8521d09b306f7b9dac7d347cf15²title: into binary‘³Input/output types:Ùˆinput
+output
+binary
+binary
+int
+binary
+number
+binary
+string
+binary
+bool
+binary
+filesize
+binary
+datetime
+binary
+table
+table
+record
+record
+’ÙÅTitle: title: into binary
+Path: Input/output types:
+Content:
+input
+output
+binary
+binary
+int
+binary
+number
+binary
+string
+binary
+bool
+binary
+filesize
+binary
+datetime
+binary
+table
+table
+record
+record
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_binary.mdÙ@1f1d5be89c9921b00caf9293a950d09716221d403b3ad9b2a49f2b229349e990²title: into binary‘¨ExamplesÚ	€convert string to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> 'This is a string that is exactly 52 characters long.' | into binary
+Length: 52 (0x34) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   54 68 69 73  20 69 73 20  61 20 73 74  72 69 6e 67   This is a string
+00000010:   20 74 68 61  74 20 69 73  20 65 78 61  63 74 6c 79    that is exactly
+00000020:   20 35 32 20  63 68 61 72  61 63 74 65  72 73 20 6c    52 characters l
+00000030:   6f 6e 67 2e                                          ong.
+
+
+```
+convert a number to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> 1 | into binary
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 00 00 00  00 00 00 00                             â€¢0000000
+
+
+```
+convert a number to a nushell binary primitive (big endian).
+```Fenced(Borrowed("nu"))
+> 258 | into binary --endian big
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   00 00 00 00  00 00 01 02                             000000â€¢â€¢
+
+
+```
+convert a number to a nushell binary primitive (little endian).
+```Fenced(Borrowed("nu"))
+> 258 | into binary --endian little
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   02 01 00 00  00 00 00 00                             â€¢â€¢000000
+
+
+```
+convert a boolean to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> true | into binary
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 00 00 00  00 00 00 00                             â€¢0000000
+
+
+```
+convert a filesize to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> ls | where name == LICENSE | get size | into binary
+
+
+```
+convert a filepath to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> ls | where name == LICENSE | get name | path expand | into binary
+
+
+```
+convert a float to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> 1.234 | into binary
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   58 39 b4 c8  76 be f3 3f                             X9Ã—Ã—vÃ—Ã—?
+
+
+```
+convert an int to a nushell binary primitive with compact enabled.
+```Fenced(Borrowed("nu"))
+> 10 | into binary --compact
+Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   0a                                                   _
+
+
+```
+’Ú	²Title: title: into binary
+Path: Examples
+Content:
+convert string to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> 'This is a string that is exactly 52 characters long.' | into binary
+Length: 52 (0x34) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   54 68 69 73  20 69 73 20  61 20 73 74  72 69 6e 67   This is a string
+00000010:   20 74 68 61  74 20 69 73  20 65 78 61  63 74 6c 79    that is exactly
+00000020:   20 35 32 20  63 68 61 72  61 63 74 65  72 73 20 6c    52 characters l
+00000030:   6f 6e 67 2e                                          ong.
+
+
+```
+convert a number to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> 1 | into binary
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 00 00 00  00 00 00 00                             â€¢0000000
+
+
+```
+convert a number to a nushell binary primitive (big endian).
+```Fenced(Borrowed("nu"))
+> 258 | into binary --endian big
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   00 00 00 00  00 00 01 02                             000000â€¢â€¢
+
+
+```
+convert a number to a nushell binary primitive (little endian).
+```Fenced(Borrowed("nu"))
+> 258 | into binary --endian little
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   02 01 00 00  00 00 00 00                             â€¢â€¢000000
+
+
+```
+convert a boolean to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> true | into binary
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 00 00 00  00 00 00 00                             â€¢0000000
+
+
+```
+convert a filesize to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> ls | where name == LICENSE | get size | into binary
+
+
+```
+convert a filepath to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> ls | where name == LICENSE | get name | path expand | into binary
+
+
+```
+convert a float to a nushell binary primitive.
+```Fenced(Borrowed("nu"))
+> 1.234 | into binary
+Length: 8 (0x8) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   58 39 b4 c8  76 be f3 3f                             X9Ã—Ã—vÃ—Ã—?
+
+
+```
+convert an int to a nushell binary primitive with compact enabled.
+```Fenced(Borrowed("nu"))
+> 10 | into binary --compact
+Length: 1 (0x1) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   0a                                                   _
+
+
+```

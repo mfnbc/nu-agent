@@ -1,0 +1,49 @@
+–’Ù@66da169af2dc4bceb60e19e3bc39256bd776e9c720420d04fc193d4ac93c832eÙlTitle: title: mkdir
+Path: filesystem
+Content:
+
+
+
+
+
+
+
+
+
+``mkdir``
+[link: /commands/categories/filesystem.md] ’Ù@90219fe89090285314143579825fd3d046964f80fc89011320567cdacf342fd6ÙITitle: title: mkdir
+Path: Signature
+Content:
+``> mkdir {flags} ...rest``
+’Ù@3ec495315bc0f7583706bdbd9ede2e568a409b7b0aba8b5deaaead2ec3e7d522ÙiTitle: title: mkdir
+Path: Flags
+Content:
+``--verbose, -v``
+: Print a message for each created directory.
+’Ù@a27d6cfd22b93bc1802243984a2a943ead98bd14bdfcd276c2a2b382eac4ed94ÙbTitle: title: mkdir
+Path: Parameters
+Content:
+``...rest``
+: The name(s) of the path(s) to create.
+’Ù@21e5dd3c6f4e70520fafce6d4226265f5dd3ff801c76b5b04102403009fe33ccÙTTitle: title: mkdir
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+’Ù@b25894415f68ff9b754a27aa58cc26ae2fd3ec544971ec2a97a6be0da4ac58eeÙâTitle: title: mkdir
+Path: Examples
+Content:
+Make a directory named foo.
+```Fenced(Borrowed("nu"))
+> mkdir foo
+
+
+```
+Make multiple directories and show the paths created.
+```Fenced(Borrowed("nu"))
+> mkdir -v foo/bar foo2
+
+
+```

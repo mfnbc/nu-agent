@@ -1,0 +1,215 @@
+•’Ù@e26431cc6334b1d42653fa02eb8cb4e61c8424e80f87180fc598e932e012deaaÚnTitle: This week in Nushell #183
+Path: Nushell
+Content:
+alextremblay created 
+[link: https://github.com/nushell/nushell/pull/8196] move 
+``hash md5``
+ and 
+``hash sha256``
+ commands to the hash category
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell/pull/8194] Force install in 
+``install-all``
+ scripts
+, and 
+[link: https://github.com/nushell/nushell/pull/8154] Update polars to 0.27.2
+ryand67 created 
+[link: https://github.com/nushell/nushell/pull/8193] remove links to 
+``ShellError``
+ and 
+``ParseError``
+ docs - #8167
+, and 
+[link: https://github.com/nushell/nushell/pull/8159] interrupt 
+``input``
+ command with Ctrl + C
+, and 
+[link: https://github.com/nushell/nushell/pull/8085] files and directory completions now use ascending ordering rather than Levenshtein. #8023
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/8192] fix ansi example so it is tested
+, and 
+[link: https://github.com/nushell/nushell/pull/8178] update the manual msi generation instructions for winget
+, and 
+[link: https://github.com/nushell/nushell/pull/8177] remove old winget manual release ci
+, and 
+[link: https://github.com/nushell/nushell/pull/8157] allow different types of lists to be appended
+, and 
+[link: https://github.com/nushell/nushell/pull/8141] update code coversage script to work better with windows
+, and 
+[link: https://github.com/nushell/nushell/pull/8140] show more informaiton when there are toml errors
+, and 
+[link: https://github.com/nushell/nushell/pull/8111] update link to command reference
+, and 
+[link: https://github.com/nushell/nushell/pull/8096] fixes a def parsing bug with a default list
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/8191] Add links to the remaining README badges
+, and 
+[link: https://github.com/nushell/nushell/pull/8190] Disable Windows coverage tracking for now
+, and 
+[link: https://github.com/nushell/nushell/pull/8161] Update to 
+``0.76.1``
+ version for development
+, and 
+[link: https://github.com/nushell/nushell/pull/8160] Fix 
+``Cargo.toml``
+ of 
+``nu_plugin_formats``
+, and 
+[link: https://github.com/nushell/nushell/pull/8142] Pin 
+``reedline``
+ to 
+``0.16.0``
+, and 
+[link: https://github.com/nushell/nushell/pull/8125] Add a script to generate coverage locally
+, and 
+[link: https://github.com/nushell/nushell/pull/8121] Bump version for 
+``0.76.0``
+ release
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/8181] Cratification: Break out nu_cmd_lang into a separate crate
+SUPERCILEX created 
+[link: https://github.com/nushell/nushell/pull/8173] Compress $HOME into ~ in prompt
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/8172] table --collapse dont do truncation return message instead
+, and 
+[link: https://github.com/nushell/nushell/pull/8120] Add colors in 
+``table --collapse``
+, and 
+[link: https://github.com/nushell/nushell/pull/8042] nu-table/ Fix --collapse wrap/truncate 
+[
+WIP
+]
+Yethal created 
+[link: https://github.com/nushell/nushell/pull/8171] Added examples to query web plugin
+MangoIV created 
+[link: https://github.com/nushell/nushell/pull/8165] chore: add a couple of direnv specific files to the gitignore
+, and 
+[link: https://github.com/nushell/nushell/pull/8151] fix: fix lexing of comments, such that a#b becomes a coherent Item
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/8164] check external failed in let assignment
+, and 
+[link: https://github.com/nushell/nushell/pull/8149] simplify 
+``parse_expression``
+ function code.
+, and 
+[link: https://github.com/nushell/nushell/pull/8138] add usage for plugin commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8114] Dependency update: update notify version to v5
+, and 
+[link: https://github.com/nushell/nushell/pull/8107] update nu_plugin_python due to signature changes
+, and 
+[link: https://github.com/nushell/nushell/pull/8087] remove git completion in default config
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/8163] Fix one error message in 
+``into string``
+, and 
+[link: https://github.com/nushell/nushell/pull/8146] Add 
+``select``
+ extra_usage explaining relationship to 
+``get``
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8148] TEST: add the output to the new 
+``with-env``
+ example
+, and 
+[link: https://github.com/nushell/nushell/pull/8119] DOCUMENTATION: add a new "key-value" example to 
+``with-env``
+jaudiger created 
+[link: https://github.com/nushell/nushell/pull/8144] HTTP HEAD / PATCH / PUT / DELETE commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8135] Final rework for the HTTP commands
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/8134] ``string | fill``
+ counts clusters, not graphemes; and doesn't count ANSI escape codes
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/8133] Bump actions-rust-lang/setup-rust-toolchain from 1.3.7 to 1.4.2
+, and 
+[link: https://github.com/nushell/nushell/pull/8132] Bump sysinfo from 0.27.7 to 0.28.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8131] Bump errno from 0.2.8 to 0.3.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8130] Bump uuid from 1.2.2 to 1.3.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8128] Bump winreg from 0.10.1 to 0.11.0
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/8102] Revert #7779 (enables back subcommand completions)
+sitiom created 
+[link: https://github.com/nushell/nushell/pull/8070] use winget releaser action for manifest submission
+Xoffio created 
+[link: https://github.com/nushell/nushell/pull/8012] ``cp``
+ progress bar implementation
+NotLebedev created 
+[link: https://github.com/nushell/nushell/pull/7925] Display empty records and lists
+’Ù@03fd46f19b8462a2da3d2e8fefc210e38a8eb6a16cc909d83fcec1cd32aeb515ÚqTitle: This week in Nushell #183
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/795] Add short flags to command docs, fix #509
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/794] Add registry query doc for Windows
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/791] Refresh docs for v0.76
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/793] Generate categories
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/792] Fix typo
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/789] Prepare for generation of categories
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/790] Add breaking change
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/770] Release notes for 
+``0.76``
+’Ù@4ae31da261ef37f944237630d559d3545a799de235dde67ae797b32d0794e879ÚaTitle: This week in Nushell #183
+Path: Nu_Scripts
+Content:
+Kinchkun created 
+[link: https://github.com/nushell/nu_scripts/pull/392] job.nu: update view source usage
+baehyunsol created 
+[link: https://github.com/nushell/nu_scripts/pull/391] make 
+``up.nu``
+ much simpler
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/390] remove 
+``build-string``
+, which is deprecated
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/389] updates for new dfr names
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/388] rename misc folder
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/387] fix text where comments don't have spaces
+Yethal created 
+[link: https://github.com/nushell/nu_scripts/pull/386] Create to-ini.nu
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/384] Update release script to 
+``nu_plugin_formats``
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/382] FEATURE: export all the math functions to use them in 
+``nushell``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/381] FIX: the math functions can not be 
+``use``
+d
+’Ù@3ac5f4bec8a27c6df78ae0faa8a52553c042276ee24592e3f0e1fef658a7b906Ú Title: This week in Nushell #183
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/542] Bump version for 
+``0.16.0``
+ release.
+, and 
+[link: https://github.com/nushell/reedline/pull/541] Bump 
+``rstest``
+ to 0.16
+’Ù@e0712e371b8138d299996b3f0c123c1d91e29e8761435113e81711b3a817f203ÙöTitle: This week in Nushell #183
+Path: Nana
+Content:
+jaudiger created 
+[link: https://github.com/nushell/nana/pull/76] Update to latest Nushell / Reedline.
+, and 
+[link: https://github.com/nushell/nana/pull/75] Update Cargo and Yarn dependencies

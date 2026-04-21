@@ -1,0 +1,44 @@
+•’Ù@28e2990ad450573683289b8266e346c9da95a432c3847ca3bc02b7ac32365fa8ÙtTitle: title: random binary
+Path: random
+Content:
+
+
+
+
+
+
+
+
+
+``random binary``
+[link: /commands/categories/random.md] ’Ù@d2d9a2c49cc68bd173f0f6b77596c00e4a2dceb6fcb8b343dfa53715dfdc994bÙZTitle: title: random binary
+Path: Signature
+Content:
+``> random binary {flags} (length)``
+’Ù@67ea0bd85aa624af9884364b2cda61005fa63b2a5ea7d80a138066e46420c2a8Ù`Title: title: random binary
+Path: Parameters
+Content:
+``length``
+: Length of the output binary.
+’Ù@1ceddcd0448f27218e9179e716877d8ccd54df9090584938c5202583b01f8ef1Ù[Title: title: random binary
+Path: Input/output types:
+Content:
+input
+output
+nothing
+binary
+’Ù@3950ef605ceef94f8b5899bcfadf449042e2e9bf54fb8e3cc0c374ac57eb5690ÙÑTitle: title: random binary
+Path: Examples
+Content:
+Generate 16 random bytes.
+```Fenced(Borrowed("nu"))
+> random binary 16
+
+
+```
+Generate 1 random kilobyte.
+```Fenced(Borrowed("nu"))
+> random binary 1kb
+
+
+```

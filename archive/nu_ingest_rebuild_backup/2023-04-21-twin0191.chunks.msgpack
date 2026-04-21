@@ -1,0 +1,259 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-21-twin0191.mdŸ@2a218cd2c15ca81ed755155c588d482811584ffc7ee1d40006e292336ed82e2aπThis week in Nushell #191ëßNushell⁄	¢fdncred 
+[link: https://github.com/nushell/nushell/pull/8961] used record separator 
+``\x1e``
+ for 
+``include_path``
+, and 
+[link: https://github.com/nushell/nushell/pull/8937] allow 
+``find``
+ command to look in specified columns only
+, and 
+[link: https://github.com/nushell/nushell/pull/8921] fix reedline breaking changes due to PR562
+, and 
+[link: https://github.com/nushell/nushell/pull/8915] fix bug with include_path -I parameter
+, and 
+[link: https://github.com/nushell/nushell/pull/8910] allow custom commands to show up in 
+``$nu.scope.commands``
+ better
+, and 
+[link: https://github.com/nushell/nushell/pull/8909] remove debug print bug
+, and 
+[link: https://github.com/nushell/nushell/pull/8901] Update issue templates
+pingiun 
+[link: https://github.com/nushell/nushell/pull/8957] set override locale in toolkit
+, and 
+[link: https://github.com/nushell/nushell/pull/8917] Set env in exec command
+jt 
+[link: https://github.com/nushell/nushell/pull/8949] reused the cached parse results of parsed files
+, and 
+[link: https://github.com/nushell/nushell/pull/8913] Hopefully speedup startup
+, and 
+[link: https://github.com/nushell/nushell/pull/8903] Allocate less when doing a capture discovery
+1Kinoti 
+[link: https://github.com/nushell/nushell/pull/8944] unified the 
+``*-BuiltinVar``
+ parser errors
+, and 
+[link: https://github.com/nushell/nushell/pull/8926] add 
+``filter-map``
+ command to 
+``std iter``
+, and 
+[link: https://github.com/nushell/nushell/pull/8899] add 
+``iter``
+ module to standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/8897] rename toolkit's 
+``set-git-hooks``
+ to 
+``setup-git-hooks``
+presidento 
+[link: https://github.com/nushell/nushell/pull/8932] fixed 
+``into decimal``
+ command category
+amtoine 
+[link: https://github.com/nushell/nushell/pull/8912] refactored the 
+``CONTRIBUTING.md``
+ guidelines for 
+``nu-std``
+, and 
+[link: https://github.com/nushell/nushell/pull/8898] stdlib: fix the 
+``clip``
+ command with integer values
+vaishaag 
+[link: https://github.com/nushell/nushell/pull/8906] fixed strange error on unbalanced curly braces
+rgwood 
+[link: https://github.com/nushell/nushell/pull/8905] upgraded 
+``open``
+ crate to fix WSL bug
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/8895] ``std run-tests``
+: Rename --command switch to --test; and likewise in --list output
+, and 
+[link: https://github.com/nushell/nushell/pull/8894] Replace #8824: CONTRIBUTING.md for standard library
+íêê⁄	⁄Title: This week in Nushell #191
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/8961] used record separator 
+``\x1e``
+ for 
+``include_path``
+, and 
+[link: https://github.com/nushell/nushell/pull/8937] allow 
+``find``
+ command to look in specified columns only
+, and 
+[link: https://github.com/nushell/nushell/pull/8921] fix reedline breaking changes due to PR562
+, and 
+[link: https://github.com/nushell/nushell/pull/8915] fix bug with include_path -I parameter
+, and 
+[link: https://github.com/nushell/nushell/pull/8910] allow custom commands to show up in 
+``$nu.scope.commands``
+ better
+, and 
+[link: https://github.com/nushell/nushell/pull/8909] remove debug print bug
+, and 
+[link: https://github.com/nushell/nushell/pull/8901] Update issue templates
+pingiun 
+[link: https://github.com/nushell/nushell/pull/8957] set override locale in toolkit
+, and 
+[link: https://github.com/nushell/nushell/pull/8917] Set env in exec command
+jt 
+[link: https://github.com/nushell/nushell/pull/8949] reused the cached parse results of parsed files
+, and 
+[link: https://github.com/nushell/nushell/pull/8913] Hopefully speedup startup
+, and 
+[link: https://github.com/nushell/nushell/pull/8903] Allocate less when doing a capture discovery
+1Kinoti 
+[link: https://github.com/nushell/nushell/pull/8944] unified the 
+``*-BuiltinVar``
+ parser errors
+, and 
+[link: https://github.com/nushell/nushell/pull/8926] add 
+``filter-map``
+ command to 
+``std iter``
+, and 
+[link: https://github.com/nushell/nushell/pull/8899] add 
+``iter``
+ module to standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/8897] rename toolkit's 
+``set-git-hooks``
+ to 
+``setup-git-hooks``
+presidento 
+[link: https://github.com/nushell/nushell/pull/8932] fixed 
+``into decimal``
+ command category
+amtoine 
+[link: https://github.com/nushell/nushell/pull/8912] refactored the 
+``CONTRIBUTING.md``
+ guidelines for 
+``nu-std``
+, and 
+[link: https://github.com/nushell/nushell/pull/8898] stdlib: fix the 
+``clip``
+ command with integer values
+vaishaag 
+[link: https://github.com/nushell/nushell/pull/8906] fixed strange error on unbalanced curly braces
+rgwood 
+[link: https://github.com/nushell/nushell/pull/8905] upgraded 
+``open``
+ crate to fix WSL bug
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/8895] ``std run-tests``
+: Rename --command switch to --test; and likewise in --list output
+, and 
+[link: https://github.com/nushell/nushell/pull/8894] Replace #8824: CONTRIBUTING.md for standard library
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-21-twin0191.mdŸ@938041ce237478010fc70f661de49c0802d20ca3bfb30d49929bd56cae7ec9c0πThis week in Nushell #191ë©Extension⁄ufdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/113] change the 
+``:``
+ separator to a record separator 
+``\x1e``
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/111] add folding regions
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/110] rename to match readme
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/109] update readme
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/107] update example generation script and examples
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/106] add a throttle timeout so that we don't update to frequently
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/105] add timing to more server functions
+glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/108] Add underscore separator in numbers
+íêê⁄ØTitle: This week in Nushell #191
+Path: Extension
+Content:
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/113] change the 
+``:``
+ separator to a record separator 
+``\x1e``
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/111] add folding regions
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/110] rename to match readme
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/109] update readme
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/107] update example generation script and examples
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/106] add a throttle timeout so that we don't update to frequently
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/105] add timing to more server functions
+glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/108] Add underscore separator in numbers
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-21-twin0191.mdŸ@83d81ecacd0417f928daf5207f9d55b98d0564c53c2c910a15680a89421261fcπThis week in Nushell #191ë≠Documentation⁄£presidento created 
+[link: https://github.com/nushell/nushell.github.io/pull/876] Dataframes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/868] Update testing chapter
+maxim-uvarov created 
+[link: https://github.com/nushell/nushell.github.io/pull/875] fixing typo in 2023-04-04-nushell_0_78.md
+D3V1LC0D3R created 
+[link: https://github.com/nushell/nushell.github.io/pull/874] Update working_with_tables.md to include reject
+Kissaki created 
+[link: https://github.com/nushell/nushell.github.io/pull/873] Improve misleading text format on note
+uselesspseudo created 
+[link: https://github.com/nushell/nushell.github.io/pull/871] Fix old keybding for help menu
+íêê⁄·Title: This week in Nushell #191
+Path: Documentation
+Content:
+presidento created 
+[link: https://github.com/nushell/nushell.github.io/pull/876] Dataframes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/868] Update testing chapter
+maxim-uvarov created 
+[link: https://github.com/nushell/nushell.github.io/pull/875] fixing typo in 2023-04-04-nushell_0_78.md
+D3V1LC0D3R created 
+[link: https://github.com/nushell/nushell.github.io/pull/874] Update working_with_tables.md to include reject
+Kissaki created 
+[link: https://github.com/nushell/nushell.github.io/pull/873] Improve misleading text format on note
+uselesspseudo created 
+[link: https://github.com/nushell/nushell.github.io/pull/871] Fix old keybding for help menu
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-21-twin0191.mdŸ@665751530cc21bca04a8d6be6ac5c3ba74bb887cdc790521f5123684a48bd222πThis week in Nushell #191ë™Nu_Scripts⁄‚fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/456] update sg.nu to print again
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/449] some fun iterm2 drawing
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/448] update range syntax in str substring usage
+nils-degroot created 
+[link: https://github.com/nushell/nu_scripts/pull/454] Added completions for pass
+D3V1LC0D3R created 
+[link: https://github.com/nushell/nu_scripts/pull/453] Update nuschiit.nu (used deprecated fetch)
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/452] a small query web showcase with unscramble.me
+TuffenDuffen created 
+[link: https://github.com/nushell/nu_scripts/pull/451] Fix issue with open in yarn completions
+íêê⁄Title: This week in Nushell #191
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/456] update sg.nu to print again
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/449] some fun iterm2 drawing
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/448] update range syntax in str substring usage
+nils-degroot created 
+[link: https://github.com/nushell/nu_scripts/pull/454] Added completions for pass
+D3V1LC0D3R created 
+[link: https://github.com/nushell/nu_scripts/pull/453] Update nuschiit.nu (used deprecated fetch)
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/452] a small query web showcase with unscramble.me
+TuffenDuffen created 
+[link: https://github.com/nushell/nu_scripts/pull/451] Fix issue with open in yarn completions
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-21-twin0191.mdŸ@45c7210a191dad6f607bee4cccc1905f64e7e99e0ff38183dc61ce083fd46ab2πThis week in Nushell #191ë®reedlineŸ¯xiuxiu62 created 
+[link: https://github.com/nushell/reedline/pull/569] re-export crossterm::style::Color for custom prompt implementations
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/562] Allow history searching via session id
+íêê⁄1Title: This week in Nushell #191
+Path: reedline
+Content:
+xiuxiu62 created 
+[link: https://github.com/nushell/reedline/pull/569] re-export crossterm::style::Color for custom prompt implementations
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/562] Allow history searching via session id

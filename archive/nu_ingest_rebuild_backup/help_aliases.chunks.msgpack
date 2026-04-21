@@ -1,0 +1,92 @@
+–—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/help_aliases.mdÙ@502961c0e0bb022a72c3cef3fd317b707eeebbde4a43f2563b3cac75b09a4a9d³title: help aliases‘¤coreÙ?
+
+
+
+
+
+
+
+
+``help aliases``
+[link: /commands/categories/core.md] ’ÙnTitle: title: help aliases
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``help aliases``
+[link: /commands/categories/core.md] —ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/help_aliases.mdÙ@0d2777ff5559ed9ddacfaeb85fd06723db4e013bc4d768f7edd845f439099441³title: help aliases‘©SignatureÙ#``> help aliases {flags} ...rest``
+’ÙWTitle: title: help aliases
+Path: Signature
+Content:
+``> help aliases {flags} ...rest``
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/help_aliases.mdÙ@b573d053ed1dd48988453cb4955c9f3329c71fb64336dcc502153506ecdad33d³title: help aliases‘¥FlagsÙJ``--find, -f {string}``
+: String to find in alias names and descriptions.
+’ÙzTitle: title: help aliases
+Path: Flags
+Content:
+``--find, -f {string}``
+: String to find in alias names and descriptions.
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/help_aliases.mdÙ@3ce5c882343c606a6cadcc28e04273b1fd8f222b4fa5ec68da05818061c84c9d³title: help aliases‘ªParametersÙ0``...rest``
+: The name of alias to get help on.
+’ÙeTitle: title: help aliases
+Path: Parameters
+Content:
+``...rest``
+: The name of alias to get help on.
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/help_aliases.mdÙ@a8444d5277e7b73ea19e7334f1c2da980c530d919590016c88fbae01765deb6e³title: help aliases‘³Input/output types:»input
+output
+nothing
+table
+’ÙYTitle: title: help aliases
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/help_aliases.mdÙ@b2b93fbd633da500d8c02c03fee7782317a19324012d66bf3b979e1106afc0bc³title: help aliases‘¨ExamplesÚShow all aliases.
+```Fenced(Borrowed("nu"))
+> help aliases
+
+
+```
+Show help for single alias.
+```Fenced(Borrowed("nu"))
+> help aliases my-alias
+
+
+```
+Search for string in alias names and descriptions.
+```Fenced(Borrowed("nu"))
+> help aliases --find my-alias
+
+
+```
+’Ú:Title: title: help aliases
+Path: Examples
+Content:
+Show all aliases.
+```Fenced(Borrowed("nu"))
+> help aliases
+
+
+```
+Show help for single alias.
+```Fenced(Borrowed("nu"))
+> help aliases my-alias
+
+
+```
+Search for string in alias names and descriptions.
+```Fenced(Borrowed("nu"))
+> help aliases --find my-alias
+
+
+```

@@ -1,0 +1,59 @@
+•’Ù@51334ec7964d824fa240bedf12a3986931d1ed9f89d68da6bb8844113bfe1930ÙjTitle: title: to text
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to text``
+[link: /commands/categories/formats.md] ’Ù@b8f2e1a5480920dda0c96db9bf2e0cfbbb4e01c8e36b698cef314797855065f9ÙFTitle: title: to text
+Path: Signature
+Content:
+``> to text {flags} ``
+’Ù@63aa9f1e045dae8b85ba6f672b317d4f32dd84c2efa4868262d6b6cacc1d0e2fÙ½Title: title: to text
+Path: Flags
+Content:
+``--no-newline, -n``
+: Do not append a newline to the end of the text.
+``--serialize, -s``
+: Serialize nushell types that cannot be deserialized.
+’Ù@9b235ff8c46234faefa0dcc7611e57def4e3675136ba95911b1e181719c1a990ÙQTitle: title: to text
+Path: Input/output types:
+Content:
+input
+output
+any
+string
+’Ù@1c2f163dfe200501a0870b08855a8db1a5c6033c4314473ec7d3bff5ce9ea5d6ÚÏTitle: title: to text
+Path: Examples
+Content:
+Outputs data as simple text with a trailing newline.
+```Fenced(Borrowed("nu"))
+> [1] | to text
+1
+
+
+```
+Outputs data as simple text without a trailing newline.
+```Fenced(Borrowed("nu"))
+> [1] | to text --no-newline
+1
+
+```
+Outputs external data as simple text.
+```Fenced(Borrowed("nu"))
+> git help -a | lines | find -r '^ ' | to text
+
+
+```
+Outputs records as simple text.
+```Fenced(Borrowed("nu"))
+> ls | to text
+
+
+```

@@ -1,0 +1,207 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-20-twin0178.mdŸ@42d52a66ed1ee113a57da715be68d11ab94b2f4be15497de0813143a28745e5aπThis week in Nushell #178ëßNushell⁄EWindSoilder 
+[link: https://github.com/nushell/nushell/pull/7675] made 
+``save``
+ stream on list stream data
+webbedspace 
+[link: https://github.com/nushell/nushell/pull/7798] updated 
+``help <cmd>``
+ to not list deprecated subcommands
+, and 
+[link: https://github.com/nushell/nushell/pull/7752] ``str length``
+, 
+``str substring``
+, 
+``str index-of``
+, 
+``split words``
+ and 
+``split chars``
+ now use graphemes instead of UTF-8 bytes
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7789] let 
+``find``
+ take linebreaks into account in 
+``Value::String``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7802] fixed signature display in help commands
+, and 
+[link: https://github.com/nushell/nushell/pull/7772] update sqlparser dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/7771] update semver dep
+zschaffer 
+[link: https://github.com/nushell/nushell/pull/7785] added magenta to ansi command as synonym for purple
+1Kinoti 
+[link: https://github.com/nushell/nushell/pull/7784] added dedicated 
+``const in pipeline``
+, 
+``const builtin var``
+ errors
+, and 
+[link: https://github.com/nushell/nushell/pull/7759] Allow underscores in integers and floats
+Xoffio 
+[link: https://github.com/nushell/nushell/pull/7779] fixed Issue 7648 which crashes nushell and happens when an alias name is shorter than the alias command and the alias command is an external command.
+, and 
+[link: https://github.com/nushell/nushell/pull/7756] Add test for fix of issue #7754
+DaRacci updated 
+``cd``
+ to 
+[link: https://github.com/nushell/nushell/pull/7775] check all user groups
+hustcer 
+[link: https://github.com/nushell/nushell/pull/7773] fixed some typos
+afetisov 
+[link: https://github.com/nushell/nushell/pull/7755] fixed typos and used more idiomatic assertions
+NotLebedev created a new 
+[link: https://github.com/nushell/nushell/pull/7751] ansi link
+ command
+VincenzoCarlino 
+[link: https://github.com/nushell/nushell/pull/7702] renamed the 
+``to url``
+ command to 
+``url build-query``
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/7619] LazyRecord
+ to speed up startup
+íêê⁄}Title: This week in Nushell #178
+Path: Nushell
+Content:
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/7675] made 
+``save``
+ stream on list stream data
+webbedspace 
+[link: https://github.com/nushell/nushell/pull/7798] updated 
+``help <cmd>``
+ to not list deprecated subcommands
+, and 
+[link: https://github.com/nushell/nushell/pull/7752] ``str length``
+, 
+``str substring``
+, 
+``str index-of``
+, 
+``split words``
+ and 
+``split chars``
+ now use graphemes instead of UTF-8 bytes
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7789] let 
+``find``
+ take linebreaks into account in 
+``Value::String``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/7802] fixed signature display in help commands
+, and 
+[link: https://github.com/nushell/nushell/pull/7772] update sqlparser dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/7771] update semver dep
+zschaffer 
+[link: https://github.com/nushell/nushell/pull/7785] added magenta to ansi command as synonym for purple
+1Kinoti 
+[link: https://github.com/nushell/nushell/pull/7784] added dedicated 
+``const in pipeline``
+, 
+``const builtin var``
+ errors
+, and 
+[link: https://github.com/nushell/nushell/pull/7759] Allow underscores in integers and floats
+Xoffio 
+[link: https://github.com/nushell/nushell/pull/7779] fixed Issue 7648 which crashes nushell and happens when an alias name is shorter than the alias command and the alias command is an external command.
+, and 
+[link: https://github.com/nushell/nushell/pull/7756] Add test for fix of issue #7754
+DaRacci updated 
+``cd``
+ to 
+[link: https://github.com/nushell/nushell/pull/7775] check all user groups
+hustcer 
+[link: https://github.com/nushell/nushell/pull/7773] fixed some typos
+afetisov 
+[link: https://github.com/nushell/nushell/pull/7755] fixed typos and used more idiomatic assertions
+NotLebedev created a new 
+[link: https://github.com/nushell/nushell/pull/7751] ansi link
+ command
+VincenzoCarlino 
+[link: https://github.com/nushell/nushell/pull/7702] renamed the 
+``to url``
+ command to 
+``url build-query``
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/7619] LazyRecord
+ to speed up startup
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-20-twin0178.mdŸ@999768fc3f7df681069ae738be1cd6c399ba24261c89e89d91a4936e47990242πThis week in Nushell #178ë≠Documentation⁄\amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/745] link to default config file in the "explore" page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/744] remove a broken link in "Introducing nushell" # "Plugins"
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/743] fix a typo on "language", was spelled "langauge"
+waldyrious created 
+[link: https://github.com/nushell/nushell.github.io/pull/738] Add two style tweaks to improve tables in code blocks
+hbt created 
+[link: https://github.com/nushell/nushell.github.io/pull/667] fix deprecated cmd
+íêê⁄öTitle: This week in Nushell #178
+Path: Documentation
+Content:
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/745] link to default config file in the "explore" page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/744] remove a broken link in "Introducing nushell" # "Plugins"
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/743] fix a typo on "language", was spelled "langauge"
+waldyrious created 
+[link: https://github.com/nushell/nushell.github.io/pull/738] Add two style tweaks to improve tables in code blocks
+hbt created 
+[link: https://github.com/nushell/nushell.github.io/pull/667] fix deprecated cmd
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-20-twin0178.mdŸ@d6a6ff26f905cb2dae9b2ae737302ab76c5b30307ab22b624ab3bf9f676a3c5dπThis week in Nushell #178ë™Nu_Scripts⁄Åzoechi created 
+[link: https://github.com/nushell/nu_scripts/pull/354] Change "list of values" to "list of records" with value and description
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/353] Export command to make it use-able
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/350] Add completions for Bitwarden CLI client
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/351] fix ohmy.nu path handling on windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/349] add timed_weather that checks the weather at timed intervals
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/348] fixed a type-o in the weather script
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/347] K8s
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/327] ssh kubernetes docker git just nvim
+fitzypop created 
+[link: https://github.com/nushell/nu_scripts/pull/346] add git_branch_cleanup.nu script and readme
+bobhy created 
+[link: https://github.com/nushell/nu_scripts/pull/345] prompt/full-line.nu -- full width prompt
+TornaxO7 created 
+[link: https://github.com/nushell/nu_scripts/pull/337] adding git aliases
+DrakeTDL created 
+[link: https://github.com/nushell/nu_scripts/pull/329] feat(custom-completions): add reflector completions
+ldsands created 
+[link: https://github.com/nushell/nu_scripts/pull/319] Add files needed for Poetry custom-completions
+íêê⁄ºTitle: This week in Nushell #178
+Path: Nu_Scripts
+Content:
+zoechi created 
+[link: https://github.com/nushell/nu_scripts/pull/354] Change "list of values" to "list of records" with value and description
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/353] Export command to make it use-able
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/350] Add completions for Bitwarden CLI client
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/351] fix ohmy.nu path handling on windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/349] add timed_weather that checks the weather at timed intervals
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/348] fixed a type-o in the weather script
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/347] K8s
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/327] ssh kubernetes docker git just nvim
+fitzypop created 
+[link: https://github.com/nushell/nu_scripts/pull/346] add git_branch_cleanup.nu script and readme
+bobhy created 
+[link: https://github.com/nushell/nu_scripts/pull/345] prompt/full-line.nu -- full width prompt
+TornaxO7 created 
+[link: https://github.com/nushell/nu_scripts/pull/337] adding git aliases
+DrakeTDL created 
+[link: https://github.com/nushell/nu_scripts/pull/329] feat(custom-completions): add reflector completions
+ldsands created 
+[link: https://github.com/nushell/nu_scripts/pull/319] Add files needed for Poetry custom-completions

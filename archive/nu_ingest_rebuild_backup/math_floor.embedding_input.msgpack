@@ -1,0 +1,54 @@
+���@1d86f0cf18b962ea703f645068bbdab4979e05a845cd5c903cc8d506920ba680�jTitle: title: math floor
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math floor``
+[link: /commands/categories/math.md] ��@6cb793ac315e4dac9827a450dc1d5801e439efa49a702ae7b0e1d42c4d8ba8c4�LTitle: title: math floor
+Path: Signature
+Content:
+``> math floor {flags} ``
+��@5a22614cd1ba6cf8107b610e385b20d5476e9e349d87668d1f522f267e719520يTitle: title: math floor
+Path: Input/output types:
+Content:
+input
+output
+number
+int
+list
+<
+number
+>
+
+list
+<
+int
+>
+
+range
+list
+<
+number
+>
+
+��@7b7ecf9f57ecbf7767654ffb9ad48950fd6a6a434073653cedd4e8cd41da4d1e�Title: title: math floor
+Path: Examples
+Content:
+Apply the floor function to a list of numbers.
+```Fenced(Borrowed("nu"))
+> [1.5 2.3 -3.1] | math floor
+╭───┬────╮
+│ 0 │  1 │
+│ 1 │  2 │
+│ 2 │ -4 │
+╰───┴────╯
+
+
+```

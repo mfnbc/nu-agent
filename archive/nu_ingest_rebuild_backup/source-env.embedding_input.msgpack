@@ -1,0 +1,54 @@
+–’Ù@992c0746ac06d8b50d358da72d93fbf4c6b6164b75c5101ad52ad3b257249937ÙjTitle: title: source-env
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``source-env``
+[link: /commands/categories/core.md] ’Ù@8bd500e8ec434395adeafc23384635becf29a292d6b8064991ee16ec98cee0afÙVTitle: title: source-env
+Path: Signature
+Content:
+``> source-env {flags} (filename)``
+’Ù@874463158f612ad791acde8410e4f9d6240be0ec8b2dd6db8757eb88c532626aÙ™Title: title: source-env
+Path: Parameters
+Content:
+``filename``
+: The filepath to the script file to source the environment from (
+``null``
+ for no-op).
+’Ù@166c20881d255d327f4d0c8e1c4a88046ae78d9c9fe327cb50d2d4ed4a5a569dÙQTitle: title: source-env
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+’Ù@070dbb81c4a224a3e90faab2d3b66d6d6ef9fb211c23356b5fe27bc543aa7fa6ÙóTitle: title: source-env
+Path: Examples
+Content:
+Sources the environment from foo.nu in the current context.
+```Fenced(Borrowed("nu"))
+> source-env foo.nu
+
+
+```
+Sourcing 
+``null``
+ is a no-op.
+```Fenced(Borrowed("nu"))
+> source-env null
+
+
+```
+’Ù@be9a64432d553455a9c90089e29c8c400d97343f8c3ff19de26f7bcfb8e7a7e7Ù•Title: title: source-env
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

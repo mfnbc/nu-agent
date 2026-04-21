@@ -1,0 +1,172 @@
+”’Ù@7e4336101893c6df17a9e404ebcbeb66bc4edd335aaa89464a5b789208bb3b8bÚÉTitle: This week in Nushell #209
+Path: Nushell
+Content:
+IanManske 
+[link: https://github.com/nushell/nushell/pull/10103] created a 
+``Record``
+ type
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/10093] bumped to 0.84
+, and did some 
+[link: https://github.com/nushell/nushell/pull/10061] Serde
+ 
+[link: https://github.com/nushell/nushell/pull/10078] stuff
+, and 
+[link: https://github.com/nushell/nushell/pull/10051] moved 'bytes' back to commands
+, and 
+[link: https://github.com/nushell/nushell/pull/10042] Spanned Value step 1: span all value cases
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10113] bumped rust-toolchain to 1.70.0
+, and 
+[link: https://github.com/nushell/nushell/pull/10101] bumped nushell to dev version 0.84.1
+, and 
+[link: https://github.com/nushell/nushell/pull/10091] removeed 
+``--column``
+ from 
+``length``
+ command and remove 
+``record``
+ processing
+, and 
+[link: https://github.com/nushell/nushell/pull/10086] updated install/build scripts to include 
+``--locked``
+, and 
+[link: https://github.com/nushell/nushell/pull/10082] allowed 
+``help``
+ to return a 
+``Type::Table``
+, and 
+[link: https://github.com/nushell/nushell/pull/10067] allowed 
+``return``
+ to return any nushell value
+, and 
+[link: https://github.com/nushell/nushell/pull/10063] tried to fix 
+``into datetime``
+ to accept more dt formats
+, and 
+[link: https://github.com/nushell/nushell/pull/10058] enabled/updated some example tests so they work again
+, and 
+[link: https://github.com/nushell/nushell/pull/10057] tried to document the more obscure testbin commands
+matthias-Q 
+[link: https://github.com/nushell/nushell/pull/10112] allowed for 
+``.parq``
+ file ending as alternative to 
+``.parquet``
+Hofer-Julian 
+[link: https://github.com/nushell/nushell/pull/10111] added a notice to enable develop mode on Windows
+, and 
+[link: https://github.com/nushell/nushell/pull/10110] renamed the Toolkit's 
+``pretty-print-command``
+rgwood 
+[link: https://github.com/nushell/nushell/pull/10109] fixed watch not detecting modifications on Windows
+ito-hiroki 
+[link: https://github.com/nushell/nushell/pull/10102] fixed tab completion order of directories to be consistent with order of files
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10095] removed illegal star dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/10073] removed global clippy 
+``-A``
+ from 
+``toolkit.nu``
+, and 
+[link: https://github.com/nushell/nushell/pull/10072] removed clippy global 
+``-A``
+ from CI
+, and 
+[link: https://github.com/nushell/nushell/pull/10071] polished 
+``CONTRIBUTING``
+, add Rust style
+, and 
+[link: https://github.com/nushell/nushell/pull/10070] pinned reedline to 0.23.0
+amtoine 
+[link: https://github.com/nushell/nushell/pull/10087] removed Clippy flags from the PR template
+, and 
+[link: https://github.com/nushell/nushell/pull/10055] reverted "deprecate 
+``--format``
+ and 
+``--list``
+ in 
+``into datetime``
+ (#10017)"
+, and 
+[link: https://github.com/nushell/nushell/pull/10053] made the code page optional for 
+``std clip``
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10068] removed "let config" warning
+, and 
+[link: https://github.com/nushell/nushell/pull/10049] recursively exported constants from modules
+, and 
+[link: https://github.com/nushell/nushell/pull/10035] simplified virtualenv testing
+horasal 
+[link: https://github.com/nushell/nushell/pull/10030] added encoding auto-detection for 
+``decode``
+herobs 
+[link: https://github.com/nushell/nushell/pull/9873] fixed 9156 endian consistency
+nibon7 submitted 
+[link: https://github.com/nushell/nushell/pull/9577] Don't use 
+``oldtime``
+ feature of chrono 
+, and 
+[link: https://github.com/nushell/nushell/pull/9550] Use built-in is_terminal instead of is_terminal::is_terminal
+’Ù@9fa8826c0c7fbbce0c6fd8fc4d82d76c8739ff4cdb3e5a7b2c6cd3581d22feadÚÉTitle: This week in Nushell #209
+Path: Documentation
+Content:
+fdncred created 
+[link: https://github.com/nushell/nushell.github.io/pull/1022] update fdncred's item + typo
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/1021] Update Reilly's comments in birthday blog post
+github-actions
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/1020] Compressed Images
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1015] Compressed Images
+jntrnr created 
+[link: https://github.com/nushell/nushell.github.io/pull/1019] Add Nushell birthday post
+webwurst created 
+[link: https://github.com/nushell/nushell.github.io/pull/1018] Fix typo
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/1016] Refresh command docs for Nu v0.84
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1009] Some improvements to 
+``make_docs.nu``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1008] Update table mode config doc, fix #1007
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1014] Sections for release notes
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/1013] Break down shoutouts to separate sections
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1012] Add intro sentence; Change 
+``str replace``
+ note
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1011] Add export const and scope notes
+jwarlander created 
+[link: https://github.com/nushell/nushell.github.io/pull/1010] Use '--locked' in cargo install snippet for dataframe feature
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/988] Release notes for 
+``0.84.0``
+’Ù@daa9f1d238d93eb930caf3e80adf29cbc4c42283cff83d0f4626ec0e9c274db6ÚæTitle: This week in Nushell #209
+Path: Nu_Scripts
+Content:
+AntoineSebert created 
+[link: https://github.com/nushell/nu_scripts/pull/585] Add 
+``dfr``
+ before 
+``into df``
+ and 
+``into nu``
+siph created 
+[link: https://github.com/nushell/nu_scripts/pull/584] init nix scripts
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/583] Upgraded to 0.84
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/566] Script to generate the excerpt of the GH release
+’Ù@47c223ed3de0dface9042f1969e0ec21503e728cfe5c6f8d01a0cdb0680f312aÙ¡Title: This week in Nushell #209
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/626] Bump version for 0.23 release

@@ -1,0 +1,37 @@
+”’Ù@c1faec5edb5c485ef76e63de10ed8b678aa58dc44a56a48f6391ca742a9cdabdÙrTitle: title: scope commands
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``scope commands``
+[link: /commands/categories/core.md] ’Ù@503776262fd60d427a47bd3e70cfc331dd82f25e496cd3736d557d9b4c1146e0ÙTTitle: title: scope commands
+Path: Signature
+Content:
+``> scope commands {flags} ``
+’Ù@2158139d41415284ee91881b84573ed8ae5f074e42703bc0ef2288cc5476896eÙcTitle: title: scope commands
+Path: Input/output types:
+Content:
+input
+output
+nothing
+list
+<
+any
+>
+
+’Ù@5460345dec11ebc171611c07894543001a4a40de9e8970a0bf400ecfd107ac8cÙŽTitle: title: scope commands
+Path: Examples
+Content:
+Show the commands in the current scope.
+```Fenced(Borrowed("nu"))
+> scope commands
+
+
+```

@@ -1,0 +1,138 @@
+”’Ù@3173261ac1351c69bec9e8c18d7500ccdd917284c9b2d5f385ef47a1e7c76863Ù’Title: This week in Nushell #127
+Path: Nushell
+Content:
+jt created 
+[link: https://github.com/nushell/nushell/pull/4271] Remove unused repo parts
+’Ù@bbbbe6684181a09fc37ab0deddf8fb3a33c59433013a0c7079f112122bf4b4e9ÚTitle: This week in Nushell #127
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/139] kubouch's benchmark script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/138] port the gradient script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/137] update output to records
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/136] port 
+``timed_weather_run``
+ to engine-q
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/135] update get_weather syntax
+’Ù@579d247416367953375c39d92efe135d127e9922d7084497af686f9065e5ad9aÚ!Title: This week in Nushell #127
+Path: engine-q
+Content:
+jt created 
+[link: https://github.com/nushell/engine-q/pull/871] "maybe text codec" version 2
+, and 
+[link: https://github.com/nushell/engine-q/pull/867] Harden highlighter against alias spans
+, and 
+[link: https://github.com/nushell/engine-q/pull/864] Move history search to ctrl-x
+, and 
+[link: https://github.com/nushell/engine-q/pull/858] Allow equals to separate long flag and arg
+, and 
+[link: https://github.com/nushell/engine-q/pull/856] Also set $in-variable with input
+, and 
+[link: https://github.com/nushell/engine-q/pull/854] Allow let/let-env to see custom command input
+, and 
+[link: https://github.com/nushell/engine-q/pull/853] Add -c flag and others to cmdline args
+, and 
+[link: https://github.com/nushell/engine-q/pull/851] Start support for commandline args to nu itself
+, and 
+[link: https://github.com/nushell/engine-q/pull/849] Port exec command
+, and 
+[link: https://github.com/nushell/engine-q/pull/848] Port default command
+, and 
+[link: https://github.com/nushell/engine-q/pull/847] Fix expanding external args
+, and 
+[link: https://github.com/nushell/engine-q/pull/842] Fix bug in date comparison
+, and 
+[link: https://github.com/nushell/engine-q/pull/841] Allow 
+``open``
+ to read its filename from input
+, and 
+[link: https://github.com/nushell/engine-q/pull/839] Allow external args to expand globs
+, and 
+[link: https://github.com/nushell/engine-q/pull/838] Highlight help tutor
+, and 
+[link: https://github.com/nushell/engine-q/pull/837] Add var vals and alias expansions to scope var
+, and 
+[link: https://github.com/nushell/engine-q/pull/825] Only escape backslash on windows
+, and 
+[link: https://github.com/nushell/engine-q/pull/817] Add flag completions
+, and 
+[link: https://github.com/nushell/engine-q/pull/815] Fix doc comments for custom commands
+, and 
+[link: https://github.com/nushell/engine-q/pull/812] Make external app error uniform
+sholderbach 
+[link: https://github.com/nushell/engine-q/pull/866] added F1-F12 key support
+, and 
+[link: https://github.com/nushell/engine-q/pull/863] Accomodate reedline#270
+eggcaker 
+[link: https://github.com/nushell/engine-q/pull/862] fixed into datetime example parameter type
+, and 
+[link: https://github.com/nushell/engine-q/pull/840] allow fetch command to add custom headers
+, and 
+[link: https://github.com/nushell/engine-q/pull/810] Add how to setup oh-my-posh with engine-q document
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/861] using menu trait
+, and 
+[link: https://github.com/nushell/engine-q/pull/846] History menu
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/857] added support for Floats for sort-by
+, and 
+[link: https://github.com/nushell/engine-q/pull/836] fix several cases where sort-by was crashing engine-q
+, and 
+[link: https://github.com/nushell/engine-q/pull/814] port sort_by without float (yet)
+onthebridgetonowhere 
+[link: https://github.com/nushell/engine-q/pull/855] added suport for Filesize and Date for sort-by command
+, and 
+[link: https://github.com/nushell/engine-q/pull/845] Flatten records
+, and 
+[link: https://github.com/nushell/engine-q/pull/831] Fix cd-ing into a file
+, and 
+[link: https://github.com/nushell/engine-q/pull/805] Fix flatten's dropping column issue #756
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/834] allowed find to respect ls_colors
+, and 
+[link: https://github.com/nushell/engine-q/pull/832] capture keyboard event
+, and 
+[link: https://github.com/nushell/engine-q/pull/827] ansi cut 2.0 update to cargo.lock
+, and 
+[link: https://github.com/nushell/engine-q/pull/824] fix to retain ls_colors coloring from ls
+, and 
+[link: https://github.com/nushell/engine-q/pull/813] add 
+``hash base64``
+ subcommand
+, and 
+[link: https://github.com/nushell/engine-q/pull/811] added 3rd party prompt docs
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/833] ported move
+zhiburt 
+[link: https://github.com/nushell/engine-q/pull/822] drafted: Bump 
+``ansi-cut``
+ version to 0.2.0
+arthur-targaryen 
+[link: https://github.com/nushell/engine-q/pull/658] ported 
+``find``
+ command
+’Ù@dae800c6017fab3562371660635a1384dbffa9ce50260ea4722503b5d6deb953Ú{Title: This week in Nushell #127
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/281] coerce to CRLF lazily
+, and 
+[link: https://github.com/nushell/reedline/pull/279] Fix after entry cursor positioning at the bottom
+, and 
+[link: https://github.com/nushell/reedline/pull/278] Small Painting changes to improve readability and correctness
+, and 
+[link: https://github.com/nushell/reedline/pull/270] Remove outdated CompletionActionHandler(s)
+elferherrera created 
+[link: https://github.com/nushell/reedline/pull/280] chronological order search
+, and 
+[link: https://github.com/nushell/reedline/pull/277] add return for multiline
+, and 
+[link: https://github.com/nushell/reedline/pull/276] Generic menus
+, and 
+[link: https://github.com/nushell/reedline/pull/275] History menu
+, and 
+[link: https://github.com/nushell/reedline/pull/273] Long menu

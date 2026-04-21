@@ -1,0 +1,54 @@
+‘’Ù@7b1dfa025792c9a1787c3c912fc05c4418908aa3962511a18835de7d5c891824Ú&Title: This week in Nu #52
+Path: This week in Nu #52
+Content:
+One year of TwiN!
+samhedin changed per-directory environments to 
+[link: https://github.com/nushell/nushell/pull/2352] run exit scripts in the original directory
+JosephTLyons updated 
+[link: https://github.com/nushell/nushell/pull/2354] ``histogram``
+ occurrences examples
+, added a 
+[link: https://github.com/nushell/nushell/pull/2358] test for 
+``count``
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2374] column count breaking on empty tables
+mattclarke renamed 
+[link: https://github.com/nushell/nushell/pull/2356] time units (eg 
+``1s``
+ is now 
+``1sec``
+)
+jonathandturner changed 
+``to json``
+ to 
+[link: https://github.com/nushell/nushell/pull/2359] preserve metadata in output
+, moved 
+[link: https://github.com/nushell/nushell/pull/2369] nu-cli data functionality into its own crate, nu-data
+, added 
+[link: https://github.com/nushell/nushell/pull/2372] testing wasm to CI
+lucasmmg changed 
+[link: https://github.com/nushell/nushell/pull/2360] ``sort-by``
+ to fail gracefully when types are mismatched
+, and 
+[link: https://github.com/nushell/nushell/pull/2366] further improved the error
+rrichardson added 
+[link: https://github.com/nushell/nushell/pull/2363] new case conversions to 
+``str``
+andrasio cleaned up 
+[link: https://github.com/nushell/nushell/pull/2364] config settings logic
+fdncred added support for 
+[link: https://github.com/nushell/nushell/pull/2365] more Nu table themes
+, and more 
+[link: https://github.com/nushell/nushell/pull/2378] table theming
+bailey-layzer added 
+[link: https://github.com/nushell/nushell/pull/2377] type inference for alias definitions
+LhKipp added a 
+[link: https://github.com/nushell/nushell/pull/2381] ``sleep``
+ command
+, fixed 
+[link: https://github.com/nushell/book/pull/125] time units in the book
+jzaefferer improved 
+[link: https://github.com/nushell/demo/pull/59] tracking errors on the demo site
+, and updated the demo to the latest Nu
+oylenshpeegal fixed a 
+[link: https://github.com/nushell/contributor-book/pull/28] typo in the contributor book

@@ -1,0 +1,40 @@
+•’Ù@e7de9448ccd69d16ba52eacc4b54fa8f5bbb5bc3c1f0f72403fa335c8bc786f6ÙhTitle: title: to yml
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to yml``
+[link: /commands/categories/formats.md] ’Ù@8d793ed3ac902059ecdcb111a53e89489afc72f7c115225f54db9eec741de9efÙDTitle: title: to yml
+Path: Signature
+Content:
+``> to yml {flags} ``
+’Ù@46412d6f6d232f4279937b2542532863a3a55f3dff1ccbd4c1f675be0484b971ÙuTitle: title: to yml
+Path: Flags
+Content:
+``--serialize, -s``
+: Serialize nushell types that cannot be deserialized.
+’Ù@d248e20fe6755acf8a869a09353c520f4d06c7934165db9f902427a9d93171fdÙPTitle: title: to yml
+Path: Input/output types:
+Content:
+input
+output
+any
+string
+’Ù@0a420ab7fa4f80ddd95c9070a6347cf7780b849e4a28bd35d1e97b402606a611ÙÄTitle: title: to yml
+Path: Examples
+Content:
+Outputs a YAML string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [[foo bar]; ["1" "2"]] | to yml
+- foo: '1'
+  bar: '2'
+
+
+```

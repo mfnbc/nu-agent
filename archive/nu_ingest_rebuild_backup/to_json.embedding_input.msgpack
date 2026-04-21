@@ -1,0 +1,64 @@
+•’Ù@ede48eb1e51c36dc62d3979cc68f9e67995c9783c9db3aea64bfb9db4e0780d2ÙjTitle: title: to json
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to json``
+[link: /commands/categories/formats.md] ’Ù@2d6ba4c0fa776122ae89a4499db24d8ef8a9a5c303bbe3503b61ae88ab1cc29aÙFTitle: title: to json
+Path: Signature
+Content:
+``> to json {flags} ``
+’Ù@2aea29e29ace9d7008b7d94321f5145d9d57b126ca789f8afb87bb2a02bce74fÚ0Title: title: to json
+Path: Flags
+Content:
+``--raw, -r``
+: Remove all of the whitespace and trailing line ending.
+``--indent, -i {number}``
+: Specify indentation width.
+``--tabs, -t {number}``
+: Specify indentation tab quantity.
+``--serialize, -s``
+: Serialize nushell types that cannot be deserialized.
+’Ù@2b807e4eb500a350712c05c7ee06397bea12516c81c595db5f6a985827244bb7ÙQTitle: title: to json
+Path: Input/output types:
+Content:
+input
+output
+any
+string
+’Ù@0fce8b3de28d7ea94b6339c468a285b118d6d2bd6988d7606dbad997de729470ÚTitle: title: to json
+Path: Examples
+Content:
+Outputs a JSON string, with default indentation, representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [a b c] | to json
+[
+  "a",
+  "b",
+  "c"
+]
+
+```
+Outputs a JSON string, with 4-space indentation, representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [Joe Bob Sam] | to json --indent 4
+[
+    "Joe",
+    "Bob",
+    "Sam"
+]
+
+```
+Outputs an unformatted JSON string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [1 2 3] | to json -r
+[1,2,3]
+
+```

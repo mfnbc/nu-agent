@@ -1,0 +1,40 @@
+•’Ù@b2f4b57415cd94c76e2bd9c63c2a4600eaa25341343542e0947ae21571ae5bbaÙpTitle: title: attr category
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``attr category``
+[link: /commands/categories/core.md] ’Ù@8e477c73bb374016d668a693c8544ce8fc34bc6b3510c00d86a2e66e787eaeddÙ\Title: title: attr category
+Path: Signature
+Content:
+``> attr category {flags} (category)``
+’Ù@103b1fcfdd6bc9fad2e23f2cb4b39939cd8df378380858ea0c284cf97e738964ÙeTitle: title: attr category
+Path: Parameters
+Content:
+``category``
+: Category of the custom command.
+’Ù@c411d8f03f51a62dce8697c4622ce0ec17cec60dde6e96e2fd1cca70775e6983Ù[Title: title: attr category
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+’Ù@9f1a690075920b95ec8368ac75f2d116a726091b421b91d6930b507e5a05ba19ÙĞTitle: title: attr category
+Path: Examples
+Content:
+Add a category to a custom command.
+```Fenced(Borrowed("nu"))
+> # Double numbers
+    @category math
+    def double []: [number -> number] { $in * 2 }
+
+
+```

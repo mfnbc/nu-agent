@@ -1,0 +1,59 @@
+���@c32d7967bf56d61ec4eb6fa59413ded3322d670fe1bdc769b4f395f43202a6f7ٌTitle: title: polars selector first
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars selector first``
+[link: /commands/categories/expression.md] ��@9174b4c0286402a150bec13fe48130577c5b9cda6b72a3d253ab036c4e412a2e�eTitle: title: polars selector first
+Path: Signature
+Content:
+``> polars selector first {flags} (n)``
+��@98fd9cc89491b92275440fef3230ac281008d579f79e42e7ee6bc2716f2891c8كTitle: title: polars selector first
+Path: Parameters
+Content:
+``n``
+: Number of columns to select from the beginning (default: 1).
+��@b607862fdc69d81acbb16aee10a3ce06eee456fe21c51ad6e2a558b3d397725d�hTitle: title: polars selector first
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_selector
+��@ff888045e03c6834bc9426109436a515b909dbf22eeb621fd2ac67a44318b9d9��Title: title: polars selector first
+Path: Examples
+Content:
+Create a selector for the first column
+```Fenced(Borrowed("nu"))
+> polars selector first
+
+
+```
+Create a selector for the first 3 columns
+```Fenced(Borrowed("nu"))
+> polars selector first 3
+
+
+```
+Create a new column from the first column using with-column
+```Fenced(Borrowed("nu"))
+> [[a b c]; [1 2 3] [4 5 6]]
+                    | polars into-df
+                    | polars with-column ((polars selector first) * 10 | polars as a_times_10)
+                    | polars collect
+╭───┬───┬───┬───┬────────────╮
+│ # │ a │ b │ c │ a_times_10 │
+├───┼───┼───┼───┼────────────┤
+│ 0 │ 1 │ 2 │ 3 │         10 │
+│ 1 │ 4 │ 5 │ 6 │         40 │
+╰───┴───┴───┴───┴────────────╯
+
+
+```

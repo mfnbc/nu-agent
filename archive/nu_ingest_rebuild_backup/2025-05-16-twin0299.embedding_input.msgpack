@@ -1,0 +1,96 @@
+–’Ù@4c19a743bbf8df39f04d7ade2019fcefa5d1c8c5a73b765d72663837a4536134ÙœTitle: title: 'This Week in Nushell #299'
+Path: This week in Nushell #299
+Content:
+
+
+
+
+Published 2025-05-16
+Thanks again to all our wonderful contributors!
+’Ù@ab57ddbf54908aef550fa8a1f780864799f5de46f987d4c5d1fa0f05bd857808ÚYTitle: title: 'This Week in Nushell #299'
+Path: Nushell
+Content:
+Tyarel8 
+[link: https://github.com/nushell/nushell/pull/15767] fixed duplicate short_name in 
+``ansi``
+ command
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/15764] used Default for making Suggestions in attribute_completions
+FlippinBerger 
+[link: https://github.com/nushell/nushell/pull/15761] corrected 
+``use-facing``
+ to 
+``user-facing``
+ in CONTRIBUTING.md
+fdncred 
+[link: https://github.com/nushell/nushell/pull/15760] allowed powershell scripts in the path to be executed
+dependabot
+[
+bot
+]
+ bumped dependencies:
+[link: https://github.com/nushell/nushell/pull/15753] tempfile from 3.15.0 to 3.20.0
+[link: https://github.com/nushell/nushell/pull/15667] miette from 7.5.0 to 7.6.0
+LazyPluto 
+[link: https://github.com/nushell/nushell/pull/15751] fixed empty tables not respecting 
+``$env.config.use_ansi_coloring``
+ (closes #14896)
+ayax79:
+[link: https://github.com/nushell/nushell/pull/15741] Updated to Rust 1.85, edition=2024
+[link: https://github.com/nushell/nushell/pull/15728] Refactored DataType
+musicinmybrain 
+[link: https://github.com/nushell/nushell/pull/15737] updated lscolors from 0.17 to 0.20
+Mrfiregem:
+[link: https://github.com/nushell/nushell/pull/15736] Allowed 
+``path join``
+ to read ByteStream input
+ (#15128)
+[link: https://github.com/nushell/nushell/pull/15654] Added lazy closure evaluation to 
+``default``
+ (#14160)
+Bahex:
+[link: https://github.com/nushell/nushell/pull/15735] Fixed parsing of bare word string interpolations starting with sub expressions
+[link: https://github.com/nushell/nushell/pull/15697] Added support for stored closures in 
+``where``
+Kissaki 
+[link: https://github.com/nushell/nushell/pull/15732] added 
+``match``
+ examples for simple value and alternative values
+blindFS 
+[link: https://github.com/nushell/nushell/pull/15730] fixed inefficient select with large row numbers
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/15727] removed unnecessary truncate logic in nu-table --expand
+hackeryarn 
+[link: https://github.com/nushell/nushell/pull/15609] made to nuon raw option remove all whitespace
+’Ù@4f4de71d3bbf66a0abdf71d636b8c14f8017963e46e2942de1349132d03de9e0ÚæTitle: title: 'This Week in Nushell #299'
+Path: Nu_Scripts
+Content:
+Kissaki:
+[link: https://github.com/nushell/nu_scripts/pull/1122] Fixed flags crossing subcommands in fishgen
+[link: https://github.com/nushell/nu_scripts/pull/1118] Dropped unnecessary line length check in fishgen
+Cattle0Horse 
+[link: https://github.com/nushell/nu_scripts/pull/1117] added complementary support for git config subcommands
+Arthapz 
+[link: https://github.com/nushell/nu_scripts/pull/1116] fixed nu_msvs
+’Ù@da21605898ca01ad6ea5ea8774c4d08c77d6f447e409b9837e1ccc6ea79eee37ÚíTitle: title: 'This Week in Nushell #299'
+Path: Documentation
+Content:
+kkoang 
+[link: https://github.com/nushell/nushell.github.io/pull/1919] fixed typo in special_variables.md
+NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/1918] Added TWiN 298
+[link: https://github.com/nushell/nushell.github.io/pull/1918] Fixed typo in 297
+Kissaki 
+[link: https://github.com/nushell/nushell.github.io/pull/1635] replaced "Pipelines Behind the Scenes" with "Result Display Rendering"
+’Ù@be4c51fe4ab7459a6f9e730b3058b8c18cc351bdc95592b660aa613858de3331ÚyTitle: title: 'This Week in Nushell #299'
+Path: Integrations
+Content:
+hustcer:
+[link: https://github.com/nushell/integrations/pull/51] Updated MSI user scope install tests
+[link: https://github.com/nushell/integrations/pull/50] Updated MSI install/uninstall checking script
+[link: https://github.com/nushell/integrations/pull/49] Added MSI install tests for winget and msiexec
+’Ù@2f9e67207579855d87d02a444f331d3d0daa708a149bfebec424032259baca41Ù«Title: title: 'This Week in Nushell #299'
+Path: Plugin Template
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_plugin_template/pull/11] updated to nushell 0.104.0

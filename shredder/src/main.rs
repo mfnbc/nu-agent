@@ -1,5 +1,5 @@
 use blake3;
-use pulldown_cmark::{Event, Options, Parser, Tag};
+use pulldown_cmark::{CodeBlockKind, Event, Options, Parser, Tag};
 use rmp_serde::to_vec_named;
 use serde::Deserialize;
 use serde::Serialize;
@@ -31,6 +31,25 @@ struct NuDocChunk<'a> {
 struct Taxonomy {
     commands: Vec<String>,
     tags: Vec<String>,
+    idiom_weight: i32,
+}
+
+// Simple heuristic to score how "idiomatic" a code block is.
+fn calculate_idiom_score(code: &str) -> i32 {
+    let mut score = 0;
+    if code.matches('|').count() > 2 {
+        score += 1;
+    }
+    let structured_tokens = [
+        "upsert", "insert", "update", "merge", "reduce", "flatten", "wrap",
+    ];
+    if structured_tokens.iter().any(|&t| code.contains(t)) {
+        score += 1;
+    }
+    if code.contains("metadata") || code.contains("$in") || code.contains("explore") {
+        score += 1;
+    }
+    score
 }
 
 fn checksum(s: &str) -> String {
@@ -53,6 +72,10 @@ fn shred_markdown<'a>(path: &'a str, md: &'a str) -> Vec<NuDocChunk<'a>> {
     let mut heading_stack: Vec<String> = Vec::new();
     let mut title: Option<String> = None;
     let mut in_heading = false;
+    // Whether the current chunk contains a Nushell fenced code block
+    let mut current_has_nu_code: bool = false;
+    // Accumulate the raw code text for the current chunk (to compute idiom score)
+    let mut current_code_text: String = String::new();
 
     for ev in parser {
         match ev {
@@ -68,20 +91,30 @@ fn shred_markdown<'a>(path: &'a str, md: &'a str) -> Vec<NuDocChunk<'a>> {
                         heading_stack.join(" > "),
                         current
                     );
+
+                    let mut taxonomy = Taxonomy {
+                        commands: vec![],
+                        tags: vec![],
+                        idiom_weight: 0,
+                    };
+                    if current_has_nu_code {
+                        taxonomy.tags.push("high_priority".to_string());
+                        taxonomy.idiom_weight = calculate_idiom_score(&current_code_text);
+                    }
+
                     let chunk = NuDocChunk {
                         path,
                         id: checksum(&id),
                         title: title.clone(),
                         heading_path: heading_stack.clone(),
                         text: current.clone(),
-                        taxonomy: Taxonomy {
-                            commands: vec![],
-                            tags: vec![],
-                        },
+                        taxonomy,
                         embedding_input,
                     };
                     chunks.push(chunk);
                     current.clear();
+                    current_has_nu_code = false;
+                    current_code_text.clear();
                 }
                 in_heading = true;
             }
@@ -106,17 +139,37 @@ fn shred_markdown<'a>(path: &'a str, md: &'a str) -> Vec<NuDocChunk<'a>> {
                 } else {
                     current.push_str(&t);
                     current.push('\n');
+                    // Also accumulate into code text if we're inside a fenced code block
+                    if current_has_nu_code {
+                        current_code_text.push_str(&t);
+                        current_code_text.push('\n');
+                    }
                 }
             }
             Event::Code(t) => {
                 current.push_str(&format!("``{}``\n", t));
             }
             Event::Start(Tag::CodeBlock(kind)) => {
-                // CodeBlockKind isn't Display; use Debug to keep language info
-                current.push_str(&format!("```{:?}\n", kind));
+                // If fenced, check the language identifier for nushell/nu
+                match kind {
+                    CodeBlockKind::Fenced(lang) => {
+                        let lang_str = lang.to_string();
+                        if !lang_str.is_empty() {
+                            let l = lang_str.to_lowercase();
+                            if l.starts_with("nu") || l.contains("nushell") {
+                                current_has_nu_code = true;
+                            }
+                        }
+                        current.push_str(&format!("```{}\n", lang_str));
+                    }
+                    CodeBlockKind::Indented => {
+                        current.push_str("```\n");
+                    }
+                }
             }
             Event::End(Tag::CodeBlock(_)) => {
                 current.push_str("```\n");
+                // closing a code block: keep current_code_text as-is (we may see multiple code blocks per chunk)
             }
             Event::Start(Tag::Link(_, dest, _)) => {
                 current.push_str(&format!("[link: {}] ", dest));
@@ -139,16 +192,24 @@ fn shred_markdown<'a>(path: &'a str, md: &'a str) -> Vec<NuDocChunk<'a>> {
             heading_stack.join(" > "),
             current
         );
+
+        let mut taxonomy = Taxonomy {
+            commands: vec![],
+            tags: vec![],
+            idiom_weight: 0,
+        };
+        if current_has_nu_code {
+            taxonomy.tags.push("high_priority".to_string());
+            taxonomy.idiom_weight = calculate_idiom_score(&current_code_text);
+        }
+
         let chunk = NuDocChunk {
             path,
             id: checksum(&id),
             title,
             heading_path: heading_stack,
             text: current,
-            taxonomy: Taxonomy {
-                commands: vec![],
-                tags: vec![],
-            },
+            taxonomy,
             embedding_input,
         };
         chunks.push(chunk);
@@ -192,7 +253,28 @@ fn main() -> anyhow::Result<()> {
             title: c.title,
             heading_path: c.heading_path,
             text: c.text,
-            taxonomy: c.taxonomy,
+            // Populate taxonomy.commands for command docs based on path
+            taxonomy: {
+                let mut tx = c.taxonomy.clone();
+                // If this looks like a command doc under commands/docs, use the file stem
+                if c.path.contains("/commands/docs/") {
+                    if let Some(stem) = std::path::Path::new(c.path)
+                        .file_stem()
+                        .and_then(|s| s.to_str())
+                    {
+                        tx.commands = vec![stem.to_string()];
+                    }
+                } else if c.path.contains("/commands/") {
+                    // fallback: if it's under /commands/ but not /commands/docs/, try to use the file stem
+                    if let Some(stem) = std::path::Path::new(c.path)
+                        .file_stem()
+                        .and_then(|s| s.to_str())
+                    {
+                        tx.commands = vec![stem.to_string()];
+                    }
+                }
+                tx
+            },
             embedding_input: c.embedding_input,
         })
         .collect();
@@ -266,6 +348,39 @@ fn main() -> anyhow::Result<()> {
     // Print combined paths so callers can find them
     println!("{}", combined_chunks_path.display());
     println!("{}", combined_emb_path.display());
+
+    // Build command_map (lowercase command -> { id, display }) and write as msgpack
+    use std::collections::BTreeMap;
+    #[derive(Serialize)]
+    struct CmdEntry {
+        id: String,
+        display: String,
+    }
+
+    let mut cmd_map: BTreeMap<String, CmdEntry> = BTreeMap::new();
+    for rec in &combined_records {
+        for cmd in &rec.taxonomy.commands {
+            let key = cmd.to_lowercase();
+            if !cmd_map.contains_key(&key) {
+                cmd_map.insert(
+                    key,
+                    CmdEntry {
+                        id: rec.id.clone(),
+                        display: cmd.clone(),
+                    },
+                );
+            }
+        }
+    }
+
+    // Ensure data dir exists and write binary msgpack command_map
+    let data_dir = std::path::Path::new("data");
+    if !data_dir.exists() {
+        std::fs::create_dir_all(data_dir)?;
+    }
+    let cmd_buf = to_vec_named(&cmd_map)?;
+    let cmd_path = data_dir.join("command_map.msgpack");
+    fs::write(&cmd_path, cmd_buf)?;
 
     Ok(())
 }

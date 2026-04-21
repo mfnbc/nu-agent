@@ -1,0 +1,137 @@
+���Oarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/columns.md�@7cec3225ac8359cd3bbdba2edcae75c26133a9b5e48f508218f910242ca15df9�title: columns��filters�=
+
+
+
+
+
+
+
+
+``columns``
+[link: /commands/categories/filters.md] ����jTitle: title: columns
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``columns``
+[link: /commands/categories/filters.md] ��Oarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/columns.md�@0e3dffe24605c4461b2f7e02f2aa6181b930cfa54ba56e7429d3a980d8fe3192�title: columns��Signature�``> columns {flags} ``
+����FTitle: title: columns
+Path: Signature
+Content:
+``> columns {flags} ``
+��Oarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/columns.md�@1857004b65c0abaf70f1c72c505a3adbab0ddeacae371c0d91e55ddf46cb0d68�title: columns��Input/output types:�<input
+output
+table
+list
+<
+string
+>
+
+record
+list
+<
+string
+>
+
+����uTitle: title: columns
+Path: Input/output types:
+Content:
+input
+output
+table
+list
+<
+string
+>
+
+record
+list
+<
+string
+>
+
+��Oarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/columns.md�@2a52578896ef1e047615d990ecb190ec5f26eab7c68625dadb750194e0932f67�title: columns��Examples��Get the columns from the record
+```Fenced(Borrowed("nu"))
+> { acronym:PWD, meaning:'Print Working Directory' } | columns
+╭───┬─────────╮
+│ 0 │ acronym │
+│ 1 │ meaning │
+╰───┴─────────╯
+
+
+```
+Get the columns from the table
+```Fenced(Borrowed("nu"))
+> [[name,age,grade]; [bill,20,a]] | columns
+╭───┬───────╮
+│ 0 │ name  │
+│ 1 │ age   │
+│ 2 │ grade │
+╰───┴───────╯
+
+
+```
+Get the first column from the table
+```Fenced(Borrowed("nu"))
+> [[name,age,grade]; [bill,20,a]] | columns | first
+
+
+```
+Get the second column from the table
+```Fenced(Borrowed("nu"))
+> [[name,age,grade]; [bill,20,a]] | columns | select 1
+
+
+```
+���� Title: title: columns
+Path: Examples
+Content:
+Get the columns from the record
+```Fenced(Borrowed("nu"))
+> { acronym:PWD, meaning:'Print Working Directory' } | columns
+╭───┬─────────╮
+│ 0 │ acronym │
+│ 1 │ meaning │
+╰───┴─────────╯
+
+
+```
+Get the columns from the table
+```Fenced(Borrowed("nu"))
+> [[name,age,grade]; [bill,20,a]] | columns
+╭───┬───────╮
+│ 0 │ name  │
+│ 1 │ age   │
+│ 2 │ grade │
+╰───┴───────╯
+
+
+```
+Get the first column from the table
+```Fenced(Borrowed("nu"))
+> [[name,age,grade]; [bill,20,a]] | columns | first
+
+
+```
+Get the second column from the table
+```Fenced(Borrowed("nu"))
+> [[name,age,grade]; [bill,20,a]] | columns | select 1
+
+
+```
+��Oarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/columns.md�@40d5c9b1b306c8d7d138684e327f3cb31f2c99cdc9597736243fdc46aab5e0e3�title: columns��Notes�QThis is a counterpart to 
+``values``
+, which produces a list of columns' values.
+����|Title: title: columns
+Path: Notes
+Content:
+This is a counterpart to 
+``values``
+, which produces a list of columns' values.

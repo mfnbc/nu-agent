@@ -1,0 +1,38 @@
+•’Ù@63b8bef04579311b36a6474d7b2f4b197c8671643406a0379eb8dac63fcdf15cÙtTitle: title: stor import
+Path: database
+Content:
+
+
+
+
+
+
+
+
+
+``stor import``
+[link: /commands/categories/database.md] ’Ù@a9f0b21166043c60322b950b03090240c966c8cfd32f55fbe22df1225546161dÙNTitle: title: stor import
+Path: Signature
+Content:
+``> stor import {flags} ``
+’Ù@b8691e79695400789e1860d6a2fb9f0990fed2a6eff6f29d7b771dc6681915fcÙ†Title: title: stor import
+Path: Flags
+Content:
+``--file-name, -f {string}``
+: File name to import the sqlite in-memory database from.
+’Ù@c62744f66a052c16e55b1883069312f30e12af331609ce7a0d20aa12b87ef102ÙXTitle: title: stor import
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@0b3fb446e83bb26d9fb852d8b7c61d69ec2ddbc298b0f78ed8a350aee1b4f02dÙ¹Title: title: stor import
+Path: Examples
+Content:
+Import a sqlite database file into the in-memory sqlite database
+```Fenced(Borrowed("nu"))
+> stor import --file-name nudb.sqlite
+
+
+```

@@ -1,0 +1,144 @@
+–—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/char.mdÙ@5fab0a3ee738d0f6f218795bc9ff6e3c123c9c2dbbd8930a6b1396cc2ae9b804«title: char‘§stringsÙ:
+
+
+
+
+
+
+
+
+``char``
+[link: /commands/categories/strings.md] ’ÙdTitle: title: char
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``char``
+[link: /commands/categories/strings.md] —ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/char.mdÙ@d3f1600c528f88b0f083966cb2b5ea6f69d75b4b31b2d02fbbb3dc31405d947b«title: char‘©SignatureÙ'``> char {flags} (character) ...rest``
+’ÙSTitle: title: char
+Path: Signature
+Content:
+``> char {flags} (character) ...rest``
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/char.mdÙ@761aa7dece2f90b6d0f6b23890d1c1411cd4850bf86ce7ff272b0d21aee15abf«title: char‘¥FlagsÙœ``--list, -l``
+: List all supported character names.
+``--unicode, -u``
+: Unicode string i.e. 1f378.
+``--integer, -i``
+: Create a codepoint from an integer.
+’ÙÄTitle: title: char
+Path: Flags
+Content:
+``--list, -l``
+: List all supported character names.
+``--unicode, -u``
+: Unicode string i.e. 1f378.
+``--integer, -i``
+: Create a codepoint from an integer.
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/char.mdÙ@feb39677bff90d77a4e4b19d9e155fe670976ccdd00bc39982d456a6eb2c1634«title: char‘ªParametersÙ[``character``
+: The name of the character to output.
+``...rest``
+: Multiple Unicode bytes.
+’ÙˆTitle: title: char
+Path: Parameters
+Content:
+``character``
+: The name of the character to output.
+``...rest``
+: Multiple Unicode bytes.
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/char.mdÙ@b5e2900e9136dea41c4873880e653303a983e44199c3b2f09b3dcc9e6927b141«title: char‘³Input/output types:¹input
+output
+nothing
+any
+’ÙOTitle: title: char
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/char.mdÙ@bea29ba394eac94f790a5cf9ce4adec1c79f9f11fc13d998471697a85541afba«title: char‘¨ExamplesÚoOutput newline
+```Fenced(Borrowed("nu"))
+> char newline
+
+
+
+```
+List available characters
+```Fenced(Borrowed("nu"))
+> char --list
+
+
+```
+Output prompt character, newline and a hamburger menu character
+```Fenced(Borrowed("nu"))
+> (char prompt) + (char newline) + (char hamburger)
+â–¶
+â‰¡
+
+```
+Output Unicode character
+```Fenced(Borrowed("nu"))
+> char --unicode 1f378
+ğŸ¸
+
+```
+Create Unicode from integer codepoint values
+```Fenced(Borrowed("nu"))
+> char --integer (0x60 + 1) (0x60 + 2)
+ab
+
+```
+Output multi-byte Unicode character
+```Fenced(Borrowed("nu"))
+> char --unicode 1F468 200D 1F466 200D 1F466
+ğŸ‘¨â€ğŸ‘¦â€ğŸ‘¦
+
+```
+’ÚšTitle: title: char
+Path: Examples
+Content:
+Output newline
+```Fenced(Borrowed("nu"))
+> char newline
+
+
+
+```
+List available characters
+```Fenced(Borrowed("nu"))
+> char --list
+
+
+```
+Output prompt character, newline and a hamburger menu character
+```Fenced(Borrowed("nu"))
+> (char prompt) + (char newline) + (char hamburger)
+â–¶
+â‰¡
+
+```
+Output Unicode character
+```Fenced(Borrowed("nu"))
+> char --unicode 1f378
+ğŸ¸
+
+```
+Create Unicode from integer codepoint values
+```Fenced(Borrowed("nu"))
+> char --integer (0x60 + 1) (0x60 + 2)
+ab
+
+```
+Output multi-byte Unicode character
+```Fenced(Borrowed("nu"))
+> char --unicode 1F468 200D 1F466 200D 1F466
+ğŸ‘¨â€ğŸ‘¦â€ğŸ‘¦
+
+```

@@ -64,8 +64,8 @@ mod tests {
     #[test]
     fn test_read_write_roundtrip() {
         let tmp = tempfile::tempdir().unwrap();
-        let input = tmp.path().join("input.jsonl");
-        let output = tmp.path().join("out.jsonl");
+        let input = tmp.path().join("input.nuon");
+        let output = tmp.path().join("out.nuon");
 
         let recs = vec![
             EmbeddingRecord {
@@ -78,13 +78,11 @@ mod tests {
             },
         ];
 
-        // write input
+        // write input as a NUON JSON array
         {
             let file = File::create(&input).unwrap();
             use std::io::Write;
-            for r in &recs {
-                writeln!(&file, "{}", serde_json::to_string(r).unwrap()).unwrap();
-            }
+            writeln!(&file, "{}", serde_json::to_string_pretty(&recs).unwrap()).unwrap();
         }
 
         let read = read_embedding_input(&input).unwrap();
@@ -101,7 +99,7 @@ mod tests {
         write_embeddings(&output, &embeddings).unwrap();
 
         let s = std::fs::read_to_string(&output).unwrap();
-        let lines: Vec<&str> = s.lines().collect();
-        assert_eq!(lines.len(), 2);
+        let parsed: Vec<EmbeddingOut> = serde_json::from_str(&s).unwrap();
+        assert_eq!(parsed.len(), 2);
     }
 }

@@ -1,0 +1,59 @@
+���@751649fd32f9cf6ffd2de2105b67a6be139c48e01ee7178d3a4f92786aed2503�~Title: title: polars get-week
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars get-week``
+[link: /commands/categories/dataframe.md] ��@017ec2f46672582c360567d4911da23ea12d9eb643f781ade1921fcf957e282d�VTitle: title: polars get-week
+Path: Signature
+Content:
+``> polars get-week {flags} ``
+��@0d2ebd1b3645f035f0c3805649572f28e01f19a76d3b502f02bf444d1aa9bf6eٶTitle: title: polars get-week
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@cca55c858cd36bb705c97c61fbeb9261719e863c16524f632464137c669c1c5b�Title: title: polars get-week
+Path: Examples
+Content:
+Returns week from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars get-week
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ 32 │
+│ 1 │ 32 │
+╰───┴────╯
+
+
+```
+Returns week from a date in an expression
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-week)
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ 32 │
+│ 1 │ 32 │
+╰───┴────╯
+
+
+```

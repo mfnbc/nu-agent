@@ -1,0 +1,331 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-03-01-twin0236.mdŸ@932a85fe1ba191ede87952e5c8c23d7096eb9d60c9f737f8c7ad9312d299cd4fπThis week in Nushell #236ëßNushell⁄Údevyn made implemented streaming for plugins, added a new 
+``tee``
+ command, and made internal improvements: 
+[link: https://github.com/nushell/nushell/pull/12027] Plugin StreamReader: fuse the iterator after an error
+, 
+[link: https://github.com/nushell/nushell/pull/12014] Add Goodbye message
+
+to ensure plugins exit when they are no longer needed
+, 
+[link: https://github.com/nushell/nushell/pull/11972] Rename spans in the serialized form of Value
+, 
+[link: https://github.com/nushell/nushell/pull/11929] Print stderr streams to stderr in 
+``pipeline_data::print_if_stream()``
+, and 
+[link: https://github.com/nushell/nushell/pull/11928] Add 
+``tee``
+ command for operating on copies of streams
+, and 
+[link: https://github.com/nushell/nushell/pull/11911] Bidirectional communication and streams for plugins
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12022] removed old 
+``mv``
+ command in favor of 
+``umv``
+ (renamed to mv)
+, 
+[link: https://github.com/nushell/nushell/pull/11993] bumped reedline
+
+to test ExecuteHostCommand changes
+, 
+[link: https://github.com/nushell/nushell/pull/11991] added an 
+``is-not-empty``
+ command as a QOL improvement
+, and 
+[link: https://github.com/nushell/nushell/pull/11954] allowed current day to be highlighted
+WindSoilder made lots of improvements to globbing: 
+[link: https://github.com/nushell/nushell/pull/12018] deprecated 
+``str escape-glob``
+, 
+[link: https://github.com/nushell/nushell/pull/11992] Glob: don't allow implicit casting between glob and string
+, and 
+[link: https://github.com/nushell/nushell/pull/11946] Don't expand globs if user pass variables.
+PanGan21 
+[link: https://github.com/nushell/nushell/pull/12012] fixed: 
+``to md``
+ command to process empty headers
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12010] disabled flaky network tests
+, 
+[link: https://github.com/nushell/nushell/pull/12001] added an 
+``upsert``
+ example
+, and 
+[link: https://github.com/nushell/nushell/pull/11949] moved 
+``typos``
+ config to repo root
+ZzMzaw 
+[link: https://github.com/nushell/nushell/pull/12008] extended the clear command so it can clear the terminal's history
+hustcer 
+[link: https://github.com/nushell/nushell/pull/12007] made coreutils umkdir the default mkdir
+, and 
+[link: https://github.com/nushell/nushell/pull/11986] fixed Windows msvc 
+*.msi builds
+kik4444 
+[link: https://github.com/nushell/nushell/pull/12005] fixed 
+``touch``
+ to allow changing timestamps on directories
+FilipAndersson245 
+[link: https://github.com/nushell/nushell/pull/12000] replaced the Criterion benchmarking framework with Divan
+, 
+[link: https://github.com/nushell/nushell/pull/11998] made benchmark changes
+, and 
+[link: https://github.com/nushell/nushell/pull/11994] fixed tests.
+ayax79 
+[link: https://github.com/nushell/nushell/pull/11987] fixed up an issue with dataframes
+, and 
+[link: https://github.com/nushell/nushell/pull/11953] handled more errors in the REPL so they don't propagate up and kill the REPL
+nils-degroot 
+[link: https://github.com/nushell/nushell/pull/11952] added date support in 
+``from xlsx``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11947] removed some unnecessary static 
+``Vec``
+s
+, 
+[link: https://github.com/nushell/nushell/pull/11939] fixed 
+``cargo b -p nu-command --tests``
+, and 
+[link: https://github.com/nushell/nushell/pull/11863] fixed a future lint by 
+``truncate(false)``
+ in 
+``touch``
+132ikl 
+[link: https://github.com/nushell/nushell/pull/11921] fixed completions for directories with hidden files
+Olilin1 
+[link: https://github.com/nushell/nushell/pull/12035] fixed string_to_table in ssv.rs so it now filters comments. (issue #11997)
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/11905] improved 
+``table -a``
+astral-l 
+[link: https://github.com/nushell/nushell/pull/11902] added a --signed flag for binary into int conversions
+, and 
+[link: https://github.com/nushell/nushell/pull/11854] added binary data handling to 
+``bits``
+ commands
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/11849] added a ConfigDirNotFound error
+íêê⁄*Title: This week in Nushell #236
+Path: Nushell
+Content:
+devyn made implemented streaming for plugins, added a new 
+``tee``
+ command, and made internal improvements: 
+[link: https://github.com/nushell/nushell/pull/12027] Plugin StreamReader: fuse the iterator after an error
+, 
+[link: https://github.com/nushell/nushell/pull/12014] Add Goodbye message
+
+to ensure plugins exit when they are no longer needed
+, 
+[link: https://github.com/nushell/nushell/pull/11972] Rename spans in the serialized form of Value
+, 
+[link: https://github.com/nushell/nushell/pull/11929] Print stderr streams to stderr in 
+``pipeline_data::print_if_stream()``
+, and 
+[link: https://github.com/nushell/nushell/pull/11928] Add 
+``tee``
+ command for operating on copies of streams
+, and 
+[link: https://github.com/nushell/nushell/pull/11911] Bidirectional communication and streams for plugins
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12022] removed old 
+``mv``
+ command in favor of 
+``umv``
+ (renamed to mv)
+, 
+[link: https://github.com/nushell/nushell/pull/11993] bumped reedline
+
+to test ExecuteHostCommand changes
+, 
+[link: https://github.com/nushell/nushell/pull/11991] added an 
+``is-not-empty``
+ command as a QOL improvement
+, and 
+[link: https://github.com/nushell/nushell/pull/11954] allowed current day to be highlighted
+WindSoilder made lots of improvements to globbing: 
+[link: https://github.com/nushell/nushell/pull/12018] deprecated 
+``str escape-glob``
+, 
+[link: https://github.com/nushell/nushell/pull/11992] Glob: don't allow implicit casting between glob and string
+, and 
+[link: https://github.com/nushell/nushell/pull/11946] Don't expand globs if user pass variables.
+PanGan21 
+[link: https://github.com/nushell/nushell/pull/12012] fixed: 
+``to md``
+ command to process empty headers
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12010] disabled flaky network tests
+, 
+[link: https://github.com/nushell/nushell/pull/12001] added an 
+``upsert``
+ example
+, and 
+[link: https://github.com/nushell/nushell/pull/11949] moved 
+``typos``
+ config to repo root
+ZzMzaw 
+[link: https://github.com/nushell/nushell/pull/12008] extended the clear command so it can clear the terminal's history
+hustcer 
+[link: https://github.com/nushell/nushell/pull/12007] made coreutils umkdir the default mkdir
+, and 
+[link: https://github.com/nushell/nushell/pull/11986] fixed Windows msvc 
+*.msi builds
+kik4444 
+[link: https://github.com/nushell/nushell/pull/12005] fixed 
+``touch``
+ to allow changing timestamps on directories
+FilipAndersson245 
+[link: https://github.com/nushell/nushell/pull/12000] replaced the Criterion benchmarking framework with Divan
+, 
+[link: https://github.com/nushell/nushell/pull/11998] made benchmark changes
+, and 
+[link: https://github.com/nushell/nushell/pull/11994] fixed tests.
+ayax79 
+[link: https://github.com/nushell/nushell/pull/11987] fixed up an issue with dataframes
+, and 
+[link: https://github.com/nushell/nushell/pull/11953] handled more errors in the REPL so they don't propagate up and kill the REPL
+nils-degroot 
+[link: https://github.com/nushell/nushell/pull/11952] added date support in 
+``from xlsx``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11947] removed some unnecessary static 
+``Vec``
+s
+, 
+[link: https://github.com/nushell/nushell/pull/11939] fixed 
+``cargo b -p nu-command --tests``
+, and 
+[link: https://github.com/nushell/nushell/pull/11863] fixed a future lint by 
+``truncate(false)``
+ in 
+``touch``
+132ikl 
+[link: https://github.com/nushell/nushell/pull/11921] fixed completions for directories with hidden files
+Olilin1 
+[link: https://github.com/nushell/nushell/pull/12035] fixed string_to_table in ssv.rs so it now filters comments. (issue #11997)
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/11905] improved 
+``table -a``
+astral-l 
+[link: https://github.com/nushell/nushell/pull/11902] added a --signed flag for binary into int conversions
+, and 
+[link: https://github.com/nushell/nushell/pull/11854] added binary data handling to 
+``bits``
+ commands
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/11849] added a ConfigDirNotFound error
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-03-01-twin0236.mdŸ@bb43fc91b7f7c29cb21babaadb38f603b64a24f7149bb3f23c7886c2ae841207πThis week in Nushell #236ë©ExtensionŸAucaCoyan created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/175] :bug: fix markdown formatting for hover lsp
+íêêŸπTitle: This week in Nushell #236
+Path: Extension
+Content:
+AucaCoyan created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/175] :bug: fix markdown formatting for hover lsp
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-03-01-twin0236.mdŸ@b2495deb643fd83a1b657db56d24ddeea708478366a57614f31d9290e608005cπThis week in Nushell #236ë≠Documentation⁄¶WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/1271] add documentation about glob value
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1258] Update moving_around.md
+
+about glob information.
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/1270] Update how_nushell_code_gets_run.md
+devyn created 
+[link: https://github.com/nushell/nushell.github.io/pull/1267] Add documentation for Goodbye in plugin protocol
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1265] Fix issues with
+
+spans in the JSON examples in the plugin protocol reference
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1264] Add docs for streaming plugin protocol overhaul
+IanManske created 
+[link: https://github.com/nushell/nushell.github.io/pull/1263] Run typos on blog
+SeerLite created 
+[link: https://github.com/nushell/nushell.github.io/pull/1261] Fix typos in cheat_sheet.md
+JackTheMico created 
+[link: https://github.com/nushell/nushell.github.io/pull/1260] Add pyenv path setup to configuration.md
+adrian5 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1259] Some cleanup of lang-guide.md
+íêê⁄‰Title: This week in Nushell #236
+Path: Documentation
+Content:
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/1271] add documentation about glob value
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1258] Update moving_around.md
+
+about glob information.
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/1270] Update how_nushell_code_gets_run.md
+devyn created 
+[link: https://github.com/nushell/nushell.github.io/pull/1267] Add documentation for Goodbye in plugin protocol
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1265] Fix issues with
+
+spans in the JSON examples in the plugin protocol reference
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1264] Add docs for streaming plugin protocol overhaul
+IanManske created 
+[link: https://github.com/nushell/nushell.github.io/pull/1263] Run typos on blog
+SeerLite created 
+[link: https://github.com/nushell/nushell.github.io/pull/1261] Fix typos in cheat_sheet.md
+JackTheMico created 
+[link: https://github.com/nushell/nushell.github.io/pull/1260] Add pyenv path setup to configuration.md
+adrian5 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1259] Some cleanup of lang-guide.md
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-03-01-twin0236.mdŸ@a8cd13e724d0e528bc7879a38051a80ce66813d659a44adaf5f1779338455afaπThis week in Nushell #236ë™Nu_Scripts⁄≈AucaCoyan created 
+[link: https://github.com/nushell/nu_scripts/pull/769] :sparkles: add 
+``cargo-make``
+ completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/767] :sparkles: add 
+``rg``
+ completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/766] :sparkles: add 
+``bat``
+ completions
+, and
+
+[link: https://github.com/nushell/nu_scripts/pull/765] :bug: fix optional arg in 
+``git stash show``
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/768] Rename edit to nve to avoid potential conflicts
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/764] merge nvdc into nvc
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/762] add 
+``gig --empty-dir``
+íêê⁄ Title: This week in Nushell #236
+Path: Nu_Scripts
+Content:
+AucaCoyan created 
+[link: https://github.com/nushell/nu_scripts/pull/769] :sparkles: add 
+``cargo-make``
+ completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/767] :sparkles: add 
+``rg``
+ completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/766] :sparkles: add 
+``bat``
+ completions
+, and
+
+[link: https://github.com/nushell/nu_scripts/pull/765] :bug: fix optional arg in 
+``git stash show``
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/768] Rename edit to nve to avoid potential conflicts
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/764] merge nvdc into nvc
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/762] add 
+``gig --empty-dir``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-03-01-twin0236.mdŸ@bb6a3b64351754b5f5e19460508753fa52f933526611f9dd94f8c3713e111bebπThis week in Nushell #236ë®reedlineŸvkit494way created 
+[link: https://github.com/nushell/reedline/pull/758] Fix rendering prompt after ExecuteHostCommand
+íêêŸØTitle: This week in Nushell #236
+Path: reedline
+Content:
+kit494way created 
+[link: https://github.com/nushell/reedline/pull/758] Fix rendering prompt after ExecuteHostCommand

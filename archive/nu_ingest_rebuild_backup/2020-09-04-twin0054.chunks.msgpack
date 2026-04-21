@@ -1,0 +1,135 @@
+ëóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-09-04-twin0054.mdŸ@2fd157c087d326a9b503e616d876bba10f6bc1a4cc3ad9b8a2015754326031d6≥This week in Nu #54ë≥This week in Nu #54⁄	∑fdncred cleaned up some 
+[link: https://github.com/nushell/nushell/pull/2491] feature usage
+, fixed the 
+[link: https://github.com/nushell/nushell/pull/2481] default alignment in tables
+, added color info suport to config.toml, added the 
+[link: https://github.com/nushell/nushell/pull/2468] with_love
+ and 
+[link: https://github.com/nushell/nushell/pull/2467] compact_double
+ table theme
+smaydew added 
+[link: https://github.com/nushell/nushell/pull/2489] ``random integer``
+almindor switched 
+[link: https://github.com/nushell/nushell/pull/2487] recursive move to 
+``fs_extra``
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/2483] released 0.19
+, turned off 
+[link: https://github.com/nushell/nushell/pull/2462] auto-pivot by default
+, added support for 
+[link: https://github.com/nushell/nushell/pull/2456] multiline edits
+, made 
+[link: https://github.com/nushell/nushell/pull/2454] commas optional in lists
+, added 
+[link: https://github.com/nushell/nushell/pull/2453] table literals
+gillespiecd move 
+``count``
+ size to 
+[link: https://github.com/nushell/nushell/pull/2482] use grapheme size
+, renamed 
+[link: https://github.com/nushell/nushell/pull/2473] ``max length``
+ to 
+``bytes``
+ in 
+``count``
+, added 
+[link: https://github.com/nushell/nushell/pull/2472] examples to 
+``uniq``
+, updated 
+[link: https://github.com/nushell/nushell/pull/2458] ``math variance``
+, updated 
+[link: https://github.com/nushell/nushell/pull/2452] ``math stddev``
+, documented 
+[link: https://github.com/nushell/nushell/pull/2447] math commands
+, fixed the 
+[link: https://github.com/nushell/nushell/pull/2445] email test
+, updated the 
+[link: https://github.com/nushell/nushell.github.io/pull/59] website docs for commands
+thegedge added support for 
+[link: https://github.com/nushell/nushell/pull/2480] ~ (home directory) in completions
+, fixed lots of 
+[link: https://github.com/nushell/nushell/pull/2476] bugs
+ and 
+[link: https://github.com/nushell/nushell/pull/2474] features
+ in the new completion engine,
+gorogoroumaru fixed 
+[link: https://github.com/nushell/nushell/pull/2466] ``ls``
+ to tolerate OS errors
+VincentWo fixed 
+[link: https://github.com/nushell/nushell/pull/2457] ``cd .``
+Marcoleni tidied up the 
+[link: https://github.com/nushell/nushell/pull/2448] CONTRIBUTING file
+Zooce fixed our 
+[link: https://github.com/nushell/book/pull/128] prompt documentation
+hilias updated our 
+[link: https://github.com/nushell/cookbook/pull/16] ``config set``
+ cookbook docs
+íêê⁄	ıTitle: This week in Nu #54
+Path: This week in Nu #54
+Content:
+fdncred cleaned up some 
+[link: https://github.com/nushell/nushell/pull/2491] feature usage
+, fixed the 
+[link: https://github.com/nushell/nushell/pull/2481] default alignment in tables
+, added color info suport to config.toml, added the 
+[link: https://github.com/nushell/nushell/pull/2468] with_love
+ and 
+[link: https://github.com/nushell/nushell/pull/2467] compact_double
+ table theme
+smaydew added 
+[link: https://github.com/nushell/nushell/pull/2489] ``random integer``
+almindor switched 
+[link: https://github.com/nushell/nushell/pull/2487] recursive move to 
+``fs_extra``
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/2483] released 0.19
+, turned off 
+[link: https://github.com/nushell/nushell/pull/2462] auto-pivot by default
+, added support for 
+[link: https://github.com/nushell/nushell/pull/2456] multiline edits
+, made 
+[link: https://github.com/nushell/nushell/pull/2454] commas optional in lists
+, added 
+[link: https://github.com/nushell/nushell/pull/2453] table literals
+gillespiecd move 
+``count``
+ size to 
+[link: https://github.com/nushell/nushell/pull/2482] use grapheme size
+, renamed 
+[link: https://github.com/nushell/nushell/pull/2473] ``max length``
+ to 
+``bytes``
+ in 
+``count``
+, added 
+[link: https://github.com/nushell/nushell/pull/2472] examples to 
+``uniq``
+, updated 
+[link: https://github.com/nushell/nushell/pull/2458] ``math variance``
+, updated 
+[link: https://github.com/nushell/nushell/pull/2452] ``math stddev``
+, documented 
+[link: https://github.com/nushell/nushell/pull/2447] math commands
+, fixed the 
+[link: https://github.com/nushell/nushell/pull/2445] email test
+, updated the 
+[link: https://github.com/nushell/nushell.github.io/pull/59] website docs for commands
+thegedge added support for 
+[link: https://github.com/nushell/nushell/pull/2480] ~ (home directory) in completions
+, fixed lots of 
+[link: https://github.com/nushell/nushell/pull/2476] bugs
+ and 
+[link: https://github.com/nushell/nushell/pull/2474] features
+ in the new completion engine,
+gorogoroumaru fixed 
+[link: https://github.com/nushell/nushell/pull/2466] ``ls``
+ to tolerate OS errors
+VincentWo fixed 
+[link: https://github.com/nushell/nushell/pull/2457] ``cd .``
+Marcoleni tidied up the 
+[link: https://github.com/nushell/nushell/pull/2448] CONTRIBUTING file
+Zooce fixed our 
+[link: https://github.com/nushell/book/pull/128] prompt documentation
+hilias updated our 
+[link: https://github.com/nushell/cookbook/pull/16] ``config set``
+ cookbook docs

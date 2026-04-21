@@ -1,0 +1,57 @@
+���@10b7ad3d6a52a70904cb496daa925cccd67d6cc62b895e2df541640a089ba284نTitle: title: polars set-with-idx
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars set-with-idx``
+[link: /commands/categories/dataframe.md] ��@a38b81cf5713a01b72051fa0407591ed3de6d23e9bd224052858ce1939289b4e�eTitle: title: polars set-with-idx
+Path: Signature
+Content:
+``> polars set-with-idx {flags} (value)``
+��@19d9e0a0d4a65bebb3aabf4ea7c2326cb4797c6f190be195a64b32cfc7715e24لTitle: title: polars set-with-idx
+Path: Flags
+Content:
+``--indices, -i {any}``
+: List of indices indicating where to set the value.
+��@67f994526236e713037c01b6420c5ecca7d5c9165ad49c7a256c6b450071f75c�hTitle: title: polars set-with-idx
+Path: Parameters
+Content:
+``value``
+: Value to be inserted in series.
+��@603e71f6f0346d237a56053296868ae99431fefec15cd871c6f491ba27340b02ٖTitle: title: polars set-with-idx
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@2019756403ada18add8737d32daaba588f9cdb864da6f1ca6af334697a06e55a��Title: title: polars set-with-idx
+Path: Examples
+Content:
+Set value in selected rows from series
+```Fenced(Borrowed("nu"))
+> let series = ([4 1 5 2 4 3] | polars into-df);
+    let indices = ([0 2] | polars into-df);
+    $series | polars set-with-idx 6 --indices $indices
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 6 │
+│ 1 │ 1 │
+│ 2 │ 6 │
+│ 3 │ 2 │
+│ 4 │ 4 │
+│ 5 │ 3 │
+╰───┴───╯
+
+
+```

@@ -1,0 +1,159 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-04-twin0306.mdŸ@9aa2bcf74a9cd45c465bcc1eda8a5c2809fcf164a79ad029b756fb9a71ef7b47Ÿ"title: 'This week in Nushell #306'ëπThis Week in Nushell #306Ÿh
+
+
+
+Published Monday, 2025-08-18, including PRs merged Friday, 2025-06-27 through Thursday, 2025-07-03.
+íêêŸªTitle: title: 'This week in Nushell #306'
+Path: This Week in Nushell #306
+Content:
+
+
+
+
+Published Monday, 2025-08-18, including PRs merged Friday, 2025-06-27 through Thursday, 2025-07-03.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-04-twin0306.mdŸ@3b6461b6fdf0251f1138639c8f8a2e1481cf15b5eb9269bed7377223610151e2Ÿ"title: 'This week in Nushell #306'ëßNushell⁄V@dilr:
+[link: https://github.com/nushell/nushell/pull/16103] Fixed 'find --columns .. --regex ..' to work and updated the help message (#16103)
+@yertto:
+[link: https://github.com/nushell/nushell/pull/16099] Added ANSI style reset codes (#16099)
+@cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/16096] Allowed enabling deprecated experimental options (#16096)
+[link: https://github.com/nushell/nushell/pull/16095] Forwarded experimental options in 
+``toolkit run``
+ (#16095)
+[link: https://github.com/nushell/nushell/pull/16093] Allowed dashes in experimental option identifiers (#16093)
+[link: https://github.com/nushell/nushell/pull/16028] Added infrastructure for experimental options (#16028)
+@Bahex:
+[link: https://github.com/nushell/nushell/pull/16094] Refactored parse to return 
+``null``
+ for unmatched capture groups instead of empty string (#16094)
+[link: https://github.com/nushell/nushell/pull/15682] Optimized cell-path member accesses to avoid clones (#15682)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/16088] Bumped crate-ci/typos from 1.33.1 to 1.34.0 (#16088)
+[link: https://github.com/nushell/nushell/pull/16087] Bumped indexmap from 2.9.0 to 2.10.0 (#16087)
+[link: https://github.com/nushell/nushell/pull/16086] Bumped quick-xml from 0.37.1 to 0.37.5 (#16086)
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/16077] Updated Rust to version 1.86.0 (#16077)
+@Tyarel8:
+[link: https://github.com/nushell/nushell/pull/16063] Fixed std/help by adding 
+``debug -v``
+ to string default parameters (#16063)
+@sholderbach:
+[link: https://github.com/nushell/nushell/pull/16053] Fixed easy clippy lints from the latest stable release (#16053)
+@kumarUjjawal:
+[link: https://github.com/nushell/nushell/pull/16049] Fixed metadata set to return an error when both --datasource-filepath and -datasource-ls are used (#16049)
+@132ikl:
+[link: https://github.com/nushell/nushell/pull/16014] Added pipeline span to 
+``metadata``
+ (#16014)
+@liquid-dragons:
+[link: https://github.com/nushell/nushell/pull/15961] Made 
+``save``
+ return directory_not_found when parent directory doesn't exist (#15961)
+íêê⁄óTitle: title: 'This week in Nushell #306'
+Path: Nushell
+Content:
+@dilr:
+[link: https://github.com/nushell/nushell/pull/16103] Fixed 'find --columns .. --regex ..' to work and updated the help message (#16103)
+@yertto:
+[link: https://github.com/nushell/nushell/pull/16099] Added ANSI style reset codes (#16099)
+@cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/16096] Allowed enabling deprecated experimental options (#16096)
+[link: https://github.com/nushell/nushell/pull/16095] Forwarded experimental options in 
+``toolkit run``
+ (#16095)
+[link: https://github.com/nushell/nushell/pull/16093] Allowed dashes in experimental option identifiers (#16093)
+[link: https://github.com/nushell/nushell/pull/16028] Added infrastructure for experimental options (#16028)
+@Bahex:
+[link: https://github.com/nushell/nushell/pull/16094] Refactored parse to return 
+``null``
+ for unmatched capture groups instead of empty string (#16094)
+[link: https://github.com/nushell/nushell/pull/15682] Optimized cell-path member accesses to avoid clones (#15682)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/16088] Bumped crate-ci/typos from 1.33.1 to 1.34.0 (#16088)
+[link: https://github.com/nushell/nushell/pull/16087] Bumped indexmap from 2.9.0 to 2.10.0 (#16087)
+[link: https://github.com/nushell/nushell/pull/16086] Bumped quick-xml from 0.37.1 to 0.37.5 (#16086)
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/16077] Updated Rust to version 1.86.0 (#16077)
+@Tyarel8:
+[link: https://github.com/nushell/nushell/pull/16063] Fixed std/help by adding 
+``debug -v``
+ to string default parameters (#16063)
+@sholderbach:
+[link: https://github.com/nushell/nushell/pull/16053] Fixed easy clippy lints from the latest stable release (#16053)
+@kumarUjjawal:
+[link: https://github.com/nushell/nushell/pull/16049] Fixed metadata set to return an error when both --datasource-filepath and -datasource-ls are used (#16049)
+@132ikl:
+[link: https://github.com/nushell/nushell/pull/16014] Added pipeline span to 
+``metadata``
+ (#16014)
+@liquid-dragons:
+[link: https://github.com/nushell/nushell/pull/15961] Made 
+``save``
+ return directory_not_found when parent directory doesn't exist (#15961)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-04-twin0306.mdŸ@ebd1c6cf4ee7f439986c62f545ca7989fb21547308f2355ce5bc1b2eea1ca357Ÿ"title: 'This week in Nushell #306'ë™Nu_Scripts⁄@TechnoTecna:
+[link: https://github.com/nushell/nu_scripts/pull/1141] Fixed custom completion for 
+``pass``
+ by converting the path pattern string to glob (#1141)
+@renestalder:
+[link: https://github.com/nushell/nu_scripts/pull/1140] Fixed composer completions by replacing 
+``filter``
+ with 
+``where``
+ (#1140)
+@samoylovfp:
+[link: https://github.com/nushell/nu_scripts/pull/1139] Stripped ANSI from the main branch name (#1139)
+@shimeoki:
+[link: https://github.com/nushell/nu_scripts/pull/1138] Fixed pause in background_task (#1138)
+íêê⁄ZTitle: title: 'This week in Nushell #306'
+Path: Nu_Scripts
+Content:
+@TechnoTecna:
+[link: https://github.com/nushell/nu_scripts/pull/1141] Fixed custom completion for 
+``pass``
+ by converting the path pattern string to glob (#1141)
+@renestalder:
+[link: https://github.com/nushell/nu_scripts/pull/1140] Fixed composer completions by replacing 
+``filter``
+ with 
+``where``
+ (#1140)
+@samoylovfp:
+[link: https://github.com/nushell/nu_scripts/pull/1139] Stripped ANSI from the main branch name (#1139)
+@shimeoki:
+[link: https://github.com/nushell/nu_scripts/pull/1138] Fixed pause in background_task (#1138)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-04-twin0306.mdŸ@be1a49ba24ee6f81caa244e9cca38312001ab76e19b7e8f51f8907bf92c04d78Ÿ"title: 'This week in Nushell #306'ë≠Documentation⁄,@scarlet-storm:
+[link: https://github.com/nushell/nushell.github.io/pull/1963] Optimized fish_completer path lookups (#1963)
+@oatovar:
+[link: https://github.com/nushell/nushell.github.io/pull/1962] Added header for parsing commits section (#1962)
+@link1183:
+[link: https://github.com/nushell/nushell.github.io/pull/1961] Fixed Getting started documentation to use where instead of filter (#1961)
+@Axlefublr:
+[link: https://github.com/nushell/nushell.github.io/pull/1959] Fixed book to suggest configuration syntax that merges rather than overrides (#1959)
+íêê⁄sTitle: title: 'This week in Nushell #306'
+Path: Documentation
+Content:
+@scarlet-storm:
+[link: https://github.com/nushell/nushell.github.io/pull/1963] Optimized fish_completer path lookups (#1963)
+@oatovar:
+[link: https://github.com/nushell/nushell.github.io/pull/1962] Added header for parsing commits section (#1962)
+@link1183:
+[link: https://github.com/nushell/nushell.github.io/pull/1961] Fixed Getting started documentation to use where instead of filter (#1961)
+@Axlefublr:
+[link: https://github.com/nushell/nushell.github.io/pull/1959] Fixed book to suggest configuration syntax that merges rather than overrides (#1959)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-07-04-twin0306.mdŸ@9abceca9c930621ab2abbce8929988d9f8a6d57a5049964f62dde5d3c9bab54cŸ"title: 'This week in Nushell #306'ë´Tree-sitter⁄{@Bahex:
+[link: https://github.com/nushell/tree-sitter-nu/pull/210] Added highlighting for regex strings and 
+``nu -c <commands>``
+ (#210)
+@blindFS:
+[link: https://github.com/nushell/tree-sitter-nu/pull/209] Refactored to add string_content child node to val_string (#209)
+[link: https://github.com/nushell/tree-sitter-nu/pull/205] Fixed cellpath literal as new value type (#205)
+íêê⁄¿Title: title: 'This week in Nushell #306'
+Path: Tree-sitter
+Content:
+@Bahex:
+[link: https://github.com/nushell/tree-sitter-nu/pull/210] Added highlighting for regex strings and 
+``nu -c <commands>``
+ (#210)
+@blindFS:
+[link: https://github.com/nushell/tree-sitter-nu/pull/209] Refactored to add string_content child node to val_string (#209)
+[link: https://github.com/nushell/tree-sitter-nu/pull/205] Fixed cellpath literal as new value type (#205)

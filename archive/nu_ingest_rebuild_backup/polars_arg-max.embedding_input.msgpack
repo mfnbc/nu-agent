@@ -1,0 +1,40 @@
+���@f4ae42d0ec24eea852d5769528be81815f220638923bc35778b07fb5d472fd81�|Title: title: polars arg-max
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars arg-max``
+[link: /commands/categories/dataframe.md] ��@21dccf423a926fe9824aea44e3f0cc5ee30ddb5cadf57dd9418c88fc26ef7235�TTitle: title: polars arg-max
+Path: Signature
+Content:
+``> polars arg-max {flags} ``
+��@7b9cf9e3f574cad54c58aa7d89a3cf0d39bf1279f27564a36da4209e822df357ّTitle: title: polars arg-max
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@8cb572a03f530f975ee581d2c6c05c3810184c296e57a2fbfea5da04494d00e5�STitle: title: polars arg-max
+Path: Examples
+Content:
+Returns index for max value
+```Fenced(Borrowed("nu"))
+> [1 3 2] | polars into-df | polars arg-max
+╭───┬─────────╮
+│ # │ arg_max │
+├───┼─────────┤
+│ 0 │       1 │
+╰───┴─────────╯
+
+
+```

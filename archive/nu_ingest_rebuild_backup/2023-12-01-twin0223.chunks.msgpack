@@ -1,0 +1,183 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-12-01-twin0223.mdŸ@47e1ccfcbfa2f7086fe68fa35fc3c91d8ef0f1c97306fb92b135bb64f064d767πThis week in Nushell #223ëßNushell⁄óWindSoilder 
+[link: https://github.com/nushell/nushell/pull/10764] added new 
+``o>>``
+, 
+``e>>``
+, 
+``o+e>>``
+ redirection operators to append output to an external file
+, 
+[link: https://github.com/nushell/nushell/pull/11191] fixed a redirection bug
+, and 
+[link: https://github.com/nushell/nushell/pull/11172] worked on redirection tests
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/11144] implemented a spread operator for record literals
+fdncred added an experimental 
+``stor``
+ family of commands for working with in-memory SQLite databases: (
+[link: https://github.com/nushell/nushell/pull/11170] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11194] 2
+) and 
+[link: https://github.com/nushell/nushell/pull/11135] added a new 
+``ExternalResolved``
+ syntax shape to show found externals via syntax highlighting in the repl
+nibon7 improved error messages and validation for 
+``str index-of``
+: 
+[link: https://github.com/nushell/nushell/pull/11201] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11190] 2
+KAAtheWiseGit 
+[link: https://github.com/nushell/nushell/pull/11195] improved 
+``input list``
+ so it can handle more data types
+, and 
+[link: https://github.com/nushell/nushell/pull/11169] forbidded reserved variable names as function arguments
+cosineblast 
+[link: https://github.com/nushell/nushell/pull/11182] removed file I/O from some tests that don't need it
+IanManske 
+[link: https://github.com/nushell/nushell/pull/11180] improved 
+``nu-protocol``
+ so docs build with all features enabled
+drbrain 
+[link: https://github.com/nushell/nushell/pull/11173] converted more ShellError variants to named fields
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11171] reverted "Adding support for Polars structs"
+rfaulhaber 
+[link: https://github.com/nushell/nushell/pull/11166] bumped 
+``sysinfo``
+ to 0.29.11
+MarikaChlebowska 
+[link: https://github.com/nushell/nushell/pull/11160] improved some filter commands so they preserve metadata
+NotLebedev 
+[link: https://github.com/nushell/nushell/pull/11152] improved target expansion in the 
+``cp``
+ command
+sigoden 
+[link: https://github.com/nushell/nushell/pull/11008] fixed spans passed to external_completer
+íêê⁄œTitle: This week in Nushell #223
+Path: Nushell
+Content:
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/10764] added new 
+``o>>``
+, 
+``e>>``
+, 
+``o+e>>``
+ redirection operators to append output to an external file
+, 
+[link: https://github.com/nushell/nushell/pull/11191] fixed a redirection bug
+, and 
+[link: https://github.com/nushell/nushell/pull/11172] worked on redirection tests
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/11144] implemented a spread operator for record literals
+fdncred added an experimental 
+``stor``
+ family of commands for working with in-memory SQLite databases: (
+[link: https://github.com/nushell/nushell/pull/11170] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11194] 2
+) and 
+[link: https://github.com/nushell/nushell/pull/11135] added a new 
+``ExternalResolved``
+ syntax shape to show found externals via syntax highlighting in the repl
+nibon7 improved error messages and validation for 
+``str index-of``
+: 
+[link: https://github.com/nushell/nushell/pull/11201] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11190] 2
+KAAtheWiseGit 
+[link: https://github.com/nushell/nushell/pull/11195] improved 
+``input list``
+ so it can handle more data types
+, and 
+[link: https://github.com/nushell/nushell/pull/11169] forbidded reserved variable names as function arguments
+cosineblast 
+[link: https://github.com/nushell/nushell/pull/11182] removed file I/O from some tests that don't need it
+IanManske 
+[link: https://github.com/nushell/nushell/pull/11180] improved 
+``nu-protocol``
+ so docs build with all features enabled
+drbrain 
+[link: https://github.com/nushell/nushell/pull/11173] converted more ShellError variants to named fields
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11171] reverted "Adding support for Polars structs"
+rfaulhaber 
+[link: https://github.com/nushell/nushell/pull/11166] bumped 
+``sysinfo``
+ to 0.29.11
+MarikaChlebowska 
+[link: https://github.com/nushell/nushell/pull/11160] improved some filter commands so they preserve metadata
+NotLebedev 
+[link: https://github.com/nushell/nushell/pull/11152] improved target expansion in the 
+``cp``
+ command
+sigoden 
+[link: https://github.com/nushell/nushell/pull/11008] fixed spans passed to external_completer
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-12-01-twin0223.mdŸ@a444ad92b9a7d5cb984b17c71362e31585cfa7b9b687fcbaa34a7a33a6a07e42πThis week in Nushell #223ë©ExtensionŸ|glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/166] Syntax highlight: add "export" to "module"
+íêêŸ∂Title: This week in Nushell #223
+Path: Extension
+Content:
+glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/166] Syntax highlight: add "export" to "module"
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-12-01-twin0223.mdŸ@130f8f98c496e1affc0b146ca7825e6f21c0804b3277345013063437bc2df3dfπThis week in Nushell #223ë≠Documentation⁄hysthakur created 
+[link: https://github.com/nushell/nushell.github.io/pull/1160] Add section on spread operator
+stfacc created 
+[link: https://github.com/nushell/nushell.github.io/pull/1159] Improve workaround for carapace ERR output
+FMotalleb created 
+[link: https://github.com/nushell/nushell.github.io/pull/1158] Update coming_from_bash.md
+MarikaChlebowska created 
+[link: https://github.com/nushell/nushell.github.io/pull/1157] Replace usage of removed 
+``date format``
+ with 
+``format date``
+ in examples
+arnau created 
+[link: https://github.com/nushell/nushell.github.io/pull/1155] Rename def-env to def --env
+íêê⁄¶Title: This week in Nushell #223
+Path: Documentation
+Content:
+ysthakur created 
+[link: https://github.com/nushell/nushell.github.io/pull/1160] Add section on spread operator
+stfacc created 
+[link: https://github.com/nushell/nushell.github.io/pull/1159] Improve workaround for carapace ERR output
+FMotalleb created 
+[link: https://github.com/nushell/nushell.github.io/pull/1158] Update coming_from_bash.md
+MarikaChlebowska created 
+[link: https://github.com/nushell/nushell.github.io/pull/1157] Replace usage of removed 
+``date format``
+ with 
+``format date``
+ in examples
+arnau created 
+[link: https://github.com/nushell/nushell.github.io/pull/1155] Rename def-env to def --env
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-12-01-twin0223.mdŸ@2811707072913f0db13f1d3b80184ada5bec23ad8f9557538a7565e47d7b15ddπThis week in Nushell #223ë™Nu_Scripts⁄3kjelly created 
+[link: https://github.com/nushell/nu_scripts/pull/680] get deploy complete for ka/kl in kubernetes module
+glcraft created 
+[link: https://github.com/nushell/nu_scripts/pull/679] Add 
+``record``
+ module
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/678] Add bat aliases
+íêê⁄nTitle: This week in Nushell #223
+Path: Nu_Scripts
+Content:
+kjelly created 
+[link: https://github.com/nushell/nu_scripts/pull/680] get deploy complete for ka/kl in kubernetes module
+glcraft created 
+[link: https://github.com/nushell/nu_scripts/pull/679] Add 
+``record``
+ module
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/678] Add bat aliases
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-12-01-twin0223.mdŸ@75364e39ab69a7deef13a89c3f68e250e804512436e974ddb890a7a617ad7724πThis week in Nushell #223ë®reedlineŸosholderbach created 
+[link: https://github.com/nushell/reedline/pull/672] Build docs.rs docs with all features
+íêêŸ®Title: This week in Nushell #223
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/672] Build docs.rs docs with all features

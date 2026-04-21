@@ -1,0 +1,96 @@
+–—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_base32hex.mdÙ@8163b5921745b0c98989e04e04c4f33eca328cec8a50f11ab5b547068b760704·title: encode base32hex‘§formatsÙF
+
+
+
+
+
+
+
+
+``encode base32hex``
+[link: /commands/categories/formats.md] ’Ù|Title: title: encode base32hex
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``encode base32hex``
+[link: /commands/categories/formats.md] —ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_base32hex.mdÙ@44e8b47a9982cf087422d573c3b66ca9c100624066593f3fe18eebc6b9a2a19a·title: encode base32hex‘©SignatureÙ ``> encode base32hex {flags} ``
+’ÙXTitle: title: encode base32hex
+Path: Signature
+Content:
+``> encode base32hex {flags} ``
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_base32hex.mdÙ@64062bce7413b93f99912a8e7140d3014c4d57bae2e4ce900fb56ebfa6e8facd·title: encode base32hex‘¥FlagsÙ$``--nopad``
+: Don't pad the output.
+’ÙXTitle: title: encode base32hex
+Path: Flags
+Content:
+``--nopad``
+: Don't pad the output.
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_base32hex.mdÙ@445f4eb00aded370290b966f2e6c19de859568c5aa058ff2751825f2d0c645ca·title: encode base32hex‘³Input/output types:Ù)input
+output
+string
+string
+binary
+string
+’ÙkTitle: title: encode base32hex
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+binary
+string
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_base32hex.mdÙ@37f5e0c897711fa938dd0d83790bf49598a14547d52f3016e3c9535e4edf8b6a·title: encode base32hex‘¨ExamplesÚJEncode a binary value
+```Fenced(Borrowed("nu"))
+> 0x[57 6E AD] | encode base32hex
+ATNAQ===
+
+```
+Encode a string
+```Fenced(Borrowed("nu"))
+> "hello there" | encode base32hex
+D1IMOR3F41Q6GPBICK======
+
+```
+Don't apply padding to the output
+```Fenced(Borrowed("nu"))
+> "hello there" | encode base32hex --nopad
+D1IMOR3F41Q6GPBICK
+
+```
+’ÚTitle: title: encode base32hex
+Path: Examples
+Content:
+Encode a binary value
+```Fenced(Borrowed("nu"))
+> 0x[57 6E AD] | encode base32hex
+ATNAQ===
+
+```
+Encode a string
+```Fenced(Borrowed("nu"))
+> "hello there" | encode base32hex
+D1IMOR3F41Q6GPBICK======
+
+```
+Don't apply padding to the output
+```Fenced(Borrowed("nu"))
+> "hello there" | encode base32hex --nopad
+D1IMOR3F41Q6GPBICK
+
+```
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/encode_base32hex.mdÙ@d379a3a8eecb111bcf9765928a2fbd5cf7dfffd4e885a03ecde554f90046bcd1·title: encode base32hex‘¥NotesÙThis command uses an alternative Base32 alphabet, defined in RFC 4648, section 7.
+Note this command will collect stream input.
+’Ù³Title: title: encode base32hex
+Path: Notes
+Content:
+This command uses an alternative Base32 alphabet, defined in RFC 4648, section 7.
+Note this command will collect stream input.

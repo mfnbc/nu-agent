@@ -1,0 +1,63 @@
+���@0a4a9cd6f1b4778ab1aa465f44571d10ce7e0bd077c9d93f0ea9dd73b2a6a6bb�rTitle: title: str reverse
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str reverse``
+[link: /commands/categories/strings.md] ��@1de900a2c95b27c9e85c6db3a749c8edbd473f2877251ef13cfd9059f452a4b8�UTitle: title: str reverse
+Path: Signature
+Content:
+``> str reverse {flags} ...rest``
+��@93c771f7272dd976bb021fac798046bbc51ce21533b10dad6ddd45e3c34bff54هTitle: title: str reverse
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, reverse strings at the given cell paths.
+��@833485353fb3035bb9ab5404115ee571059eab4d3bf97700cc162c083087963aٔTitle: title: str reverse
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+��@1bd55e5bc73cdb2eb19a766842bffc0155b7258e9862e836b9eb4b2d9d675b32��Title: title: str reverse
+Path: Examples
+Content:
+Reverse a single string.
+```Fenced(Borrowed("nu"))
+> 'Nushell' | str reverse
+llehsuN
+
+```
+Reverse multiple strings in a list.
+```Fenced(Borrowed("nu"))
+> ['Nushell' 'is' 'cool'] | str reverse
+╭───┬─────────╮
+│ 0 │ llehsuN │
+│ 1 │ si      │
+│ 2 │ looc    │
+╰───┴─────────╯
+
+
+```

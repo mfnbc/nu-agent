@@ -1,0 +1,64 @@
+���@28346bfbe3108853a67acdf7f85adebb62d6dce8751eaf01ab8dde84dc056109�nTitle: title: overlay list
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``overlay list``
+[link: /commands/categories/core.md] ��@8b6702cb0995363e17456b465ff6c5777d53ca77ff032fe60293f12bde1c3cc4�PTitle: title: overlay list
+Path: Signature
+Content:
+``> overlay list {flags} ``
+��@228dfdefd6f437dd8be0505b845d5d5c0be2060b8a63a6f12a5238fffecf4e05�yTitle: title: overlay list
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+<
+name: string, active: bool
+>
+
+��@f71dc01579d848653069696fe38d0f7f7694fe0a6b2f29803e0e2144a04c84d7��Title: title: overlay list
+Path: Examples
+Content:
+List all overlays with their active status.
+```Fenced(Borrowed("nu"))
+> module spam { export def foo [] { "foo" } }
+    overlay use spam
+    overlay list
+╭───┬──────┬────────╮
+│ # │ name │ active │
+├───┼──────┼────────┤
+│ 0 │ spam │ true   │
+╰───┴──────┴────────╯
+
+
+```
+Get overlay status after hiding.
+```Fenced(Borrowed("nu"))
+> module spam { export def foo [] { "foo" } }
+    overlay use spam
+    overlay hide spam
+    overlay list | where name == "spam"
+╭───┬──────┬────────╮
+│ # │ name │ active │
+├───┼──────┼────────┤
+│ 0 │ spam │ false  │
+╰───┴──────┴────────╯
+
+
+```
+��@4c077a0d51b76bb91a70827ee97c84ba07045ee02a641e8e906ff0ee6b541384�Title: title: overlay list
+Path: Notes
+Content:
+The overlays are listed in the order they were activated. Hidden overlays are listed first, followed by active overlays listed in the order that they were activated. 
+``last``
+ command will always give the top active overlay

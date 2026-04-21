@@ -1,0 +1,66 @@
+���@82943619904baf3001ee8f26ddceff3c97f27b8d352d0ca833737563de937a09�vTitle: title: polars last
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars last``
+[link: /commands/categories/dataframe.md] ��@c117431604f3df3c980dc5bfad9625367e3214610100be661eb0aab5df470642�TTitle: title: polars last
+Path: Signature
+Content:
+``> polars last {flags} (rows)``
+��@93ab3825df60a5bc85582c15615b2c549f6912e68f4af8da21bb937cb7efff36�XTitle: title: polars last
+Path: Parameters
+Content:
+``rows``
+: Number of rows for tail.
+��@cc7ab33e66fb8e89db602522ba7f94325313623b1c1885c70e3f2bc347b59cf2ٲTitle: title: polars last
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@1a9d9b0e48c5540daddb5f71ac7b498f06a60084a7d83949dc442c61bffda293��Title: title: polars last
+Path: Examples
+Content:
+Create new dataframe with last rows
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars last 1
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 3 │ 4 │
+╰───┴───┴───╯
+
+
+```
+Creates a last expression from a column
+```Fenced(Borrowed("nu"))
+> polars col a | polars last
+
+
+```
+Aggregate the last values in the group.
+```Fenced(Borrowed("nu"))
+> [[a b c d]; [1 0.5 true Apple] [2 0.5 true Orange] [2 4 true Apple] [3 10 false Apple] [4 13 false Banana] [5 14 true Banana]] | polars into-df -s {a: u8, b: f32, c: bool, d: str} | polars group-by d | polars last | polars sort-by [a] | polars collect
+╭───┬────────┬───┬───────┬───────╮
+│ # │   d    │ a │   b   │   c   │
+├───┼────────┼───┼───────┼───────┤
+│ 0 │ Orange │ 2 │  0.50 │ true  │
+│ 1 │ Apple  │ 3 │ 10.00 │ false │
+│ 2 │ Banana │ 5 │ 14.00 │ true  │
+╰───┴────────┴───┴───────┴───────╯
+
+
+```

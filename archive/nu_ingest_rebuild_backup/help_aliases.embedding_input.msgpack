@@ -1,0 +1,55 @@
+–’Ù@502961c0e0bb022a72c3cef3fd317b707eeebbde4a43f2563b3cac75b09a4a9dÙnTitle: title: help aliases
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``help aliases``
+[link: /commands/categories/core.md] ’Ù@0d2777ff5559ed9ddacfaeb85fd06723db4e013bc4d768f7edd845f439099441ÙWTitle: title: help aliases
+Path: Signature
+Content:
+``> help aliases {flags} ...rest``
+’Ù@b573d053ed1dd48988453cb4955c9f3329c71fb64336dcc502153506ecdad33dÙzTitle: title: help aliases
+Path: Flags
+Content:
+``--find, -f {string}``
+: String to find in alias names and descriptions.
+’Ù@3ce5c882343c606a6cadcc28e04273b1fd8f222b4fa5ec68da05818061c84c9dÙeTitle: title: help aliases
+Path: Parameters
+Content:
+``...rest``
+: The name of alias to get help on.
+’Ù@a8444d5277e7b73ea19e7334f1c2da980c530d919590016c88fbae01765deb6eÙYTitle: title: help aliases
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@b2b93fbd633da500d8c02c03fee7782317a19324012d66bf3b979e1106afc0bcÚ:Title: title: help aliases
+Path: Examples
+Content:
+Show all aliases.
+```Fenced(Borrowed("nu"))
+> help aliases
+
+
+```
+Show help for single alias.
+```Fenced(Borrowed("nu"))
+> help aliases my-alias
+
+
+```
+Search for string in alias names and descriptions.
+```Fenced(Borrowed("nu"))
+> help aliases --find my-alias
+
+
+```

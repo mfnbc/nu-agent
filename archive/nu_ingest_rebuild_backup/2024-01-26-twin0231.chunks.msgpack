@@ -1,0 +1,344 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-01-26-twin0231.mdŸ@9f875d114a5419ff4d62ca22d25443f9def55a86d91917235ee385f9c98fbeafπThis week in Nushell #231ëßNushell⁄Âmaxomatic458 
+[link: https://github.com/nushell/nushell/pull/11593] added an IDE-style completion menu
+, and 
+[link: https://github.com/nushell/nushell/pull/11589] updated reedline
+amtoine 
+[link: https://github.com/nushell/nushell/pull/11640] fixed spreading of arguments to externals in toolkit
+, and 
+[link: https://github.com/nushell/nushell/pull/11331] hid 
+``std testing``
+Hofer-Julian 
+[link: https://github.com/nushell/nushell/pull/11628] updated tests to account for internationalization
+nibon7 made dependency version improvements (
+[link: https://github.com/nushell/nushell/pull/11624] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11613] 2
+)
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/11621] unified glob behavior on 
+``open``
+, 
+``rm``
+, 
+``cp-old``
+, 
+``mv``
+, 
+``umv``
+, 
+``cp``
+ and 
+``du``
+ commands
+, 
+[link: https://github.com/nushell/nushell/pull/11596] made sure that an empty list matches 
+``list<int>``
+ types
+, 
+[link: https://github.com/nushell/nushell/pull/11569] fixed glob expansion if the file path is wrapped in quotes
+, and 
+[link: https://github.com/nushell/nushell/pull/11541] removed 
+``--flag: bool``
+ support
+fdncred 
+[link: https://github.com/nushell/nushell/pull/11645] made the 
+``input_output_types``
+ of 
+``each``
+ and 
+``par-each``
+ consistent
+, and 
+[link: https://github.com/nushell/nushell/pull/11638] cleanup hide testing PR
+, 
+[link: https://github.com/nushell/nushell/pull/11622] removed cp-old
+, and 
+[link: https://github.com/nushell/nushell/pull/11598] allowed math avg to work with durations
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/11608] fixed a help menu regression
+, 
+[link: https://github.com/nushell/nushell/pull/11562] made it so we evaluate string interpolation at parse time
+, 
+[link: https://github.com/nushell/nushell/pull/11584] upgraded the byte-unit dependency
+Tastaturtaste 
+[link: https://github.com/nushell/nushell/pull/11535] improved navigation functionality through reedline
+yukitomoda 
+[link: https://github.com/nushell/nushell/pull/11590] implemented 
+``<``
+ and 
+``>``
+ operators for strings
+NotLebedev 
+[link: https://github.com/nushell/nushell/pull/11581] fixed explicit flags for plugins
+andrei-27 
+[link: https://github.com/nushell/nushell/pull/11580] added a new 
+``--index``
+ flag to 
+``input list``
+rsteube 
+[link: https://github.com/nushell/nushell/pull/11442] added style support to the external completer
+drbrain 
+[link: https://github.com/nushell/nushell/pull/11322] added 
+``into cell-path``
+ for dynamic cell-path creation
+stormasm updated versions (
+[link: https://github.com/nushell/nushell/pull/11635] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11594] 2
+)
+davehorner 
+[link: https://github.com/nushell/nushell/pull/10558] fixed a panic caused by 
+``ls \\.\pipe``
+crides 
+[link: https://github.com/nushell/nushell/pull/11636] fixed env conversion for buffer editor
+, and 
+[link: https://github.com/nushell/nushell/pull/11618] made it so that resolving external highlight takes the current PATH into account
+íêê⁄Title: This week in Nushell #231
+Path: Nushell
+Content:
+maxomatic458 
+[link: https://github.com/nushell/nushell/pull/11593] added an IDE-style completion menu
+, and 
+[link: https://github.com/nushell/nushell/pull/11589] updated reedline
+amtoine 
+[link: https://github.com/nushell/nushell/pull/11640] fixed spreading of arguments to externals in toolkit
+, and 
+[link: https://github.com/nushell/nushell/pull/11331] hid 
+``std testing``
+Hofer-Julian 
+[link: https://github.com/nushell/nushell/pull/11628] updated tests to account for internationalization
+nibon7 made dependency version improvements (
+[link: https://github.com/nushell/nushell/pull/11624] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11613] 2
+)
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/11621] unified glob behavior on 
+``open``
+, 
+``rm``
+, 
+``cp-old``
+, 
+``mv``
+, 
+``umv``
+, 
+``cp``
+ and 
+``du``
+ commands
+, 
+[link: https://github.com/nushell/nushell/pull/11596] made sure that an empty list matches 
+``list<int>``
+ types
+, 
+[link: https://github.com/nushell/nushell/pull/11569] fixed glob expansion if the file path is wrapped in quotes
+, and 
+[link: https://github.com/nushell/nushell/pull/11541] removed 
+``--flag: bool``
+ support
+fdncred 
+[link: https://github.com/nushell/nushell/pull/11645] made the 
+``input_output_types``
+ of 
+``each``
+ and 
+``par-each``
+ consistent
+, and 
+[link: https://github.com/nushell/nushell/pull/11638] cleanup hide testing PR
+, 
+[link: https://github.com/nushell/nushell/pull/11622] removed cp-old
+, and 
+[link: https://github.com/nushell/nushell/pull/11598] allowed math avg to work with durations
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/11608] fixed a help menu regression
+, 
+[link: https://github.com/nushell/nushell/pull/11562] made it so we evaluate string interpolation at parse time
+, 
+[link: https://github.com/nushell/nushell/pull/11584] upgraded the byte-unit dependency
+Tastaturtaste 
+[link: https://github.com/nushell/nushell/pull/11535] improved navigation functionality through reedline
+yukitomoda 
+[link: https://github.com/nushell/nushell/pull/11590] implemented 
+``<``
+ and 
+``>``
+ operators for strings
+NotLebedev 
+[link: https://github.com/nushell/nushell/pull/11581] fixed explicit flags for plugins
+andrei-27 
+[link: https://github.com/nushell/nushell/pull/11580] added a new 
+``--index``
+ flag to 
+``input list``
+rsteube 
+[link: https://github.com/nushell/nushell/pull/11442] added style support to the external completer
+drbrain 
+[link: https://github.com/nushell/nushell/pull/11322] added 
+``into cell-path``
+ for dynamic cell-path creation
+stormasm updated versions (
+[link: https://github.com/nushell/nushell/pull/11635] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11594] 2
+)
+davehorner 
+[link: https://github.com/nushell/nushell/pull/10558] fixed a panic caused by 
+``ls \\.\pipe``
+crides 
+[link: https://github.com/nushell/nushell/pull/11636] fixed env conversion for buffer editor
+, and 
+[link: https://github.com/nushell/nushell/pull/11618] made it so that resolving external highlight takes the current PATH into account
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-01-26-twin0231.mdŸ@a869f24a5a4cc9d8f9d3bbddceb48ee8de27717f07ba0ca4aa303b2cde56623fπThis week in Nushell #231ë≠Documentation⁄äcrasite created 
+[link: https://github.com/nushell/nushell.github.io/pull/1224] Add a section describing how to change table outputs
+TWSiO created 
+[link: https://github.com/nushell/nushell.github.io/pull/1222] Adding a page on control flow (and small misspelling)
+SLASHLogin created 
+[link: https://github.com/nushell/nushell.github.io/pull/1220] Update 
+``scope``
+'s syntax in external_completers.md
+samoylovfp created 
+[link: https://github.com/nushell/nushell.github.io/pull/1219] Remove outdated commands from explore.md
+Tirka created 
+[link: https://github.com/nushell/nushell.github.io/pull/1218] Fix deprecation in external_completers.md (one more)
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/1217] Bump vite from 5.0.10 to 5.0.12
+Roshanjossey created 
+[link: https://github.com/nushell/nushell.github.io/pull/1187] docs: translate metadata page to German
+íêê⁄»Title: This week in Nushell #231
+Path: Documentation
+Content:
+crasite created 
+[link: https://github.com/nushell/nushell.github.io/pull/1224] Add a section describing how to change table outputs
+TWSiO created 
+[link: https://github.com/nushell/nushell.github.io/pull/1222] Adding a page on control flow (and small misspelling)
+SLASHLogin created 
+[link: https://github.com/nushell/nushell.github.io/pull/1220] Update 
+``scope``
+'s syntax in external_completers.md
+samoylovfp created 
+[link: https://github.com/nushell/nushell.github.io/pull/1219] Remove outdated commands from explore.md
+Tirka created 
+[link: https://github.com/nushell/nushell.github.io/pull/1218] Fix deprecation in external_completers.md (one more)
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell.github.io/pull/1217] Bump vite from 5.0.10 to 5.0.12
+Roshanjossey created 
+[link: https://github.com/nushell/nushell.github.io/pull/1187] docs: translate metadata page to German
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-01-26-twin0231.mdŸ@1bd6496cdbd6cfd8c198a3346cc2fd36957c9425ca22c74439eb72341fab791fπThis week in Nushell #231ë™Nu_Scripts⁄÷fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/750] image-push supports renaming via -t
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/745] krd for kubectl redistribution deployment
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/744] git-v2: fix ga
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/742] docker.nu : fix container-log and container-attach, add registry
+AucaCoyan created 
+[link: https://github.com/nushell/nu_scripts/pull/749] :bug: fix 
+``winget-completions``
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/748] update jalon-git.nu to latest nushell syntax
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/747] remove comma.nu from repo
+íêê⁄Title: This week in Nushell #231
+Path: Nu_Scripts
+Content:
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/750] image-push supports renaming via -t
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/745] krd for kubectl redistribution deployment
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/744] git-v2: fix ga
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/742] docker.nu : fix container-log and container-attach, add registry
+AucaCoyan created 
+[link: https://github.com/nushell/nu_scripts/pull/749] :bug: fix 
+``winget-completions``
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/748] update jalon-git.nu to latest nushell syntax
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/747] remove comma.nu from repo
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-01-26-twin0231.mdŸ@e7737377c53aad93726305a3c3750b33c1ece930722770f433b137f78e254d92πThis week in Nushell #231ë®reedline⁄ maxomatic458 created 
+[link: https://github.com/nushell/reedline/pull/725] Fix style in ide menu
+, and 
+[link: https://github.com/nushell/reedline/pull/722] add style from #691 to ide menu
+, and 
+[link: https://github.com/nushell/reedline/pull/713] get back the ranges of the strings from the completer used for generating completions
+, and 
+[link: https://github.com/nushell/reedline/pull/709] respect windows newline in update_values
+, and 
+[link: https://github.com/nushell/reedline/pull/708] get correct cursor pos when menu indicator contains newline
+stormasm created 
+[link: https://github.com/nushell/reedline/pull/721] update history error message
+, and 
+[link: https://github.com/nushell/reedline/pull/718] update the ide_completions example with more cases to explore
+, and 
+[link: https://github.com/nushell/reedline/pull/710] modify ci.yml to see if it will turn off code coverage in the reedline repo
+rsteube created 
+[link: https://github.com/nushell/reedline/pull/720] columnar_menu: fix explicit highlighting color
+, and 
+[link: https://github.com/nushell/reedline/pull/691] suggestion: added style
+kubouch created 
+[link: https://github.com/nushell/reedline/pull/717] Update dependencies
+, and 
+[link: https://github.com/nushell/reedline/pull/716] Update nu-ansi-term to 0.50.0
+Tastaturtaste created 
+[link: https://github.com/nushell/reedline/pull/715] Remove conflicting keybindings added with selection feature
+abusch created 
+[link: https://github.com/nushell/reedline/pull/712] Clipboard graceful handling
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/701]  Don't panic when creating 
+``FileBackedHistory``
+ with 
+``usize::MAX``
+ capacity 
+andreistan26 created 
+[link: https://github.com/nushell/reedline/pull/653] Fix panic when history size set to 0
+íêê⁄9Title: This week in Nushell #231
+Path: reedline
+Content:
+maxomatic458 created 
+[link: https://github.com/nushell/reedline/pull/725] Fix style in ide menu
+, and 
+[link: https://github.com/nushell/reedline/pull/722] add style from #691 to ide menu
+, and 
+[link: https://github.com/nushell/reedline/pull/713] get back the ranges of the strings from the completer used for generating completions
+, and 
+[link: https://github.com/nushell/reedline/pull/709] respect windows newline in update_values
+, and 
+[link: https://github.com/nushell/reedline/pull/708] get correct cursor pos when menu indicator contains newline
+stormasm created 
+[link: https://github.com/nushell/reedline/pull/721] update history error message
+, and 
+[link: https://github.com/nushell/reedline/pull/718] update the ide_completions example with more cases to explore
+, and 
+[link: https://github.com/nushell/reedline/pull/710] modify ci.yml to see if it will turn off code coverage in the reedline repo
+rsteube created 
+[link: https://github.com/nushell/reedline/pull/720] columnar_menu: fix explicit highlighting color
+, and 
+[link: https://github.com/nushell/reedline/pull/691] suggestion: added style
+kubouch created 
+[link: https://github.com/nushell/reedline/pull/717] Update dependencies
+, and 
+[link: https://github.com/nushell/reedline/pull/716] Update nu-ansi-term to 0.50.0
+Tastaturtaste created 
+[link: https://github.com/nushell/reedline/pull/715] Remove conflicting keybindings added with selection feature
+abusch created 
+[link: https://github.com/nushell/reedline/pull/712] Clipboard graceful handling
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/701]  Don't panic when creating 
+``FileBackedHistory``
+ with 
+``usize::MAX``
+ capacity 
+andreistan26 created 
+[link: https://github.com/nushell/reedline/pull/653] Fix panic when history size set to 0

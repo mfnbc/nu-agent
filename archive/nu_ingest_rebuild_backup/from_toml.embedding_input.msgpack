@@ -1,0 +1,48 @@
+���@9fb8d53a14d68f168f6d65faa9bc4a767bcdc482ebfdfdb2c099f269cd30a7c1�nTitle: title: from toml
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``from toml``
+[link: /commands/categories/formats.md] ��@2e034d84c7a719bb758618482807058362f602f297deabb05d456519716ab158�JTitle: title: from toml
+Path: Signature
+Content:
+``> from toml {flags} ``
+��@d72d3afbd8fa33c68497db740618ad4732a0db41917cceb8dc9b6d34f1df7fac�VTitle: title: from toml
+Path: Input/output types:
+Content:
+input
+output
+string
+record
+��@c2fbaeb4baf91943b377c273521485b8df90d91bed1025387cff88965aad4063�QTitle: title: from toml
+Path: Examples
+Content:
+Converts toml formatted string to record.
+```Fenced(Borrowed("nu"))
+> 'a = 1' | from toml
+╭───┬───╮
+│ a │ 1 │
+╰───┴───╯
+
+```
+Converts toml formatted string to record.
+```Fenced(Borrowed("nu"))
+> 'a = 1
+b = [1, 2]' | from toml
+╭───┬───────────╮
+│ a │ 1         │
+│   │ ╭───┬───╮ │
+│ b │ │ 0 │ 1 │ │
+│   │ │ 1 │ 2 │ │
+│   │ ╰───┴───╯ │
+╰───┴───────────╯
+
+```

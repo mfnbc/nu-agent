@@ -1,0 +1,102 @@
+”’Ù@d2bdc8daac7b6517f2fbad16db8c9ee1984063bd44f31c55a7cb91e90e3a80cfÚ	¥Title: This week in Nushell #273
+Path: Nushell
+Content:
+musicinmybrain 
+[link: https://github.com/nushell/nushell/pull/14350] updated rstest from 0.18 to 0.23 (the current version)
+ayax79 
+[link: https://github.com/nushell/nushell/pull/14343] added support for converting polars decimal values to nushell values
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/14341] added proper config defaults for hooks
+, 
+[link: https://github.com/nushell/nushell/pull/14307] fixed a binary example and added one for text uploads
+, 
+[link: https://github.com/nushell/nushell/pull/14302] fixed ignored 
+``into datetime``
+ test
+, 
+[link: https://github.com/nushell/nushell/pull/14295] allowed duration to be added to date
+, and 
+[link: https://github.com/nushell/nushell/pull/14291] fixed multipart/form-data post example
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14337] added support for multiple groupers to 
+``group-by``
+userwiths 
+[link: https://github.com/nushell/nushell/pull/13875] fixed inconsistency in 
+``ls``
+ sort-order
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14335] cut down unnecessary lint allows
+, and 
+[link: https://github.com/nushell/nushell/pull/14317] pinned reedline to 
+``0.37.0``
+ release
+hustcer 
+[link: https://github.com/nushell/nushell/pull/14328] bumped to dev version 0.100.1
+, 
+[link: https://github.com/nushell/nushell/pull/14327] downgraded softprops/action-gh-release to 2.0.5
+, and 
+[link: https://github.com/nushell/nushell/pull/14312] bumped version to 
+``0.100.0``
+sgvictorino 
+[link: https://github.com/nushell/nushell/pull/14310] made 
+``ls``
+ return "Permission denied" for CWD instead of empty results
+, and 
+[link: https://github.com/nushell/nushell/pull/14299] skipped 
+``test_iteration_errors``
+ if 
+``/root``
+ is missing
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14318] allowed nuscripts to be run again on windows with assoc/ftype
+, and 
+[link: https://github.com/nushell/nushell/pull/14297] ignored without_timezone test for now
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14314] added a test to ensure that functions can't use mutable variables
+atahabaki 
+[link: https://github.com/nushell/nushell/pull/14296] upgraded bracoxide to v0.1.4 (fixes #14290)
+devyn 
+[link: https://github.com/nushell/nushell/pull/14293] removed the 
+``NU_DISABLE_IR``
+ option
+anomius 
+[link: https://github.com/nushell/nushell/pull/14261] updated seq char to work on all characters
+’Ù@c67a8bf051f73641787676403d5be55be4c61092f28efb0f28a9339b41ded9c6Ú%Title: This week in Nushell #273
+Path: Documentation
+Content:
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1633] upgraded shiki and vuepress plugins
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1628] updated release note by scripts
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1625] refreshed Nu command docs for v0.100
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1630] provided more specific information about std/log use in modules
+Jasha10 
+[link: https://github.com/nushell/nushell.github.io/pull/1629] updated direnv.md to use ENV_CONVERSIONS
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1627] made release notes changes for 0.100.0
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1626] started 0.100.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1617] added release notes for 
+``0.100.0``
+heinwol 
+[link: https://github.com/nushell/nushell.github.io/pull/1624] fixed wrong link in working_with_records.md
+’Ù@18bd4d4b94d238c9a10813d49703a1be20e4f44b30cdd76930c3463d9c0820ccÙ±Title: This week in Nushell #273
+Path: Nu_Scripts
+Content:
+chanmaoganda 
+[link: https://github.com/nushell/nu_scripts/pull/979] added basic docker compose support: up down stop
+’Ù@e608298cfb0464abd28e45dd0cb958641710112485c9857611a3ed050b96badcÚrTitle: This week in Nushell #273
+Path: reedline
+Content:
+musicinmybrain 
+[link: https://github.com/nushell/reedline/pull/852] updated rstest to 0.23.0, the current version
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/851] bumped version for 
+``0.37.0``
+ release
+, and 
+[link: https://github.com/nushell/reedline/pull/850] fixed forgotten 
+``Cargo.lock``

@@ -1,0 +1,115 @@
+œ’Ù@cdb2992d2643b7942dd08bfb4974bdfbdc4bbd5875cb2ce87a4c8e8041d3531cÙ‚Title: title: Nushell 0.96.1
+Path:  in range expressions, and some minor fixes to IR evaluation and plugins.
+Content:
+
+
+
+
+``$in``
+’Ù@bfdd38dae434c84401a3272efc1a2668dc27f73d5af6bc86f55c89b1cac9b0feÚ(Title: title: Nushell 0.96.1
+Path: Nushell 0.96.1
+Content:
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your command line. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful command line pipelines.
+Today, we're releasing version 0.96.1 of Nu. This release fixes various bugs introduced by the 0.96.0 release, including the behavior of 
+``$in``
+ in range expressions, and some minor fixes to IR evaluation and plugins.
+’Ù@fcfb8f22963c3abd5afe7853e2d9097468936aed907ba30ec787e0f7b5e07490ÚÐTitle: title: Nushell 0.96.1
+Path: Where to get it
+Content:
+Nu 0.96.1 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.96.1] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+’Ù@6def37238c0b6b9715e288fd5cbe8cdcf1f9a3d9e1430c367683134062247b46Ú¯Title: title: Nushell 0.96.1
+Path: Table of content
+Content:
+[link: #highlights-and-themes-of-this-release-toc] Highlights and themes of this release
+[link: #fix-in-in-range-expressions-toc] Fix 
+``$in``
+ in range expressions
+[link: #ir-fix-incorrect-capturing-of-subexpressions-toc] IR: fix incorrect capturing of subexpressions
+[link: #clean-up-arguments-added-to-stack-after-calldecl-engine-call-toc] Clean up arguments added to stack after 
+``CallDecl``
+ engine call
+[link: #changes-to-commands-toc] Changes to commands
+[link: #bug-fixes-and-other-changes-toc] Bug fixes and other changes
+[link: #keybindings-list-toc] ``keybindings list``
+[link: #full-changelog-toc] Full changelog
+’Ù@070831562cf980636c407c34364cbdfcb68d2158ca92e160da1568150a22ec61ÙHTitle: title: Nushell 0.96.1
+Path: ]
+Content:
+[link: #table-of-content] ’Ù@a3531d4de33a388e4ad632fc5970e3440c82150c82f85b8f838ec446128da733ÚÖTitle: title: Nushell 0.96.1
+Path: ]
+Content:
+``$in``
+[link: #table-of-content] 0.96.0 changed how 
+``$in``
+-containing expressions worked to make them more consistent, but we missed checking the expressions contained within ranges. Piping to a range expression containing 
+``$in``
+ has now been fixed:
+```Fenced(Borrowed("nushell"))
+3 | 0..$in | each { print }
+
+```
+Thanks to 
+[link: https://github.com/maxim-uvarov] Maxim Uvarov
+ for finding and reporting this issue!
+’Ù@f4949bfdab888ddf404da07b4006f7038b54300301d13e8241cfec27f14504b0ÚøTitle: title: Nushell 0.96.1
+Path: ]
+Content:
+[link: #table-of-content] A bug was found by user 
+``warp``
+ over on Discord in the new internal representation engine that we introduced as a preview in 0.96.0. Subexpressions (i.e., expressions in parentheses) should not have any impact on the capturing behavior of external commands, but this was implemented incorrectly. In 0.96.0, the following code produced no output when run with IR even though it should have still resulted in a message being printed:
+```Fenced(Borrowed(""))
+(nu -c 'print foo'); null
+
+```
+This was most noticeable when running some kind of interactive command, as it would result in stdout not being a TTY. We have fixed the IR implementation to match the behavior of the AST evaluator.
+’Ù@897062d289bf29c96b810f7510b700a3c6dc465fe2f85f41ea36d5fb2d76c0dfÚ Title: title: Nushell 0.96.1
+Path: ]
+Content:
+``CallDecl``
+[link: #table-of-content] A memory leak was present when using the new 
+[link: ../contributor-book/plugin_protocol_reference.md#calldecl-engine-call] ``CallDecl``
+ engine call
+ from plugins. The arguments included in the call would persist in memory until the plugin call ended, rather than being removed at the end of the engine call. This has been fixed.
+’Ù@6289114c2aa216bae5938455c6777a527ad2ced2c15e2c65f712e404e889e41aÙHTitle: title: Nushell 0.96.1
+Path: ]
+Content:
+[link: #table-of-content] ’Ù@39e6850959ddee4e626c823750195e2e3a7667ff75e86fdfece1ddb3ad1a7d77ÙHTitle: title: Nushell 0.96.1
+Path: ]
+Content:
+[link: #table-of-content] ’Ù@32b23b95a8c5ee126ae93aa7c642a77f74e91c5887e7d3335a429bdb78d5d8faÚ†Title: title: Nushell 0.96.1
+Path: ]
+Content:
+``keybindings list``
+[link: #table-of-content] The 
+``keybindings list``
+ command was unintentionally changed to acts as if no options had been selected if none of the toggle switches for different categories had been provided. This would result in an empty list. The previous behavior of returning all categories by default has been restored.
+’Ù@d2d1c6d96207f80dfdb70bcde7e67044a351c0c3df23ef30c34ee682a5132cceÚcTitle: title: Nushell 0.96.1
+Path: ]
+Content:
+[link: #table-of-content] [link: https://github.com/devyn] devyn
+ created
+[link: https://github.com/nushell/nushell/pull/13471] Fix bad method links in docstrings
+[link: https://github.com/nushell/nushell/pull/13469] Clean up arguments added to stack after 
+``CallDecl``
+ engine call
+[link: https://github.com/nushell/nushell/pull/13467] IR: fix incorrect capturing of subexpressions
+[link: https://github.com/nushell/nushell/pull/13456] Fix 
+``keybindings list``
+ being empty by default
+[link: https://github.com/nushell/nushell/pull/13447] Fix 
+``$in``
+ in range expressions
+[link: https://github.com/nushell/nushell/pull/13439] Bump version to 
+``0.96.1``
+[link: https://github.com/fdncred] fdncred
+ created
+[link: https://github.com/nushell/nushell/pull/13451] update release-pkg.nu with working url for less license

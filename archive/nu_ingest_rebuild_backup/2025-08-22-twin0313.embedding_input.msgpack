@@ -1,0 +1,142 @@
+–’Ù@e563dc910562c0c9b9ddf7f1e2f810cea90888df4c85b27617339c9a8d6bb485Ù»Title: title: 'This week in Nushell #313'
+Path: This Week in Nushell #313
+Content:
+
+
+
+
+Published Sunday, 2025-08-24, including PRs merged Friday, 2025-08-15 through Thursday, 2025-08-21.
+’Ù@586199c32043e95e08f911147545aa95ab1a9e203dd9092cfcbd074c4bc13330ÚòTitle: title: 'This week in Nushell #313'
+Path: Nushell
+Content:
+@fdncred 
+[link: https://github.com/nushell/nushell/pull/16487] updated reedline dep to latest commit (#16487)
+@sholderbach:
+[link: https://github.com/nushell/nushell/pull/16486] updated benchmarking README (#16486)
+[link: https://github.com/nushell/nushell/pull/16485] added a benchmark 
+``use``
+ing the whole 
+``std``
+ (#16485)
+[link: https://github.com/nushell/nushell/pull/16470] updated PLATFORM_SUPPORT to mention loongarch limitations (#16470)
+[link: https://github.com/nushell/nushell/pull/16469] performed clippy and dead code elimination pass (#16469)
+[link: https://github.com/nushell/nushell/pull/16468] used direct 
+``Value.as_str()``
+ in string commands (#16468)
+@Bahex:
+[link: https://github.com/nushell/nushell/pull/16482] moved 
+``SplitRead``
+ and 
+``MultiLife``
+ into 
+``nu-utils``
+ (#16482)
+[link: https://github.com/nushell/nushell/pull/16428] made 
+``watch``
+ return a stream of events as a table when called without a closure (#16428)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/16480] bumped tempfile from 3.20.0 to 3.21.0 (#16480)
+[link: https://github.com/nushell/nushell/pull/16478] bumped crate-ci/typos from 1.35.4 to 1.35.5 (#16478)
+[link: https://github.com/nushell/nushell/pull/16426] bumped actions/checkout from 4 to 5 (#16426)
+@uraneko 
+[link: https://github.com/nushell/nushell/pull/16476] sorted help message flags by required field (#16476)
+@132ikl:
+[link: https://github.com/nushell/nushell/pull/16475] added assertion that DeprecationEntry flag do not have dashes (#16475)
+[link: https://github.com/nushell/nushell/pull/16473] mitigated 
+``watch -d``
+ breaking change (#16473)
+[link: https://github.com/nushell/nushell/pull/16471] made 
+``Span``
+ mandatory for some fields in 
+``ShellError``
+ (#16471)
+[link: https://github.com/nushell/nushell/pull/16460] tweaked PR template (#16460)
+[link: https://github.com/nushell/nushell/pull/16458] added "Motivation and technical details" (#16458)
+[link: https://github.com/nushell/nushell/pull/16443] redirected "Questions" issue option to Discussions (#16443)
+@weirdan:
+[link: https://github.com/nushell/nushell/pull/16472] made 
+``xml:``
+ prefix always available in 
+``query xml``
+ (#16472)
+[link: https://github.com/nushell/nushell/pull/16465] extended nodeset output formats for 
+``query xml``
+ (#16465)
+[link: https://github.com/nushell/nushell/pull/16461] used fixed column name for 
+``query xml``
+ output (#16461)
+[link: https://github.com/nushell/nushell/pull/16459] added multiple output types for 
+``query xml``
+ (#16459)
+[link: https://github.com/nushell/nushell/pull/16440] quoted strings containing 
+``=``
+ (#16440)
+@andoalon:
+[link: https://github.com/nushell/nushell/pull/16466] added 
+``--endian``
+ flag to 
+``into binary``
+ (#16466)
+[link: https://github.com/nushell/nushell/pull/16435] changed the output of 
+``format bits``
+ to big endian instead of native endian (#16435)
+@hustcer 
+[link: https://github.com/nushell/nushell/pull/16455] fixed loongarch64 builds for rust 1.87.0 (#16455)
+@WindSoilder 
+[link: https://github.com/nushell/nushell/pull/16452] fixed uninlined_format_args clippy warnings (#16452)
+@NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/16450] added ability to specify a table name for kv commands (#16450)
+@cptpiepmatz 
+[link: https://github.com/nushell/nushell/pull/16446] added well-optimized string types (#16446)
+@ItsHarper 
+[link: https://github.com/nushell/nushell/pull/16393] fixed error message: custom commands cannot be 
+``const``
+ (#16393)
+’Ù@8eff73659805c5b700f1b15a96f1e9fb5c913495af512c58a5e93b5c4b10dd6dÚ8Title: title: 'This week in Nushell #313'
+Path: Documentation
+Content:
+@rktjmp 
+[link: https://github.com/nushell/nushell.github.io/pull/2014] added a hint for generating \0 character to strings guide (#2014)
+@NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/2013] added missing back issues of TWiN (#2013)
+@Kissaki 
+[link: https://github.com/nushell/nushell.github.io/pull/1970] updated the home feature title to be more concise (#1970)
+@levitte 
+[link: https://github.com/nushell/nushell.github.io/pull/1925] fixed color theme examples (#1925)
+’Ù@ab5770cf7a982c7612f21ea4502aab727e823e59ede7e37815df9d0a1770d7f5Ú´Title: title: 'This week in Nushell #313'
+Path: reedline
+Content:
+@sholderbach 
+[link: https://github.com/nushell/reedline/pull/947] fixed 
+``mismatched_lifetime_syntaxes``
+ (#947)
+@CastilloDel 
+[link: https://github.com/nushell/reedline/pull/942] fixed missing use in README.md (#942)
+@blindFS 
+[link: https://github.com/nushell/reedline/pull/899] fixed cursor dislocation after previous_history navigation to a multiline entry (#899)
+’Ù@048944657f7d88f1ad3b1219c07f32c1a711f818234cc201277a0d3343db3132ÚŠTitle: title: 'This week in Nushell #313'
+Path: Nu_Scripts
+Content:
+@fnuttens 
+[link: https://github.com/nushell/nu_scripts/pull/1163] marked 
+``scoop cache rm``
+ apps parameter as optional in scoop-completion (#1163)
+@NotTheDr01ds 
+[link: https://github.com/nushell/nu_scripts/pull/1162] updated TWiN generation scripts (#1162)
+@krovuxdev:
+[link: https://github.com/nushell/nu_scripts/pull/1161] added new cargo aliases (#1161)
+[link: https://github.com/nushell/nu_scripts/pull/1161] fixed autocompletion (#1161)
+@Bahex 
+[link: https://github.com/nushell/nu_scripts/pull/1136] refactored nu-hooks/startup-times for better performance and UX (#1136)
+’Ù@3f15ac8181749ee07b9fe02184ea7ed0973531c697f4e34a110bffdd012a942eÚZTitle: title: 'This week in Nushell #313'
+Path: NUPM
+Content:
+@kubouch:
+[link: https://github.com/nushell/nupm/pull/125] fixed deprecated 
+``get -i``
+ flag (#125)
+[link: https://github.com/nushell/nupm/pull/125] fixed unreliable test (#125)
+@mkatychev 
+[link: https://github.com/nushell/nupm/pull/122] added 
+``nupm registry``
+ subcommand (#122)

@@ -1,0 +1,105 @@
+——ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_send.mdÙ@c8f8f86aa588f5501a9934dd8e2ff6e00f0a06e6ea02ad728898213b79294cd5¯title: job send‘¬experimentalÙC
+
+
+
+
+
+
+
+
+``job send``
+[link: /commands/categories/experimental.md] ’ÙvTitle: title: job send
+Path: experimental
+Content:
+
+
+
+
+
+
+
+
+
+``job send``
+[link: /commands/categories/experimental.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_send.mdÙ@6747290d8a17043b3f1431eaf7045df9e6f2e59be8408564be7f626f02927448¯title: job send‘©Signature¼``> job send {flags} (id)``
+’ÙLTitle: title: job send
+Path: Signature
+Content:
+``> job send {flags} (id)``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_send.mdÙ@0183e7daf1da85b0c636d36c8fc52fa3fc064b79699633a91ba558a4a4cbc3d7¯title: job send‘¥FlagsÙ)``--tag {int}``
+: A tag for the message.
+’ÙUTitle: title: job send
+Path: Flags
+Content:
+``--tag {int}``
+: A tag for the message.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_send.mdÙ@ab4bbd5e3f08d13cba69a93e8a30a389e11e914470938db041ae430ac5364aa2¯title: job send‘ªParametersÙ3``id``
+: The id of the job to send the message to.
+’ÙdTitle: title: job send
+Path: Parameters
+Content:
+``id``
+: The id of the job to send the message to.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_send.mdÙ@fead68ef2da7cae4ab4af3b0e2aa266fe6c5412f73df283c9db5f87519cfe862¯title: job send‘³Input/output types:¹input
+output
+any
+nothing
+’ÙSTitle: title: job send
+Path: Input/output types:
+Content:
+input
+output
+any
+nothing
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_send.mdÙ@46303be6b712239644b1084b340e79c81fc46225e16bad02a910afc4152c5cab¯title: job send‘¨ExamplesÚUSend a message from the main thread to a newly-spawned job.
+```Fenced(Borrowed("nu"))
+> let id = job spawn { job recv | save sent.txt }; 'hi' | job send $id
+
+
+```
+Send a message from a newly-spawned job to the main thread (which always has an ID of 0).
+```Fenced(Borrowed("nu"))
+> job spawn { sleep 1sec; 'hi' | job send 0 }; job recv
+
+
+```
+’Ú„Title: title: job send
+Path: Examples
+Content:
+Send a message from the main thread to a newly-spawned job.
+```Fenced(Borrowed("nu"))
+> let id = job spawn { job recv | save sent.txt }; 'hi' | job send $id
+
+
+```
+Send a message from a newly-spawned job to the main thread (which always has an ID of 0).
+```Fenced(Borrowed("nu"))
+> job spawn { sleep 1sec; 'hi' | job send 0 }; job recv
+
+
+```
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_send.mdÙ@3a1e710aa4a4c221d1bbd00d6cd7776491c52a7bc901c06c82a90f623fcca21e¯title: job send‘¥NotesÚÓThis command sends a message to a background job, which can then read sent messages
+
+in a first-in-first-out fashion with 
+``job recv``
+. When it does so, it may additionally specify a numeric filter tag,
+
+in which case it will only read messages sent with the exact same filter tag.
+
+In particular, the id 0 refers to the main/initial nushell thread.
+A message can be any nushell value, and streams are always collected before being sent.
+This command never blocks.
+’ÚÿTitle: title: job send
+Path: Notes
+Content:
+This command sends a message to a background job, which can then read sent messages
+
+in a first-in-first-out fashion with 
+``job recv``
+. When it does so, it may additionally specify a numeric filter tag,
+
+in which case it will only read messages sent with the exact same filter tag.
+
+In particular, the id 0 refers to the main/initial nushell thread.
+A message can be any nushell value, and streams are always collected before being sent.
+This command never blocks.

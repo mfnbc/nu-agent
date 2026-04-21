@@ -1,0 +1,114 @@
+•’Ù@af64cb637e9d10516ff3354833e5b61abb05fdba2b52f6ceacbb80954254573fÚ´Title: This week in Nushell #203
+Path: Nushell
+Content:
+jt 
+[link: https://github.com/nushell/nushell/pull/9686] changed input/output types in help to a table
+, and 
+[link: https://github.com/nushell/nushell/pull/9680] Input output checking
+, and 
+[link: https://github.com/nushell/nushell/pull/9677] Remove broken compile-time overload system
+, and 
+[link: https://github.com/nushell/nushell/pull/9658] allow mut to take pipelines
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9683] added more input_output_types found from breaking scripts
+, and 
+[link: https://github.com/nushell/nushell/pull/9669] add kind and state to other key presses
+IanManske 
+[link: https://github.com/nushell/nushell/pull/9681] fixed SIGTTIN handling
+kubouch 
+[link: https://github.com/nushell/nushell/pull/9679] fixed broken constants in scopes
+stormasm 
+[link: https://github.com/nushell/nushell/pull/9675] removed warning: unused import pipeline
+, and 
+[link: https://github.com/nushell/nushell/pull/9674] cratification: part III of the math commands to nu-cmd-extra
+, and 
+[link: https://github.com/nushell/nushell/pull/9657] cratification: part II of the math commands to nu-cmd-extra
+, and 
+[link: https://github.com/nushell/nushell/pull/9647] cratification: start moving over the math commands to nu-cmd-extra
+amtoine 
+[link: https://github.com/nushell/nushell/pull/9671] simplified the test for 
+``let``
+ core command
+, and 
+[link: https://github.com/nushell/nushell/pull/9535] fix the 
+``std``
+ test commands calls in dev documents
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/9670] Use 
+``is-terminal``
+ crate for now
+, and 
+[link: https://github.com/nushell/nushell/pull/9668] Bump deps to transitively use hashbrown 0.14
+, and 
+[link: https://github.com/nushell/nushell/pull/9654] Apply nightly clippy lints
+, and 
+[link: https://github.com/nushell/nushell/pull/9644] Update reedline dev version lock
+, and 
+[link: https://github.com/nushell/nushell/pull/9643] Bump 
+``indexmap``
+ to 2.0
+, and 
+[link: https://github.com/nushell/nushell/pull/9641] Remove duplicated dependency on 
+``ansi-str 0.7``
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/9666] nu-explore/ Add handlers for HOME/END keys
+mengsuenyan 
+[link: https://github.com/nushell/nushell/pull/9662] fixed the command 
+``cp -u src dst``
+/
+``mv -u src dst``
+ doesn't work when theâ€¦
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9650] supported env assignment and mutable variable assignment with 
+``if``
+ block and 
+``match``
+ guard
+hanjunghyuk 
+[link: https://github.com/nushell/nushell/pull/9645] removed unnecessary 
+``cwd``
+, 
+``pipeline()``
+, 
+``r#``
+ from various tests
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/9640] Bump libproc from 0.13.0 to 0.14.0
+, and 
+[link: https://github.com/nushell/nushell/pull/9639] Bump strum from 0.24.1 to 0.25.0
+, and 
+[link: https://github.com/nushell/nushell/pull/9638] Bump scraper from 0.16.0 to 0.17.1
+’Ù@87ed4ba9f6f2fe937f8f54f090b846723912bdf0595ffbc86f3bba9892e8ce0aÙ¬Title: This week in Nushell #203
+Path: Extension
+Content:
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/145] forgot to merge changes for 1.60
+’Ù@797597931b47e9a8447b0c469cc8f3217578e547a3ba0c4d25783833fd60527aÚ¿Title: This week in Nushell #203
+Path: Documentation
+Content:
+fachammer created 
+[link: https://github.com/nushell/nushell.github.io/pull/981] Fix link
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/980] Fix typo
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/979] Fix typo
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/978] Use lefthook instead of husky and lint-staged for git hooks
+’Ù@ea640658e7bdeee87719ecd2be00d1388301cf03271362e1dc88d405bbd693e7ÚTitle: This week in Nushell #203
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/551] fix error background color in oh-my.nu script
+maxim-uvarov created 
+[link: https://github.com/nushell/nu_scripts/pull/547] conda fix
+’Ù@f8811e74380694f22a3895dbc4ee2402ab3a0dcdd1af12e59d7c50f8ba325f6cÚ2Title: This week in Nushell #203
+Path: reedline
+Content:
+NotLebedev created 
+[link: https://github.com/nushell/reedline/pull/601] Replace crossterm ScrollUp with universal workaround
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/600] Update (dev-)deps strum/pretty-assertions,rstest

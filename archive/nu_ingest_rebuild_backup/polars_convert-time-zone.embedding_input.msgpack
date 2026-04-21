@@ -1,0 +1,64 @@
+���@32a565994ad5a0ae6f8b8f0f1e8fde12e4002c7f4f7e29a7389e8308b20d95b7ِTitle: title: polars convert-time-zone
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars convert-time-zone``
+[link: /commands/categories/dataframe.md] ��@4a9ed224da950a01a2387287426650fee3e01f73e38626acb8ce515963a1959a�sTitle: title: polars convert-time-zone
+Path: Signature
+Content:
+``> polars convert-time-zone {flags} (time_zone)``
+��@db8f9c78d9bf09cf6329cfc43aad278b56c2b0657e00f7ea9a3e6562f409a1b6ٗTitle: title: polars convert-time-zone
+Path: Parameters
+Content:
+``time_zone``
+: Timezone for the Datetime Series. Pass 
+``null``
+ to unset time zone.
+��@8f0c425bfe20223a07fee81f4f354931dfb39db71f6472078ddab82957e8f201ٝTitle: title: polars convert-time-zone
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_selector
+polars_expression
+��@f54b15e8b4e3160da94c5802e5168feeb3ceb851c7b7c958cadb8ee79b2ffdf9��Title: title: polars convert-time-zone
+Path: Examples
+Content:
+Convert timezone for timezone-aware datetime
+```Fenced(Borrowed("nu"))
+> ["2025-04-10 09:30:00 -0400" "2025-04-10 10:30:00 -0400"] | polars into-df
+                    | polars as-datetime "%Y-%m-%d %H:%M:%S %z"
+                    | polars select (polars col datetime | polars convert-time-zone "Europe/Lisbon")
+╭───┬────────────╮
+│ # │  datetime  │
+├───┼────────────┤
+│ 0 │ a year ago │
+│ 1 │ a year ago │
+╰───┴────────────╯
+
+
+```
+Timezone conversions for timezone-naive datetime will assume the original timezone is UTC
+```Fenced(Borrowed("nu"))
+> ["2025-04-10 09:30:00" "2025-04-10 10:30:00"] | polars into-df
+                    | polars as-datetime "%Y-%m-%d %H:%M:%S" --naive
+                    | polars select (polars col datetime | polars convert-time-zone "America/New_York")
+╭───┬────────────╮
+│ # │  datetime  │
+├───┼────────────┤
+│ 0 │ a year ago │
+│ 1 │ a year ago │
+╰───┴────────────╯
+
+
+```

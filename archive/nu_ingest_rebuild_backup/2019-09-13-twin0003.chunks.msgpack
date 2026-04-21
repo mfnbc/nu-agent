@@ -1,0 +1,95 @@
+ëóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-09-13-twin0003.mdŸ@a16768a4ae306cc3411aa32491ac80bcfda1edd451028fb0d4ef26dac72845f1≤This week in Nu #3ë≤This week in Nu #3⁄ªLots of stability improvements this week with better support for parsing, external commands, and more.
+vsoch continues pushing Docker support forward, and added support for Ubuntu 18.04 (
+[link: https://github.com/nushell/nushell/pull/663] #663
+)
+androbtech removed our dependency on regex, as part of the effort to improve build times (
+[link: https://github.com/nushell/nushell/pull/651] #651
+)
+max-sixty landed a CI guard to ensure the codebase was properly formatted (
+[link: https://github.com/nushell/nushell/pull/649] #649
+)
+wycats landed an improved parser that is both more stable and handles external commands better (
+[link: https://github.com/nushell/nushell/pull/632] #632
+)
+chhetripradeep added a 
+``pwd``
+ command (
+[link: https://github.com/nushell/nushell/pull/612] #612
+)
+tim77 added instructions for Fedora (
+[link: https://github.com/nushell/nushell/pull/607] #607
+)
+Lots of bugfixes by est31, tim77, pmeredit, vsoch, lesichkovm. Big thanks to bug reporters jeka, stephanemagnenat, twe4ked, rrichardson, bmurphy1976, joedborg, and lienke.
+Fix for long-standing issue where externals freeze when outputting large amounts of output (
+[link: https://github.com/nushell/nushell/pull/664] #664
+)
+Added support for "did you mean?"-style errors when a column is mistyped. (
+[link: https://github.com/nushell/nushell/pull/662] #662
+)
+Added a lighter-weight table output format (
+[link: https://github.com/nushell/nushell/pull/631] #631
+)
+More plugins were made optional to help with build times. To get the full behavior be sure to build with 
+``--all-features``
+(
+[link: https://github.com/nushell/nushell/pull/617] #617
+)
+Improved help system was added. Type 
+``help``
+ to get started (
+[link: https://github.com/nushell/nushell/pull/657] #657
+)
+Updates by ymgyt, androbtech, and pka to the 
+[link: https://book.nushell.sh/] Nu book
+Updates to the 
+[link: https://github.com/nushell/contributor-handbook] Contributor Handbook
+, a guide for developers working on Nu
+íêê⁄˜Title: This week in Nu #3
+Path: This week in Nu #3
+Content:
+Lots of stability improvements this week with better support for parsing, external commands, and more.
+vsoch continues pushing Docker support forward, and added support for Ubuntu 18.04 (
+[link: https://github.com/nushell/nushell/pull/663] #663
+)
+androbtech removed our dependency on regex, as part of the effort to improve build times (
+[link: https://github.com/nushell/nushell/pull/651] #651
+)
+max-sixty landed a CI guard to ensure the codebase was properly formatted (
+[link: https://github.com/nushell/nushell/pull/649] #649
+)
+wycats landed an improved parser that is both more stable and handles external commands better (
+[link: https://github.com/nushell/nushell/pull/632] #632
+)
+chhetripradeep added a 
+``pwd``
+ command (
+[link: https://github.com/nushell/nushell/pull/612] #612
+)
+tim77 added instructions for Fedora (
+[link: https://github.com/nushell/nushell/pull/607] #607
+)
+Lots of bugfixes by est31, tim77, pmeredit, vsoch, lesichkovm. Big thanks to bug reporters jeka, stephanemagnenat, twe4ked, rrichardson, bmurphy1976, joedborg, and lienke.
+Fix for long-standing issue where externals freeze when outputting large amounts of output (
+[link: https://github.com/nushell/nushell/pull/664] #664
+)
+Added support for "did you mean?"-style errors when a column is mistyped. (
+[link: https://github.com/nushell/nushell/pull/662] #662
+)
+Added a lighter-weight table output format (
+[link: https://github.com/nushell/nushell/pull/631] #631
+)
+More plugins were made optional to help with build times. To get the full behavior be sure to build with 
+``--all-features``
+(
+[link: https://github.com/nushell/nushell/pull/617] #617
+)
+Improved help system was added. Type 
+``help``
+ to get started (
+[link: https://github.com/nushell/nushell/pull/657] #657
+)
+Updates by ymgyt, androbtech, and pka to the 
+[link: https://book.nushell.sh/] Nu book
+Updates to the 
+[link: https://github.com/nushell/contributor-handbook] Contributor Handbook
+, a guide for developers working on Nu

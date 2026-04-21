@@ -1,0 +1,167 @@
+•’Ù@65da75c5f8b7e0131e0fe757bf7617e0a60ba1ab1c40a724c9f2dae848f880feÚ¬Title: Aliases
+Path: Aliases
+Content:
+Aliases in Nushell offer a way of doing a simple replacement of command calls (both external and internal commands). This allows you to create a shorthand name for a longer command, including its default arguments.
+For example, let's create an alias called 
+``ll``
+ which will expand to 
+``ls -l``
+.
+```Fenced(Borrowed("nu"))
+alias ll = ls -l
+
+```
+We can now call this alias:
+```Fenced(Borrowed("nu"))
+ll
+
+```
+Once we do, it's as if we typed 
+``ls -l``
+. This also allows us to pass in flags or positional parameters. For example, we can now also write:
+```Fenced(Borrowed("nu"))
+ll -a
+
+```
+And get the equivalent to having typed 
+``ls -l -a``
+.
+’Ù@bd87634203cd09c976da6f07bdab23d9a406edd938bfa5ed57814bc97b39d473Ù†Title: Aliases
+Path: List All Loaded Aliases
+Content:
+Your useable aliases can be seen in 
+``scope aliases``
+ and 
+``help aliases``
+.
+’Ù@3a6a3aa4e2020a532b7db8a212160d8f6169752711bd3ed93e668a1d14d8a972Ú¶Title: Aliases
+Path: Persisting
+Content:
+To make your aliases persistent they must be added to your 
+config.nu
+ file by running 
+``config nu``
+ to open an editor and inserting them, and then restarting nushell.
+
+e.g. with the above 
+``ll``
+ alias, you can add 
+``alias ll = ls -l``
+ anywhere in 
+config.nu
+```Fenced(Borrowed("nu"))
+$env.config = {
+    # main configuration
+}
+
+alias ll = ls -l
+
+# some other config and script loading
+
+```
+’Ù@ceea92d40cbc2db41e945335835acdb0cc75aed84fe9895277537c94ee4b50b2ÚsTitle: Aliases
+Path: Piping in Aliases
+Content:
+Note that 
+``alias uuidgen = uuidgen | tr A-F a-f``
+ (to make uuidgen on mac behave like linux) won't work.
+
+The solution is to define a command without parameters that calls the system program 
+``uuidgen``
+ via 
+``^``
+.
+```Fenced(Borrowed("nu"))
+def uuidgen [] { ^uuidgen | tr A-F a-f }
+
+```
+See more in the 
+[link: custom_commands.md] custom commands
+ section of this book.
+Or a more idiomatic example with nushell internal commands
+```Fenced(Borrowed("nu"))
+def lsg [] { ls | sort-by type name -i | grid -c | str trim }
+
+```
+displaying all listed files and folders in a grid.
+’Ù@707a3dee212bdfe9ddca92be68c0d90d032c866d37463292d76640befb50881eÚ
+KTitle: Aliases
+Path: Replacing Existing Commands Using Aliases
+Content:
+::: warning Caution!
+
+When replacing commands it is best to "back up" the command first and avoid recursion error.
+
+:::
+How to back up a command like 
+``ls``
+:
+```Fenced(Borrowed("nu"))
+alias core-ls = ls    # This will create a new alias core-ls for ls
+
+```
+Now you can use 
+``core-ls``
+ as 
+``ls``
+ in your nu-programming. You will see further down how to use 
+``core-ls``
+.
+The reason you need to use alias is because, unlike 
+``def``
+, aliases are position-dependent. So, you need to "back up" the old command first with an alias, before re-defining it.
+
+If you do not backup the command and you replace the command using 
+``def``
+ you get a recursion error.
+```Fenced(Borrowed("nu"))
+def ls [] { ls }; ls    # Do *NOT* do this! This will throw a recursion error
+
+#output:
+#Error: nu::shell::recursion_limit_reached
+#
+#  Ã— Recursion limit (50) reached
+#     â•­â”€[C:\Users\zolodev\AppData\Roaming\nushell\config.nu:807:1]
+# 807 â”‚
+# 808 â”‚ def ls [] { ls }; ls
+#     Â·           â”€â”€â”€â”¬â”€â”€
+#     Â·              â•°â”€â”€ This called itself too many times
+#     â•°â”€â”€â”€â”€
+
+```
+The recommended way to replace an existing command is to shadow the command.
+
+Here is an example shadowing the 
+``ls``
+ command.
+```Fenced(Borrowed("nu"))
+# alias the built-in ls command to ls-builtins
+alias ls-builtin = ls
+
+# List the filenames, sizes, and modification times of items in a directory.
+def ls [
+    --all (-a),         # Show hidden files
+    --long (-l),        # Get all available columns for each entry (slower; columns are platform-dependent)
+    --short-names (-s), # Only print the file names, and not the path
+    --full-paths (-f),  # display paths as absolute paths
+    --du (-d),          # Display the apparent directory size ("disk usage") in place of the directory metadata size
+    --directory (-D),   # List the specified directory itself instead of its contents
+    --mime-type (-m),   # Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined)
+    --threads (-t),     # Use multiple threads to list contents. Output will be non-deterministic.
+    ...pattern: glob,   # The glob pattern to use.
+]: [ nothing -> table ] {
+    let pattern = if ($pattern | is-empty) { [ '.' ] } else { $pattern }
+    (ls-builtin
+        --all=$all
+        --long=$long
+        --short-names=$short_names
+        --full-paths=$full_paths
+        --du=$du
+        --directory=$directory
+        --mime-type=$mime_type
+        --threads=$threads
+        ...$pattern
+    ) | sort-by type name -i
+}
+
+```

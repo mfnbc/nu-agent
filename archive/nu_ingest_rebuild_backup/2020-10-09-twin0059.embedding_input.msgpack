@@ -1,0 +1,44 @@
+ëíŸ@99692bd9b68c0fd26c4c8042f0c02891e7ed8c30163fedca8f596ffc4991e39f⁄ÅTitle: This week in Nu #59
+Path: This week in Nu #59
+Content:
+LhKipp updated the 
+[link: https://github.com/nushell/rfcs/pull/4] Type Deduction RFC
+JosephTLyons fixed 
+[link: https://github.com/nushell/blog/pull/28] a few issues with the blog
+, corrected 
+[link: https://github.com/nushell/nushell/pull/2636] a function name
+fdncred added 
+[link: https://github.com/nushell/nushell/pull/2630] string padding
+, update 
+[link: https://github.com/nushell/nushell/pull/2634] the Wix package builder
+, added 
+[link: https://github.com/nushell/nushell/pull/2638] blink and strikethrough when coloring
+, fixed a 
+[link: https://github.com/nushell/nushell/pull/2646] terminal width calculation bug
+jonathandturner fixed 
+[link: https://github.com/nushell/nushell/pull/2631] alias default var values
+, added 
+[link: https://github.com/nushell/nushell/pull/2643] initial wasi support
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2651] more recent clippy lints
+gillespiecd fixed 
+[link: https://github.com/nushell/nushell/pull/2632] a panic in 
+``str to-datetime``
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2642] integer parsing to use bigint
+, fixed 
+[link: https://github.com/nushell/nushell/pull/2644] decimal parsing to use bigdecimal
+, added 
+[link: https://github.com/nushell/nushell/pull/2647] tips for contributors
+, added 
+[link: https://github.com/nushell/nushell/pull/2652] inf/nan support for csv
+andrasio improved 
+[link: https://github.com/nushell/nushell/pull/2635] testing for internal commands and surveyed anchor usage
+, added 
+[link: https://github.com/nushell/nushell/pull/2637] CI tests for the Wix package
+, rewrote 
+[link: https://github.com/nushell/nushell/pull/2641] ``empty?``
+, allowed 
+[link: https://github.com/nushell/nushell/pull/2653] config to work with column paths
+RReverser improved 
+[link: https://github.com/nushell/nushell/pull/2645] wasi support for time and instant

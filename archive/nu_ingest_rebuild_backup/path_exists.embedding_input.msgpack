@@ -1,0 +1,72 @@
+–’Ù@1f6502e89c65b4e0f4f33d99044cfc3a5c4a7ea17dc69b0deb6d686f3c3a67c0ÙlTitle: title: path exists
+Path: path
+Content:
+
+
+
+
+
+
+
+
+
+``path exists``
+[link: /commands/categories/path.md] ’Ù@3505debc17b327d84cf12f9b1f3cf849674d4412749d524a3a01ed97d7798455ÙNTitle: title: path exists
+Path: Signature
+Content:
+``> path exists {flags} ``
+’Ù@4836c1feef2367ef424177d286d6d381ad3d6e23d47debcef18aac3704882c3bÙeTitle: title: path exists
+Path: Flags
+Content:
+``--no-symlink, -n``
+: Do not resolve symbolic links.
+’Ù@4b8ae0a11b6d1f3bd7c4020f068eb088d19013f680f72a033078e10215cdd869ÙvTitle: title: path exists
+Path: Input/output types:
+Content:
+input
+output
+string
+bool
+list
+<
+string
+>
+
+list
+<
+bool
+>
+
+’Ù@ffae292c73d9341b6cb177a369161340ffdf29fd82bcee8f1eda838bb134dcd3Ú…Title: title: path exists
+Path: Examples
+Content:
+Check if a file exists.
+```Fenced(Borrowed("nu"))
+> '/home/joe/todo.txt' | path exists
+false
+
+```
+Check if files in list exist.
+```Fenced(Borrowed("nu"))
+> [ /home/joe/todo.txt, /home/doe/todo.txt ] | path exists
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ false â”‚
+â”‚ 1 â”‚ false â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â•¯
+
+
+```
+’Ù@f444493c8782a4e250ff207c129ad4305c7488002064d4eb8ee25ee043e60f11Ú.Title: title: path exists
+Path: Notes
+Content:
+This only checks if it is possible to either 
+``open``
+ or 
+``cd``
+ to the given path.
+
+If you need to distinguish dirs and files, please use 
+``path type``
+.
+
+Also note that if you don't have a permission to a directory of a path, false will be returned

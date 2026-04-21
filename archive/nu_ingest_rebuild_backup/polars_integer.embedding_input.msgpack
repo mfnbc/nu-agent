@@ -1,0 +1,50 @@
+–’Ù@ee4b6bd46ee186d99a5dceac4fa99c8c0386d6a0c65ee15b0fe15803e1ebe6bdÙ|Title: title: polars integer
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars integer``
+[link: /commands/categories/dataframe.md] ’Ù@2b2f77f51136f60025ade29c5ecef22ba0700c1b732620b4c08a2b2ccb226ca6ÙbTitle: title: polars integer
+Path: Signature
+Content:
+``> polars integer {flags} (base) (dtype)``
+’Ù@95d47ae5d1f99253a338e32da603e0157f204ad1ba72f9e625e2c0089bbf6834ÙwTitle: title: polars integer
+Path: Flags
+Content:
+``--strict, -s``
+: Raises an error as opposed to converting to null.
+’Ù@801b134e3ab0e4b5efa2f3386151ffd695ada5a4cb684b394d6d081f2c5f4c3fÙÓTitle: title: polars integer
+Path: Parameters
+Content:
+``base``
+: An integer or expression representing the base (radix) of the number system (default is 10).
+``dtype``
+: Data type to cast to (defaults is i64).
+’Ù@ac8034c00a0c4cc8d86081e880c162c0c0730cf58fd9da4b0eedccdca06dbd05ÙqTitle: title: polars integer
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+’Ù@116c21e43889b650c619c825fc8bc2fcb7cdc8fff3d7b291ed6f157ee8aad639ÚKTitle: title: polars integer
+Path: Examples
+Content:
+Modifies strings to integer
+```Fenced(Borrowed("nu"))
+> [[a b]; [1, '2']] | polars into-df | polars select (polars col b | polars integer) | polars collect
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ # â”‚ b â”‚
+â”œâ”€â”€â”€â”¼â”€â”€â”€â”¤
+â”‚ 0 â”‚ 2 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+
+```

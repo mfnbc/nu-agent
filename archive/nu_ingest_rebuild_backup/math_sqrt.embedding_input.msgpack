@@ -1,0 +1,53 @@
+���@f1d76fb07b92e0dd982d2def134a08a2f6dbcf5d58054025301515449c94ffff�hTitle: title: math sqrt
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math sqrt``
+[link: /commands/categories/math.md] ��@61fdf449b98c99970bb78d474878db39636c2dd1bd7a722c31977a3b6c043a19�JTitle: title: math sqrt
+Path: Signature
+Content:
+``> math sqrt {flags} ``
+��@54a8abc2bd2cf01f144e04f3bb8ad93121dc54a1a316c5601b91a3123319fa52ٍTitle: title: math sqrt
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+range
+list
+<
+number
+>
+
+��@894b214d8357d25998c54054eb207fb9732855bf37e5c023eccb7bbc580246b6�Title: title: math sqrt
+Path: Examples
+Content:
+Compute the square root of each number in a list.
+```Fenced(Borrowed("nu"))
+> [9 16] | math sqrt
+╭───┬──────╮
+│ 0 │ 3.00 │
+│ 1 │ 4.00 │
+╰───┴──────╯
+
+
+```

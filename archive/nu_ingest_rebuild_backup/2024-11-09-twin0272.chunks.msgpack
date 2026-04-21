@@ -1,0 +1,207 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-11-09-twin0272.mdŸ@d246ba686af1901cb502318abe0f788bc11e29c92059ef8dba84d1b0162d2f7dπThis week in Nushell #272ëßNushell⁄	ÕIanManske 
+[link: https://github.com/nushell/nushell/pull/14258] removed 
+``as_i64``
+ and 
+``as_f64``
+, 
+[link: https://github.com/nushell/nushell/pull/14166] made 
+``to text``
+ line endings consistent for list (streams)
+, and 
+[link: https://github.com/nushell/nushell/pull/14157] overhauled div, mod, and floor div
+aionescu 
+[link: https://github.com/nushell/nushell/pull/14283] removed unneeded clones in 
+``select``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14281] updated reedline to the latest commit
+, 
+[link: https://github.com/nushell/nushell/pull/14266] updated human-date-parser conversion to use local timezone
+, and 
+[link: https://github.com/nushell/nushell/pull/14263] allowed != for polars
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14114] prevented IR from generating unnecessary instructions for 
+``def``
+ and 
+``export def``
+, and 
+[link: https://github.com/nushell/nushell/pull/14101] fixed $env.FILE_PWD and $env.CURRENT_FILE inside 
+``use``
+weirdan 
+[link: https://github.com/nushell/nushell/pull/14275] fixed the order of preference for 
+``VISUAL``
+ and 
+``EDITOR``
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14255] improved Nushell's handling of case-insensitive string handling
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14250] consolidated uses of 
+``test-case``
+ to 
+``rstest``
+CharlesTaylor7 
+[link: https://github.com/nushell/nushell/pull/14246] made empty rest args match an empty list
+alex-kattathra-johnson 
+[link: https://github.com/nushell/nushell/pull/14245] added tests for the 
+``--max-age``
+ arg in http commands
+, and 
+[link: https://github.com/nushell/nushell/pull/14237] changed --max-time arg for http commands to use 
+``Duration``
+ type
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/14242] stopped autoloading deprecated-dirs
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14239] added table params support to 
+``url join``
+ and 
+``url build-query``
+, and 
+[link: https://github.com/nushell/nushell/pull/14211] implemented a new 
+``url split-query``
+ command
+sgvictorino 
+[link: https://github.com/nushell/nushell/pull/14231] excluded import path from args to aliased external commands
+, 
+[link: https://github.com/nushell/nushell/pull/14226] correctly parsed table literals as lists
+, and 
+[link: https://github.com/nushell/nushell/pull/14224] added support for binary input in 
+``length``
+Dorumin 
+[link: https://github.com/nushell/nushell/pull/14214] removed a deref in 
+``touch``
+íêê⁄
+Title: This week in Nushell #272
+Path: Nushell
+Content:
+IanManske 
+[link: https://github.com/nushell/nushell/pull/14258] removed 
+``as_i64``
+ and 
+``as_f64``
+, 
+[link: https://github.com/nushell/nushell/pull/14166] made 
+``to text``
+ line endings consistent for list (streams)
+, and 
+[link: https://github.com/nushell/nushell/pull/14157] overhauled div, mod, and floor div
+aionescu 
+[link: https://github.com/nushell/nushell/pull/14283] removed unneeded clones in 
+``select``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14281] updated reedline to the latest commit
+, 
+[link: https://github.com/nushell/nushell/pull/14266] updated human-date-parser conversion to use local timezone
+, and 
+[link: https://github.com/nushell/nushell/pull/14263] allowed != for polars
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14114] prevented IR from generating unnecessary instructions for 
+``def``
+ and 
+``export def``
+, and 
+[link: https://github.com/nushell/nushell/pull/14101] fixed $env.FILE_PWD and $env.CURRENT_FILE inside 
+``use``
+weirdan 
+[link: https://github.com/nushell/nushell/pull/14275] fixed the order of preference for 
+``VISUAL``
+ and 
+``EDITOR``
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14255] improved Nushell's handling of case-insensitive string handling
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14250] consolidated uses of 
+``test-case``
+ to 
+``rstest``
+CharlesTaylor7 
+[link: https://github.com/nushell/nushell/pull/14246] made empty rest args match an empty list
+alex-kattathra-johnson 
+[link: https://github.com/nushell/nushell/pull/14245] added tests for the 
+``--max-age``
+ arg in http commands
+, and 
+[link: https://github.com/nushell/nushell/pull/14237] changed --max-time arg for http commands to use 
+``Duration``
+ type
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/14242] stopped autoloading deprecated-dirs
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14239] added table params support to 
+``url join``
+ and 
+``url build-query``
+, and 
+[link: https://github.com/nushell/nushell/pull/14211] implemented a new 
+``url split-query``
+ command
+sgvictorino 
+[link: https://github.com/nushell/nushell/pull/14231] excluded import path from args to aliased external commands
+, 
+[link: https://github.com/nushell/nushell/pull/14226] correctly parsed table literals as lists
+, and 
+[link: https://github.com/nushell/nushell/pull/14224] added support for binary input in 
+``length``
+Dorumin 
+[link: https://github.com/nushell/nushell/pull/14214] removed a deref in 
+``touch``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-11-09-twin0272.mdŸ@a5d4476297cda2b5372c6e3f4e278ae2711bcc6f6de88ba8958a15c8027902c5πThis week in Nushell #272ë≠Documentation⁄raphaelpra 
+[link: https://github.com/nushell/nushell.github.io/pull/1622] fixed a typo in an example provided in custom_commands.md
+weirdan 
+[link: https://github.com/nushell/nushell.github.io/pull/1621] updated 
+``VISUAL``
+/
+``EDITOR``
+ order
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1620] made module chapter edits from review
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1618] fixed code-block line numbering
+cablehead 
+[link: https://github.com/nushell/nushell.github.io/pull/1619] added details on signal handling to the plugin protocol reference
+vyadh 
+[link: https://github.com/nushell/nushell.github.io/pull/1616] added Docker image usage
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1615] upgraded shiki, vuepress and related plugins
+rodvieirasilva 
+[link: https://github.com/nushell/nushell.github.io/pull/1614] fixed prepend to append in coming_from_cmd.md
+132ikl 
+[link: https://github.com/nushell/nushell.github.io/pull/1568] added documentation for sorting
+íêê⁄PTitle: This week in Nushell #272
+Path: Documentation
+Content:
+raphaelpra 
+[link: https://github.com/nushell/nushell.github.io/pull/1622] fixed a typo in an example provided in custom_commands.md
+weirdan 
+[link: https://github.com/nushell/nushell.github.io/pull/1621] updated 
+``VISUAL``
+/
+``EDITOR``
+ order
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1620] made module chapter edits from review
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1618] fixed code-block line numbering
+cablehead 
+[link: https://github.com/nushell/nushell.github.io/pull/1619] added details on signal handling to the plugin protocol reference
+vyadh 
+[link: https://github.com/nushell/nushell.github.io/pull/1616] added Docker image usage
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1615] upgraded shiki, vuepress and related plugins
+rodvieirasilva 
+[link: https://github.com/nushell/nushell.github.io/pull/1614] fixed prepend to append in coming_from_cmd.md
+132ikl 
+[link: https://github.com/nushell/nushell.github.io/pull/1568] added documentation for sorting
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-11-09-twin0272.mdŸ@e545bc5a09e6bc041d529234a43d2f3be01c7b2413e2564d9fcb47f3329b18edπThis week in Nushell #272ë™Nu_ScriptsŸybminer 
+[link: https://github.com/nushell/nu_scripts/pull/980] fixed a bug where find_in globs were matching directories
+íêêŸ¥Title: This week in Nushell #272
+Path: Nu_Scripts
+Content:
+bminer 
+[link: https://github.com/nushell/nu_scripts/pull/980] fixed a bug where find_in globs were matching directories
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-11-09-twin0272.mdŸ@761dd02c65879555be27afed18649d57170b3028ee815a82bf98e7f7f9c46407πThis week in Nushell #272ë®reedlineŸjpetricavalry 
+[link: https://github.com/nushell/reedline/pull/839] fixed wrong unit when splitting string
+íêêŸ£Title: This week in Nushell #272
+Path: reedline
+Content:
+petricavalry 
+[link: https://github.com/nushell/reedline/pull/839] fixed wrong unit when splitting string

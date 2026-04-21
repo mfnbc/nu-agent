@@ -1,0 +1,40 @@
+���@6dca98042489c4f231ec1f9bcaaeec7ec72543399dc8371d42ba0e61c66bb8a7�nTitle: title: enumerate
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``enumerate``
+[link: /commands/categories/filters.md] ��@ea62bb731cbad54151f87960aa25a3364af71f6bf915c49349d3f3971d0a2115�JTitle: title: enumerate
+Path: Signature
+Content:
+``> enumerate {flags} ``
+��@ad5429bc0996b44ba91e996976be4d55ff9084be3cb6929ba174fa088354aa0e�RTitle: title: enumerate
+Path: Input/output types:
+Content:
+input
+output
+any
+table
+��@7251b49b9b695497644ebd8de49f1aa6466a1b1c1ae2489d7fdeaee9a551592c�KTitle: title: enumerate
+Path: Examples
+Content:
+Add an index to each element of a list.
+```Fenced(Borrowed("nu"))
+> [a, b, c] | enumerate
+╭───┬──────╮
+│ # │ item │
+├───┼──────┤
+│ 0 │ a    │
+│ 1 │ b    │
+│ 2 │ c    │
+╰───┴──────╯
+
+
+```

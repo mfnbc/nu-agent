@@ -1,0 +1,116 @@
+íóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-07-31-twin0049.mdŸ@ccca03ef53ec5dbf7b19e6605dd760bad5f5210a75c1e5d210f684b7bd3f47b3≥This week in Nu #49ë≥This week in Nu #49⁄˚fdncred fixed an issue with the 
+[link: https://github.com/nushell/nushell/pull/2278] default line edit mode
+, updated the 
+[link: https://github.com/nushell/nushell/pull/2266] cmd built-in commands
+warrenseine improved 
+[link: https://github.com/nushell/nushell/pull/2276] ``path``
+ errors
+mattyhall added commands to 
+[link: https://github.com/nushell/nushell/pull/2274] work with 
+``url``
+s
+, added 
+[link: https://github.com/nushell/nushell/pull/2264] two 
+``path``
+ subcommands
+, added a 
+[link: https://github.com/nushell/nushell/pull/2255] new 
+``path``
+ command
+k-brk added 
+[link: https://github.com/nushell/nushell/pull/2269] ``starts_with``
+ and 
+``ends_with``
+ to 
+``str``
+, added 
+[link: https://github.com/nushell/nushell/pull/2262] ``str ltrim``
+ and 
+``str rtrim``
+coolshaurya extended 
+[link: https://github.com/nushell/nushell/pull/2265] ``insert``
+ to take a block
+JosephTLyons 
+[link: https://github.com/nushell/nushell/pull/2257] cleaned up some docs
+, updated 
+[link: https://github.com/nushell/nushell/pull/2253] ``to xml``
+ docs
+, cleaned up some 
+[link: https://github.com/nushell/nushell/pull/2248] engine implementation
+jzaefferer added an 
+[link: https://github.com/nushell/nushell/pull/2256] example to the 
+``parse``
+ command
+, updated the 
+[link: https://github.com/nushell/demo/pull/44] theme on the demo site
+thegedge 
+[link: https://github.com/nushell/nushell/pull/2254] refactored completion logic
+, simplified some 
+[link: https://github.com/nushell/nushell/pull/2251] internal pipeline implementation
+arashout updated the automatically generated 
+[link: https://github.com/nushell/nushell.github.io/pull/54] command list for the website
+Tiwalun added directions for 
+[link: https://github.com/nushell/nushell.github.io/pull/55] installing from scoop
+íêê⁄9Title: This week in Nu #49
+Path: This week in Nu #49
+Content:
+fdncred fixed an issue with the 
+[link: https://github.com/nushell/nushell/pull/2278] default line edit mode
+, updated the 
+[link: https://github.com/nushell/nushell/pull/2266] cmd built-in commands
+warrenseine improved 
+[link: https://github.com/nushell/nushell/pull/2276] ``path``
+ errors
+mattyhall added commands to 
+[link: https://github.com/nushell/nushell/pull/2274] work with 
+``url``
+s
+, added 
+[link: https://github.com/nushell/nushell/pull/2264] two 
+``path``
+ subcommands
+, added a 
+[link: https://github.com/nushell/nushell/pull/2255] new 
+``path``
+ command
+k-brk added 
+[link: https://github.com/nushell/nushell/pull/2269] ``starts_with``
+ and 
+``ends_with``
+ to 
+``str``
+, added 
+[link: https://github.com/nushell/nushell/pull/2262] ``str ltrim``
+ and 
+``str rtrim``
+coolshaurya extended 
+[link: https://github.com/nushell/nushell/pull/2265] ``insert``
+ to take a block
+JosephTLyons 
+[link: https://github.com/nushell/nushell/pull/2257] cleaned up some docs
+, updated 
+[link: https://github.com/nushell/nushell/pull/2253] ``to xml``
+ docs
+, cleaned up some 
+[link: https://github.com/nushell/nushell/pull/2248] engine implementation
+jzaefferer added an 
+[link: https://github.com/nushell/nushell/pull/2256] example to the 
+``parse``
+ command
+, updated the 
+[link: https://github.com/nushell/demo/pull/44] theme on the demo site
+thegedge 
+[link: https://github.com/nushell/nushell/pull/2254] refactored completion logic
+, simplified some 
+[link: https://github.com/nushell/nushell/pull/2251] internal pipeline implementation
+arashout updated the automatically generated 
+[link: https://github.com/nushell/nushell.github.io/pull/54] command list for the website
+Tiwalun added directions for 
+[link: https://github.com/nushell/nushell.github.io/pull/55] installing from scoop
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-07-31-twin0049.mdŸ@fdcf47cd620bd05250f1d5772ab5d4f8045760d6e0e14451449568fd5083813f≥This week in Nu #49ë´Active RFCsŸYgedge posted 
+[link: https://github.com/nushell/rfcs/pull/2] Signature-Based Completions
+íêêŸèTitle: This week in Nu #49
+Path: Active RFCs
+Content:
+gedge posted 
+[link: https://github.com/nushell/rfcs/pull/2] Signature-Based Completions

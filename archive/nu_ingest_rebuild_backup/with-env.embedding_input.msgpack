@@ -1,0 +1,44 @@
+•’Ù@111931daa5eecd36c9e2ae7f237713850490f52ef3a8c95403c43fbbe2a7050bÙdTitle: title: with-env
+Path: env
+Content:
+
+
+
+
+
+
+
+
+
+``with-env``
+[link: /commands/categories/env.md] ’Ù@0bac49979a14619f2f427936dafe2db785bba635a95aa4620c37ab20af74015eÙZTitle: title: with-env
+Path: Signature
+Content:
+``> with-env {flags} (variable) (block)``
+’Ù@9b6eafebaca1950800e419f5c48ebf00a0598aacd7bc6ff1ab84f0f98fc8d5d2Ù¤Title: title: with-env
+Path: Parameters
+Content:
+``variable``
+: The environment variable to temporarily set.
+``block``
+: The block to run once the variable is set.
+’Ù@7e43e25cc79fdee3d31a896ba2c94884a6cc57e8cf5aca542c6cb21714ce29c9ÙOTitle: title: with-env
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+’Ù@1a22badcd97cd8b1425b3379405f3244044372736f7ee227f811ff670eda0147ÙðTitle: title: with-env
+Path: Examples
+Content:
+Set by key-value record.
+```Fenced(Borrowed("nu"))
+> with-env {X: "Y", W: "Z"} { [$env.X $env.W] }
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ 0 â”‚ Y â”‚
+â”‚ 1 â”‚ Z â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+
+```

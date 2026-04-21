@@ -1,0 +1,54 @@
+”—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_mem.mdÙ@ceb4c46cf5a45a9ac3b9c9b0226f587796b93d75056f73683af7742745c8982b®title: sys mem‘¦systemÙ<
+
+
+
+
+
+
+
+
+``sys mem``
+[link: /commands/categories/system.md] ’ÙhTitle: title: sys mem
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``sys mem``
+[link: /commands/categories/system.md] —ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_mem.mdÙ@b23ce1185925a0892b54689b3acd2be4b1ea48b7104eeb6ea7a225082d849861®title: sys mem‘©Signature·``> sys mem {flags} ``
+’ÙFTitle: title: sys mem
+Path: Signature
+Content:
+``> sys mem {flags} ``
+—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_mem.mdÙ@43b175e482cd6c9de6a63ccd948a1e2fbf386fbaa4224a2a4a2e123cb648c4fd®title: sys mem‘³Input/output types:¼input
+output
+nothing
+record
+’ÙUTitle: title: sys mem
+Path: Input/output types:
+Content:
+input
+output
+nothing
+record
+—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_mem.mdÙ@e751044d3679ac550a533bd56be668f24617756e7501b9efe8c1863dc1b8d6ac®title: sys mem‘¨ExamplesÙLShow info about the system memory
+```Fenced(Borrowed("nu"))
+> sys mem
+
+
+```
+’ÙzTitle: title: sys mem
+Path: Examples
+Content:
+Show info about the system memory
+```Fenced(Borrowed("nu"))
+> sys mem
+
+
+```

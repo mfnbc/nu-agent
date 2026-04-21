@@ -1,0 +1,59 @@
+���@431e1fc4d30f75cc1925b85c507540862d478a45a14848d04956e473f5f5980d�jTitle: title: reverse
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``reverse``
+[link: /commands/categories/filters.md] ��@768aa464f817e7184cbfdbfe9456b3d61b82f5080ec67f54f827fc68022bc80a�FTitle: title: reverse
+Path: Signature
+Content:
+``> reverse {flags} ``
+��@5a0e98462ef4e6cb1dee83f8aecc728f9655a75887b90c2f498064f263f3dd2a�bTitle: title: reverse
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+��@299551205883330210132f4469554f920ec1c433c9cc2bfe32a3a71aadcbd354��Title: title: reverse
+Path: Examples
+Content:
+Reverse a list.
+```Fenced(Borrowed("nu"))
+> [0,1,2,3] | reverse
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 2 │
+│ 2 │ 1 │
+│ 3 │ 0 │
+╰───┴───╯
+
+
+```
+Reverse a table.
+```Fenced(Borrowed("nu"))
+> [{a: 1} {a: 2}] | reverse
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 2 │
+│ 1 │ 1 │
+╰───┴───╯
+
+
+```

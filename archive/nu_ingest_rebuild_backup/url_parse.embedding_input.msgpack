@@ -1,0 +1,80 @@
+���@983902ea82be0d3501e2e9a67318c5d0fcae9ec2d60657b4565c10f64ca34df7�nTitle: title: url parse
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``url parse``
+[link: /commands/categories/network.md] ��@6eb30f3e9156cf728c6db28723f83b3625ad091709ec438858ff78c282a82707�QTitle: title: url parse
+Path: Signature
+Content:
+``> url parse {flags} ...rest``
+��@37874bff8e51b352e2969ccd971f5cee437f57d02cc7d44b06523b6394677246�oTitle: title: url parse
+Path: Flags
+Content:
+``--base, -b {string}``
+: Base URL used to resolve relative URLs.
+��@1a4449cb63ba4b2dac7123dd20c66fa780ee59885f4675657ee3ae013584fbc4�aTitle: title: url parse
+Path: Parameters
+Content:
+``...rest``
+: Optionally operate by cell path.
+��@99845fb8bd0d90500bbfb9ffc9fd229b663c10fee3806355a162e6f6bd23bd8e�pTitle: title: url parse
+Path: Input/output types:
+Content:
+input
+output
+string
+record
+table
+table
+record
+record
+��@d8f0fa98280f0f15bcb33777a03e56666d415dcdaf32485abdeeaf4fedc351c5�	fTitle: title: url parse
+Path: Examples
+Content:
+Parses a URL.
+```Fenced(Borrowed("nu"))
+> 'http://user123:pass567@www.example.com:8081/foo/bar?param1=section&p2=&f[name]=vldc&f[no]=42#hello' | url parse
+╭──────────┬──────────────────────────────────────────╮
+│ scheme   │ http                                     │
+│ username │ user123                                  │
+│ password │ pass567                                  │
+│ host     │ www.example.com                          │
+│ port     │ 8081                                     │
+│ path     │ /foo/bar                                 │
+│ query    │ param1=section&p2=&f[name]=vldc&f[no]=42 │
+│ fragment │ hello                                    │
+│          │ ╭───┬─────────┬─────────╮                │
+│ params   │ │ # │   key   │  value  │                │
+│          │ ├───┼─────────┼─────────┤                │
+│          │ │ 0 │ param1  │ section │                │
+│          │ │ 1 │ p2      │         │                │
+│          │ │ 2 │ f[name] │ vldc    │                │
+│          │ │ 3 │ f[no]   │ 42      │                │
+│          │ ╰───┴─────────┴─────────╯                │
+╰──────────┴──────────────────────────────────────────╯
+
+```
+Resolves a relative URL against a base URL.
+```Fenced(Borrowed("nu"))
+> "../images/logo.png" | url parse --base "https://example.com/products/item1"
+╭──────────┬──────────────────╮
+│ scheme   │ https            │
+│ username │                  │
+│ password │                  │
+│ host     │ example.com      │
+│ port     │                  │
+│ path     │ /images/logo.png │
+│ query    │                  │
+│ fragment │                  │
+│ params   │ [list 0 items]   │
+╰──────────┴──────────────────╯
+
+```

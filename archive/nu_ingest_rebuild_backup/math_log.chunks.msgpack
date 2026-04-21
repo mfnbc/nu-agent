@@ -1,0 +1,115 @@
+•—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_log.mdÙ@f4d9c629a8804b229d8e0745f2c04eb47777d3a17b6d27e34fb36295712cd909¯title: math log‘¤mathÙ;
+
+
+
+
+
+
+
+
+``math log``
+[link: /commands/categories/math.md] ’ÙfTitle: title: math log
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math log``
+[link: /commands/categories/math.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_log.mdÙ@6e6580a999e1f5c0a025f308ddb042e115dec016675c8297a1f33a5f24c979ff¯title: math log‘©Signature¾``> math log {flags} (base)``
+’ÙNTitle: title: math log
+Path: Signature
+Content:
+``> math log {flags} (base)``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_log.mdÙ@840e7c3f015f61983d55a8b1a44b81d0c576aa6eb87eea7d46ee7ca3e851c278¯title: math log‘ªParametersÙ<``base``
+: Base for which the logarithm should be computed.
+’ÙmTitle: title: math log
+Path: Parameters
+Content:
+``base``
+: Base for which the logarithm should be computed.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_log.mdÙ@d6f97c8330fd8a17513a19569b5dea9d422981d063f5d2a057a14585a8a9b7cc¯title: math log‘³Input/output types:ÙRinput
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+range
+list
+<
+number
+>
+
+’ÙŒTitle: title: math log
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+range
+list
+<
+number
+>
+
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_log.mdÙ@2095a9460650224ce028c65ff4d7abf5676569f71f88d934b70573c20b62f64b¯title: math log‘¨ExamplesÚ=Get the logarithm of 100 to the base 10.
+```Fenced(Borrowed("nu"))
+> 100 | math log 10
+2.0
+
+```
+Get the log2 of a list of values.
+```Fenced(Borrowed("nu"))
+> [16 8 4] | math log 2
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ 4.00 â”‚
+â”‚ 1 â”‚ 3.00 â”‚
+â”‚ 2 â”‚ 2.00 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â•¯
+
+
+```
+’ÚlTitle: title: math log
+Path: Examples
+Content:
+Get the logarithm of 100 to the base 10.
+```Fenced(Borrowed("nu"))
+> 100 | math log 10
+2.0
+
+```
+Get the log2 of a list of values.
+```Fenced(Borrowed("nu"))
+> [16 8 4] | math log 2
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ 4.00 â”‚
+â”‚ 1 â”‚ 3.00 â”‚
+â”‚ 2 â”‚ 2.00 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â•¯
+
+
+```

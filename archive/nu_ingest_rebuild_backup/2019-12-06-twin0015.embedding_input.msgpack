@@ -1,0 +1,44 @@
+‘’Ù@ade8dedf8ae8f894f0ccdf14dbe58f1b9c7ce54ab9883fe5bb2e10e44790a8f0ÚoTitle: This week in Nu #15
+Path: This week in Nu #15
+Content:
+Major internals work this week as multiple refactorings land.
+sebastian-xyz added the new 
+``range``
+ command (
+[link: https://github.com/nushell/nushell/pull/1045] #1045
+)
+thegedge simplified the pipeline execution code (
+[link: https://github.com/nushell/nushell/pull/1039] #1039
+)
+wycats begun the process of reorganizing the codebase to use subcrates for better code modularity (
+[link: https://github.com/nushell/nushell/pull/1046] #1046
+, 
+[link: https://github.com/nushell/nushell/pull/1044] #1044
+)
+jonathandturner continued extracting plugins into subcrates and organizing commands/plugins for maximal portability (
+[link: https://github.com/nushell/nushell/pull/1058] #1058
+, 
+[link: https://github.com/nushell/nushell/pull/1055] #1055
+, 
+[link: https://github.com/nushell/nushell/pull/1054] #1054
+, 
+[link: https://github.com/nushell/nushell/pull/1052] #1052
+)
+jonathandturner also added a new type to represent a string with a carriage return, fixing an issue when stream large amounts of text (
+[link: https://github.com/nushell/nushell/pull/1047] #1047
+)
+jonathandturner shipped the 0.6.1 release with a fix for the starship prompt (
+[link: https://github.com/nushell/nushell/pull/1035] #1035
+, 
+[link: https://github.com/nushell/nushell/pull/1029] #1029
+)
+andrasio updated 
+``embed``
+ to more naturally embed a single column (
+[link: https://github.com/nushell/nushell/pull/1049] #1049
+)
+tchak and sebastian-xyz added more command documentation (
+[link: https://github.com/nushell/nushell/pull/1041] #1041
+, 
+[link: https://github.com/nushell/nushell/pull/1032] #1032
+)

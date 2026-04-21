@@ -1,0 +1,82 @@
+ñóŸTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_unfreeze.mdŸ@26e4aa1aa347b780b4440dc236bdf5132dc575405b0d71edb6b2a5812a4d6a15≥title: job unfreezeë¨experimentalŸG
+
+
+
+
+
+
+
+
+``job unfreeze``
+[link: /commands/categories/experimental.md] íêêŸ~Title: title: job unfreeze
+Path: experimental
+Content:
+
+
+
+
+
+
+
+
+
+``job unfreeze``
+[link: /commands/categories/experimental.md] óŸTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_unfreeze.mdŸ@edbc0111e0cdfb0dee22fff0f1141db50e7d583a01d5f084cc656e64b60119f4≥title: job unfreezeë©SignatureŸ ``> job unfreeze {flags} (id)``
+íêêŸTTitle: title: job unfreeze
+Path: Signature
+Content:
+``> job unfreeze {flags} (id)``
+óŸTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_unfreeze.mdŸ@96da42b6a19452659f260ab05e947d0dd7d5cc928435d59c4c507674877e6fd9≥title: job unfreezeë™ParametersŸ%``id``
+: The process id to unfreeze.
+íêêŸZTitle: title: job unfreeze
+Path: Parameters
+Content:
+``id``
+: The process id to unfreeze.
+óŸTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_unfreeze.mdŸ@d9769c4f9353f6d0cf9b16779f9eb1bb45949193e24c2630c3cf5998f81c13a3≥title: job unfreezeë≥Input/output types:Ωinput
+output
+nothing
+nothing
+íêêŸ[Title: title: job unfreeze
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+óŸTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_unfreeze.mdŸ@43e041171efca85959d9ee73eefeb12a4264536fe6b9cdcec06baa727497bb1a≥title: job unfreezeë®ExamplesŸ´Unfreeze the latest frozen job.
+```Fenced(Borrowed("nu"))
+> job unfreeze
+
+
+```
+Unfreeze a specific frozen job by its PID.
+```Fenced(Borrowed("nu"))
+> job unfreeze 4
+
+
+```
+íêêŸﬁTitle: title: job unfreeze
+Path: Examples
+Content:
+Unfreeze the latest frozen job.
+```Fenced(Borrowed("nu"))
+> job unfreeze
+
+
+```
+Unfreeze a specific frozen job by its PID.
+```Fenced(Borrowed("nu"))
+> job unfreeze 4
+
+
+```
+óŸTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_unfreeze.mdŸ@13918becaf6f314c2a6cb149897d28c1790f43121ecb117e01dc78ed13098cfa≥title: job unfreezeë•NotesŸΩWhen a running process is frozen (with the SIGTSTP signal or with the Ctrl-Z key on unix),
+
+a background job gets registered for this process, which can then be resumed using this command.
+íêêŸÌTitle: title: job unfreeze
+Path: Notes
+Content:
+When a running process is frozen (with the SIGTSTP signal or with the Ctrl-Z key on unix),
+
+a background job gets registered for this process, which can then be resumed using this command.

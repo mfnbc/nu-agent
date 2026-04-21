@@ -1,0 +1,128 @@
+îíŸ@7842f1348b0bb5a236643936c1b8ec1bbe587035a046a54f500da192c8843d85⁄çTitle: This week in Nushell #121
+Path: Nushell
+Content:
+efx fixed 
+[link: https://github.com/nushell/nushell/pull/4207] ci: update macOS agent
+, and 
+[link: https://github.com/nushell/nushell/pull/4203] ci: fix macOS agent
+, and 
+[link: https://github.com/nushell/nushell/pull/4081] use heck for string casing
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4201] updated feature template
+íŸ@c1f8f2dd8a3d79c06a3fe7d8150969ea3aba6b8785363639312cab524584b183ŸˆTitle: This week in Nushell #121
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/116] a fun script to create sparklines
+Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/115] updated docker.nu
+íŸ@8bd4b0b1c34c56895005f0788ffe95af44021ab0e24302f2fb03c0b63ee84d3d⁄◊Title: This week in Nushell #121
+Path: engine-q
+Content:
+matthewauld 
+[link: https://github.com/nushell/engine-q/pull/509] ported 'ansi gradient' command from nushell to engine-q
+, and 
+[link: https://github.com/nushell/engine-q/pull/504] added a 'list' option to the ansi command
+, and 
+[link: https://github.com/nushell/engine-q/pull/500] ported 'char' command from nushell to engine-q
+, and 
+[link: https://github.com/nushell/engine-q/pull/494] ported 'ansi' command from nushell to engine-q
+sholderbach 
+[link: https://github.com/nushell/engine-q/pull/508] fixed 
+``Ctrl-D``
+ exit in cli
+, and 
+[link: https://github.com/nushell/engine-q/pull/507] made dialoguer completion abortable
+jt 
+[link: https://github.com/nushell/engine-q/pull/503] bumped some deps
+, and 
+[link: https://github.com/nushell/engine-q/pull/501] fixed comment issue and shadowing issue
+, and 
+[link: https://github.com/nushell/engine-q/pull/496] fixed a couple crlf issues
+, and 
+[link: https://github.com/nushell/engine-q/pull/490] fixed bug in chained boolean typecheck
+, and 
+[link: https://github.com/nushell/engine-q/pull/488] bumped to use latest git reedline
+, and 
+[link: https://github.com/nushell/engine-q/pull/485] added better filepath completions
+, and added 
+[link: https://github.com/nushell/engine-q/pull/484] ps still needs a delay to be accurate
+, and 
+[link: https://github.com/nushell/engine-q/pull/482] made config default if broken
+, and 
+[link: https://github.com/nushell/engine-q/pull/480] added in variable and sub-command completions
+, and 
+[link: https://github.com/nushell/engine-q/pull/479] added in auto-cd if you pass just a directory
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/502] allowed flatshape (command line syntax) theming
+, and 
+[link: https://github.com/nushell/engine-q/pull/489] allowed fg, bg, attributes to be set for all colors in color_config
+, and 
+[link: https://github.com/nushell/engine-q/pull/486] allowed user to use hex colors in config
+, and 
+[link: https://github.com/nushell/engine-q/pull/472] tweaked 
+``version``
+ output as a list vs table
+, and 
+[link: https://github.com/nushell/engine-q/pull/471] added 
+``temp-path``
+ to 
+``$nu``
+, and 
+[link: https://github.com/nushell/engine-q/pull/470] added 
+``keybinding-path``
+ to 
+``$nu``
+, and 
+[link: https://github.com/nushell/engine-q/pull/469] added 
+``cwd``
+ to 
+``$nu``
+, and 
+[link: https://github.com/nushell/engine-q/pull/468] added 
+``home-path``
+ to 
+``$nu``
+, and 
+[link: https://github.com/nushell/engine-q/pull/466] updated to 2021 edition
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/498] ported drop nth
+, and 
+[link: https://github.com/nushell/engine-q/pull/495] ported drop column
+kubouch created 
+[link: https://github.com/nushell/engine-q/pull/497] Treating environment variables as Values
+, and 
+[link: https://github.com/nushell/engine-q/pull/487] fixed hiding of import patterns with globs
+, and 
+[link: https://github.com/nushell/engine-q/pull/478] added docs page about modules and overlays
+CBenoit 
+[link: https://github.com/nushell/engine-q/pull/493] fixed error propagation across 
+``hash``
+ commands
+, and 
+[link: https://github.com/nushell/engine-q/pull/465] sorted default context items categorically
+jaeheonji 
+[link: https://github.com/nushell/engine-q/pull/477] fixed missing bind commands
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/475] Plugin json
+, and 
+[link: https://github.com/nushell/engine-q/pull/474] Plugin json
+onthebridgetonowhere 
+[link: https://github.com/nushell/engine-q/pull/467] ported version
+arthur-targaryen 
+[link: https://github.com/nushell/engine-q/pull/384] ported 
+``keep``
+, 
+``keep while``
+ and 
+``keep until``
+ commands
+LiHRaM 
+[link: https://github.com/nushell/engine-q/pull/280] added Path commands
+íŸ@64ae0cc1f70d8a43da2dc6020212d347aa1085af403c757904647099bc974205ŸÙTitle: This week in Nushell #121
+Path: reedline
+Content:
+jt created 
+[link: https://github.com/nushell/reedline/pull/199] Crlf fixes
+, and 
+[link: https://github.com/nushell/reedline/pull/198] added some wrapping estimate when adjusting prompt

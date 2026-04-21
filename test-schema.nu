@@ -13,7 +13,7 @@ export def main [] {
   }
 
   let search_hits = (try {
-    run-json --calls '[{"name":"search-chunks","arguments":{"path":"build/tmp-ingest/README.chunks.jsonl","pattern":"Enrichment Contract"}}]'
+    run-json --calls '[{"name":"search-chunks","arguments":{"path":"build/tmp-ingest/README.chunks.nuon","pattern":"Enrichment Contract"}}]'
   } catch { |err|
     print $err.msg?
     error make { msg: "Expected search-chunks to be exposed in the tool schema" }

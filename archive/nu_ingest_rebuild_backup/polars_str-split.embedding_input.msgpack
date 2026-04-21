@@ -1,0 +1,49 @@
+���@533bf330c1e71916470846d53dc7cf9301ea825ed5cfddd9a52b510bc213b318ـTitle: title: polars str-split
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars str-split``
+[link: /commands/categories/dataframe.md] ��@83146ebb25863d50ca02e1b550e9253e0c08248042cde1916ea2888e19157449�^Title: title: polars str-split
+Path: Signature
+Content:
+``> polars str-split {flags} (expr)``
+��@39fa49c3d526ddd774305964624192aa75558e0d6ce1110ceed4a27f516f78fe�ZTitle: title: polars str-split
+Path: Parameters
+Content:
+``expr``
+: Separator expression.
+��@061c1944be07df37d898be7dcc36542d298a18dcf27a9e92fc3c863a2bd010b6ٕTitle: title: polars str-split
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_selector
+polars_expression
+��@e582410ad3147f4bc02ab45a58dd3ab604e3b4967999d5d14f4f632ac0d3ef98�Title: title: polars str-split
+Path: Examples
+Content:
+Split the string by comma, then create a new row for each string
+```Fenced(Borrowed("nu"))
+> [[a]; ["one,two,three"]] | polars into-df
+                | polars select (polars col a | polars str-split "," | polars explode)
+                | polars collect
+╭───┬───────╮
+│ # │   a   │
+├───┼───────┤
+│ 0 │ one   │
+│ 1 │ two   │
+│ 2 │ three │
+╰───┴───────╯
+
+
+```

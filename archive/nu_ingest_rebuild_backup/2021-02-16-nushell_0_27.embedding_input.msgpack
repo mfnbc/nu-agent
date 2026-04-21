@@ -1,0 +1,135 @@
+™’Ù@2f3d4308ee04d05432c6ab24c86fa0061c32f8d9ba710fa57937e57caa68d64bÚ¨Title: title: Nushell 0.27
+Path: Nushell 0.27
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.27 of Nu. This release fixes some long-standing issues with Nushell.
+’Ù@8b89d77746c5ac96a07c7ba58b1e3e87b420123750fcf4f779e918a433448de4ÚTitle: title: Nushell 0.27
+Path: Where to get it
+Content:
+Nu 0.27 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.27.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+’Ù@2deb280769ac1a73d9c21042ffe17c900ffe956b7bf3a35fc485b2adb94f0ebeÚ$Title: title: Nushell 0.27
+Path: Book updates (fdncred, sophiajt)
+Content:
+The Nushell book received some much-needed updates. You'll notice new chapters and updated chapters to bring it more up-to-date with recent Nushell.
+[link: https://www.nushell.sh/book/configuration.html] Thoroughly updated configuration section
+[link: https://www.nushell.sh/book/types_of_data.html] Updated section on data types
+[link: https://www.nushell.sh/book/custom_commands.html] A new section on creating your own commands
+[link: https://www.nushell.sh/book/aliases.html] An updated section on aliases
+[link: https://www.nushell.sh/book/variables.html] A new section on working with variables and expressions
+[link: https://www.nushell.sh/book/scripts.html] The start of a new section on writing your own Nushell scripts
+’Ù@ba38f81160d6536c4343ea810fb69aa4d9f5c5d67e90520331627a3d9be3b3e0ÚdTitle: title: Nushell 0.27
+Path: New commands (fdncred)
+Content:
+A new 
+``term size``
+ commands 
+[link: https://github.com/nushell/nushell/pull/3038] lets you get the current size of the terminal
+New 
+[link: https://github.com/nushell/nushell/pull/2976] ``pow``
+ operator
+New 
+[link: https://github.com/nushell/nushell/pull/2975] modulus(
+``%``
+) operator
+’Ù@88833ad051bf62af8808d9c2aaee6268a52226e0c006853f53725af5093287ceÚITitle: title: Nushell 0.27
+Path: Functionality (sophiajt, WatsonThink, ilius, andrasio, Qwanve, fdncred, ammkrn)
+Content:
+Tables now 
+[link: https://github.com/nushell/nushell/pull/3061] truncate instead of crashing when too large
+``source``
+ command now can 
+[link: https://github.com/nushell/nushell/pull/3059] use tilde in the path
+``let-env``
+ can now shadow 
+[link: https://github.com/nushell/nushell/pull/3057] environment variables
+ in addition to adding new ones
+Prompts can now call 
+[link: https://github.com/nushell/nushell/pull/3056] external commands on initial startup
+You can now configure the 
+[link: https://github.com/nushell/nushell/pull/3045] file size standard to use
+Strings can now be passed in where 
+[link: https://github.com/nushell/nushell/pull/3048] column-paths were expected
+ and 
+[link: https://github.com/nushell/nushell/pull/3016] here
+More 
+[link: https://github.com/nushell/nushell/pull/3035] file size types have been added
+``sort-by``
+ can now 
+[link: https://github.com/nushell/nushell/pull/3025] reverse sort
+``which``
+ can now take 
+[link: https://github.com/nushell/nushell/pull/3024] multiple applications
+``ps -l``
+ now has 
+[link: https://github.com/nushell/nushell/pull/3015] a cleaner output when the parent is missing
+``select``
+ can no longer 
+[link: https://github.com/nushell/nushell/pull/3012] select the same column twice
+``to-md --per-element``
+ now gives you 
+[link: https://github.com/nushell/nushell/pull/2997] more fine-grained control over the markdown output
+A new 
+[link: https://github.com/nushell/nushell/pull/2995] ``$nothing``
+ built-in variable to help check for the existence of a value
+``str from``
+ can convert 
+[link: https://github.com/nushell/nushell/pull/2977] more things to strings
+Booleans are now shown as 
+[link: https://github.com/nushell/nushell/pull/3043] true/false instead of Yes/No
+’Ù@c791af333e790c968d102b6082de895a7e0098b7a6a59e8426fb1488aa151ef2Ú‰Title: title: Nushell 0.27
+Path: Internal (stormasm, ilius, fdncred, LhKipp, RReverser, sophiajt)
+Content:
+Some 
+[link: https://github.com/nushell/nushell/pull/3053] comment parsing improvements
+The 
+``block``
+ function is now 
+[link: https://github.com/nushell/nushell/pull/3047] ``parse_block``
+More 
+[link: https://github.com/nushell/nushell/pull/3000] Value helpers were added
+[link: https://github.com/nushell/nushell/pull/2986] Parser cleanup for handling 
+``def``
+The 
+[link: https://github.com/nushell/nushell/pull/2983] WASI build should now be working again
+File size is 
+[link: https://github.com/nushell/nushell/pull/2984] now a big int
+’Ù@d8f5efc4014cc6ba53dd3cbafed232da18468e1b43d3a7765905d36c2db4b8bbÚDTitle: title: Nushell 0.27
+Path: Documentation (watzon, ahkrr, LhKipp, Andy-Python-Programmer, diogomafra)
+Content:
+Sample config has 
+[link: https://github.com/nushell/nushell/pull/3060] gotten an update
+ and 
+[link: https://github.com/nushell/nushell/pull/3031] here
+Some 
+[link: https://github.com/nushell/nushell/pull/3052] README links got updated
+More 
+[link: https://github.com/nushell/nushell/pull/3013] README updates
+ and 
+[link: https://github.com/nushell/nushell/pull/2996] here
+README now shows 
+[link: https://github.com/nushell/nushell/pull/2993] contributor icons
+’Ù@021f518edd3d6800e7b4e2574658236bb36cd04cfa6053a2f549e3e3fd1fa4bcÙ¨Title: title: Nushell 0.27
+Path: Breaking changes
+Content:
+Booleans are now shown as 
+[link: https://github.com/nushell/nushell/pull/3043] true/false instead of Yes/No
+’Ù@e3bebbf81c4a3d4c17e28ea6639e641f7c3a3c99970313724d63cf79be68298fÚ|Title: title: Nushell 0.27
+Path: Looking ahead
+Content:
+We're hard at work at putting together the proposed features for Nushell 1.0, which will help guide the work to get there. While there's still much work to do to achieve a 1.0 release, this proposal will let the community help refine and correct the direction. We're looking forward to kicking this off in the coming weeks.

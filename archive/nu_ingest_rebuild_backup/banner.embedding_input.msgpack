@@ -1,0 +1,22 @@
+“’Ù@e2d76b5e0b979f576665a0e171e1c4ede4545cc55876f5948486d9c036cc9be1ÙhTitle: title: banner
+Path: default
+Content:
+
+
+
+
+
+
+
+
+
+``banner``
+[link: /commands/categories/default.md] ’Ù@688e68a96cf943e89faf33b9c8c8a1685ebab47d3667386aab76b125e431c292ÙDTitle: title: banner
+Path: Signature
+Content:
+``> banner {flags} ``
+’Ù@899c92e8159b46f172fa240778f54ee134d419fcbd9d30606e3838032d9f7c7cÙOTitle: title: banner
+Path: Flags
+Content:
+``--short``
+: Only show startup time

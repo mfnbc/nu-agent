@@ -1,0 +1,41 @@
+���@cfd0bd1b95d510f7b4071aca572874460d23c50c30aa24f382cf548beb6f17d9قTitle: title: polars count-null
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars count-null``
+[link: /commands/categories/dataframe.md] ��@36cbec97093b39dc62323e1925a34f002a4c1dda26493d0b0c2e2bae78827049�ZTitle: title: polars count-null
+Path: Signature
+Content:
+``> polars count-null {flags} ``
+��@f8265d77cfb76035e7489afd343bc1c740639d4b0c9c8b121b6e50f70c8482d5ٔTitle: title: polars count-null
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@febabf122df1c4db081cdd3ec49d9e7c8e5515e2a74a7a9d52445647321345ef��Title: title: polars count-null
+Path: Examples
+Content:
+Counts null values
+```Fenced(Borrowed("nu"))
+> let s = ([1 1 0 0 3 3 4] | polars into-df);
+    ($s / $s) | polars count-null
+╭───┬────────────╮
+│ # │ count_null │
+├───┼────────────┤
+│ 0 │          2 │
+╰───┴────────────╯
+
+
+```

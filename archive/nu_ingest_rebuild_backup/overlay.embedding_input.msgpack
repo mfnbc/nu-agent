@@ -1,0 +1,49 @@
+•’Ù@7ee558e6c28d2de284767a4e313a296daf92cf0850e289c2224bc0b4fcde16c4ÙdTitle: title: overlay
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``overlay``
+[link: /commands/categories/core.md] ’Ù@c0c2cab6195d9fbbadada6979ca5c77fb96497d9dedbebe281c53ba8a71e4926ÙFTitle: title: overlay
+Path: Signature
+Content:
+``> overlay {flags} ``
+’Ù@44e98630ed1d466dfd1516307e05b2dd8da229c28516f011fb70f1bcdf1ba556ÙUTitle: title: overlay
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+’Ù@26e59286ae81e96629aa346045d750a5dcee671b222093b8535347e92d6e13bcÙÿTitle: title: overlay
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+’Ù@7d65aecd2353b9df34cbce037906e0566309237d9bc40dab7fd8ea16031f6832ÚÏTitle: title: overlay
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/overlay_hide.md] ``overlay hide``
+Hide an active overlay.
+keyword
+[link: /commands/docs/overlay_list.md] ``overlay list``
+List all overlays with their active status.
+built-in
+[link: /commands/docs/overlay_new.md] ``overlay new``
+Create an empty overlay.
+keyword
+[link: /commands/docs/overlay_use.md] ``overlay use``
+Use definitions from a module as an overlay.
+keyword

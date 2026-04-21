@@ -1,0 +1,270 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-04-13-twin0242.mdŸ@cbdddb47d7405863727f70aa5c8c1d2fbe9a82a993982e4ef50718c43df3567eπThis week in Nushell #242ëßNushell⁄sayax79 made lots of dataframe improvements: 
+[link: https://github.com/nushell/nushell/pull/12220] moved dataframes support to a plugin
+ (this is huge!), 
+[link: https://github.com/nushell/nushell/pull/12501] ensured that two columns named 'index' don't exist when converting a DataFrame to a nu value
+, 
+[link: https://github.com/nushell/nushell/pull/12487] added a short flag -c to 
+``polars append``
+, 
+[link: https://github.com/nushell/nushell/pull/12486] handled relative paths correctly on polars 
+``to-(parquet|nuon|arrow|etc)``
+, 
+[link: https://github.com/nushell/nushell/pull/12472] displayed span information, creation time, and size with 
+``polars ls``
+, and 
+[link: https://github.com/nushell/nushell/pull/12462] showed full help when running the 
+``polars``
+ command
+devyn 
+[link: https://github.com/nushell/nushell/pull/12493] switched the CI to use macOS-13 instead of macOS-latest, due to failures
+, 
+[link: https://github.com/nushell/nushell/pull/12439] added a 
+``GetSpanContents``
+ engine call
+, 
+[link: https://github.com/nushell/nushell/pull/12437] isolated tests from user config
+, and 
+[link: https://github.com/nushell/nushell/pull/12410] added a 
+``--no-newline``
+ option to 
+``nu``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12497] bumped Nushell to latest reedline
+, introduced 
+[link: https://github.com/nushell/nushell/pull/12494] better logging for the 
+``shell_integration``
+ setting
+, and aimed 
+[link: https://github.com/nushell/nushell/pull/12449] to be a bit more precise with REPL logging
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/12495] fixed up plugin CI for macOS
+, 
+[link: https://github.com/nushell/nushell/pull/12476] bumped version to 
+``0.92.3``
+, 
+[link: https://github.com/nushell/nushell/pull/12471] bumped our Rust version to stable
+, and 
+[link: https://github.com/nushell/nushell/pull/12455] updated MSRV following 
+``rust-toolchain.toml``
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12480] updated 
+``kill``
+ to return a single value instead of a stream
+, did a 
+[link: https://github.com/nushell/nushell/pull/12479] ``drop``
+ refactor
+, 
+[link: https://github.com/nushell/nushell/pull/12478] refactored 
+``first``
+ and 
+``last``
+, 
+[link: https://github.com/nushell/nushell/pull/12436] mentioned 
+``print``
+ in the 
+``echo``
+ help text
+, and 
+[link: https://github.com/nushell/nushell/pull/12433] renamed 
+``IoStream``
+ to 
+``OutDest``
+amtoine 
+[link: https://github.com/nushell/nushell/pull/12470] fixed 
+``std log``
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/12465] forced 
+``timeit``
+ to not capture stdout
+, and 
+[link: https://github.com/nushell/nushell/pull/12327] made 
+``ls``
+ and 
+``du``
+ support rest parameters
+singh-priyank 
+[link: https://github.com/nushell/nushell/pull/12443] fixed a bug with negative file sizes for 
+``into filesize``
+oornaque 
+[link: https://github.com/nushell/nushell/pull/12442] fixed typo in help stor import
+texastoland 
+[link: https://github.com/nushell/nushell/pull/12339] lexed whitespace in input-output types
+, and 
+[link: https://github.com/nushell/nushell/pull/12338] ensured 
+``currently_parsed_cwd``
+ is set for config files
+íêê⁄´Title: This week in Nushell #242
+Path: Nushell
+Content:
+ayax79 made lots of dataframe improvements: 
+[link: https://github.com/nushell/nushell/pull/12220] moved dataframes support to a plugin
+ (this is huge!), 
+[link: https://github.com/nushell/nushell/pull/12501] ensured that two columns named 'index' don't exist when converting a DataFrame to a nu value
+, 
+[link: https://github.com/nushell/nushell/pull/12487] added a short flag -c to 
+``polars append``
+, 
+[link: https://github.com/nushell/nushell/pull/12486] handled relative paths correctly on polars 
+``to-(parquet|nuon|arrow|etc)``
+, 
+[link: https://github.com/nushell/nushell/pull/12472] displayed span information, creation time, and size with 
+``polars ls``
+, and 
+[link: https://github.com/nushell/nushell/pull/12462] showed full help when running the 
+``polars``
+ command
+devyn 
+[link: https://github.com/nushell/nushell/pull/12493] switched the CI to use macOS-13 instead of macOS-latest, due to failures
+, 
+[link: https://github.com/nushell/nushell/pull/12439] added a 
+``GetSpanContents``
+ engine call
+, 
+[link: https://github.com/nushell/nushell/pull/12437] isolated tests from user config
+, and 
+[link: https://github.com/nushell/nushell/pull/12410] added a 
+``--no-newline``
+ option to 
+``nu``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12497] bumped Nushell to latest reedline
+, introduced 
+[link: https://github.com/nushell/nushell/pull/12494] better logging for the 
+``shell_integration``
+ setting
+, and aimed 
+[link: https://github.com/nushell/nushell/pull/12449] to be a bit more precise with REPL logging
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/12495] fixed up plugin CI for macOS
+, 
+[link: https://github.com/nushell/nushell/pull/12476] bumped version to 
+``0.92.3``
+, 
+[link: https://github.com/nushell/nushell/pull/12471] bumped our Rust version to stable
+, and 
+[link: https://github.com/nushell/nushell/pull/12455] updated MSRV following 
+``rust-toolchain.toml``
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12480] updated 
+``kill``
+ to return a single value instead of a stream
+, did a 
+[link: https://github.com/nushell/nushell/pull/12479] ``drop``
+ refactor
+, 
+[link: https://github.com/nushell/nushell/pull/12478] refactored 
+``first``
+ and 
+``last``
+, 
+[link: https://github.com/nushell/nushell/pull/12436] mentioned 
+``print``
+ in the 
+``echo``
+ help text
+, and 
+[link: https://github.com/nushell/nushell/pull/12433] renamed 
+``IoStream``
+ to 
+``OutDest``
+amtoine 
+[link: https://github.com/nushell/nushell/pull/12470] fixed 
+``std log``
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/12465] forced 
+``timeit``
+ to not capture stdout
+, and 
+[link: https://github.com/nushell/nushell/pull/12327] made 
+``ls``
+ and 
+``du``
+ support rest parameters
+singh-priyank 
+[link: https://github.com/nushell/nushell/pull/12443] fixed a bug with negative file sizes for 
+``into filesize``
+oornaque 
+[link: https://github.com/nushell/nushell/pull/12442] fixed typo in help stor import
+texastoland 
+[link: https://github.com/nushell/nushell/pull/12339] lexed whitespace in input-output types
+, and 
+[link: https://github.com/nushell/nushell/pull/12338] ensured 
+``currently_parsed_cwd``
+ is set for config files
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-04-13-twin0242.mdŸ@b506c95485db4fb7feeaa7d10573369f11d5abbb6d7753ab8aa6912dbff5c3afπThis week in Nushell #242ë≠Documentation⁄ïdevyn 
+[link: https://github.com/nushell/nushell.github.io/pull/1348] posted release notes for 0.92.2
+intellild 
+[link: https://github.com/nushell/nushell.github.io/pull/1347] provided an ssh agent workaround for keychain
+kubouch 
+[link: https://github.com/nushell/nushell.github.io/pull/1346] updated the 2024-04-09-art-contest-summary
+ and 
+[link: https://github.com/nushell/nushell.github.io/pull/1344] added an art contest showcase blog
+github-actions
+[
+bot
+]
+ 
+[link: https://github.com/nushell/nushell.github.io/pull/1345] compressed images
+sophiajt 
+[link: https://github.com/nushell/nushell.github.io/pull/1343] fixed deadnames and updated contact info
+íêê⁄”Title: This week in Nushell #242
+Path: Documentation
+Content:
+devyn 
+[link: https://github.com/nushell/nushell.github.io/pull/1348] posted release notes for 0.92.2
+intellild 
+[link: https://github.com/nushell/nushell.github.io/pull/1347] provided an ssh agent workaround for keychain
+kubouch 
+[link: https://github.com/nushell/nushell.github.io/pull/1346] updated the 2024-04-09-art-contest-summary
+ and 
+[link: https://github.com/nushell/nushell.github.io/pull/1344] added an art contest showcase blog
+github-actions
+[
+bot
+]
+ 
+[link: https://github.com/nushell/nushell.github.io/pull/1345] compressed images
+sophiajt 
+[link: https://github.com/nushell/nushell.github.io/pull/1343] fixed deadnames and updated contact info
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-04-13-twin0242.mdŸ@e7871014c4b9260501a8fd09773ab95238f2b0609eed52ea7e0f012c7ab02274πThis week in Nushell #242ë™Nu_Scripts⁄vZuruuh 
+[link: https://github.com/nushell/nu_scripts/pull/817] added composer completions
+MilesCranmer 
+[link: https://github.com/nushell/nu_scripts/pull/816] fixed: prefix conda commands with 
+``conda``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/815] fixed non-exported completions
+ehdevries 
+[link: https://github.com/nushell/nu_scripts/pull/813] panache-git: stopped printing stderr from Git commands
+csc530 
+[link: https://github.com/nushell/nu_scripts/pull/812] added missing scoop completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/811] added windows compatibility for command not found hook
+íêê⁄±Title: This week in Nushell #242
+Path: Nu_Scripts
+Content:
+Zuruuh 
+[link: https://github.com/nushell/nu_scripts/pull/817] added composer completions
+MilesCranmer 
+[link: https://github.com/nushell/nu_scripts/pull/816] fixed: prefix conda commands with 
+``conda``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/815] fixed non-exported completions
+ehdevries 
+[link: https://github.com/nushell/nu_scripts/pull/813] panache-git: stopped printing stderr from Git commands
+csc530 
+[link: https://github.com/nushell/nu_scripts/pull/812] added missing scoop completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/811] added windows compatibility for command not found hook
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-04-13-twin0242.mdŸ@ee62b1b1827c949eb6a4b5eff6397a420c124d5a4293bbb732dc7192c875cc37πThis week in Nushell #242ë®reedlineŸófdncred 
+[link: https://github.com/nushell/reedline/pull/779] added bashism 
+``!term``
+ to prefix search for the last command beginning with 
+``term``
+íêêŸ–Title: This week in Nushell #242
+Path: reedline
+Content:
+fdncred 
+[link: https://github.com/nushell/reedline/pull/779] added bashism 
+``!term``
+ to prefix search for the last command beginning with 
+``term``

@@ -1,0 +1,97 @@
+–’Ù@54a8a052404265334301acab8fef560c48f91be0083fa0d67b1da0bb3e6721e7ÙZTitle: title: do
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``do``
+[link: /commands/categories/core.md] ’Ù@6be2a2ba2cab8119f71e51e2f72da1e667c256584e5bede0ad0a6459607df119ÙMTitle: title: do
+Path: Signature
+Content:
+``> do {flags} (closure) ...rest``
+’Ù@0941922ee05f30c06b7d26774a3a8187f24371350c0514d4e7c9993b3d9f6a8bÙîTitle: title: do
+Path: Flags
+Content:
+``--ignore-errors, -i``
+: Ignore errors as the closure runs.
+``--capture-errors, -c``
+: Catch errors as the closure runs, and return them.
+``--env``
+: Keep the environment defined inside the command.
+’Ù@2db3b8f71cb6afeb09bb3b5a59d856275c2ef998792120b746844431c7811cd4Ù}Title: title: do
+Path: Parameters
+Content:
+``closure``
+: The closure to run.
+``...rest``
+: The parameter(s) for the closure.
+’Ù@475dedb71f2ae7933433b7e21b2e8578ada8ac7d30d439c0e1ee4a09d4c48453ÙITitle: title: do
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+’Ù@4a8758319504bf773e8786b80da6c33460bb332a96e68ed80956c58c31bbf37dÚvTitle: title: do
+Path: Examples
+Content:
+Run the closure.
+```Fenced(Borrowed("nu"))
+> do { echo hello }
+hello
+
+```
+Run a stored first-class closure.
+```Fenced(Borrowed("nu"))
+> let text = "I am enclosed"; let hello = {|| echo $text}; do $hello
+I am enclosed
+
+```
+Run the closure and ignore both shell and external program errors.
+```Fenced(Borrowed("nu"))
+> do --ignore-errors { thisisnotarealcommand }
+
+
+```
+Abort the pipeline if a program returns a non-zero exit code.
+```Fenced(Borrowed("nu"))
+> do --capture-errors { nu --commands 'exit 1' } | myscarycommand
+
+
+```
+Run the closure with a positional, type-checked parameter.
+```Fenced(Borrowed("nu"))
+> do {|x:int| 100 + $x } 77
+177
+
+```
+Run the closure with pipeline input.
+```Fenced(Borrowed("nu"))
+> 77 | do { 100 + $in }
+177
+
+```
+Run the closure with a default parameter value.
+```Fenced(Borrowed("nu"))
+> 77 | do {|x=100| $x + $in }
+177
+
+```
+Run the closure with two positional parameters.
+```Fenced(Borrowed("nu"))
+> do {|x,y| $x + $y } 77 100
+177
+
+```
+Run the closure and keep changes to the environment.
+```Fenced(Borrowed("nu"))
+> do --env { $env.foo = 'bar' }; $env.foo
+bar
+
+```

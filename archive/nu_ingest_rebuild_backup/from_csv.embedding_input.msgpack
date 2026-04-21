@@ -1,0 +1,110 @@
+���@dd3019c9dffa1296ce3bc54f27dc05625931ad0ae694bdc3a6c6ddc9e08e8312�lTitle: title: from csv
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``from csv``
+[link: /commands/categories/formats.md] ��@b33a65a5675b23111574f45683dbeb0737d9327dc8c23808804f54a6d401f19f�HTitle: title: from csv
+Path: Signature
+Content:
+``> from csv {flags} ``
+��@8b179d9c3354429968ca708d3e619437457dfc1511a6a2ad1935dfcde1407ecc��Title: title: from csv
+Path: Flags
+Content:
+``--separator, -s {string}``
+: A character to separate columns (either single char or 4 byte unicode sequence), defaults to ','.
+``--comment, -c {string}``
+: A comment character to ignore lines starting with it.
+``--quote, -q {string}``
+: A quote character to ignore separators in strings, defaults to '"'.
+``--escape, -e {string}``
+: An escape character for strings containing the quote character.
+``--noheaders, -n``
+: Don't treat the first row as column names.
+``--flexible``
+: Allow the number of fields in records to be variable.
+``--no-infer``
+: No field type inferencing.
+``--trim, -t {string}``
+: drop leading and trailing whitespaces around headers names and/or field values
+��@e730c59426e3377e8bd54d9db073dca8309c8bbab08780f90c83db2aad104239�TTitle: title: from csv
+Path: Input/output types:
+Content:
+input
+output
+string
+table
+��@1fa90e4957d7fdeeef90bf54851807f252c1e6a871c288c73a3df8cfe6a5f5cf�dTitle: title: from csv
+Path: Examples
+Content:
+Convert comma-separated data to a table.
+```Fenced(Borrowed("nu"))
+> "ColA,ColB
+1,2" | from csv
+╭───┬──────┬──────╮
+│ # │ ColA │ ColB │
+├───┼──────┼──────┤
+│ 0 │    1 │    2 │
+╰───┴──────┴──────╯
+
+
+```
+Convert comma-separated data to a table, allowing variable number of columns per row.
+```Fenced(Borrowed("nu"))
+> "ColA,ColB
+1,2
+3,4,5
+6" | from csv --flexible
+╭───┬──────┬──────┬─────────╮
+│ # │ ColA │ ColB │ column2 │
+├───┼──────┼──────┼─────────┤
+│ 0 │    1 │    2 │   ❎    │
+│ 1 │    3 │    4 │       5 │
+│ 2 │    6 │  ❎  │   ❎    │
+╰───┴──────┴──────┴─────────╯
+
+
+```
+Convert comma-separated data to a table, ignoring headers.
+```Fenced(Borrowed("nu"))
+> open data.txt | from csv --noheaders
+
+
+```
+Convert semicolon-separated data to a table.
+```Fenced(Borrowed("nu"))
+> open data.txt | from csv --separator ';'
+
+
+```
+Convert comma-separated data to a table, ignoring lines starting with '#'.
+```Fenced(Borrowed("nu"))
+> open data.txt | from csv --comment '#'
+
+
+```
+Convert comma-separated data to a table, dropping all possible whitespaces around header names and field values.
+```Fenced(Borrowed("nu"))
+> open data.txt | from csv --trim all
+
+
+```
+Convert comma-separated data to a table, dropping all possible whitespaces around header names.
+```Fenced(Borrowed("nu"))
+> open data.txt | from csv --trim headers
+
+
+```
+Convert comma-separated data to a table, dropping all possible whitespaces around field values.
+```Fenced(Borrowed("nu"))
+> open data.txt | from csv --trim fields
+
+
+```

@@ -1,0 +1,73 @@
+•—ÙYarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/attr_search-terms.mdÙ@b6d40c78c2d6235d545d2e7a42548b0203be2a038b0b82fb1e9a9d87d3379f9a¸title: attr search-terms‘¤coreÙD
+
+
+
+
+
+
+
+
+``attr search-terms``
+[link: /commands/categories/core.md] ’ÙxTitle: title: attr search-terms
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``attr search-terms``
+[link: /commands/categories/core.md] —ÙYarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/attr_search-terms.mdÙ@745674ef08d99604c395827f9f4d2d8340426ac9bde338ff76965a1ca441f4fb¸title: attr search-terms‘©SignatureÙ(``> attr search-terms {flags} ...rest``
+’ÙaTitle: title: attr search-terms
+Path: Signature
+Content:
+``> attr search-terms {flags} ...rest``
+—ÙYarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/attr_search-terms.mdÙ@a4f7657d68a7175473fd9f7fc6b68e60941c4fadabf485a865c9ae9df5c43f4e¸title: attr search-terms‘ªParameters¼``...rest``
+: Search terms.
+’ÙVTitle: title: attr search-terms
+Path: Parameters
+Content:
+``...rest``
+: Search terms.
+—ÙYarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/attr_search-terms.mdÙ@5be50647b00ee4ec995dd1944d7e06482f4d577515561fe2d1d3487c8dfeea72¸title: attr search-terms‘³Input/output types:Ù&input
+output
+nothing
+list
+<
+string
+>
+
+’ÙiTitle: title: attr search-terms
+Path: Input/output types:
+Content:
+input
+output
+nothing
+list
+<
+string
+>
+
+—ÙYarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/attr_search-terms.mdÙ@a6bcc48eaed89b88f56ea9ede24b56d037b34a9bf7423df1b847ad4d039368a1¸title: attr search-terms‘¨ExamplesÙ¬Add search terms to a custom command.
+```Fenced(Borrowed("nu"))
+> # Double numbers
+    @search-terms multiply times
+    def double []: [number -> number] { $in * 2 }
+
+
+```
+’ÙäTitle: title: attr search-terms
+Path: Examples
+Content:
+Add search terms to a custom command.
+```Fenced(Borrowed("nu"))
+> # Double numbers
+    @search-terms multiply times
+    def double []: [number -> number] { $in * 2 }
+
+
+```

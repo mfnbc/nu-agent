@@ -1,0 +1,103 @@
+òíŸ@99a6f90a76ad286b9b2f98afb7bf6b26722d6d6ef94e5de1afd99bed7ede90a3⁄‚Title: title: Nushell 0.37
+Path: Nushell 0.37
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.37 of Nu. This release adds a new 
+``find``
+ function, improvements to the current engine, and updates on the upcoming engine.
+íŸ@e02150b87d91b2cdc7179432d0ea56a9428d0ebbf8eaf6962616aec849a00228⁄Title: title: Nushell 0.37
+Path: Where to get it
+Content:
+Nu 0.37 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.37.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+íŸ@db036a96c03769baec2a432277ae83b28260e5ed36792db2ddcb67f2dd5adc5a⁄sTitle: title: Nushell 0.37
+Path: ing data in tables
+Content:
+``find``
+Screenshot showing using the new find command to find the phrase toml in a table
+In 0.37, you now have access to a new 
+``find``
+ command, which can help you quickly look for data across all columns in a table.
+You can still reach your system's 
+``find``
+ command using 
+``^``
+ by typing 
+``^find``
+.
+íŸ@f1e3598d1463577c5b07976cef24f5483b518def86f8f6c3b18164902999cc7d⁄˛Title: title: Nushell 0.37
+Path: Additional improvements
+Content:
+fdncred added more 
+[link: https://github.com/nushell/nushell/pull/3973] support for ansi art
+, and 
+[link: https://github.com/nushell/nushell/pull/3975] more chars
+aminya removed shelling out in 
+[link: https://github.com/nushell/nushell/pull/3974] some cases where it's not needed
+sophiajt made 
+[link: https://github.com/nushell/nushell/pull/3983] sys/ps/fetch/post core commands
+, moving them from plugins to internal commands. This allows for future capability to have nushell download its own extensions.
+andrasio began adding 
+[link: https://github.com/nushell/nushell/pull/3986] support for creating errors inside of nushell code
+, extended 
+[link: https://github.com/nushell/nushell/pull/3988] ``tags``
+ to support basic command reflection
+lily-mara added 
+[link: https://github.com/nushell/nushell/pull/3987] ``into filesize``
+tw4452852 added 
+[link: https://github.com/nushell/nushell/pull/3992] support to append when calling 
+``save``
+Pantoshire improved 
+[link: https://github.com/nushell/nushell/pull/3995] errors when bash-style alias was mistakingly used
+tranzystorek-io did a lot of 
+[link: https://github.com/nushell/nushell/pull/3996] general code improvements
+kubouch did some fixes to p
+[link: https://github.com/nushell/nushell/pull/3998] aths and the 
+``source``
+ command
+elferherrera updated the 
+[link: https://github.com/nushell/nushell/pull/4003] prompt environment variable to PROMPT_COMMAND
+ to show that it is nushell code that gets run
+íŸ@6e8d07e51a5e41d3c5ccbd7596fc4b386bc4ed1d01a3b8188a0803b21ace25ef⁄èTitle: title: Nushell 0.37
+Path: Engine-q
+Content:
+We've been hard at work on the upcoming set of engine updates for Nushell (codenamed 'engine-q'). These updates address some fundamental flaws in the current Nushell engine design and should help set us up for a strong engine in the future.
+In this section we'll talk a bit about the design of this engine and show some fun tricks it's able to do.
+íŸ@8f0b68417aedfd5a5ac34df06b570887200ec9b3500de5eda34b99d402bd6d9f⁄‘Title: title: Nushell 0.37
+Path: Background
+Content:
+The current Nushell code uses a single concept for the scope that's shared between the parser and the evaluation engine. This is how definitions could be added by the parser into the scope that the engine could find them. This scope used locks to maintain thread safety. This meant that each variable lookup had the additional cost of unlocking the lock around the scope. The way this was set up also had subtle bugs with how the scope was handled, including corner cases where variables would be visible in scopes where they shouldn't be.
+In addition, there wasn't an easy way to do a speculative parse of content like you might with syntax highlighting or completions.
+íŸ@18c106690c8f46ddea52fd0491f91e2b77241850d0fb7d339240b23e9b9fc28d⁄[Title: title: Nushell 0.37
+Path: New design
+Content:
+In the new design, both the parser and the engine have received a pretty thorough rework. The parser now uses an 
+[link: https://en.wikipedia.org/wiki/String_interning] interning system
+ for its definitions, allowing the resulting parse tree to be simpler. It also has a change delta system where the parser can create a temporary working set to use, and this working set can optionally merge into the permanent state. We've also building in a lot of additional fun additions -- like typechecking! -- so you can get additional benefits from information the parser knows.
+Likewise, the engine has been rewritten to use proper scoping, a simpler value system, and more.
+As you can see, we're taking full advantage of the opportunity to fix long-standing issues we wished we could fix over the last couple of years working on Nu.
+Oh, there is one more thing.
+Animated gif showing off dynaming git branch completions
+A big motivator for the rewrite was to make it easier to add dynamic custom completions, like the kind you use when completing a git branch while doing 
+``git checkout``
+. The above gif shows a very early prototype of how we might implement this using the engine-q system. It works by running actually nushell code at completion time, getting the list of git branches as a list, and handing that list back to the completion system.
+The demo took less than two hours to implement using the capabilities of the new engine, and we're excited to see how we can make this more general and offer the ability for folks to create their own completions in nushell code.
+íŸ@9a8e3c43ccca1c3518eb30114769a8ca755d924a12dfdb00847ba55dc25457e0⁄áTitle: title: Nushell 0.37
+Path: Looking ahead
+Content:
+Engine-q offers some huge improvements to both the internals of Nushell as well as a way to finally check off tasks we know we've wanted for a long time (like git completions). If you're interested in helping out with the engine-q work, we'd love to have the help. The best place is to join us on the discord and on the engine-q repo.

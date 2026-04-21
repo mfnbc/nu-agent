@@ -1,0 +1,264 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-05-19-twin0195.mdŸ@05a6a0827b13e291583c6e3c31705a43491ab9fd20dbf675e64177ca6b211aa3πThis week in Nushell #195ëßNushell⁄ÂDorumin added 
+[link: https://github.com/nushell/nushell/pull/8332] Feature: Userland LazyRecords
+stormasm 
+[link: https://github.com/nushell/nushell/pull/9241] moved dataframe commands to nu-cmd-dataframe
+, and 
+[link: https://github.com/nushell/nushell/pull/9188] documented how to run dataframe tests as well
+skelly37 
+[link: https://github.com/nushell/nushell/pull/9235] added 
+``assert not``
+ command (assertion that the value/expression is 
+``false``
+)
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9230] removed unused dependencies
+, 
+[link: https://github.com/nushell/nushell/pull/9223] added cargo.lock file
+, and 
+[link: https://github.com/nushell/nushell/pull/9215] bump nushell from release version to development version
+maxim-uvarov 
+[link: https://github.com/nushell/nushell/pull/9216] added the 
+``no-strip``
+ flag to the clip command
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9212] bumped version for 0.80.0 release
+, and 
+[link: https://github.com/nushell/nushell/pull/9211] Pin reedline to 
+``0.19.1``
+ for 0.80 release
+melMass 
+[link: https://github.com/nushell/nushell/pull/9210] fixed: üêõ handle windows Path casing
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9204] fixed clippy warning on clippy 0.1.69
+, and 
+[link: https://github.com/nushell/nushell/pull/8784] Avoid blocking when 
+``o+e>``
+ redirects too much stderr message
+nicolb2305 
+[link: https://github.com/nushell/nushell/pull/9202] removed unnecessary cwd and pipeline from various tests 
+bobhy 
+[link: https://github.com/nushell/nushell/pull/9197] fixed spurious 'item not found' error in 
+``std help``
+1Kinoti 
+[link: https://github.com/nushell/nushell/pull/9190] improved parsing of values with units
+Mehrbod2002 created 
+[link: https://github.com/nushell/nushell/pull/9142] Fmt f64
+rgwood 
+[link: https://github.com/nushell/nushell/pull/9020] changed group-by to accept cell paths
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8415] REFACTOR: remove the shell commands
+íêê⁄Title: This week in Nushell #195
+Path: Nushell
+Content:
+Dorumin added 
+[link: https://github.com/nushell/nushell/pull/8332] Feature: Userland LazyRecords
+stormasm 
+[link: https://github.com/nushell/nushell/pull/9241] moved dataframe commands to nu-cmd-dataframe
+, and 
+[link: https://github.com/nushell/nushell/pull/9188] documented how to run dataframe tests as well
+skelly37 
+[link: https://github.com/nushell/nushell/pull/9235] added 
+``assert not``
+ command (assertion that the value/expression is 
+``false``
+)
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9230] removed unused dependencies
+, 
+[link: https://github.com/nushell/nushell/pull/9223] added cargo.lock file
+, and 
+[link: https://github.com/nushell/nushell/pull/9215] bump nushell from release version to development version
+maxim-uvarov 
+[link: https://github.com/nushell/nushell/pull/9216] added the 
+``no-strip``
+ flag to the clip command
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9212] bumped version for 0.80.0 release
+, and 
+[link: https://github.com/nushell/nushell/pull/9211] Pin reedline to 
+``0.19.1``
+ for 0.80 release
+melMass 
+[link: https://github.com/nushell/nushell/pull/9210] fixed: üêõ handle windows Path casing
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9204] fixed clippy warning on clippy 0.1.69
+, and 
+[link: https://github.com/nushell/nushell/pull/8784] Avoid blocking when 
+``o+e>``
+ redirects too much stderr message
+nicolb2305 
+[link: https://github.com/nushell/nushell/pull/9202] removed unnecessary cwd and pipeline from various tests 
+bobhy 
+[link: https://github.com/nushell/nushell/pull/9197] fixed spurious 'item not found' error in 
+``std help``
+1Kinoti 
+[link: https://github.com/nushell/nushell/pull/9190] improved parsing of values with units
+Mehrbod2002 created 
+[link: https://github.com/nushell/nushell/pull/9142] Fmt f64
+rgwood 
+[link: https://github.com/nushell/nushell/pull/9020] changed group-by to accept cell paths
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8415] REFACTOR: remove the shell commands
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-05-19-twin0195.mdŸ@97ae5ef71b07238d1031f3b59fb1b2262bf914be33b4cc2a1be9988bdb401980πThis week in Nushell #195ë©ExtensionŸÊEmilySeville7cfg created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/128] feat(snippets): use H3 headers
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/127] feat(snippets): markdown doc sections
+íêê⁄ Title: This week in Nushell #195
+Path: Extension
+Content:
+EmilySeville7cfg created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/128] feat(snippets): use H3 headers
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/127] feat(snippets): markdown doc sections
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-05-19-twin0195.mdŸ@18a9485c1de8944a8bf43b93829de3704f6e9b4899a4cc43d7bb58b77eb049d6πThis week in Nushell #195ë≠Documentation⁄ˆamtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/915] refactor minor things in the modules chapter
+mrkkrp created 
+[link: https://github.com/nushell/nushell.github.io/pull/914] Minor improvements to the installation chapter
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/913] Try to fix tooltip in Modules (2nd attempt)
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/912] Try to fix tipbox in Modules
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/908] Update modules chapter
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/911] Fix heading for ebook building
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/909] Refresh docs for nu v0.80
+daniel-vainsencher created 
+[link: https://github.com/nushell/nushell.github.io/pull/910] Tiny typo fixes in 2023-05-16-nushell_0_80.md
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/890] Release notes for 
+``0.80``
+íêê⁄4Title: This week in Nushell #195
+Path: Documentation
+Content:
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/915] refactor minor things in the modules chapter
+mrkkrp created 
+[link: https://github.com/nushell/nushell.github.io/pull/914] Minor improvements to the installation chapter
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/913] Try to fix tooltip in Modules (2nd attempt)
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/912] Try to fix tipbox in Modules
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/908] Update modules chapter
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/911] Fix heading for ebook building
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/909] Refresh docs for nu v0.80
+daniel-vainsencher created 
+[link: https://github.com/nushell/nushell.github.io/pull/910] Tiny typo fixes in 2023-05-16-nushell_0_80.md
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/890] Release notes for 
+``0.80``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-05-19-twin0195.mdŸ@b1dd2fbcb5d594da2bc0004d0b55cf3ece9c25e7f9f4f40cd9c2fb93e951f56cπThis week in Nushell #195ë™Nu_Scripts⁄bfj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/504] refactor: introduce 
+``spr``
+ and 
+``sprb``
+ for spread
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/497] merge ktpa into ktp(-a), rename ktn to ktno
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/496] refactor 
+``git-v2#agree``
+ with 
+``input list``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/492] Experimental multi-taskrunner support for 
+``jx``
+ (npm for example)
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/490] gp: run 
+``git fetch``
+ before 
+``git push``
+ or 
+``git pull``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/487] kubernetes completion of jsonpath
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/503] add a package file in NUON
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/501] FEATURE: add the preview script for the themes
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/500] FEATURE: add 
+``term-dark``
+ and 
+``term-light``
+ themes from main 
+``nushell``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/499] FEATURE: allow to run themes/make script from anywhere
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/498] REFACTOR: make the indentation in the themes more consistent
+Tiggax created 
+[link: https://github.com/nushell/nu_scripts/pull/502] Fixed the completion of 
+``--flamegraph``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/494] Added typst completion script.
+EmilySeville7cfg created 
+[link: https://github.com/nushell/nu_scripts/pull/495] Fix: remaining aliases
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/489] feat(aliases): reformat and use long options
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/488] feat(module): add random-list
+nullishamy created 
+[link: https://github.com/nushell/nu_scripts/pull/491] fix: just completions
+íêê⁄ùTitle: This week in Nushell #195
+Path: Nu_Scripts
+Content:
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/504] refactor: introduce 
+``spr``
+ and 
+``sprb``
+ for spread
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/497] merge ktpa into ktp(-a), rename ktn to ktno
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/496] refactor 
+``git-v2#agree``
+ with 
+``input list``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/492] Experimental multi-taskrunner support for 
+``jx``
+ (npm for example)
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/490] gp: run 
+``git fetch``
+ before 
+``git push``
+ or 
+``git pull``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/487] kubernetes completion of jsonpath
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/503] add a package file in NUON
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/501] FEATURE: add the preview script for the themes
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/500] FEATURE: add 
+``term-dark``
+ and 
+``term-light``
+ themes from main 
+``nushell``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/499] FEATURE: allow to run themes/make script from anywhere
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/498] REFACTOR: make the indentation in the themes more consistent
+Tiggax created 
+[link: https://github.com/nushell/nu_scripts/pull/502] Fixed the completion of 
+``--flamegraph``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/494] Added typst completion script.
+EmilySeville7cfg created 
+[link: https://github.com/nushell/nu_scripts/pull/495] Fix: remaining aliases
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/489] feat(aliases): reformat and use long options
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/488] feat(module): add random-list
+nullishamy created 
+[link: https://github.com/nushell/nu_scripts/pull/491] fix: just completions

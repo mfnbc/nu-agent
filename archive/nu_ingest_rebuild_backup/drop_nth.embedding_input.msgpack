@@ -1,0 +1,120 @@
+���@1c709baea00c62a61baa50fc67a5157cb3ca77b5877bc6ffec6e1ba8776531fd�lTitle: title: drop nth
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``drop nth``
+[link: /commands/categories/filters.md] ��@d58a55a57ccc3bf99084a46fc36ddf3334a3d1cd5753cfb13243a4f1aad8aa08�OTitle: title: drop nth
+Path: Signature
+Content:
+``> drop nth {flags} ...rest``
+��@f5184aaa54ea841436c5147fe874b3ca22481ad80a87d7338ef07732a4f6ac3f�bTitle: title: drop nth
+Path: Parameters
+Content:
+``...rest``
+: The row numbers or ranges to drop.
+��@e502cc1eaf16807c408c5d0e8691ff812eaf8f75798c8d6a83956c7387b0a171�zTitle: title: drop nth
+Path: Input/output types:
+Content:
+input
+output
+range
+list
+<
+number
+>
+
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+��@0a6e2e75864634cb1ec963232b411d373f9d81ff5d80b0c38eb2ba409129108d��Title: title: drop nth
+Path: Examples
+Content:
+Drop the first, second, and third row
+```Fenced(Borrowed("nu"))
+> [sam,sarah,2,3,4,5] | drop nth 0 1 2
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 4 │
+│ 2 │ 5 │
+╰───┴───╯
+
+
+```
+Drop the first, second, and third row
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | drop nth 0 1 2
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 4 │
+│ 2 │ 5 │
+╰───┴───╯
+
+
+```
+Drop rows 0 2 4
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | drop nth 0 2 4
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 3 │
+│ 2 │ 5 │
+╰───┴───╯
+
+
+```
+Drop rows 2 0 4
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | drop nth 2 0 4
+╭───┬───╮
+│ 0 │ 1 │
+│ 1 │ 3 │
+│ 2 │ 5 │
+╰───┴───╯
+
+
+```
+Drop range rows from second to fourth
+```Fenced(Borrowed("nu"))
+> [first second third fourth fifth] | drop nth (1..3)
+╭───┬───────╮
+│ 0 │ first │
+│ 1 │ fifth │
+╰───┴───────╯
+
+
+```
+Drop all rows except first row
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | drop nth 1..
+╭───┬───╮
+│ 0 │ 0 │
+╰───┴───╯
+
+
+```
+Drop rows 3,4,5
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | drop nth 3..
+╭───┬───╮
+│ 0 │ 0 │
+│ 1 │ 1 │
+│ 2 │ 2 │
+╰───┴───╯
+
+
+```

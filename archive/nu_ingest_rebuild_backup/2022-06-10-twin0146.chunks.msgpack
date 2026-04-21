@@ -1,0 +1,156 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-10-twin0146.mdŸ@16436b147731dec358e455d4aa5a21ed469989a61bf074401473cfda5dc68e20πThis week in Nushell #146ëßNushell⁄°WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/5751] While starting nu, force PWD to be current working directory
+, and 
+[link: https://github.com/nushell/nushell/pull/5744] handle SIGQUIT
+, and 
+[link: https://github.com/nushell/nushell/pull/5736] add as record tag to transfer result to record
+, and 
+[link: https://github.com/nushell/nushell/pull/5731] print warning message if meet non utf-8 path
+, and 
+[link: https://github.com/nushell/nushell/pull/5695] fix argument type
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5750] input and output types
+Kangaxx-0 created 
+[link: https://github.com/nushell/nushell/pull/5749] Support completion for alias and sub-command
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/5747] Temporarily disable rust-cache in tests
+, and 
+[link: https://github.com/nushell/nushell/pull/5718] Clean up README
+, and 
+[link: https://github.com/nushell/nushell/pull/5717] Statically link the CRT on Windows
+kubouch 
+[link: https://github.com/nushell/nushell/pull/5739] added 
+``$nu.scope.engine_state``
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5737] added search terms to alias
+, and 
+[link: https://github.com/nushell/nushell/pull/5730] Improves help str substring
+, and 
+[link: https://github.com/nushell/nushell/pull/5712] Attempts to add a command that checks if nushell is running with admin priveleges
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5733] made 
+``to text``
+ work more intuitively
+hustcer 
+[link: https://github.com/nushell/nushell/pull/5725] fixed: normalize some parameter names
+jaeheonji 
+[link: https://github.com/nushell/nushell/pull/5723] added search terms to category of strings
+herlon214 created 
+[link: https://github.com/nushell/nushell/pull/5715] nu-engine: better display for shape when showing help params
+sec65 
+[link: https://github.com/nushell/nushell/pull/5714] added loginshell config file #4620
+íêê⁄ŸTitle: This week in Nushell #146
+Path: Nushell
+Content:
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/5751] While starting nu, force PWD to be current working directory
+, and 
+[link: https://github.com/nushell/nushell/pull/5744] handle SIGQUIT
+, and 
+[link: https://github.com/nushell/nushell/pull/5736] add as record tag to transfer result to record
+, and 
+[link: https://github.com/nushell/nushell/pull/5731] print warning message if meet non utf-8 path
+, and 
+[link: https://github.com/nushell/nushell/pull/5695] fix argument type
+elferherrera created 
+[link: https://github.com/nushell/nushell/pull/5750] input and output types
+Kangaxx-0 created 
+[link: https://github.com/nushell/nushell/pull/5749] Support completion for alias and sub-command
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/5747] Temporarily disable rust-cache in tests
+, and 
+[link: https://github.com/nushell/nushell/pull/5718] Clean up README
+, and 
+[link: https://github.com/nushell/nushell/pull/5717] Statically link the CRT on Windows
+kubouch 
+[link: https://github.com/nushell/nushell/pull/5739] added 
+``$nu.scope.engine_state``
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5737] added search terms to alias
+, and 
+[link: https://github.com/nushell/nushell/pull/5730] Improves help str substring
+, and 
+[link: https://github.com/nushell/nushell/pull/5712] Attempts to add a command that checks if nushell is running with admin priveleges
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5733] made 
+``to text``
+ work more intuitively
+hustcer 
+[link: https://github.com/nushell/nushell/pull/5725] fixed: normalize some parameter names
+jaeheonji 
+[link: https://github.com/nushell/nushell/pull/5723] added search terms to category of strings
+herlon214 created 
+[link: https://github.com/nushell/nushell/pull/5715] nu-engine: better display for shape when showing help params
+sec65 
+[link: https://github.com/nushell/nushell/pull/5714] added loginshell config file #4620
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-10-twin0146.mdŸ@d0fea7082ea826f53562cfd30a8e68057086d3a154773b2baf0686b3f1a5ead8πThis week in Nushell #146ë≠Documentation⁄ˆlfritz created 
+[link: https://github.com/nushell/nushell.github.io/pull/492] Fix a couple of typos
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/491] Fix side nav links for nu book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/490] Fix some broken links
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/487] fix: update deploy workflow for checkout
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/486] Revert "Fix checkout step for feed plugin"
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/485] Fix checkout step for feed plugin
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/484] fix feed plugin configs, make it work as expected
+CAD97 created 
+[link: https://github.com/nushell/nushell.github.io/pull/489] Replace 
+``str find-replace``
+ with 
+``str replace``
+ in 
+``coming_from_bash.md``
+sec65 created 
+[link: https://github.com/nushell/nushell.github.io/pull/488] Add doc fo loginshell file #4620
+íêê⁄4Title: This week in Nushell #146
+Path: Documentation
+Content:
+lfritz created 
+[link: https://github.com/nushell/nushell.github.io/pull/492] Fix a couple of typos
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/491] Fix side nav links for nu book
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/490] Fix some broken links
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/487] fix: update deploy workflow for checkout
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/486] Revert "Fix checkout step for feed plugin"
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/485] Fix checkout step for feed plugin
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/484] fix feed plugin configs, make it work as expected
+CAD97 created 
+[link: https://github.com/nushell/nushell.github.io/pull/489] Replace 
+``str find-replace``
+ with 
+``str replace``
+ in 
+``coming_from_bash.md``
+sec65 created 
+[link: https://github.com/nushell/nushell.github.io/pull/488] Add doc fo loginshell file #4620
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-10-twin0146.mdŸ@17ca7a9b8108591efafbe230cfd679ec6ee885d4c7692d93c533de9750b45bceπThis week in Nushell #146ë™Nu_Scripts⁄ skelly37 created 
+[link: https://github.com/nushell/nu_scripts/pull/249] Update checker for /etc/hosts
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/248] cdpath.nu -- more clear for windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/247] cdpath fixed for windows
+íêê⁄[Title: This week in Nushell #146
+Path: Nu_Scripts
+Content:
+skelly37 created 
+[link: https://github.com/nushell/nu_scripts/pull/249] Update checker for /etc/hosts
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/248] cdpath.nu -- more clear for windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/247] cdpath fixed for windows
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-06-10-twin0146.mdŸ@e2e04d6ba71605493f1d2af240ae84f61cf020b7979e2c87c80b191e3c3fe20eπThis week in Nushell #146ë®reedlineŸfphiresky created 
+[link: https://github.com/nushell/reedline/pull/401] SQLite History (third version)
+íêêŸüTitle: This week in Nushell #146
+Path: reedline
+Content:
+phiresky created 
+[link: https://github.com/nushell/reedline/pull/401] SQLite History (third version)

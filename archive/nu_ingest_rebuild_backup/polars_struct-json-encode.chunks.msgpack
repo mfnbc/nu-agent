@@ -1,0 +1,74 @@
+���aarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_struct-json-encode.md�@17de663b2b6a744fe68b00b715b1e699b78f7c66d966805bfa0c5ca8cb581dcb� title: polars struct-json-encode��dataframe�Q
+
+
+
+
+
+
+
+
+``polars struct-json-encode``
+[link: /commands/categories/dataframe.md] ���ْTitle: title: polars struct-json-encode
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars struct-json-encode``
+[link: /commands/categories/dataframe.md] ��aarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_struct-json-encode.md�@8e46c029a73e63f8871ca37132e874cac28aa39f7fb5aa6d7c621d0776ed54a5� title: polars struct-json-encode��Signature�)``> polars struct-json-encode {flags} ``
+����jTitle: title: polars struct-json-encode
+Path: Signature
+Content:
+``> polars struct-json-encode {flags} ``
+��aarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_struct-json-encode.md�@63352a4f0274dd97245f8b353661727d798f6f8cb68fa59930df61966c5b7b97� title: polars struct-json-encode��Input/output types:�#input
+output
+expression
+expression
+����nTitle: title: polars struct-json-encode
+Path: Input/output types:
+Content:
+input
+output
+expression
+expression
+��aarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_struct-json-encode.md�@dbce80eca6a657def02c575979d10163e7bfd5b09026a658f63b9f835b3f7ef3� title: polars struct-json-encode��Examples�oEncode a struct as JSON
+```Fenced(Borrowed("nu"))
+> [[id person]; [1 {name: "Bob", age: 36}] [2 {name: "Betty", age: 63}]]
+                    | polars into-df -s {id: i32, person: {name: str, age: u8}}
+                    | polars select id (polars col person | polars struct-json-encode | polars as encoded)
+                    | polars sort-by id
+                    | polars collect
+╭───┬────┬───────────────────────────╮
+│ # │ id │          encoded          │
+├───┼────┼───────────────────────────┤
+│ 0 │  1 │ {"name":"Bob","age":36}   │
+│ 1 │  2 │ {"name":"Betty","age":63} │
+╰───┴────┴───────────────────────────╯
+
+
+```
+�����Title: title: polars struct-json-encode
+Path: Examples
+Content:
+Encode a struct as JSON
+```Fenced(Borrowed("nu"))
+> [[id person]; [1 {name: "Bob", age: 36}] [2 {name: "Betty", age: 63}]]
+                    | polars into-df -s {id: i32, person: {name: str, age: u8}}
+                    | polars select id (polars col person | polars struct-json-encode | polars as encoded)
+                    | polars sort-by id
+                    | polars collect
+╭───┬────┬───────────────────────────╮
+│ # │ id │          encoded          │
+├───┼────┼───────────────────────────┤
+│ 0 │  1 │ {"name":"Bob","age":36}   │
+│ 1 │  2 │ {"name":"Betty","age":63} │
+╰───┴────┴───────────────────────────╯
+
+
+```

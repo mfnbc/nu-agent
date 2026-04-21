@@ -1,0 +1,129 @@
+”’Ù@17a9f57dbe619da87604bb1257c764e2e482b93001e5d84d6bc29a9a589fa67aÚ
+ÌTitle: This week in Nushell #206
+Path: Nushell
+Content:
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/9907] re-aligned how prompt indicators work
+, and 
+[link: https://github.com/nushell/nushell/pull/9900] simplified default style and match Rust code to config
+, and 
+[link: https://github.com/nushell/nushell/pull/9893] reverted 9693 to prevent CPU hangs
+, and 
+[link: https://github.com/nushell/nushell/pull/9908] reverted "Add an option to move header on borders"
+IanManske 
+[link: https://github.com/nushell/nushell/pull/9770] replaced 
+``&Span``
+ with 
+``Span``
+ since 
+``Span``
+ is 
+``Copy``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9905] removed 
+``vectorize_over_list``
+ from python plugin
+, and 
+[link: https://github.com/nushell/nushell/pull/9898] updated the 
+``format``
+ signature to allow 
+``record``
+ to be passed in
+, and 
+[link: https://github.com/nushell/nushell/pull/9896] updated the 
+``items``
+ signature to allow 
+``any``
+ output
+, and 
+[link: https://github.com/nushell/nushell/pull/9895] updated the 
+``char``
+ signature with 
+``Table``
+, and 
+[link: https://github.com/nushell/nushell/pull/9877] updated to current reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/9866] bumped to dev version 0.83.2
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9902] renamed 
+``date format``
+ to 
+``format date``
+, and 
+[link: https://github.com/nushell/nushell/pull/9773] Module: support defining const and use const variables inside of function
+ayax79 cleaned up some dataframe commands: 
+[link: https://github.com/nushell/nushell/pull/9860] merged overloaded commands
+, and 
+[link: https://github.com/nushell/nushell/pull/9858] merging into one 
+``dfr into-nu``
+ command
+atahabaki created 
+[link: https://github.com/nushell/nushell/pull/9856] str-expand: add path flag
+, and 
+[link: https://github.com/nushell/nushell/pull/9841] str-expand: Add Escaping Example
+ghost 
+[link: https://github.com/nushell/nushell/pull/9854] made URLs clickable in error documentation
+mengsuenyan 
+[link: https://github.com/nushell/nushell/pull/9853] fixed a bug where 
+``~ | path type``
+ returned an empty string
+, and 
+[link: https://github.com/nushell/nushell/pull/9851] fixed a panic when type a statement similar to 
+``let f = 'f' $``
+ in the nushell
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9814] updated 
+``unicode-linebreak``
+ to 
+``0.1.5``
+, and 
+[link: https://github.com/nushell/nushell/pull/9788] added 
+``format duration``
+ to replace 
+``into duration --convert``
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/9796] added an option to move header on borders
+jflics6460 created 
+[link: https://github.com/nushell/nushell/pull/9771] Accept records for http subcommand headers (-H)
+’Ù@e5a7bed79f908720825a699e039430fc2437d55d7988b66aaa05111be0f106b2Ú¬Title: This week in Nushell #206
+Path: Documentation
+Content:
+LeoniePhiline created 
+[link: https://github.com/nushell/nushell.github.io/pull/996] fix(docs): Fix link to "setting environment variables"
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/993] fix(docs): Link to Command Reference led to HTTP 404
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/995] Upgrade some dependencies, and fix some broken assets import
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/994] patch: release notes for 0.83.1
+gregokent created 
+[link: https://github.com/nushell/nushell.github.io/pull/992] tweak 
+``overlay new``
+ tip
+’Ù@cd749c8a29410cff17ea88f7ee694d330f7a8b448108953c2b2ece5869a2d830ÚçTitle: This week in Nushell #206
+Path: Nu_Scripts
+Content:
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/571] rename 
+``date format``
+ to 
+``format date``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/561] fix the date schedule in the release scripts
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/570] update 
+``date format``
+ to 
+``format date``
+ in oh-my.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/568] delete codeowners file
+e2dk4r created 
+[link: https://github.com/nushell/nu_scripts/pull/567] custom-completions: scoop: fix getting environmental variables
+kjelly created 
+[link: https://github.com/nushell/nu_scripts/pull/549] Add descriptions for the docker module.
+’Ù@b7b334845eb578ba47176d7a297bd47a865bce617a37def6b36c341998afcacbÙ¹Title: This week in Nushell #206
+Path: reedline
+Content:
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/615] turn off default prompt styling (bold) to prevent leakage

@@ -1,0 +1,79 @@
+•—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-02-08-nushell_0_44.mdÙ@dc3cce4ae5c15b225b86b5a72a8ef9247c03d9e79fcf6f64e740dfd21c37acf1³title: Nushell 0.44‘Ù(Nushell 0.44 - the calm before the stormÚw
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.44 of Nu. This is the last release before engine-q becomes the new engine.
+’ÚÊTitle: title: Nushell 0.44
+Path: Nushell 0.44 - the calm before the storm
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.44 of Nu. This is the last release before engine-q becomes the new engine.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-02-08-nushell_0_44.mdÙ@9c7c69c9ec44cbe52ae5ea66d2c391a00d435615fa98732ef27bccbd54336f07³title: Nushell 0.44‘¯Where to get itÚßNu 0.44 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.44.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+’ÚTitle: title: Nushell 0.44
+Path: Where to get it
+Content:
+Nu 0.44 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.44.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-02-08-nushell_0_44.mdÙ@1e28e6e370c31d38f0e403c1dfeaf038f17e9929618472417d25861289615ff9³title: Nushell 0.44‘ªWhat's NewÙdThe 
+``drop nth``
+ command can now also take a range, allowing you to drop a range of rows as well.
+’Ù™Title: title: Nushell 0.44
+Path: What's New
+Content:
+The 
+``drop nth``
+ command can now also take a range, allowing you to drop a range of rows as well.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-02-08-nushell_0_44.mdÙ@8b4ff3a278ef63ac766a645a28d5f8cf71dfa20187e883b8d6d5c13e8997aa56³title: Nushell 0.44‘©It's timeÚšHere we are. The last release before engine-q merges into Nushell main. There are an 
+[link: https://github.com/nushell/nushell/pull/4364] enormous amount of changes coming
+, including many 
+[link: https://github.com/nushell/nushell/issues/4305] breaking changes
+. We encourage you to take a look at the breaking changes ahead of the engine-q releases so that you're familiar with the differences in commands.
+’ÚÎTitle: title: Nushell 0.44
+Path: It's time
+Content:
+Here we are. The last release before engine-q merges into Nushell main. There are an 
+[link: https://github.com/nushell/nushell/pull/4364] enormous amount of changes coming
+, including many 
+[link: https://github.com/nushell/nushell/issues/4305] breaking changes
+. We encourage you to take a look at the breaking changes ahead of the engine-q releases so that you're familiar with the differences in commands.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-02-08-nushell_0_44.mdÙ@ff09b671b2fc0a41b32cfe42355cfa43edfe0542342a94344923069fd22fc589³title: Nushell 0.44‘¯Looking forwardÚöA few things are coming up:
+After this release, engine-q will land into Nushell main. At this point, we'll work to polish it and prepare it for its first release.
+If, as we approach time for the coming release, we feel that it's close but not yet ready, we'll instead release a one-off set of binaries that you can download. This won't be a full release, but instead a beta release geared towards getting more feedback from early adopters.
+When it's ready, we'll release the first full Nushell release with engine-q. We'll likely number this by skipping versions, jumping to 0.60 to show how much has changed and also letting folks know to look for breaking changes as well.
+From there we'll keep building on the new engine, improving it for 1.0 and beyond.
+’Ú0Title: title: Nushell 0.44
+Path: Looking forward
+Content:
+A few things are coming up:
+After this release, engine-q will land into Nushell main. At this point, we'll work to polish it and prepare it for its first release.
+If, as we approach time for the coming release, we feel that it's close but not yet ready, we'll instead release a one-off set of binaries that you can download. This won't be a full release, but instead a beta release geared towards getting more feedback from early adopters.
+When it's ready, we'll release the first full Nushell release with engine-q. We'll likely number this by skipping versions, jumping to 0.60 to show how much has changed and also letting folks know to look for breaking changes as well.
+From there we'll keep building on the new engine, improving it for 1.0 and beyond.

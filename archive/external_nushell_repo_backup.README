@@ -1,0 +1,4 @@
+This folder contains the removed external/nushell.github.io snapshot and other large artifacts.
+It was created by an automated cleanup run to remove the nushell book/cookbook from the repository.
+
+Do not add this folder back into git. Keep it locally if you need to restore the removed content.

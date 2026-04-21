@@ -1,0 +1,219 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-11-30-twin0275.mdŸ@c5fd498bb634dc865eccb5d29f23c695f64db76e973edae919964c48f3a29d70πThis week in Nushell #275ëßNushell⁄›ayax79 
+[link: https://github.com/nushell/nushell/pull/14478] upgraded to polars 0.44
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14477] improved try/catch errors
+, and 
+[link: https://github.com/nushell/nushell/pull/14475] made length only operate on supported input types
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14476] removed unused 
+``FlatShape``
+s 
+``And``
+/
+``Or``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14473] updated the Rust toolchain to rust 1.81.0
+, and 
+[link: https://github.com/nushell/nushell/pull/14423] removed 
+``terminal_size``
+ crate from several places
+cptpiepmatz 
+[link: https://github.com/nushell/nushell/pull/14418] started to add WASM support again
+paulie4 
+[link: https://github.com/nushell/nushell/pull/14468] added more 
+``less``
+ key bindings and added 
+``Transition::None``
+ to 
+``explore``
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/14467] allowed inherited environment variables
+, 
+[link: https://github.com/nushell/nushell/pull/14461] updated default-files README
+, 
+[link: https://github.com/nushell/nushell/pull/14455] bumped reedline to current main
+, 
+[link: https://github.com/nushell/nushell/pull/14439] added example for PROMPT_COMMAND_RIGHT
+, 
+[link: https://github.com/nushell/nushell/pull/14436] removed long-unused 
+``autoenv``
+ tests
+, 
+[link: https://github.com/nushell/nushell/pull/14435] ensured config record is always populated during startup
+, and 
+[link: https://github.com/nushell/nushell/pull/14319] deprecated 
+``date to-record``
+ and 
+``date to-table``
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14456] updated unicode-width to 0.2
+, 
+[link: https://github.com/nushell/nushell/pull/14454] updated miette to 7.3
+, 
+[link: https://github.com/nushell/nushell/pull/14405] raised a ParseError if assigning to a non-variable or non-mutable-variable
+, 
+[link: https://github.com/nushell/nushell/pull/14385] deprecated --ignore-shell-errors and --ignore-program-errors in 
+``do``
+, and 
+[link: https://github.com/nushell/nushell/pull/14347] made 
+``std help``
+ more user friendly
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14453] propagated existing errors in 
+``insert``
+ and 
+``merge``
+, and 
+[link: https://github.com/nushell/nushell/pull/14427] added 
+``term query``
+, for querying information from terminals
+PegasusPlusUS 
+[link: https://github.com/nushell/nushell/pull/14451] fixed an unstable test case
+IanManske 
+[link: https://github.com/nushell/nushell/pull/14425] removed the obsolete 
+``ListStream``
+ type
+, 
+[link: https://github.com/nushell/nushell/pull/14369] added a 
+``Filesize``
+ type
+, 
+[link: https://github.com/nushell/nushell/pull/14345] made 
+``Hooks``
+ fields non-optional to match the new config defaults
+, and 
+[link: https://github.com/nushell/nushell/pull/14344] changed append operator to concatenation operator
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/14424] fixed: Respect sort in custom completions
+cosineblast 
+[link: https://github.com/nushell/nushell/pull/14410] implemented chunk_by operation
+amtoine 
+[link: https://github.com/nushell/nushell/pull/14334] added 
+``from ndnuon``
+ and 
+``to ndnuon``
+ to stdlib
+DziubaMaksym 
+[link: https://github.com/nushell/nushell/pull/14465] fixed a README link
+íêê⁄Title: This week in Nushell #275
+Path: Nushell
+Content:
+ayax79 
+[link: https://github.com/nushell/nushell/pull/14478] upgraded to polars 0.44
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14477] improved try/catch errors
+, and 
+[link: https://github.com/nushell/nushell/pull/14475] made length only operate on supported input types
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14476] removed unused 
+``FlatShape``
+s 
+``And``
+/
+``Or``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14473] updated the Rust toolchain to rust 1.81.0
+, and 
+[link: https://github.com/nushell/nushell/pull/14423] removed 
+``terminal_size``
+ crate from several places
+cptpiepmatz 
+[link: https://github.com/nushell/nushell/pull/14418] started to add WASM support again
+paulie4 
+[link: https://github.com/nushell/nushell/pull/14468] added more 
+``less``
+ key bindings and added 
+``Transition::None``
+ to 
+``explore``
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/14467] allowed inherited environment variables
+, 
+[link: https://github.com/nushell/nushell/pull/14461] updated default-files README
+, 
+[link: https://github.com/nushell/nushell/pull/14455] bumped reedline to current main
+, 
+[link: https://github.com/nushell/nushell/pull/14439] added example for PROMPT_COMMAND_RIGHT
+, 
+[link: https://github.com/nushell/nushell/pull/14436] removed long-unused 
+``autoenv``
+ tests
+, 
+[link: https://github.com/nushell/nushell/pull/14435] ensured config record is always populated during startup
+, and 
+[link: https://github.com/nushell/nushell/pull/14319] deprecated 
+``date to-record``
+ and 
+``date to-table``
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14456] updated unicode-width to 0.2
+, 
+[link: https://github.com/nushell/nushell/pull/14454] updated miette to 7.3
+, 
+[link: https://github.com/nushell/nushell/pull/14405] raised a ParseError if assigning to a non-variable or non-mutable-variable
+, 
+[link: https://github.com/nushell/nushell/pull/14385] deprecated --ignore-shell-errors and --ignore-program-errors in 
+``do``
+, and 
+[link: https://github.com/nushell/nushell/pull/14347] made 
+``std help``
+ more user friendly
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14453] propagated existing errors in 
+``insert``
+ and 
+``merge``
+, and 
+[link: https://github.com/nushell/nushell/pull/14427] added 
+``term query``
+, for querying information from terminals
+PegasusPlusUS 
+[link: https://github.com/nushell/nushell/pull/14451] fixed an unstable test case
+IanManske 
+[link: https://github.com/nushell/nushell/pull/14425] removed the obsolete 
+``ListStream``
+ type
+, 
+[link: https://github.com/nushell/nushell/pull/14369] added a 
+``Filesize``
+ type
+, 
+[link: https://github.com/nushell/nushell/pull/14345] made 
+``Hooks``
+ fields non-optional to match the new config defaults
+, and 
+[link: https://github.com/nushell/nushell/pull/14344] changed append operator to concatenation operator
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/14424] fixed: Respect sort in custom completions
+cosineblast 
+[link: https://github.com/nushell/nushell/pull/14410] implemented chunk_by operation
+amtoine 
+[link: https://github.com/nushell/nushell/pull/14334] added 
+``from ndnuon``
+ and 
+``to ndnuon``
+ to stdlib
+DziubaMaksym 
+[link: https://github.com/nushell/nushell/pull/14465] fixed a README link
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-11-30-twin0275.mdŸ@4c34a8873e2d742bac91ed19c4bcff9e0f8c7fda6152b06ac8c70aa217b6744eπThis week in Nushell #275ë≠Documentation⁄NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1653] updated/renamed Shells-in-Shells Chapter - 0.100 changes
+WieeRd 
+[link: https://github.com/nushell/nushell.github.io/pull/1649] updated the Fish completer to leverage nushell/nushell#14399
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1648] fixed broken links to the default config files
+íêê⁄ΩTitle: This week in Nushell #275
+Path: Documentation
+Content:
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1653] updated/renamed Shells-in-Shells Chapter - 0.100 changes
+WieeRd 
+[link: https://github.com/nushell/nushell.github.io/pull/1649] updated the Fish completer to leverage nushell/nushell#14399
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1648] fixed broken links to the default config files
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-11-30-twin0275.mdŸ@67013182375567a2f11cc24cebde34c96f4e5a2d0c6204f85f09aeb8259eeeb0πThis week in Nushell #275ë™Nu_ScriptsŸ_rikukiix 
+[link: https://github.com/nushell/nu_scripts/pull/984] added Catppuccin Frappe theme
+íêêŸöTitle: This week in Nushell #275
+Path: Nu_Scripts
+Content:
+rikukiix 
+[link: https://github.com/nushell/nu_scripts/pull/984] added Catppuccin Frappe theme

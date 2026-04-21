@@ -1,0 +1,77 @@
+•—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/port.mdÙ@1310c7400da6c9d05404624058e7553dff6fa739ec7e2a3511667d07177410e6«title: port‘§networkÙ:
+
+
+
+
+
+
+
+
+``port``
+[link: /commands/categories/network.md] ’ÙdTitle: title: port
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``port``
+[link: /commands/categories/network.md] —ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/port.mdÙ@4c1c61c7dac10bb10b0250e92006adfcc849cb3a9adfa5aa6b03b7635e2abad9«title: port‘©SignatureÙ!``> port {flags} (start) (end)``
+’ÙMTitle: title: port
+Path: Signature
+Content:
+``> port {flags} (start) (end)``
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/port.mdÙ@870d8afff27b3d71d71fa216c6f723900215a1e7d3d8b57d28dff413d977a6c8«title: port‘ªParametersÙ\``start``
+: The start port to scan (inclusive).
+``end``
+: The end port to scan (inclusive).
+’Ù‰Title: title: port
+Path: Parameters
+Content:
+``start``
+: The start port to scan (inclusive).
+``end``
+: The end port to scan (inclusive).
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/port.mdÙ@435d8e624bbfe1c0587f495cfec8c3e8b9baf8af835e2ef8bfd9331affa07287«title: port‘³Input/output types:¹input
+output
+nothing
+int
+’ÙOTitle: title: port
+Path: Input/output types:
+Content:
+input
+output
+nothing
+int
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/port.mdÙ@74083e4cd8a7b1249ec26942df678f7a7f9ebf76bdb923bc6ad9c56a8af79d4b«title: port‘¨ExamplesÙžget a free port between 3121 and 4000
+```Fenced(Borrowed("nu"))
+> port 3121 4000
+3121
+
+```
+get a free port from system
+```Fenced(Borrowed("nu"))
+> port
+
+
+```
+’ÙÉTitle: title: port
+Path: Examples
+Content:
+get a free port between 3121 and 4000
+```Fenced(Borrowed("nu"))
+> port 3121 4000
+3121
+
+```
+get a free port from system
+```Fenced(Borrowed("nu"))
+> port
+
+
+```

@@ -1,0 +1,188 @@
+–—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/grid.mdÙ@924fa048537144186dc7ed063bbb10ca3ee962cba2e48d0d4c8a589cf2d26771«title: grid‘§viewersÙ:
+
+
+
+
+
+
+
+
+``grid``
+[link: /commands/categories/viewers.md] ’ÙdTitle: title: grid
+Path: viewers
+Content:
+
+
+
+
+
+
+
+
+
+``grid``
+[link: /commands/categories/viewers.md] —ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/grid.mdÙ@d051b3bb98559a3a3fab3c46105560d138a4cca0f22ca8f761096ce293387235«title: grid‘©Signature´``> grid {flags} ``
+’Ù@Title: title: grid
+Path: Signature
+Content:
+``> grid {flags} ``
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/grid.mdÙ@d8c7f849a13d8f4a72f0e0312b2175261fa1202a4afbf2f8e8aba128d74c702f«title: grid‘¥FlagsÙş``--width, -w {int}``
+: Number of terminal columns wide (not output columns).
+``--color, -c``
+: Draw output with color.
+``--icons, -i``
+: Draw output with icons (assumes nerd font is used).
+``--separator, -s {string}``
+: Character to separate grid with.
+’Ú&Title: title: grid
+Path: Flags
+Content:
+``--width, -w {int}``
+: Number of terminal columns wide (not output columns).
+``--color, -c``
+: Draw output with color.
+``--icons, -i``
+: Draw output with icons (assumes nerd font is used).
+``--separator, -s {string}``
+: Character to separate grid with.
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/grid.mdÙ@99d9545f527252a38d05c8a9d7b8bc67b51f2ee83ec95459536ce78e1eb07489«title: grid‘³Input/output types:Ù0input
+output
+list
+<
+any
+>
+
+string
+record
+string
+’ÙfTitle: title: grid
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+any
+>
+
+string
+record
+string
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/grid.mdÙ@9021da898f659a9f6d35a602b66c113a0a4bd5577ee206b0aa95c8cc8b9b6891«title: grid‘¨ExamplesÚeRender a simple list to a grid
+```Fenced(Borrowed("nu"))
+> [1 2 3 a b c] | grid
+1 â”‚ 2 â”‚ 3 â”‚ a â”‚ b â”‚ c
+
+
+```
+The above example is the same as:
+```Fenced(Borrowed("nu"))
+> [1 2 3 a b c] | wrap name | grid
+1 â”‚ 2 â”‚ 3 â”‚ a â”‚ b â”‚ c
+
+
+```
+Render a record to a grid
+```Fenced(Borrowed("nu"))
+> {name: 'foo', b: 1, c: 2} | grid
+foo
+
+
+```
+Render a list of records to a grid
+```Fenced(Borrowed("nu"))
+> [{name: 'A', v: 1} {name: 'B', v: 2} {name: 'C', v: 3}] | grid
+A â”‚ B â”‚ C
+
+
+```
+Render a table with 'name' column in it to a grid
+```Fenced(Borrowed("nu"))
+> [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
+0.1.0 â”‚ 0.1.1 â”‚ 0.2.0
+
+
+```
+Render a table with 'name' column in it to a grid with icons and colors
+```Fenced(Borrowed("nu"))
+> [[name patch]; [Cargo.toml false] [README.md true] [SECURITY.md false]] | grid --icons --color
+
+
+```
+’ÚTitle: title: grid
+Path: Examples
+Content:
+Render a simple list to a grid
+```Fenced(Borrowed("nu"))
+> [1 2 3 a b c] | grid
+1 â”‚ 2 â”‚ 3 â”‚ a â”‚ b â”‚ c
+
+
+```
+The above example is the same as:
+```Fenced(Borrowed("nu"))
+> [1 2 3 a b c] | wrap name | grid
+1 â”‚ 2 â”‚ 3 â”‚ a â”‚ b â”‚ c
+
+
+```
+Render a record to a grid
+```Fenced(Borrowed("nu"))
+> {name: 'foo', b: 1, c: 2} | grid
+foo
+
+
+```
+Render a list of records to a grid
+```Fenced(Borrowed("nu"))
+> [{name: 'A', v: 1} {name: 'B', v: 2} {name: 'C', v: 3}] | grid
+A â”‚ B â”‚ C
+
+
+```
+Render a table with 'name' column in it to a grid
+```Fenced(Borrowed("nu"))
+> [[name patch]; [0.1.0 false] [0.1.1 true] [0.2.0 false]] | grid
+0.1.0 â”‚ 0.1.1 â”‚ 0.2.0
+
+
+```
+Render a table with 'name' column in it to a grid with icons and colors
+```Fenced(Borrowed("nu"))
+> [[name patch]; [Cargo.toml false] [README.md true] [SECURITY.md false]] | grid --icons --color
+
+
+```
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/grid.mdÙ@c49a2ead7acbb839e1ca188d8db591d82ddb138efb9354512c4e02f6d4dc0288«title: grid‘¥NotesÚvgrid was built to give a concise gridded layout for ls. however,
+
+it determines what to put in the grid by looking for a column named
+
+'name'. this works great for tables and records but for lists we
+
+need to do something different. such as with '
+[
+one two three
+]
+ | grid'
+
+it creates a fake column called 'name' for these values so that it
+
+prints out the list properly.
+’ÚTitle: title: grid
+Path: Notes
+Content:
+grid was built to give a concise gridded layout for ls. however,
+
+it determines what to put in the grid by looking for a column named
+
+'name'. this works great for tables and records but for lists we
+
+need to do something different. such as with '
+[
+one two three
+]
+ | grid'
+
+it creates a fake column called 'name' for these values so that it
+
+prints out the list properly.

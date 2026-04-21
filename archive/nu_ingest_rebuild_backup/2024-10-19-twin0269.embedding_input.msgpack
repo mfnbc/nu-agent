@@ -1,0 +1,93 @@
+”’Ù@d0d3fa8008cfa370ba69df1c2993617f7b0c20c83af92f72d5ed1eb18d1871b8ÚÞTitle: This week in Nushell #269
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14086] allowed 
+``group-by``
+ and 
+``split-by``
+ to work with other values
+, 
+[link: https://github.com/nushell/nushell/pull/14082] added rendered and json error messages in try/catch
+, 
+[link: https://github.com/nushell/nushell/pull/14077] reverted "Add the 
+``history import``
+ command"
+, and 
+[link: https://github.com/nushell/nushell/pull/14072] added 
+``like``
+ and 
+``not-like``
+ operators as synonyms for the regex operators 
+``=~``
+ and 
+``!~``
+IanManske 
+[link: https://github.com/nushell/nushell/pull/14120] fixed an issue with the last exit code not being set
+, and 
+[link: https://github.com/nushell/nushell/pull/14081] fixed keybinding parsing
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14108] added count to uniq search terms
+ and 
+[link: https://github.com/nushell/nushell/pull/14075] rate-limited save command progress bar updates
+ayax79 
+[link: https://github.com/nushell/nushell/pull/14106] updated to rust 1.80.1
+, 
+[link: https://github.com/nushell/nushell/pull/14104] implemented 
+``polars unnest``
+, and 
+[link: https://github.com/nushell/nushell/pull/14093] bumped reedline to version 0.36
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/14105] reduced duplicate dependencies on the 
+``windows``
+ crate
+devyn 
+[link: https://github.com/nushell/nushell/pull/14085] made 
+``plugin list``
+ read state from plugin registry file as well
+hustcer 
+[link: https://github.com/nushell/nushell/pull/14084] added a workflow to set milestone for a merged PR automatically
+sgvictorino 
+[link: https://github.com/nushell/nushell/pull/14074] ran ensure_flag_arg_type for short flag values
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14051] prevented 
+``use``
+ command from creating a variable with empty record if it doesn't define any constants
+ and 
+[link: https://github.com/nushell/nushell/pull/13873] changed display_error.exit_code to false by default
+’Ù@6ab91de41f6febde1f100172e66d48b03408a67799d54c7a66102d0e411a88e2Ú…Title: This week in Nushell #269
+Path: Documentation
+Content:
+chuckwondo 
+[link: https://github.com/nushell/nushell.github.io/pull/1593] fixed dataframe python example
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1592] added 0.99.1 release notes
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1588] finished 0.99.0 release notes
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1586] started 0.99.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1566] added release notes for 
+``0.99.0``
+vyadh 
+[link: https://github.com/nushell/nushell.github.io/pull/1590] updated Coming from Bash for reading a secret
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1587] refreshed Nu command docs for v0.99
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1585] updated Standard Library for 0.99
+’Ù@04139da984e4877c81997e4a6fc8d8cc859405e71f4ed5423113581cb7e0d2c3ÚYTitle: This week in Nushell #269
+Path: Nu_Scripts
+Content:
+louiss0 
+[link: https://github.com/nushell/nu_scripts/pull/976] fixed errors with yadm command file
+ and 
+[link: https://github.com/nushell/nu_scripts/pull/975] rewrote the yadm module
+bminer 
+[link: https://github.com/nushell/nu_scripts/pull/972] added find_in command to search files
+’Ù@1afc9bd7345ba48e26b69afe6ae34d824c05afb7dd7d1fccfcf63651c770fe53ÚTitle: This week in Nushell #269
+Path: reedline
+Content:
+ayax79 
+[link: https://github.com/nushell/reedline/pull/845] bumped version
+ and 
+[link: https://github.com/nushell/reedline/pull/844] implemented VI mode change inside and delete inside functionality

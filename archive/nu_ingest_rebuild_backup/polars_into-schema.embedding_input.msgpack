@@ -1,0 +1,36 @@
+���@b8f0ee518ce55b8608ea4c926c00a79edac1ba5868f5f3adbae708c85dadda26لTitle: title: polars into-schema
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars into-schema``
+[link: /commands/categories/dataframe.md] ��@94c5e61bd0b0dfce35000c3fa940be94f8508b38b5c3622dd178284e89a27a4b�\Title: title: polars into-schema
+Path: Signature
+Content:
+``> polars into-schema {flags} ``
+��@7999e0c3bffa58ed713b7940e56890180d3cde2220e86df1f4d1a80d62e7caba�cTitle: title: polars into-schema
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_schema
+��@dae4efc6aab841e4fe4b24cb2b2303a202e7392fd249518a3b2a3d64711d67c7�/Title: title: polars into-schema
+Path: Examples
+Content:
+Convert a record into a schema and back to a nu object
+```Fenced(Borrowed("nu"))
+> {a: str, b: u8} | polars into-schema | polars into-nu
+╭───┬─────╮
+│ a │ str │
+│ b │ u8  │
+╰───┴─────╯
+
+```

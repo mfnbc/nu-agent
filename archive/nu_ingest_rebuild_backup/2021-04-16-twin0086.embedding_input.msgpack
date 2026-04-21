@@ -1,0 +1,57 @@
+“’Ù@fb5501e44d68803e9acd169672787cb64852b6d8302bab62000bbd7fe9798f12ÚTTitle: This week in Nu #86
+Path: Nushell
+Content:
+fdncred cleaned up 
+[link: https://github.com/nushell/nushell/pull/3297] error reporting
+, began support for 
+[link: https://github.com/nushell/nushell/pull/3299] ``into``
+ commands
+, removed dupes from 
+[link: https://github.com/nushell/nushell/pull/3308] get commands names
+, removed 
+[link: https://github.com/nushell/nushell/pull/3311] help from the commands list in 
+``$scope``
+, 
+[link: https://github.com/nushell/nushell/pull/3319] sorted 
+``$scope``
+, improved 
+[link: https://github.com/nushell/nushell/pull/3323] ``$scope``
+ output
+jonathandturner improved 
+[link: https://github.com/nushell/nushell/pull/3300] range and internal iteration
+, more 
+[link: https://github.com/nushell/nushell/pull/3301] internal iteration improvements
+, split 
+[link: https://github.com/nushell/nushell/pull/3304] OutputStream and ActionStream
+, fixed a 
+[link: https://github.com/nushell/nushell/pull/3307] regression with auto-conversion
+, updated 
+[link: https://github.com/nushell/nushell/pull/3320] ``to``
+ and 
+``from``
+ subcommands to new command forms
+LhKipp made sure 
+[link: https://github.com/nushell/nushell/pull/3303] the rest arg was available
+kubouch improved 
+[link: https://github.com/nushell/nushell/pull/3305] filepath values
+daschl fixed the 
+[link: https://github.com/nushell/nushell/pull/3309] lib api to allow for custom commands
+lucassmg fixed 
+[link: https://github.com/nushell/nushell/pull/3322] ``echo ..``
+ from treating 
+``..``
+ as a range
+andrasio wrote up 
+[link: https://github.com/nushell/nushell/pull/3326] a guide for creating Nushell commands
+’Ù@78d537095095ee4252d1b78174f61c64926816c29b5f72e2acaaf42114009575Ù²Title: This week in Nu #86
+Path: Documentation
+Content:
+mvolkmann added a 
+[link: https://github.com/nushell/nushell.github.io/pull/119] "working with lists" chapter to the book
+’Ù@3dec33afa1e82b140c0540b8b9a93847932d3de2ce750c22f45cb425017404aaÙßTitle: This week in Nu #86
+Path: Scripts
+Content:
+efx and fdncred added new scripts to the scripts repo 
+[link: https://github.com/nushell/nu_scripts/pull/42] 1
+ and 
+[link: https://github.com/nushell/nu_scripts/pull/43] 2

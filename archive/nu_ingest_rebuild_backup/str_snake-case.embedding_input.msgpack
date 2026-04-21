@@ -1,0 +1,75 @@
+���@8accbe2e1e3c32d00b603ec9ece6c09e32a645fbb12cdfb02a6f2f22a9df7be1�xTitle: title: str snake-case
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str snake-case``
+[link: /commands/categories/strings.md] ��@2b612714e726a227684c27467feee4ed0cc051de7fddce62cf1980176a75a727�[Title: title: str snake-case
+Path: Signature
+Content:
+``> str snake-case {flags} ...rest``
+��@8aa177cf7c6bac8a2907af3c5696ac89ccb3699f4f75660bd02e327899abb91cيTitle: title: str snake-case
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert strings at the given cell paths.
+��@ef986b181fcb62c86c12c06410dbdaaef2459dcdf304d9bc37443fa1cf62aeecٗTitle: title: str snake-case
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+��@a4f7b0836fa2d554694233c77311aff488303d5a604d4d4f78a57ba225bbd9c7�(Title: title: str snake-case
+Path: Examples
+Content:
+convert a string to snake_case
+```Fenced(Borrowed("nu"))
+>  "NuShell" | str snake-case
+nu_shell
+
+```
+convert a string to snake_case
+```Fenced(Borrowed("nu"))
+>  "this_is_the_second_case" | str snake-case
+this_is_the_second_case
+
+```
+convert a string to snake_case
+```Fenced(Borrowed("nu"))
+> "this-is-the-first-case" | str snake-case
+this_is_the_first_case
+
+```
+convert a column from a table to snake_case
+```Fenced(Borrowed("nu"))
+> [[lang, gems]; [nuTest, 100]] | str snake-case lang
+╭───┬─────────┬──────╮
+│ # │  lang   │ gems │
+├───┼─────────┼──────┤
+│ 0 │ nu_test │  100 │
+╰───┴─────────┴──────╯
+
+
+```

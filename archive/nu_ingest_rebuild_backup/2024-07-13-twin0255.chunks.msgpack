@@ -1,0 +1,264 @@
+íóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-07-13-twin0255.mdŸ@fa43b42c45ad6ec0ef0746ad16cf6a318af4d92b8440672cb665d4516320f15dπThis week in Nushell #255ëßNushell⁄Tdevyn landed 
+[link: https://github.com/nushell/nushell/pull/13330] a massive Internal Representation (IR) compiler and evaluator PR üéâüéâüéâ
+ and then did lots of mostly related work: 
+[link: https://github.com/nushell/nushell/pull/13367] fixed the file count in the 
+``Debug``
+ implementation of 
+``IrBlock``
+, 
+[link: https://github.com/nushell/nushell/pull/13356] fixed the order of I/O types in 
+``take until``
+, 
+[link: https://github.com/nushell/nushell/pull/13355] included the actual output type in an OutputMismatch error
+, 
+[link: https://github.com/nushell/nushell/pull/13351] made the 
+``store-env``
+ IR instruction also update the config
+, 
+[link: https://github.com/nushell/nushell/pull/13345] added IR support to the debugger
+, 
+[link: https://github.com/nushell/nushell/pull/13343] included more argument types to 
+``view ir``
+, 
+[link: https://github.com/nushell/nushell/pull/13342] fixed the signature of 
+``view ir``
+, 
+[link: https://github.com/nushell/nushell/pull/13339] set the capacity of the Vec used in 
+``gather_captures()``
+ to the expected number of captures
+, 
+[link: https://github.com/nushell/nushell/pull/13338] avoided cloning in 
+``Signature::get_positional()``
+, 
+[link: https://github.com/nushell/nushell/pull/13334] made pipe redirections consistent and added 
+``err>|``
+ and similar forms
+, 
+[link: https://github.com/nushell/nushell/pull/13333] used Arc for environment variables on the stack
+, 
+[link: https://github.com/nushell/nushell/pull/13332] updated the config directly at assignment
+, and 
+[link: https://github.com/nushell/nushell/pull/13310] made 
+``into bits``
+ produce a bitstring stream
+.
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/13371] prevented the 
+``touch``
+ command from being added twice to the default context
+.
+fdncred 
+[link: https://github.com/nushell/nushell/pull/13363] tweaked 
+``parse``
+ usage and examples for better clarity
+ and 
+[link: https://github.com/nushell/nushell/pull/13340] did a quick fix up for IR PR as referenced
+.
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/13361] fixed 
+``select``
+ cell path renaming behavior
+, 
+[link: https://github.com/nushell/nushell/pull/13360] used conventional generic bounds
+, 
+[link: https://github.com/nushell/nushell/pull/13346] grouped dependabot updates for uutils/coreutils
+, 
+[link: https://github.com/nushell/nushell/pull/13344] bumped the yanked 
+``libc``
+ version
+, and 
+[link: https://github.com/nushell/nushell/pull/12906] documented public types in 
+``nu-protocol``
+.
+IanManske 
+[link: https://github.com/nushell/nushell/pull/13358] edited path form doc comments
+, 
+[link: https://github.com/nushell/nushell/pull/13329] continued the path migration with 
+``nu-test-support``
+, 
+[link: https://github.com/nushell/nushell/pull/13314] added and used a new 
+``Signals``
+ struct
+, and 
+[link: https://github.com/nushell/nushell/pull/13309] started the path migration
+.
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/13353] fixed unused space issues when truncation is used and header on border is configured
+ and 
+[link: https://github.com/nushell/nushell/pull/13325] fixed the kv table width issue with header_on_border configuration
+.
+132ikl 
+[link: https://github.com/nushell/nushell/pull/13337] fixed the main binary being rebuilt when nothing has changed
+.
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13335] made 
+``polars unpivot``
+ consistent with 
+``polars pivot``
+ and 
+[link: https://github.com/nushell/nushell/pull/13282] implemented a command to expose polars' pivot functionality
+.
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/13323] raised an error when using the invalid 
+``o>|``
+ pipe
+.
+ito-hiroki 
+[link: https://github.com/nushell/nushell/pull/13315] fixed 
+``from toml``
+ to handle TOML datetime correctly
+.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/13312] updated the 
+``explore``
+ feature to pass config to views at creation time
+.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/13273] upgraded Ubuntu runners to 22.04 to fix nightly build errors
+.
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/13024] fixed PWD-aware command hints
+.
+íêê⁄åTitle: This week in Nushell #255
+Path: Nushell
+Content:
+devyn landed 
+[link: https://github.com/nushell/nushell/pull/13330] a massive Internal Representation (IR) compiler and evaluator PR üéâüéâüéâ
+ and then did lots of mostly related work: 
+[link: https://github.com/nushell/nushell/pull/13367] fixed the file count in the 
+``Debug``
+ implementation of 
+``IrBlock``
+, 
+[link: https://github.com/nushell/nushell/pull/13356] fixed the order of I/O types in 
+``take until``
+, 
+[link: https://github.com/nushell/nushell/pull/13355] included the actual output type in an OutputMismatch error
+, 
+[link: https://github.com/nushell/nushell/pull/13351] made the 
+``store-env``
+ IR instruction also update the config
+, 
+[link: https://github.com/nushell/nushell/pull/13345] added IR support to the debugger
+, 
+[link: https://github.com/nushell/nushell/pull/13343] included more argument types to 
+``view ir``
+, 
+[link: https://github.com/nushell/nushell/pull/13342] fixed the signature of 
+``view ir``
+, 
+[link: https://github.com/nushell/nushell/pull/13339] set the capacity of the Vec used in 
+``gather_captures()``
+ to the expected number of captures
+, 
+[link: https://github.com/nushell/nushell/pull/13338] avoided cloning in 
+``Signature::get_positional()``
+, 
+[link: https://github.com/nushell/nushell/pull/13334] made pipe redirections consistent and added 
+``err>|``
+ and similar forms
+, 
+[link: https://github.com/nushell/nushell/pull/13333] used Arc for environment variables on the stack
+, 
+[link: https://github.com/nushell/nushell/pull/13332] updated the config directly at assignment
+, and 
+[link: https://github.com/nushell/nushell/pull/13310] made 
+``into bits``
+ produce a bitstring stream
+.
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/13371] prevented the 
+``touch``
+ command from being added twice to the default context
+.
+fdncred 
+[link: https://github.com/nushell/nushell/pull/13363] tweaked 
+``parse``
+ usage and examples for better clarity
+ and 
+[link: https://github.com/nushell/nushell/pull/13340] did a quick fix up for IR PR as referenced
+.
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/13361] fixed 
+``select``
+ cell path renaming behavior
+, 
+[link: https://github.com/nushell/nushell/pull/13360] used conventional generic bounds
+, 
+[link: https://github.com/nushell/nushell/pull/13346] grouped dependabot updates for uutils/coreutils
+, 
+[link: https://github.com/nushell/nushell/pull/13344] bumped the yanked 
+``libc``
+ version
+, and 
+[link: https://github.com/nushell/nushell/pull/12906] documented public types in 
+``nu-protocol``
+.
+IanManske 
+[link: https://github.com/nushell/nushell/pull/13358] edited path form doc comments
+, 
+[link: https://github.com/nushell/nushell/pull/13329] continued the path migration with 
+``nu-test-support``
+, 
+[link: https://github.com/nushell/nushell/pull/13314] added and used a new 
+``Signals``
+ struct
+, and 
+[link: https://github.com/nushell/nushell/pull/13309] started the path migration
+.
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/13353] fixed unused space issues when truncation is used and header on border is configured
+ and 
+[link: https://github.com/nushell/nushell/pull/13325] fixed the kv table width issue with header_on_border configuration
+.
+132ikl 
+[link: https://github.com/nushell/nushell/pull/13337] fixed the main binary being rebuilt when nothing has changed
+.
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13335] made 
+``polars unpivot``
+ consistent with 
+``polars pivot``
+ and 
+[link: https://github.com/nushell/nushell/pull/13282] implemented a command to expose polars' pivot functionality
+.
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/13323] raised an error when using the invalid 
+``o>|``
+ pipe
+.
+ito-hiroki 
+[link: https://github.com/nushell/nushell/pull/13315] fixed 
+``from toml``
+ to handle TOML datetime correctly
+.
+rgwood 
+[link: https://github.com/nushell/nushell/pull/13312] updated the 
+``explore``
+ feature to pass config to views at creation time
+.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/13273] upgraded Ubuntu runners to 22.04 to fix nightly build errors
+.
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/13024] fixed PWD-aware command hints
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-07-13-twin0255.mdŸ@52788e60e5928e34ffc7dfc700a88e01b3a01cf6174af2ae4443069387fa9a96πThis week in Nushell #255ë™Nu_Scripts⁄\cdfq152313 
+[link: https://github.com/nushell/nu_scripts/pull/893] fixed an issue where SSH config might not contain a hostname
+ and 
+[link: https://github.com/nushell/nu_scripts/pull/891] added SSH completion
+.
+devyn 
+[link: https://github.com/nushell/nu_scripts/pull/892] added a Fibonacci benchmark for fairly low-level evaluation performance
+.
+íêê⁄óTitle: This week in Nushell #255
+Path: Nu_Scripts
+Content:
+cdfq152313 
+[link: https://github.com/nushell/nu_scripts/pull/893] fixed an issue where SSH config might not contain a hostname
+ and 
+[link: https://github.com/nushell/nu_scripts/pull/891] added SSH completion
+.
+devyn 
+[link: https://github.com/nushell/nu_scripts/pull/892] added a Fibonacci benchmark for fairly low-level evaluation performance
+.

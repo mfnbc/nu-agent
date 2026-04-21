@@ -1,0 +1,34 @@
+’’Ù@4d395a9328b4d65536f4d1bb8fc9c093959fd96f68d9bb8a5e885c29b7ffc2aeÚ­Title: This week in Nushell #89
+Path: Nushell
+Content:
+kubouch ported 
+[link: https://api.github.com/repos/nushell/nushell/issues/3393] random integer & decimal to engine-p + related refactoring
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3377] ported range to engine-p
+jonathandturner updated 
+[link: https://api.github.com/repos/nushell/nushell/issues/3392] clippy fixes for new Rust version
+, improved some internals to 
+[link: https://api.github.com/repos/nushell/nushell/issues/3379] simplify down to one type of context
+Azgrom created a 
+[link: https://api.github.com/repos/nushell/nushell/issues/3388] juicy features cargo installer wrapper
+jgoday fixed 
+[link: https://api.github.com/repos/nushell/nushell/issues/3387]  #3385: Add ignore-case and duplicated options to uniq command 
+ammkrn fixed 
+[link: https://api.github.com/repos/nushell/nushell/issues/3382] dont unwrap rustyline helper in cli
+fdncred 
+[link: https://api.github.com/repos/nushell/nushell/issues/3375] added check for endian-ness, added a bytes and skip
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3374] added ability to change "#" color using header_color
+, 
+[link: https://api.github.com/repos/nushell/nushell/issues/3370] added nu-pretty-hex, add into binary, update binaryview
+onthebridgetonowhere 
+[link: https://api.github.com/repos/nushell/nushell/issues/3209] added first prototype of functionality to parse numbers in parantheses
+’Ù@e8260b36f3b036df9498d44d5b9658afe817506f5a92d072925eb92925ee40edÚ§Title: This week in Nushell #89
+Path: Nu_Scripts
+Content:
+fdncred added a 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/48] table grouping experiment, update twin to support single user per row
+ and 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/46] added TWiN weeknum guess
+efx added 
+[link: https://api.github.com/repos/nushell/nu_scripts/issues/47] a one liner to parse aws s3 ls output

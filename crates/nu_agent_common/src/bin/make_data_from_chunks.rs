@@ -4,7 +4,7 @@ use std::fs::{self, File};
 use std::io::{self, BufRead, BufReader, Write};
 
 fn main() -> anyhow::Result<()> {
-    let in_path = "build/nu_ingest/chunks.jsonl";
+    let in_path = "build/nu_ingest/chunks.nuon";
     let out_vectors = "data/nu_docs_vectors.nuon";
     let out_command_map = "data/command_map.nuon";
     let out_embed = "build/nu_ingest/embedding_input.nuon";
@@ -60,24 +60,23 @@ fn main() -> anyhow::Result<()> {
             }
         }
 
-        // write embedding_input if present
+        // collect embedding_input if present
         if let Some(e) = v.get("embedding_input") {
-            // prepare {id, text}
             if let Some(id) = v.get("id").and_then(|x| x.as_str()) {
-                let text = if e.is_string() {
-                    e.as_str().unwrap().to_string()
-                } else {
-                    e.to_string()
-                };
+                let text = if e.is_string() { e.as_str().unwrap().to_string() } else { e.to_string() };
                 let o = serde_json::json!({"id": id, "text": text});
-                writeln!(embed_out, "{}", o.to_string())?;
+                vec!push_embed(&mut embed_rows, o);
             }
         }
     }
 
-    // write vectors as a top-level JSON array (compatible with NUON parsing)
+    // write vectors as a top-level JSON array (NUON)
     let mut vecf = File::create(out_vectors)?;
     vecf.write_all(serde_json::to_string_pretty(&vec_rows)?.as_bytes())?;
+
+    // write embedding_input as a NUON JSON array
+    let mut embedf = File::create(out_embed)?;
+    embedf.write_all(serde_json::to_string_pretty(&embed_rows)?.as_bytes())?;
 
     // write command_map.nuon
     let mut out_map = serde_json::Map::new();

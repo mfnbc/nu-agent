@@ -1,0 +1,155 @@
+——ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/def.mdÙ@950530aa3bdf15800aacb31ed9d917bdab1a296e5abf93147fb1bf25d56d26e7ªtitle: def‘¤coreÙ6
+
+
+
+
+
+
+
+
+``def``
+[link: /commands/categories/core.md] ’Ù\Title: title: def
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``def``
+[link: /commands/categories/core.md] —ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/def.mdÙ@4147bee0cfac6b29fd46596a0b8737547bd4a41d14b0bb32a9a64d19c0e9f3f0ªtitle: def‘©SignatureÙ.``> def {flags} (def_name) (params) (block)``
+’ÙYTitle: title: def
+Path: Signature
+Content:
+``> def {flags} (def_name) (params) (block)``
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/def.mdÙ@b80b9c7c216d26cc34ec5d03968be14136dadb46232a2a4e35399a51a212a2d3ªtitle: def‘¥FlagsÙª``--env``
+: Keep the environment defined inside the command.
+``--wrapped``
+: Treat unknown flags and arguments as strings (requires ...rest-like parameter in signature).
+’ÙÑTitle: title: def
+Path: Flags
+Content:
+``--env``
+: Keep the environment defined inside the command.
+``--wrapped``
+: Treat unknown flags and arguments as strings (requires ...rest-like parameter in signature).
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/def.mdÙ@9e7d7c6ba67531756d9115c46537783ca7ea1a5b940b3c3a83db860a86438ea5ªtitle: def‘ªParametersÙ¼``def_name``
+: The command name to define.
+``params``
+: The command parameters, a comma-separated list inside 
+[
+]
+.
+``block``
+: The body of the command, a list of instructions inside {}.
+’ÙèTitle: title: def
+Path: Parameters
+Content:
+``def_name``
+: The command name to define.
+``params``
+: The command parameters, a comma-separated list inside 
+[
+]
+.
+``block``
+: The body of the command, a list of instructions inside {}.
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/def.mdÙ@e894fbbf403b0425259f86052bb7f87fd53a5fb476b3d6218c822e69da735046ªtitle: def‘³Input/output types:½input
+output
+nothing
+nothing
+’ÙRTitle: title: def
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/def.mdÙ@96db37025358125f0023d7fabb5a67e4a6c3b22350bce3f6f3d4176956d6e755ªtitle: def‘¨ExamplesÚ¡Define a command and run it.
+```Fenced(Borrowed("nu"))
+> def say-hi [] { echo 'hi' }; say-hi
+hi
+
+```
+Define a command and run it with parameter(s).
+```Fenced(Borrowed("nu"))
+> def say-sth [sth: string] { echo $sth }; say-sth hi
+hi
+
+```
+Set environment variable by call a custom command.
+```Fenced(Borrowed("nu"))
+> def --env foo [] { $env.BAR = "BAZ" }; foo; $env.BAR
+BAZ
+
+```
+cd affects the environment, so '--env' is required to change directory from within a command.
+```Fenced(Borrowed("nu"))
+> def --env gohome [] { cd ~ }; gohome; $env.PWD == ('~' | path expand)
+true
+
+```
+Define a custom wrapper for an external command.
+```Fenced(Borrowed("nu"))
+> def --wrapped my-echo [...rest] { ^echo ...$rest }; my-echo -e 'spam\tspam'
+spamspam
+
+```
+Define a custom command with a type signature. Passing a non-int value will result in an error.
+```Fenced(Borrowed("nu"))
+> def only_int []: int -> int { $in }; 42 | only_int
+42
+
+```
+’ÚËTitle: title: def
+Path: Examples
+Content:
+Define a command and run it.
+```Fenced(Borrowed("nu"))
+> def say-hi [] { echo 'hi' }; say-hi
+hi
+
+```
+Define a command and run it with parameter(s).
+```Fenced(Borrowed("nu"))
+> def say-sth [sth: string] { echo $sth }; say-sth hi
+hi
+
+```
+Set environment variable by call a custom command.
+```Fenced(Borrowed("nu"))
+> def --env foo [] { $env.BAR = "BAZ" }; foo; $env.BAR
+BAZ
+
+```
+cd affects the environment, so '--env' is required to change directory from within a command.
+```Fenced(Borrowed("nu"))
+> def --env gohome [] { cd ~ }; gohome; $env.PWD == ('~' | path expand)
+true
+
+```
+Define a custom wrapper for an external command.
+```Fenced(Borrowed("nu"))
+> def --wrapped my-echo [...rest] { ^echo ...$rest }; my-echo -e 'spam\tspam'
+spamspam
+
+```
+Define a custom command with a type signature. Passing a non-int value will result in an error.
+```Fenced(Borrowed("nu"))
+> def only_int []: int -> int { $in }; 42 | only_int
+42
+
+```
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/def.mdÙ@65b7d89e0f50505c2e2b97f7663aacbfaa7036f9186ad8213865e69c0470af55ªtitle: def‘¥NotesÙgThis command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+’ÙTitle: title: def
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

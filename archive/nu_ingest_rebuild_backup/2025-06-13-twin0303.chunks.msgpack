@@ -1,0 +1,352 @@
+òóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@227b19dbdde044a51c00dae59c2f5dbd99921ad38b41fdff66d9695ba57e12c0Ÿ"title: 'This Week in Nushell #303'ëŸJBelatedly published Wednesday, July 9th for PRs the week ending 2025-06-13⁄;
+
+
+
+This week, @noahfraiture made the 
+``http get``
+ and 
+``http post``
+ commands smarter. Just using 
+``http``
+ will usually choose the right verb!
+Also 
+``clip copy``
+ and 
+``clip paste``
+ are moving! You'll now find them in 
+``std``
+, rather than 
+``std-rfc``
+.
+Thanks for all the great contributions this week!
+íêê⁄øTitle: title: 'This Week in Nushell #303'
+Path: Belatedly published Wednesday, July 9th for PRs the week ending 2025-06-13
+Content:
+
+
+
+
+This week, @noahfraiture made the 
+``http get``
+ and 
+``http post``
+ commands smarter. Just using 
+``http``
+ will usually choose the right verb!
+Also 
+``clip copy``
+ and 
+``clip paste``
+ are moving! You'll now find them in 
+``std``
+, rather than 
+``std-rfc``
+.
+Thanks for all the great contributions this week!
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@b432a1e868b1444244721a37ad079a402b7402ffe39bb171530b7ecbb7169cdbŸ"title: 'This Week in Nushell #303'ëßNushell⁄eechasnovski 
+[link: https://github.com/nushell/nushell/pull/15965] added 
+``state``
+ entry to 
+``gstat``
+ (like "Clean", "Merge", "Rebase", etc.)
+ayax79:
+[link: https://github.com/nushell/nushell/pull/15964] Allowed 
+``polars schema --datatype-list``
+ to be used without pipeline input
+[link: https://github.com/nushell/nushell/pull/15963] Made polars last consistent with polars first
+[link: https://github.com/nushell/nushell/pull/15953] Added groupby support for 
+``polars last``
+Tyarel8:
+[link: https://github.com/nushell/nushell/pull/15960] Added 
+``--no-prefix``
+ flag to 
+``format number``
+[link: https://github.com/nushell/nushell/pull/15907] Improved ansi format: using 
+``_``
+ in short name and 
+``rst``
+ ‚Üí 
+``reset``
+fdncred:
+[link: https://github.com/nushell/nushell/pull/15959] Added 
+``like``
+ and 
+``not-like``
+ to 
+``help operators``
+[link: https://github.com/nushell/nushell/pull/15952] Bumped to dev version 0.105.2
+[link: https://github.com/nushell/nushell/pull/15918] Made 
+``date humanize``
+ use 
+``human_time_from_now()``
+[link: https://github.com/nushell/nushell/pull/15838] Fixed 
+``stor``
+ insert/delete collision
+liquid-dragons:
+[link: https://github.com/nushell/nushell/pull/15954] Fixed typo referring to non-existent 
+``Value::CustomValue``
+[link: https://github.com/nushell/nushell/pull/15950] Improved precision in parsing filesize values
+[link: https://github.com/nushell/nushell/pull/15925] Fixed typo in examples of the 
+``table``
+ command
+dependabot
+[
+bot
+]
+:
+[link: https://github.com/nushell/nushell/pull/15937] Bumped which from 7.0.0 to 7.0.3
+[link: https://github.com/nushell/nushell/pull/15936] Bumped titlecase from 3.5.0 to 3.6.0
+[link: https://github.com/nushell/nushell/pull/15935] Bumped ansi-str from 8.0.0 to 9.0.0
+hustcer:
+[link: https://github.com/nushell/nushell/pull/15934] Used NUSHELL_PAT for winget publish
+[link: https://github.com/nushell/nushell/pull/15933] Attempted to fix winget publish error
+[link: https://github.com/nushell/nushell/pull/15930] Bumped to version 0.105.0
+[link: https://github.com/nushell/nushell/pull/15922] Attempted to fix PAT issue for winget publish account
+cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/15932] Reverted "update nushell to use coreutils v0.1.0 crates"
+[link: https://github.com/nushell/nushell/pull/15931] Used stable reedline version for release
+[link: https://github.com/nushell/nushell/pull/15908] Downgraded calamine to 0.26 to fix build without 
+``--locked``
+JoaquinTrinanes 
+[link: https://github.com/nushell/nushell/pull/15919] made CLI use latest specified flag value when repeated
+ofek:
+[link: https://github.com/nushell/nushell/pull/15914] Enabled 
+``shell_integration.osc9_9``
+ by default on Windows
+[link: https://github.com/nushell/nushell/pull/15910] Fixed typo in example config.nu
+pyz4 
+[link: https://github.com/nushell/nushell/pull/15913] fixed polars warning by swapping pivot for pivot_stable
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/15912] pulled reedline development version
+marienz 
+[link: https://github.com/nushell/nushell/pull/15911] improved error message on spawn failure from null bytes
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/15904] attempted to make hide-env respect overlays
+zhiburt:
+[link: https://github.com/nushell/nushell/pull/15902] Reused NuRecordsValue::width in nu-table -e
+[link: https://github.com/nushell/nushell/pull/15901] Removed safety-net width check from nu-table
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/15878] prevented making unquoted file/dir paths absolute
+132ikl 
+[link: https://github.com/nushell/nushell/pull/15877] promoted clip from 
+``std-rfc``
+ to 
+``std``
+noahfraiture 
+[link: https://github.com/nushell/nushell/pull/15862] made http requests default to GET, use POST only with payload
+lazenga 
+[link: https://github.com/nushell/nushell/pull/15861] added support for centering columns via CellPaths in to-md
+íêê⁄¶Title: title: 'This Week in Nushell #303'
+Path: Nushell
+Content:
+echasnovski 
+[link: https://github.com/nushell/nushell/pull/15965] added 
+``state``
+ entry to 
+``gstat``
+ (like "Clean", "Merge", "Rebase", etc.)
+ayax79:
+[link: https://github.com/nushell/nushell/pull/15964] Allowed 
+``polars schema --datatype-list``
+ to be used without pipeline input
+[link: https://github.com/nushell/nushell/pull/15963] Made polars last consistent with polars first
+[link: https://github.com/nushell/nushell/pull/15953] Added groupby support for 
+``polars last``
+Tyarel8:
+[link: https://github.com/nushell/nushell/pull/15960] Added 
+``--no-prefix``
+ flag to 
+``format number``
+[link: https://github.com/nushell/nushell/pull/15907] Improved ansi format: using 
+``_``
+ in short name and 
+``rst``
+ ‚Üí 
+``reset``
+fdncred:
+[link: https://github.com/nushell/nushell/pull/15959] Added 
+``like``
+ and 
+``not-like``
+ to 
+``help operators``
+[link: https://github.com/nushell/nushell/pull/15952] Bumped to dev version 0.105.2
+[link: https://github.com/nushell/nushell/pull/15918] Made 
+``date humanize``
+ use 
+``human_time_from_now()``
+[link: https://github.com/nushell/nushell/pull/15838] Fixed 
+``stor``
+ insert/delete collision
+liquid-dragons:
+[link: https://github.com/nushell/nushell/pull/15954] Fixed typo referring to non-existent 
+``Value::CustomValue``
+[link: https://github.com/nushell/nushell/pull/15950] Improved precision in parsing filesize values
+[link: https://github.com/nushell/nushell/pull/15925] Fixed typo in examples of the 
+``table``
+ command
+dependabot
+[
+bot
+]
+:
+[link: https://github.com/nushell/nushell/pull/15937] Bumped which from 7.0.0 to 7.0.3
+[link: https://github.com/nushell/nushell/pull/15936] Bumped titlecase from 3.5.0 to 3.6.0
+[link: https://github.com/nushell/nushell/pull/15935] Bumped ansi-str from 8.0.0 to 9.0.0
+hustcer:
+[link: https://github.com/nushell/nushell/pull/15934] Used NUSHELL_PAT for winget publish
+[link: https://github.com/nushell/nushell/pull/15933] Attempted to fix winget publish error
+[link: https://github.com/nushell/nushell/pull/15930] Bumped to version 0.105.0
+[link: https://github.com/nushell/nushell/pull/15922] Attempted to fix PAT issue for winget publish account
+cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/15932] Reverted "update nushell to use coreutils v0.1.0 crates"
+[link: https://github.com/nushell/nushell/pull/15931] Used stable reedline version for release
+[link: https://github.com/nushell/nushell/pull/15908] Downgraded calamine to 0.26 to fix build without 
+``--locked``
+JoaquinTrinanes 
+[link: https://github.com/nushell/nushell/pull/15919] made CLI use latest specified flag value when repeated
+ofek:
+[link: https://github.com/nushell/nushell/pull/15914] Enabled 
+``shell_integration.osc9_9``
+ by default on Windows
+[link: https://github.com/nushell/nushell/pull/15910] Fixed typo in example config.nu
+pyz4 
+[link: https://github.com/nushell/nushell/pull/15913] fixed polars warning by swapping pivot for pivot_stable
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/15912] pulled reedline development version
+marienz 
+[link: https://github.com/nushell/nushell/pull/15911] improved error message on spawn failure from null bytes
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/15904] attempted to make hide-env respect overlays
+zhiburt:
+[link: https://github.com/nushell/nushell/pull/15902] Reused NuRecordsValue::width in nu-table -e
+[link: https://github.com/nushell/nushell/pull/15901] Removed safety-net width check from nu-table
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/15878] prevented making unquoted file/dir paths absolute
+132ikl 
+[link: https://github.com/nushell/nushell/pull/15877] promoted clip from 
+``std-rfc``
+ to 
+``std``
+noahfraiture 
+[link: https://github.com/nushell/nushell/pull/15862] made http requests default to GET, use POST only with payload
+lazenga 
+[link: https://github.com/nushell/nushell/pull/15861] added support for centering columns via CellPaths in to-md
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@ed3142a796282441ca3b73ab175c74093d5707bce8943e2617b3aec0f79e6090Ÿ"title: 'This Week in Nushell #303'ë¨IntegrationsŸÂhongquan 
+[link: https://github.com/nushell/integrations/pull/60] fixed maintainer script making /etc/shells empty
+hustcer 
+[link: https://github.com/nushell/integrations/pull/59] added just bump task to automate version bumping
+íêê⁄+Title: title: 'This Week in Nushell #303'
+Path: Integrations
+Content:
+hongquan 
+[link: https://github.com/nushell/integrations/pull/60] fixed maintainer script making /etc/shells empty
+hustcer 
+[link: https://github.com/nushell/integrations/pull/59] added just bump task to automate version bumping
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@08bc2e48c8bca06da10f32421f5776ca825efc587c8894c7d269dfefe1874bfbŸ"title: 'This Week in Nushell #303'ë®reedlineŸ◊dburburan 
+[link: https://github.com/nushell/reedline/pull/918] fixed panic in fuzzy completion with multibyte filenames
+mrdgo 
+[link: https://github.com/nushell/reedline/pull/882] added immediate command execution
+íêê⁄Title: title: 'This Week in Nushell #303'
+Path: reedline
+Content:
+dburburan 
+[link: https://github.com/nushell/reedline/pull/918] fixed panic in fuzzy completion with multibyte filenames
+mrdgo 
+[link: https://github.com/nushell/reedline/pull/882] added immediate command execution
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@45148a46ccc0ebfc54bf3532395b947db20cf9ab9799727e4a0bd6474405fec7Ÿ"title: 'This Week in Nushell #303'ë™Awesome NuŸ´FMotalleb 
+[link: https://github.com/nushell/awesome-nu/pull/126] improved workflow chores
+null-dev 
+[link: https://github.com/nushell/awesome-nu/pull/125] added Windmill
+íêêŸÔTitle: title: 'This Week in Nushell #303'
+Path: Awesome Nu
+Content:
+FMotalleb 
+[link: https://github.com/nushell/awesome-nu/pull/126] improved workflow chores
+null-dev 
+[link: https://github.com/nushell/awesome-nu/pull/125] added Windmill
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@67765dce4d87c51109678da2aedf97ed9041c41775b51423e0321d8ebaf1ccbaŸ"title: 'This Week in Nushell #303'ë™Nu_Scripts⁄<fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/1135] replaced 
+``filter``
+ with 
+``where``
+cptpiepmatz 
+[link: https://github.com/nushell/nu_scripts/pull/1132] updated 
+``cargo hack``
+ command for releases
+samoylovfp 
+[link: https://github.com/nushell/nu_scripts/pull/1129] fixed error in non-home paths
+íêê⁄ÄTitle: title: 'This Week in Nushell #303'
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/1135] replaced 
+``filter``
+ with 
+``where``
+cptpiepmatz 
+[link: https://github.com/nushell/nu_scripts/pull/1132] updated 
+``cargo hack``
+ command for releases
+samoylovfp 
+[link: https://github.com/nushell/nu_scripts/pull/1129] fixed error in non-home paths
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@5554f949e2630166033514c59929b6734b0a2e40a3b2b2bbbfaa4bfacb6bfe1eŸ"title: 'This Week in Nushell #303'ë≠Documentation⁄?Axlefublr 
+[link: https://github.com/nushell/nushell.github.io/pull/1946] fixed "using" -> "Using" typo
+axelcool1234:
+[link: https://github.com/nushell/nushell.github.io/pull/1945] Fixed broken link in creating_modules.md
+[link: https://github.com/nushell/nushell.github.io/pull/1944] Fixed typo in modules.md
+[link: https://github.com/nushell/nushell.github.io/pull/1943] Removed awkward newline from scripts.md
+[link: https://github.com/nushell/nushell.github.io/pull/1942] Fixed broken link in control_flow.md
+[link: https://github.com/nushell/nushell.github.io/pull/1941] Fixed erroneous Nu code in variables.md
+[link: https://github.com/nushell/nushell.github.io/pull/1933] Fixed typo in custom_commands.md
+cptpiepmatz:
+[link: https://github.com/nushell/nushell.github.io/pull/1940] Sorted same-date blog posts by path
+[link: https://github.com/nushell/nushell.github.io/pull/1939] Added release notes for 0.105.1
+[link: https://github.com/nushell/nushell.github.io/pull/1932] Added release notes for 0.105.0
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1938] refreshed Nu command docs for v0.105.0
+NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/1937] Added TWiN #302
+[link: https://github.com/nushell/nushell.github.io/pull/1936] Added TWiN 301
+[link: https://github.com/nushell/nushell.github.io/pull/1935] Added TWiN 300
+ysthakur 
+[link: https://github.com/nushell/nushell.github.io/pull/1934] moved Zoxide completer to cookbook
+blindFS 
+[link: https://github.com/nushell/nushell.github.io/pull/1847] moved zoxide completer to custom_completions
+íêê⁄ÜTitle: title: 'This Week in Nushell #303'
+Path: Documentation
+Content:
+Axlefublr 
+[link: https://github.com/nushell/nushell.github.io/pull/1946] fixed "using" -> "Using" typo
+axelcool1234:
+[link: https://github.com/nushell/nushell.github.io/pull/1945] Fixed broken link in creating_modules.md
+[link: https://github.com/nushell/nushell.github.io/pull/1944] Fixed typo in modules.md
+[link: https://github.com/nushell/nushell.github.io/pull/1943] Removed awkward newline from scripts.md
+[link: https://github.com/nushell/nushell.github.io/pull/1942] Fixed broken link in control_flow.md
+[link: https://github.com/nushell/nushell.github.io/pull/1941] Fixed erroneous Nu code in variables.md
+[link: https://github.com/nushell/nushell.github.io/pull/1933] Fixed typo in custom_commands.md
+cptpiepmatz:
+[link: https://github.com/nushell/nushell.github.io/pull/1940] Sorted same-date blog posts by path
+[link: https://github.com/nushell/nushell.github.io/pull/1939] Added release notes for 0.105.1
+[link: https://github.com/nushell/nushell.github.io/pull/1932] Added release notes for 0.105.0
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1938] refreshed Nu command docs for v0.105.0
+NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/1937] Added TWiN #302
+[link: https://github.com/nushell/nushell.github.io/pull/1936] Added TWiN 301
+[link: https://github.com/nushell/nushell.github.io/pull/1935] Added TWiN 300
+ysthakur 
+[link: https://github.com/nushell/nushell.github.io/pull/1934] moved Zoxide completer to cookbook
+blindFS 
+[link: https://github.com/nushell/nushell.github.io/pull/1847] moved zoxide completer to custom_completions
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-06-13-twin0303.mdŸ@4fa6c8a50bd3718752ff4e16ece3e02092b6e1e5ff99342cce4e0d07ea110677Ÿ"title: 'This Week in Nushell #303'ë§NUPMŸ’cptpiepmatz 
+[link: https://github.com/nushell/nupm/pull/120] bumped nu version in CI to 0.105.1
+Muttsuri 
+[link: https://github.com/nushell/nupm/pull/119] replaced deprecated "filter" with "where" in registry.nu
+íêê⁄Title: title: 'This Week in Nushell #303'
+Path: NUPM
+Content:
+cptpiepmatz 
+[link: https://github.com/nushell/nupm/pull/120] bumped nu version in CI to 0.105.1
+Muttsuri 
+[link: https://github.com/nushell/nupm/pull/119] replaced deprecated "filter" with "where" in registry.nu

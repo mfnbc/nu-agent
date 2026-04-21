@@ -1,0 +1,55 @@
+–’Ù@9ae35b83d3c945ca9a1e97042eb86290516098279dac2645514ba77eb44c449bÙfTitle: title: du
+Path: filesystem
+Content:
+
+
+
+
+
+
+
+
+
+``du``
+[link: /commands/categories/filesystem.md] ’Ù@cc53fbc985c1336d66efec73894892b2bf7f5289a3f76716c5af589e2adba7fcÙCTitle: title: du
+Path: Signature
+Content:
+``> du {flags} ...rest``
+’Ù@9bfc86fca13f26808df240a926a2c275694574fe7d98bcbc04be9fb8d284b22dÚTitle: title: du
+Path: Flags
+Content:
+``--deref, -r``
+: Dereference symlinks to their targets for size.
+``--long, -l``
+: Get underlying directories and files for each entry.
+``--exclude, -x {glob}``
+: Exclude these file names.
+``--max-depth, -d {int}``
+: Directory recursion limit.
+``--min-size, -m {int}``
+: Exclude files below this size.
+``--all, -a``
+: Include hidden files if '
+*
+' is provided.
+’Ù@6e3183d89a68622241367b85ec202a0c417e1c61dc4886e93df012a6d8f9e78dÙMTitle: title: du
+Path: Parameters
+Content:
+``...rest``
+: Starting directory.
+’Ù@9e9a096a39883f1fa02e721d454da35c2a193605b5785d680d4ba680c9deccc0ÙOTitle: title: du
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@212a365bb3ccf99c5f34528334b7e6614201fb0080294a438d95d914aef8b5a2ÙsTitle: title: du
+Path: Examples
+Content:
+Disk usage of the current directory.
+```Fenced(Borrowed("nu"))
+> du
+
+
+```

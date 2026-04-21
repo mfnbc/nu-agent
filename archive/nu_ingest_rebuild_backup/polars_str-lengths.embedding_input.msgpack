@@ -1,0 +1,62 @@
+���@8f9cc6c0e095ade4df11a8b386bdbfa52e3daa3768d89f0f3f7701fb6eae7a41لTitle: title: polars str-lengths
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars str-lengths``
+[link: /commands/categories/dataframe.md] ��@719cfb44712187b7862ac145573cfab570349a324b2bc41ba9edd66db5cc3e32�\Title: title: polars str-lengths
+Path: Signature
+Content:
+``> polars str-lengths {flags} ``
+��@505af3c7f168bdc5a7aaec5034a2c855e456e3c1bb7844c8510d9398ae425e7d�rTitle: title: polars str-lengths
+Path: Flags
+Content:
+``--bytes, -b``
+: Get the length in bytes instead of chars.
+��@24bc2e4350ecfff680a083e39bca50c2fe6fee97ce7c685fa241ce7d9da90ce6ٹTitle: title: polars str-lengths
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@e8bd067c8668d606d62b78ad74bf92b031f74c08d4b06a27f7406579d2807a17�}Title: title: polars str-lengths
+Path: Examples
+Content:
+Returns string lengths for a column
+```Fenced(Borrowed("nu"))
+> [[a]; [a] [ab] [abc]] | polars into-df | polars select (polars col a | polars str-lengths) | polars collect
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+╰───┴───╯
+
+
+```
+Returns string lengths
+```Fenced(Borrowed("nu"))
+> [a ab abc] | polars into-df | polars str-lengths
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 3 │
+╰───┴───╯
+
+
+```

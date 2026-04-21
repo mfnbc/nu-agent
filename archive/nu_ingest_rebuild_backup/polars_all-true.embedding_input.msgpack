@@ -1,0 +1,53 @@
+���@ef21ba0502c7d2321854687c47c6e0de3de5f3d8db3b6394766a267c0280b7ff�~Title: title: polars all-true
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars all-true``
+[link: /commands/categories/dataframe.md] ��@181874d577786999ae13bd8e1720b2ab61ce2e157ef4d443f5d6c154984fe389�VTitle: title: polars all-true
+Path: Signature
+Content:
+``> polars all-true {flags} ``
+��@a4300b79934c8ff2635c67d674be19957fb5d6725840a730fb0a8f6a01fa5100ْTitle: title: polars all-true
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@2aabd2a0f07ecdefb7f8378723c2d137c3b4a4b17f33edd9944840db707bb09e��Title: title: polars all-true
+Path: Examples
+Content:
+Returns true if all values are true
+```Fenced(Borrowed("nu"))
+> [true true true] | polars into-df | polars all-true
+╭───┬──────────╮
+│ # │ all_true │
+├───┼──────────┤
+│ 0 │ true     │
+╰───┴──────────╯
+
+
+```
+Checks the result from a comparison
+```Fenced(Borrowed("nu"))
+> let s = ([5 6 2 8] | polars into-df);
+    let res = ($s > 9);
+    $res | polars all-true
+╭───┬──────────╮
+│ # │ all_true │
+├───┼──────────┤
+│ 0 │ false    │
+╰───┴──────────╯
+
+
+```

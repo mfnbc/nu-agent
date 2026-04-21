@@ -1,0 +1,146 @@
+•’Ù@6504dead7cea9900a1f21e243659e5e5be3e85d3fab55d764cfbe54c3e2ff398ÚŸTitle: This week in Nushell #182
+Path: Nushell
+Content:
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/8090] update colors in dark theme
+, and 
+[link: https://github.com/nushell/nushell/pull/8086] fix rename when it is passed an empty column list to rename
+, and 
+[link: https://github.com/nushell/nushell/pull/8084] allow date grouping in group-by
+, and 
+[link: https://github.com/nushell/nushell/pull/8077] move ast command to the debug group
+, and 
+[link: https://github.com/nushell/nushell/pull/8071] relocate debug commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8048] update cargo wix to 0.3.4
+, and 
+[link: https://github.com/nushell/nushell/pull/8046] add benchmark to deprecated commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8028] add a new inspect command for more debugging
+, and 
+[link: https://github.com/nushell/nushell/pull/8018] rename benchmark to timeit
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/8073] remove spurious use from default_context.rs
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/8069] Make patch coverage check informational only
+, and 
+[link: https://github.com/nushell/nushell/pull/8059] Add a 
+``codecov.yml``
+ configuration
+, and 
+[link: https://github.com/nushell/nushell/pull/8057] Disable auto-benchmark harness for crates
+, and 
+[link: https://github.com/nushell/nushell/pull/8043] Minor clippy: inline format string
+, and 
+[link: https://github.com/nushell/nushell/pull/7948] Another shot at trying to setup codecov
+jntrnr created 
+[link: https://github.com/nushell/nushell/pull/8066] Bare word improvements
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/8065] Bump roxmltree from 0.17.0 to 0.18.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8064] Bump rstest from 0.15.0 to 0.16.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8063] Bump proptest from 1.0.0 to 1.1.0
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/8061] support multiplication operation on string and list values
+, and 
+[link: https://github.com/nushell/nushell/pull/7942] Move some 
+``from xxx``
+ commands to plugin
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/8055] Fix hidden env vars not being hidden in closures
+, and 
+[link: https://github.com/nushell/nushell/pull/7854] Benchmark each pipeline element
+bobhy created 
+[link: https://github.com/nushell/nushell/pull/8050] Improve error when regex rejects pattern. Resolution of #8037
+, and 
+[link: https://github.com/nushell/nushell/pull/7952] Syntax errors for string and int
+ryand67 created 
+[link: https://github.com/nushell/nushell/pull/8049] #8027 Hide implementation details in invalid cd call
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/8045] nu-table/ Fix table --expand issue when table with no header involved 
+, and 
+[link: https://github.com/nushell/nushell/pull/8041] nu-table/ table --collapse style fix
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8038] remove the 
+``--encoding``
+ option from 
+``register``
+ in the examples
+dmatos2012 created 
+[link: https://github.com/nushell/nushell/pull/7799] Support URLs in 
+``start``
+ command
+’Ù@88b1575b629225d3c5f28dfa60b4f3cdc0a3a73d924b0f90b01ed138c26f41beÙ Title: This week in Nushell #182
+Path: Extension
+Content:
+glcraft created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/79] Fix 
+``use``
+ syntax 
+’Ù@e820915e3ae07d94ed095aeb00f4b38dffc43c925f9df1039ef47f4b58f6d7a7ÚæTitle: This week in Nushell #182
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/787] fix #768 for zh-CN translation
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/786] fix 
+``all``
+ and 
+``any``
+ usage examples, close #758
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/783] fix #781 and update some node modules
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/785] Move 
+``book/commands``
+ to 
+``commands/commands``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/782] Move command reference to navbar
+msmart created 
+[link: https://github.com/nushell/nushell.github.io/pull/780] Fix typos in plugins.md
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/778] Add 
+``profile``
+ note and screenshot
+bobhy created 
+[link: https://github.com/nushell/nushell.github.io/pull/777] release notes for #7952
+das-g created 
+[link: https://github.com/nushell/nushell.github.io/pull/766] [
+pt-BR
+]
+ fix statement about 
+``lines``
+ output type ("tabela"â†’"lista")
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/765] [
+es
+]
+ fix statement about 
+``lines``
+ output type ("tabla"â†’"lista")
+’Ù@0e151472e4195f80c9c2007552c4b4377187a35ef8417037c099f5ad3b77b2afÚÂTitle: This week in Nushell #182
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/380] just a base64 encoder written for fun
+hyiltiz created 
+[link: https://github.com/nushell/nu_scripts/pull/379] Fix space-in-path issue and extra / at root
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/375] Fix abbrev logic
+maxim-uvarov created 
+[link: https://github.com/nushell/nu_scripts/pull/378] add a current session history menu
+Tiggax created 
+[link: https://github.com/nushell/nu_scripts/pull/377] Updated the temp.nu for 0.60.0+
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/376] Update Check-if-env-exsists to use the envs_dirs from conda info
+’Ù@acacc526ac123d9c6245a7224f01050a6903a2f8e2d834a5cbcb2a055b009f48Ù Title: This week in Nushell #182
+Path: reedline
+Content:
+rgwood created 
+[link: https://github.com/nushell/reedline/pull/538] VACUUM after deleting SQLite data

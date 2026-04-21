@@ -1,0 +1,308 @@
+ñóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-04-04-twin0293.mdŸ@cd4ab0a7e011d8d0fd91572dc78879b18d9cf756cd25950d7093903e15ec85c3Ÿ"title: 'This week in Nushell #293'ëπThis Week in Nushell #293Ÿ"
+
+
+
+Published Friday, 04-Apr 2025
+íêêŸuTitle: title: 'This week in Nushell #293'
+Path: This Week in Nushell #293
+Content:
+
+
+
+
+Published Friday, 04-Apr 2025
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-04-04-twin0293.mdŸ@0e400d7af8f923cb1cb295f0d7f447d3795b7d52ae5e32febf15ef365c103e3eŸ"title: 'This week in Nushell #293'ë™Highlights⁄ÕThanks to @LoicRiegel for two improvements to 
+``into datetime``
+ this week - The command can now use a timezone flag when parsing a specific format, and it also accepts 
+``float``
+s as input.
+A few additional improvements come to 
+``into datetime``
+ with the upgrade of the 
+``human-date-parser``
+ crate. While we don't always remember to call out upstream improvements, Nushell
+
+just wouldn't be possible without the contributions of numerous contributors outside and upstream from our repos. A huge thanks to these (usually) unsung heroes.
+@pyz4 improved the 
+``polars cast``
+ command to accept a decimal precision and scale. Thank you!
+@blindFS has enabled tab-complete for the built-in modules 
+``std``
+, 
+``std-rfc``
+, and their submodules. Woot! Thanks!
+And thanks to @vansh284 for additional exact-match improvements for completions!
+Finally, @mztikk added support on Windows for running scripts on the path.
+As always, thank you to all the contributors this week!
+íêê⁄Title: title: 'This week in Nushell #293'
+Path: Highlights
+Content:
+Thanks to @LoicRiegel for two improvements to 
+``into datetime``
+ this week - The command can now use a timezone flag when parsing a specific format, and it also accepts 
+``float``
+s as input.
+A few additional improvements come to 
+``into datetime``
+ with the upgrade of the 
+``human-date-parser``
+ crate. While we don't always remember to call out upstream improvements, Nushell
+
+just wouldn't be possible without the contributions of numerous contributors outside and upstream from our repos. A huge thanks to these (usually) unsung heroes.
+@pyz4 improved the 
+``polars cast``
+ command to accept a decimal precision and scale. Thank you!
+@blindFS has enabled tab-complete for the built-in modules 
+``std``
+, 
+``std-rfc``
+, and their submodules. Woot! Thanks!
+And thanks to @vansh284 for additional exact-match improvements for completions!
+Finally, @mztikk added support on Windows for running scripts on the path.
+As always, thank you to all the contributors this week!
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-04-04-twin0293.mdŸ@c6c1889491e4bf0eed69a5418be5e35d1eece3704905f0e47afae8165f773d4eŸ"title: 'This week in Nushell #293'ë∞Features & Fixes⁄	(mztikk 
+[link: https://github.com/nushell/nushell/pull/15486] considered PATH when running a command is a nushell script in Windows
+.
+fdncred:
+[link: https://github.com/nushell/nushell/pull/15483] bumped to the latest Rust version
+.
+[link: https://github.com/nushell/nushell/pull/15426] updated human-date-parser to 3.0
+.
+blindFS:
+[link: https://github.com/nushell/nushell/pull/15471] refactored commands to be identified by name instead of span content
+.
+[link: https://github.com/nushell/nushell/pull/15270] added stdlib virtual path completion & exportable completion
+.
+pyz4 
+[link: https://github.com/nushell/nushell/pull/15464] ``polars cast``
+: added a decimal option for the 
+``dtype``
+ parameter
+.
+WindSoilder:
+[link: https://github.com/nushell/nushell/pull/15463] updated rand and rand_chacha to 0.9
+.
+[link: https://github.com/nushell/nushell/pull/15462] updated shadow-rs to version 1
+.
+[link: https://github.com/nushell/nushell/pull/15456] removed 
+``-s``
+ and 
+``-p``
+ options in 
+``do``
+.
+migraine-user 
+[link: https://github.com/nushell/nushell/pull/15461] fixed a typo in doc_config.nu and improved the description
+.
+ysthakur:
+[link: https://github.com/nushell/nushell/pull/15458] enabled exact match behavior for any path with slashes
+.
+[link: https://github.com/nushell/nushell/pull/15457] reverted "Improve completions for exact matches (Issue #14794)"
+.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/15454] fixed upgrading and checking of typos
+.
+132ikl 
+[link: https://github.com/nushell/nushell/pull/15442] added boolean examples to 
+``any``
+ and 
+``all``
+.
+vansh284 
+[link: https://github.com/nushell/nushell/pull/15387] improved completions for exact matches (Issue #14794)
+.
+LoicRiegel:
+[link: https://github.com/nushell/nushell/pull/15370] fixed 
+``into datetime``
+ ignoring timezone with format
+.
+[link: https://github.com/nushell/nushell/pull/15297] made 
+``into duration``
+ accept floats
+.
+dependabot
+[
+bot
+]
+:
+[link: https://github.com/nushell/nushell/pull/15469] bumped crate-ci/typos from 1.31.0 to 1.31.1
+.
+[link: https://github.com/nushell/nushell/pull/15468] bumped bytesize from 1.3.2 to 1.3.3
+.
+[link: https://github.com/nushell/nushell/pull/15460] bumped array-init-cursor from 0.2.0 to 0.2.1
+.
+[link: https://github.com/nushell/nushell/pull/15418] bumped crate-ci/typos from 1.29.10 to 1.30.3
+.
+íêê⁄	rTitle: title: 'This week in Nushell #293'
+Path: Features & Fixes
+Content:
+mztikk 
+[link: https://github.com/nushell/nushell/pull/15486] considered PATH when running a command is a nushell script in Windows
+.
+fdncred:
+[link: https://github.com/nushell/nushell/pull/15483] bumped to the latest Rust version
+.
+[link: https://github.com/nushell/nushell/pull/15426] updated human-date-parser to 3.0
+.
+blindFS:
+[link: https://github.com/nushell/nushell/pull/15471] refactored commands to be identified by name instead of span content
+.
+[link: https://github.com/nushell/nushell/pull/15270] added stdlib virtual path completion & exportable completion
+.
+pyz4 
+[link: https://github.com/nushell/nushell/pull/15464] ``polars cast``
+: added a decimal option for the 
+``dtype``
+ parameter
+.
+WindSoilder:
+[link: https://github.com/nushell/nushell/pull/15463] updated rand and rand_chacha to 0.9
+.
+[link: https://github.com/nushell/nushell/pull/15462] updated shadow-rs to version 1
+.
+[link: https://github.com/nushell/nushell/pull/15456] removed 
+``-s``
+ and 
+``-p``
+ options in 
+``do``
+.
+migraine-user 
+[link: https://github.com/nushell/nushell/pull/15461] fixed a typo in doc_config.nu and improved the description
+.
+ysthakur:
+[link: https://github.com/nushell/nushell/pull/15458] enabled exact match behavior for any path with slashes
+.
+[link: https://github.com/nushell/nushell/pull/15457] reverted "Improve completions for exact matches (Issue #14794)"
+.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/15454] fixed upgrading and checking of typos
+.
+132ikl 
+[link: https://github.com/nushell/nushell/pull/15442] added boolean examples to 
+``any``
+ and 
+``all``
+.
+vansh284 
+[link: https://github.com/nushell/nushell/pull/15387] improved completions for exact matches (Issue #14794)
+.
+LoicRiegel:
+[link: https://github.com/nushell/nushell/pull/15370] fixed 
+``into datetime``
+ ignoring timezone with format
+.
+[link: https://github.com/nushell/nushell/pull/15297] made 
+``into duration``
+ accept floats
+.
+dependabot
+[
+bot
+]
+:
+[link: https://github.com/nushell/nushell/pull/15469] bumped crate-ci/typos from 1.31.0 to 1.31.1
+.
+[link: https://github.com/nushell/nushell/pull/15468] bumped bytesize from 1.3.2 to 1.3.3
+.
+[link: https://github.com/nushell/nushell/pull/15460] bumped array-init-cursor from 0.2.0 to 0.2.1
+.
+[link: https://github.com/nushell/nushell/pull/15418] bumped crate-ci/typos from 1.29.10 to 1.30.3
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-04-04-twin0293.mdŸ@2c332b9db2fe27dedb5e348c0ca6c138088af376c24e06c2a08c63e105758d58Ÿ"title: 'This week in Nushell #293'ë≠Documentation⁄1sunnyzanchi 
+[link: https://github.com/nushell/nushell.github.io/pull/1859] made positional parameters more searchable
+.
+Anabar 
+[link: https://github.com/nushell/nushell.github.io/pull/1857] fixed an erratum in the default_shell.md
+.
+dependabot
+[
+bot
+]
+ 
+[link: https://github.com/nushell/nushell.github.io/pull/1856] bumped vite from 6.0.11 to 6.0.13
+.
+bfeitknecht 
+[link: https://github.com/nushell/nushell.github.io/pull/1854] corrected the 
+``std-rfc``
+ reference
+.
+Kissaki 
+[link: https://github.com/nushell/nushell.github.io/pull/1853] clarified immutability to avoid confusion
+.
+hank20010209 
+[link: https://github.com/nushell/nushell.github.io/pull/1852] fixed broken links in configuration.md, environment.md, and explore.md
+.
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1851] added TWiN 292
+.
+antonio-caceres 
+[link: https://github.com/nushell/nushell.github.io/pull/1842] corrected light theme instructions to use the module
+.
+cosineblast 
+[link: https://github.com/nushell/nushell.github.io/pull/1826] added documentation for jobs
+.
+íêê⁄xTitle: title: 'This week in Nushell #293'
+Path: Documentation
+Content:
+sunnyzanchi 
+[link: https://github.com/nushell/nushell.github.io/pull/1859] made positional parameters more searchable
+.
+Anabar 
+[link: https://github.com/nushell/nushell.github.io/pull/1857] fixed an erratum in the default_shell.md
+.
+dependabot
+[
+bot
+]
+ 
+[link: https://github.com/nushell/nushell.github.io/pull/1856] bumped vite from 6.0.11 to 6.0.13
+.
+bfeitknecht 
+[link: https://github.com/nushell/nushell.github.io/pull/1854] corrected the 
+``std-rfc``
+ reference
+.
+Kissaki 
+[link: https://github.com/nushell/nushell.github.io/pull/1853] clarified immutability to avoid confusion
+.
+hank20010209 
+[link: https://github.com/nushell/nushell.github.io/pull/1852] fixed broken links in configuration.md, environment.md, and explore.md
+.
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1851] added TWiN 292
+.
+antonio-caceres 
+[link: https://github.com/nushell/nushell.github.io/pull/1842] corrected light theme instructions to use the module
+.
+cosineblast 
+[link: https://github.com/nushell/nushell.github.io/pull/1826] added documentation for jobs
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-04-04-twin0293.mdŸ@8a3bc75a94729c72acd945f278766d5aa6ed0f3d988f4e159e3fe2ed2511daa1Ÿ"title: 'This week in Nushell #293'ë®ReedlineŸóWindSoilder 
+[link: https://github.com/nushell/reedline/pull/902] fixed clippy: replaced 
+``last``
+ with 
+``next_back``
+ on 
+``DoubleEndedIterator``
+.
+íêêŸŸTitle: title: 'This week in Nushell #293'
+Path: Reedline
+Content:
+WindSoilder 
+[link: https://github.com/nushell/reedline/pull/902] fixed clippy: replaced 
+``last``
+ with 
+``next_back``
+ on 
+``DoubleEndedIterator``
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-04-04-twin0293.mdŸ@aacd18440be0784dd2407dc489d6a8f7369720143d2b324d6fd7906a729913ceŸ"title: 'This week in Nushell #293'ë¨IntegrationsŸqhustcer 
+[link: https://github.com/nushell/integrations/pull/45] added tests when installing Nu on loongarch64
+.
+íêêŸ∑Title: title: 'This week in Nushell #293'
+Path: Integrations
+Content:
+hustcer 
+[link: https://github.com/nushell/integrations/pull/45] added tests when installing Nu on loongarch64
+.

@@ -19,16 +19,13 @@ chrono = { version = "0.4", features = ["serde"] }
 nu_agent_common = { path = "../nu_agent_common" }
 
 # Fastembed + SurrealDB for local embeddings + persistence
-fastembed = "4.9"
-# use the 3.x surrealdb crate series from crates.io
-# Don't enable the RocksDB feature here so builds don't require system libclang/bindgen.
-# For persistence with RocksDB enable the "kv-rocksdb" feature in environments that provide
-# libclang (or set LIBCLANG_PATH). For local dev and CI we prefer the default/in-memory engine.
-surrealdb = { version = "3.0.5" }
-# arrow pulled in previously; not required by embed_runner directly and causes
-# a transitive build failure in this environment (chrono/arrow-arith ambiguity).
-# Remove to simplify local dev; add back in environments that need Arrow.
-lancedb = { version = "0.10", optional = true }
+# Align with tools/nu_embedder which uses fastembed = "5"
+fastembed = "5"
+# Persistence/DB crates removed: we persist MessagePack files as the canonical store.
+
+# Utilities used by nu-search
+rayon = "1"
+rmp-serde = "1"
 
 
 [lib]

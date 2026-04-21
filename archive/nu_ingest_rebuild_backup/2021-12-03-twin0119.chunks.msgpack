@@ -1,0 +1,301 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-03-twin0119.mdŸ@af2b04baf92d5d292a8d92f813aadcc2a3fe409171350424b14ba1730ca82603πThis week in Nushell #119ëßNushell⁄Æjt created 
+[link: https://github.com/nushell/nushell/pull/4176] Clippy 1.57 fixes
+, and 
+[link: https://github.com/nushell/nushell/pull/4174] removed 'arboard'
+ahouts 
+[link: https://github.com/nushell/nushell/pull/4175] added -l/--login flags for compatibility with other shells
+fdncred removed 
+[link: https://github.com/nushell/nushell/pull/4173] upx
+, and 
+[link: https://github.com/nushell/nushell/pull/4172] bye bye upx, let's try stripping alone
+BraulioVM 
+[link: https://github.com/nushell/nushell/pull/4157] sanitized arguments to external commands a bit better
+vmiheer fixed 
+[link: https://github.com/nushell/nushell/pull/4000] docs talking about accessing $it outside each
+íêê⁄ÊTitle: This week in Nushell #119
+Path: Nushell
+Content:
+jt created 
+[link: https://github.com/nushell/nushell/pull/4176] Clippy 1.57 fixes
+, and 
+[link: https://github.com/nushell/nushell/pull/4174] removed 'arboard'
+ahouts 
+[link: https://github.com/nushell/nushell/pull/4175] added -l/--login flags for compatibility with other shells
+fdncred removed 
+[link: https://github.com/nushell/nushell/pull/4173] upx
+, and 
+[link: https://github.com/nushell/nushell/pull/4172] bye bye upx, let's try stripping alone
+BraulioVM 
+[link: https://github.com/nushell/nushell/pull/4157] sanitized arguments to external commands a bit better
+vmiheer fixed 
+[link: https://github.com/nushell/nushell/pull/4000] docs talking about accessing $it outside each
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-03-twin0119.mdŸ@cd62a9793abbe3e2f4cf433a8d7ff849cf9329fd2db7aef4bce1e982e4b23a8bπThis week in Nushell #119ë≠DocumentationŸnrashil2000 
+[link: https://github.com/nushell/nushell.github.io/pull/208] added winget as installation method
+íêêŸ¨Title: This week in Nushell #119
+Path: Documentation
+Content:
+rashil2000 
+[link: https://github.com/nushell/nushell.github.io/pull/208] added winget as installation method
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-03-twin0119.mdŸ@a3a8b355cb2ca1e968c1b3c37b48c672692153eb656791436f408059e785752bπThis week in Nushell #119ë™Nu_Scripts⁄àkubouch 
+[link: https://github.com/nushell/nu_scripts/pull/109] fixed typo in directory name
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/108] Add example engine-q config script with a module
+skelly37 
+[link: https://github.com/nushell/nu_scripts/pull/107] documented + minor enchancement
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/106] added storm to maintainers
+íêê⁄√Title: This week in Nushell #119
+Path: Nu_Scripts
+Content:
+kubouch 
+[link: https://github.com/nushell/nu_scripts/pull/109] fixed typo in directory name
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/108] Add example engine-q config script with a module
+skelly37 
+[link: https://github.com/nushell/nu_scripts/pull/107] documented + minor enchancement
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/106] added storm to maintainers
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-03-twin0119.mdŸ@71271cb3d033974962c99e110eda84bc395bd343559bdcfc97a75aef9e778241πThis week in Nushell #119ë®engine-q⁄¬fdncred created 
+[link: https://github.com/nushell/engine-q/pull/422] this fixes garbage ansi when externals turn off vt processing
+, and 
+[link: https://github.com/nushell/engine-q/pull/401] add back debug --raw switch
+, and 
+[link: https://github.com/nushell/engine-q/pull/392] add optional footer to table
+, and 
+[link: https://github.com/nushell/engine-q/pull/391] added row_index coloring
+, and 
+[link: https://github.com/nushell/engine-q/pull/378] allow icons to be used in 
+``grid -c``
+, and 
+[link: https://github.com/nushell/engine-q/pull/376] enable env setting for prompt animation
+kubouch created 
+[link: https://github.com/nushell/engine-q/pull/421] Add canonicalization to parser paths; Improve FileNotFound error
+, and 
+[link: https://github.com/nushell/engine-q/pull/420] Fix 'help commands'; Add 'is_custom' column
+, and 
+[link: https://github.com/nushell/engine-q/pull/395] Rename add_decls() to use_decls()
+, and 
+[link: https://github.com/nushell/engine-q/pull/362] Hiding of environment variables
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/417] Plugin repeated
+, and 
+[link: https://github.com/nushell/engine-q/pull/398] Plugin path for $nu
+, and 
+[link: https://github.com/nushell/engine-q/pull/393] Plugin with evaluated call
+, and 
+[link: https://github.com/nushell/engine-q/pull/379] Testing suite for dataframes
+, and 
+[link: https://github.com/nushell/engine-q/pull/374] Option to replace command same name
+jt created 
+[link: https://github.com/nushell/engine-q/pull/415] Try some fixes for external paths
+, and 
+[link: https://github.com/nushell/engine-q/pull/413] Add table streaming
+, and 
+[link: https://github.com/nushell/engine-q/pull/411] Just a few cleanups around error messages
+, and 
+[link: https://github.com/nushell/engine-q/pull/409] Fix plurals in abbrevations
+, and 
+[link: https://github.com/nushell/engine-q/pull/407] Add value abbreviations
+, and 
+[link: https://github.com/nushell/engine-q/pull/406] Update external spawn
+, and 
+[link: https://github.com/nushell/engine-q/pull/403] Default prompt animations to off
+, and 
+[link: https://github.com/nushell/engine-q/pull/400] Move prompt animation setting to config
+, and 
+[link: https://github.com/nushell/engine-q/pull/399] Fix parse error metadata
+, and 
+[link: https://github.com/nushell/engine-q/pull/397] Introduce metadata into the pipeline
+, and 
+[link: https://github.com/nushell/engine-q/pull/372] A few help cleanups
+luccasmmg created 
+[link: https://github.com/nushell/engine-q/pull/412] ``to csv``
+ and 
+``to tsv``
+ 
+, and 
+[link: https://github.com/nushell/engine-q/pull/396] ``to url``
+ and 
+``to toml``
+, and 
+[link: https://github.com/nushell/engine-q/pull/383] From ssv from xml
+onthebridgetonowhere created 
+[link: https://github.com/nushell/engine-q/pull/408] Port str to-decimal to into decimal command.
+, and 
+[link: https://github.com/nushell/engine-q/pull/405] [
+str-trim
+]
+ Remove Arc from Arguments
+, and 
+[link: https://github.com/nushell/engine-q/pull/404] Port str upcase
+, and 
+[link: https://github.com/nushell/engine-q/pull/394] Port str trim
+, and 
+[link: https://github.com/nushell/engine-q/pull/389] Add the support of str to-int to the into int command
+, and 
+[link: https://github.com/nushell/engine-q/pull/388] Port str substring command
+jaeheonji created 
+[link: https://github.com/nushell/engine-q/pull/402] feat(random): add random-decimal
+, and 
+[link: https://github.com/nushell/engine-q/pull/390] feat(random): add random-chars
+, and 
+[link: https://github.com/nushell/engine-q/pull/366] add random commands
+sholderbach 
+[link: https://github.com/nushell/engine-q/pull/387] fixed busy poll with reedline
+Scorpil 
+[link: https://github.com/nushell/engine-q/pull/381] ported over the kill command from nushell
+, and 
+[link: https://github.com/nushell/engine-q/pull/373] Ported over the clear command from nushell
+, and 
+[link: https://github.com/nushell/engine-q/pull/371] Ported over the sleep command from nushell
+arthur-targaryen 
+[link: https://github.com/nushell/engine-q/pull/380] ported 
+``skip``
+, 
+``skip while``
+ and 
+``skip until``
+ commands
+, and 
+[link: https://github.com/nushell/engine-q/pull/375] Ported 
+``any?``
+ command
+, and 
+[link: https://github.com/nushell/engine-q/pull/365] Ported 
+``all?``
+ command
+íêê⁄˚Title: This week in Nushell #119
+Path: engine-q
+Content:
+fdncred created 
+[link: https://github.com/nushell/engine-q/pull/422] this fixes garbage ansi when externals turn off vt processing
+, and 
+[link: https://github.com/nushell/engine-q/pull/401] add back debug --raw switch
+, and 
+[link: https://github.com/nushell/engine-q/pull/392] add optional footer to table
+, and 
+[link: https://github.com/nushell/engine-q/pull/391] added row_index coloring
+, and 
+[link: https://github.com/nushell/engine-q/pull/378] allow icons to be used in 
+``grid -c``
+, and 
+[link: https://github.com/nushell/engine-q/pull/376] enable env setting for prompt animation
+kubouch created 
+[link: https://github.com/nushell/engine-q/pull/421] Add canonicalization to parser paths; Improve FileNotFound error
+, and 
+[link: https://github.com/nushell/engine-q/pull/420] Fix 'help commands'; Add 'is_custom' column
+, and 
+[link: https://github.com/nushell/engine-q/pull/395] Rename add_decls() to use_decls()
+, and 
+[link: https://github.com/nushell/engine-q/pull/362] Hiding of environment variables
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/417] Plugin repeated
+, and 
+[link: https://github.com/nushell/engine-q/pull/398] Plugin path for $nu
+, and 
+[link: https://github.com/nushell/engine-q/pull/393] Plugin with evaluated call
+, and 
+[link: https://github.com/nushell/engine-q/pull/379] Testing suite for dataframes
+, and 
+[link: https://github.com/nushell/engine-q/pull/374] Option to replace command same name
+jt created 
+[link: https://github.com/nushell/engine-q/pull/415] Try some fixes for external paths
+, and 
+[link: https://github.com/nushell/engine-q/pull/413] Add table streaming
+, and 
+[link: https://github.com/nushell/engine-q/pull/411] Just a few cleanups around error messages
+, and 
+[link: https://github.com/nushell/engine-q/pull/409] Fix plurals in abbrevations
+, and 
+[link: https://github.com/nushell/engine-q/pull/407] Add value abbreviations
+, and 
+[link: https://github.com/nushell/engine-q/pull/406] Update external spawn
+, and 
+[link: https://github.com/nushell/engine-q/pull/403] Default prompt animations to off
+, and 
+[link: https://github.com/nushell/engine-q/pull/400] Move prompt animation setting to config
+, and 
+[link: https://github.com/nushell/engine-q/pull/399] Fix parse error metadata
+, and 
+[link: https://github.com/nushell/engine-q/pull/397] Introduce metadata into the pipeline
+, and 
+[link: https://github.com/nushell/engine-q/pull/372] A few help cleanups
+luccasmmg created 
+[link: https://github.com/nushell/engine-q/pull/412] ``to csv``
+ and 
+``to tsv``
+ 
+, and 
+[link: https://github.com/nushell/engine-q/pull/396] ``to url``
+ and 
+``to toml``
+, and 
+[link: https://github.com/nushell/engine-q/pull/383] From ssv from xml
+onthebridgetonowhere created 
+[link: https://github.com/nushell/engine-q/pull/408] Port str to-decimal to into decimal command.
+, and 
+[link: https://github.com/nushell/engine-q/pull/405] [
+str-trim
+]
+ Remove Arc from Arguments
+, and 
+[link: https://github.com/nushell/engine-q/pull/404] Port str upcase
+, and 
+[link: https://github.com/nushell/engine-q/pull/394] Port str trim
+, and 
+[link: https://github.com/nushell/engine-q/pull/389] Add the support of str to-int to the into int command
+, and 
+[link: https://github.com/nushell/engine-q/pull/388] Port str substring command
+jaeheonji created 
+[link: https://github.com/nushell/engine-q/pull/402] feat(random): add random-decimal
+, and 
+[link: https://github.com/nushell/engine-q/pull/390] feat(random): add random-chars
+, and 
+[link: https://github.com/nushell/engine-q/pull/366] add random commands
+sholderbach 
+[link: https://github.com/nushell/engine-q/pull/387] fixed busy poll with reedline
+Scorpil 
+[link: https://github.com/nushell/engine-q/pull/381] ported over the kill command from nushell
+, and 
+[link: https://github.com/nushell/engine-q/pull/373] Ported over the clear command from nushell
+, and 
+[link: https://github.com/nushell/engine-q/pull/371] Ported over the sleep command from nushell
+arthur-targaryen 
+[link: https://github.com/nushell/engine-q/pull/380] ported 
+``skip``
+, 
+``skip while``
+ and 
+``skip until``
+ commands
+, and 
+[link: https://github.com/nushell/engine-q/pull/375] Ported 
+``any?``
+ command
+, and 
+[link: https://github.com/nushell/engine-q/pull/365] Ported 
+``all?``
+ command
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-03-twin0119.mdŸ@21e8d9aaf13851d5b81a37cca242308f8348aa80ed05a6e1703a5c1925523bc4πThis week in Nushell #119ë®reedline⁄sholderbach 
+[link: https://github.com/nushell/reedline/pull/192] fixed clippy style and remove unecessary stuff
+, and 
+[link: https://github.com/nushell/reedline/pull/191] Improved undo of EditCommands
+, and 
+[link: https://github.com/nushell/reedline/pull/188] Fixed busy polling when animation is disabled
+, and 
+[link: https://github.com/nushell/reedline/pull/187] Fixed cursor flickering for full repaint
+aslynatilla created 
+[link: https://github.com/nushell/reedline/pull/185] Forwarding Prompt's multiline indicator
+íêê⁄ETitle: This week in Nushell #119
+Path: reedline
+Content:
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/192] fixed clippy style and remove unecessary stuff
+, and 
+[link: https://github.com/nushell/reedline/pull/191] Improved undo of EditCommands
+, and 
+[link: https://github.com/nushell/reedline/pull/188] Fixed busy polling when animation is disabled
+, and 
+[link: https://github.com/nushell/reedline/pull/187] Fixed cursor flickering for full repaint
+aslynatilla created 
+[link: https://github.com/nushell/reedline/pull/185] Forwarding Prompt's multiline indicator

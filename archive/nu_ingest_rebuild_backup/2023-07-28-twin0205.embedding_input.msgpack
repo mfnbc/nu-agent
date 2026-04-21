@@ -1,0 +1,142 @@
+•’Ù@5d5e2dd68c277f838c7f87b10f5edb5291c051322037c2174a2d8f549dd39fcbÚ
+ŠTitle: This week in Nushell #205
+Path: Nushell
+Content:
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/9842] fixed transpose's input/output types
+, and 
+[link: https://github.com/nushell/nushell/pull/9828] fixed prepend's type
+, and 
+[link: https://github.com/nushell/nushell/pull/9827] fixed the implied collect type to 'any'
+, and 
+[link: https://github.com/nushell/nushell/pull/9816] set the rest variable to the correct type
+, and 
+[link: https://github.com/nushell/nushell/pull/9802] bumped the version to 0.83
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9836] narrowed the signature of 
+``math ceil``
+/
+``floor``
+, and 
+[link: https://github.com/nushell/nushell/pull/9830] fixed 
+``math min``
+/
+``max``
+ signatures
+, and 
+[link: https://github.com/nushell/nushell/pull/9829] fixed signature of 
+``split row``
+, and 
+[link: https://github.com/nushell/nushell/pull/9824] bumped 
+``trash``
+ in lockfile due to yank
+, and 
+[link: https://github.com/nushell/nushell/pull/9794] pinned 
+``reedline``
+ to 
+``0.22.0``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/9793] fixed signatures for cellpath access of records
+, and 
+[link: https://github.com/nushell/nushell/pull/9787] updated 
+``nu-ansi-term``
+, 
+``lscolors``
+, and 
+``reedline``
+, and added 
+[link: https://github.com/nushell/nushell/pull/9779] Abort type determination for List early
+, and 
+[link: https://github.com/nushell/nushell/pull/9778] adjusted signatures for cellpath access of tables
+, and 
+[link: https://github.com/nushell/nushell/pull/9777] removed 
+``Signature.vectorizes_over_list``
+ entirely
+, and 
+[link: https://github.com/nushell/nushell/pull/9742] used explicit in/out list types for vectorized commands
+, and 
+[link: https://github.com/nushell/nushell/pull/9741] added explicit input types for vectorized 
+``into int``
+ form
+, and 
+[link: https://github.com/nushell/nushell/pull/9739] fixed output signature of 
+``split chars``
+/
+``words``
+amtoine 
+[link: https://github.com/nushell/nushell/pull/9823] allowed 
+``print``
+ to take data as input again
+, and 
+[link: https://github.com/nushell/nushell/pull/9822] changed the signature of 
+``enumerate``
+ to 
+``any -> table``
+, and 
+[link: https://github.com/nushell/nushell/pull/9775] added 
+``table -> table``
+ to 
+``into datetime``
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9821] fixed append's signature
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9817] added input_output_type to ansi command
+, and 
+[link: https://github.com/nushell/nushell/pull/9811] bumped to dev version 0.83.1
+hustcer 
+[link: https://github.com/nushell/nushell/pull/9805] fixed command docs deployment for 
+``input listen``
+’Ù@e7c2a9c277fca1b22a5c3506ae73a1c6915438cdaac823b63796a934b820e14bÚTitle: This week in Nushell #205
+Path: Extension
+Content:
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/147] Audit fix
+gaetschwartz created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/143] Don't try to read if file doesn't exist
+’Ù@6341b202bc0d0c217a22ed46e64cb208cda1e330335bbe7eb95c414d88a177cfÚæTitle: This week in Nushell #205
+Path: Documentation
+Content:
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/991] update doc about env assignment
+mike-ninja created 
+[link: https://github.com/nushell/nushell.github.io/pull/990] Updated the oh-my-posh setup guide
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/989] give real links to our GitHub contributors
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/972] replace 
+``let-env FOO = ...``
+ by 
+``$env.FOO = ...``
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/966] Release notes for 
+``0.83``
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/987] Refresh docs for nu v0.83
+’Ù@4c88f683901fe4df41e40522322b878b64164e6ebc52818014f6972d9b49e8cfÚ—Title: This week in Nushell #205
+Path: Nu_Scripts
+Content:
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/565] add a script to bump the version of Nushell
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/562] apply some minor style fixes to the release guide
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/548] add 
+``$.version``
+ to 
+``package.nuon``
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/564] Specify that config versions need updating as well
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/563] gn allows init git repo in current directory, and use main as default branch
+’Ù@21725643c8260825bdda373ed24dbb93295e966c7122626f3a3606383f0d2c86ÚTitle: This week in Nushell #205
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/614] Bump version for 
+``0.22``
+ release
+, and 
+[link: https://github.com/nushell/reedline/pull/613] Bump 
+``nu-ansi-term``
+ to 0.49.0

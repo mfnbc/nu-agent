@@ -1,0 +1,190 @@
+”’Ù@49d42247d8ba58fb96363c0b0dfc6be97b5be8970fd3aecf2e6a19b5e7804348ÚçTitle: This week in Nushell #131
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4646] made message more readable
+, and 
+[link: https://github.com/nushell/nushell/pull/4607] fixed some more tests
+, and 
+[link: https://github.com/nushell/nushell/pull/4590] this little hack allows the color to be whatever the default is
+, and 
+[link: https://github.com/nushell/nushell/pull/4589] rename 
+``flatshape_*``
+ to 
+``shape_*``
+, and 
+[link: https://github.com/nushell/nushell/pull/4572] tweak default config to amplify theme-ability
+, and 
+[link: https://github.com/nushell/nushell/pull/4553] a few more ansi escape sequences
+zkldi created 
+[link: https://github.com/nushell/nushell/pull/4641] Document Visual C++ requirement on Windows.
+hustcer 
+[link: https://github.com/nushell/nushell/pull/4639] fixed some examples and regenerate docs, should fix: #4455
+, and 
+[link: https://github.com/nushell/nushell/pull/4627] fix: #3809, try to fix the 
+``source -h``
+ not work issue
+, and 
+[link: https://github.com/nushell/nushell/pull/4622] Add examples for command n, g, p and grid, update date now examples
+, and 
+[link: https://github.com/nushell/nushell/pull/4604] Add example for command enter, shells and view-source, update some docs
+, and 
+[link: https://github.com/nushell/nushell/pull/4597] fix strip trailing whitespace for make_docs script
+, and 
+[link: https://github.com/nushell/nushell/pull/4586] update #4455, regenerate commands' docs and update make_docs script
+, and 
+[link: https://github.com/nushell/nushell/pull/4584] Add examples for command: use,module,export def,export env and export def-env
+, and 
+[link: https://github.com/nushell/nushell/pull/4581] Add examples for command: hide, history, from yml, def-env, and table
+, and 
+[link: https://github.com/nushell/nushell/pull/4577] Add example for register,source,save,shuffle and from tsv
+, and 
+[link: https://github.com/nushell/nushell/pull/4557] Update #4455, Regenerate all commands' docs
+, and 
+[link: https://github.com/nushell/nushell/pull/4556] refactor: change column names from 'Column
+*
+' to 'column
+*
+'
+, and 
+[link: https://github.com/nushell/nushell/pull/4549] Add example for cd,transpose,detect columns,split column and split row
+, and 
+[link: https://github.com/nushell/nushell/pull/4547] feat: add examples for length,lines,reject,benchmark and drop column
+jt 
+[link: https://github.com/nushell/nushell/pull/4647] added support for stderr and exit code
+, and 
+[link: https://github.com/nushell/nushell/pull/4643] fixed Windows doc comments
+, and 
+[link: https://github.com/nushell/nushell/pull/4638] cleaned table text before rendering
+, and 
+[link: https://github.com/nushell/nushell/pull/4637] finished up with examples
+, and 
+[link: https://github.com/nushell/nushell/pull/4636] Use external exceptions in path strings
+, and 
+[link: https://github.com/nushell/nushell/pull/4635] Use metadata with lists
+, and 
+[link: https://github.com/nushell/nushell/pull/4632] Windows external exceptions
+, and 
+[link: https://github.com/nushell/nushell/pull/4629] Try again with math-like externals
+, and 
+[link: https://github.com/nushell/nushell/pull/4628] Check for external exceptions more often
+, and 
+[link: https://github.com/nushell/nushell/pull/4626] Speed up the parser and nuon parser a bit more
+, and 
+[link: https://github.com/nushell/nushell/pull/4619] Date literals
+, and 
+[link: https://github.com/nushell/nushell/pull/4612] Better ls paths
+, and 
+[link: https://github.com/nushell/nushell/pull/4606] Add support for math-like externals
+, and 
+[link: https://github.com/nushell/nushell/pull/4598] Speedup unit parse
+, and 
+[link: https://github.com/nushell/nushell/pull/4596] Compact nuon tables
+, and 
+[link: https://github.com/nushell/nushell/pull/4594] Add pipeline redirection support
+, and 
+[link: https://github.com/nushell/nushell/pull/4588] Add binary support to 'skip'
+, and 
+[link: https://github.com/nushell/nushell/pull/4587] Fix shorthand env duplicates
+, and 
+[link: https://github.com/nushell/nushell/pull/4585] Show errors when a prompt fails
+, and 
+[link: https://github.com/nushell/nushell/pull/4583] Make sure to apply captures when setting prompt
+, and 
+[link: https://github.com/nushell/nushell/pull/4582] Remove record iteration
+, and 
+[link: https://github.com/nushell/nushell/pull/4579] Improve json errors a bit
+, and 
+[link: https://github.com/nushell/nushell/pull/4576] more strict nuon handling, better nuon errors
+, and 
+[link: https://github.com/nushell/nushell/pull/4573] Add auto-cancelling previous PRs
+, and 
+[link: https://github.com/nushell/nushell/pull/4570] A few fixes to docs generation and default config
+, and 
+[link: https://github.com/nushell/nushell/pull/4568] Remove stray println
+, and 
+[link: https://github.com/nushell/nushell/pull/4565] Default config improvements
+, and 
+[link: https://github.com/nushell/nushell/pull/4560] Improve missing param error span
+, and 
+[link: https://github.com/nushell/nushell/pull/4559] Improve full help for flags
+, and 
+[link: https://github.com/nushell/nushell/pull/4546] Make 'each' implicitly filter out nothings
+, and 
+[link: https://github.com/nushell/nushell/pull/4401] Add nuon format for fun
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/4623] web_tables tests are now up and running
+, and 
+[link: https://github.com/nushell/nushell/pull/4621] replace ValueStream with ListStream
+, and 
+[link: https://github.com/nushell/nushell/pull/4614] add back in the tests for query_web in the nu_plugin_query
+, and 
+[link: https://github.com/nushell/nushell/pull/4555] change wording on config file
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/4615] allowed int and float as strings for arguments
+, and 
+[link: https://github.com/nushell/nushell/pull/4600] remove repeated function
+, and 
+[link: https://github.com/nushell/nushell/pull/4554] default config file
+, and 
+[link: https://github.com/nushell/nushell/pull/4552] flag to pass config file in nu
+, and 
+[link: https://github.com/nushell/nushell/pull/4543] Better keybinding parsing
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/4592] Look up predecl only in the working set
+, and 
+[link: https://github.com/nushell/nushell/pull/4591] Set visibility to true only when calling 
+``use``
+, and 
+[link: https://github.com/nushell/nushell/pull/4566] Use environment variable for env_conversions
+JosephTLyons 
+[link: https://github.com/nushell/nushell/pull/4575] striped trailing whitespace in files
+, and 
+[link: https://github.com/nushell/nushell/pull/4571] Add indent flag to 
+``to json``
+ (first draft)
+, and 
+[link: https://github.com/nushell/nushell/pull/4551] Reduce code duplication in 
+``to json``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/4548] Use join over custom join code
+, and 
+[link: https://github.com/nushell/nushell/pull/4544] Fix 
+``ps``
+ command to show process name only
+eggcaker 
+[link: https://github.com/nushell/nushell/pull/4558] added custom header ability to post command
+jaeheonji 
+[link: https://github.com/nushell/nushell/pull/4525] fixed lose 
+``ls_colors``
+ in some filters commands
+’Ù@61c3fb5b6532325c74fbfb3909b6370d7b41393a694a0ecb13b4328f58de594fÙ·Title: This week in Nushell #131
+Path: Documentation
+Content:
+zkldi created 
+[link: https://github.com/nushell/nushell.github.io/pull/224] Document Visual C++ requirement on Windows.
+’Ù@4d6d16919de16eb0cecbacf727fd715dd84003b7c00b5666bd8ac51a4296b8cbÚdTitle: This week in Nushell #131
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/161] reorganized site in preparation for beta and release
+WindSoilder 
+[link: https://github.com/nushell/nu_scripts/pull/160] ported conda.nu to engine-q
+stormasm created 
+[link: https://github.com/nushell/nu_scripts/pull/159] clear screen buf on mac / change ansi sequence
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/158] clear screen buffer via ansi commands
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/157] a script that shows nushell script writers parsing issues
+’Ù@90406f9553312959e30eebb086368e6924f049a92a841ac25173f77f937d1fcdÚÓTitle: This week in Nushell #131
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/325] Small fix to document need to configure completion
+, and 
+[link: https://github.com/nushell/reedline/pull/310] Bump dependencies and edition to 2021
+elferherrera created 
+[link: https://github.com/nushell/reedline/pull/322] extra row for empty menu
+, and 
+[link: https://github.com/nushell/reedline/pull/319] corrected padding for menu

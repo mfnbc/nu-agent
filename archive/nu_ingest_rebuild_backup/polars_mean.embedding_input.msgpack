@@ -1,0 +1,59 @@
+���@cb3057d8d85c70bee6a4c381f2cb806d55a289792f942162e515d4e64d1fc29a�vTitle: title: polars mean
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars mean``
+[link: /commands/categories/dataframe.md] ��@d8a073d7799cf0fc123fe6fe4772672fd26faa4808faa4e68e8d941b1cea3b00�NTitle: title: polars mean
+Path: Signature
+Content:
+``> polars mean {flags} ``
+��@31f4dccd23c8ea5e68b115868d123877b8b24622940edaf59e332a5c0b3b3079ٲTitle: title: polars mean
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@8b876b239beb53c944e4ab64f00b17077d17fdbe1d798f0044a2e40749a54425��Title: title: polars mean
+Path: Examples
+Content:
+Mean value from columns in a dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [6 2] [4 2] [2 2]] | polars into-df | polars mean
+╭───┬──────┬──────╮
+│ # │  a   │  b   │
+├───┼──────┼──────┤
+│ 0 │ 4.00 │ 2.00 │
+╰───┴──────┴──────╯
+
+
+```
+Mean aggregation for a group-by
+```Fenced(Borrowed("nu"))
+> [[a b]; [one 2] [one 4] [two 1]]
+                | polars into-df
+                | polars group-by a
+                | polars agg (polars col b | polars mean)
+                | polars collect
+                | polars sort-by a
+╭───┬─────┬──────╮
+│ # │  a  │  b   │
+├───┼─────┼──────┤
+│ 0 │ one │ 3.00 │
+│ 1 │ two │ 1.00 │
+╰───┴─────┴──────╯
+
+
+```

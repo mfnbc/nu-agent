@@ -1,0 +1,110 @@
+–—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/mut.mdÙ@98f5486380c1e705bfbc4ef5934b24cc883f5b4e064edc171e66e76bcc533d52ªtitle: mut‘¤coreÙ6
+
+
+
+
+
+
+
+
+``mut``
+[link: /commands/categories/core.md] ’Ù\Title: title: mut
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``mut``
+[link: /commands/categories/core.md] —ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/mut.mdÙ@8cfbd2384caed391cbca8018fbd4405576b4876cc8032ea5a3d46651362fac63ªtitle: mut‘©SignatureÙ-``> mut {flags} (var_name) (initial_value)``
+’ÙXTitle: title: mut
+Path: Signature
+Content:
+``> mut {flags} (var_name) (initial_value)``
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/mut.mdÙ@9ef8d51ba8006ff64e7ac2b4ec3c1cd017285ed1f382ec83c4a009f6332986a4ªtitle: mut‘ªParametersÙg``var_name``
+: The mutable variable name to create.
+``initial_value``
+: Equals sign followed by value.
+’Ù“Title: title: mut
+Path: Parameters
+Content:
+``var_name``
+: The mutable variable name to create.
+``initial_value``
+: Equals sign followed by value.
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/mut.mdÙ@4205770e2632fa04cb1dd5792cd5e5cda1471f353855e142ba76fc10eebca8c5ªtitle: mut‘³Input/output types:¹input
+output
+any
+nothing
+’ÙNTitle: title: mut
+Path: Input/output types:
+Content:
+input
+output
+any
+nothing
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/mut.mdÙ@7021d5f8535922eba233996247db4e42a6c76308e5096ff060c3f126864df5c5ªtitle: mut‘¨ExamplesÚ·Set a mutable variable to a value, then update it.
+```Fenced(Borrowed("nu"))
+> mut x = 10; $x = 12
+
+
+```
+Upsert a value inside a mutable data structure.
+```Fenced(Borrowed("nu"))
+> mut a = {b:{c:1}}; $a.b.c = 2
+
+
+```
+Set a mutable variable to the result of an expression.
+```Fenced(Borrowed("nu"))
+> mut x = 10 + 100
+
+
+```
+Set a mutable variable based on the condition.
+```Fenced(Borrowed("nu"))
+> mut x = if false { -1 } else { 1 }
+
+
+```
+’ÚáTitle: title: mut
+Path: Examples
+Content:
+Set a mutable variable to a value, then update it.
+```Fenced(Borrowed("nu"))
+> mut x = 10; $x = 12
+
+
+```
+Upsert a value inside a mutable data structure.
+```Fenced(Borrowed("nu"))
+> mut a = {b:{c:1}}; $a.b.c = 2
+
+
+```
+Set a mutable variable to the result of an expression.
+```Fenced(Borrowed("nu"))
+> mut x = 10 + 100
+
+
+```
+Set a mutable variable based on the condition.
+```Fenced(Borrowed("nu"))
+> mut x = if false { -1 } else { 1 }
+
+
+```
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/mut.mdÙ@1b6c56a3e4575b2012fc46c50923609f6434ee50493a66c1d00dc0d15acae911ªtitle: mut‘¥NotesÙgThis command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+’ÙTitle: title: mut
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

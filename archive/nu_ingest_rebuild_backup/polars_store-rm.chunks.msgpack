@@ -1,0 +1,71 @@
+•—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-rm.mdÙ@96b23b6affaad1a6228c0a29eb0671a52ede2c05a8b5c7b52392c7e7f628c01f¶title: polars store-rm‘©dataframeÙG
+
+
+
+
+
+
+
+
+``polars store-rm``
+[link: /commands/categories/dataframe.md] ’Ù~Title: title: polars store-rm
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars store-rm``
+[link: /commands/categories/dataframe.md] —ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-rm.mdÙ@269da712a3239e33194671c9cfcb3df37f5f7fb3904c4f5c8d06e04103b9753d¶title: polars store-rm‘©SignatureÙ&``> polars store-rm {flags} ...rest``
+’Ù]Title: title: polars store-rm
+Path: Signature
+Content:
+``> polars store-rm {flags} ...rest``
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-rm.mdÙ@9b56bc2bff220a6a83906b9521c15816f27fa85253c58fcdbfaf885228af6e3c¶title: polars store-rm‘ªParametersÙ)``...rest``
+: Keys of objects to remove.
+’ÙaTitle: title: polars store-rm
+Path: Parameters
+Content:
+``...rest``
+: Keys of objects to remove.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-rm.mdÙ@49fb962df02def326875957cf818a78fc12c5d85cc433fcd4317df9db344792e¶title: polars store-rm‘³Input/output types:Ù"input
+output
+any
+list
+<
+string
+>
+
+’ÙcTitle: title: polars store-rm
+Path: Input/output types:
+Content:
+input
+output
+any
+list
+<
+string
+>
+
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-rm.mdÙ@838daf47ff3d4a331fab86cf0e8159bc440a61c95934af795058d97e0eb071fc¶title: polars store-rm‘¨ExamplesÙ Removes a stored
+```Fenced(Borrowed("nu"))
+> let df = ([[a b];[1 2] [3 4]] | polars into-df);
+    polars store-ls | get key | first | polars store-rm $in
+
+
+```
+’ÙÖTitle: title: polars store-rm
+Path: Examples
+Content:
+Removes a stored
+```Fenced(Borrowed("nu"))
+> let df = ([[a b];[1 2] [3 4]] | polars into-df);
+    polars store-ls | get key | first | polars store-rm $in
+
+
+```

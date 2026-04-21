@@ -1,0 +1,19 @@
+’’Ù@b9842b7bb216775af5c80220013d55b6a663d1571007b7d211ef544bf04aa3a5ÚªTitle: Filters
+Path: Filters
+Content:
+A primary goal of Nushell is the ability to easily handle structured data in the pipeline. Nushell contains an extensive set of commands known as "filters" designed to meet these needs.
+A sample of filter commands is listed in this Guide below. For the current list of commands categorized as filters, you can run:
+```Fenced(Borrowed("nu"))
+help commands | where category == filters
+
+```
+’Ù@5cf1750b6602dd4cd43666c3189f559b8e096845d10519bc831c5aa8697f6417Ú–Title: Filters
+Path: Filters vs. Flow Control Statements
+Content:
+While it's certainly possible to modify structured data using "traditional" flow control statements like 
+``for``
+ or 
+``while``
+, filters are usually more convenient and (often far) more performant. See the 
+[link: /book/variables.html#choosing-between-mutable-and-immutable-variables] Variables section of The Book
+ for more information.

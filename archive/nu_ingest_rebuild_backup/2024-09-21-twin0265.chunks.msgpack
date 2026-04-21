@@ -1,0 +1,96 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-09-21-twin0265.mdŸ@851cbd0cf07f7a3465a7983c7554eda5152488c7619a74fd104b19596305321dπThis week in Nushell #265ëßNushell⁄Ïdevyn 
+[link: https://github.com/nushell/nushell/pull/13865] bumped version to 
+``0.98.0``
+, and 
+[link: https://github.com/nushell/nushell/pull/13718] made IR the default evaluator
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13855] improved null handling when converting from nu -> dataframe
+, and 
+[link: https://github.com/nushell/nushell/pull/13850] caught more Polars panics
+hustcer 
+[link: https://github.com/nushell/nushell/pull/13851] fixed an issue with the Nu Dockerfile
+íêê⁄$Title: This week in Nushell #265
+Path: Nushell
+Content:
+devyn 
+[link: https://github.com/nushell/nushell/pull/13865] bumped version to 
+``0.98.0``
+, and 
+[link: https://github.com/nushell/nushell/pull/13718] made IR the default evaluator
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13855] improved null handling when converting from nu -> dataframe
+, and 
+[link: https://github.com/nushell/nushell/pull/13850] caught more Polars panics
+hustcer 
+[link: https://github.com/nushell/nushell/pull/13851] fixed an issue with the Nu Dockerfile
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-09-21-twin0265.mdŸ@e44f72cbbcdbc0a4ee9034172f745932f6f001b86926c3ee42a1313c1de4db54πThis week in Nushell #265ë≠Documentation⁄zpaulie4 
+[link: https://github.com/nushell/nushell.github.io/pull/1558] added references to 
+``explore``
+ and 
+``first``
+ in 
+``coming_from_bash.md``
+nome 
+[link: https://github.com/nushell/nushell.github.io/pull/1557] removed outdated mention of $it
+cptpiepmatz 
+[link: https://github.com/nushell/nushell.github.io/pull/1556] documented the recommended MIME type for Nushell
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1555] refreshed command docs for Nu 0.98.0
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1554] fixed make_docs.nu for Nu v0.98
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1551] edited 0.98.0 release notes
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1550] started 0.98.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1541] added release notes for 
+``0.98.0``
+íêê⁄∏Title: This week in Nushell #265
+Path: Documentation
+Content:
+paulie4 
+[link: https://github.com/nushell/nushell.github.io/pull/1558] added references to 
+``explore``
+ and 
+``first``
+ in 
+``coming_from_bash.md``
+nome 
+[link: https://github.com/nushell/nushell.github.io/pull/1557] removed outdated mention of $it
+cptpiepmatz 
+[link: https://github.com/nushell/nushell.github.io/pull/1556] documented the recommended MIME type for Nushell
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1555] refreshed command docs for Nu 0.98.0
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1554] fixed make_docs.nu for Nu v0.98
+IanManske 
+[link: https://github.com/nushell/nushell.github.io/pull/1551] edited 0.98.0 release notes
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1550] started 0.98.0 release notes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1541] added release notes for 
+``0.98.0``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-09-21-twin0265.mdŸ@4e335948a2f7daa9bc62d63995cef8f1faad6e61b3c98ff7f577778111144fd9πThis week in Nushell #265ë™Nu_Scripts⁄OJarrisonn 
+[link: https://github.com/nushell/nu_scripts/pull/958] updated to new rustup help page style
+IanManske 
+[link: https://github.com/nushell/nu_scripts/pull/957] edited release notes template
+fj0r 
+[link: https://github.com/nushell/nu_scripts/pull/953] upgraded range syntax
+íêê⁄WTitle: This week in Nushell #265
+Path: Nu_Scripts
+Content:
+OJarrisonn 
+[link: https://github.com/nushell/nu_scripts/pull/958] updated to new rustup help page style
+IanManske 
+[link: https://github.com/nushell/nu_scripts/pull/957] edited release notes template
+fj0r 
+[link: https://github.com/nushell/nu_scripts/pull/953] upgraded range syntax
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-09-21-twin0265.mdŸ@58ee56a5c3b9d8fe619eed047b2c015b6a4cd38bf76ce50fa0d471ac3df5ec4fπThis week in Nushell #265ë®reedlineŸZdevyn 
+[link: https://github.com/nushell/reedline/pull/830] bumped version to 
+``0.35.0``
+íêêŸìTitle: This week in Nushell #265
+Path: reedline
+Content:
+devyn 
+[link: https://github.com/nushell/reedline/pull/830] bumped version to 
+``0.35.0``

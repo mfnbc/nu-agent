@@ -1,0 +1,224 @@
+���@3e38d4c75a2c6e774ed60d878c0a9ab315413450c6986403a4a10cc0f496c897�_Title: title: Happy Nu Year 2020
+Path: Happy Nu Year 2020
+Content:
+
+
+
+
+Happy Nu Year!
+2019 was quite the year for Nushell. We landed the initial commit on May 10th, and 1881 commits later we find ourselves at the end of 2019. What all happened this year?
+We started off with quite the bang! After quietly working on Nu for a few months, we wrote up a 
+[link: https://www.nushell.sh/blog/2019-08-23-introducing-nushell.html] blog post
+ to explain what Nu was. To our surprise, the post got a surprisingly warm reception! Soon, we were recording a podcast with the Changelog to 
+[link: https://changelog.com/podcast/363] talk about Nu
+.
+As the excitement calmed back to everyday levels, we got to the work of turning this minimum-viable product into the real thing. More than 65 people joined us to help fix bugs, test code, write docs, and explore new directions.
+��@9de45254d7ada6bf9483e91b8b702b661c1089ceb5e58b467a66255bddecb029��Title: title: Happy Nu Year 2020
+Path: Where are we?
+Content:
+At the end of 2019, where are we?
+We now have a 
+[link: https://nushell.sh] website
+, a 
+[link: https://www.nushell.sh/blog] blog
+, 
+[link: https://www.nushell.sh/book/] three
+ 
+[link: https://www.nushell.sh/contributor-book/] different
+ 
+[link: https://www.nushell.sh/cookbook/] books
+, and the results of our 
+[link: https://www.nushell.sh/blog/2019-11-23-nushell-survey-results.html] first survey
+We released 6 different releases: 
+[link: https://www.nushell.sh/blog/2019-08-23-introducing-nushell.html] 0.2
+, 
+[link: https://www.nushell.sh/blog/2019-09-24-nushell_0_3_0.html] 0.3
+, 
+[link: https://www.nushell.sh/blog/2019-10-15-nushell-0_4_0.html] 0.4
+, 
+[link: https://www.nushell.sh/blog/2019-11-05-nushell-0_5_0.html] 0.5
+, 
+[link: https://www.nushell.sh/blog/2019-11-26-nushell-0_6_0.html] 0.6
+, and 
+[link: https://www.nushell.sh/blog/2019-12-18-nushell-0_7_0.html] 0.7
+.
+Nu gained features. Lots of them. New table designs, new file formats, lots of new commands, improvements to error reporting, plugins (in 
+[link: https://github.com/lefticus/nu_plugin_calc] C++
+, 
+[link: https://vsoch.github.io/2019/nushell-plugin-golang/] Go
+, 
+[link: https://github.com/vsoch/nushell-plugin-python] Python
+, and 
+[link: https://github.com/andrasio/nu-plugin/tree/master/examples] Ruby
+), new colors, support for streaming tables, vi mode, moved to the stable Rust compiler, login shell support, recycle bin support, starship.rs support, fuzzy matching, duration and date comparison, ranges, improved autocomplete, and a bunch of internal improvements to make way for 2020.
+Thanks to all the reports, PRs, and help debugging we've made a ton of progress in making Nu more stable and complete
+��@190a941e8c5a6ec9e699d26342f3e59d0862849beead94888238cee7dd2d3940�Title: title: Happy Nu Year 2020
+Path: What's ahead?
+Content:
+That said, it's "
+[link: https://twitter.com/yoshuawuyts/status/1210367651354161152?s=20] def early days
+" for Nu, as one recent user put it. We couldn't agree more. It's not 
+quite
+ ready for people to use as their everyday shell. Things we're working on in 2020 to make it possible for everyone to use Nu in their day-to-day work:
+Stability fixes! We'll be working hard to make Nu rock solid.
+Aliases, variables, functions, scripts
+Better integration with the native OS
+Improved line editing
+A better motto (lots of people confused about what "Github-era" means)
+In short, it's been a lot of fun, a lot of work, and we met some new friends along the way. A very big "thanks!" to all our contributors this year!
+��@4d9c118fac1d3aa33611b6b80ad053a0af9624b2664a5bef6f83c1dc3b553a51�?Title: title: Happy Nu Year 2020
+Path: Nushell repo
+Content:
+```Fenced(Borrowed("shell"))
+> fetch https://api.github.com/repos/nushell/nushell/stats/contributors | get author | sort-by login | get login
+────┬───────────────────
+ #  │ <value>
+────┼───────────────────
+  0 │ Aloso
+  1 │ BatmanAoD
+  2 │ BradyBromley
+  3 │ BurNiinTRee
+  4 │ Detegr
+  5 │ DrSensor
+  6 │ Flare576
+  7 │ GuillaumeGomez
+  8 │ JesterOrNot
+  9 │ JonnyWalker81
+ 10 │ Paradiesstaub
+ 11 │ Porges
+ 12 │ Southclaws
+ 13 │ aidanharris
+ 14 │ andrasio
+ 15 │ bndbsh
+ 16 │ chhetripradeep
+ 17 │ coolshaurya
+ 18 │ cristicismas
+ 19 │ davidrobertmason
+ 20 │ devnought
+ 21 │ djc
+ 22 │ drmason13
+ 23 │ eoinkelly
+ 24 │ est31
+ 25 │ gilesv
+ 26 │ iamcodemaker
+ 27 │ incrop
+ 28 │ ineol
+ 29 │ jankoprowski
+ 30 │ jdvr
+ 31 │ jerodsanto
+ 32 │ landaire
+ 33 │ lesichkovm
+ 34 │ marcelocg
+ 35 │ max-sixty
+ 36 │ mfarberbrodsky
+ 37 │ miller-time
+ 38 │ mlbright
+ 39 │ nalshihabi
+ 40 │ naufraghi
+ 41 │ notryanb
+ 42 │ oknozor
+ 43 │ orf
+ 44 │ oskarskog
+ 45 │ piotrek-szczygiel
+ 46 │ pizzafox
+ 47 │ pka
+ 48 │ pmeredit
+ 49 │ quebin31
+ ───┴───────────────────
+────┬───────────────
+ #  │ <value>
+────┼───────────────
+ 50 │ ramonsnir
+ 51 │ rnxpyke
+ 52 │ rtlechow
+ 53 │ sdfnz
+ 54 │ sebastian-xyz
+ 55 │ sophiajt
+ 56 │ svartalf
+ 57 │ t-hart
+ 58 │ taiki-e
+ 59 │ tchak
+ 60 │ thegedge
+ 61 │ tim77
+ 62 │ twe4ked
+ 63 │ uma0317
+ 64 │ vsoch
+ 65 │ vthriller
+ 66 │ wycats
+ 67 │ yaahc
+ 68 │ yahsinhuangtw
+────┴───────────────
+
+```
+��@00f2467d2207ad2764bf6784a8e9f8f0114e15c5c6b5434c817a527c2aed6110��Title: title: Happy Nu Year 2020
+Path: Nushell book repo
+Content:
+```Fenced(Borrowed("shell"))
+> fetch https://api.github.com/repos/nushell/book/stats/contributors | get author | sort-by login | get login
+────┬─────────────────
+ #  │ <value>
+────┼─────────────────
+  0 │ Andrew-Webb
+  1 │ andrasio
+  2 │ boisgera
+  3 │ jankoprowski
+  4 │ landaire
+  5 │ lord
+  6 │ marcelocg
+  7 │ mistydemeo
+  8 │ mlh758
+  9 │ pizzafox
+ 10 │ pka
+ 11 │ romanlevin
+ 12 │ rtlechow
+ 13 │ sebastian-xyz
+ 14 │ sophiajt
+ 15 │ ymgyt
+────┴─────────────────
+
+```
+��@8043d31e06ea852c6760f54971697347d8bfee28a5d9337a7941faa99d4284e5�Title: title: Happy Nu Year 2020
+Path: Contributor book
+Content:
+```Fenced(Borrowed("shell"))
+> fetch https://api.github.com/repos/nushell/contributor-book/stats/contributors | get author | sort-by login | get login
+───┬─────────────────
+ # │ <value>
+───┼─────────────────
+ 0 │ andrasio
+ 1 │ daveremy
+ 2 │ jankoprowski
+ 3 │ sophiajt
+ 4 │ sebastian-xyz
+───┴─────────────────
+
+```
+��@94a1324a6191aeebbf4566c5ca02e7b3827837eac149941103d14863855b0aa4��Title: title: Happy Nu Year 2020
+Path: Cookbook
+Content:
+```Fenced(Borrowed("shell"))
+> fetch https://api.github.com/repos/nushell/cookbook/stats/contributors | get author | sort-by login | get login
+───┬─────────────────
+ # │ <value>
+───┼─────────────────
+ 0 │ sophiajt
+ 1 │ notryanb
+ 2 │ sebastian-xyz
+───┴─────────────────
+
+```
+��@72b9e33452403dadeeecf8b0212346750b7d9fc1bba45e8638e95ff3969b87bd��Title: title: Happy Nu Year 2020
+Path: Blog
+Content:
+```Fenced(Borrowed("shell"))
+> fetch https://api.github.com/repos/nushell/blog/stats/contributors | get author | sort-by login | get login
+───┬─────────────────
+ # │ <value>
+───┼─────────────────
+ 0 │ Aloso
+ 1 │ sophiajt
+ 2 │ sebastian-xyz
+ 3 │ waldyrious
+───┴─────────────────
+
+```

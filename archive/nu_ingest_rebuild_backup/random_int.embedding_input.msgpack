@@ -1,0 +1,56 @@
+•’Ù@38aa997fbb18e0314d5f613b01960df58495ec880a721364781fcf311035d9fbÙnTitle: title: random int
+Path: random
+Content:
+
+
+
+
+
+
+
+
+
+``random int``
+[link: /commands/categories/random.md] ’Ù@30d1264f3d962c951cc243027bbe993e2680de88138c3c2d77278eb2729e8de4ÙSTitle: title: random int
+Path: Signature
+Content:
+``> random int {flags} (range)``
+’Ù@f6146a34bef05f6e947bb0e8e8012f45c647e7ca953a21870ee7d384b7da7ae5Ù‚Title: title: random int
+Path: Parameters
+Content:
+``range``
+: Range of potential values, inclusive of both start and end values.
+’Ù@1cea358139d3bf0bb3870e1f18a48a7c7f90472777e65ccc4472da79059e8089ÙUTitle: title: random int
+Path: Input/output types:
+Content:
+input
+output
+nothing
+int
+’Ù@0c0566ee31f6a4f36e40607acafc9d484fed37e6a9c34e8eb8203505f007c3afÚìTitle: title: random int
+Path: Examples
+Content:
+Generate a non-negative random integer.
+```Fenced(Borrowed("nu"))
+> random int
+
+
+```
+Generate a random integer between 0 (inclusive) and 500 (inclusive).
+```Fenced(Borrowed("nu"))
+> random int ..500
+
+
+```
+Generate a random integer greater than or equal to 100000.
+```Fenced(Borrowed("nu"))
+> random int 100000..
+
+
+```
+Generate a random integer between -10 (inclusive) and 10 (inclusive).
+```Fenced(Borrowed("nu"))
+> random int (-10)..10
+
+
+```

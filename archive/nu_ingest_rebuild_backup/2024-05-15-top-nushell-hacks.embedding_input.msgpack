@@ -1,0 +1,141 @@
+���@356cb2761cfd3832962565cbeec1e4817b80f67fb5d0315f032851c0235f76b3ٙTitle: title: Top 5 Nushell Hacks
+Path: Nushell Hacks
+Content:
+
+
+
+
+Listed below are the top nushell hacks that people often forget about or didn't know.
+��@09dfc781a356063cde23afdba142168c9d3954ec44f3f2b4b7891da86999a308�.Title: title: Top 5 Nushell Hacks
+Path: 1. ends-with / starts-with operators
+Content:
+```Fenced(Borrowed("nushell"))
+❯ ls | where name ends-with .toml or name starts-with Car
+╭─#─┬────────name─────────┬─type─┬───size───┬────modified────╮
+│ 0 │ Cargo.lock          │ file │ 165.4 KB │ 22 minutes ago │
+│ 1 │ Cargo.toml          │ file │   6.4 KB │ an hour ago    │
+│ 2 │ Cross.toml          │ file │    666 B │ an hour ago    │
+│ 3 │ rust-toolchain.toml │ file │   1.1 KB │ an hour ago    │
+╰───┴─────────────────────┴──────┴──────────┴────────────────╯
+
+```
+��@265f5bf3a234447a43a1e784d2f5f2ae5327308f5b79ba64e73af00fcc100e4a�Title: title: Top 5 Nushell Hacks
+Path: 2. easter egg
+Content:
+Did you know that when you start nushell, the 
+``$env.CMD_DURATION_MS``
+ value of 0823 is an easter egg? 
+[link: https://github.com/nushell/nushell/releases/tag/0.2.0] It's nushell's first public release date month day
+.
+��@a77530dd9eb75671c58793b09756c5c2da32094e02754b52a777c524428530dd�Title: title: Top 5 Nushell Hacks
+Path: 3. abbr
+Content:
+With this menu and keybinding configured appropriately in your config.nu file, you can hit 
+``ctrl+space``
+ and your alias abbreviation will expand to it's non-abbreviated form.
+For instance, if you have this alias
+```Fenced(Borrowed("nushell"))
+alias gwch = git whatchanged -p --abbrev-commit --pretty=medium
+
+```
+and then you type 
+``gwch<ctrl+space>``
+ it will expand on the prompt line to 
+```Fenced(Borrowed("nushell"))
+git whatchanged -p --abbrev-commit --pretty=medium
+
+```
+��@aa8878ad9ef3626af3b1529f94019f82b7af6e47b68ec4ecf183718e3d4eb017�Title: title: Top 5 Nushell Hacks
+Path: keybinding
+Content:
+```Fenced(Borrowed("js"))
+  {
+    name: abbr
+    modifier: control
+    keycode: space
+    mode: [emacs, vi_normal, vi_insert]
+    event: [
+    { send: menu name: abbr_menu }
+    { edit: insertchar, value: ' '}
+    ]
+  }
+
+```
+��@6fb53809cfe5adb6d00961fdc9d165c30b64b221f46710636e802cccdea3df37�#Title: title: Top 5 Nushell Hacks
+Path: menu
+Content:
+```Fenced(Borrowed("js"))
+    {
+      name: abbr_menu
+      only_buffer_difference: false
+      marker: "👀 "
+      type: {
+        layout: columnar
+        columns: 1
+        col_width: 20
+        col_padding: 2
+      }
+      style: {
+        text: green
+        selected_text: green_reverse
+        description_text: yellow
+      }
+      source: { |buffer, position|
+        scope aliases
+        | where name == $buffer
+        | each { |elt| {value: $elt.expansion }}
+      }
+    }
+
+```
+��@7a6483e805cc2342e8d6e6a7e4ac5475e5ec7f8e9c738061ea639bc5693e9970��Title: title: Top 5 Nushell Hacks
+Path:  with 
+Content:
+``where``
+``ls``
+People often forget that the 
+``=~``
+ and 
+``!~``
+ are regular expression operators, which means you can do a case-insensitive search like this.
+```Fenced(Borrowed("nushell"))
+❯ ls | where name =~ '(?i)car'
+╭─#─┬────name────┬─type─┬───size───┬────modified────╮
+│ 0 │ Cargo.lock │ file │ 160.6 KB │ 8 hours ago    │
+│ 1 │ Cargo.toml │ file │   6.4 KB │ 8 hours ago    │
+│ 2 │ car.txt    │ file │      0 B │ 11 seconds ago │
+╰───┴────────────┴──────┴──────────┴────────────────╯
+
+```
+��@cf1dc7305cf8b1cd7d1595c7b364ce7d55a81dc1b0e1aa3b76694fa019acd6f4��Title: title: Top 5 Nushell Hacks
+Path: 5. the magic of nushell datatype closures
+Content:
+In your config.nu file you can have themes that color nushell datatypes a particular color. One thing that is sometimes overlooked is that these colors can also be closures, like the one below for 
+``string``
+.
+```Fenced(Borrowed("nushell"))
+string: {|| if $in =~ '^#[a-fA-F\d]+' { $in } else { 'default' } }
+
+```
+This allows nushell to detect anything that looks like a hex color and display that color in nushell.
+This allows you to take a file like the x11 rgb.txt file and parse it into colors.
+rgb.txt
+```Fenced(Borrowed("nushell"))
+❯ open ~/Downloads/rgb.txt | lines | last 10
+╭───┬───────────────────────────────────╮
+│ 0 │ 139   0   0        DarkRed        │
+│ 1 │ 144 238 144        light green    │
+│ 2 │ 144 238 144        LightGreen     │
+│ 3 │ 220  20  60        crimson        │
+│ 4 │  75   0 130        indigo         │
+│ 5 │ 128 128   0        olive          │
+│ 6 │ 102  51 153        rebecca purple │
+│ 7 │ 102  51 153        RebeccaPurple  │
+│ 8 │ 192 192 192        silver         │
+│ 9 │   0 128 128        teal           │
+╰───┴───────────────────────────────────╯
+
+```
+And after parsing the file looks similar to this.
+
+rgb

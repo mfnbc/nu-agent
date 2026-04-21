@@ -1,0 +1,81 @@
+���@3051b37ae726ea60fc84d8845c508ea97bc057fe3e609a054fac14b1c9031c9f�jTitle: title: uniq-by
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``uniq-by``
+[link: /commands/categories/filters.md] ��@99c7d309b2d2ca249871057de50bfdc37f9ba861b1e699a838945a67a4bae49e�MTitle: title: uniq-by
+Path: Signature
+Content:
+``> uniq-by {flags} ...rest``
+��@55a12360ac03cce2483d3386951e7b28c068b3ee7d2e1fa43a01c3f6bd5d7239��Title: title: uniq-by
+Path: Flags
+Content:
+``--count, -c``
+: Return a table containing the distinct input values together with their counts.
+``--keep-last, -l``
+: Return the last occurrence of each unique value instead of the first.
+``--repeated, -d``
+: Return the input values that occur more than once.
+``--ignore-case, -i``
+: Ignore differences in case when comparing input values.
+``--unique, -u``
+: Return the input values that occur once only.
+��@e34d67829e175a022ef29bbcc56661152aacb5070a17feb23058ab2b1b4f3f34�ZTitle: title: uniq-by
+Path: Parameters
+Content:
+``...rest``
+: The column(s) to filter by.
+��@811ac84403ed61a0a2ac7f867dcd93fd752593d395839a442773c2b1bb299e61�nTitle: title: uniq-by
+Path: Input/output types:
+Content:
+input
+output
+table
+table
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+��@1741f532c6c0c1cede06accf3ee60ecf8a01652e370bcefa4e5d59b653ffcb95�/Title: title: uniq-by
+Path: Examples
+Content:
+Get rows from table filtered by column uniqueness.
+```Fenced(Borrowed("nu"))
+> [[fruit count]; [apple 9] [apple 2] [pear 3] [orange 7]] | uniq-by fruit
+╭───┬────────┬───────╮
+│ # │ fruit  │ count │
+├───┼────────┼───────┤
+│ 0 │ apple  │     9 │
+│ 1 │ pear   │     3 │
+│ 2 │ orange │     7 │
+╰───┴────────┴───────╯
+
+
+```
+Get rows from table filtered by column uniqueness, keeping the last occurrence of each duplicate.
+```Fenced(Borrowed("nu"))
+> [[fruit count]; [apple 9] [apple 2] [pear 3] [orange 7]] | uniq-by fruit --keep-last
+╭───┬────────┬───────╮
+│ # │ fruit  │ count │
+├───┼────────┼───────┤
+│ 0 │ apple  │     2 │
+│ 1 │ pear   │     3 │
+│ 2 │ orange │     7 │
+╰───┴────────┴───────╯
+
+
+```

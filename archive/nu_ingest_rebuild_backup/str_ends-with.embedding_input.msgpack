@@ -1,0 +1,75 @@
+–’Ù@6a6e3270b0f55e78ba16729c335619b729a1e88010e253d9a1ed20efb3766d20ÙvTitle: title: str ends-with
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str ends-with``
+[link: /commands/categories/strings.md] ’Ù@c0f30b9cdb23da6e5d15c76b9f7dc2c6c8736652160e274d3ab09a2bc54d7a1eÙbTitle: title: str ends-with
+Path: Signature
+Content:
+``> str ends-with {flags} (string) ...rest``
+’Ù@0595eb6a3126e013cb418cf9e29b84060f9eb03859f7783c46d058e7d0573ed6ÙeTitle: title: str ends-with
+Path: Flags
+Content:
+``--ignore-case, -i``
+: Search is case insensitive.
+’Ù@f9293798e283adf91c6de2e017ac84a979b69321a28d2f59a13441a4ec8c6218ÙÂTitle: title: str ends-with
+Path: Parameters
+Content:
+``string``
+: The string to match.
+``...rest``
+: For a data structure input, check strings at the given cell paths, and replace with result.
+’Ù@ef9ac5f7b953cf279df3ee5ce78832a6a84e94f3a8cfc1dd327f3fc9e2124d63Ù’Title: title: str ends-with
+Path: Input/output types:
+Content:
+input
+output
+string
+bool
+list
+<
+string
+>
+
+list
+<
+bool
+>
+
+table
+table
+record
+record
+’Ù@cc3c8e3d8b0f8c49d2d2e9713412dd219ac53ba3e5dc55773d744704cc508800Ú$Title: title: str ends-with
+Path: Examples
+Content:
+Checks if string ends with '.rb'.
+```Fenced(Borrowed("nu"))
+> 'my_library.rb' | str ends-with '.rb'
+true
+
+```
+Checks if strings end with '.txt'.
+```Fenced(Borrowed("nu"))
+> ['my_library.rb', 'README.txt'] | str ends-with '.txt'
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ false â”‚
+â”‚ 1 â”‚ true  â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â•¯
+
+
+```
+Checks if string ends with '.RB', case-insensitive.
+```Fenced(Borrowed("nu"))
+> 'my_library.rb' | str ends-with --ignore-case '.RB'
+true
+
+```

@@ -1,0 +1,92 @@
+”—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_product.mdÙ@65658fbaeae9d2cd1c74dbba61efff533ee9055e620b9a109f849a68e88a3e39³title: math product‘¤mathÙ?
+
+
+
+
+
+
+
+
+``math product``
+[link: /commands/categories/math.md] ’ÙnTitle: title: math product
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math product``
+[link: /commands/categories/math.md] —ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_product.mdÙ@c05ace609510512592872619ecdd735f471050ba7c6d56262c286d7e8759253e³title: math product‘©Signature¼``> math product {flags} ``
+’ÙPTitle: title: math product
+Path: Signature
+Content:
+``> math product {flags} ``
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_product.mdÙ@6010179cfddf0df38c7aae24e66241fe6f868406510db122e38cfb7df4b69e5b³title: math product‘³Input/output types:ÙMinput
+output
+list
+<
+number
+>
+
+number
+range
+number
+table
+record
+record
+record
+’Ù‹Title: title: math product
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+number
+>
+
+number
+range
+number
+table
+record
+record
+record
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_product.mdÙ@c5f00d633860771aa3d13c142db4b2e5f61932f082e6236c670406e2fce77cb2³title: math product‘¨ExamplesÚ3Compute the product of a list of numbers.
+```Fenced(Borrowed("nu"))
+> [2 3 3 4] | math product
+72
+
+```
+Compute the product of each column in a table.
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | math product
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ a â”‚ 3 â”‚
+â”‚ b â”‚ 8 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+```
+’ÚfTitle: title: math product
+Path: Examples
+Content:
+Compute the product of a list of numbers.
+```Fenced(Borrowed("nu"))
+> [2 3 3 4] | math product
+72
+
+```
+Compute the product of each column in a table.
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | math product
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ a â”‚ 3 â”‚
+â”‚ b â”‚ 8 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+```

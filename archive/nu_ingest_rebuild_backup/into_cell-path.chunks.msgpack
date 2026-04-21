@@ -1,0 +1,141 @@
+•—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_cell-path.mdÙ@55cfd0ec55b00c0d464c7a1433cb4fb32788e16764218303e7aa55694a7522e4µtitle: into cell-path‘«conversionsÙH
+
+
+
+
+
+
+
+
+``into cell-path``
+[link: /commands/categories/conversions.md] ’Ù€Title: title: into cell-path
+Path: conversions
+Content:
+
+
+
+
+
+
+
+
+
+``into cell-path``
+[link: /commands/categories/conversions.md] —ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_cell-path.mdÙ@18174fc9959b20ae913952f8503f69da7e5f6640379b17e004dc7181cc66806cµtitle: into cell-path‘©Signature¾``> into cell-path {flags} ``
+’ÙTTitle: title: into cell-path
+Path: Signature
+Content:
+``> into cell-path {flags} ``
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_cell-path.mdÙ@3aac01bac478fd2ac1408b7cd33cb3e09943162daf6ceabc521379499fe01d1cµtitle: into cell-path‘³Input/output types:Ù”input
+output
+cell-path
+cell-path
+int
+cell-path
+list
+<
+any
+>
+
+cell-path
+list
+<
+record
+<
+value: any, optional: bool, insensitive: bool
+>
+>
+
+cell-path
+’ÙÔTitle: title: into cell-path
+Path: Input/output types:
+Content:
+input
+output
+cell-path
+cell-path
+int
+cell-path
+list
+<
+any
+>
+
+cell-path
+list
+<
+record
+<
+value: any, optional: bool, insensitive: bool
+>
+>
+
+cell-path
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_cell-path.mdÙ@448d689c9816494e684741197947b5b304a036d4e283b831c657fce644f300ddµtitle: into cell-path‘¨ExamplesÚIConvert integer into cell path.
+```Fenced(Borrowed("nu"))
+> 5 | into cell-path
+$.5
+
+```
+Convert cell path into cell path.
+```Fenced(Borrowed("nu"))
+> 5 | into cell-path | into cell-path
+$.5
+
+```
+Convert string into cell path.
+```Fenced(Borrowed("nu"))
+> 'some.path' | split row '.' | into cell-path
+$.some.path
+
+```
+Convert list into cell path.
+```Fenced(Borrowed("nu"))
+> [5 c 7 h] | into cell-path
+$.5.c.7.h
+
+```
+Convert table into cell path.
+```Fenced(Borrowed("nu"))
+> [[value, optional, insensitive]; [5 true false] [c false false] [d false true]] | into cell-path
+$.5?.c.d!
+
+```
+’Ú~Title: title: into cell-path
+Path: Examples
+Content:
+Convert integer into cell path.
+```Fenced(Borrowed("nu"))
+> 5 | into cell-path
+$.5
+
+```
+Convert cell path into cell path.
+```Fenced(Borrowed("nu"))
+> 5 | into cell-path | into cell-path
+$.5
+
+```
+Convert string into cell path.
+```Fenced(Borrowed("nu"))
+> 'some.path' | split row '.' | into cell-path
+$.some.path
+
+```
+Convert list into cell path.
+```Fenced(Borrowed("nu"))
+> [5 c 7 h] | into cell-path
+$.5.c.7.h
+
+```
+Convert table into cell path.
+```Fenced(Borrowed("nu"))
+> [[value, optional, insensitive]; [5 true false] [c false false] [d false true]] | into cell-path
+$.5?.c.d!
+
+```
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/into_cell-path.mdÙ@7fb4a95be4513ff5843300a53616e9b23cc0dffb1fef141c39404ecfe3efd834µtitle: into cell-path‘¥NotesÙNConverting a string directly into a cell path is intentionally not supported.
+’Ù€Title: title: into cell-path
+Path: Notes
+Content:
+Converting a string directly into a cell path is intentionally not supported.

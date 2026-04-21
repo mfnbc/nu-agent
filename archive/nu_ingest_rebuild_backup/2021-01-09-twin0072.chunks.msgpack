@@ -1,0 +1,103 @@
+ëóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-01-09-twin0072.mdŸ@c061bf92e508d903029b680562f1422003ad7bd18bb4df5e8b4ee050ff646595≥This week in Nu #72ë≥This week in Nu #72⁄éjonathandturner improved 
+[link: https://github.com/nushell/nushell/pull/2839] some errors
+, improved 
+[link: https://github.com/nushell/nushell/pull/2847] InputStream
+, fixed a 
+[link: https://github.com/nushell/nushell/pull/2849] variable scope leak
+, added 
+[link: https://github.com/nushell/nushell/pull/2851] shadowing
+, add support for 
+[link: https://github.com/nushell/nushell/pull/2855] ``source``
+ during parsing
+, renamed 
+[link: https://github.com/nushell/nushell/pull/2859] set/set-env to let/let-env
+, released 
+[link: https://github.com/nushell/nushell/pull/2860] 0.25.0
+, pinned 
+[link: https://github.com/nushell/nushell/pull/2868] ``syn``
+ to avoid build breakage
+, removed 
+[link: https://github.com/nushell/nushell/pull/2887] the line primitive
+, renamed 
+[link: https://github.com/nushell/nushell/pull/2889] Path and Pattern
+, updated startup to 
+[link: https://github.com/nushell/nushell/pull/2890] treat all startup lines as coming from the same source
+, and fixed 
+[link: https://github.com/nushell/nushell/pull/2893] reading/writing of bigint/bigdecimal
+JosephTLyons fixed a 
+[link: https://github.com/nushell/nushell/pull/2841] typo in the sorting error message
+LhKipp added the 
+[link: https://github.com/nushell/nushell/pull/2846] ability to use a comment above the custom command as part of its description
+, improved 
+[link: https://github.com/nushell/nushell/pull/2885] the precedence rules for 
+``which``
+jinlow added 
+[link: https://github.com/nushell/nushell/pull/2848] support for filesizes to 
+``math median``
+baoyachi 
+[link: https://github.com/nushell/nushell/pull/2853] reduced the number of dependencies
+, updated 
+[link: https://github.com/nushell/nushell/pull/2861] shadow-rs
+stormasm 
+[link: https://github.com/nushell/nushell/pull/2854] refactoring some function in nu-cli
+sousajf1 
+[link: https://github.com/nushell/nushell/pull/2857] updated some dependencies
+wycats 
+[link: https://github.com/nushell/nushell/pull/2865] improved and documented the lexer
+TrevorAC99 
+[link: https://github.com/nushell/nushell/pull/2880] updated rust-embed
+fdncred created a new 
+[link: https://github.com/nushell/vscode-nushell-lang] VSCode plugin for Nushell!
+íêê⁄ÃTitle: This week in Nu #72
+Path: This week in Nu #72
+Content:
+jonathandturner improved 
+[link: https://github.com/nushell/nushell/pull/2839] some errors
+, improved 
+[link: https://github.com/nushell/nushell/pull/2847] InputStream
+, fixed a 
+[link: https://github.com/nushell/nushell/pull/2849] variable scope leak
+, added 
+[link: https://github.com/nushell/nushell/pull/2851] shadowing
+, add support for 
+[link: https://github.com/nushell/nushell/pull/2855] ``source``
+ during parsing
+, renamed 
+[link: https://github.com/nushell/nushell/pull/2859] set/set-env to let/let-env
+, released 
+[link: https://github.com/nushell/nushell/pull/2860] 0.25.0
+, pinned 
+[link: https://github.com/nushell/nushell/pull/2868] ``syn``
+ to avoid build breakage
+, removed 
+[link: https://github.com/nushell/nushell/pull/2887] the line primitive
+, renamed 
+[link: https://github.com/nushell/nushell/pull/2889] Path and Pattern
+, updated startup to 
+[link: https://github.com/nushell/nushell/pull/2890] treat all startup lines as coming from the same source
+, and fixed 
+[link: https://github.com/nushell/nushell/pull/2893] reading/writing of bigint/bigdecimal
+JosephTLyons fixed a 
+[link: https://github.com/nushell/nushell/pull/2841] typo in the sorting error message
+LhKipp added the 
+[link: https://github.com/nushell/nushell/pull/2846] ability to use a comment above the custom command as part of its description
+, improved 
+[link: https://github.com/nushell/nushell/pull/2885] the precedence rules for 
+``which``
+jinlow added 
+[link: https://github.com/nushell/nushell/pull/2848] support for filesizes to 
+``math median``
+baoyachi 
+[link: https://github.com/nushell/nushell/pull/2853] reduced the number of dependencies
+, updated 
+[link: https://github.com/nushell/nushell/pull/2861] shadow-rs
+stormasm 
+[link: https://github.com/nushell/nushell/pull/2854] refactoring some function in nu-cli
+sousajf1 
+[link: https://github.com/nushell/nushell/pull/2857] updated some dependencies
+wycats 
+[link: https://github.com/nushell/nushell/pull/2865] improved and documented the lexer
+TrevorAC99 
+[link: https://github.com/nushell/nushell/pull/2880] updated rust-embed
+fdncred created a new 
+[link: https://github.com/nushell/vscode-nushell-lang] VSCode plugin for Nushell!

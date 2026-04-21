@@ -1,0 +1,124 @@
+—’Ù@70f2d7ea16898f1d14194f3a042cd434b4553689122bffe9c7886ef26fa1a912Ù»Title: title: 'This week in Nushell #308'
+Path: This Week in Nushell #308
+Content:
+
+
+
+
+Published Monday, 2025-08-18, including PRs merged Friday, 2025-07-11 through Thursday, 2025-07-17.
+’Ù@41337b4b11c0471cb8db5aaace2212720c70f0211350f8c4a116d11b692a90ecÚ
+áTitle: title: 'This week in Nushell #308'
+Path: Nushell
+Content:
+@xentec:
+[link: https://github.com/nushell/nushell/pull/16195] bumped sysinfo to v0.36 to improve 
+``sys temp``
+ command (#16195)
+@marienz:
+[link: https://github.com/nushell/nushell/pull/16194] type-checked optional arguments (#16194)
+@jasha-hrp:
+[link: https://github.com/nushell/nushell/pull/16190] fixed column name in 
+``history import -h``
+ example (#16190)
+@Bahex:
+[link: https://github.com/nushell/nushell/pull/16184] fixed overlay use error reporting in export-env (#16184)
+[link: https://github.com/nushell/nushell/pull/16180] reverted "Add 
+``extern``
+ for 
+``nu``
+ command" (#16180)
+[link: https://github.com/nushell/nushell/pull/16155] fixed consistency with regular cell-path access on 
+``null``
+ values (#16155)
+[link: https://github.com/nushell/nushell/pull/16154] fixed overlay use/hide config state updates (#16154)
+[link: https://github.com/nushell/nushell/pull/16007] deprecated --ignore-errors in favor of --optional for get/select/reject (#16007)
+@sgvictorino:
+[link: https://github.com/nushell/nushell/pull/16176] fixed rest parameter spans (#16176)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/16173] performed housekeeping on Polars limit (#16173)
+@WindSoilder:
+[link: https://github.com/nushell/nushell/pull/16171] made print to a value use SIGPIPE (#16171)
+@132ikl:
+[link: https://github.com/nushell/nushell/pull/16166] added default error codes (#16166)
+[link: https://github.com/nushell/nushell/pull/16165] updated default config scaffold blurb (#16165)
+[link: https://github.com/nushell/nushell/pull/16151] added warning for history isolation with non-SQLite format (#16151)
+[link: https://github.com/nushell/nushell/pull/16147] added 
+``ShellWarning``
+ (#16147)
+[link: https://github.com/nushell/nushell/pull/16134] added interrupt check before each IR instruction (#16134)
+[link: https://github.com/nushell/nushell/pull/16128] printed errors during stdlib testing (#16128)
+[link: https://github.com/nushell/nushell/pull/16119] added 
+``extern``
+ for 
+``nu``
+ command (#16119)
+@cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/16161] fixed unwrapping 
+``ShellErrorBridge``
+ in 
+``ByteStream::into_bytes``
+ (#16161)
+[link: https://github.com/nushell/nushell/pull/16160] made panic when converting other I/O errors to Nushell I/O errors (#16160)
+@mgrachev:
+[link: https://github.com/nushell/nushell/pull/16157] bumped 
+``update-informer``
+ to 
+``v1.3.0``
+ (#16157)
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/16156] updated reedline to latest (#16156)
+@blindFS:
+[link: https://github.com/nushell/nushell/pull/16112] fixed argument completion ordering (#16112)
+@klapptnot:
+[link: https://github.com/nushell/nushell/pull/16089] fixed quotation rules (#16089)
+’Ù@e04ab54a491e488cf9c1d3e661f7dc469dd6568081a29c5cb6a3da4a84209aa0ÙžTitle: title: 'This week in Nushell #308'
+Path: Nu_Scripts
+Content:
+@sandyandi:
+[link: https://github.com/nushell/nu_scripts/pull/1143] enhanced gwta (#1143)
+’Ù@d7fcbd04875348bbfe1fa558591d969b1b1e6dc2dda325322a6c608937f98dbbÚ]Title: title: 'This week in Nushell #308'
+Path: Documentation
+Content:
+@Kissaki:
+[link: https://github.com/nushell/nushell.github.io/pull/1984] added missing example output (#1984)
+[link: https://github.com/nushell/nushell.github.io/pull/1983] used preferred commented output format (#1983)
+[link: https://github.com/nushell/nushell.github.io/pull/1982] reduced and focused closure command examples (#1982)
+[link: https://github.com/nushell/nushell.github.io/pull/1981] extended Closure reference with examples (#1981)
+[link: https://github.com/nushell/nushell.github.io/pull/1977] ordered 
+``$env``
+ variables in Special Variables (#1977)
+[link: https://github.com/nushell/nushell.github.io/pull/1976] added 
+``$env.NU_LOG_LEVEL``
+ to Special Variables (#1976)
+[link: https://github.com/nushell/nushell.github.io/pull/1974] fixed swapped closure parameters (#1974)
+[link: https://github.com/nushell/nushell.github.io/pull/1973] linked commands in lang-guide closure list (#1973)
+[link: https://github.com/nushell/nushell.github.io/pull/1972] improved cookbook env setup (#1972)
+[link: https://github.com/nushell/nushell.github.io/pull/1971] added doc section and links to home page (#1971)
+@hustcer:
+[link: https://github.com/nushell/nushell.github.io/pull/1980] updated vuepress and plugins (#1980)
+@hongquan:
+[link: https://github.com/nushell/nushell.github.io/pull/1979] fixed completions folder path (#1979)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/1978] updated TWiN 304 (#1978)
+@eevleevs:
+[link: https://github.com/nushell/nushell.github.io/pull/1969] corrected theming instructions (#1969)
+’Ù@f95c9cf4a9ca255c43ebd2801b9509037190b76e7e8d6ee2d530a5735c943b8eÙÁTitle: title: 'This week in Nushell #308'
+Path: reedline
+Content:
+@blindFS:
+[link: https://github.com/nushell/reedline/pull/898] fixed prompt glitch during resize with multiline command (#898)
+’Ù@c6131c2b73e24ccdf5d0cebe8e20877eabdbce4bbb9849d4b569676fa27eee3eÚ¤Title: title: 'This week in Nushell #308'
+Path: Awesome Nu
+Content:
+@ryanxcharles:
+[link: https://github.com/nushell/awesome-nu/pull/129] added termplot with fixed config.yaml (#129)
+[link: https://github.com/nushell/awesome-nu/pull/127] added termplot (nu_plugin_termplot) to plugins (#127)
+@fdncred:
+[link: https://github.com/nushell/awesome-nu/pull/128] reverted "add termplot (nu_plugin_termplot) to plugins" (#128)
+’Ù@9b1cd146c970a786c765c8adb1c4a2153136e9f229539273b8fc8433e4f0152aÚ3Title: title: 'This week in Nushell #308'
+Path: Tree-sitter
+Content:
+@blindFS:
+[link: https://github.com/nushell/tree-sitter-nu/pull/218] fixed env_var with interpolated string values (#218)
+@Bahex:
+[link: https://github.com/nushell/tree-sitter-nu/pull/216] highlighted operators in where predicates (#216)

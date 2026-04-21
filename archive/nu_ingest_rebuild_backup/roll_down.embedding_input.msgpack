@@ -1,0 +1,45 @@
+���@846821bd3af5dbf1de9a449152e6c8f8f30da2076bdfdda9d50b9d03342de618�nTitle: title: roll down
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``roll down``
+[link: /commands/categories/filters.md] ��@1c4e593c0377b651fab2615ea33d049f3e8088084501e697533dbb68d6cbb84d�JTitle: title: roll down
+Path: Signature
+Content:
+``> roll down {flags} ``
+��@e98a91849fac6436750e8d329e014b09a7e063975be9d206a2bd3f66da2ea978�ZTitle: title: roll down
+Path: Flags
+Content:
+``--by, -b {int}``
+: Number of rows to roll.
+��@247bcc453e0ca8d8a3183f19558c963f4e4baec0c7c67b0448f4e8e1b4fd0edc�TTitle: title: roll down
+Path: Input/output types:
+Content:
+input
+output
+table
+table
+��@420de16e406296de3b721f3cf8c97c1f9514903610c76d5f062829534986e7bd�dTitle: title: roll down
+Path: Examples
+Content:
+Rolls rows down of a table
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4] [5 6]] | roll down
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 5 │ 6 │
+│ 1 │ 1 │ 2 │
+│ 2 │ 3 │ 4 │
+╰───┴───┴───╯
+
+
+```

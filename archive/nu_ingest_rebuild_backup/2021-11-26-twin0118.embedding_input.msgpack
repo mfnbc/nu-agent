@@ -1,0 +1,44 @@
+“’Ù@1b6dc412e162575155241bd4cbcbac308dc41023eaccdc107d4418656dba0a7eÚ¡Title: This week in Nushell #118
+Path: Nushell
+Content:
+BraulioVM added 
+[link: https://github.com/nushell/nushell/pull/4156] save --append: create file if it doesn't exist
+tshepang 
+[link: https://github.com/nushell/nushell/pull/4155] fixed markup
+EdwardBetts 
+[link: https://github.com/nushell/nushell/pull/4152] corrected spelling
+ahkrr 
+[link: https://github.com/nushell/nushell/pull/4135] upgraded dependencies 
+’Ù@91c80027b1de9f85d6dde364fa6d8550066fd353013d2507be1f2fa401c17216ÚÀTitle: This week in Nushell #118
+Path: engine-q
+Content:
+jt 
+[link: https://github.com/nushell/engine-q/pull/369] added better exit command
+, 
+[link: https://github.com/nushell/engine-q/pull/368] moved row condition to block
+, 
+[link: https://github.com/nushell/engine-q/pull/364] updated reedline for multiline prompt
+, and 
+[link: https://github.com/nushell/engine-q/pull/359] added better comment skipping
+luccasmmg added 
+[link: https://github.com/nushell/engine-q/pull/367] ``from vcf``
+ 
+``from ics``
+ and 
+``from ini``
+ 
+elferherrera added 
+[link: https://github.com/nushell/engine-q/pull/361] Dataframe feature
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/358] ported over the 
+``drop``
+ command from nushell
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/357] fixed reading of LS_COLORS + ls displays symlink
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/353] added coloring by primitive, bring in nu-ansi-term crate
+’Ù@536ad59392a7e17a4dfcb7cdaa0726221529c3b3a52d83e4da0810393dca623cÙ¨Title: This week in Nushell #118
+Path: reedline
+Content:
+aslynatilla created 
+[link: https://github.com/nushell/reedline/pull/184] Simple multiline continuation prompt

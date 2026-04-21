@@ -1,0 +1,105 @@
+‘’Ù@f3e91f8abeb5782766941218cdc2ce42524f4d5942132bd3a9e40be259f39606ÚúTitle: This week in Nu #40
+Path: This week in Nu #40
+Content:
+JosephTLyons added more help for contributors to 
+[link: http://contributing.md] CONTRIBUTING.md
+ (
+[link: https://github.com/nushell/nushell/pull/1865] #1865
+), improve the 
+``cal``
+ implementation (
+[link: https://github.com/nushell/nushell/pull/1886] #1885
+) and documentation (
+[link: https://github.com/nushell/nushell/pull/1895] #1895
+), added ctrl-c support to 
+``du``
+ (
+[link: https://github.com/nushell/nushell/pull/1901] #1901
+)
+AarconC81 added completions for binaries in the PATH (
+[link: https://github.com/nushell/nushell/pull/1866] #1866
+)
+shiena fixed a link in our Japanese documentation (
+[link: https://github.com/nushell/book/pull/101] #101
+, 
+[link: https://github.com/nushell/book/pull/103] #103
+)
+Kelli314 helped improved light mode table printing (
+[link: https://github.com/nushell/nushell/pull/1871] #1871
+)
+q-b helped fix some typos in the book (
+[link: https://github.com/nushell/book/pull/102] #102
+)
+k-brk added 
+``--to-float``
+ to the 
+``str``
+ command (
+[link: https://github.com/nushell/nushell/pull/1872] #1872
+), improved the 
+``with-env``
+ shorthand (
+[link: https://github.com/nushell/nushell/pull/1900] #1900
+)
+jzaefferer documented the new 
+``--save``
+ flag for 
+``alias``
+ (
+[link: https://github.com/nushell/nushell/pull/1874] #1874
+)
+thegedge simplified the logic in the 
+``parse``
+ command (
+[link: https://github.com/nushell/nushell/pull/1875] #1875
+, 
+[link: https://github.com/nushell/nushell/pull/1904] #1904
+)
+EmNudge documented the 
+``trim``
+ command (
+[link: https://github.com/nushell/nushell/pull/1876] #1876
+)
+notryanb fixed some flaky external command tests (
+[link: https://github.com/nushell/nushell/pull/1878] #1878
+)
+andrasio converted the 
+``split``
+ commands into sub-commands (
+[link: https://github.com/nushell/nushell/pull/1879] #1879
+), moved 
+``str``
+ to being a built-in command (
+[link: https://github.com/nushell/nushell/pull/1908] #1908
+), fixed an issue with plugins not having "end_filter" called correctly (
+[link: https://github.com/nushell/nushell/pull/1914] #1914
+), updated docs for 
+``split``
+ and 
+``from``
+ (
+[link: https://github.com/nushell/book/pull/104] #104
+)
+shaaraddalvi improved errors when sorting by invalid column (
+[link: https://github.com/nushell/nushell/pull/1880] #1880
+)
+fdncred improved auto-pivot's configuration (
+[link: https://github.com/nushell/nushell/pull/1888] #1888
+), added "plugin_dir" to config docs (
+[link: https://github.com/nushell/nushell/pull/1911] #1911
+), got nu-jupyter working online (
+[link: https://github.com/nushell/nu_jupyter/pull/2] #2
+)
+jonathandturner optimized processing time for 
+``where``
+ and related commands (
+[link: https://github.com/nushell/nushell/pull/1902] #1902
+), made it-expansion work on lists (
+[link: https://github.com/nushell/nushell/pull/1903] #1903
+), allowed 
+``echo``
+ to iterate ranges (
+[link: https://github.com/nushell/nushell/pull/1905] #1905
+), simplified plugin directory scanning (
+[link: https://github.com/nushell/nushell/pull/1910] #1910
+)

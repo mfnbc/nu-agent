@@ -1,0 +1,76 @@
+���@8fafcf9b7749aa0064bc043b3e66114d4739892178f24fe7bca0e85c4df81525٘Title: title: polars selector starts-with
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars selector starts-with``
+[link: /commands/categories/expression.md] ��@392f06a195b2ce0d778ce2e59d5e07151e6d63feb3a388377177b3b854ce8678�uTitle: title: polars selector starts-with
+Path: Signature
+Content:
+``> polars selector starts-with {flags} ...rest``
+��@86a706844b802bbaa2f33d4165588bde0f6da4d4a43d0eddaf233d4ad769b3a9ىTitle: title: polars selector starts-with
+Path: Parameters
+Content:
+``...rest``
+: Select columns that start with the given substring(s).
+��@1832eba8ee6e4c57bb34618a0e081d555cedba806b70d085f44000f13fdbdac7�nTitle: title: polars selector starts-with
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_selector
+��@72fdeb31faa1b00bee62028f1758fb6a8b788b4f2a83dcb99ed9c1177cf8ccda�Title: title: polars selector starts-with
+Path: Examples
+Content:
+Match columns starting with a 'b'
+```Fenced(Borrowed("nu"))
+> {
+        "foo": [1.0, 2.0],
+        "bar": [3.0, 4.0],
+        "baz": [5, 6],
+        "zap": [7, 8],
+    } |
+    polars into-df --as-columns |
+    polars select (polars selector starts-with b) |
+    polars sort-by bar baz |
+    polars collect
+╭───┬──────┬─────╮
+│ # │ bar  │ baz │
+├───┼──────┼─────┤
+│ 0 │ 3.00 │   5 │
+│ 1 │ 4.00 │   6 │
+╰───┴──────┴─────╯
+
+
+```
+Match columns starting with 
+either
+ the letter 'b' or 'z'
+```Fenced(Borrowed("nu"))
+> {
+        "foo": [1.0, 2.0],
+        "bar": [3.0, 4.0],
+        "baz": [5, 6],
+        "zap": [7, 8],
+    } |
+    polars into-df --as-columns |
+    polars select (polars selector starts-with b z) |
+    polars sort-by bar baz zap |
+    polars collect
+╭───┬──────┬─────┬─────╮
+│ # │ bar  │ baz │ zap │
+├───┼──────┼─────┼─────┤
+│ 0 │ 3.00 │   5 │   7 │
+│ 1 │ 4.00 │   6 │   8 │
+╰───┴──────┴─────┴─────╯
+
+
+```

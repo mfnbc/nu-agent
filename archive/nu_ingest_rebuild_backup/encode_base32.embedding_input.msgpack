@@ -1,0 +1,57 @@
+–’Ù@6ab63ec546eb71b33f1b071c8e0e7daf75ce619bac0c94f6e49bae17c3f71876ÙvTitle: title: encode base32
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``encode base32``
+[link: /commands/categories/formats.md] ’Ù@6b0d43d0fe7e6529c666b921692e5ad572aee8d0d97bff4e2403d527ee758a57ÙRTitle: title: encode base32
+Path: Signature
+Content:
+``> encode base32 {flags} ``
+’Ù@1d1d6523b112b474ccfcb03e734bb9e93705b5cde8571f88d71f8d67a82df8ddÙUTitle: title: encode base32
+Path: Flags
+Content:
+``--nopad``
+: Don't accept padding.
+’Ù@786b483857986ee50c4435811b2ea3528d432bd16075960dde25ddea4862c061ÙhTitle: title: encode base32
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+binary
+string
+’Ù@bf483ee0c96f9a11c9a06b34c0ba83cfe54944510a044f21f2df04947f8f7bd9Ú^Title: title: encode base32
+Path: Examples
+Content:
+Encode a binary value
+```Fenced(Borrowed("nu"))
+> 0x[01 02 10] | encode base32
+AEBBA===
+
+```
+Encode a string
+```Fenced(Borrowed("nu"))
+> "hello there" | encode base32
+NBSWY3DPEB2GQZLSMU======
+
+```
+Don't apply padding to the output
+```Fenced(Borrowed("nu"))
+> "hi" | encode base32 --nopad
+NBUQ
+
+```
+’Ù@204a949ac2114bc36de99ee4f50e9cabca1fbe2a02c25074c94a8de67ddaf9d8Ù–Title: title: encode base32
+Path: Notes
+Content:
+The default alphabet is taken from RFC 4648, section 6.
+Note this command will collect stream input.

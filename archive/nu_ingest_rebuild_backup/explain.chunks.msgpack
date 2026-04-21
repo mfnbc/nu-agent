@@ -1,0 +1,65 @@
+•—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explain.mdÙ@5556ce53316b04fd12dad723af984588fb7f30e4f72ea3e99c82a1b354b65323®title: explain‘¥debugÙ;
+
+
+
+
+
+
+
+
+``explain``
+[link: /commands/categories/debug.md] ’ÙfTitle: title: explain
+Path: debug
+Content:
+
+
+
+
+
+
+
+
+
+``explain``
+[link: /commands/categories/debug.md] —ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explain.mdÙ@4489b4dfbfb73f506ff62c2b2ea6abd2709a452519238168249e711e4ad6cc57®title: explain‘©SignatureÙ ``> explain {flags} (closure)``
+’ÙOTitle: title: explain
+Path: Signature
+Content:
+``> explain {flags} (closure)``
+—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explain.mdÙ@2bb20b33102c5468f9d6b29ac880127573f46fbe4944ef6cda636481eb39cd03®title: explain‘ªParametersÙ"``closure``
+: The closure to run.
+’ÙRTitle: title: explain
+Path: Parameters
+Content:
+``closure``
+: The closure to run.
+—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explain.mdÙ@9873f1f00366b2aaea1542b8189728efae713269ac7cff8502de3197cb90ec57®title: explain‘³Input/output types:Ù!input
+output
+any
+any
+nothing
+any
+’ÙZTitle: title: explain
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+nothing
+any
+—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/explain.mdÙ@57df6a0caee1a5b4b6511e46d2ff15cd33910c4fb013383b82ce3f1756b104cb®title: explain‘¨ExamplesÙ•Explain a command within a closure.
+```Fenced(Borrowed("nu"))
+> explain {|| ls | sort-by name type --ignore-case | get name } | table --expand
+
+
+```
+’ÙÃTitle: title: explain
+Path: Examples
+Content:
+Explain a command within a closure.
+```Fenced(Borrowed("nu"))
+> explain {|| ls | sort-by name type --ignore-case | get name } | table --expand
+
+
+```

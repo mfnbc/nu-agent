@@ -1,0 +1,59 @@
+���@99cf0756f974eae16c7d67bcce519308f0b2a53841d29b088ab9580cb8ed3646يTitle: title: polars get-nanosecond
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars get-nanosecond``
+[link: /commands/categories/dataframe.md] ��@fd19d6414ff68fca893486343348c0498437fe7dee115214ae2c662cc256a0a2�bTitle: title: polars get-nanosecond
+Path: Signature
+Content:
+``> polars get-nanosecond {flags} ``
+��@bdbc530e62bc42caea32b32fc39fef55aa7e9b2a99d8f286f0f83459e0ee56fdټTitle: title: polars get-nanosecond
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@5d2776a06818802a6c1857e3a4b62f7f5a4f63eb3ce39ee3befbcac01ae6ec89�Title: title: polars get-nanosecond
+Path: Examples
+Content:
+Returns nanosecond from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars get-nanosecond
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+╰───┴───╯
+
+
+```
+Returns nanosecond from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-nanosecond)
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+╰───┴───╯
+
+
+```

@@ -1,0 +1,17 @@
+‘‡¤pathÙnarchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/basic_types/00_basic_types.md¢idÙ@3c231143129f9741f85bbb2c330ff945f7c0141627dc8d116dacd00f20b11a23¥title«Basic Types¬heading_path‘«Basic Types¤textÚcThe following pages contain detail on the basic types available in Nushell.
+Variables, parameters, input values, and return values can be annotated with these types.
+Internal Implementation: See 
+``enum Value``
+ in 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-protocol/src/value/mod.rs] ``nushell/crates/nu-protocol/src/value/mod.rs``
+.
+¨taxonomy‚¨commands¤tags¯embedding_inputÚ‘Title: Basic Types
+Path: Basic Types
+Content:
+The following pages contain detail on the basic types available in Nushell.
+Variables, parameters, input values, and return values can be annotated with these types.
+Internal Implementation: See 
+``enum Value``
+ in 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-protocol/src/value/mod.rs] ``nushell/crates/nu-protocol/src/value/mod.rs``
+.

@@ -1,0 +1,757 @@
+ùóŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@1f4eac8226e5316b544feba6c3f096a5878ff45edd12f05eb1c804cbd4ca632b•next:ëÆBest Practices⁄∏
+
+This page is a working document collecting syntax guidelines and best practices we have discovered so far.
+
+The goal of this document is to eventually land on a canonical Nushell code style, but as for now it is still work in
+
+progress and subject to change. We welcome discussion and contributions.
+Keep in mind that these guidelines are not required to be used in external repositories (not ours), you can change them in the
+
+way you want, but please be consistent and follow your rules.
+All escape sequences should not be interpreted literally, unless directed to do so. In other words,
+
+treat something like 
+``\n``
+ like the new line character and not a literal slash followed by 
+``n``
+.
+íêê⁄„Title: next:
+Path: Best Practices
+Content:
+
+
+This page is a working document collecting syntax guidelines and best practices we have discovered so far.
+
+The goal of this document is to eventually land on a canonical Nushell code style, but as for now it is still work in
+
+progress and subject to change. We welcome discussion and contributions.
+Keep in mind that these guidelines are not required to be used in external repositories (not ours), you can change them in the
+
+way you want, but please be consistent and follow your rules.
+All escape sequences should not be interpreted literally, unless directed to do so. In other words,
+
+treat something like 
+``\n``
+ like the new line character and not a literal slash followed by 
+``n``
+.
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@96292dc221a4402b3397f4e3320710cc97f58f463eec752193739e95a7a1efb8•next:ë®DefaultsŸ~It's recommended to
+ assume that by default no spaces or tabs allowed, but the following rules define where they are allowed.
+íêêŸ£Title: next:
+Path: Defaults
+Content:
+It's recommended to
+ assume that by default no spaces or tabs allowed, but the following rules define where they are allowed.
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@3e12a0e15e20e0f8dfc2f046a393935b5dd56dc3ed5f162c84e37d46627e7b69•next:ë•Basic⁄IIt's recommended to
+ put one space before and after pipe 
+``|``
+ symbol, commands, subcommands, their options and arguments.
+It's recommended to
+ never put several consecutive spaces unless they are part of string.
+It's recommended to
+ omit commas between list items.
+Correct:
+```Fenced(Borrowed("nu"))
+'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+# - too many spaces after "|": 2 instead of 1
+'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
+
+```
+íêê⁄kTitle: next:
+Path: Basic
+Content:
+It's recommended to
+ put one space before and after pipe 
+``|``
+ symbol, commands, subcommands, their options and arguments.
+It's recommended to
+ never put several consecutive spaces unless they are part of string.
+It's recommended to
+ omit commas between list items.
+Correct:
+```Fenced(Borrowed("nu"))
+'Hello, Nushell! This is a gradient.' | ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+# - too many spaces after "|": 2 instead of 1
+'Hello, Nushell! This is a gradient.' |  ansi gradient --fgstart '0x40c9ff' --fgend '0xe81cff'
+
+```
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@05560a0f1931fe5f3c1cfa443d30759f2a8f99deb17c5dfe6fce02326a88aa53•next:ëØOne-line Format⁄2One-line format is a format for writing all commands in one line.
+It's recommended to
+ default to this format:
+unless you are writing scripts
+in scripts for lists and records unless they either:
+more than 80 characters long
+contain nested lists or records
+for pipelines less than 80 characters long not containing items should be formatted with
+
+a long format
+Rules:
+parameters:
+It's recommended to
+ put one space after comma 
+``,``
+ after block or closure parameter.
+It's recommended to
+ put one space after pipe 
+``|``
+ symbol denoting block or closure parameter list end.
+block and closure bodies:
+It's recommended to
+ put one space after opening block or closure curly brace 
+``{``
+ if no explicit parameters defined.
+It's recommended to
+ put one space before closing block or closure curly brace 
+``}``
+.
+records:
+It's recommended to
+ put one space after 
+``:``
+ after record key.
+It's recommended to
+ put one space after comma 
+``,``
+ after key value.
+lists:
+It's recommended to
+ put one space after comma 
+``,``
+ after list value.
+surrounding constructs:
+It's recommended to
+ put one space before opening square 
+``[``
+, curly brace 
+``{``
+, or parenthesis 
+``(``
+ if preceding symbol is not the same.
+It's recommended to
+ put one space after closing square 
+``]``
+, curly brace 
+``}``
+, or parenthesis 
+``)``
+ if following symbol is not the same.
+Correct:
+```Fenced(Borrowed("nu"))
+[[status]; [UP] [UP]] | all {|el| $el.status == UP }
+[1 2 3 4] | reduce {|elt, acc| $elt + $acc }
+[1 2 3 4] | reduce {|elt acc| $elt + $acc }
+{x: 1, y: 2}
+{x: 1 y: 2}
+[1 2] | zip [3 4]
+[]
+(1 + 2) * 3
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+# too many spaces before "|el|": no space is allowed
+[[status]; [UP] [UP]] | all { |el| $el.status == UP }
+
+# too many spaces before ",": no space is allowed
+[1 2 3 4] | reduce {|elt , acc| $elt + $acc }
+
+# too many spaces before "x": no space is allowed
+{ x: 1, y: 2}
+
+# too many spaces before "[3": one space is required
+[1 2] | zip  [3 4]
+
+# too many spaces before "]": no space is allowed
+[ ]
+
+# too many spaces before ")": no space is allowed
+(1 + 2 ) * 3
+
+```
+íêê⁄^Title: next:
+Path: One-line Format
+Content:
+One-line format is a format for writing all commands in one line.
+It's recommended to
+ default to this format:
+unless you are writing scripts
+in scripts for lists and records unless they either:
+more than 80 characters long
+contain nested lists or records
+for pipelines less than 80 characters long not containing items should be formatted with
+
+a long format
+Rules:
+parameters:
+It's recommended to
+ put one space after comma 
+``,``
+ after block or closure parameter.
+It's recommended to
+ put one space after pipe 
+``|``
+ symbol denoting block or closure parameter list end.
+block and closure bodies:
+It's recommended to
+ put one space after opening block or closure curly brace 
+``{``
+ if no explicit parameters defined.
+It's recommended to
+ put one space before closing block or closure curly brace 
+``}``
+.
+records:
+It's recommended to
+ put one space after 
+``:``
+ after record key.
+It's recommended to
+ put one space after comma 
+``,``
+ after key value.
+lists:
+It's recommended to
+ put one space after comma 
+``,``
+ after list value.
+surrounding constructs:
+It's recommended to
+ put one space before opening square 
+``[``
+, curly brace 
+``{``
+, or parenthesis 
+``(``
+ if preceding symbol is not the same.
+It's recommended to
+ put one space after closing square 
+``]``
+, curly brace 
+``}``
+, or parenthesis 
+``)``
+ if following symbol is not the same.
+Correct:
+```Fenced(Borrowed("nu"))
+[[status]; [UP] [UP]] | all {|el| $el.status == UP }
+[1 2 3 4] | reduce {|elt, acc| $elt + $acc }
+[1 2 3 4] | reduce {|elt acc| $elt + $acc }
+{x: 1, y: 2}
+{x: 1 y: 2}
+[1 2] | zip [3 4]
+[]
+(1 + 2) * 3
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+# too many spaces before "|el|": no space is allowed
+[[status]; [UP] [UP]] | all { |el| $el.status == UP }
+
+# too many spaces before ",": no space is allowed
+[1 2 3 4] | reduce {|elt , acc| $elt + $acc }
+
+# too many spaces before "x": no space is allowed
+{ x: 1, y: 2}
+
+# too many spaces before "[3": one space is required
+[1 2] | zip  [3 4]
+
+# too many spaces before "]": no space is allowed
+[ ]
+
+# too many spaces before ")": no space is allowed
+(1 + 2 ) * 3
+
+```
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@5fbf1fdf0a2689ca90a4aa6a6381c00776253c4f63e74722360ff97f371c884d•next:ë±Multi-line Format⁄¢Multi-line format is a format for writing all commands in several lines. It inherits all rules from one-line format
+
+and modifies them slightly.
+It's recommended to
+ default to this format:
+while you are writing scripts
+in scripts for lists and records while they either:
+more than 80 characters long
+contain nested lists or records
+for pipelines more 80 characters long
+Rules:
+general:
+It's required to omit
+ trailing spaces.
+block and closure bodies:
+It's recommended to
+ put each body pipeline on a separate line.
+records:
+It's recommended to
+ put each record key-value pair on separate line.
+lists:
+It's recommended to
+ put each list item on separate line.
+surrounding constructs:
+It's recommended to
+ put one 
+``\n``
+ before opening square 
+``[``
+, curly brace 
+``{``
+, or parenthesis 
+``(``
+ if preceding symbol is not the and applying this rule produce line with a singular parenthesis.
+It's recommended to
+ put one 
+``\n``
+ after closing square 
+``]``
+, curly brace 
+``}``
+, or parenthesis 
+``)``
+ if following symbol is not the same and applying this rule produce line with a singular parenthesis.
+Correct:
+```Fenced(Borrowed("nu"))
+[[status]; [UP] [UP]] | all {|el|
+    $el.status == UP
+}
+
+[1 2 3 4] | reduce {|elt, acc|
+    $elt + $acc
+}
+
+{x: 1, y: 2}
+
+[
+  {name: "Teresa", age: 24},
+  {name: "Thomas", age: 26}
+]
+
+let selectedProfile = (for it in ($credentials | transpose name credentials) {
+    echo $it.name
+})
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+# too many spaces before "|el|": no space is allowed (like in one-line format)
+[[status]; [UP] [UP]] | all { |el|
+    # too few "\n" before "}": one "\n" is required
+    $el.status == UP}
+
+# too many spaces before "2": one space is required (like in one-line format)
+[1  2 3 4] | reduce {|elt, acc|
+    $elt + $acc
+}
+
+{
+   # too many "\n" before "x": one-line format required as no nested lists or record exist
+   x: 1,
+   y: 2
+}
+
+# too few "\n" before "{": multi-line format required as there are two nested records
+[{name: "Teresa", age: 24},
+  {name: "Thomas", age: 26}]
+
+let selectedProfile = (
+    # too many "\n" before "foo": no "\n" is allowed
+    for it in ($credentials | transpose name credentials) {
+        echo $it.name
+})
+
+```
+íêê⁄–Title: next:
+Path: Multi-line Format
+Content:
+Multi-line format is a format for writing all commands in several lines. It inherits all rules from one-line format
+
+and modifies them slightly.
+It's recommended to
+ default to this format:
+while you are writing scripts
+in scripts for lists and records while they either:
+more than 80 characters long
+contain nested lists or records
+for pipelines more 80 characters long
+Rules:
+general:
+It's required to omit
+ trailing spaces.
+block and closure bodies:
+It's recommended to
+ put each body pipeline on a separate line.
+records:
+It's recommended to
+ put each record key-value pair on separate line.
+lists:
+It's recommended to
+ put each list item on separate line.
+surrounding constructs:
+It's recommended to
+ put one 
+``\n``
+ before opening square 
+``[``
+, curly brace 
+``{``
+, or parenthesis 
+``(``
+ if preceding symbol is not the and applying this rule produce line with a singular parenthesis.
+It's recommended to
+ put one 
+``\n``
+ after closing square 
+``]``
+, curly brace 
+``}``
+, or parenthesis 
+``)``
+ if following symbol is not the same and applying this rule produce line with a singular parenthesis.
+Correct:
+```Fenced(Borrowed("nu"))
+[[status]; [UP] [UP]] | all {|el|
+    $el.status == UP
+}
+
+[1 2 3 4] | reduce {|elt, acc|
+    $elt + $acc
+}
+
+{x: 1, y: 2}
+
+[
+  {name: "Teresa", age: 24},
+  {name: "Thomas", age: 26}
+]
+
+let selectedProfile = (for it in ($credentials | transpose name credentials) {
+    echo $it.name
+})
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+# too many spaces before "|el|": no space is allowed (like in one-line format)
+[[status]; [UP] [UP]] | all { |el|
+    # too few "\n" before "}": one "\n" is required
+    $el.status == UP}
+
+# too many spaces before "2": one space is required (like in one-line format)
+[1  2 3 4] | reduce {|elt, acc|
+    $elt + $acc
+}
+
+{
+   # too many "\n" before "x": one-line format required as no nested lists or record exist
+   x: 1,
+   y: 2
+}
+
+# too few "\n" before "{": multi-line format required as there are two nested records
+[{name: "Teresa", age: 24},
+  {name: "Thomas", age: 26}]
+
+let selectedProfile = (
+    # too many "\n" before "foo": no "\n" is allowed
+    for it in ($credentials | transpose name credentials) {
+        echo $it.name
+})
+
+```
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@b742657cf4250c5a0b5e26f773e51edabdf2f22eda504c950f424ebff880f3b7•next:ë∫Abbreviations and Acronyms⁄/It's recommended
+ to use full concise words over abbreviations and acronyms, unless they are well-known and/or
+
+commonly used.
+Correct:
+```Fenced(Borrowed("nu"))
+query-user --id 123
+
+$user.name | str downcase
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+qry-usr --id 123
+
+$user.name | string downcase
+
+```
+íêê⁄fTitle: next:
+Path: Abbreviations and Acronyms
+Content:
+It's recommended
+ to use full concise words over abbreviations and acronyms, unless they are well-known and/or
+
+commonly used.
+Correct:
+```Fenced(Borrowed("nu"))
+query-user --id 123
+
+$user.name | str downcase
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+qry-usr --id 123
+
+$user.name | string downcase
+
+```
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@d314668752b3a7f66f35801064b236a5abd8a08e7c3c50344b8d56477f8a37f5•next:ë®Commands⁄It's recommended to
+ use kebab-case for command names with multiple words.
+Correct:
+```Fenced(Borrowed("nu"))
+fetch-user --id 123
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+fetch_user --id 123
+fetchUser --id 123
+
+```
+See also 
+[link: custom_commands.md#naming-commands] Naming Commands
+.
+íêê⁄DTitle: next:
+Path: Commands
+Content:
+It's recommended to
+ use kebab-case for command names with multiple words.
+Correct:
+```Fenced(Borrowed("nu"))
+fetch-user --id 123
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+fetch_user --id 123
+fetchUser --id 123
+
+```
+See also 
+[link: custom_commands.md#naming-commands] Naming Commands
+.
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@9ca596fc28df5d8a7a2ccf807e3ed291f95efc11a9f2ad2e12a8bf7b0da0a3a1•next:ë¨Sub-Commands⁄{Sub commands are commands that are logically grouped under a parent command and separated by a space.
+
+It's recommended to
+ use kebab-case for the sub-command name.
+Correct:
+```Fenced(Borrowed("nu"))
+date now
+
+date list-timezone
+
+def "login basic-auth" [username: string password: string] {
+    # ...
+}
+
+```
+See also 
+[link: custom_commands.md#subcommands] Naming Sub-Commands
+.
+íêê⁄§Title: next:
+Path: Sub-Commands
+Content:
+Sub commands are commands that are logically grouped under a parent command and separated by a space.
+
+It's recommended to
+ use kebab-case for the sub-command name.
+Correct:
+```Fenced(Borrowed("nu"))
+date now
+
+date list-timezone
+
+def "login basic-auth" [username: string password: string] {
+    # ...
+}
+
+```
+See also 
+[link: custom_commands.md#subcommands] Naming Sub-Commands
+.
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@fcd4fbd5dd31d218ef41e46f96351a57b129616d75018ace5b79a2b3b3427e2f•next:ë•Flags⁄´It's recommended to
+ use kebab-case for flag names.
+Correct:
+```Fenced(Borrowed("nu"))
+def greet [name: string, --all-caps] {
+    # ...
+}
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+def greet [name: string, --all_caps] {
+    # ...
+}
+
+```
+::: tip
+
+Notice that the name used to access the flag is accessed by replacing the dash with an underscore in the resulting
+
+variable name.
+See 
+[link: custom_commands.md#flags] Flags
+.
+
+:::
+íêê⁄ÕTitle: next:
+Path: Flags
+Content:
+It's recommended to
+ use kebab-case for flag names.
+Correct:
+```Fenced(Borrowed("nu"))
+def greet [name: string, --all-caps] {
+    # ...
+}
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+def greet [name: string, --all_caps] {
+    # ...
+}
+
+```
+::: tip
+
+Notice that the name used to access the flag is accessed by replacing the dash with an underscore in the resulting
+
+variable name.
+See 
+[link: custom_commands.md#flags] Flags
+.
+
+:::
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@41dc72b030c3912e4086952d26ecd93dc2ec12bfc722cc9516d76b6cb49f0595•next:ëŸ Variables and Command Parameters⁄3It's recommended to
+ use snake_case for variable names, including command parameters.
+Correct:
+```Fenced(Borrowed("nu"))
+let user_id = 123
+
+def fetch-user [user_id: int] {
+  # ...
+}
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+let user-id = 123
+let userId = 123
+
+def fetch-user [user-id: int] {
+  # ...
+}
+
+```
+íêê⁄pTitle: next:
+Path: Variables and Command Parameters
+Content:
+It's recommended to
+ use snake_case for variable names, including command parameters.
+Correct:
+```Fenced(Borrowed("nu"))
+let user_id = 123
+
+def fetch-user [user_id: int] {
+  # ...
+}
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+let user-id = 123
+let userId = 123
+
+def fetch-user [user-id: int] {
+  # ...
+}
+
+```
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@7db87f4f11a1e1a1a4edffd9c2ad03d47e2cde63f9b1bb5ef1410428754a8da0•next:ëµEnvironment Variables⁄It's recommended to
+ use SCREAMING_SNAKE_CASE for environment variable names.
+Correct:
+```Fenced(Borrowed("nu"))
+$env.ENVIRONMENT_CODE = "prod"
+
+$env.APP_VERSION = "1.0.0"
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+$env.ENVIRONMENT-CODE = "prod"
+
+$env.app_version = "1.0.0"
+
+```
+íêê⁄HTitle: next:
+Path: Environment Variables
+Content:
+It's recommended to
+ use SCREAMING_SNAKE_CASE for environment variable names.
+Correct:
+```Fenced(Borrowed("nu"))
+$env.ENVIRONMENT_CODE = "prod"
+
+$env.APP_VERSION = "1.0.0"
+
+```
+Incorrect:
+```Fenced(Borrowed("nu"))
+$env.ENVIRONMENT-CODE = "prod"
+
+$env.app_version = "1.0.0"
+
+```
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@35d4c6f34ea86209435a7bbf128d5fb977f25892c9cf336313e20277bf323b39•next:ëŸ)Options and Parameters of Custom Commands⁄íIt's recommended to
+ keep count of all positional parameters less than or equal to 2, for remaining inputs use options. Assume that command can expect source and destination parameter, like 
+``mv``
+: source and target file or directory.
+It's recommended to
+ use positional parameters unless they can't be used due to rules listed here or technical restrictions.
+
+For instance, when there are several kinds of optional parameters (but at least one parameter should be provided)
+
+use options. Great example of this is 
+``ansi gradient``
+ command where at least foreground or background must be passed.
+It's recommended to
+ provide both long and short options.
+íêê⁄ÿTitle: next:
+Path: Options and Parameters of Custom Commands
+Content:
+It's recommended to
+ keep count of all positional parameters less than or equal to 2, for remaining inputs use options. Assume that command can expect source and destination parameter, like 
+``mv``
+: source and target file or directory.
+It's recommended to
+ use positional parameters unless they can't be used due to rules listed here or technical restrictions.
+
+For instance, when there are several kinds of optional parameters (but at least one parameter should be provided)
+
+use options. Great example of this is 
+``ansi gradient``
+ command where at least foreground or background must be passed.
+It's recommended to
+ provide both long and short options.
+óŸJarchive/external_nushell_repo_backup/nushell.github.io/book/style_guide.mdŸ@4f191c2cc6ad779603108019dc42c5afb30efe09279360f813fd635b1c68a8b6•next:ë≠DocumentationŸúIt's recommended to
+ provide documentation for all exported entities (like custom commands) and their
+
+inputs (like custom command parameters and options).
+íêêŸ∆Title: next:
+Path: Documentation
+Content:
+It's recommended to
+ provide documentation for all exported entities (like custom commands) and their
+
+inputs (like custom command parameters and options).

@@ -1,0 +1,74 @@
+���@c20cc7d112ee964ad362aa19cbadb3ed4567e1238262ba74dfc44d8befb72114�pTitle: title: skip until
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``skip until``
+[link: /commands/categories/filters.md] ��@2ea6ea12d1cf060384d6ace7f94b32bc260a63870bd03fecccf77df00d14da67�WTitle: title: skip until
+Path: Signature
+Content:
+``> skip until {flags} (predicate)``
+��@0b8f50fb0bd7849bdd6be781d850e2e8c7a0dee48ea52f9c3e43b5311acbd14b�vTitle: title: skip until
+Path: Parameters
+Content:
+``predicate``
+: The predicate that skipped element must not match.
+��@d341c867d6305adad837882c72f59e87ba547e07995588d4044a1dd102f09b5e�qTitle: title: skip until
+Path: Input/output types:
+Content:
+input
+output
+table
+table
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+��@489d512faca68be420b9c66afd373cf8ca782d0c95f0d88f0b5d718aee06cd73�Title: title: skip until
+Path: Examples
+Content:
+Skip until the element is positive.
+```Fenced(Borrowed("nu"))
+> [-2 0 2 -1] | skip until {|x| $x > 0 }
+╭───┬────╮
+│ 0 │  2 │
+│ 1 │ -1 │
+╰───┴────╯
+
+
+```
+Skip until the element is positive using stored condition.
+```Fenced(Borrowed("nu"))
+> let cond = {|x| $x > 0 }; [-2 0 2 -1] | skip until $cond
+╭───┬────╮
+│ 0 │  2 │
+│ 1 │ -1 │
+╰───┴────╯
+
+
+```
+Skip until the field value is positive.
+```Fenced(Borrowed("nu"))
+> [{a: -2} {a: 0} {a: 2} {a: -1}] | skip until {|x| $x.a > 0 }
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │  2 │
+│ 1 │ -1 │
+╰───┴────╯
+
+
+```

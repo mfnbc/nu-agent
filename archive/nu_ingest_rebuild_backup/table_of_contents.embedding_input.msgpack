@@ -1,0 +1,81 @@
+‘’Ù@886e7397d2135d9995c8a3d1fe2d19df6363f09337b1ae36c013efcc86825fb5Ú…Title: Table of Contents
+Path: Table of Contents
+Content:
+[link: installation.md] Installation
+ - Installing Nushell
+[link: README.md] Introduction
+ - Getting started
+[link: thinking_in_nu.md] Thinking in Nu
+ - Thinking in Nushell
+[link: moving_around.md] Moving around
+ - Moving around in Nushell
+[link: types_of_data.md] Types of data
+ - Types of data in Nushell
+[link: loading_data.md] Loading data
+ - Loading data and using it
+[link: working_with_strings.md] Strings
+ - Strings, escape characters, and string interpolation
+[link: working_with_lists.md] Working with lists
+ - Working with Nu lists
+[link: working_with_tables.md] Working with tables
+ - Working with Nu tables
+[link: pipelines.md] Pipelines
+ - How the pipeline works
+[link: configuration.md] Configuration
+ - How to configure Nushell
+[link: 3rdpartyprompts.md] 3rd Party Prompts
+ - How to configure 3rd party prompts
+[link: custom_commands.md] Custom commands
+ - Creating your own commands
+[link: aliases.md] Aliases
+ - How to alias commands
+[link: operators.md] Operators
+ - Operators supported by Nushell
+[link: variables.md] Variables
+ - Working with variables
+[link: control_flow.md] Control flow
+ - Working with the control flow commands
+[link: environment.md] Environment
+ - Working with environment variables
+[link: stdout_stderr_exit_codes.md] Stdout, stderr, and exit codes
+ - Working with stdout, stderr, and exit codes
+[link: modules.md] Modules
+ - Creating and using your own modules
+[link: hooks.md] Hooks
+ - Adding code snippets to be run automatically
+[link: scripts.md] Scripts
+ - Creating your own scripts
+[link: metadata.md] Metadata
+ - An explanation of Nu's metadata system
+[link: creating_errors.md] Creating your own errors
+ - Creating your own error messages
+[link: directory_stack.md] Directory Stack
+ - Working with multiple locations
+[link: ./running_externals.md] Running External (System) Commands
+ - Running external commands with a naming conflict
+[link: plugins.md] Plugins
+ - Enhancing Nushell with more features using plugins
+[link: parallelism.md] Parallelism
+ - Running your code in parallel
+[link: line_editor.md] Line editor
+ - Nushell's line editor
+[link: dataframes.md] Dataframes
+ - Working with dataframes in Nushell
+[link: explore.md] Explore
+ - Using the Nushell TUI
+[link: coloring_and_theming.md] Coloring and Theming
+ - How to change the colors and themes in Nushell
+[link: regular_expressions.md] Regular Expressions
+ - Guide to use regex
+[link: coming_from_bash.md] Coming from Bash
+ - Guide for those coming to Nushell from Bash
+[link: nushell_map.md] Nushell map from shells/DSL
+ - Guide to show how Nushell compares with SQL, LINQ, PowerShell, and Bash
+[link: nushell_map_imperative.md] Nushell map from imperative languages
+ - Guide to show how Nushell compares with Python, Kotlin, C++, C#, and Rust
+[link: nushell_map_functional.md] Nushell map from functional languages
+ - Guide to show how Nushell compares with Clojure, Tablecloth (OCaml / Elm) and Haskell
+[link: nushell_operator_map.md] Nushell operator map
+ - Guide to show how Nushell operators compare with those in general purpose programming languages
+[link: /commands/] Command Reference
+ - List of all Nushell's commands

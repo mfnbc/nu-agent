@@ -27,11 +27,11 @@ const TOOL_SPECS = {
     allowed: ["pattern", "path"]
     argument_descriptions: { pattern: "Regex pattern to match.", path: "File or directory path to search." }
   }
-  "search-chunks": {
-    description: "Search ingested chunk JSONL files for matching evidence."
+    "search-chunks": {
+    description: "Search ingested chunk NUON files for matching evidence."
     required: ["pattern", "path"]
     allowed: ["pattern", "path"]
-    argument_descriptions: { pattern: "Regex pattern to match against chunk fields.", path: "Directory or .chunks.jsonl file to search." }
+    argument_descriptions: { pattern: "Regex pattern to match against chunk fields.", path: "Directory or .chunks.nuon file to search." }
   }
   "replace-in-file": {
     description: "Replace matching text in a file and preview the result."
@@ -73,22 +73,12 @@ const TOOL_SPECS = {
       limit: "Optional maximum number of jobs to return."
     }
   }
-  "inspect-kuzu-plan": {
-    description: "Inspect a Kùzu node/edge plan or sample rows."
-    required: ["path"]
-    allowed: ["path", "kind", "limit"]
-    argument_descriptions: {
-      path: "Path to the Kùzu plan JSON file."
-      kind: "Which portion to view: plan, nodes, or edges."
-      limit: "Optional maximum number of rows to sample."
-    }
-  }
   "inspect-chunk": {
     description: "Retrieve a specific chunk (and optional neighbors) from chunk JSONL files."
     required: ["path", "id"]
     allowed: ["path", "id", "neighbors"]
     argument_descriptions: {
-      path: "Directory or .chunks.jsonl file to inspect."
+      path: "Directory or .chunks.nuon file to inspect."
       id: "Chunk id to retrieve."
       neighbors: "Include previous/next chunks when present."
     }
@@ -335,19 +325,56 @@ def validate-nu-output [call, result, tools: list] {
 }
 
 def call-llm-json [task: string, tools: list] {
-  let raw = (call-llm $task $tools)
+  # Use raw call to obtain metadata about the response type.
+  let raw_obj = (call-llm-raw $task $tools)
+  let raw = ($raw_obj.content | default "")
+  let resp_type = ($raw_obj.metadata.response_type? | default "chat")
 
-  try {
-    coerce-json $raw
-  } catch { |err|
-    let reason = ($err.msg? | default ($err | to text))
-    let retry_task = (repair-prompt $task $raw $reason)
-    let raw2 = (call-llm $retry_task $tools)
+  # If the response came from a completion endpoint, aggressively try to
+  # extract a JSON array even when the model emits extra text.
+  if $resp_type == "completion" {
+    if not ($raw | str starts-with "[") {
+      # Attempt to extract the first JSON array substring from the text.
+      try {
+        let start = ($raw | str find "[" )
+        let end = ($raw | str rfind "]" )
+        if ($start >= 0) and ($end >= $start) {
+          let candidate = ($raw | str substring $start (($end - $start) + 1))
+          let parsed = (coerce-json $candidate)
+          parsed
+        } else {
+          # fallthrough to normal repair flow
+          throw make { msg: "no bracketed array found" }
+        }
+      } catch { |e|
+        # Fallback: perform the repair prompt flow
+        let reason = ($e.msg? | default ($e | to text))
+        let retry_task = (repair-prompt $task $raw $reason)
+        let raw2 = (call-llm $retry_task $tools)
 
-    try {
-      coerce-json $raw2
-    } catch {
-      error make { msg: "LLM did not return parseable JSON array after retry" }
+        try {
+          coerce-json $raw2
+        } catch {
+          error make { msg: "LLM did not return parseable JSON array after retry" }
+        }
+      }
+    } else {
+      try { coerce-json $raw } catch { |err|
+        let reason = ($err.msg? | default ($err | to text))
+        let retry_task = (repair-prompt $task $raw $reason)
+        let raw2 = (call-llm $retry_task $tools)
+
+        try { coerce-json $raw2 } catch { error make { msg: "LLM did not return parseable JSON array after retry" } }
+      }
+    }
+  } else {
+    # Default chat-style behavior: expect clean JSON
+    try { coerce-json $raw } catch { |err|
+      let reason = ($err.msg? | default ($err | to text))
+      let retry_task = (repair-prompt $task $raw $reason)
+      let raw2 = (call-llm $retry_task $tools)
+
+      try { coerce-json $raw2 } catch { error make { msg: "LLM did not return parseable JSON array after retry" } }
     }
   }
 }
@@ -588,7 +615,7 @@ def invoke-tool [call] {
     "search" => { search --pattern $args.pattern --path $args.path }
     "search-chunks" => { search-chunks --pattern $args.pattern --path $args.path }
     "inspect-rig-plan" => { inspect-rig-plan --path $args.path --table ($args.table? | default "") --limit ($args.limit? | default 0) }
-    "inspect-kuzu-plan" => { inspect-kuzu-plan --path $args.path --kind ($args.kind? | default "plan") --limit ($args.limit? | default 10) }
+    # "inspect-kuzu-plan" removed (Kùzu integration was archival/opt-in)
     "inspect-chunk" => {
       let include_neighbors = ($args.neighbors? | default false)
       if $include_neighbors {

@@ -1,0 +1,273 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-29-twin0153.mdŸ@a439d88997bc489983c3f8e69d427f685b0d3927739779d9810e7185f1c22d79πThis week in Nushell #153ëßNushell⁄|hustcer 
+[link: https://github.com/nushell/nushell/pull/6183] bumped to 0.66.3 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/6120] fix typo of 
+``port``
+ command
+nibon7 
+[link: https://github.com/nushell/nushell/pull/6181] fixed touch panics when using invalid timestamp
+, and 
+[link: https://github.com/nushell/nushell/pull/6171] Prevent mv panic again
+, and 
+[link: https://github.com/nushell/nushell/pull/6158] Prevent mv panic
+, and 
+[link: https://github.com/nushell/nushell/pull/6148] Fix ls panics when a file or directory not exists
+, and 
+[link: https://github.com/nushell/nushell/pull/6141] Make path::canonicalize::canonicalize_dot test case more reliable
+, and 
+[link: https://github.com/nushell/nushell/pull/6134] Make login.nu work when using nu as a login shell 
+, and 
+[link: https://github.com/nushell/nushell/pull/6132] Use local time for logger
+, and 
+[link: https://github.com/nushell/nushell/pull/6130] Fix print_table_or_error when 
+``table``
+ is overridden
+, and 
+[link: https://github.com/nushell/nushell/pull/6129] Fix PipelineData::print when 
+``table``
+ is overridden
+, and 
+[link: https://github.com/nushell/nushell/pull/6122] Simplify print_table_or_error
+, and 
+[link: https://github.com/nushell/nushell/pull/6121] Simplify eval_block
+, and 
+[link: https://github.com/nushell/nushell/pull/6119] Simplify PipelineData::print
+, and 
+[link: https://github.com/nushell/nushell/pull/6104] Don't panic if nu failed to create config files 
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/6176] made default env works better with bash style PATH
+, and 
+[link: https://github.com/nushell/nushell/pull/6117] try make port test more reliable
+jt 
+[link: https://github.com/nushell/nushell/pull/6175] moved 
+``ls``
+ back to last-known-good state
+, and 
+[link: https://github.com/nushell/nushell/pull/6169] Revert cp and mv back to last-known-good state
+, and 
+[link: https://github.com/nushell/nushell/pull/6157] bump to 0.66.2 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/6142] fix var names coming from long/short flags
+, and 
+[link: https://github.com/nushell/nushell/pull/6140] bump to 0.66.1 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/6138] fix 0.66 nu-command crate
+, and 
+[link: https://github.com/nushell/nushell/pull/6137] bump to 0.66
+, and 
+[link: https://github.com/nushell/nushell/pull/6136] move to latest stable reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/6125] require variable names to follow additional restrictions
+, and 
+[link: https://github.com/nushell/nushell/pull/6116] Revert "
+``extern``
+ command should be treated as external"
+, and 
+[link: https://github.com/nushell/nushell/pull/6115] exit with non-zero exit code when script ends with non-zero exit
+kubouch 
+[link: https://github.com/nushell/nushell/pull/6168] quickly patched wrong 'export' command name
+, and 
+[link: https://github.com/nushell/nushell/pull/6162] Allow modules to 
+``use``
+ other modules
+, and 
+[link: https://github.com/nushell/nushell/pull/6150] Use relative paths as file-relative when parsing a file
+, and 
+[link: https://github.com/nushell/nushell/pull/6127] Use official virtualenv repo for the CI tests
+fdncred 
+[link: https://github.com/nushell/nushell/pull/6163] add a new welcome banner to nushell
+, and 
+[link: https://github.com/nushell/nushell/pull/6153] move application reset mode ansi sequence after cmdline execute
+, and 
+[link: https://github.com/nushell/nushell/pull/6152] winget wants this to match
+, and 
+[link: https://github.com/nushell/nushell/pull/6147] clean up some comments
+, and 
+[link: https://github.com/nushell/nushell/pull/6131] update some dependencies
+, and 
+[link: https://github.com/nushell/nushell/pull/6123] expand durations to include month, year, decade
+, and 
+[link: https://github.com/nushell/nushell/pull/6112] move the shell integration title setting to the right place
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/6161] maintained quotes for arguments
+, and 
+[link: https://github.com/nushell/nushell/pull/6126] plugin show signature
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/6135] allowed view-source to view aliases
+, and 
+[link: https://github.com/nushell/nushell/pull/6118] remove misleading example from 
+``source``
+, and 
+[link: https://github.com/nushell/nushell/pull/6110] throw error if any? or all? expression invokes invalid command
+PlasmaIntec 
+[link: https://github.com/nushell/nushell/pull/6114] allowed cp multiple files at once
+, and 
+[link: https://github.com/nushell/nushell/pull/6098] Allow multiple patterns in ls command
+Mathspy 
+[link: https://github.com/nushell/nushell/pull/6070] added CustomValue support to plugins
+íêê⁄¥Title: This week in Nushell #153
+Path: Nushell
+Content:
+hustcer 
+[link: https://github.com/nushell/nushell/pull/6183] bumped to 0.66.3 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/6120] fix typo of 
+``port``
+ command
+nibon7 
+[link: https://github.com/nushell/nushell/pull/6181] fixed touch panics when using invalid timestamp
+, and 
+[link: https://github.com/nushell/nushell/pull/6171] Prevent mv panic again
+, and 
+[link: https://github.com/nushell/nushell/pull/6158] Prevent mv panic
+, and 
+[link: https://github.com/nushell/nushell/pull/6148] Fix ls panics when a file or directory not exists
+, and 
+[link: https://github.com/nushell/nushell/pull/6141] Make path::canonicalize::canonicalize_dot test case more reliable
+, and 
+[link: https://github.com/nushell/nushell/pull/6134] Make login.nu work when using nu as a login shell 
+, and 
+[link: https://github.com/nushell/nushell/pull/6132] Use local time for logger
+, and 
+[link: https://github.com/nushell/nushell/pull/6130] Fix print_table_or_error when 
+``table``
+ is overridden
+, and 
+[link: https://github.com/nushell/nushell/pull/6129] Fix PipelineData::print when 
+``table``
+ is overridden
+, and 
+[link: https://github.com/nushell/nushell/pull/6122] Simplify print_table_or_error
+, and 
+[link: https://github.com/nushell/nushell/pull/6121] Simplify eval_block
+, and 
+[link: https://github.com/nushell/nushell/pull/6119] Simplify PipelineData::print
+, and 
+[link: https://github.com/nushell/nushell/pull/6104] Don't panic if nu failed to create config files 
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/6176] made default env works better with bash style PATH
+, and 
+[link: https://github.com/nushell/nushell/pull/6117] try make port test more reliable
+jt 
+[link: https://github.com/nushell/nushell/pull/6175] moved 
+``ls``
+ back to last-known-good state
+, and 
+[link: https://github.com/nushell/nushell/pull/6169] Revert cp and mv back to last-known-good state
+, and 
+[link: https://github.com/nushell/nushell/pull/6157] bump to 0.66.2 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/6142] fix var names coming from long/short flags
+, and 
+[link: https://github.com/nushell/nushell/pull/6140] bump to 0.66.1 dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/6138] fix 0.66 nu-command crate
+, and 
+[link: https://github.com/nushell/nushell/pull/6137] bump to 0.66
+, and 
+[link: https://github.com/nushell/nushell/pull/6136] move to latest stable reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/6125] require variable names to follow additional restrictions
+, and 
+[link: https://github.com/nushell/nushell/pull/6116] Revert "
+``extern``
+ command should be treated as external"
+, and 
+[link: https://github.com/nushell/nushell/pull/6115] exit with non-zero exit code when script ends with non-zero exit
+kubouch 
+[link: https://github.com/nushell/nushell/pull/6168] quickly patched wrong 'export' command name
+, and 
+[link: https://github.com/nushell/nushell/pull/6162] Allow modules to 
+``use``
+ other modules
+, and 
+[link: https://github.com/nushell/nushell/pull/6150] Use relative paths as file-relative when parsing a file
+, and 
+[link: https://github.com/nushell/nushell/pull/6127] Use official virtualenv repo for the CI tests
+fdncred 
+[link: https://github.com/nushell/nushell/pull/6163] add a new welcome banner to nushell
+, and 
+[link: https://github.com/nushell/nushell/pull/6153] move application reset mode ansi sequence after cmdline execute
+, and 
+[link: https://github.com/nushell/nushell/pull/6152] winget wants this to match
+, and 
+[link: https://github.com/nushell/nushell/pull/6147] clean up some comments
+, and 
+[link: https://github.com/nushell/nushell/pull/6131] update some dependencies
+, and 
+[link: https://github.com/nushell/nushell/pull/6123] expand durations to include month, year, decade
+, and 
+[link: https://github.com/nushell/nushell/pull/6112] move the shell integration title setting to the right place
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/6161] maintained quotes for arguments
+, and 
+[link: https://github.com/nushell/nushell/pull/6126] plugin show signature
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/6135] allowed view-source to view aliases
+, and 
+[link: https://github.com/nushell/nushell/pull/6118] remove misleading example from 
+``source``
+, and 
+[link: https://github.com/nushell/nushell/pull/6110] throw error if any? or all? expression invokes invalid command
+PlasmaIntec 
+[link: https://github.com/nushell/nushell/pull/6114] allowed cp multiple files at once
+, and 
+[link: https://github.com/nushell/nushell/pull/6098] Allow multiple patterns in ls command
+Mathspy 
+[link: https://github.com/nushell/nushell/pull/6070] added CustomValue support to plugins
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-29-twin0153.mdŸ@acb4010bf41cecfaaad2103a7503e8a5b8033d0d97992a943cf6d76cf4ce2289πThis week in Nushell #153ë≠Documentation⁄∫hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/544] Refresh commands for v0.66
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/541] Translate hooks.md to Chinese
+jt created 
+[link: https://github.com/nushell/nushell.github.io/pull/543] add the 0.66 release blog
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/542] Add overviews of chapters; Move Introduction to top level
+íêê⁄¯Title: This week in Nushell #153
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/544] Refresh commands for v0.66
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/541] Translate hooks.md to Chinese
+jt created 
+[link: https://github.com/nushell/nushell.github.io/pull/543] add the 0.66 release blog
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/542] Add overviews of chapters; Move Introduction to top level
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-29-twin0153.mdŸ@9469318889b81c0c7b17b6737f9c9d631d38d05b73af59b4f45c3d42fd50698bπThis week in Nushell #153ë™Nu_Scripts⁄Lfdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/269] winget: switch kebab case parameters to snake case
+skelly37 created 
+[link: https://github.com/nushell/nu_scripts/pull/267] Unspanned error
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/266] Update conda to 0.67 variable naming convention
+íêê⁄áTitle: This week in Nushell #153
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/269] winget: switch kebab case parameters to snake case
+skelly37 created 
+[link: https://github.com/nushell/nu_scripts/pull/267] Unspanned error
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/266] Update conda to 0.67 variable naming convention
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-29-twin0153.mdŸ@80fa17c38745702108f7b202be443d173d359e66986f1a5824fddb6c5c9d10a1πThis week in Nushell #153ë®reedline⁄jt created 
+[link: https://github.com/nushell/reedline/pull/454] bump to 0.9
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/453] update some deps
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/447] Update crossterm to 0.24
+íêê⁄@Title: This week in Nushell #153
+Path: reedline
+Content:
+jt created 
+[link: https://github.com/nushell/reedline/pull/454] bump to 0.9
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/453] update some deps
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/447] Update crossterm to 0.24
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-29-twin0153.mdŸ@fc58e209060021c4afddaa3d1d4f3e0ac48043efcc57f64045b2600f67f1bcceπThis week in Nushell #153ë§NanaŸ[rgwood created 
+[link: https://github.com/nushell/nana/pull/61] Implement copy card button
+íêêŸêTitle: This week in Nushell #153
+Path: Nana
+Content:
+rgwood created 
+[link: https://github.com/nushell/nana/pull/61] Implement copy card button

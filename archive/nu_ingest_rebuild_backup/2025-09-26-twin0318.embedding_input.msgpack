@@ -1,0 +1,101 @@
+š’Ù@dbbfa980c071bc5e728a7b1e25c9bef834cfdfb64e6528c2a94ad5503c8906d2Ù»Title: title: 'This week in Nushell #318'
+Path: This Week in Nushell #318
+Content:
+
+
+
+
+Published Friday, 2025-09-26, including PRs merged Friday, 2025-09-19 through Thursday, 2025-09-25.
+’Ù@a45575ddab278541eb88b8c559885b0cdb663f62dd752123c5607e36ee572684Ú	8Title: title: 'This week in Nushell #318'
+Path: Nushell
+Content:
+@Bahex:
+[link: https://github.com/nushell/nushell/pull/16738] refactored stream collection to raise an error on failure (#16738)
+[link: https://github.com/nushell/nushell/pull/16732] refactored 
+``each``
+ (#16732)
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/16737] updated Nushell to use coreutils v0.2.2 crates (#16737)
+@cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/16736] passed optional and casing to follow path methods for 
+``CustomValue``
+ (#16736)
+[link: https://github.com/nushell/nushell/pull/16697] replaced 
+``into value``
+ with 
+``detect type``
+ (#16697)
+[link: https://github.com/nushell/nushell/pull/16692] allowed saving 
+``CustomValue``
+s (#16692)
+@simonborje:
+[link: https://github.com/nushell/nushell/pull/16724] added configuration for columnar menu traversal direction (#16724)
+@nome:
+[link: https://github.com/nushell/nushell/pull/16722] fixed theming (#16722)
+@blindFS:
+[link: https://github.com/nushell/nushell/pull/16721] fixed missing span of incomplete math binary op (#16721)
+[link: https://github.com/nushell/nushell/pull/16715] refactored dotnu completion, fixing path-with-space issues (#16715)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/16693] introduced the MCP server feature (#16693)
+@fixerer:
+[link: https://github.com/nushell/nushell/pull/16676] fixed ir eval error on branched block redirection (#16676)
+@ysthakur:
+[link: https://github.com/nushell/nushell/pull/16595] test: ignored XDG_CONFIG_HOME when getting default config path (#16595)
+@maxim-uvarov:
+[link: https://github.com/nushell/nushell/pull/16588] added %J and %Q format specifiers for compact date/time formatting (#16588)
+@sgvictorino:
+[link: https://github.com/nushell/nushell/pull/16530] improved collection type inference (#16530)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/16745] bumped uuid from 1.16.0 to 1.18.1 (#16745)
+[link: https://github.com/nushell/nushell/pull/16744] bumped quick-xml from 0.37.5 to 0.38.3 (#16744)
+[link: https://github.com/nushell/nushell/pull/16743] bumped brotli from 7.0.0 to 8.0.2 (#16743)
+[link: https://github.com/nushell/nushell/pull/16742] bumped tempfile from 3.22.0 to 3.23.0 (#16742)
+[link: https://github.com/nushell/nushell/pull/16741] bumped strum_macros from 0.26.4 to 0.27.2 (#16741)
+’Ù@3b5955a6428f89618fa4c984424c7a84aad5a59aafadb2906bfb2abec06c90d4ÚûTitle: title: 'This week in Nushell #318'
+Path: Documentation
+Content:
+@knottio:
+[link: https://github.com/nushell/nushell.github.io/pull/2045] fixed broken links (#2045)
+@nome:
+[link: https://github.com/nushell/nushell.github.io/pull/2043] fixed broken links in closure reference (#2043)
+[link: https://github.com/nushell/nushell.github.io/pull/2041] fixed references to renamed range command (#2041)
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/2039] published TWiN 317 (#2039)
+’Ù@ea3b0eb5dffc175f5d342e86c1a143d395524c1b6474aa5139f0c9100b90aaaaÙ³Title: title: 'This week in Nushell #318'
+Path: Awesome Nu
+Content:
+@notelgnis:
+[link: https://github.com/nushell/awesome-nu/pull/132] added amasia/snip to the script list (#132)
+’Ù@7791e20bb9a3d95fc89b82743040e0240321c627b3ca5cf8d9ec5db7de004561Ù°Title: title: 'This week in Nushell #318'
+Path: plugin-examples
+Content:
+@cptpiepmatz:
+[link: https://github.com/nushell/plugin-examples/pull/8] bumped to nushell 0.107.1 (#8)
+’Ù@02b69602d21f0930fd93871aab7e92e5c00a4cf59aa7ccca7553b2834657f970Ù´Title: title: 'This week in Nushell #318'
+Path: VSCode Extension
+Content:
+@fdncred:
+[link: https://github.com/nushell/vscode-nushell-lang/pull/222] updated 
+``def``
+ syntax (#222)
+’Ù@d39979b48e53cf277bc3036ca3ce47071654d1f9a5e42ab080307277169ec0a6Ù¿Title: title: 'This week in Nushell #318'
+Path: reedline
+Content:
+@simonborje:
+[link: https://github.com/nushell/reedline/pull/951] made columnar menu traversal direction configurable (#951)
+’Ù@7971882a08c214acb1f028596f89dba3afdd2614cfb44d040d9cb16c37c33dd0Ù§Title: title: 'This week in Nushell #318'
+Path: Nu_Scripts
+Content:
+@NotTheDr01ds:
+[link: https://github.com/nushell/nu_scripts/pull/1174] updated TWiN script (#1174)
+’Ù@c9f1b822d0e45c90d121385079898db08de0c75a54b76109cb589bd6598c705aÚTitle: title: 'This week in Nushell #318'
+Path: Tree-sitter
+Content:
+@mkatychev:
+[link: https://github.com/nushell/tree-sitter-nu/pull/225] fixed cursed env flag positions (#225)
+[link: https://github.com/nushell/tree-sitter-nu/pull/224] fixed untyped collection body handling (#224)
+’Ù@cce7f4099fabd7f8f6be0c655fbe1098cd32e544bc0f4ed25aa7537a081acf1dÙ©Title: title: 'This week in Nushell #318'
+Path: Integrations
+Content:
+@hustcer:
+[link: https://github.com/nushell/integrations/pull/71] fixed winget install error (#71)

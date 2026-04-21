@@ -34,9 +34,9 @@ Conceptually:
 - `mod.nu` - core pipeline (schema build, parse/validate, execution)
 - `api.nu` - `http post` wrapper with strict no-prose system prompt
 - `tools.nu` - canonical Nushell tools
-- `rig_plan.nu` - deterministic LanceDB job manifest generator for Rig embedding input
-- `rig_run.nu` - Rig FastEmbed execution harness (dry-run/execute/validate)
-- `kuzu_plan.nu` - deterministic Kùzu node/edge export planner
+ - `rig_plan.nu` - deterministic LanceDB job manifest generator for Rig embedding input
+ - `rig_run.nu` - Rig FastEmbed execution harness (dry-run/execute/validate)
+ - Kùzu node/edge export planner (removed from the default repo; archival/opt-in integration)
 - `RULES.md` - hard project constraints
 - `PLAN.md` - current status and next steps
 
@@ -49,7 +49,7 @@ Conceptually:
 - `search-chunks --path <string> --pattern <string>`
 - `replace-in-file --path <string> --pattern <string> --replacement <string>`
 - `inspect-rig-plan --path <string> [--table <string>] [--limit <int>]`
-- `inspect-kuzu-plan --path <string> [--kind <string>] [--limit <int>]`
+ - (inspect-kuzu-plan removed; Kùzu integration is archival/opt-in)
 - `inspect-chunk --path <string> --id <string> [--neighbors]`
 - `search-embedding-input --path <string> --pattern <string> [--limit <int>]`
 - `propose-edit --path <string> --pattern <string> --replacement <string>`
@@ -98,7 +98,7 @@ Deterministic Markdown ingestion:
 ./nu-ingest README.md --out-dir build/nu-ingest
 ```
 
-This writes JSONL chunks, embedding-input jobs, and a manifest under the output directory. Each Markdown file produces both `<name>.chunks.jsonl` and `<name>.embedding_input.nuon` (preferred) so Rig/FastEmbed can index the derived inputs deterministically.
+This writes NUON chunks, embedding-input jobs (NUON) and a manifest under the output directory. Each Markdown file produces `<name>.chunks.nuon` and `<name>.embedding_input.nuon` (preferred) and a canonical MessagePack embeddings file for binary-first consumers.
 
 Generate a LanceDB ingestion plan for Rig/FastEmbed:
 
@@ -117,22 +117,7 @@ rig-run build/rig-plan.json --validate         # add dataset presence check (ski
 # rig-run build/rig-plan.json --execute --validate   # execute and verify LanceDB dataset
 ```
 
-Generate Kùzu node/edge exports:
-
-```nu
-use ./kuzu_plan.nu *
-kuzu-plan build/nu-ingest/manifest.json --out-dir build/kuzu-plan --out build/kuzu-plan.json
-```
-
-Transform the plan into executable Kùzu commands (dry-run by default):
-
-```nu
-use ./kuzu_run.nu *
-kuzu-run build/kuzu-plan.json --db build/kuzu/db            # dry-run
-kuzu-run build/kuzu-plan.json --db build/kuzu/db --validate # dry-run + validation metadata
-# kuzu-run build/kuzu-plan.json --db build/kuzu/db --execute        # execute when Kùzu binary is available
-# kuzu-run build/kuzu-plan.json --db build/kuzu/db --execute --validate   # execute and verify database presence
-```
+Kùzu export/import tooling has been removed from the default repository. If you require graph ingestion or specialized DB imports, implement them in a separate adapter repository and invoke them as an opt-in step.
 
 Repo-local CLI wrapper:
 
@@ -228,6 +213,13 @@ Key points:
 - See docs/RAG.md for the artifact layout, command surface, caching rules, and
   developer notes.
 
+Note: The repository previously contained a vendored FAISS tree under
+`build/faiss_local` (FAISS demos and C/Python bindings). That directory has been
+archived/removed from the active tree in favor of the Rust `fastembed`-based
+embedding path used by the `nu_plugin_rag` and `tools/nu_embedder` crates.
+FAISS remains available as an optional/archival artifact in project history if
+needed, but it is not part of the default build or runtime path.
+
 There are lightweight Nushell wrappers in `scripts/` to help run the prep/build/import
 steps. Two simple execution modes are supported so you can pick whichever is easiest:
 
@@ -251,9 +243,7 @@ steps. Two simple execution modes are supported so you can pick whichever is eas
 
      nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
 
-   - Use `scripts/kuzu-import.nu` to opt-in to Kùzu import if you have the `kuzu` binary:
-
-     nu scripts/kuzu-import.nu --plan build/rag/nu-docs/kuzu-plan.json --execute-kuzu
+    - Kùzu import helpers and scripts have been removed from the active defaults. If you need a graph-DB import workflow, implement it in a separate opt-in adapter and call it from this repo.
 
 The Nushell wrappers are small and call the plugin binaries under `crates/nu_plugin_rag/target/debug/`.
 If you prefer Makefile shortcuts, use `make plugin-build` and `make build`.

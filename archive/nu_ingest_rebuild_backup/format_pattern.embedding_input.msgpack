@@ -1,0 +1,60 @@
+•’Ù@310a84a1f84195d0a62e51a76996cb17145b4a26b64facf0ca618a0f342a3220ÙxTitle: title: format pattern
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``format pattern``
+[link: /commands/categories/strings.md] ’Ù@9ce76b45b277ea3bdb992794647a80693f2c5601ef82d4e220767fb897fc5923Ù]Title: title: format pattern
+Path: Signature
+Content:
+``> format pattern {flags} (pattern)``
+’Ù@ec71b8801ffe762251ccb6a2217e1bd452ec50f181b3798fdccfcec17498d9daÙrTitle: title: format pattern
+Path: Parameters
+Content:
+``pattern``
+: The pattern to output. e.g.) "{foo}: {bar}".
+’Ù@96fbd694080418ac42fe0277cf67469dab011e110f56a3c15bb0c97330bc1e4fÙoTitle: title: format pattern
+Path: Input/output types:
+Content:
+input
+output
+table
+list
+<
+string
+>
+
+record
+any
+’Ù@a63c157d229e0f2c63fba461fe331300c02963683bfc560110c07b764cc47158ÚTTitle: title: format pattern
+Path: Examples
+Content:
+Print filenames with their sizes
+```Fenced(Borrowed("nu"))
+> ls | format pattern '{name}: {size}'
+
+
+```
+Print elements from some columns of a table
+```Fenced(Borrowed("nu"))
+> [[col1, col2]; [v1, v2] [v3, v4]] | format pattern '{col2}'
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ v2 â”‚
+â”‚ 1 â”‚ v4 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â•¯
+
+
+```
+Escape braces by repeating them
+```Fenced(Borrowed("nu"))
+> {start: 3, end: 5} | format pattern 'if {start} < {end} {{ "correct" }} else {{ "incorrect" }}'
+if 3 < 5 { "correct" } else { "incorrect" }
+
+```

@@ -1,0 +1,5 @@
+‘—Ùqarchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/other_types/01_not_declarable.mdÙ@dfdaf992ac315b8077453f6d6800c88394a44e9b69787cb3df2ba765a9f2156eÙ)Types that are not declarable by the user‘Ù)Types that are not declarable by the userÙÄThe following are valid Nushell data types which cannot be declared by the user. They are used by Nushell internally or by plugins or commands compiled in Nushell like Polars and SQLite database.
+’Ú.Title: Types that are not declarable by the user
+Path: Types that are not declarable by the user
+Content:
+The following are valid Nushell data types which cannot be declared by the user. They are used by Nushell internally or by plugins or commands compiled in Nushell like Polars and SQLite database.

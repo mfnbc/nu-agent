@@ -1,0 +1,59 @@
+���@978028da5ca5e614053af1080c53b86e0efcd244c58d43195d7f0ffa1c05d3d6لTitle: title: polars get-weekday
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars get-weekday``
+[link: /commands/categories/dataframe.md] ��@e18c959e2fe15e05881b349f2b6ad4c830b830a96ecf0a5d9302e1675b3c1592�\Title: title: polars get-weekday
+Path: Signature
+Content:
+``> polars get-weekday {flags} ``
+��@f7b599f3e45c1153483c6e29dc6d521f5dea77fcf0449ce045dd224308b6b106ٹTitle: title: polars get-weekday
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@55d35e55747f2638b4aae7e979828053b59d8ef32adad5e4a5f156c8f550144f��Title: title: polars get-weekday
+Path: Examples
+Content:
+Returns weekday from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars get-weekday
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 2 │
+│ 1 │ 2 │
+╰───┴───╯
+
+
+```
+Returns weekday from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-weekday)
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 2 │
+│ 1 │ 2 │
+╰───┴───╯
+
+
+```

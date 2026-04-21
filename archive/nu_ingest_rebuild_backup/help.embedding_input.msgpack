@@ -1,0 +1,73 @@
+”’Ù@716c0410ee1fcd86ffeec6c6c6f0876d07fc1930b6674ac72b8b896569c39fb4Ù~Title: title: Help
+Path: Help
+Content:
+The 
+``help``
+ command is a good way to become familiar with all that Nu has to offer.
+’Ù@0aba93ed1b3db9dc6dfaf8fe0889898b1611a8a1f3f2f4ba368413af7adb8eceÙrTitle: title: Help
+Path: How to see all supported commands:
+Content:
+```Fenced(Borrowed("nu"))
+help commands
+
+```
+’Ù@ede931f9ed1d43cb87b40ab010663e579b1093b7c2ca09b631b028acc2cbd911ÚoTitle: title: Help
+Path: Specific information on a command
+Content:
+To find more specific information on a command, use 
+``help <COMMAND>``
+. This works for regular commands (i.e. 
+``http``
+) and subcommands (i.e. 
+``http get``
+):
+```Fenced(Borrowed("nu"))
+help http get
+# => Fetch the contents from a URL.
+# => 
+# => Performs HTTP GET operation.
+# => 
+# => Search terms: network, fetch, pull, request, download, curl, wget
+# => 
+# => Usage:
+# =>   > http get {flags} <URL>
+# => 
+# => Flags:
+# =>   -h, --help - Display the help message for this command
+# =>   -u, --user <Any> - the username when authenticating
+# =>   -p, --password <Any> - the password when authenticating
+# =>   -t, --timeout <Int> - timeout period in seconds
+# =>   -H, --headers <Any> - custom headers you want to add
+# =>   -r, --raw - fetch contents as text rather than a table
+# => 
+# => Signatures:
+# =>   <nothing> | http get <string> -> <any>
+# => 
+# => Parameters:
+# =>   URL <string>: the URL to fetch the contents from
+# => 
+# => Examples:
+# =>   http get content from example.com
+# =>   > http get https://www.example.com
+# => 
+# =>   http get content from example.com, with username and password
+# =>   > http get -u myuser -p mypass https://www.example.com
+# => 
+# =>   http get content from example.com, with custom header
+# =>   > http get -H [my-header-key my-header-value] https://www.example.com
+
+```
+’Ù@d4c6fc758742d5dfb6874163906dcea1f9f38af3f76128ae9f4a7bbbfad754d7Ú1Title: title: Help
+Path: Custom help command
+Content:
+If you want to change the 
+``help``
+ output, you can create your own custom command named 
+``help``
+ and it will also be used for all 
+``--help``
+ invocations. An example of this is in the standard library.
+```Fenced(Borrowed("nu"))
+use std/help
+
+```

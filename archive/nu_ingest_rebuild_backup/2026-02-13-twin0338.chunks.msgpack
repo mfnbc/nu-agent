@@ -1,0 +1,268 @@
+ñóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2026-02-13-twin0338.mdŸ@e20ae2d02f6bcbb608c6990a144b9e03c7d1e1e0d1017ecad938aa725f7ce14cŸ"title: 'This week in Nushell #338'ëπThis Week in Nushell #338Ÿh
+
+
+
+Published Friday, 2026-02-27, including PRs merged Friday, 2026-02-06 through Thursday, 2026-02-12.
+íêêŸªTitle: title: 'This week in Nushell #338'
+Path: This Week in Nushell #338
+Content:
+
+
+
+
+Published Friday, 2026-02-27, including PRs merged Friday, 2026-02-06 through Thursday, 2026-02-12.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2026-02-13-twin0338.mdŸ@b0054f48e983ebea194eaeb7e06744b219797ee3312cb19c7a1e167962ebffe1Ÿ"title: 'This week in Nushell #338'ëßNushell⁄”@fdncred:
+[link: https://github.com/nushell/nushell/pull/17555] cleaned up ansi command pr.md (#17555)
+[link: https://github.com/nushell/nushell/pull/17533] added 
+``nu``
+ to the ignore_list for 
+``:try``
+ in 
+``explore``
+ (#17533)
+[link: https://github.com/nushell/nushell/pull/17532] disabled auto tail and tracked previous row count in push_layer in explore (#17532)
+[link: https://github.com/nushell/nushell/pull/17516] updated to latest reedline commit bdcc842 (#17516)
+[link: https://github.com/nushell/nushell/pull/17514] updated structured ansi to support attr names and codes (#17514)
+[link: https://github.com/nushell/nushell/pull/17511] updated nushell to reedline to 4c16687 (#17511)
+[link: https://github.com/nushell/nushell/pull/17446] made 
+``let``
+ pass-thru in mid pipeline, output no values when assigned at beginning of the pipeline, output values at the end of the pipeline (#17446)
+@blindFS:
+[link: https://github.com/nushell/nushell/pull/17553] fixed block duplication for aliased ones only in 
+``replace_in_variable``
+ (#17553)
+@WindSoilder:
+[link: https://github.com/nushell/nushell/pull/17551] updated uu libs to 0.6.0 (#17551)
+@jlcrochet:
+[link: https://github.com/nushell/nushell/pull/17550] removed 
+``$env.config.input_list``
+ from 
+``input list``
+ (#17550)
+@Juhan280:
+[link: https://github.com/nushell/nushell/pull/17549] aligned --tmpdir behavior in 
+``mktemp``
+ with coreutils/uutils (#17549)
+[link: https://github.com/nushell/nushell/pull/17540] added 
+``path_columns``
+ to PipelineMetadata for flexible path rendering (#17540)
+[link: https://github.com/nushell/nushell/pull/17508] added linewise and non-blank start edit commands (#17508)
+@evolvomind:
+[link: https://github.com/nushell/nushell/pull/17547] fixed variable expansion inconsistency in path arguments for commands using GlobPattern (#17547)
+@monigarr:
+[link: https://github.com/nushell/nushell/pull/17545] improved strings command help text (PR 9 of 10) (#17545)
+[link: https://github.com/nushell/nushell/pull/17544] improved math random help text (PR 8 of 10) (#17544)
+[link: https://github.com/nushell/nushell/pull/17528] improved help text for filesystem, path, and platform commands (PR 7 of 10) (#17528)
+[link: https://github.com/nushell/nushell/pull/17523] improved help text for bytes, conversions, database, and date commands (#17523)
+[link: https://github.com/nushell/nushell/pull/17522] improved help text for format commands (PR 4 of 10) (#17522)
+@maxim-uvarov:
+[link: https://github.com/nushell/nushell/pull/17539] avoided panic in replace_in_variable for permanent blocks (#17539)
+@cablehead:
+[link: https://github.com/nushell/nushell/pull/17537] deprecated 
+``metadata set --merge``
+ in favor of closure form (#17537)
+@InnocentZero:
+[link: https://github.com/nushell/nushell/pull/17526] added skip columns functionality (#17526)
+@cuiweixie:
+[link: https://github.com/nushell/nushell/pull/17521] fixed median calculation to use sorted len (#17521)
+@weirdan:
+[link: https://github.com/nushell/nushell/pull/17519] fixed poll/pool typo for 
+``http pool``
+ (#17519)
+@hustcer:
+[link: https://github.com/nushell/nushell/pull/17517] upgraded interprocess to 2.3.1 (#17517)
+[link: https://github.com/nushell/nushell/pull/17506] pinned libc and interprocess to fix cross-platform build failures (#17506)
+@BluewyDiamond:
+[link: https://github.com/nushell/nushell/pull/17509] made 
+``rm``
+ behavior consistent with 
+``mv``
+, 
+``du``
+, and 
+``cp``
+ (#17509)
+@stuartcarnie:
+[link: https://github.com/nushell/nushell/pull/17491] enabled OSC133 click events via reedline (#17491)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/17541] bumped crate-ci/typos from 1.43.1 to 1.43.4 (#17541)
+[link: https://github.com/nushell/nushell/pull/17495] bumped git2 from 0.20.0 to 0.20.4 (#17495)
+íêê⁄Title: title: 'This week in Nushell #338'
+Path: Nushell
+Content:
+@fdncred:
+[link: https://github.com/nushell/nushell/pull/17555] cleaned up ansi command pr.md (#17555)
+[link: https://github.com/nushell/nushell/pull/17533] added 
+``nu``
+ to the ignore_list for 
+``:try``
+ in 
+``explore``
+ (#17533)
+[link: https://github.com/nushell/nushell/pull/17532] disabled auto tail and tracked previous row count in push_layer in explore (#17532)
+[link: https://github.com/nushell/nushell/pull/17516] updated to latest reedline commit bdcc842 (#17516)
+[link: https://github.com/nushell/nushell/pull/17514] updated structured ansi to support attr names and codes (#17514)
+[link: https://github.com/nushell/nushell/pull/17511] updated nushell to reedline to 4c16687 (#17511)
+[link: https://github.com/nushell/nushell/pull/17446] made 
+``let``
+ pass-thru in mid pipeline, output no values when assigned at beginning of the pipeline, output values at the end of the pipeline (#17446)
+@blindFS:
+[link: https://github.com/nushell/nushell/pull/17553] fixed block duplication for aliased ones only in 
+``replace_in_variable``
+ (#17553)
+@WindSoilder:
+[link: https://github.com/nushell/nushell/pull/17551] updated uu libs to 0.6.0 (#17551)
+@jlcrochet:
+[link: https://github.com/nushell/nushell/pull/17550] removed 
+``$env.config.input_list``
+ from 
+``input list``
+ (#17550)
+@Juhan280:
+[link: https://github.com/nushell/nushell/pull/17549] aligned --tmpdir behavior in 
+``mktemp``
+ with coreutils/uutils (#17549)
+[link: https://github.com/nushell/nushell/pull/17540] added 
+``path_columns``
+ to PipelineMetadata for flexible path rendering (#17540)
+[link: https://github.com/nushell/nushell/pull/17508] added linewise and non-blank start edit commands (#17508)
+@evolvomind:
+[link: https://github.com/nushell/nushell/pull/17547] fixed variable expansion inconsistency in path arguments for commands using GlobPattern (#17547)
+@monigarr:
+[link: https://github.com/nushell/nushell/pull/17545] improved strings command help text (PR 9 of 10) (#17545)
+[link: https://github.com/nushell/nushell/pull/17544] improved math random help text (PR 8 of 10) (#17544)
+[link: https://github.com/nushell/nushell/pull/17528] improved help text for filesystem, path, and platform commands (PR 7 of 10) (#17528)
+[link: https://github.com/nushell/nushell/pull/17523] improved help text for bytes, conversions, database, and date commands (#17523)
+[link: https://github.com/nushell/nushell/pull/17522] improved help text for format commands (PR 4 of 10) (#17522)
+@maxim-uvarov:
+[link: https://github.com/nushell/nushell/pull/17539] avoided panic in replace_in_variable for permanent blocks (#17539)
+@cablehead:
+[link: https://github.com/nushell/nushell/pull/17537] deprecated 
+``metadata set --merge``
+ in favor of closure form (#17537)
+@InnocentZero:
+[link: https://github.com/nushell/nushell/pull/17526] added skip columns functionality (#17526)
+@cuiweixie:
+[link: https://github.com/nushell/nushell/pull/17521] fixed median calculation to use sorted len (#17521)
+@weirdan:
+[link: https://github.com/nushell/nushell/pull/17519] fixed poll/pool typo for 
+``http pool``
+ (#17519)
+@hustcer:
+[link: https://github.com/nushell/nushell/pull/17517] upgraded interprocess to 2.3.1 (#17517)
+[link: https://github.com/nushell/nushell/pull/17506] pinned libc and interprocess to fix cross-platform build failures (#17506)
+@BluewyDiamond:
+[link: https://github.com/nushell/nushell/pull/17509] made 
+``rm``
+ behavior consistent with 
+``mv``
+, 
+``du``
+, and 
+``cp``
+ (#17509)
+@stuartcarnie:
+[link: https://github.com/nushell/nushell/pull/17491] enabled OSC133 click events via reedline (#17491)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/17541] bumped crate-ci/typos from 1.43.1 to 1.43.4 (#17541)
+[link: https://github.com/nushell/nushell/pull/17495] bumped git2 from 0.20.0 to 0.20.4 (#17495)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2026-02-13-twin0338.mdŸ@1fbbe3e28c3daef24c4559a4723c0f8c406b953854082a90d3a9f75d5c3ffd49Ÿ"title: 'This week in Nushell #338'ë™Nu_Scripts⁄@Zaubentrucker:
+[link: https://github.com/nushell/nu_scripts/pull/1222] fixed conda activate for conda>=25.11 (#1222)
+@kevmoo:
+[link: https://github.com/nushell/nu_scripts/pull/1221] added alias completion to git-completion (#1221)
+[link: https://github.com/nushell/nu_scripts/pull/1219] added correct completion for 
+``git checkout -b``
+ and 
+``git switch -c``
+ (#1219)
+[link: https://github.com/nushell/nu_scripts/pull/1218] updated dart-completion to support completing scripts with 
+``dart``
+ command (#1218)
+@fredrik-stock:
+[link: https://github.com/nushell/nu_scripts/pull/1220] improved fnm module with better error handling, user configuration, and missing version workflow (#1220)
+@Juhan280:
+[link: https://github.com/nushell/nu_scripts/pull/1217] allowed globs in bat-completions (#1217)
+íêê⁄bTitle: title: 'This week in Nushell #338'
+Path: Nu_Scripts
+Content:
+@Zaubentrucker:
+[link: https://github.com/nushell/nu_scripts/pull/1222] fixed conda activate for conda>=25.11 (#1222)
+@kevmoo:
+[link: https://github.com/nushell/nu_scripts/pull/1221] added alias completion to git-completion (#1221)
+[link: https://github.com/nushell/nu_scripts/pull/1219] added correct completion for 
+``git checkout -b``
+ and 
+``git switch -c``
+ (#1219)
+[link: https://github.com/nushell/nu_scripts/pull/1218] updated dart-completion to support completing scripts with 
+``dart``
+ command (#1218)
+@fredrik-stock:
+[link: https://github.com/nushell/nu_scripts/pull/1220] improved fnm module with better error handling, user configuration, and missing version workflow (#1220)
+@Juhan280:
+[link: https://github.com/nushell/nu_scripts/pull/1217] allowed globs in bat-completions (#1217)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2026-02-13-twin0338.mdŸ@bd0f041a7cde4b330829be1fa493ddc115a2ff1f7b4a7cc2dc30a1b28a30e9caŸ"title: 'This week in Nushell #338'ë≠DocumentationŸÇ@weirdan:
+[link: https://github.com/nushell/nushell.github.io/pull/2120] fixed 
+``buffer_editor``
+ example for 
+``code``
+ (#2120)
+íêêŸ…Title: title: 'This week in Nushell #338'
+Path: Documentation
+Content:
+@weirdan:
+[link: https://github.com/nushell/nushell.github.io/pull/2120] fixed 
+``buffer_editor``
+ example for 
+``code``
+ (#2120)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2026-02-13-twin0338.mdŸ@9e46254eea300eca0ec5a40f62f1c7e71031244b7c63afe65d232d6730a6fd88Ÿ"title: 'This week in Nushell #338'ë®reedline⁄V@fdncred:
+[link: https://github.com/nushell/reedline/pull/1024] reverted osc133;P to osc133;A (#1024)
+@Juhan280:
+[link: https://github.com/nushell/reedline/pull/1022] added keybindings for moving to start and end of buffer (#1022)
+[link: https://github.com/nushell/reedline/pull/953] added gg/G motions and fixed ^ motion behavior in vi-mode (#953)
+@eitsupi:
+[link: https://github.com/nushell/reedline/pull/1015] added idle_callback feature to set callback while waiting for input (#1015)
+[link: https://github.com/nushell/reedline/pull/1011] exported HistoryItemExtraInfo etc. (#1011)
+@NiltonVolpato:
+[link: https://github.com/nushell/reedline/pull/1014] added 
+``libc``
+ feature to enable crossterm's libc backend (#1014)
+@schlich:
+[link: https://github.com/nushell/reedline/pull/963] improved CONTRIBUTING.md to more closely match CI execution (#963)
+íêê⁄òTitle: title: 'This week in Nushell #338'
+Path: reedline
+Content:
+@fdncred:
+[link: https://github.com/nushell/reedline/pull/1024] reverted osc133;P to osc133;A (#1024)
+@Juhan280:
+[link: https://github.com/nushell/reedline/pull/1022] added keybindings for moving to start and end of buffer (#1022)
+[link: https://github.com/nushell/reedline/pull/953] added gg/G motions and fixed ^ motion behavior in vi-mode (#953)
+@eitsupi:
+[link: https://github.com/nushell/reedline/pull/1015] added idle_callback feature to set callback while waiting for input (#1015)
+[link: https://github.com/nushell/reedline/pull/1011] exported HistoryItemExtraInfo etc. (#1011)
+@NiltonVolpato:
+[link: https://github.com/nushell/reedline/pull/1014] added 
+``libc``
+ feature to enable crossterm's libc backend (#1014)
+@schlich:
+[link: https://github.com/nushell/reedline/pull/963] improved CONTRIBUTING.md to more closely match CI execution (#963)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2026-02-13-twin0338.mdŸ@de50c531f767ad7df4b8d0be1a2f1d794b39e759d9b851ca4faed7f4b57a4456Ÿ"title: 'This week in Nushell #338'ë≠New nu-parserŸÙ@InnocentZero:
+[link: https://github.com/nushell/new-nu-parser/pull/66] added benchmark tests (#66)
+@WindSoilder:
+[link: https://github.com/nushell/new-nu-parser/pull/65] added support for 
+``try``
+ expression and 
+``extern``
+ statements (#65)
+íêê⁄;Title: title: 'This week in Nushell #338'
+Path: New nu-parser
+Content:
+@InnocentZero:
+[link: https://github.com/nushell/new-nu-parser/pull/66] added benchmark tests (#66)
+@WindSoilder:
+[link: https://github.com/nushell/new-nu-parser/pull/65] added support for 
+``try``
+ expression and 
+``extern``
+ statements (#65)

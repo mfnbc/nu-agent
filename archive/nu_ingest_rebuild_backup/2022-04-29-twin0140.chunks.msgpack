@@ -1,0 +1,205 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-04-29-twin0140.mdŸ@2ffb8c541d9b9a2a826b605048b0e72751240428ecace52db1c54ebd2feee6cdπThis week in Nushell #140ëßNushell⁄∏rgwood created 
+[link: https://github.com/nushell/nushell/pull/5374] Faster CI
+, and 
+[link: https://github.com/nushell/nushell/pull/5359] rust-cache fix
+, and 
+[link: https://github.com/nushell/nushell/pull/5358] CI: remove rust-cache from virtualenv tests
+, and 
+[link: https://github.com/nushell/nushell/pull/5357] CI: make Clippy reuse build artifacts, other cleanup
+, and 
+[link: https://github.com/nushell/nushell/pull/5354] CI: enable rust-cache, remove minimal
+, and 
+[link: https://github.com/nushell/nushell/pull/5352] Openssl feature
+, and 
+[link: https://github.com/nushell/nushell/pull/5349] Statically link OpenSSL
+, and 
+[link: https://github.com/nushell/nushell/pull/5338] ``db info``
+ tweaks
+, and 
+[link: https://github.com/nushell/nushell/pull/5331] Add watch command
+, and 
+[link: https://github.com/nushell/nushell/pull/5328] Move print_pipeline_data() to nu-protocol
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5345] fixed an issue with an empty selector panic
+, and 
+[link: https://github.com/nushell/nushell/pull/5335] ``db info``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/5322] add database feature to extra
+, and 
+[link: https://github.com/nushell/nushell/pull/5321] update build status badge
+, and 
+[link: https://github.com/nushell/nushell/pull/5317] update contrib to max=500
+, and 
+[link: https://github.com/nushell/nushell/pull/5302] consolidate shell integration behind config setting
+uasi 
+[link: https://github.com/nushell/nushell/pull/5365] avoided using time conversion methods that may panic
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/5356] cleanup version command and add in database feature
+, and 
+[link: https://github.com/nushell/nushell/pull/5350] mute false import warning for nu-command test where
+_
+jmoore34 
+[link: https://github.com/nushell/nushell/pull/5355] changed description of 
+``sort``
+efx 
+[link: https://github.com/nushell/nushell/pull/5346] improved inc plugin docs
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/5343] Database commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5307] Database commands
+jt 
+[link: https://github.com/nushell/nushell/pull/5334] fixed 'range' range exclusive
+, and 
+[link: https://github.com/nushell/nushell/pull/5327] Allow bare words to interpolate
+, and 
+[link: https://github.com/nushell/nushell/pull/5318] Warn if we see let config = ..
+gipsyh 
+[link: https://github.com/nushell/nushell/pull/5332] fixed use of 
+``export/alias --help``
+ bug
+xgillard created 
+[link: https://github.com/nushell/nushell/pull/5326] activates optional trim in 'from csv' and 'from tsv'
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5323] allowed cd (and other commands that depend on current working directory) to use path of type '~user'
+, and 
+[link: https://github.com/nushell/nushell/pull/5251] Adding ~user tilde recognition in file paths
+Tropid created 
+[link: https://github.com/nushell/nushell/pull/5320] Fuzzy completion matching
+jokeyrhyme 
+[link: https://github.com/nushell/nushell/pull/5311] fixed: remove 
+``println!()``
+ from 
+``exec``
+ builtin
+herlon214 created 
+[link: https://github.com/nushell/nushell/pull/5310] nu-command/filesystem: remove newline from cd path
+íêê⁄Title: This week in Nushell #140
+Path: Nushell
+Content:
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/5374] Faster CI
+, and 
+[link: https://github.com/nushell/nushell/pull/5359] rust-cache fix
+, and 
+[link: https://github.com/nushell/nushell/pull/5358] CI: remove rust-cache from virtualenv tests
+, and 
+[link: https://github.com/nushell/nushell/pull/5357] CI: make Clippy reuse build artifacts, other cleanup
+, and 
+[link: https://github.com/nushell/nushell/pull/5354] CI: enable rust-cache, remove minimal
+, and 
+[link: https://github.com/nushell/nushell/pull/5352] Openssl feature
+, and 
+[link: https://github.com/nushell/nushell/pull/5349] Statically link OpenSSL
+, and 
+[link: https://github.com/nushell/nushell/pull/5338] ``db info``
+ tweaks
+, and 
+[link: https://github.com/nushell/nushell/pull/5331] Add watch command
+, and 
+[link: https://github.com/nushell/nushell/pull/5328] Move print_pipeline_data() to nu-protocol
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5345] fixed an issue with an empty selector panic
+, and 
+[link: https://github.com/nushell/nushell/pull/5335] ``db info``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/5322] add database feature to extra
+, and 
+[link: https://github.com/nushell/nushell/pull/5321] update build status badge
+, and 
+[link: https://github.com/nushell/nushell/pull/5317] update contrib to max=500
+, and 
+[link: https://github.com/nushell/nushell/pull/5302] consolidate shell integration behind config setting
+uasi 
+[link: https://github.com/nushell/nushell/pull/5365] avoided using time conversion methods that may panic
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/5356] cleanup version command and add in database feature
+, and 
+[link: https://github.com/nushell/nushell/pull/5350] mute false import warning for nu-command test where
+_
+jmoore34 
+[link: https://github.com/nushell/nushell/pull/5355] changed description of 
+``sort``
+efx 
+[link: https://github.com/nushell/nushell/pull/5346] improved inc plugin docs
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/5343] Database commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5307] Database commands
+jt 
+[link: https://github.com/nushell/nushell/pull/5334] fixed 'range' range exclusive
+, and 
+[link: https://github.com/nushell/nushell/pull/5327] Allow bare words to interpolate
+, and 
+[link: https://github.com/nushell/nushell/pull/5318] Warn if we see let config = ..
+gipsyh 
+[link: https://github.com/nushell/nushell/pull/5332] fixed use of 
+``export/alias --help``
+ bug
+xgillard created 
+[link: https://github.com/nushell/nushell/pull/5326] activates optional trim in 'from csv' and 'from tsv'
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5323] allowed cd (and other commands that depend on current working directory) to use path of type '~user'
+, and 
+[link: https://github.com/nushell/nushell/pull/5251] Adding ~user tilde recognition in file paths
+Tropid created 
+[link: https://github.com/nushell/nushell/pull/5320] Fuzzy completion matching
+jokeyrhyme 
+[link: https://github.com/nushell/nushell/pull/5311] fixed: remove 
+``println!()``
+ from 
+``exec``
+ builtin
+herlon214 created 
+[link: https://github.com/nushell/nushell/pull/5310] nu-command/filesystem: remove newline from cd path
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-04-29-twin0140.mdŸ@5a1021935b6c8b779f4b7d971b31ac51a71bc8640c85f084b681c2ed38090857πThis week in Nushell #140ë≠Documentation⁄merelymyself 
+[link: https://github.com/nushell/nushell.github.io/pull/424] changed the confusing title of "Working With Strings"
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/422] More proofreading work for the zh-CN translations
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/421] Fix some broken links
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/420] Some proofreading work for zh-CN translations
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/419] Update zh-CN translations to the latest english version of commit: b6c91cabfa
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/417] Update some node modules
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/415] Translate dataframes.md to zh-CN from commit: 92fb0ac2c
+Yethal 
+[link: https://github.com/nushell/nushell.github.io/pull/418] updated working_with_tables.md
+morzel85 
+[link: https://github.com/nushell/nushell.github.io/pull/416] updated loading_data.md
+íêê⁄BTitle: This week in Nushell #140
+Path: Documentation
+Content:
+merelymyself 
+[link: https://github.com/nushell/nushell.github.io/pull/424] changed the confusing title of "Working With Strings"
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/422] More proofreading work for the zh-CN translations
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/421] Fix some broken links
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/420] Some proofreading work for zh-CN translations
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/419] Update zh-CN translations to the latest english version of commit: b6c91cabfa
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/417] Update some node modules
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/415] Translate dataframes.md to zh-CN from commit: 92fb0ac2c
+Yethal 
+[link: https://github.com/nushell/nushell.github.io/pull/418] updated working_with_tables.md
+morzel85 
+[link: https://github.com/nushell/nushell.github.io/pull/416] updated loading_data.md
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-04-29-twin0140.mdŸ@e2428ac3bba0fe4aa9df41351735e399a0308ac409701244e9512603452493abπThis week in Nushell #140ë™Nu_ScriptsŸ»fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/213] update type-o for windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/212] use $nu.os-info vs (sys).host for speed
+íêê⁄Title: This week in Nushell #140
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/213] update type-o for windows
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/212] use $nu.os-info vs (sys).host for speed

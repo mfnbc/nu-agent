@@ -1,0 +1,18 @@
+‘’Ù@5001bbd3319379b13347b59030dbee0b9230b0152ce9875e3ea423de7a370b16ÚõTitle: Escapando para o sistema
+Path: Escapando para o sistema
+Content:
+O Nu fornece um conjunto de comandos que vocÃª pode usar entre diferentes SOs e contar com essa consistÃªncia Ã© Ãºtil. Ã€s vezes, porÃ©m, vocÃª quer executar comando que tem o mesmo nome que um dos comandos do Nu. Para executar os comandos locais 
+``ls``
+ ou 
+``date``
+, por exemplo, use o comando circunflexo (^).
+Comando Nu:
+```Fenced(Borrowed("nu"))
+ls
+
+```
+Escapando para o comando local:
+```Fenced(Borrowed("nu"))
+^ls
+
+```

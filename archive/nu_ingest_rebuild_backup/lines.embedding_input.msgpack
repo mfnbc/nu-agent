@@ -1,0 +1,46 @@
+•’Ù@970b52fa2cabbf89fdaa516977bf843831fc99704f5a9e67b3a22b31c24e135fÙfTitle: title: lines
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``lines``
+[link: /commands/categories/filters.md] ’Ù@a0585404b021bb594f8161cae86e08a756d7464bc1f3cd8ce98c5c17b9815a97ÙBTitle: title: lines
+Path: Signature
+Content:
+``> lines {flags} ``
+’Ù@85fa542677b8ff6cf3078f0ec6c43b81e9e777481a257849f5ad881a577192ffÙRTitle: title: lines
+Path: Flags
+Content:
+``--skip-empty, -s``
+: Skip empty lines.
+’Ù@5759efbf37cb0e0ffbd19df0966f0a9e429d82ec675ee9cc2f08dae1f5eb1c7eÙYTitle: title: lines
+Path: Input/output types:
+Content:
+input
+output
+any
+list
+<
+string
+>
+
+’Ù@2223b7a3a5b9e5a6401973d2ff9b249770e14d070999c9b69d8135fafe339597ÙÿTitle: title: lines
+Path: Examples
+Content:
+Split multi-line string into lines
+```Fenced(Borrowed("nu"))
+> $"two\nlines" | lines
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ two   â”‚
+â”‚ 1 â”‚ lines â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â•¯
+
+
+```

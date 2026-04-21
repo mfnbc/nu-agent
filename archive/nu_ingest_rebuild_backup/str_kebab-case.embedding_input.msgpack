@@ -1,0 +1,75 @@
+���@b2926709e93163f4e13937d0e2aa088ad3c77b2d7e01a031273e70aff680e2e5�xTitle: title: str kebab-case
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str kebab-case``
+[link: /commands/categories/strings.md] ��@9acefcb89eb282b5aaca11023d35921c516666644eda4c7a6377b28b54a040e2�[Title: title: str kebab-case
+Path: Signature
+Content:
+``> str kebab-case {flags} ...rest``
+��@1ae7161064242a999d9d62f0a544765ebfb77f6ed093aa657d12f65b6b2a1727يTitle: title: str kebab-case
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert strings at the given cell paths.
+��@622a5212106e93e15632fcfe1830bee823093f7913beffa3bd8ad675bd79dad8ٗTitle: title: str kebab-case
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+table
+table
+record
+record
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+��@223954f890eee435bcd13bb3b43aaef7e89f383a2ec8a00d90373de1b65639a6�"Title: title: str kebab-case
+Path: Examples
+Content:
+convert a string to kebab-case
+```Fenced(Borrowed("nu"))
+> 'NuShell' | str kebab-case
+nu-shell
+
+```
+convert a string to kebab-case
+```Fenced(Borrowed("nu"))
+> 'thisIsTheFirstCase' | str kebab-case
+this-is-the-first-case
+
+```
+convert a string to kebab-case
+```Fenced(Borrowed("nu"))
+> 'THIS_IS_THE_SECOND_CASE' | str kebab-case
+this-is-the-second-case
+
+```
+convert a column from a table to kebab-case
+```Fenced(Borrowed("nu"))
+> [[lang, gems]; [nuTest, 100]] | str kebab-case lang
+╭───┬─────────┬──────╮
+│ # │  lang   │ gems │
+├───┼─────────┼──────┤
+│ 0 │ nu-test │  100 │
+╰───┴─────────┴──────╯
+
+
+```

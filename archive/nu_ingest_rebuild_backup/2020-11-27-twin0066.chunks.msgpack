@@ -1,0 +1,33 @@
+ëóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-11-27-twin0066.mdŸ@d010cd334426bbe3a8e55a7f81deda38fd1eff35eee54e4df511cdcab17b4b54≥This week in Nu #66ë≥This week in Nu #66⁄Ismaydew added 
+[link: https://github.com/nushell/nushell/pull/2762] ``random decimal``
+andrasio 
+[link: https://github.com/nushell/nushell/pull/2764] fixed a 
+``str substring``
+ indexing issue
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/2760] fixed clippy warnings
+, 
+[link: https://github.com/nushell/nushell/pull/2766] released 0.23
+, and has also been 
+[link: https://github.com/jonathandturner/nunu/commits/main] working on the Nunu prototype
+ for future Nushell functionality
+efx 
+[link: https://github.com/nushell/nushell.github.io/pull/69] fixed a book typo
+íêê⁄áTitle: This week in Nu #66
+Path: This week in Nu #66
+Content:
+smaydew added 
+[link: https://github.com/nushell/nushell/pull/2762] ``random decimal``
+andrasio 
+[link: https://github.com/nushell/nushell/pull/2764] fixed a 
+``str substring``
+ indexing issue
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/2760] fixed clippy warnings
+, 
+[link: https://github.com/nushell/nushell/pull/2766] released 0.23
+, and has also been 
+[link: https://github.com/jonathandturner/nunu/commits/main] working on the Nunu prototype
+ for future Nushell functionality
+efx 
+[link: https://github.com/nushell/nushell.github.io/pull/69] fixed a book typo

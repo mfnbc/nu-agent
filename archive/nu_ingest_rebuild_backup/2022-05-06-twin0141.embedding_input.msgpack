@@ -1,0 +1,135 @@
+”’Ù@ff97f859940fd19d553be411f21e3743fa9858fcd070195fa67daa5286f76f0bÚ¶Title: This week in Nushell #141
+Path: Nushell
+Content:
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/5454] made cd recornize symblic link
+, and 
+[link: https://github.com/nushell/nushell/pull/5453] implement seq char command to generate single character sequence
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5452] enabled cd to work with directory abbreviations
+, and 
+[link: https://github.com/nushell/nushell/pull/5450] fix bug in shell_integration
+, and 
+[link: https://github.com/nushell/nushell/pull/5441] add a 
+``to text``
+ command because sometimes you just need text
+, and 
+[link: https://github.com/nushell/nushell/pull/5394] a little database cleanup
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/5446] Added flags and optional arguments to view-source
+, and 
+[link: https://github.com/nushell/nushell/pull/5435] Allowed for view-source to include entire custom command definition
+gipsyh 
+[link: https://github.com/nushell/nushell/pull/5434] added split number flag in 
+``split row``
+, and 
+[link: https://github.com/nushell/nushell/pull/5409] Fixed ctrl-c in recursion loop bug #5362
+, and 
+[link: https://github.com/nushell/nushell/pull/5408] Fixed interrupting a for-loop over a list bug #5378
+, and 
+[link: https://github.com/nushell/nushell/pull/5369] Don't resuggest accepted completions
+hustcer 
+[link: https://github.com/nushell/nushell/pull/5432] updated rust version
+Caedan 
+[link: https://github.com/nushell/nushell/pull/5431] used correct ParseError
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/5427] pinned reedline to v0.5.0 for the next release
+, and 
+[link: https://github.com/nushell/nushell/pull/5410] Fix CI to run doctests again
+, and 
+[link: https://github.com/nushell/nushell/pull/5404] Bump reedline
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/5426] added open editor event in config parsing
+, and 
+[link: https://github.com/nushell/nushell/pull/5417] Database commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5390] Line buffer keybinding
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/5425] fixed coloring when string has spaces
+jt 
+[link: https://github.com/nushell/nushell/pull/5422] released 0.62
+, and 
+[link: https://github.com/nushell/nushell/pull/5419] Update path completions to handle spaces
+, and 
+[link: https://github.com/nushell/nushell/pull/5407] Rename =^ to 'starts-with'
+, and 
+[link: https://github.com/nushell/nushell/pull/5403] More escaping/unescaping fixes
+, and 
+[link: https://github.com/nushell/nushell/pull/5400] Adds error printing back in a couple places
+, and 
+[link: https://github.com/nushell/nushell/pull/5399] Add unescaping to external command parsing
+, and 
+[link: https://github.com/nushell/nushell/pull/5398] Move uses of trim_quotes to unescape for filenames
+Tropid 
+[link: https://github.com/nushell/nushell/pull/5416] fixed erroneous removal of "./" folder prefix
+, and 
+[link: https://github.com/nushell/nushell/pull/5401] Update reedline to use partial completion changes
+stormasm 
+[link: https://github.com/nushell/nushell/pull/5415] removed ctrl-l from config.nu as a way to clear scrollback
+, and 
+[link: https://github.com/nushell/nushell/pull/5405] event ClearScrollback is working in reedline / update config.nu
+rgwood 
+[link: https://github.com/nushell/nushell/pull/5406] added job to build plugins
+, and 
+[link: https://github.com/nushell/nushell/pull/5402] Add Miette "fancy" feature to fix plugin builds
+, and 
+[link: https://github.com/nushell/nushell/pull/5396] CI: build virtualenv tests in dev profile for speed
+, and 
+[link: https://github.com/nushell/nushell/pull/5389] Error printing changes for 
+``watch``
+panicbit 
+[link: https://github.com/nushell/nushell/pull/5395] added ends-with operator and fix dataframe operator behavior
+kubouch 
+[link: https://github.com/nushell/nushell/pull/5393] fixed PATH update example
+andrasio 
+[link: https://github.com/nushell/nushell/pull/5214] removed 'empty' block support reminders, for now.
+’Ù@08cd805d6a0646e802388f61c5d52d3d15489436753c21ffee7f9c39fab8aa05ÚTitle: This week in Nushell #141
+Path: Documentation
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell.github.io/pull/434] mentioned default values for command parameters.
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/430] refreshed docs for all commands
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/427] Update zh-CN docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/425] feat: Add github action related stuff
+rgwood 
+[link: https://github.com/nushell/nushell.github.io/pull/429] updated SQLite bits in 0.62 blog post
+jt 
+[link: https://github.com/nushell/nushell.github.io/pull/428] added 0.62 release
+reillysiemens 
+[link: https://github.com/nushell/nushell.github.io/pull/426] fixed broken nu_scripts repo link
+’Ù@3a40b7da5188a586c52a80725ea45e9e5e030a1525730ea33d3188697d51f114ÙúTitle: This week in Nushell #141
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/215] removed title because it breaks kitty
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/214] update get_os_icon for wsl
+’Ù@d8051f510ae2a00309999031c7754c84f4ebd3e85cf7ab8a97d7a1dd4b3aff92ÚjTitle: This week in Nushell #141
+Path: reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/422] Change keybinding for external editor
+, and 
+[link: https://github.com/nushell/reedline/pull/421] Prepare the 0.5.0 release
+, and 
+[link: https://github.com/nushell/reedline/pull/419] Fix README and lib.rs code examples
+, and 
+[link: https://github.com/nushell/reedline/pull/418] Add doctests back to the CI
+, and 
+[link: https://github.com/nushell/reedline/pull/417] Vi additions and fixes by @zim0369
+, and 
+[link: https://github.com/nushell/reedline/pull/416] Attempt fix of 
+``ClearScrollback``
+, and 
+[link: https://github.com/nushell/reedline/pull/415] Fix the CI badge
+, and 
+[link: https://github.com/nushell/reedline/pull/414] Change the CI to use caching
+elferherrera created 
+[link: https://github.com/nushell/reedline/pull/413] Buffer editor keybinding
+Tropid created 
+[link: https://github.com/nushell/reedline/pull/412] Only partial complete suggestions when input is a prefix
+gipsyh created 
+[link: https://github.com/nushell/reedline/pull/410] Append whitespace after selecting menu

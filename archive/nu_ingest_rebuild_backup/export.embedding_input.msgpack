@@ -1,0 +1,63 @@
+–’Ù@15e9bb86dc3ac46852455a52ad3b41a9a5b08576902b50f3670b2dc35b0d4452ÙbTitle: title: export
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``export``
+[link: /commands/categories/core.md] ’Ù@2b1c514a05f424bc4282bf08dd8a9c21298af632be24959f27a0a8b3641cf8a6ÙDTitle: title: export
+Path: Signature
+Content:
+``> export {flags} ``
+’Ù@b55ceec1816c7b78a5925aaa24a7a92975a81def211c5f449da822fe0fac1d64ÙUTitle: title: export
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+’Ù@d0c707c0c0ef3d02276f7118afade13cf2e9cd1d341de652fca7e3918dacb594ÙÏTitle: title: export
+Path: Examples
+Content:
+Export a definition from a module.
+```Fenced(Borrowed("nu"))
+> module utils { export def my-command [] { "hello" } }; use utils my-command; my-command
+hello
+
+```
+’Ù@a91c6fad0719c3302aab89d1cb2a7e525e40cc0bbac5bf30ac9d3346bfa40fe3Ù‘Title: title: export
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+’Ù@cdd86caf5765e725a5cc3a13994f39cc3056bd8835a35fbc9b09026b07f0dde6Ú%Title: title: export
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/export_alias.md] ``export alias``
+Alias a command (with optional flags) to a new name and export it from a module.
+keyword
+[link: /commands/docs/export_const.md] ``export const``
+Use parse-time constant from a module and export them from this module.
+keyword
+[link: /commands/docs/export_def.md] ``export def``
+Define a custom command and export it from a module.
+keyword
+[link: /commands/docs/export_extern.md] ``export extern``
+Define an extern and export it from a module.
+keyword
+[link: /commands/docs/export_module.md] ``export module``
+Export a custom module from a module.
+keyword
+[link: /commands/docs/export_use.md] ``export use``
+Use definitions from a module and export them from this module.
+keyword

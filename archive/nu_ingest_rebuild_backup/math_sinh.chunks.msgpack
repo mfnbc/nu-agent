@@ -1,0 +1,74 @@
+”—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sinh.mdÙ@e43cb1ac114bb1d9ff0319b57b9695a491a1a5ea9e7206907ed2a8b7cdbf4333°title: math sinh‘¤mathÙ<
+
+
+
+
+
+
+
+
+``math sinh``
+[link: /commands/categories/math.md] ’ÙhTitle: title: math sinh
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math sinh``
+[link: /commands/categories/math.md] —ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sinh.mdÙ@6737296544f3903f12ca505f5f1a6e5e41b1de3b83c0f507ece56542baa4597c°title: math sinh‘©Signature¹``> math sinh {flags} ``
+’ÙJTitle: title: math sinh
+Path: Signature
+Content:
+``> math sinh {flags} ``
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sinh.mdÙ@a7d0167e0c083cce8daac76735cb0f60f1c298b0d8680f15cc00e13bad61f2ed°title: math sinh‘³Input/output types:Ù;input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’ÙvTitle: title: math sinh
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_sinh.mdÙ@73e3e24cddc9d934346c4028bdbe6ead5808615d2fb3bc5aaad264413b98c420°title: math sinh‘¨ExamplesÙaApply the hyperbolic sine to 1
+```Fenced(Borrowed("nu"))
+> 1 | math sinh
+1.1752011936438014
+
+```
+’Ù‘Title: title: math sinh
+Path: Examples
+Content:
+Apply the hyperbolic sine to 1
+```Fenced(Borrowed("nu"))
+> 1 | math sinh
+1.1752011936438014
+
+```

@@ -1,0 +1,32 @@
+‘’Ù@fd326be0c5a91126cef8364743dcdf6cd40b43d005776daff26c32e4218f09adÚTitle: This week in Nu #80
+Path: This week in Nu #80
+Content:
+fdncred fixed 
+[link: https://github.com/nushell/nushell/pull/3133] coercion errors for 
+``$nothing``
+ and 
+``$variable``
+, updated 
+[link: https://github.com/nushell/nushell/pull/3120] ``fetch``
+ to surf 2.2
+, released a new version of 
+[link: https://github.com/nushell/vscode-nushell-lang/releases/tag/v0.1.1] the Nushell VSCode extension
+rezural added an 
+[link: https://github.com/nushell/nushell/pull/3128] optional paging system
+ and 
+[link: https://github.com/nushell/nushell/pull/3121] here
+andrasio added back 
+[link: https://github.com/nushell/nushell/pull/3126] preserving column order in json
+kubouch added 
+[link: https://github.com/nushell/nushell/pull/3123] ``path join``
+ and updated other path commands
+, added option to 
+[link: https://github.com/nushell/nushell/pull/3114] invert match selections
+LhKipp improved 
+[link: https://github.com/nushell/nushell/pull/3112] host printing support
+davidmalcolm 
+[link: https://github.com/nushell/nushell.github.io/pull/106] fixed a typo in the book
+stormasm clarified 
+[link: https://github.com/nushell/nushell.github.io/pull/107] how to think about let-env in the book
+More scripts were added to the 
+[link: https://github.com/nushell/nu_scripts] nu scripts collection

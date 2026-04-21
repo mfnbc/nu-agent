@@ -1,0 +1,331 @@
+���@d1a97b9c2cf19f373c55096e7a0a039e99fc6b73b3eb2b2e6eef7ea119ae6493�nTitle: Environment
+Path: Environment
+Content:
+A common task in a shell is to control the environment that external applications will use. This is often done automatically, as the environment is packaged up and given to the external application as it launches. Sometimes, though, we want to have more precise control over what environment variables an application sees.
+You can see the current environment variables in the $env variable:
+```Fenced(Borrowed("nu"))
+$env | table -e
+# => ╭──────────────────────────────────┬───────────────────────────────────────────╮
+# => │                                  │ ╭──────┬────────────────────────────────╮ │
+# => │ ENV_CONVERSIONS                  │ │      │ ╭─────────────┬──────────────╮ │ │
+# => │                                  │ │ PATH │ │ from_string │ <Closure 32> │ │ │
+# => │                                  │ │      │ │ to_string   │ <Closure 34> │ │ │
+# => │                                  │ │      │ ╰─────────────┴──────────────╯ │ │
+# => │                                  │ │      │ ╭─────────────┬──────────────╮ │ │
+# => │                                  │ │ Path │ │ from_string │ <Closure 36> │ │ │
+# => │                                  │ │      │ │ to_string   │ <Closure 38> │ │ │
+# => │                                  │ │      │ ╰─────────────┴──────────────╯ │ │
+# => │                                  │ ╰──────┴────────────────────────────────╯ │
+# => │ HOME                             │ /Users/jelle                              │
+# => │ LSCOLORS                         │ GxFxCxDxBxegedabagaced                    │
+# => | ...                              | ...                                       |
+# => ╰──────────────────────────────────┴───────────────────────────────────────────╯
+
+```
+In Nushell, environment variables can be any value and have any type. You can see the type of an env variable with the describe command, for example: 
+``$env.PROMPT_COMMAND | describe``
+.
+To send environment variables to external applications, the values will need to be converted to strings. See 
+[link: #environment-variable-conversions] Environment variable conversions
+ on how this works.
+The environment is initially created from the Nu 
+[link: configuration.md] configuration files
+ and from the environment that Nu is run inside of.
+��@aa9c3a6b03caf41a478210a64546ef86e62ddd2fb369d389c9ed9c3c53b37b7d�wTitle: Environment
+Path: Setting Environment Variables
+Content:
+There are several ways to set an environment variable:
+��@f97087ae6cda6e11b3e2901fa77e8ffc436fdc09e973db31194da1f0adfad23f�RTitle: Environment
+Path: $env.VAR assignment
+Content:
+Using the 
+``$env.VAR = "val"``
+ is the most straightforward method
+```Fenced(Borrowed("nu"))
+$env.FOO = 'BAR'
+
+```
+So, if you want to extend the Windows 
+``Path``
+ variable, for example, you could do that as follows.
+```Fenced(Borrowed("nu"))
+$env.Path = ($env.Path | prepend 'C:\path\you\want\to\add')
+
+```
+Here we've prepended our folder to the existing folders in the Path, so it will have the highest priority.
+
+If you want to give it the lowest priority instead, you can use the 
+[link: /commands/docs/append.md] ``append``
+ command.
+��@1b5edabb195a56e5a7541a9c1c09480a82614bf968ee53cca8eb54391dd07693��Title: Environment
+Path: $env.VAR assignment
+Content:
+[link: /commands/docs/load-env.md] ``load-env``
+If you have more than one environment variable you'd like to set, you can use 
+[link: /commands/docs/load-env.md] ``load-env``
+ to create a table of name/value pairs and load multiple variables at the same time:
+```Fenced(Borrowed("nu"))
+load-env { "BOB": "FOO", "JAY": "BAR" }
+
+```
+��@af5cd55c953368d90fc9b9e8869d3bb66e5f688e677db243abad5a4f4fb6f18e�Title: Environment
+Path: One-shot Environment Variables
+Content:
+These are defined to be active only temporarily for a duration of executing a code block.
+
+See 
+[link: environment.md#single-use-environment-variables] Single-use environment variables
+ for details.
+��@2671649f49bd909067d1f85b562fc9e2ed9ec3c27b801e1984863804bb7e3d94��Title: Environment
+Path: Calling a Command Defined with 
+Content:
+[link: /commands/docs/def.md] ``def --env``
+See 
+[link: custom_commands.md#changing-the-environment-in-a-custom-command] Defining environment from custom commands
+ for details.
+��@e3fa4f89c3fe1fcfd0b4cbb0edcd01b65c1132556032fb496a0cdb9626ecc5ec�gTitle: Environment
+Path: Using Module's Exports
+Content:
+See 
+[link: modules.md] Modules
+ for details.
+��@a688fefb62e72287221ec7035d7eaf47333aa45212e4962960c79aa5830b13f6�Title: Environment
+Path: Reading Environment Variables
+Content:
+Individual environment variables are fields of a record that is stored in the 
+``$env``
+ variable and can be read with 
+``$env.VARIABLE``
+:
+```Fenced(Borrowed("nu"))
+$env.FOO
+# => BAR
+
+```
+Sometimes, you may want to access an environmental variable which might be unset. Consider using the 
+[link: types_of_data.md#optional-cell-paths] question mark operator
+ to avoid an error:
+```Fenced(Borrowed("nu"))
+$env.FOO | describe
+# => Error: nu::shell::column_not_found
+# => 
+# =>   × Cannot find column
+# =>    ╭─[entry #1:1:1]
+# =>  1 │ $env.FOO
+# =>    · ──┬─ ─┬─
+# =>    ·   │   ╰── cannot find column 'FOO'
+# =>    ·   ╰── value originates here
+# =>    ╰────
+
+$env.FOO? | describe
+# => nothing
+
+$env.FOO? | default "BAR"
+# => BAR
+
+```
+Alternatively, you can check for the presence of an environmental variable with 
+``in``
+:
+```Fenced(Borrowed("nu"))
+$env.FOO
+# => BAR
+
+if "FOO" in $env {
+    echo $env.FOO
+}
+# => BAR
+
+```
+��@5b857b053c4087715abd6e24cdb2ca91630956a481ccf9d3f916d99c8a3f2815��Title: Environment
+Path: Case sensitivity
+Content:
+Nushell's 
+``$env``
+ is case-insensitive, regardless of the OS. Although 
+``$env``
+ behaves mostly like a record, it is special in that it ignores the case when reading or updating. This means, for example, you can use any of 
+``$env.PATH``
+, 
+``$env.Path``
+, or 
+``$env.path``
+, and they all work the same on any OS.
+If you want to read 
+``$env``
+ in a case-sensitive manner, use 
+``$env | get --sensitive``
+.
+��@de8de6f9432e3b90149b8bff55a6d95b84883f4e148599561e541bd46fe86677��Title: Environment
+Path: Scoping
+Content:
+When you set an environment variable, it will be available only in the current scope (the block you're in and any block inside of it).
+Here is a small example to demonstrate the environment scoping:
+```Fenced(Borrowed("nu"))
+$env.FOO = "BAR"
+do {
+    $env.FOO = "BAZ"
+    $env.FOO == "BAZ"
+}
+# => true
+$env.FOO == "BAR"
+# => true
+
+```
+See also: 
+[link: ./custom_commands.html#changing-the-environment-in-a-custom-command] Changing the Environment in a Custom Command
+.
+��@3a1f262b0eeb7adae5efd5f764cbe5750c543683bf4042bd724f9022f67212a4�yTitle: Environment
+Path: Changing the Directory
+Content:
+A common task in a shell is to change the directory using the 
+[link: /commands/docs/cd.md] ``cd``
+ command. In Nushell, calling 
+[link: /commands/docs/cd.md] ``cd``
+ is equivalent to setting the 
+``PWD``
+ environment variable. Therefore, it follows the same rules as other environment variables (for example, scoping).
+��@b4e5944c833136b9d795eb239432f9806b0d1a7f606fa533a7af062369b08bb9��Title: Environment
+Path: Single-use Environment Variables
+Content:
+A common shorthand to set an environment variable once is available, inspired by Bash and others:
+```Fenced(Borrowed("nu"))
+FOO=BAR $env.FOO
+# => BAR
+
+```
+You can also use 
+[link: /commands/docs/with-env.md] ``with-env``
+ to do the same thing more explicitly:
+```Fenced(Borrowed("nu"))
+with-env { FOO: BAR } { $env.FOO }
+# => BAR
+
+```
+The 
+[link: /commands/docs/with-env.md] ``with-env``
+ command will temporarily set the environment variable to the value given (here: the variable "FOO" is given the value "BAR"). Once this is done, the 
+[link: types_of_data.md#blocks] block
+ will run with this new environment variable set.
+��@debb41b41935063b4d7a0e8e45412e36cc8da0460f3ba7a46f6c575f975390a3�`Title: Environment
+Path: Permanent Environment Variables
+Content:
+You can also set environment variables at startup so they are available for the duration of Nushell running. To do this, set an environment variable inside 
+[link: configuration.md] the Nu configuration file
+.
+For example:
+```Fenced(Borrowed("nu"))
+# In config.nu
+$env.FOO = 'BAR'
+
+```
+��@f90cec3bbe4821ba7dbccc9d8f91d0f7db06409c4580a70799821053cdd787ab�	�Title: Environment
+Path: Environment Variable Conversions
+Content:
+You can set the 
+``ENV_CONVERSIONS``
+ environment variable to convert other environment variables between a string and a value.
+
+For example, the 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu] default environment config
+ includes conversion of PATH (and Path used on Windows) environment variables from a string to a list.
+
+After both 
+``env.nu``
+ and 
+``config.nu``
+ are loaded, any existing environment variable specified inside 
+``ENV_CONVERSIONS``
+ will be translated according to its 
+``from_string``
+ field into a value of any type.
+
+External tools require environment variables to be strings, therefore, any non-string environment variable needs to be converted first.
+
+The conversion of value -> string is set by the 
+``to_string``
+ field of 
+``ENV_CONVERSIONS``
+ and is done every time an external command is run.
+Let's illustrate the conversions with an example.
+
+Put the following in your config.nu:
+```Fenced(Borrowed("nu"))
+$env.ENV_CONVERSIONS = {
+    # ... you might have Path and PATH already there, add:
+    FOO : {
+        from_string: { |s| $s | split row '-' }
+        to_string: { |v| $v | str join '-' }
+    }
+}
+
+```
+Now, within a Nushell instance:
+```Fenced(Borrowed("nu"))
+with-env { FOO : 'a-b-c' } { nu }  # runs Nushell with FOO env. var. set to 'a-b-c'
+
+$env.FOO
+# =>   0   a
+# =>   1   b
+# =>   2   c
+
+```
+You can see the 
+``$env.FOO``
+ is now a list in a new Nushell instance with the updated config.
+
+You can also test the conversion manually by
+```Fenced(Borrowed("nu"))
+do $env.ENV_CONVERSIONS.FOO.from_string 'a-b-c'
+
+```
+Now, to test the conversion list -> string, run:
+```Fenced(Borrowed("nu"))
+nu -c '$env.FOO'
+# => a-b-c
+
+```
+Because 
+``nu``
+ is an external program, Nushell translated the 
+``[ a b c ]``
+ list according to 
+``ENV_CONVERSIONS.FOO.to_string``
+ and passed it to the 
+``nu``
+ process.
+
+Running commands with 
+``nu -c``
+ does not load the config file, therefore the env conversion for 
+``FOO``
+ is missing and it is displayed as a plain string -- this way we can verify the translation was successful.
+
+You can also run this step manually by 
+``do $env.ENV_CONVERSIONS.FOO.to_string [a b c]``
+(Important! The environment conversion string -> value happens 
+after
+ the env.nu and config.nu are evaluated. All environment variables in env.nu and config.nu are still strings unless you set them manually to some other values.)
+��@176e987997ecea43415cf942b0ca7bc5ab9dbd13850632fe1537f08551bf5b0f�/Title: Environment
+Path: Removing Environment Variables
+Content:
+You can remove an environment variable only if it was set in the current scope via 
+[link: /commands/docs/hide-env.md] ``hide-env``
+:
+```Fenced(Borrowed("nu"))
+$env.FOO = 'BAR'
+# => ...
+hide-env FOO
+
+```
+The hiding is also scoped which both allows you to remove an environment variable temporarily and prevents you from modifying a parent environment from within a child scope:
+```Fenced(Borrowed("nu"))
+$env.FOO = 'BAR'
+do {
+  hide-env FOO
+  # $env.FOO does not exist
+}
+$env.FOO
+# => BAR
+
+```

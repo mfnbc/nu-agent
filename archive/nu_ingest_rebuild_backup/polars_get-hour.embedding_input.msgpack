@@ -1,0 +1,73 @@
+���@47a8c044ebcc7c0cd71b18d09ee67b4a6822c6806e95138b3a8575b333eccb5a�~Title: title: polars get-hour
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars get-hour``
+[link: /commands/categories/dataframe.md] ��@234a050a0d7e5e0a9e2919515d338f11b797fdbaea6a745259f7f94fe3a6d18d�VTitle: title: polars get-hour
+Path: Signature
+Content:
+``> polars get-hour {flags} ``
+��@10f9d34de65404374e303c4fdead1f73c63b09095c8317641a4469dc98324bc4ٶTitle: title: polars get-hour
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@5c35e9a0550359db4915d3581a960a30055b61b0229217c30be1454427b1ac8b��Title: title: polars get-hour
+Path: Examples
+Content:
+Returns hour from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars get-hour
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ 16 │
+│ 1 │ 16 │
+╰───┴────╯
+
+
+```
+Returns hour from a date in a lazyframe
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-lazy);
+    $df | polars get-hour
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ 16 │
+│ 1 │ 16 │
+╰───┴────╯
+
+
+```
+Returns hour from a date in an expression
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-hour)
+╭───┬────╮
+│ # │ 0  │
+├───┼────┤
+│ 0 │ 16 │
+│ 1 │ 16 │
+╰───┴────╯
+
+
+```

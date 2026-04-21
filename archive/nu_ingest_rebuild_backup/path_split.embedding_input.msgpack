@@ -1,0 +1,76 @@
+���@c368f37e79c8220146dce499b3ad52da276f5c388852842c5a3727a881a4be45�jTitle: title: path split
+Path: path
+Content:
+
+
+
+
+
+
+
+
+
+``path split``
+[link: /commands/categories/path.md] ��@0325a1bc07040fe224db64269a8baa207f058dd8311ea6f3280d895364e825a8�LTitle: title: path split
+Path: Signature
+Content:
+``> path split {flags} ``
+��@d2ea3961a9943b7ca05ff768ccea467b6b4532db3fabefc1ee2e097f4f7564b7ٌTitle: title: path split
+Path: Input/output types:
+Content:
+input
+output
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+list
+<
+list
+<
+string
+>
+>
+
+��@3e45460e889f45f76cd39dd1730e5e0044d79ee5f37be019e725d7a467e2fb40��Title: title: path split
+Path: Examples
+Content:
+Split a path into parts.
+```Fenced(Borrowed("nu"))
+> '/home/viking/spam.txt' | path split
+╭───┬──────────╮
+│ 0 │ /        │
+│ 1 │ home     │
+│ 2 │ viking   │
+│ 3 │ spam.txt │
+╰───┴──────────╯
+
+
+```
+Split paths in list into parts.
+```Fenced(Borrowed("nu"))
+> [ /home/viking/spam.txt /home/viking/eggs.txt ] | path split
+╭───┬──────────────────╮
+│ 0 │ ╭───┬──────────╮ │
+│   │ │ 0 │ /        │ │
+│   │ │ 1 │ home     │ │
+│   │ │ 2 │ viking   │ │
+│   │ │ 3 │ spam.txt │ │
+│   │ ╰───┴──────────╯ │
+│ 1 │ ╭───┬──────────╮ │
+│   │ │ 0 │ /        │ │
+│   │ │ 1 │ home     │ │
+│   │ │ 2 │ viking   │ │
+│   │ │ 3 │ eggs.txt │ │
+│   │ ╰───┴──────────╯ │
+╰───┴──────────────────╯
+
+
+```

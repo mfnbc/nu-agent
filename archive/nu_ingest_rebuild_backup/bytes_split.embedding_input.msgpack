@@ -1,0 +1,59 @@
+���@0d6a90b30f20affcb560ae12e818847068dd008bd510867315a148f50b19815c�nTitle: title: bytes split
+Path: bytes
+Content:
+
+
+
+
+
+
+
+
+
+``bytes split``
+[link: /commands/categories/bytes.md] ��@048a54eb953872ff7e3ec50ffabfbdee6dcdb9db96710b60f6bde3e2a9555a45�YTitle: title: bytes split
+Path: Signature
+Content:
+``> bytes split {flags} (separator)``
+��@8e1453e13c5b547430c8296c802d51650e418a4f0646056549da89c14e610a10ىTitle: title: bytes split
+Path: Parameters
+Content:
+``separator``
+: Bytes or string that the input will be split on (must be non-empty).
+��@c02a4dc627d2214a79a62f7bc3dfa845463c8c23117745617714b85d192fdb57�bTitle: title: bytes split
+Path: Input/output types:
+Content:
+input
+output
+binary
+list
+<
+binary
+>
+
+��@735a46f89b8c4c0b1afb2e6d06fedeec994d0eea4be597543371bd7dac785c05��Title: title: bytes split
+Path: Examples
+Content:
+Split a binary value using a binary separator.
+```Fenced(Borrowed("nu"))
+> 0x[66 6F 6F 20 62 61 72 20 62 61 7A 20] | bytes split 0x[20]
+╭───┬─────────────────╮
+│ 0 │ [102, 111, 111] │
+│ 1 │ [98, 97, 114]   │
+│ 2 │ [98, 97, 122]   │
+│ 3 │ []              │
+╰───┴─────────────────╯
+
+
+```
+Split a binary value using a string separator.
+```Fenced(Borrowed("nu"))
+> 0x[61 2D 2D 62 2D 2D 63] | bytes split "--"
+╭───┬──────╮
+│ 0 │ [97] │
+│ 1 │ [98] │
+│ 2 │ [99] │
+╰───┴──────╯
+
+
+```

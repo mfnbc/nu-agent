@@ -1,0 +1,70 @@
+���@746f1d9ca8b0b98da140dbdf5c1f9df7dae1ca47c18efbbf4a4b4af5acad70a8�fTitle: title: slice
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``slice``
+[link: /commands/categories/filters.md] ��@66380dcdcd08542c367c01b9b4c2ccf30e60cfe4ace42efff5393d78403ff9e0�HTitle: title: slice
+Path: Signature
+Content:
+``> slice {flags} (rows)``
+��@f6acd4892eae63f08f5422401bfc557329b5d92103f2041f0e13f0d88294e4d6�RTitle: title: slice
+Path: Parameters
+Content:
+``rows``
+: Range of rows to return.
+��@b5615393ae36507dcaedc7a3f7b5ec8cf38466fa170574ea03dfd7dfbd43f49d�`Title: title: slice
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+��@12a84a164389712a22eaa4acaaa701aa4a71181cd3547517f7fd2936c9c2914a�;Title: title: slice
+Path: Examples
+Content:
+Get the last 2 items.
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | slice 4..5
+╭───┬───╮
+│ 0 │ 4 │
+│ 1 │ 5 │
+╰───┴───╯
+
+
+```
+Get the last 2 items.
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | slice (-2)..
+╭───┬───╮
+│ 0 │ 4 │
+│ 1 │ 5 │
+╰───┴───╯
+
+
+```
+Get the next to last 2 items.
+```Fenced(Borrowed("nu"))
+> [0,1,2,3,4,5] | slice (-3)..-2
+╭───┬───╮
+│ 0 │ 3 │
+│ 1 │ 4 │
+╰───┴───╯
+
+
+```

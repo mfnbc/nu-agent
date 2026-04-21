@@ -1,0 +1,108 @@
+“’Ù@78b7565eb4ad8abe350b1097c946d5e0d4e0a9dd55112a9e61d832fdbdef9cd7ÚæTitle: This week in Nushell #280
+Path: Nushell
+Content:
+NotTheDr01ds worked on SHLVL (
+[link: https://github.com/nushell/nushell/pull/14732] 1
+, 
+[link: https://github.com/nushell/nushell/pull/14727] 2
+), 
+[link: https://github.com/nushell/nushell/pull/14669] added a user-level autoload directory
+, 
+[link: https://github.com/nushell/nushell/pull/14681] removed no-longer-needed 
+``convert_env_values``
+ calls
+, 
+[link: https://github.com/nushell/nushell/pull/14670] improved 
+``open``
+ to assign 
+``content_type``
+ metadata for filetypes not handled with a 
+``from``
+ converter
+, and 
+[link: https://github.com/nushell/nushell/pull/14734] added a comment on 
+``nu_repl``
+ usage
+rikukiix 
+[link: https://github.com/nushell/nushell/pull/14707] made exec command decrement SHLVL correctly & added a SHLVL related test
+cptpiepmatz worked on boolean coercion (
+[link: https://github.com/nushell/nushell/pull/14731] 1
+, 
+[link: https://github.com/nushell/nushell/pull/14704] 2
+)
+ayax79 
+[link: https://github.com/nushell/nushell/pull/14723] provided the ability to split strings in columns via 
+``polars str-split``
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/14721] made 
+``utouch``
+ the new 
+``touch``
+ and 
+[link: https://github.com/nushell/nushell/pull/14717] created a 
+``nu_glob::is_glob``
+ function
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14711] improved error messages for "sum", "product", and "sum_of_squares"
+ and 
+[link: https://github.com/nushell/nushell/pull/14646] replaced regex crate with fancy_regex
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/14710] fixed a 
+``tabled``
+ panic
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14703] promoted a note about 
+``internal_span``
+ to doccomment
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14700] removed usages of 
+``internal_span``
+NiceGuyIT 
+[link: https://github.com/nushell/nushell/pull/14696] fixed a command description
+0x4D5352 
+[link: https://github.com/nushell/nushell/pull/14695] improved example formatting in README.md
+hjetmundsen 
+[link: https://github.com/nushell/nushell/pull/14674] added glob support to 
+``utouch``
+tsukimizake 
+[link: https://github.com/nushell/nushell/pull/14590] stopped multiline prompts from removing the last newline
+’Ù@27a0adc7544d3bfbba15a5e4169ba58313256946a4b5358f35d64963bacdbc11Ú*Title: This week in Nushell #280
+Path: Documentation
+Content:
+jesper-olsen 
+[link: https://github.com/nushell/nushell.github.io/pull/1733] updated loading_data.md
+ and 
+[link: https://github.com/nushell/nushell.github.io/pull/1731] updated thinking_in_nu.md
+ysthakur 
+[link: https://github.com/nushell/nushell.github.io/pull/1730] used white foreground for copy code button
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1726] documented custom completion options and styling
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1723] used dark-plus in code blocks for light mode also
+alexandregv 
+[link: https://github.com/nushell/nushell.github.io/pull/1725] fixed a broken link and a typo
+132ikl 
+[link: https://github.com/nushell/nushell.github.io/pull/1720] updated example in working with lists to reflect changes to ++ operator
+0x4D5352 
+[link: https://github.com/nushell/nushell.github.io/pull/1698] added Japanese and Portuguese book
+ and 
+[link: https://github.com/nushell/nushell.github.io/pull/1697] added Spanish and French book
+’Ù@6c4e2e9f9839752c23ead743b1e22ae892d4f26d21e7e53ace51010c439a669eÚÂTitle: This week in Nushell #280
+Path: Nu_Scripts
+Content:
+NotTheDr01ds 
+[link: https://github.com/nushell/nu_scripts/pull/1008] removed some outdated comments
+fantasyzhjk 
+[link: https://github.com/nushell/nu_scripts/pull/1007] updated rbenv module
+kjelly 
+[link: https://github.com/nushell/nu_scripts/pull/1006] added support for nu 101 in argx module
+Bahex 
+[link: https://github.com/nushell/nu_scripts/pull/1005] fixed propagation of errors from aggregate operation closures
+ and 
+[link: https://github.com/nushell/nu_scripts/pull/991] added 
+``aggregate``
+ to stdlib-candidate
+WindSoilder 
+[link: https://github.com/nushell/nu_scripts/pull/1002] added 
+``path replace-extension``
+ to stdlib-candidate

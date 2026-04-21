@@ -1,0 +1,184 @@
+˜’Ù@f62e1251dd0c59aa60a7b9052500701049094d37726f10f3d1fdef378910b80fÚžTitle: title: 'This week in Nushell #290'
+Path: Highlights
+Content:
+
+
+
+
+Be on the lookout for a new release! Nushell 0.103 is just around the corner, with an expected drop sometime around
+
+Tuesday. That is, of course, when most folks get to try out all of the great stuff you've been reading about in TWiN for
+
+the last month or so. But not you, right? You couldn't wait to try out job support, so you started running nightlies or
+
+building yourself, right?!
+This week we have a few new features, with more Polars PRs, a 
+``default --empty``
+ flag, and 
+``into string --group-digits``
+ as well!
+The full list of fixes, features, tweaks, and transformations is below ...
+’Ù@b99d89c98f8cf6a671c80b17186cf2c6543eb1b634367b700bf76414d286b6e8Ú^Title: title: 'This week in Nushell #290'
+Path: Nushell
+Content:
+sholderbach
+[link: https://github.com/nushell/nushell/pull/15310] Bumped reedline for a recent completion fix
+[link: https://github.com/nushell/nushell/pull/15040] Removed 
+``fmt``
+ after deprecation
+[link: https://github.com/nushell/nushell/pull/15039] Removed 
+``into bits``
+ after deprecation
+[link: https://github.com/nushell/nushell/pull/15038] Removed 
+``range``
+ command after deprecation
+LoicRiegel
+[link: https://github.com/nushell/nushell/pull/15309] Refactored by renaming subcommand structs
+[link: https://github.com/nushell/nushell/pull/15236] Fixed a bug where math commands returned an error with infinite ranges 
+[
+#15135
+]
+MMesch 
+[link: https://github.com/nushell/nushell/pull/15304] Added polars list-contains command
+blindFS
+[link: https://github.com/nushell/nushell/pull/15303] Fixed completion for the full set of operators for type 
+``any``
+[link: https://github.com/nushell/nushell/pull/15301] Refactored to make tree-sitter-nu friendly alternative expressions
+[link: https://github.com/nushell/nushell/pull/15289] Fixed LSP 
+``find_id``
+ for custom definitions within custom definitions
+[link: https://github.com/nushell/nushell/pull/15287] Refactored LSP span fixes by bumping 
+``lsp-textdocument``
+ to 0.4.2
+[link: https://github.com/nushell/nushell/pull/15263] Fixed a security audit by bumping 
+``ring``
+ from 0.17.8 to 0.17.13
+ayax79
+[link: https://github.com/nushell/nushell/pull/15292] Added support for reading Categorical and Enum types
+[link: https://github.com/nushell/nushell/pull/15284] Mapped 
+``.pq``
+ extension to parquet files in Polars
+[link: https://github.com/nushell/nushell/pull/15255] Exposed the ability to configure Hive settings in 
+``polars open``
+NotTheDr01ds
+[link: https://github.com/nushell/nushell/pull/15283] Fixed improper application of local timezone offset to Unix epochs
+[link: https://github.com/nushell/nushell/pull/15223] Added 
+``default --empty``
+ to handle empty values
+cptpiepmatz 
+[link: https://github.com/nushell/nushell/pull/15280] Tested on the Beta toolchain
+IanManske
+[link: https://github.com/nushell/nushell/pull/15276] Added 
+``filesize.show_unit``
+ config option
+[link: https://github.com/nushell/nushell/pull/15271] Respected system locale when formatting file sizes via config
+132ikl 
+[link: https://github.com/nushell/nushell/pull/15272] Parsed XML documents with DTDs by default and added a 
+``--disallow-dtd``
+ flag
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/15268] Included symlinks in directory completions
+fdncred 
+[link: https://github.com/nushell/nushell/pull/15265] Allowed 
+``--group-digits``
+ to be used in 
+``into string``
+dependabot
+[
+bot
+]
+[link: https://github.com/nushell/nushell/pull/15295] Bumped 
+``titlecase``
+ from 3.3.0 to 3.4.0
+[link: https://github.com/nushell/nushell/pull/15294] Bumped 
+``scraper``
+ from 0.22.0 to 0.23.1
+’Ù@d58543db8f25572e0d75ba7661b5d6defbd8a56fb4213630709b476967c65e4bÚeTitle: title: 'This week in Nushell #290'
+Path: Documentation
+Content:
+dependabot
+[
+bot
+]
+ 
+[link: https://github.com/nushell/nushell.github.io/pull/1832] Bumped 
+``prismjs``
+ from 1.29.0 to 1.30.0
+tkr-sh 
+[link: https://github.com/nushell/nushell.github.io/pull/1831] Added 
+``pwd``
+ command
+yo-goto 
+[link: https://github.com/nushell/nushell.github.io/pull/1830] Fixed a typo in the range type explanation
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1829] Published TWiN #289
+LoicRiegel 
+[link: https://github.com/nushell/nushell.github.io/pull/1828] Added release notes for 'to yml'
+’Ù@20a2ad164411845c8224161927ae3aaba1d15fe8f9b413856fcc46529fd94111ÚwTitle: title: 'This week in Nushell #290'
+Path: Nu_Scripts
+Content:
+hongquan 
+[link: https://github.com/nushell/nu_scripts/pull/1071] Added completion for the 
+``uv``
+ Python package manager
+Yethal 
+[link: https://github.com/nushell/nu_scripts/pull/1070] Added a Nushell port of 
+``autoaspm``
+ruancomelli
+[link: https://github.com/nushell/nu_scripts/pull/1069] Fixed a heading in the zoxide completions README
+[link: https://github.com/nushell/nu_scripts/pull/1068] Fixed a typo in the README file name for pytest's custom completions
+fnuttens 
+[link: https://github.com/nushell/nu_scripts/pull/1067] Allowed the 
+``zvm use``
+ command to install a Zig version first
+danmichaelo
+[link: https://github.com/nushell/nu_scripts/pull/1066] Fixed a typo: 
+``RAEDME.md``
+ -> 
+``README.md``
+[link: https://github.com/nushell/nu_scripts/pull/1065] Fixed ssh-completions when there are no includes
+’Ù@df5e4d1f634b1f96e23f7e641e6f427652911bf0bb2ae2557f5587c6f730943dÙÀTitle: title: 'This week in Nushell #290'
+Path: reedline
+Content:
+blindFS 
+[link: https://github.com/nushell/reedline/pull/886] Fixed columnar_menu 
+``create_string``
+ with quoted suggestions
+’Ù@570446665b841e5cc865704c64d8435b04dac33bac0887c50702fb08aa115e51ÙüTitle: title: 'This week in Nushell #290'
+Path: Awesome Nu
+Content:
+atahabaki 
+[link: https://github.com/nushell/awesome-nu/pull/112] Added libvirt-hooks-nushell
+KamilKleina 
+[link: https://github.com/nushell/awesome-nu/pull/111] Added alias-finder.nu
+’Ù@7c1157843556ce0391aaf14e6749e2db6bd381cf1e4238d7fe1e5bb6c20e2831ÚDTitle: title: 'This week in Nushell #290'
+Path: Tree-sitter
+Content:
+blindFS
+[link: https://github.com/nushell/tree-sitter-nu/pull/194] Fixed empty closures
+[link: https://github.com/nushell/tree-sitter-nu/pull/193] Fixed 
+``ctrl_do``
+ with 
+``expr_paren``
+[link: https://github.com/nushell/tree-sitter-nu/pull/192] Fixed 
+``id``
+ in 
+``collection_type``
+ to allow hyphen
+[link: https://github.com/nushell/tree-sitter-nu/pull/191] Fixed 
+``hide-env``
+ with more than one variable
+[link: https://github.com/nushell/tree-sitter-nu/pull/190] Fixed 
+``like``
+/
+``not-like``
+ operator
+’Ù@4811194b6e1418eb27e09a614827755337f745784a2d5aaacdd318f1064ca0d1ÙÇTitle: title: 'This week in Nushell #290'
+Path: Integrations
+Content:
+hustcer 
+[link: https://github.com/nushell/integrations/pull/36] Added 
+``/usr/bin/nu``
+ to 
+``/etc/shells``
+ after installation

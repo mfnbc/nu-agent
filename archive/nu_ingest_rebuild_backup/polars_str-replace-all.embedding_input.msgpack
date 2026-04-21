@@ -1,0 +1,64 @@
+���@b31b228000105d420f73851250e23f29f56c668663145ba1b32103876fc8fe98ٌTitle: title: polars str-replace-all
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars str-replace-all``
+[link: /commands/categories/dataframe.md] ��@d0307050c479977cda0ba361f515cd963cab2879d839155a6e025839d35429c2�dTitle: title: polars str-replace-all
+Path: Signature
+Content:
+``> polars str-replace-all {flags} ``
+��@8585c2dd67e5c820010d8a89f8ee05dcfcfb76eabf6121ba35f26c27d9c85525٣Title: title: polars str-replace-all
+Path: Flags
+Content:
+``--pattern, -p {string}``
+: Regex pattern to be matched.
+``--replace, -r {string}``
+: Replacing string.
+��@81d8f19d89ad28abb6aa856bd2091d4d56c588ebea3084fbed120631cdfb3ebbٽTitle: title: polars str-replace-all
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@969197826169bdf00b84c5c6dccb8d4ef5590f440736f1003f7fcf1b2bacd0de�Title: title: polars str-replace-all
+Path: Examples
+Content:
+Replaces string in a column
+```Fenced(Borrowed("nu"))
+> [[a]; [abac] [abac] [abac]] | polars into-df | polars select (polars col a | polars str-replace-all --pattern a --replace A) | polars collect
+╭───┬──────╮
+│ # │  a   │
+├───┼──────┤
+│ 0 │ AbAc │
+│ 1 │ AbAc │
+│ 2 │ AbAc │
+╰───┴──────╯
+
+
+```
+Replaces string
+```Fenced(Borrowed("nu"))
+> [abac abac abac] | polars into-df | polars str-replace-all --pattern a --replace A
+╭───┬──────╮
+│ # │  0   │
+├───┼──────┤
+│ 0 │ AbAc │
+│ 1 │ AbAc │
+│ 2 │ AbAc │
+╰───┴──────╯
+
+
+```

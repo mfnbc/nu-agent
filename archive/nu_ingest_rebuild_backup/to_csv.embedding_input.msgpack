@@ -1,0 +1,70 @@
+•’Ù@10ec11066e242699ba29b808921255ddd7462a023b209a7324956b5e02fa320dÙhTitle: title: to csv
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to csv``
+[link: /commands/categories/formats.md] ’Ù@978aa2721dfc0392aa102f70db8074c842dd5e99e4818a11027affe7a682afb1ÙDTitle: title: to csv
+Path: Signature
+Content:
+``> to csv {flags} ``
+’Ù@7a20f6ba22db066435e67db93de6aa56348441593c145dadb82e4d4898302d96ÚTitle: title: to csv
+Path: Flags
+Content:
+``--separator, -s {string}``
+: A character to separate columns, defaults to ','.
+``--noheaders, -n``
+: Do not output the columns names as the first row.
+``--columns {list<string>}``
+: The names (in order) of the columns to use.
+’Ù@b213236abc91c5828a72397ef606838fa58bda41bef130724af3d11dcb41037bÙ`Title: title: to csv
+Path: Input/output types:
+Content:
+input
+output
+record
+string
+table
+string
+’Ù@46100b1a71edd9a68294b1884aed126a7159d55d69c1b99f83d47bda5d2d2a18ÚfTitle: title: to csv
+Path: Examples
+Content:
+Outputs a CSV string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [[foo bar]; [1 2]] | to csv
+foo,bar
+1,2
+
+
+```
+Outputs a CSV string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [[foo bar]; [1 2]] | to csv --separator ';'
+foo;bar
+1;2
+
+
+```
+Outputs a CSV string representing the contents of this record.
+```Fenced(Borrowed("nu"))
+> {a: 1 b: 2} | to csv
+a,b
+1,2
+
+
+```
+Outputs a CSV stream with column names pre-determined.
+```Fenced(Borrowed("nu"))
+> [[foo bar baz]; [1 2 3]] | to csv --columns [baz foo]
+baz,foo
+3,1
+
+
+```

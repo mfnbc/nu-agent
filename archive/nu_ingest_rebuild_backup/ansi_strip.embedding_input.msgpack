@@ -1,0 +1,72 @@
+���@08f9a02166ec88f02a6a65712ddc3035fb74e4cf899bcb4fae313939cbd30cb2�rTitle: title: ansi strip
+Path: platform
+Content:
+
+
+
+
+
+
+
+
+
+``ansi strip``
+[link: /commands/categories/platform.md] ��@5a49e612b41935979d0f8277c18db2d3979acdc8c36a145cde4442f19f84756f�STitle: title: ansi strip
+Path: Signature
+Content:
+``> ansi strip {flags} ...rest``
+��@00aceccb8c81ef6e1636b0bec5c2dd18ea975c8a9643fa6d3d4e7d79965e747dٙTitle: title: ansi strip
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, remove ANSI sequences from strings at the given cell paths.
+��@33320dd5df2d604c2331342610e838b51b29b4a6b8146b1ea219a262766e90bbٓTitle: title: ansi strip
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+��@495ae30a23c5cb17368857fc04f758eda982de1de74cf245d972e834247cc2d9�4Title: title: ansi strip
+Path: Examples
+Content:
+Strip ANSI escape sequences from a string
+```Fenced(Borrowed("nu"))
+> $'(ansi green)(ansi cursor_on)hello' | ansi strip
+hello
+
+```
+Strip ANSI escape sequences from a record field
+```Fenced(Borrowed("nu"))
+> { greeting: $'hello (ansi red)world' exclamation: false } | ansi strip greeting
+╭─────────────┬─────────────╮
+│ greeting    │ hello world │
+│ exclamation │ false       │
+╰─────────────┴─────────────╯
+
+```
+Strip ANSI escape sequences from multiple table columns
+```Fenced(Borrowed("nu"))
+> [[language feature]; [$'(ansi red)rust' $'(ansi i)safety']] | ansi strip language feature
+╭───┬──────────┬─────────╮
+│ # │ language │ feature │
+├───┼──────────┼─────────┤
+│ 0 │ rust     │ safety  │
+╰───┴──────────┴─────────╯
+
+
+```

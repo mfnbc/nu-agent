@@ -1,0 +1,74 @@
+���@c531c3e84d89a18ac354d3683022af675ebd13e189e15af165729feba75b94ee�wTitle: title: polars rename
+Path: (/commands/categories/dataframe or lazyframe.md)
+Content:
+
+
+
+
+
+
+
+
+
+``polars rename``
+��@02bebfbf380c10498999c7864aa446a981e918430fac25b2d20790ff48c89172�gTitle: title: polars rename
+Path: Signature
+Content:
+``> polars rename {flags} (columns) (new names)``
+��@62612e71cd1942ab163bb6b0a4e66d25ef980f822f789990196c010709d9358f��Title: title: polars rename
+Path: Parameters
+Content:
+``columns``
+: Column(s) to be renamed. A string or list of strings.
+``new names``
+: New names for the selected column(s). A string or list of strings.
+��@82241aa5fae2e6cef27280d3b1304a55e2464e0b31a36b1b2653d7dbc2cb5805ِTitle: title: polars rename
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@f2fe279821894f3953791d51a177a7f3d6e9882100169018293a829a3e55892a��Title: title: polars rename
+Path: Examples
+Content:
+Renames a series
+```Fenced(Borrowed("nu"))
+> [5 6 7 8] | polars into-df | polars rename '0' new_name
+╭───┬──────────╮
+│ # │ new_name │
+├───┼──────────┤
+│ 0 │        5 │
+│ 1 │        6 │
+│ 2 │        7 │
+│ 3 │        8 │
+╰───┴──────────╯
+
+
+```
+Renames a dataframe column
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars rename a a_new
+╭───┬───────┬───╮
+│ # │ a_new │ b │
+├───┼───────┼───┤
+│ 0 │     1 │ 2 │
+│ 1 │     3 │ 4 │
+╰───┴───────┴───╯
+
+
+```
+Renames two dataframe columns
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars rename [a b] [a_new b_new]
+╭───┬───────┬───────╮
+│ # │ a_new │ b_new │
+├───┼───────┼───────┤
+│ 0 │     1 │     2 │
+│ 1 │     3 │     4 │
+╰───┴───────┴───────╯
+
+
+```

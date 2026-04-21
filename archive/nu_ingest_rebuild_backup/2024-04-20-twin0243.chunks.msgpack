@@ -1,0 +1,281 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-04-20-twin0243.mdŸ@ce656880e604612955005955306dc5819fbbe8105d83d28f2def80da052fafdbπThis week in Nushell #243ëßNushell⁄›devyn made lots of improvements, mostly around plugin support: 
+[link: https://github.com/nushell/nushell/pull/12580] switched the plugin msgpack protocol to named format
+, 
+[link: https://github.com/nushell/nushell/pull/12575] fixed the error output in the Python plugin to match LabeledError
+, 
+[link: https://github.com/nushell/nushell/pull/12574] added an example Nushell plugin written in Nushell itself
+, 
+[link: https://github.com/nushell/nushell/pull/12550] improved safety of 
+``get_unchecked_str``
+ in 
+``nu_system::macos``
+, 
+[link: https://github.com/nushell/nushell/pull/12549] replaced subtraction of Instants and Durations with saturating subtractions
+, 
+[link: https://github.com/nushell/nushell/pull/12533] removed unnecessary fields from Python plugin signature
+, 
+[link: https://github.com/nushell/nushell/pull/12526] added a panic unwind handler during plugin calls
+, 
+[link: https://github.com/nushell/nushell/pull/12510] improved error messages for plugin protocol by removing 
+``#[serde(untagged)]``
+, 
+[link: https://github.com/nushell/nushell/pull/12448] introduced local socket mode and foreground terminal control for plugins
+, and 
+[link: https://github.com/nushell/nushell/pull/12305] implemented copy-on-write for record values
+ayax79 did lots of work on dataframe support: 
+[link: https://github.com/nushell/nushell/pull/12577] removed the polars dtypes command
+, and 
+[link: https://github.com/nushell/nushell/pull/12571] only marked collected dataframes as from_lazy=false when collect is called from the collect command
+, and 
+[link: https://github.com/nushell/nushell/pull/12554] upgraded nu-cmd-dataframe to polars 0.39
+, and 
+[link: https://github.com/nushell/nushell/pull/12551] upgraded nu_plugin_polars to polars 0.39.1
+, and 
+[link: https://github.com/nushell/nushell/pull/12538] fixed NuLazyFrame/NuDataFrame conversion issues
+, and 
+[link: https://github.com/nushell/nushell/pull/12528] cleaned up to_pipe_line_data and cache_and_to_value, making them part of CustomValueSupport
+, and 
+[link: https://github.com/nushell/nushell/pull/12525] ensured that lazy frames converted via to-lazy are not converted back to eager frames later in the pipeline
+poliorcetics 
+[link: https://github.com/nushell/nushell/pull/12593] added more details to 
+``version``
+amtoine 
+[link: https://github.com/nushell/nushell/pull/12591] added "to nuon" enumeration of possible styles
+, and 
+[link: https://github.com/nushell/nushell/pull/12553] created a new 
+``nuon``
+ crate from 
+``from nuon``
+ and 
+``to nuon``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12589] improved 
+``nu --lsp``
+ command tooltips
+, and 
+[link: https://github.com/nushell/nushell/pull/12564] added the ability to set metadata
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/12573] set the type of default NU_LIB_DIRS and NU_PLUGIN_DIRS to 
+``list<string>``
+, and 
+[link: https://github.com/nushell/nushell/pull/12559] disallowed skip on external stream
+, and 
+[link: https://github.com/nushell/nushell/pull/12534] removed useless path.rs
+, and 
+[link: https://github.com/nushell/nushell/pull/12531] unified 
+``working_set.error``
+ usage
+TheLostLambda 
+[link: https://github.com/nushell/nushell/pull/12569] fixed shell_integration to set window title on startup
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12568] boxed 
+``ImportPattern``
+ in 
+``Expr``
+, and 
+[link: https://github.com/nushell/nushell/pull/12529] added 
+``ListItem``
+ type for 
+``Expr::List``
+, and 
+[link: https://github.com/nushell/nushell/pull/12508] made 
+``group-by``
+ return errors in closure
+, and 
+[link: https://github.com/nushell/nushell/pull/12324] added 
+``Record::into_columns``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/12566] updated crate feature flags
+, and 
+[link: https://github.com/nushell/nushell/pull/12542] implemented 
+``FusedIterator``
+ for record iterators
+, 
+[link: https://github.com/nushell/nushell/pull/12540] did minor housekeeping in the parser
+, and 
+[link: https://github.com/nushell/nushell/pull/12523] improved 
+``with-env``
+ robustness
+, and 
+[link: https://github.com/nushell/nushell/pull/12522] disallowed setting the 
+``PWD``
+ via 
+``load-env``
+ input
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/12517] used abbreviated string instead of debug string for 
+``DatetimeParseError``
+s
+schrieveslaach 
+[link: https://github.com/nushell/nushell/pull/12454] improved config behaviour in LSP Mode
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/12262] fixed circular source causing Nushell to crash
+íêê⁄Title: This week in Nushell #243
+Path: Nushell
+Content:
+devyn made lots of improvements, mostly around plugin support: 
+[link: https://github.com/nushell/nushell/pull/12580] switched the plugin msgpack protocol to named format
+, 
+[link: https://github.com/nushell/nushell/pull/12575] fixed the error output in the Python plugin to match LabeledError
+, 
+[link: https://github.com/nushell/nushell/pull/12574] added an example Nushell plugin written in Nushell itself
+, 
+[link: https://github.com/nushell/nushell/pull/12550] improved safety of 
+``get_unchecked_str``
+ in 
+``nu_system::macos``
+, 
+[link: https://github.com/nushell/nushell/pull/12549] replaced subtraction of Instants and Durations with saturating subtractions
+, 
+[link: https://github.com/nushell/nushell/pull/12533] removed unnecessary fields from Python plugin signature
+, 
+[link: https://github.com/nushell/nushell/pull/12526] added a panic unwind handler during plugin calls
+, 
+[link: https://github.com/nushell/nushell/pull/12510] improved error messages for plugin protocol by removing 
+``#[serde(untagged)]``
+, 
+[link: https://github.com/nushell/nushell/pull/12448] introduced local socket mode and foreground terminal control for plugins
+, and 
+[link: https://github.com/nushell/nushell/pull/12305] implemented copy-on-write for record values
+ayax79 did lots of work on dataframe support: 
+[link: https://github.com/nushell/nushell/pull/12577] removed the polars dtypes command
+, and 
+[link: https://github.com/nushell/nushell/pull/12571] only marked collected dataframes as from_lazy=false when collect is called from the collect command
+, and 
+[link: https://github.com/nushell/nushell/pull/12554] upgraded nu-cmd-dataframe to polars 0.39
+, and 
+[link: https://github.com/nushell/nushell/pull/12551] upgraded nu_plugin_polars to polars 0.39.1
+, and 
+[link: https://github.com/nushell/nushell/pull/12538] fixed NuLazyFrame/NuDataFrame conversion issues
+, and 
+[link: https://github.com/nushell/nushell/pull/12528] cleaned up to_pipe_line_data and cache_and_to_value, making them part of CustomValueSupport
+, and 
+[link: https://github.com/nushell/nushell/pull/12525] ensured that lazy frames converted via to-lazy are not converted back to eager frames later in the pipeline
+poliorcetics 
+[link: https://github.com/nushell/nushell/pull/12593] added more details to 
+``version``
+amtoine 
+[link: https://github.com/nushell/nushell/pull/12591] added "to nuon" enumeration of possible styles
+, and 
+[link: https://github.com/nushell/nushell/pull/12553] created a new 
+``nuon``
+ crate from 
+``from nuon``
+ and 
+``to nuon``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/12589] improved 
+``nu --lsp``
+ command tooltips
+, and 
+[link: https://github.com/nushell/nushell/pull/12564] added the ability to set metadata
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/12573] set the type of default NU_LIB_DIRS and NU_PLUGIN_DIRS to 
+``list<string>``
+, and 
+[link: https://github.com/nushell/nushell/pull/12559] disallowed skip on external stream
+, and 
+[link: https://github.com/nushell/nushell/pull/12534] removed useless path.rs
+, and 
+[link: https://github.com/nushell/nushell/pull/12531] unified 
+``working_set.error``
+ usage
+TheLostLambda 
+[link: https://github.com/nushell/nushell/pull/12569] fixed shell_integration to set window title on startup
+IanManske 
+[link: https://github.com/nushell/nushell/pull/12568] boxed 
+``ImportPattern``
+ in 
+``Expr``
+, and 
+[link: https://github.com/nushell/nushell/pull/12529] added 
+``ListItem``
+ type for 
+``Expr::List``
+, and 
+[link: https://github.com/nushell/nushell/pull/12508] made 
+``group-by``
+ return errors in closure
+, and 
+[link: https://github.com/nushell/nushell/pull/12324] added 
+``Record::into_columns``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/12566] updated crate feature flags
+, and 
+[link: https://github.com/nushell/nushell/pull/12542] implemented 
+``FusedIterator``
+ for record iterators
+, 
+[link: https://github.com/nushell/nushell/pull/12540] did minor housekeeping in the parser
+, and 
+[link: https://github.com/nushell/nushell/pull/12523] improved 
+``with-env``
+ robustness
+, and 
+[link: https://github.com/nushell/nushell/pull/12522] disallowed setting the 
+``PWD``
+ via 
+``load-env``
+ input
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/12517] used abbreviated string instead of debug string for 
+``DatetimeParseError``
+s
+schrieveslaach 
+[link: https://github.com/nushell/nushell/pull/12454] improved config behaviour in LSP Mode
+YizhePKU 
+[link: https://github.com/nushell/nushell/pull/12262] fixed circular source causing Nushell to crash
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-04-20-twin0243.mdŸ@07423ebb0521c99e4f9bc6a7b6237d09eda2fe7e5721194c7d8b4cc1371a7d81πThis week in Nushell #243ë≠Documentation⁄˜SCKelemen 
+[link: https://github.com/nushell/nushell.github.io/pull/1356] fixed(lang-guide): IEE-754 -> IEEE-754
+maxim-uvarov 
+[link: https://github.com/nushell/nushell.github.io/pull/1355] added the 
+``not``
+ operator in the list of the order of operations
+devyn 
+[link: https://github.com/nushell/nushell.github.io/pull/1353] documented all variants of 
+``Value``
+ and fixed error types
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1351] upgraded all actions for GitHub workflows
+íêê⁄5Title: This week in Nushell #243
+Path: Documentation
+Content:
+SCKelemen 
+[link: https://github.com/nushell/nushell.github.io/pull/1356] fixed(lang-guide): IEE-754 -> IEEE-754
+maxim-uvarov 
+[link: https://github.com/nushell/nushell.github.io/pull/1355] added the 
+``not``
+ operator in the list of the order of operations
+devyn 
+[link: https://github.com/nushell/nushell.github.io/pull/1353] documented all variants of 
+``Value``
+ and fixed error types
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1351] upgraded all actions for GitHub workflows
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-04-20-twin0243.mdŸ@3fea94548bf5f274b98afafbc2972c679815fdbca02b7e53c39f30e03fb72b0eπThis week in Nushell #243ë™Nu_Scripts⁄±devyn 
+[link: https://github.com/nushell/nu_scripts/pull/822] added nu_plugin_nu_example to bump-version.nu
+nils-degroot 
+[link: https://github.com/nushell/nu_scripts/pull/821] added 
+``zellij action new-tab``
+ completions
+kubouch 
+[link: https://github.com/nushell/nu_scripts/pull/820] reverted "fix: prefix conda commands with 
+``conda``
+"
+zhangymPerson 
+[link: https://github.com/nushell/nu_scripts/pull/819] added mvn completion
+íêê⁄ÏTitle: This week in Nushell #243
+Path: Nu_Scripts
+Content:
+devyn 
+[link: https://github.com/nushell/nu_scripts/pull/822] added nu_plugin_nu_example to bump-version.nu
+nils-degroot 
+[link: https://github.com/nushell/nu_scripts/pull/821] added 
+``zellij action new-tab``
+ completions
+kubouch 
+[link: https://github.com/nushell/nu_scripts/pull/820] reverted "fix: prefix conda commands with 
+``conda``
+"
+zhangymPerson 
+[link: https://github.com/nushell/nu_scripts/pull/819] added mvn completion

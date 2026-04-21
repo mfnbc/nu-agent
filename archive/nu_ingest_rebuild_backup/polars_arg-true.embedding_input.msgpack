@@ -1,0 +1,40 @@
+���@8108ac3898902b50cb4bd485e7c2e96023a99f31623b93a83c6ecd1436156972�~Title: title: polars arg-true
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars arg-true``
+[link: /commands/categories/dataframe.md] ��@3fc5a96df5ce6e06a04a7f3c6511a5c3653f49f7d521a98e401de4fe84df9480�VTitle: title: polars arg-true
+Path: Signature
+Content:
+``> polars arg-true {flags} ``
+��@69e1849157f9015b39186f476140c6311fa01b91d79749916d4b0d53a2639b78ْTitle: title: polars arg-true
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@220e5115622d43f2f3161a06b7b864f2e0cb6f556e2edf24725519113d2fcf06�uTitle: title: polars arg-true
+Path: Examples
+Content:
+Returns indexes where values are true
+```Fenced(Borrowed("nu"))
+> [false true false] | polars into-df | polars arg-true
+╭───┬──────────╮
+│ # │ arg_true │
+├───┼──────────┤
+│ 0 │        1 │
+╰───┴──────────╯
+
+
+```

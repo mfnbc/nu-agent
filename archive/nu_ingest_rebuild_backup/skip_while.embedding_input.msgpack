@@ -1,0 +1,77 @@
+���@974b5d5d15bf8e44dfed6eed0d91281189dce23d0a34247c7806fd9a5df48d77�pTitle: title: skip while
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``skip while``
+[link: /commands/categories/filters.md] ��@a17a43a8afd96855904c2ea60c73f2b257d4b53ddeab5d6ab91a3b30dd68ffa5�WTitle: title: skip while
+Path: Signature
+Content:
+``> skip while {flags} (predicate)``
+��@534865595366754352af1e227216b8cf92c68d9475fb5caac1c0fdc813615dff�rTitle: title: skip while
+Path: Parameters
+Content:
+``predicate``
+: The predicate that skipped element must match.
+��@280286f0db39ad4f379febb6be25411edfe05ed78c1fc69f4aa9abb907153ee5�qTitle: title: skip while
+Path: Input/output types:
+Content:
+input
+output
+table
+table
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+��@5644397211bc8799a615ae220fbaa5d5a4dcc22e41e3aa83116265c4e5afaa58�>Title: title: skip while
+Path: Examples
+Content:
+Skip while the element is negative.
+```Fenced(Borrowed("nu"))
+> [-2 0 2 -1] | skip while {|x| $x < 0 }
+╭───┬────╮
+│ 0 │  0 │
+│ 1 │  2 │
+│ 2 │ -1 │
+╰───┴────╯
+
+
+```
+Skip while the element is negative using stored condition.
+```Fenced(Borrowed("nu"))
+> let cond = {|x| $x < 0 }; [-2 0 2 -1] | skip while $cond
+╭───┬────╮
+│ 0 │  0 │
+│ 1 │  2 │
+│ 2 │ -1 │
+╰───┴────╯
+
+
+```
+Skip while the field value is negative.
+```Fenced(Borrowed("nu"))
+> [{a: -2} {a: 0} {a: 2} {a: -1}] | skip while {|x| $x.a < 0 }
+╭───┬────╮
+│ # │ a  │
+├───┼────┤
+│ 0 │  0 │
+│ 1 │  2 │
+│ 2 │ -1 │
+╰───┴────╯
+
+
+```

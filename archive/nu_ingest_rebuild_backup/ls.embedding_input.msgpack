@@ -1,0 +1,115 @@
+–’Ù@9dab29fcf4b434e2a614a83d27b2c5a79b4676d0d310c6c48b0d93b3be1dce70ÙfTitle: title: ls
+Path: filesystem
+Content:
+
+
+
+
+
+
+
+
+
+``ls``
+[link: /commands/categories/filesystem.md] ’Ù@e0ec5094d5d48393747a13be74a8645a7cd42337dc7d9bbc553faa321df7054dÙCTitle: title: ls
+Path: Signature
+Content:
+``> ls {flags} ...rest``
+’Ù@a811a27949f576b7ce0ff32961ebc73fdc99faa5ec058a31aef4f5d6e19c860dÚÈTitle: title: ls
+Path: Flags
+Content:
+``--all, -a``
+: Show hidden files.
+``--long, -l``
+: Get all available columns for each entry (slower; columns are platform-dependent).
+``--short-names, -s``
+: Only print the file names, and not the path.
+``--full-paths, -f``
+: Display paths as absolute paths.
+``--du, -d``
+: Display the apparent directory size ("disk usage") in place of the directory metadata size.
+``--directory, -D``
+: List the specified directory itself instead of its contents.
+``--mime-type, -m``
+: Show mime-type in type column instead of 'file' (based on filenames only; files' contents are not examined).
+``--threads, -t``
+: Use multiple threads to list contents. Output will be non-deterministic.
+’Ù@a538a4065cddf074b5f1b495ea5aaec2476812d2d243e8e24776f580b1461bd8ÙRTitle: title: ls
+Path: Parameters
+Content:
+``...rest``
+: The glob pattern to use.
+’Ù@68def2eefb84201f45af8bc5084443b078233a1fa46cbd58a5b740313a58b8beÙOTitle: title: ls
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@0ab41c42911421aed1ccd5a7ba3e0a0d2de46ce143b7a1369ec052d51e35e871ÚÏTitle: title: ls
+Path: Examples
+Content:
+List visible files in the current directory.
+```Fenced(Borrowed("nu"))
+> ls
+
+
+```
+List visible files in a subdirectory.
+```Fenced(Borrowed("nu"))
+> ls subdir
+
+
+```
+List visible files with full path in the parent directory.
+```Fenced(Borrowed("nu"))
+> ls -f ..
+
+
+```
+List Rust files.
+```Fenced(Borrowed("nu"))
+> ls *.rs
+
+
+```
+List files and directories whose name do not contain 'bar'.
+```Fenced(Borrowed("nu"))
+> ls | where name !~ bar
+
+
+```
+List the full path of all dirs in your home directory.
+```Fenced(Borrowed("nu"))
+> ls -a ~ | where type == dir
+
+
+```
+List only the names (not paths) of all dirs in your home directory which have not been modified in 7 days.
+```Fenced(Borrowed("nu"))
+> ls -as ~ | where type == dir and modified < ((date now) - 7day)
+
+
+```
+Recursively list all files and subdirectories under the current directory using a glob pattern.
+```Fenced(Borrowed("nu"))
+> ls -a **/*
+
+
+```
+Recursively list 
+*
+.rs and 
+*
+.toml files using the glob command.
+```Fenced(Borrowed("nu"))
+> ls ...(glob **/*.{rs,toml})
+
+
+```
+List given paths and show directories themselves.
+```Fenced(Borrowed("nu"))
+> ['/path/to/directory' '/path/to/file'] | each {|| ls -D $in } | flatten
+
+
+```

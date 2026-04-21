@@ -1,0 +1,82 @@
+–—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export-env.mdÙ@e3c40dbbf990c25cd36c701ac31cd757db00100b10eb9c56d93e5493d2c8bcc7±title: export-env‘£envÙ<
+
+
+
+
+
+
+
+
+``export-env``
+[link: /commands/categories/env.md] ’ÙhTitle: title: export-env
+Path: env
+Content:
+
+
+
+
+
+
+
+
+
+``export-env``
+[link: /commands/categories/env.md] —ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export-env.mdÙ@210affe78c77b87fe5eb8bf25330b17cf5d3377bc85afc9a9087e94a6064e36e±title: export-env‘©SignatureÙ!``> export-env {flags} (block)``
+’ÙSTitle: title: export-env
+Path: Signature
+Content:
+``> export-env {flags} (block)``
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export-env.mdÙ@322d33753df3074bd51214355857127dcf009baa0f16a4bc176accca5708379c±title: export-env‘ªParametersÙ5``block``
+: The block to run to set the environment.
+’ÙhTitle: title: export-env
+Path: Parameters
+Content:
+``block``
+: The block to run to set the environment.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export-env.mdÙ@31b0d39c51fc6aa4c530549c84c0e89db6dfa66ece937cd2d1d060595a898b2d±title: export-env‘³Input/output types:½input
+output
+nothing
+nothing
+’ÙYTitle: title: export-env
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export-env.mdÙ@14c22ee17d116c5feab1867136bb8c765e7434643ef71adddc211e9c8a713efb±title: export-env‘¨ExamplesÙçSet an environment variable.
+```Fenced(Borrowed("nu"))
+> export-env { $env.SPAM = 'eggs' }
+
+
+```
+Set an environment variable and examine its value.
+```Fenced(Borrowed("nu"))
+> export-env { $env.SPAM = 'eggs' }; $env.SPAM
+eggs
+
+```
+’ÚTitle: title: export-env
+Path: Examples
+Content:
+Set an environment variable.
+```Fenced(Borrowed("nu"))
+> export-env { $env.SPAM = 'eggs' }
+
+
+```
+Set an environment variable and examine its value.
+```Fenced(Borrowed("nu"))
+> export-env { $env.SPAM = 'eggs' }; $env.SPAM
+eggs
+
+```
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/export-env.mdÙ@b3f5516beb15830fd742472e6d7ab915a2dc2249ecc66a1626adbd5665cb6704±title: export-env‘¥NotesÙgThis command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+’Ù•Title: title: export-env
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

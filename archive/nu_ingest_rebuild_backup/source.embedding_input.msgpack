@@ -1,0 +1,68 @@
+–’Ù@e9bdf2f3b7cad6cc70c973d305d766764059a2743b2a486277c4b1a770989049ÙbTitle: title: source
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``source``
+[link: /commands/categories/core.md] ’Ù@28ef77db0f9cdc73d7d7fef22566c5fd0f370ad5a55442d380df02b63f18075dÙNTitle: title: source
+Path: Signature
+Content:
+``> source {flags} (filename)``
+’Ù@79d6f70b6409c7d50f823dda6d387bc383f50f7c507116ba19383cfd3f5f230aÙ€Title: title: source
+Path: Parameters
+Content:
+``filename``
+: The filepath to the script file to source (
+``null``
+ for no-op).
+’Ù@a7a2fb07c389033c157350c181479be9ff8f21f479290386a0060c738c3805f4ÙMTitle: title: source
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+’Ù@bc44df1759c67abc0d9c63bf53d0b7c190e588e9f80cfbe2e806d692a286c704Ú%Title: title: source
+Path: Examples
+Content:
+Runs foo.nu in the current context.
+```Fenced(Borrowed("nu"))
+> source foo.nu
+
+
+```
+Runs foo.nu in current context and call the command defined, suppose foo.nu has content: 
+``def say-hi [] { echo 'Hi!' }``
+.
+```Fenced(Borrowed("nu"))
+> source ./foo.nu; say-hi
+
+
+```
+Sourcing 
+``null``
+ is a no-op.
+```Fenced(Borrowed("nu"))
+> source null
+
+
+```
+Source can be used with const variables.
+```Fenced(Borrowed("nu"))
+> const file = if $nu.is-interactive { "interactive.nu" } else { null }; source $file
+
+
+```
+’Ù@a9a69ac636d665b2b1fe26b299dcb09d661207659b8988c285b4582f09cecde6Ù‘Title: title: source
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

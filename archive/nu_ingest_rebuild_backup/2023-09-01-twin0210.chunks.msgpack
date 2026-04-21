@@ -1,0 +1,194 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-01-twin0210.mdŸ@6a8358eefa11d60017de1cd9b4e2011dd180c882ea51dae750bb73e72c46c06aπThis week in Nushell #210ëßNushell⁄´sholderbach 
+[link: https://github.com/nushell/nushell/pull/10180] simplified rawstrings in tests
+, and 
+[link: https://github.com/nushell/nushell/pull/10179] Remove dead tests depending on 
+``inc``
+, and 
+[link: https://github.com/nushell/nushell/pull/10178] Keep 
+``arrow2``
+ out of basic 
+``--workspace``
+ build
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10177] added NU_VERSION environment variable on startup
+, and 
+[link: https://github.com/nushell/nushell/pull/10160] Make $nu constant
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10173] updated query web example because wikipedia changed their page
+, and 
+[link: https://github.com/nushell/nushell/pull/10127] name hooks internally
+J-Kappes created 
+[link: https://github.com/nushell/nushell/pull/10170] Tests: clean up unnecessary use of pipeline()
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/10162] fixed #10154
+ayax79 
+[link: https://github.com/nushell/nushell/pull/10161] fixed usages of deprecated chrono DateTime::from_utc
+, and 
+[link: https://github.com/nushell/nushell/pull/10114] Updating polars and sqlparser versions
+horasal 
+[link: https://github.com/nushell/nushell/pull/10149] skipped comments and eols while parsing pipeline
+, and 
+[link: https://github.com/nushell/nushell/pull/10116] handle empty pipeline while parsing let (fix Issue10083)
+stormasm 
+[link: https://github.com/nushell/nushell/pull/10146] moved hook to nu_cmd_base
+, and 
+[link: https://github.com/nushell/nushell/pull/10145] remove warnings in nu_command tests
+, and 
+[link: https://github.com/nushell/nushell/pull/10140] update rust-toolchain doc to 4 weeks from 3
+matthias-Q created 
+[link: https://github.com/nushell/nushell/pull/10138] feat: allow 
+``from csv``
+ to accept 4 byte unicode separator chars
+dependabot
+[
+bot
+]
+ 
+[link: https://github.com/nushell/nushell/pull/10129] bumped notify-debouncer-full from 0.2.0 to 0.3.1
+SED4906 
+[link: https://github.com/nushell/nushell/pull/10126] updated removed "MDI" icons to current MD icons
+JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell/pull/10122] Screen reader-friendly errors
+dead10ck created 
+[link: https://github.com/nushell/nushell/pull/10013] Support Termux
+íêê⁄„Title: This week in Nushell #210
+Path: Nushell
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10180] simplified rawstrings in tests
+, and 
+[link: https://github.com/nushell/nushell/pull/10179] Remove dead tests depending on 
+``inc``
+, and 
+[link: https://github.com/nushell/nushell/pull/10178] Keep 
+``arrow2``
+ out of basic 
+``--workspace``
+ build
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10177] added NU_VERSION environment variable on startup
+, and 
+[link: https://github.com/nushell/nushell/pull/10160] Make $nu constant
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10173] updated query web example because wikipedia changed their page
+, and 
+[link: https://github.com/nushell/nushell/pull/10127] name hooks internally
+J-Kappes created 
+[link: https://github.com/nushell/nushell/pull/10170] Tests: clean up unnecessary use of pipeline()
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/10162] fixed #10154
+ayax79 
+[link: https://github.com/nushell/nushell/pull/10161] fixed usages of deprecated chrono DateTime::from_utc
+, and 
+[link: https://github.com/nushell/nushell/pull/10114] Updating polars and sqlparser versions
+horasal 
+[link: https://github.com/nushell/nushell/pull/10149] skipped comments and eols while parsing pipeline
+, and 
+[link: https://github.com/nushell/nushell/pull/10116] handle empty pipeline while parsing let (fix Issue10083)
+stormasm 
+[link: https://github.com/nushell/nushell/pull/10146] moved hook to nu_cmd_base
+, and 
+[link: https://github.com/nushell/nushell/pull/10145] remove warnings in nu_command tests
+, and 
+[link: https://github.com/nushell/nushell/pull/10140] update rust-toolchain doc to 4 weeks from 3
+matthias-Q created 
+[link: https://github.com/nushell/nushell/pull/10138] feat: allow 
+``from csv``
+ to accept 4 byte unicode separator chars
+dependabot
+[
+bot
+]
+ 
+[link: https://github.com/nushell/nushell/pull/10129] bumped notify-debouncer-full from 0.2.0 to 0.3.1
+SED4906 
+[link: https://github.com/nushell/nushell/pull/10126] updated removed "MDI" icons to current MD icons
+JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell/pull/10122] Screen reader-friendly errors
+dead10ck created 
+[link: https://github.com/nushell/nushell/pull/10013] Support Termux
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-01-twin0210.mdŸ@ab6ac40c36ca3a8b84f596efcb9a828b8705a8e1d24fe4f8428752a03ee21716πThis week in Nushell #210ë≠Documentation⁄Õdclausen created 
+[link: https://github.com/nushell/nushell.github.io/pull/1039] Update cheat_sheet.md
+simonboots created 
+[link: https://github.com/nushell/nushell.github.io/pull/1038] Fix small typo in modules.md
+leetemil created 
+[link: https://github.com/nushell/nushell.github.io/pull/1037] Update docs for exiting shell in shells
+jamesarch created 
+[link: https://github.com/nushell/nushell.github.io/pull/1034] fix missing command
+narve created 
+[link: https://github.com/nushell/nushell.github.io/pull/1033] Update loading_data.md, correct link to http command
+follower created 
+[link: https://github.com/nushell/nushell.github.io/pull/1032] Move launch instructions earlier in page.
+adamchalmers created 
+[link: https://github.com/nushell/nushell.github.io/pull/1031] Link to escape when discussing escapes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1030] Clarify how to check config file paths
+dlamei created 
+[link: https://github.com/nushell/nushell.github.io/pull/1028] fix typo in book
+JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell.github.io/pull/1026] Error style section
+lomm28 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1025] nu cheat sheet added
+íêê⁄Title: This week in Nushell #210
+Path: Documentation
+Content:
+dclausen created 
+[link: https://github.com/nushell/nushell.github.io/pull/1039] Update cheat_sheet.md
+simonboots created 
+[link: https://github.com/nushell/nushell.github.io/pull/1038] Fix small typo in modules.md
+leetemil created 
+[link: https://github.com/nushell/nushell.github.io/pull/1037] Update docs for exiting shell in shells
+jamesarch created 
+[link: https://github.com/nushell/nushell.github.io/pull/1034] fix missing command
+narve created 
+[link: https://github.com/nushell/nushell.github.io/pull/1033] Update loading_data.md, correct link to http command
+follower created 
+[link: https://github.com/nushell/nushell.github.io/pull/1032] Move launch instructions earlier in page.
+adamchalmers created 
+[link: https://github.com/nushell/nushell.github.io/pull/1031] Link to escape when discussing escapes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1030] Clarify how to check config file paths
+dlamei created 
+[link: https://github.com/nushell/nushell.github.io/pull/1028] fix typo in book
+JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell.github.io/pull/1026] Error style section
+lomm28 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1025] nu cheat sheet added
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-01-twin0210.mdŸ@a9bd8a04662ae3624dac098582ac7ee6f7e14f503478cb2d710722a3014611f9πThis week in Nushell #210ë™Nu_ScriptsŸÃmaxim-uvarov created 
+[link: https://github.com/nushell/nu_scripts/pull/589] Update 
+``bar``
+ function
+StripedMonkey created 
+[link: https://github.com/nushell/nu_scripts/pull/587] Expand git completions
+íêê⁄Title: This week in Nushell #210
+Path: Nu_Scripts
+Content:
+maxim-uvarov created 
+[link: https://github.com/nushell/nu_scripts/pull/589] Update 
+``bar``
+ function
+StripedMonkey created 
+[link: https://github.com/nushell/nu_scripts/pull/587] Expand git completions
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-09-01-twin0210.mdŸ@0a08645f9d551cb23bc8d8eeae37f52e4b12eed073d4e3e99b689b4cfcfa694aπThis week in Nushell #210ë®reedline⁄DHofer-Julian created 
+[link: https://github.com/nushell/reedline/pull/629] Fix 
+``read_line``
+ docs
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/625] Bump 
+``crossterm``
+ to 0.27.0
+Abdillah created 
+[link: https://github.com/nushell/reedline/pull/607] Add Kitty protocol keyboard enhancement support
+íêê⁄}Title: This week in Nushell #210
+Path: reedline
+Content:
+Hofer-Julian created 
+[link: https://github.com/nushell/reedline/pull/629] Fix 
+``read_line``
+ docs
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/625] Bump 
+``crossterm``
+ to 0.27.0
+Abdillah created 
+[link: https://github.com/nushell/reedline/pull/607] Add Kitty protocol keyboard enhancement support

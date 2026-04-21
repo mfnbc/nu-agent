@@ -1,0 +1,141 @@
+–’Ù@75a3764cab5f1838e329cc2279d4845233e65b679dd63dbc4e5c6b1acb59f23eÚTitle: This week in Nushell #181
+Path: Nushell
+Content:
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/8020] Check ctrl+c when collecting a RawStream
+, and 
+[link: https://github.com/nushell/nushell/pull/8017] Make ++ operator work with strings and binary values
+, and 
+[link: https://github.com/nushell/nushell/pull/7999] Windows: handle illegal filenames a little better
+, and 
+[link: https://github.com/nushell/nushell/pull/7996] Fix $nu path separators on Windows
+, and 
+[link: https://github.com/nushell/nushell/pull/7878] Add comment explaining background thread usage for plugin calls
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/8019] Make metadata a 
+``Category::Debug``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/8003] fix completions PATH vs Path
+, and 
+[link: https://github.com/nushell/nushell/pull/7998] Add dfr to dataframe cmds
+, and 
+[link: https://github.com/nushell/nushell/pull/7989] view span & view files commands
+, and 
+[link: https://github.com/nushell/nushell/pull/7980] report which datetime couldn't be converted
+, and 
+[link: https://github.com/nushell/nushell/pull/7957] explain command
+, and 
+[link: https://github.com/nushell/nushell/pull/7846] A 
+``fill``
+ command to replace 
+``str lpad``
+ and 
+``str rpad``
+NotLebedev created 
+[link: https://github.com/nushell/nushell/pull/8014] Filesystem commands print --verbose to stderr
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/8011] Bump openssl-src from 111.22.0+1.1.1q to 111.25.0+1.1.1t
+, and 
+[link: https://github.com/nushell/nushell/pull/7979] Bump actions-rust-lang/setup-rust-toolchain from 1.3.5 to 1.3.7
+, and 
+[link: https://github.com/nushell/nushell/pull/7976] Bump fs_extra from 1.2.0 to 1.3.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7975] Bump ical from 0.7.0 to 0.8.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7974] Bump which from 4.3.0 to 4.4.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7958] Bump tokio from 1.24.1 to 1.25.0
+initinll created 
+[link: https://github.com/nushell/nushell/pull/8009] Added fix for #7981 - Replaced crate serde_ini with rust-ini for package nu-command/from
+, and 
+[link: https://github.com/nushell/nushell/pull/7990] Added fix for #7970 - Upgraded toml crate version from version from 0.5.8 to 0.7.1 for package nu-command
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/8001] Fix imported virtualenv testsuite
+, and 
+[link: https://github.com/nushell/nushell/pull/7973] Test return in 
+``reduce``
+ closure from #7961
+, and 
+[link: https://github.com/nushell/nushell/pull/7972] Fix 
+``def-env``
+ docs according to docs#761
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/8000] Address #7997
+jaudiger created 
+[link: https://github.com/nushell/nushell/pull/7992] http: add 
+``--insecure``
+ flag to 
+``http get``
+, share common code
+, and 
+[link: https://github.com/nushell/nushell/pull/7987] Update few examples of math commands
+, and 
+[link: https://github.com/nushell/nushell/pull/7967] Use imported names in 
+``Command::run``
+ signatures
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/7984] Make plugin commands support examples.
+bgeron created 
+[link: https://github.com/nushell/nushell/pull/7969] Clarify two config fields
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell/pull/7964] Extract run blocks into functions
+Mehrbod2002 created 
+[link: https://github.com/nushell/nushell/pull/7963] Load env pwd
+, and 
+[link: https://github.com/nushell/nushell/pull/7962] Validate input range of 
+``du``
+ flags
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/7929] Reorder 
+``help <keyword>``
+ priority
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7870] allow 
+``parse``
+ to work better with streams
+’Ù@2c5d6299b6e29e8685b62ce2ff4918e7b2b5d3e34764504d39a7af1b61ee8e71Ù¼Title: This week in Nushell #181
+Path: Extension
+Content:
+kecrily created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/77] feat: add icon for 
+``.nu``
+ extension in VS Code
+’Ù@0701f3c5909ab25a4d639f1f0431f668039405514499d03c19994cd08900f0cfÚ0Title: This week in Nushell #181
+Path: Documentation
+Content:
+jafriyie1 created 
+[link: https://github.com/nushell/nushell.github.io/pull/776] Fix: updating pages that used each -n command
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/773] Fix changed history command to match default in config
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/775] Add breaking change for plugin signature
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/771] Update some vuepress plugins
+FilipAndersson245 created 
+[link: https://github.com/nushell/nushell.github.io/pull/769] replaces fetch with http in varius places
+das-g created 
+[link: https://github.com/nushell/nushell.github.io/pull/764] fix statement about 
+``lines``
+ output type ("table"â†’"list")
+’Ù@7e4bd7c76598fc3bc32c4b896c77eaaabdedb4064a514f3adb3f617c9c5f2156Ù›Title: This week in Nushell #181
+Path: Nu_Scripts
+Content:
+hyiltiz created 
+[link: https://github.com/nushell/nu_scripts/pull/371] Update to 0.75.1 syntax
+’Ù@37146631f82a32fb18609d79ab7430efded5651df662c213c9bb81ad737699ecÙüTitle: This week in Nushell #181
+Path: reedline
+Content:
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/537] add history-clear to demo
+rgwood created 
+[link: https://github.com/nushell/reedline/pull/536] Add History::clear() function
+’Ù@d531dd9cc0f3b3404b5c80f93d14bb0a91e05e02a1b6d9cb1aa3296dd031d7adÙ†Title: This week in Nushell #181
+Path: Nana
+Content:
+jaudiger created 
+[link: https://github.com/nushell/nana/pull/74] Update README.

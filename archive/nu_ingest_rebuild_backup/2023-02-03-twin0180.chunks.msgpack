@@ -1,0 +1,258 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-02-03-twin0180.mdŸ@8cb0a2072500c4d23c59e453ec6fa9c3370130849115da350c8aecc4afeccde1πThis week in Nushell #180ëßNushell⁄ksholderbach created 
+[link: https://github.com/nushell/nushell/pull/7949] Fix code in benchmarks
+, and 
+[link: https://github.com/nushell/nushell/pull/7930] Bump to 
+``0.75.1``
+ development version
+, and 
+[link: https://github.com/nushell/nushell/pull/7918] Pin 
+``reedline``
+ to new 
+``0.15``
+ for release
+, and 
+[link: https://github.com/nushell/nushell/pull/7916] Apply more recent/nightly clippy lints
+, and 
+[link: https://github.com/nushell/nushell/pull/7914] Bump 
+``trash``
+ to 
+``3.0.1``
+, and 
+[link: https://github.com/nushell/nushell/pull/7906] Use variable names directly in the format strings
+, and 
+[link: https://github.com/nushell/nushell/pull/7905] Remove unused 
+``nu-test-support``
+ in 
+``nu-table``
+, and 
+[link: https://github.com/nushell/nushell/pull/7903] Update reedline for pre-release testing
+, and 
+[link: https://github.com/nushell/nushell/pull/7902] Version bump for 
+``0.75``
+ release
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell/pull/7945] Fix copy paste error
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/7939] clean up the registry query output
+, and 
+[link: https://github.com/nushell/nushell/pull/7935] add ability to view-source on closures
+, and 
+[link: https://github.com/nushell/nushell/pull/7926] update type check so that ++ with lists works better
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/7927] Remove deprecated 
+``where -b``
+ parameter
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7922] Only abbreviate to "
+[
+table x rows
+]
+" if every value is a record
+, and 
+[link: https://github.com/nushell/nushell/pull/7777] Remove deprecated 
+``--numbered``
+ flag from four commands
+csko created 
+[link: https://github.com/nushell/nushell/pull/7919] use newer reedline (once available)
+, and 
+[link: https://github.com/nushell/nushell/pull/7912] respect use_ansi_coloring configuration
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/7911] Bump windows from 0.43.0 to 0.44.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7910] Bump serial_test from 0.10.0 to 1.0.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7909] Bump roxmltree from 0.16.0 to 0.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7908] Bump typetag from 0.1.8 to 0.2.5
+, and 
+[link: https://github.com/nushell/nushell/pull/7907] Bump chrono-tz from 0.6.3 to 0.8.1
+jt created 
+[link: https://github.com/nushell/nushell/pull/7904] Use clippy-recommended simplification
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7897] make 
+``parse -r``
+ columns return 0-indexed uncapitalised
+, and 
+[link: https://github.com/nushell/nushell/pull/7415] ensure that when nu evaluates files, it allows early returns
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/7896] make help commands search term don't generate $nothing
+, and 
+[link: https://github.com/nushell/nushell/pull/7889] make do -i works with liststream
+, and 
+[link: https://github.com/nushell/nushell/pull/7848] Let redirection keep exit code
+Mehrbod2002 created 
+[link: https://github.com/nushell/nushell/pull/7895] Fix: dst error on cp command
+íêê⁄£Title: This week in Nushell #180
+Path: Nushell
+Content:
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/7949] Fix code in benchmarks
+, and 
+[link: https://github.com/nushell/nushell/pull/7930] Bump to 
+``0.75.1``
+ development version
+, and 
+[link: https://github.com/nushell/nushell/pull/7918] Pin 
+``reedline``
+ to new 
+``0.15``
+ for release
+, and 
+[link: https://github.com/nushell/nushell/pull/7916] Apply more recent/nightly clippy lints
+, and 
+[link: https://github.com/nushell/nushell/pull/7914] Bump 
+``trash``
+ to 
+``3.0.1``
+, and 
+[link: https://github.com/nushell/nushell/pull/7906] Use variable names directly in the format strings
+, and 
+[link: https://github.com/nushell/nushell/pull/7905] Remove unused 
+``nu-test-support``
+ in 
+``nu-table``
+, and 
+[link: https://github.com/nushell/nushell/pull/7903] Update reedline for pre-release testing
+, and 
+[link: https://github.com/nushell/nushell/pull/7902] Version bump for 
+``0.75``
+ release
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell/pull/7945] Fix copy paste error
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/7939] clean up the registry query output
+, and 
+[link: https://github.com/nushell/nushell/pull/7935] add ability to view-source on closures
+, and 
+[link: https://github.com/nushell/nushell/pull/7926] update type check so that ++ with lists works better
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/7927] Remove deprecated 
+``where -b``
+ parameter
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7922] Only abbreviate to "
+[
+table x rows
+]
+" if every value is a record
+, and 
+[link: https://github.com/nushell/nushell/pull/7777] Remove deprecated 
+``--numbered``
+ flag from four commands
+csko created 
+[link: https://github.com/nushell/nushell/pull/7919] use newer reedline (once available)
+, and 
+[link: https://github.com/nushell/nushell/pull/7912] respect use_ansi_coloring configuration
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/7911] Bump windows from 0.43.0 to 0.44.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7910] Bump serial_test from 0.10.0 to 1.0.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7909] Bump roxmltree from 0.16.0 to 0.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7908] Bump typetag from 0.1.8 to 0.2.5
+, and 
+[link: https://github.com/nushell/nushell/pull/7907] Bump chrono-tz from 0.6.3 to 0.8.1
+jt created 
+[link: https://github.com/nushell/nushell/pull/7904] Use clippy-recommended simplification
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/7897] make 
+``parse -r``
+ columns return 0-indexed uncapitalised
+, and 
+[link: https://github.com/nushell/nushell/pull/7415] ensure that when nu evaluates files, it allows early returns
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/7896] make help commands search term don't generate $nothing
+, and 
+[link: https://github.com/nushell/nushell/pull/7889] make do -i works with liststream
+, and 
+[link: https://github.com/nushell/nushell/pull/7848] Let redirection keep exit code
+Mehrbod2002 created 
+[link: https://github.com/nushell/nushell/pull/7895] Fix: dst error on cp command
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-02-03-twin0180.mdŸ@23eef7f1e92eb85f62755a108c61fb42823fb4974ff045275c9c8a42aaa80bb9πThis week in Nushell #180ë≠Documentation⁄ìFilipAndersson245 created 
+[link: https://github.com/nushell/nushell.github.io/pull/763] Updated cookbook with http get instead of fetch.
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/762] Update typos config and fix some typos
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/760] feat: refresh command docs for nu v0.75
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/759] Add progressbar example image
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/746] Release notes for 
+``0.75``
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/757] Reflect the separation of block and closure
+bobhy created 
+[link: https://github.com/nushell/nushell.github.io/pull/756] Document \u{x...} unicode escapes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/755] document 7883 for release notes
+íêê⁄—Title: This week in Nushell #180
+Path: Documentation
+Content:
+FilipAndersson245 created 
+[link: https://github.com/nushell/nushell.github.io/pull/763] Updated cookbook with http get instead of fetch.
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/762] Update typos config and fix some typos
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/760] feat: refresh command docs for nu v0.75
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/759] Add progressbar example image
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/746] Release notes for 
+``0.75``
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/757] Reflect the separation of block and closure
+bobhy created 
+[link: https://github.com/nushell/nushell.github.io/pull/756] Document \u{x...} unicode escapes
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/755] document 7883 for release notes
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-02-03-twin0180.mdŸ@157ac8f14f3dee7ba8749f440f7a6d23f9b82102503bb9ca7aea1fd620e83becπThis week in Nushell #180ë™Nu_Scripts⁄WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/372] update themes' readme
+Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/370] added nu_msvs module
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/367] nu_conda: Another Conda module with Better Performance
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/369] Add documentation to nu_deps
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/368] nu: Add new release ordering; Tweak nu_deps
+íêê⁄=Title: This week in Nushell #180
+Path: Nu_Scripts
+Content:
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/372] update themes' readme
+Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/370] added nu_msvs module
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/367] nu_conda: Another Conda module with Better Performance
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/369] Add documentation to nu_deps
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/368] nu: Add new release ordering; Tweak nu_deps
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-02-03-twin0180.mdŸ@aea47044a676e278701b40352ebbd0cb964838d21af996babaa5d57eaafdddf4πThis week in Nushell #180ë®reedline⁄Mcsko created 
+[link: https://github.com/nushell/reedline/pull/534] Fix columnar menu completion corrupting the editor insertion point
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/533] Remove unstable rustdoc lint
+, and 
+[link: https://github.com/nushell/reedline/pull/532] Bump version for 
+``0.15``
+ release
+íêê⁄ÜTitle: This week in Nushell #180
+Path: reedline
+Content:
+csko created 
+[link: https://github.com/nushell/reedline/pull/534] Fix columnar menu completion corrupting the editor insertion point
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/533] Remove unstable rustdoc lint
+, and 
+[link: https://github.com/nushell/reedline/pull/532] Bump version for 
+``0.15``
+ release

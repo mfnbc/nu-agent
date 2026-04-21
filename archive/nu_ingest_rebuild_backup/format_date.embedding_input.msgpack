@@ -1,0 +1,79 @@
+–’Ù@1411a381241c0a30f5c8dd59dd7b4a41f228b262305017b219996793964f74afÙrTitle: title: format date
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``format date``
+[link: /commands/categories/strings.md] ’Ù@e98d7f967152fa6f56c4d000cfb5a02e4842180129b20a0a2b310d2bafddc70fÙ]Title: title: format date
+Path: Signature
+Content:
+``> format date {flags} (format string)``
+’Ù@28a954e96648c889bd7bca43f926882453bec3349242a72d4225e5997ddb57a6Ù[Title: title: format date
+Path: Flags
+Content:
+``--list, -l``
+: Lists strftime cheatsheet.
+’Ù@71d53e83fd617d0f2e4f0c01c54d1f7d534a92de937170e0848163eda2233605ÙaTitle: title: format date
+Path: Parameters
+Content:
+``format string``
+: The desired format date.
+’Ù@2fbb45a71dd2347d34a47559a667d44058ef8f90a6ae7eb557762aeb2ba06f8aÙ€Title: title: format date
+Path: Input/output types:
+Content:
+input
+output
+datetime
+string
+string
+string
+nothing
+table
+any
+table
+’Ù@6b1df024351c6fbb11b61f8b8c99cd058d68709f4dc3358e43d69242719dcdbbÚöTitle: title: format date
+Path: Examples
+Content:
+Format a given date-time using the default format (RFC 2822).
+```Fenced(Borrowed("nu"))
+> '2021-10-22 20:00:12 +01:00' | into datetime | format date
+Fri, 22 Oct 2021 20:00:12 +0100
+
+```
+Format a given date-time as a string using the default format (RFC 2822).
+```Fenced(Borrowed("nu"))
+> "2021-10-22 20:00:12 +01:00" | format date
+Fri, 22 Oct 2021 20:00:12 +0100
+
+```
+Format a given date-time according to the RFC 3339 standard.
+```Fenced(Borrowed("nu"))
+> '2021-10-22 20:00:12 +01:00' | into datetime | format date "%+"
+2021-10-22T20:00:12+01:00
+
+```
+Format the current date-time using a given format string.
+```Fenced(Borrowed("nu"))
+> date now | format date "%Y-%m-%d %H:%M:%S"
+
+
+```
+Format the current date using a given format string.
+```Fenced(Borrowed("nu"))
+> date now | format date "%Y-%m-%d %H:%M:%S"
+
+
+```
+Format a given date using a given format string.
+```Fenced(Borrowed("nu"))
+> "2021-10-22 20:00:12 +01:00" | format date "%Y-%m-%d"
+2021-10-22
+
+```

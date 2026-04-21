@@ -1,0 +1,129 @@
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@41169e58277ff40bf7cdda481bd0d9a9de6843088d03c9a4577e266a9bd8722b´title: Nushell 0.4.0‘­Nushell 0.4.0Ú'
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today we're happy to announce the 0.4.0 release of Nushell. The 
+[link: https://github.com/nushell/nushell/releases/tag/0.4.0] 0.4.0 release
+ marks a continually maturing shell that is now starting to show signs of stability. And, of course, a few fun features along the way.
+’Ú`Title: title: Nushell 0.4.0
+Path: Nushell 0.4.0
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today we're happy to announce the 0.4.0 release of Nushell. The 
+[link: https://github.com/nushell/nushell/releases/tag/0.4.0] 0.4.0 release
+ marks a continually maturing shell that is now starting to show signs of stability. And, of course, a few fun features along the way.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@80db6d347803f60e3450873f37657d1105c2f0dbffa9b8725f41a580eddff2f1´title: Nushell 0.4.0‘¯Where to get itÚENu 0.4.0 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.4.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo +beta install nu``
+ (or if you want all the features 
+``cargo +beta install nu --all-features``
+).
+’Ú€Title: title: Nushell 0.4.0
+Path: Where to get it
+Content:
+Nu 0.4.0 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.4.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo +beta install nu``
+ (or if you want all the features 
+``cargo +beta install nu --all-features``
+).
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@b481520edbe3b61e27cd424805d4cf098141a3be2fc2e015a8195b3bbb04887c´title: Nushell 0.4.0‘³New Colors (wycats)ÚgExample of nushell
+
+New colors!
+With 0.4.0, we're adding some new colors to show off different types of the command, where errors might be happening, and if the command is internal or external. The coloring is just the tip of the iceberg, as it were, and builds from a reworking of the parser to make it more accurate, more stable, and more feature-complete.
+’Ú¦Title: title: Nushell 0.4.0
+Path: New Colors (wycats)
+Content:
+Example of nushell
+
+New colors!
+With 0.4.0, we're adding some new colors to show off different types of the command, where errors might be happening, and if the command is internal or external. The coloring is just the tip of the iceberg, as it were, and builds from a reworking of the parser to make it more accurate, more stable, and more feature-complete.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@250b389ed1fbdf4720a75ea8efe83d91cdb9bca5d959b784705b2c05566840c3´title: Nushell 0.4.0‘ºStreaming table (sophiajt)Ú‚Animation of a long table streaming out
+
+Streaming tables
+Up to this point, we've taken a few shortcuts with how streams worked in Nushell. We knew that a table, in theory, was a stream of rows. In practice, though, this wasn't the case as the code has lots of assumptions about how tables worked.
+With the 0.4.0, we're taking a big step in the direction of full support for streams. You'll see that now data will start being printed as it becomes available, with tables printing pages of 50 rows at a time (by default). This allows you to get deep listings of files (eg using 
+``ls **``
+), work with streams from external sources, and more.
+’ÚÈTitle: title: Nushell 0.4.0
+Path: Streaming table (sophiajt)
+Content:
+Animation of a long table streaming out
+
+Streaming tables
+Up to this point, we've taken a few shortcuts with how streams worked in Nushell. We knew that a table, in theory, was a stream of rows. In practice, though, this wasn't the case as the code has lots of assumptions about how tables worked.
+With the 0.4.0, we're taking a big step in the direction of full support for streams. You'll see that now data will start being printed as it becomes available, with tables printing pages of 50 rows at a time (by default). This allows you to get deep listings of files (eg using 
+``ls **``
+), work with streams from external sources, and more.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@206fff00a8ed659ed5f0625a8df16e0102f9e48ca35c37ff67ef9aa83337f0b5´title: Nushell 0.4.0‘Ù*Better ctrl-c support (sophiajt, landaire)Ù×As part of having streams of tables, it's always helpful to be able to say "stop!" when you need to. With 0.4.0, using ctrl-c to stop the output should be a lot more responsive and will take you back to the prompt.
+’Ú-Title: title: Nushell 0.4.0
+Path: Better ctrl-c support (sophiajt, landaire)
+Content:
+As part of having streams of tables, it's always helpful to be able to say "stop!" when you need to. With 0.4.0, using ctrl-c to stop the output should be a lot more responsive and will take you back to the prompt.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@f328c381278c8832a8fc817101241eacf64978226d1431bbfee711ee0d7ac1d7´title: Nushell 0.4.0‘Ù%Textview gets VI keys (JonnyWalker81)ÙaThe built-in text viewer now lets you use vi keys for navigation thanks to JonnyWalker81's work.
+’Ù²Title: title: Nushell 0.4.0
+Path: Textview gets VI keys (JonnyWalker81)
+Content:
+The built-in text viewer now lets you use vi keys for navigation thanks to JonnyWalker81's work.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@7313b05581591408228d7d1238efb12bff8d1449156ddbc21fac5cd96238df5e´title: Nushell 0.4.0‘¾Onto the Beta compiler (est31)Ú®For those of you wondering if and when Nu was going to be usable on stable Rust, you need but wait just a little longer. Contributor est31 has been hard at work at moving Nu onto stable Rust and has now successfully moved Nu off of nightly and onto beta. As beta matures and becomes the next release of Rust, we'll be able to move Nu onto stable. This should help people who are working to distribute Nu on various distributions.
+’ÚøTitle: title: Nushell 0.4.0
+Path: Onto the Beta compiler (est31)
+Content:
+For those of you wondering if and when Nu was going to be usable on stable Rust, you need but wait just a little longer. Contributor est31 has been hard at work at moving Nu onto stable Rust and has now successfully moved Nu off of nightly and onto beta. As beta matures and becomes the next release of Rust, we'll be able to move Nu onto stable. This should help people who are working to distribute Nu on various distributions.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@fa5c7d100950815fcdfa5f42eda5e01ec9b1144bdbe52ce7731a9dbbdd4ff364´title: Nushell 0.4.0‘Ù%Brazilian Portuguese book (marcelocg)ÙsContributor marcelocg surprised us with a translation of the Nu book into Brazilian Portuguese. Obrigado, Marcelo!
+’ÙÄTitle: title: Nushell 0.4.0
+Path: Brazilian Portuguese book (marcelocg)
+Content:
+Contributor marcelocg surprised us with a translation of the Nu book into Brazilian Portuguese. Obrigado, Marcelo!
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@789c4e48caeb4f3895768e1d4aee3cdac65bdb9694e0c7422a9c3c2ad6b58bb3´title: Nushell 0.4.0‘±from-ssv (t-hart)Ú^To follow along with our 
+``from-csv``
+ (comma-separated-values) and 
+``from-tsv``
+ (tab-separated-values), we now have a new way of handle importing content from commands that output their own tables: 
+``from-ssv``
+. Like its siblings, it looks for values separated by a separator, using the spaces to show where the breaks between cells should be.
+’Ú›Title: title: Nushell 0.4.0
+Path: from-ssv (t-hart)
+Content:
+To follow along with our 
+``from-csv``
+ (comma-separated-values) and 
+``from-tsv``
+ (tab-separated-values), we now have a new way of handle importing content from commands that output their own tables: 
+``from-ssv``
+. Like its siblings, it looks for values separated by a separator, using the spaces to show where the breaks between cells should be.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@62fad0d8e2b7ebdf893b17ab0fca837e2f3854d9ff7aba4a49986210f9cdaffb´title: Nushell 0.4.0‘¯match (rnxpyke)ÚWe're continuing to evolve our support for matching string data. Recently, we began experimenting with a 
+``match``
+ command that can find matches in strings for you. We plan to continue experimenting and exploring what's possible in this space in the future.
+’Ú?Title: title: Nushell 0.4.0
+Path: match (rnxpyke)
+Content:
+We're continuing to evolve our support for matching string data. Recently, we began experimenting with a 
+``match``
+ command that can find matches in strings for you. We plan to continue experimenting and exploring what's possible in this space in the future.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@da519fcab82effe608144e63706c40d0a84f6e926bc7c27ae8d3deb9fdf01a35´title: Nushell 0.4.0‘Ú!Lots of new documentation (sdfnz, twe4ked, chhetripradeep, mfarberbrodsky, cristicismas, Charles-Schleich, coolshaurya, notryanb, pema99, gilesv, yahsinhuangtw, JesterOrNot, nalshihabi, marcelocg, sorrell, pizzafox, iggy14750, DrSensor, mlbright, BradyBromley, andrasio, piotrek-szczygiel)ÙåHappy hacktoberfest! Lots of people wanted to jump in and help document all of our commands, help fix docs that are already there, and generally give things a bit of polish. Much appreciated everyone who came by and contributed.
+’Ú2Title: title: Nushell 0.4.0
+Path: Lots of new documentation (sdfnz, twe4ked, chhetripradeep, mfarberbrodsky, cristicismas, Charles-Schleich, coolshaurya, notryanb, pema99, gilesv, yahsinhuangtw, JesterOrNot, nalshihabi, marcelocg, sorrell, pizzafox, iggy14750, DrSensor, mlbright, BradyBromley, andrasio, piotrek-szczygiel)
+Content:
+Happy hacktoberfest! Lots of people wanted to jump in and help document all of our commands, help fix docs that are already there, and generally give things a bit of polish. Much appreciated everyone who came by and contributed.
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@653b7c78058573fe148b880ce8a4cb7a0184cbe8d6eb64e2676b9507ddd2ea00´title: Nushell 0.4.0‘ÙOTons of stability fixes (thegedge, sophiajt, wycats, JonnyWalker81, vsoch, pka)ÙrAs always, there were a bunch of stability and correctness both in Nu and in the CI that support Nu's development
+’ÙíTitle: title: Nushell 0.4.0
+Path: Tons of stability fixes (thegedge, sophiajt, wycats, JonnyWalker81, vsoch, pka)
+Content:
+As always, there were a bunch of stability and correctness both in Nu and in the CI that support Nu's development
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/blog/2019-10-15-nushell-0_4_0.mdÙ@cded3fcd0f720a14ed54d5a9dbb23c012ac8329ec9446722ed925a480e5c7573´title: Nushell 0.4.0‘­Looking aheadÙ¯We'll continuing filling out the features that will let folks use Nu as their everyday shell. Coming up are better support for the environment, path, and for command aliases.
+’ÙèTitle: title: Nushell 0.4.0
+Path: Looking ahead
+Content:
+We'll continuing filling out the features that will let folks use Nu as their everyday shell. Coming up are better support for the environment, path, and for command aliases.

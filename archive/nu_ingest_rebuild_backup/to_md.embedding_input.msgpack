@@ -1,0 +1,136 @@
+•’Ù@1f94b287376594e0f8f35318282d35f7cd467137116911908480997769254719ÙfTitle: title: to md
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to md``
+[link: /commands/categories/formats.md] ’Ù@4c2da42890c0bef67eff6d94f4c8a342e94d036b6e1311848bbb0c1c096b7b1dÙBTitle: title: to md
+Path: Signature
+Content:
+``> to md {flags} ``
+’Ù@1a2ec02bf4408a558ff030f22157f18e4fb4981ab29cf1f9f45dbe086417724aÚDTitle: title: to md
+Path: Flags
+Content:
+``--pretty, -p``
+: Formats the Markdown table to vertically align items.
+``--per-element, -e``
+: Treat each row as markdown syntax element.
+``--center, -c {list<cell-path>}``
+: Formats the Markdown table to center given columns.
+``--escape-md, -m``
+: Escapes Markdown special characters.
+``--escape-html, -t``
+: Escapes HTML special characters.
+``--escape-all, -a``
+: Escapes both Markdown and HTML special characters.
+``--list, -l {string}``
+: Format lists as 'ordered' (1. 2. 3.), 'unordered' (
+*
+ * 
+*
+), or 'none'. Default: unordered.
+’Ù@4d97639769dfad07c6386e25d233cb11f1ed959b91f5d52b65f81b4a913dbeeeÙOTitle: title: to md
+Path: Input/output types:
+Content:
+input
+output
+any
+string
+’Ù@d2f59f050951fb87833fab8faaaffb757f1a020ebdf003ef3c41be10cfa17011ÚÎTitle: title: to md
+Path: Examples
+Content:
+Outputs an MD string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [[foo bar]; [1 2]] | to md
+| foo | bar |
+| --- | --- |
+| 1 | 2 |
+
+```
+Optionally, output a formatted markdown string.
+```Fenced(Borrowed("nu"))
+> [[foo bar]; [1 2]] | to md --pretty
+| foo | bar |
+| --- | --- |
+| 1   | 2   |
+
+```
+Treat each row as a markdown element.
+```Fenced(Borrowed("nu"))
+> [{"H1": "Welcome to Nushell" } [[foo bar]; [1 2]]] | to md --per-element --pretty
+# Welcome to Nushell
+| foo | bar |
+| --- | --- |
+| 1   | 2   |
+
+```
+Render a list (unordered by default).
+```Fenced(Borrowed("nu"))
+> [0 1 2] | to md
+* 0
+* 1
+* 2
+
+```
+Separate list into markdown tables.
+```Fenced(Borrowed("nu"))
+> [ {foo: 1, bar: 2} {foo: 3, bar: 4} {foo: 5}] | to md --per-element
+| foo | bar |
+| --- | --- |
+| 1 | 2 |
+| 3 | 4 |
+
+| foo |
+| --- |
+| 5 |
+
+```
+Center a column of a markdown table.
+```Fenced(Borrowed("nu"))
+> [ {foo: 1, bar: 2} {foo: 3, bar: 4}] | to md --pretty --center [bar]
+| foo | bar |
+| --- |:---:|
+| 1   |  2  |
+| 3   |  4  |
+
+```
+Escape markdown special characters.
+```Fenced(Borrowed("nu"))
+> [ {foo: "_1_", bar: "\# 2"} {foo: "[3]", bar: "4|5"}] | to md --escape-md
+| foo | bar |
+| --- | --- |
+| \_1\_ | \# 2 |
+| \[3\] | 4\|5 |
+
+```
+Escape html special characters.
+```Fenced(Borrowed("nu"))
+> [ {a: p, b: "<p>Welcome to nushell</p>"}] | to md --escape-html
+| a | b |
+| --- | --- |
+| p | &lt;p&gt;Welcome to nushell&lt;&#x2f;p&gt; |
+
+```
+Render a list as an ordered markdown list.
+```Fenced(Borrowed("nu"))
+> [one two three] | to md --list ordered
+1. one
+2. two
+3. three
+
+```
+Render a list without markers.
+```Fenced(Borrowed("nu"))
+> [one two three] | to md --list none
+one
+two
+three
+
+```

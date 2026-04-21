@@ -1,0 +1,33 @@
+”’Ù@571e473b99c6c0627e1640df90a43318b5a2f81e36ecb6327984d556bee7ceb9ÙhTitle: title: sys net
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``sys net``
+[link: /commands/categories/system.md] ’Ù@222b9189c07cb3507a0119fdf3808eb500d09016cf1d4b2954bc10b92ae188f5ÙFTitle: title: sys net
+Path: Signature
+Content:
+``> sys net {flags} ``
+’Ù@b7c914af11422f980f49824b42d266d80e5a7afdb4424e0db8d4405b013735b6ÙTTitle: title: sys net
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@dda8975ae5125d80e362d18aa574b745942691d68ece714fd24385c2a14ee4ebÙ{Title: title: sys net
+Path: Examples
+Content:
+Show info about the system network
+```Fenced(Borrowed("nu"))
+> sys net
+
+
+```

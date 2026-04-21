@@ -1,0 +1,93 @@
+‘—ÙSarchive/external_nushell_repo_backup/nushell.github.io/de/book/command_signature.mdÙ@f07f191560810f4061b7cb864b478074c59a1ed6ed363b13b4871c9a7fe9331d°Befehls Signatur‘°Befehls SignaturÚŒNu Befehle enthalten einen Signatur Abschnitt. Zum Beispiel wie hier in 
+[link: /commands/docs/str_distance.md] ``str distance``
+:
+```Fenced(Borrowed(""))
+Signatures(Cell paths are supported):
+  <string> | str distance <string> -> <int>
+
+```
+Der erste Typenname vor dem 
+``|``
+ beschreibt den Typ der Eingangs-Pipeline. Nach dem Befehlsnamen folgt der benÃ¶tigte Arguments Typ. Der Output-Typ ist in diesem Falle 
+``int``
+ und wird nach dem 
+``->``
+ ausgegeben.
+
+``(Cell paths are supported)``
+ zeigt an, dass Zell Pfade angegeben werden kÃ¶nnen fÃ¼r 
+``str distance``
+. So kann in einer verschachtelten Struktur oder Tabelle einem Zell Pfad eine Operation hinzugefÃ¼gt und wie hier der Spaltenname ersetzt werden: 
+``ls | str distance 'nushell' 'name'``
+Hier ein weiteres Beispiel, 
+[link: /commands/docs/str_join.md] ``str join``
+:
+```Fenced(Borrowed(""))
+Signatures:
+  list<string> | str join <string?> -> <string>
+
+```
+Hier bedeutet die Signatur von 
+[link: /commands/docs/str_join.md] ``str join``
+, dass eine Liste von Texten als Eingang erwartet wird. Der Befehl nimmt ausserdem optionale 
+``string``
+ Typ Argumente entgegen. Schliesslich wird ein 
+``string``
+ als Output generiert.
+Einige Befehle akzeptieren oder benÃ¶tigen keine Daten in einer Pipeline, weshalb ihr Input-Typ 
+``<nothing>``
+ sein wird.
+
+Dies gilt auch, wenn der Output Typ 
+``null``
+ zurÃ¼ckgiebt (e.g. 
+[link: /commands/docs/rm.md] ``rm``
+).
+’ÚÄTitle: Befehls Signatur
+Path: Befehls Signatur
+Content:
+Nu Befehle enthalten einen Signatur Abschnitt. Zum Beispiel wie hier in 
+[link: /commands/docs/str_distance.md] ``str distance``
+:
+```Fenced(Borrowed(""))
+Signatures(Cell paths are supported):
+  <string> | str distance <string> -> <int>
+
+```
+Der erste Typenname vor dem 
+``|``
+ beschreibt den Typ der Eingangs-Pipeline. Nach dem Befehlsnamen folgt der benÃ¶tigte Arguments Typ. Der Output-Typ ist in diesem Falle 
+``int``
+ und wird nach dem 
+``->``
+ ausgegeben.
+
+``(Cell paths are supported)``
+ zeigt an, dass Zell Pfade angegeben werden kÃ¶nnen fÃ¼r 
+``str distance``
+. So kann in einer verschachtelten Struktur oder Tabelle einem Zell Pfad eine Operation hinzugefÃ¼gt und wie hier der Spaltenname ersetzt werden: 
+``ls | str distance 'nushell' 'name'``
+Hier ein weiteres Beispiel, 
+[link: /commands/docs/str_join.md] ``str join``
+:
+```Fenced(Borrowed(""))
+Signatures:
+  list<string> | str join <string?> -> <string>
+
+```
+Hier bedeutet die Signatur von 
+[link: /commands/docs/str_join.md] ``str join``
+, dass eine Liste von Texten als Eingang erwartet wird. Der Befehl nimmt ausserdem optionale 
+``string``
+ Typ Argumente entgegen. Schliesslich wird ein 
+``string``
+ als Output generiert.
+Einige Befehle akzeptieren oder benÃ¶tigen keine Daten in einer Pipeline, weshalb ihr Input-Typ 
+``<nothing>``
+ sein wird.
+
+Dies gilt auch, wenn der Output Typ 
+``null``
+ zurÃ¼ckgiebt (e.g. 
+[link: /commands/docs/rm.md] ``rm``
+).

@@ -1,0 +1,154 @@
+“’Ù@ff48fb4b8280b000bd8296f20b081b2aa913d7d153e6fc556ea4c1c206865234ÚTitle: This week in Nushell #215
+Path: Nushell
+Content:
+Hofer-Julian added long options to several commands: 
+[link: https://github.com/nushell/nushell/pull/10621] 1
+, 
+[link: https://github.com/nushell/nushell/pull/10619] 2
+, 
+[link: https://github.com/nushell/nushell/pull/10602] 3
+, 
+[link: https://github.com/nushell/nushell/pull/10601] 4
+, 
+[link: https://github.com/nushell/nushell/pull/10596] 5
+lpchaim 
+[link: https://github.com/nushell/nushell/pull/10611] added a 
+``url decode``
+ command
+dmatos2012 fixed an issue in 
+``ucp``
+: 
+[link: https://github.com/nushell/nushell/pull/10609] "Change error when directory is specified but not recursive"
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10604] removed underline from std NU_LOG_FORMAT
+, and 
+[link: https://github.com/nushell/nushell/pull/10583] added a few more grid icons
+gaetschwartz updated 
+``std log``
+ to 
+[link: https://github.com/nushell/nushell/pull/10603] allow specifying a custom date format
+lavafroth fixed a bug with 
+[link: https://github.com/nushell/nushell/pull/10600] path completions surrounded by quotes or backticks
+, and added 
+[link: https://github.com/nushell/nushell/pull/10543] Fish-like completions for nested directories
+jntrnr made improvements to 
+``cd``
+: 
+[link: https://github.com/nushell/nushell/pull/10588] removed cd w/ abbreviations
+, and 
+[link: https://github.com/nushell/nushell/pull/10585] allowed auto-cd on trailing slash
+hudclark added a 
+[link: https://github.com/nushell/nushell/pull/10489] new 
+``unfold``
+ command
+sholderbach made some parsing+type improvements: 
+[link: https://github.com/nushell/nushell/pull/10581] Parse custom completer annotation only in args
+, and 
+[link: https://github.com/nushell/nushell/pull/10579] Use 
+``int``
+ type name consistently
+, and 
+[link: https://github.com/nushell/nushell/pull/10448] Move 
+``SyntaxShape``
+ specifier parsing into own file
+joergsch fixed 
+[link: https://github.com/nushell/nushell/pull/10577] line folding in 
+``from ics``
+/
+``from vcf``
+ClipplerBlood 
+[link: https://github.com/nushell/nushell/pull/10572] added a 
+``--env``
+ flag to the 
+``do``
+ command
+rgwood did some work to simplify 
+``explore``
+: 
+[link: https://github.com/nushell/nushell/pull/10570] 1
+, 
+[link: https://github.com/nushell/nushell/pull/10562] 2
+, 
+[link: https://github.com/nushell/nushell/pull/10559] 3
+amtoine 
+[link: https://github.com/nushell/nushell/pull/10569] made "can't follow stream paths" error a bit better
+, and 
+[link: https://github.com/nushell/nushell/pull/10551] improved assertion error messages in 
+``std assert``
+, and 
+[link: https://github.com/nushell/nushell/pull/10519] added 
+``to ndjson``
+ and 
+``to nuon``
+ to the standard library
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10566] added 
+``--env``
+ and 
+``--wrapped``
+ flags to 
+``def``
+brunerm99 
+[link: https://github.com/nushell/nushell/pull/10565] added a warning to 
+``url join``
+ when input key is not supported (#10506)
+hustcer 
+[link: https://github.com/nushell/nushell/pull/10564] update build flags for riscv64gc and armv7 targets
+Yethal 
+[link: https://github.com/nushell/nushell/pull/10545] reduced test file parsing overhead in the stdlib
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/10526] changed the SyntaxShape of 
+``-c``
+ flag from list to record
+vedaRadev 
+[link: https://github.com/nushell/nushell/pull/10522] added a 'help escapes' command for quick reference of nushell string escapes
+stormasm tweaked 
+[link: https://github.com/nushell/nushell/pull/10587] eval.rs to remove pub from fn eval_element_with_input
+’Ù@43689a232c3be4072985343f5660f3536e7fd60b58b9748ea22f6162c72751a9ÚÅTitle: This week in Nushell #215
+Path: Documentation
+Content:
+dedebenui created 
+[link: https://github.com/nushell/nushell.github.io/pull/1097] fixed alias normalization
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/1096] Improve command docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1095] make_docs: Parallelize command generation
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/1092] Update CONTRIBUTING.md and lefthook module
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1090] Update syntax highlighting for Nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1089] Update syntax highlighting for some blog docs
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1088] Update syntax highlighting for commands docs from shell to nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1078] Add real Nushell syntax highlighting support
+savente93 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1087] finish sentence in pattern matching.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1083] Expand 
+``append``
+ examples and add 
+``match``
+ example
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/1086] add the "style guide" page to the sidebar
+EmilyGraceSeville7cf created 
+[link: https://github.com/nushell/nushell.github.io/pull/904] Write best practices and style guide
+’Ù@d59a53ab0a8b16296df2d74efeddf9e216acfd7ea33a30f28d905baa13d24c2dÚTitle: This week in Nushell #215
+Path: Nu_Scripts
+Content:
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/628] update the 
+``direnv``
+ hook
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/624] Add cartesian product to math module
+savente93 created 
+[link: https://github.com/nushell/nu_scripts/pull/627] add tests to str.nu
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/626] Add 
+``str append``
+ to stdlib-candidate
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/625] Add gnu wc wrapper

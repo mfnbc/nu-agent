@@ -1,0 +1,87 @@
+���@3aeb15e2d989a823f2d4977cedc14ae328c61c3744778f67ef4d239afa43aaee�hTitle: title: encode
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``encode``
+[link: /commands/categories/strings.md] ��@90d8c72901264b7d28273d746727113c11b0d38e7fbe04a235ffb3a4f8ab0880�NTitle: title: encode
+Path: Signature
+Content:
+``> encode {flags} (encoding)``
+��@00622382de75e139bb01c71f7c9cc0001e25abf0862a31feab89d2fc507fd242٥Title: title: encode
+Path: Flags
+Content:
+``--ignore-errors, -i``
+: When a character isn't in the given encoding, replace with a HTML entity (like 
+``&#127880;``
+).
+��@dd9b1f05317179656b7648f3bc8edf5c7404a32b279c2f2895520890136b18d9�XTitle: title: encode
+Path: Parameters
+Content:
+``encoding``
+: The text encoding to use.
+��@04d77aa2f8b00410f218252dbe387fb8708c574a999c45a6b24c084d3afca451�STitle: title: encode
+Path: Input/output types:
+Content:
+input
+output
+string
+binary
+��@52a1f6ac8fb1b05e734d6d8a0c7be23c135a651f356f94c7feb9d843b336ad78�LTitle: title: encode
+Path: Examples
+Content:
+Encode an UTF-8 string into Shift-JIS
+```Fenced(Borrowed("nu"))
+> "負けると知って戦うのが、遥かに美しいのだ" | encode shift-jis
+Length: 40 (0x28) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   95 89 82 af  82 e9 82 c6  92 6d 82 c1  82 c4 90 ed   ×××××××××m××××××
+00000010:   82 a4 82 cc  82 aa 81 41  97 79 82 a9  82 c9 94 fc   ×××××××A×y××××××
+00000020:   82 b5 82 a2  82 cc 82 be                             ××××××××
+
+
+```
+Replace characters with HTML entities if they can't be encoded
+```Fenced(Borrowed("nu"))
+> "🎈" | encode --ignore-errors shift-jis
+Length: 9 (0x9) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   26 23 31 32  37 38 38 30  3b                         &#127880;
+
+
+```
+��@86bb84ea74400444b6d5894e100b28909fe250f00c1d328f95c10cd54e6cc2a2�$Title: title: encode
+Path: Notes
+Content:
+Multiple encodings are supported; here are a few:
+
+big5, euc-jp, euc-kr, gbk, iso-8859-1, cp1252, latin5
+Note that since the Encoding Standard doesn't specify encoders for utf-16le and utf-16be, these are not yet supported.
+
+More information can be found here: https://docs.rs/encoding_rs/latest/encoding_rs/#utf-16le-utf-16be-and-unicode-encoding-schemes
+For a more complete list of encodings, please refer to the encoding_rs
+
+documentation link at https://docs.rs/encoding_rs/latest/encoding_rs/#statics
+��@1218abc2afc5f10278e86c960d2436b586641afbfe6c34dfc223ddbbf146291b�	Title: title: encode
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/encode_base32.md] ``encode base32``
+Encode a string or binary value using Base32.
+built-in
+[link: /commands/docs/encode_base32hex.md] ``encode base32hex``
+Encode a binary value or a string using base32hex.
+built-in
+[link: /commands/docs/encode_base64.md] ``encode base64``
+Encode a string or binary value using Base64.
+built-in
+[link: /commands/docs/encode_hex.md] ``encode hex``
+Hex encode a binary value or a string.
+built-in

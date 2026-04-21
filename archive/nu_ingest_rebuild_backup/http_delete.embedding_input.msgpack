@@ -1,0 +1,107 @@
+—’Ù@57a0564d43f34d25e54e54bed4562ebd46b801c18a1a677e782d25a0e912deb7ÙrTitle: title: http delete
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``http delete``
+[link: /commands/categories/network.md] ’Ù@5d2ed0ea18e5d7ebab9d279726392a104f568939d06c183b9265152a2f0164ceÙSTitle: title: http delete
+Path: Signature
+Content:
+``> http delete {flags} (URL)``
+’Ù@0a1a72bb705d91ed44a8ff6dbd53f52a2ef3321c61005ff80981d225510f839fÚÆTitle: title: http delete
+Path: Flags
+Content:
+``--user, -u {any}``
+: The username when authenticating.
+``--password, -p {any}``
+: The password when authenticating.
+``--data, -d {any}``
+: The content to post.
+``--content-type, -t {any}``
+: The MIME type of content to post.
+``--max-time, -m {duration}``
+: Max duration before timeout occurs.
+``--headers, -H {any}``
+: Custom headers you want to add.
+``--raw, -r``
+: Fetch contents as text rather than a table.
+``--insecure, -k``
+: Allow insecure server connections when using SSL.
+``--full, -f``
+: Returns the full response instead of only the body.
+``--allow-errors, -e``
+: Do not fail if the server returns an error code.
+``--pool``
+: Using a global pool as a client.
+``--redirect-mode, -R {string}``
+: What to do when encountering redirects. Default: 'follow'. Valid options: 'follow' ('f'), 'manual' ('m'), 'error' ('e').
+``--unix-socket, -U {path}``
+: Connect to the specified Unix socket instead of using TCP.
+’Ù@f1c495af8c046883fa356dd406f26772e7250724be2cd558b68c921ea44d231eÙbTitle: title: http delete
+Path: Parameters
+Content:
+``URL``
+: The URL to fetch the contents from.
+’Ù@f11a1db7c0c317abec07a0bda0791a19d075556082d0ae8ea0a7d6dd30c8cf75ÙRTitle: title: http delete
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+’Ù@6da66603f2835bda265c45d570857956966b49d89c76b40306e3bc81f45b8068Ú…Title: title: http delete
+Path: Examples
+Content:
+HTTP delete from example.com.
+```Fenced(Borrowed("nu"))
+> http delete https://www.example.com
+
+
+```
+HTTP delete from example.com, with username and password.
+```Fenced(Borrowed("nu"))
+> http delete --user myuser --password mypass https://www.example.com
+
+
+```
+HTTP delete from example.com, with custom header using a record.
+```Fenced(Borrowed("nu"))
+> http delete --headers {my-header-key: my-header-value} https://www.example.com
+
+
+```
+HTTP delete from example.com, with custom header using a list.
+```Fenced(Borrowed("nu"))
+> http delete --headers [my-header-key-A my-header-value-A my-header-key-B my-header-value-B] https://www.example.com
+
+
+```
+HTTP delete from example.com, with body.
+```Fenced(Borrowed("nu"))
+> http delete --data 'body' https://www.example.com
+
+
+```
+HTTP delete from example.com, with JSON body.
+```Fenced(Borrowed("nu"))
+> http delete --content-type application/json --data { field: value } https://www.example.com
+
+
+```
+Perform an HTTP delete with JSON content from a pipeline to example.com.
+```Fenced(Borrowed("nu"))
+> open foo.json | http delete https://www.example.com
+
+
+```
+’Ù@1da376473c82f0af16e8775600b265ca9ee6a45016f85bb91dfaf011c02717ddÙOTitle: title: http delete
+Path: Notes
+Content:
+Performs HTTP DELETE operation.

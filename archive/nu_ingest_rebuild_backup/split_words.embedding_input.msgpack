@@ -1,0 +1,80 @@
+���@c3dd7ccb5061a8bb3242b90ba7379ecf6520ee98c24147a93237dfe4c52d8d4b�rTitle: title: split words
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``split words``
+[link: /commands/categories/strings.md] ��@e908c0667fe0d4ab2fc9d6068766c5adf0771f8bc5591e7ec21a57aaeb1b86d2�NTitle: title: split words
+Path: Signature
+Content:
+``> split words {flags} ``
+��@c59a5de82ce2d4c0e71b4e5bacae494933dc0cbce1d231a778ce25c137a98bb7�2Title: title: split words
+Path: Flags
+Content:
+``--min-word-length, -l {int}``
+: The minimum word length.
+``--grapheme-clusters, -g``
+: Measure word length in grapheme clusters (requires -l).
+``--utf-8-bytes, -b``
+: Measure word length in UTF-8 bytes (default; requires -l; non-ASCII chars are length 2+).
+��@87143ddcf4a74ce65458a2e02dcad02821d617d0b9b514bc99e754e4c8997d2cٍTitle: title: split words
+Path: Input/output types:
+Content:
+input
+output
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+list
+<
+list
+<
+string
+>
+>
+
+��@d61f81930eec892551ddcb356e38e107f5d5c167b3c9796bf94076f9d3deddad�'Title: title: split words
+Path: Examples
+Content:
+Split the string's words into separate rows.
+```Fenced(Borrowed("nu"))
+> 'hello world' | split words
+╭───┬───────╮
+│ 0 │ hello │
+│ 1 │ world │
+╰───┴───────╯
+
+
+```
+Split the string's words, of at least 3 characters, into separate rows.
+```Fenced(Borrowed("nu"))
+> 'hello to the world' | split words --min-word-length 3
+╭───┬───────╮
+│ 0 │ hello │
+│ 1 │ the   │
+│ 2 │ world │
+╰───┴───────╯
+
+
+```
+A real-world example of splitting words.
+```Fenced(Borrowed("nu"))
+> http get https://www.gutenberg.org/files/11/11-0.txt | str downcase | split words --min-word-length 2 | uniq --count | sort-by count --reverse | first 10
+
+
+```

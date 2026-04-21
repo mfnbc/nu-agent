@@ -1,0 +1,144 @@
+–—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-10-10-twin0320.mdÙ@ec6c4b930dd5fd7180d02cbcd0967d10b2da20a4cc4202227f8d316f73b82db5Ù"title: 'This week in Nushell #320'‘¹This Week in Nushell #320Ùk
+
+
+
+Published Wednesday, 2025-11-19, including PRs merged Friday, 2025-10-03 through Thursday, 2025-10-09.
+’Ù¾Title: title: 'This week in Nushell #320'
+Path: This Week in Nushell #320
+Content:
+
+
+
+
+Published Wednesday, 2025-11-19, including PRs merged Friday, 2025-10-03 through Thursday, 2025-10-09.
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-10-10-twin0320.mdÙ@6b383841c809a13f7114f8d7661f5b30d1bb0debe4caff54e5bfcc477e2633aaÙ"title: 'This week in Nushell #320'‘§NushellÚ7@cablehead:
+[link: #16836] fixed HTTP/metadata access examples requiring '--allow-errors' flag
+[link: #16821] added custom metadata support and HTTP response metadata
+@Bahex:
+[link: #16835] removed 
+``pipeline``
+ calls added after testing refactor branched off
+[link: #16820] marked 
+``Value``
+ variants as 
+``#[non_exhaustive]``
+[link: #16818] increased timeout for 
+``hover_on_external_command``
+[link: #16817] added tests for ast-grep rules
+[link: #16810] made 
+``compact``
+ work on records
+[link: #16802] completed big testing refactor
+[link: #16789] added syntax for simple completions from const lists
+[link: #16765] implemented command-wide completions
+[link: #16735] enabled 
+``each``
+ to flatten streams from closures without collecting
+@app/dependabot:
+[link: #16824] bumped shadow-rs from 1.3.0 to 1.4.0
+[link: #16823] bumped rmcp from 0.7.0 to 0.8.1
+@ayax79:
+[link: #16819] cleaned up Polars input/output types
+@Tyarel8:
+[link: #16809] added cell-path input to 
+``into string``
+@132ikl:
+[link: #16799] removed all usages of 
+``internal_span``
+[link: #16770] added 
+``run pr``
+ and 
+``download pr``
+ to 
+``toolkit``
+@fdncred:
+[link: #16791] updated reedline to latest commit
+@nome:
+[link: #16775] fixed Windows device paths
+@Xylobyte:
+[link: #16681] escaped markdown characters for valid table output and added new switches
+’ÚxTitle: title: 'This week in Nushell #320'
+Path: Nushell
+Content:
+@cablehead:
+[link: #16836] fixed HTTP/metadata access examples requiring '--allow-errors' flag
+[link: #16821] added custom metadata support and HTTP response metadata
+@Bahex:
+[link: #16835] removed 
+``pipeline``
+ calls added after testing refactor branched off
+[link: #16820] marked 
+``Value``
+ variants as 
+``#[non_exhaustive]``
+[link: #16818] increased timeout for 
+``hover_on_external_command``
+[link: #16817] added tests for ast-grep rules
+[link: #16810] made 
+``compact``
+ work on records
+[link: #16802] completed big testing refactor
+[link: #16789] added syntax for simple completions from const lists
+[link: #16765] implemented command-wide completions
+[link: #16735] enabled 
+``each``
+ to flatten streams from closures without collecting
+@app/dependabot:
+[link: #16824] bumped shadow-rs from 1.3.0 to 1.4.0
+[link: #16823] bumped rmcp from 0.7.0 to 0.8.1
+@ayax79:
+[link: #16819] cleaned up Polars input/output types
+@Tyarel8:
+[link: #16809] added cell-path input to 
+``into string``
+@132ikl:
+[link: #16799] removed all usages of 
+``internal_span``
+[link: #16770] added 
+``run pr``
+ and 
+``download pr``
+ to 
+``toolkit``
+@fdncred:
+[link: #16791] updated reedline to latest commit
+@nome:
+[link: #16775] fixed Windows device paths
+@Xylobyte:
+[link: #16681] escaped markdown characters for valid table output and added new switches
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-10-10-twin0320.mdÙ@ca66feaa4378021cacc09427059375a041054a9ecfe127f374e81dd4018223efÙ"title: 'This week in Nushell #320'‘ªAwesome NuÙR@graves:
+[link: https://github.com/nushell/awesome-nu/pull/134] added rust_ast.nu
+’Ù–Title: title: 'This week in Nushell #320'
+Path: Awesome Nu
+Content:
+@graves:
+[link: https://github.com/nushell/awesome-nu/pull/134] added rust_ast.nu
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-10-10-twin0320.mdÙ@bfc67774003a53ddb4d326b442bafceb4606f9fa9256add512380b8aa9c2ca03Ù"title: 'This week in Nushell #320'‘¨reedlineÙ[@JonLD:
+[link: https://github.com/nushell/reedline/pull/957] made text object types public
+’ÙTitle: title: 'This week in Nushell #320'
+Path: reedline
+Content:
+@JonLD:
+[link: https://github.com/nushell/reedline/pull/957] made text object types public
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-10-10-twin0320.mdÙ@2d0b6387c331f943ebc8fb4408b1cf9b177a2ea0185faba2951c87baec314b0eÙ"title: 'This week in Nushell #320'‘ªNu_ScriptsÚ@alightgoesout:
+[link: https://github.com/nushell/nu_scripts/pull/1177] added jujutsu (jj) completions
+@ExpandingMan:
+[link: https://github.com/nushell/nu_scripts/pull/1176] added result.nu module
+@graves:
+[link: https://github.com/nushell/nu_scripts/pull/1175] added rust_ast.nu
+’Ú\Title: title: 'This week in Nushell #320'
+Path: Nu_Scripts
+Content:
+@alightgoesout:
+[link: https://github.com/nushell/nu_scripts/pull/1177] added jujutsu (jj) completions
+@ExpandingMan:
+[link: https://github.com/nushell/nu_scripts/pull/1176] added result.nu module
+@graves:
+[link: https://github.com/nushell/nu_scripts/pull/1175] added rust_ast.nu
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-10-10-twin0320.mdÙ@0441ccfd1af9d1d9e36c81a40e569952ab562e571fcc14148568944cf5e9ee85Ù"title: 'This week in Nushell #320'‘«Tree-sitterÙ|@blindFS:
+[link: https://github.com/nushell/tree-sitter-nu/pull/226] added support for new custom constant completer syntax
+’ÙÁTitle: title: 'This week in Nushell #320'
+Path: Tree-sitter
+Content:
+@blindFS:
+[link: https://github.com/nushell/tree-sitter-nu/pull/226] added support for new custom constant completer syntax

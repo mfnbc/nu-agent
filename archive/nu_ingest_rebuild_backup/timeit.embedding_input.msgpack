@@ -1,0 +1,93 @@
+���@3c42a9a9166f9263c15758abe9d82cb213f0f7270e6a7cf32856f16b53b47ff0�dTitle: title: timeit
+Path: debug
+Content:
+
+
+
+
+
+
+
+
+
+``timeit``
+[link: /commands/categories/debug.md] ��@22f02df52d3375603eb2ed40b016428806af1c718e1f6371f4768262003b74ee�MTitle: title: timeit
+Path: Signature
+Content:
+``> timeit {flags} (command)``
+��@16969bf7ce005cc015e943872d37d56a3bf00e969a0fc0ad0b55ec77c945a3d0�YTitle: title: timeit
+Path: Flags
+Content:
+``--output, -o``
+: Include the closure output.
+��@9fbe94fc54f53eea1f211b3600b35c362eb2f55c71a16d834fa2cb621e01a340�QTitle: title: timeit
+Path: Parameters
+Content:
+``command``
+: The closure to run.
+��@53246328ad5cc8da05bd7190afeead329a713a952554b35427c5f13adf0486cdٿTitle: title: timeit
+Path: Input/output types:
+Content:
+input
+output
+any
+duration
+nothing
+duration
+any
+record
+<
+time: duration, output: any
+>
+
+nothing
+record
+<
+time: duration, output: any
+>
+
+��@58ffb46b376c8608af8502254fbf09d40866a5c82ce710cc8033ad70450b62f6�NTitle: title: timeit
+Path: Examples
+Content:
+Time a closure containing one command.
+```Fenced(Borrowed("nu"))
+> timeit { sleep 500ms }
+500ms 631µs 800ns
+
+```
+Time a closure with an input value.
+```Fenced(Borrowed("nu"))
+> 'A really long string' | timeit { split chars }
+
+
+```
+Time a closure with an input stream.
+```Fenced(Borrowed("nu"))
+> open some_file.txt | collect | timeit { split chars }
+
+
+```
+Time a closure containing a pipeline.
+```Fenced(Borrowed("nu"))
+> timeit { open some_file.txt | split chars }
+
+
+```
+Time a closure and also return the output.
+```Fenced(Borrowed("nu"))
+> timeit --output { 'example text' }
+╭────────┬──────────────╮
+│ time   │ 14µs 328ns   │
+│ output │ example text │
+╰────────┴──────────────╯
+
+```
+��@17564498b17c723729801f633ffd3983bd476c52f7cd23b3be0e3ca8fe9d17ec��Title: title: timeit
+Path: Notes
+Content:
+Any pipeline input given to this command is passed to the closure. Note that streaming inputs may affect timing results, and it is recommended to add a 
+``collect``
+ command before this if the input is a stream.
+This command will bubble up any errors encountered when running the closure. The return pipeline of the closure is collected into a value and then discarded if 
+``--output``
+ is not set.

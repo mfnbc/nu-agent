@@ -1,0 +1,136 @@
+ñóŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-01-18-nushell_0_43.mdŸ@3105d56981e2b0462bb54052a045c7bccf5b23890eba49f12b3b10e5ce89f4e6≥title: Nushell 0.43ë¨Nushell 0.43⁄`
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.43 of Nu. This release is a bugfix release of 0.42.
+íêê⁄óTitle: title: Nushell 0.43
+Path: Nushell 0.43
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.43 of Nu. This release is a bugfix release of 0.42.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-01-18-nushell_0_43.mdŸ@d5ffc7d2457b6bebaf519fb4ad2f4ccec3228da05abc04b7d6baf60a6df7f789≥title: Nushell 0.43ëØWhere to get it⁄ﬂNu 0.43 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.43.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+íêê⁄Title: title: Nushell 0.43
+Path: Where to get it
+Content:
+Nu 0.43 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.43.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-01-18-nushell_0_43.mdŸ@7b0033f6be39c822ae6c9dc43284bdeb423c14056d93002c35e20a81ddfb9714≥title: Nushell 0.43ë™What's NewŸ‹You can now learn about some of the upcoming changes in Nushell by reading the 
+``tutor e-q``
+ page. It will tell you about some of the new features and breaking changes, as well as link you to the full list of changes.
+íêê⁄Title: title: Nushell 0.43
+Path: What's New
+Content:
+You can now learn about some of the upcoming changes in Nushell by reading the 
+``tutor e-q``
+ page. It will tell you about some of the new features and breaking changes, as well as link you to the full list of changes.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-01-18-nushell_0_43.mdŸ@e64b7d2cf6b10684083a8701d9060e79e8fe2a059df9c2c19ed1e32383227f0a≥title: Nushell 0.43ë•Fixes⁄Fix to the 
+[link: https://github.com/nushell/nushell/pull/4241] sample configuration file
+ (ilius)
+Fix to a 
+[link: https://github.com/nushell/nushell/pull/4247] crate description
+ (michel-slm)
+Bump to some 
+[link: https://github.com/nushell/nushell/pull/4258] dependencies in wasm support
+ (dependabot)
+Update to 
+[link: https://github.com/nushell/nushell/pull/4261] sysinfo support
+ (GuillaumeGomez)
+Fix to build 
+[link: https://github.com/nushell/nushell/pull/4262] on latest Rust stable + clippy
+ (sophiajt)
+íêê⁄1Title: title: Nushell 0.43
+Path: Fixes
+Content:
+Fix to the 
+[link: https://github.com/nushell/nushell/pull/4241] sample configuration file
+ (ilius)
+Fix to a 
+[link: https://github.com/nushell/nushell/pull/4247] crate description
+ (michel-slm)
+Bump to some 
+[link: https://github.com/nushell/nushell/pull/4258] dependencies in wasm support
+ (dependabot)
+Update to 
+[link: https://github.com/nushell/nushell/pull/4261] sysinfo support
+ (GuillaumeGomez)
+Fix to build 
+[link: https://github.com/nushell/nushell/pull/4262] on latest Rust stable + clippy
+ (sophiajt)
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-01-18-nushell_0_43.mdŸ@1f9836a0f79183ea5b8cb05a58fe4440cde273ba2a53356f30663f7108b2d27b≥title: Nushell 0.43ë±Engine-q progress⁄»Engine-q is now nearly complete. Most of the commands have been ported, as has support for the 
+``shells``
+ feature, many reedline-related improvements, text encoding, and much more. It's now ready for early adopters to pick it up and use it as their shell, reporting any issues they find.
+To try it out, you can 
+[link: https://github.com/nushell/engine-q] build and run engine-q as a standalone application
+. Also check out the 
+[link: https://github.com/nushell/engine-q/issues/459] list of configuration settings
+, 
+[link: https://github.com/nushell/engine-q/issues/522] list of breaking changes
+, and 
+[link: https://github.com/nushell/engine-q/issues/735] the final checklist before engine-q merges into Nushell
+.
+We're hoping to merge engine-q into the main Nushell codebase after the the upcoming 0.44 release. We'll number this release 0.60 to show how much progress has been made by switching to the new engine. We've love to get your feedback on engine-q before it becomes the main Nushell, to help us fix any major issues before the merge happens. Let us know what you find!
+You can check out a 
+[link: https://www.youtube.com/watch?v=c18l_HPsOxs] recent video about engine-q
+ if you'd like to see it in action.
+íêê⁄Title: title: Nushell 0.43
+Path: Engine-q progress
+Content:
+Engine-q is now nearly complete. Most of the commands have been ported, as has support for the 
+``shells``
+ feature, many reedline-related improvements, text encoding, and much more. It's now ready for early adopters to pick it up and use it as their shell, reporting any issues they find.
+To try it out, you can 
+[link: https://github.com/nushell/engine-q] build and run engine-q as a standalone application
+. Also check out the 
+[link: https://github.com/nushell/engine-q/issues/459] list of configuration settings
+, 
+[link: https://github.com/nushell/engine-q/issues/522] list of breaking changes
+, and 
+[link: https://github.com/nushell/engine-q/issues/735] the final checklist before engine-q merges into Nushell
+.
+We're hoping to merge engine-q into the main Nushell codebase after the the upcoming 0.44 release. We'll number this release 0.60 to show how much progress has been made by switching to the new engine. We've love to get your feedback on engine-q before it becomes the main Nushell, to help us fix any major issues before the merge happens. Let us know what you find!
+You can check out a 
+[link: https://www.youtube.com/watch?v=c18l_HPsOxs] recent video about engine-q
+ if you'd like to see it in action.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-01-18-nushell_0_43.mdŸ@fd35ca400164cd6d4b75e22217db769b2209558d3405d819cd50769ca5aff11a≥title: Nushell 0.43ëØLooking forward⁄•There are still 
+[link: https://github.com/nushell/engine-q/issues/242] some commands left to port
+ if you'd like to jump in and give porting a try. If you're interested, you can also help us by testing out engine-q itself as a shell and report your experiences with it. And of course, come join us on the 
+[link: https://discord.gg/NtAbbGn] discord
+. We'd be happy to show you around.
+Thanks again for all your support.
+íêê⁄ﬂTitle: title: Nushell 0.43
+Path: Looking forward
+Content:
+There are still 
+[link: https://github.com/nushell/engine-q/issues/242] some commands left to port
+ if you'd like to jump in and give porting a try. If you're interested, you can also help us by testing out engine-q itself as a shell and report your experiences with it. And of course, come join us on the 
+[link: https://discord.gg/NtAbbGn] discord
+. We'd be happy to show you around.
+Thanks again for all your support.

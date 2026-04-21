@@ -1,0 +1,111 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-22-twin0152.mdŸ@6863a751e1068c03adf6641fa4544f7c8da9e54a13f2a5b9acc8dcd3d5a20b47πThis week in Nushell #152ëßNushell⁄zhiburt created 
+[link: https://github.com/nushell/nushell/pull/6097] nu-table/ Bump tabled version
+, and 
+[link: https://github.com/nushell/nushell/pull/6082] nu-table: Update tests after #6080
+, and 
+[link: https://github.com/nushell/nushell/pull/6080] Consider space for single 
+``...``
+ column not enough space
+, and 
+[link: https://github.com/nushell/nushell/pull/6074] nu-table: Add a few tests
+, and 
+[link: https://github.com/nushell/nushell/pull/6073] nu-table: Fix header style (again 2x)
+, and 
+[link: https://github.com/nushell/nushell/pull/6071] nu-table: Add suffix coloring
+fdncred 
+[link: https://github.com/nushell/nushell/pull/6094] enabled find to work on some external streams
+, and 
+[link: https://github.com/nushell/nushell/pull/6087] add more shell integration ansi escapes in support of vscode
+, and 
+[link: https://github.com/nushell/nushell/pull/6086] enable find to be able to highlight some hits
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/6093] concat string with lazy expressions
+, and 
+[link: https://github.com/nushell/nushell/pull/6089] append string to series
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/6090] added a fair amount of search terms
+, and 
+[link: https://github.com/nushell/nushell/pull/6084] make 
+``into string --decimals``
+ add decimals to integer numbers
+, and 
+[link: https://github.com/nushell/nushell/pull/6076] add config option to limit external command completions
+Kangaxx-0 created 
+[link: https://github.com/nushell/nushell/pull/6083] ``extern``
+ command should be treated as external
+, and 
+[link: https://github.com/nushell/nushell/pull/6014] Conditionally disable expansion for external command
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/6079] made Semicolon stop on error
+jackos 
+[link: https://github.com/nushell/nushell/pull/6067] fixed short-flag completion
+Mathspy 
+[link: https://github.com/nushell/nushell/pull/6065] restored 
+``nu_with_plugins``
+ test macro
+, and 
+[link: https://github.com/nushell/nushell/pull/6064] Add plugin CLI argument
+íêê⁄MTitle: This week in Nushell #152
+Path: Nushell
+Content:
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/6097] nu-table/ Bump tabled version
+, and 
+[link: https://github.com/nushell/nushell/pull/6082] nu-table: Update tests after #6080
+, and 
+[link: https://github.com/nushell/nushell/pull/6080] Consider space for single 
+``...``
+ column not enough space
+, and 
+[link: https://github.com/nushell/nushell/pull/6074] nu-table: Add a few tests
+, and 
+[link: https://github.com/nushell/nushell/pull/6073] nu-table: Fix header style (again 2x)
+, and 
+[link: https://github.com/nushell/nushell/pull/6071] nu-table: Add suffix coloring
+fdncred 
+[link: https://github.com/nushell/nushell/pull/6094] enabled find to work on some external streams
+, and 
+[link: https://github.com/nushell/nushell/pull/6087] add more shell integration ansi escapes in support of vscode
+, and 
+[link: https://github.com/nushell/nushell/pull/6086] enable find to be able to highlight some hits
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/6093] concat string with lazy expressions
+, and 
+[link: https://github.com/nushell/nushell/pull/6089] append string to series
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/6090] added a fair amount of search terms
+, and 
+[link: https://github.com/nushell/nushell/pull/6084] make 
+``into string --decimals``
+ add decimals to integer numbers
+, and 
+[link: https://github.com/nushell/nushell/pull/6076] add config option to limit external command completions
+Kangaxx-0 created 
+[link: https://github.com/nushell/nushell/pull/6083] ``extern``
+ command should be treated as external
+, and 
+[link: https://github.com/nushell/nushell/pull/6014] Conditionally disable expansion for external command
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/6079] made Semicolon stop on error
+jackos 
+[link: https://github.com/nushell/nushell/pull/6067] fixed short-flag completion
+Mathspy 
+[link: https://github.com/nushell/nushell/pull/6065] restored 
+``nu_with_plugins``
+ test macro
+, and 
+[link: https://github.com/nushell/nushell/pull/6064] Add plugin CLI argument
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-22-twin0152.mdŸ@8dedc9c4e612c868af4b3772216232dad531a2105e67a59a3cdb9d16aed30c21πThis week in Nushell #152ë≠DocumentationŸgkubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/537] Add hooks documentation
+íêêŸ•Title: This week in Nushell #152
+Path: Documentation
+Content:
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/537] Add hooks documentation
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2022-07-22-twin0152.mdŸ@0467a43eb878ed6a241735d2008948ccca405f0f2328c22ec88d2daad3db2cc0πThis week in Nushell #152ë™Nu_ScriptsŸ^Eun created 
+[link: https://github.com/nushell/nu_scripts/pull/265] Use autojump with nushell
+íêêŸôTitle: This week in Nushell #152
+Path: Nu_Scripts
+Content:
+Eun created 
+[link: https://github.com/nushell/nu_scripts/pull/265] Use autojump with nushell

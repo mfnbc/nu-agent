@@ -1,0 +1,38 @@
+•’Ù@4aad1b9a693b9e89d046b5279879f18186285052c7051d2bc0cd505c451c0e5fÙtTitle: title: nu-highlight
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``nu-highlight``
+[link: /commands/categories/strings.md] ’Ù@6ad551c4045ed73c4544a6bb0b636968269a18224e4eaef89a6b3ca94258a672ÙPTitle: title: nu-highlight
+Path: Signature
+Content:
+``> nu-highlight {flags} ``
+’Ù@19507e3339f8186221cb942c75d02234c334078a065d0d1376282aa81e533933ÙˆTitle: title: nu-highlight
+Path: Flags
+Content:
+``--reject-garbage, -r``
+: Return an error if invalid syntax (garbage) was encountered.
+’Ù@9d99b805de94edcd45c883d19047261863b8be151c2fa926f742382b53071146ÙYTitle: title: nu-highlight
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+’Ù@90390880c23480b64f22541fd3920f485eba2adcc47ae3abb6c645174f793d0eÙŽTitle: title: nu-highlight
+Path: Examples
+Content:
+Describe the type of a string
+```Fenced(Borrowed("nu"))
+> 'let x = 3' | nu-highlight
+
+
+```

@@ -1,0 +1,63 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_info.mdŸ@d448832b21387fcab9e5d7888233a5bcb5ba39771c088dd2e6fa1d3084144c9d±title: debug infoë•debugŸ>
+
+
+
+
+
+
+
+
+``debug info``
+[link: /commands/categories/debug.md] íêêŸlTitle: title: debug info
+Path: debug
+Content:
+
+
+
+
+
+
+
+
+
+``debug info``
+[link: /commands/categories/debug.md] óŸRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_info.mdŸ@3727f6a67840d5ab872545ac347ec8c598137532e665d5a916526011c3af4a71±title: debug infoë©Signature∫``> debug info {flags} ``
+íêêŸLTitle: title: debug info
+Path: Signature
+Content:
+``> debug info {flags} ``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_info.mdŸ@649053792a1c31f159ed6d2908060f6e9707db09ea196d3909863a961f28d420±title: debug infoë≥Input/output types:ºinput
+output
+nothing
+record
+íêêŸXTitle: title: debug info
+Path: Input/output types:
+Content:
+input
+output
+nothing
+record
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_info.mdŸ@b0dcd07e5050603f988f02407270d460b155dfd9bf8ab7faee66aca877067c3e±title: debug infoë®ExamplesŸGView process information.
+```Fenced(Borrowed("nu"))
+> debug info
+
+
+```
+íêêŸxTitle: title: debug info
+Path: Examples
+Content:
+View process information.
+```Fenced(Borrowed("nu"))
+> debug info
+
+
+```
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_info.mdŸ@bcce9bb083f25f8038c3bacc9b5cf1d3e27c0499777c654447e92e6c002a8fcc±title: debug infoë•NotesŸsThis command is meant for debugging purposes.
+
+It shows you the process information and system memory information.
+íêêŸ°Title: title: debug info
+Path: Notes
+Content:
+This command is meant for debugging purposes.
+
+It shows you the process information and system memory information.

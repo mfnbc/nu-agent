@@ -1,0 +1,162 @@
+–—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/save.mdÙ@25478d2fa23c52f7143201c47ebd03bf2491c7d9e81dc07d086cf48c098bc871«title: save‘ªfilesystemÙ=
+
+
+
+
+
+
+
+
+``save``
+[link: /commands/categories/filesystem.md] ’ÙjTitle: title: save
+Path: filesystem
+Content:
+
+
+
+
+
+
+
+
+
+``save``
+[link: /commands/categories/filesystem.md] —ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/save.mdÙ@3baf6416b26e208235e1e4a1a1edd1ced745752332d23ab45163516b91e13918«title: save‘©Signature¾``> save {flags} (filename)``
+’ÙJTitle: title: save
+Path: Signature
+Content:
+``> save {flags} (filename)``
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/save.mdÙ@69eb4e172037cb5d206c5be8e79b1ee7b6144dcf798ae0dc7a266462aa731822«title: save‘¥FlagsÚ``--stderr, -e {path}``
+: The filename used to save stderr, only works with 
+``-r``
+ flag.
+``--raw, -r``
+: Save file as raw binary.
+``--append, -a``
+: Append input to the end of the file.
+``--force, -f``
+: Overwrite the destination.
+``--progress, -p``
+: Enable progress bar.
+’Ú;Title: title: save
+Path: Flags
+Content:
+``--stderr, -e {path}``
+: The filename used to save stderr, only works with 
+``-r``
+ flag.
+``--raw, -r``
+: Save file as raw binary.
+``--append, -a``
+: Append input to the end of the file.
+``--force, -f``
+: Overwrite the destination.
+``--progress, -p``
+: Enable progress bar.
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/save.mdÙ@34569dfa4f9ad9f84a69bce874b78d03cfccc783235398e4b8145e222868784a«title: save‘ªParametersÙ$``filename``
+: The filename to use.
+’ÙQTitle: title: save
+Path: Parameters
+Content:
+``filename``
+: The filename to use.
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/save.mdÙ@d386a9bbceda4098124daea803330d47bb7b02b41fa5e412c44b1cd2e2861dbb«title: save‘³Input/output types:¹input
+output
+any
+nothing
+’ÙOTitle: title: save
+Path: Input/output types:
+Content:
+input
+output
+any
+nothing
+—ÙLarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/save.mdÙ@2cba0ca2056b4c257bb53104c4a1860cfea8722a2c703446d63c9e83352a4bb0«title: save‘¨ExamplesÚsSave a string to foo.txt in the current directory.
+```Fenced(Borrowed("nu"))
+> 'save me' | save foo.txt
+
+
+```
+Append a string to the end of foo.txt.
+```Fenced(Borrowed("nu"))
+> 'append me' | save --append foo.txt
+
+
+```
+Save a record to foo.json in the current directory.
+```Fenced(Borrowed("nu"))
+> { a: 1, b: 2 } | save foo.json
+
+
+```
+Save a running program's stderr to foo.txt.
+```Fenced(Borrowed("nu"))
+> do -i {} | save foo.txt --stderr foo.txt
+
+
+```
+Save a running program's stderr to separate file.
+```Fenced(Borrowed("nu"))
+> do -i {} | save foo.txt --stderr bar.txt
+
+
+```
+Show the extensions for which the 
+``save``
+ command will automatically serialize.
+```Fenced(Borrowed("nu"))
+> scope commands
+    | where name starts-with "to "
+    | insert extension { get name | str replace -r "^to " "" | $"*.($in)" }
+    | select extension name
+    | rename extension command
+
+
+
+```
+’ÚžTitle: title: save
+Path: Examples
+Content:
+Save a string to foo.txt in the current directory.
+```Fenced(Borrowed("nu"))
+> 'save me' | save foo.txt
+
+
+```
+Append a string to the end of foo.txt.
+```Fenced(Borrowed("nu"))
+> 'append me' | save --append foo.txt
+
+
+```
+Save a record to foo.json in the current directory.
+```Fenced(Borrowed("nu"))
+> { a: 1, b: 2 } | save foo.json
+
+
+```
+Save a running program's stderr to foo.txt.
+```Fenced(Borrowed("nu"))
+> do -i {} | save foo.txt --stderr foo.txt
+
+
+```
+Save a running program's stderr to separate file.
+```Fenced(Borrowed("nu"))
+> do -i {} | save foo.txt --stderr bar.txt
+
+
+```
+Show the extensions for which the 
+``save``
+ command will automatically serialize.
+```Fenced(Borrowed("nu"))
+> scope commands
+    | where name starts-with "to "
+    | insert extension { get name | str replace -r "^to " "" | $"*.($in)" }
+    | select extension name
+    | rename extension command
+
+
+
+```

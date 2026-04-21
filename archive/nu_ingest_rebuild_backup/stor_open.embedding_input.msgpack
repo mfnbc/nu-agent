@@ -1,0 +1,33 @@
+”’Ù@1b54ddff511b6039e67b7d7f033ca5ffecf093a0210b0d40b5c4b634a5ed2683ÙpTitle: title: stor open
+Path: database
+Content:
+
+
+
+
+
+
+
+
+
+``stor open``
+[link: /commands/categories/database.md] ’Ù@761df88fb0de71a0caedb41a347317373fb0d61c3eb352e7407a04ecfa8d7172ÙJTitle: title: stor open
+Path: Signature
+Content:
+``> stor open {flags} ``
+’Ù@231c86ad4a2eadcacdd3bf09283a9399fdc13c733485dd6b980ee4c2a71bd6feÙaTitle: title: stor open
+Path: Input/output types:
+Content:
+input
+output
+nothing
+sqlite-in-memory
+’Ù@d666b66ae16b3dfce743bda11cc002de243a0bbeddca6f81f085f96025a57abcÙTitle: title: stor open
+Path: Examples
+Content:
+Open the in-memory sqlite database
+```Fenced(Borrowed("nu"))
+> stor open
+
+
+```

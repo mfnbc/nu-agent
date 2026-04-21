@@ -1,0 +1,84 @@
+���@5fdbab0eac3c1b8189eaffb32ddb410472288ceff1b674d46e84c2fc959f4667�\Title: title: drop column
+Path: contributors: false
+Content:
+
+
+
+
+
+``reject``
+
+
+``reject``
+
+
+��@8641fde899ad4e6af9a4f5ca737167e86bb10cc72703f7bed369c0ed0c4a7773�iTitle: title: drop column
+Path: filters
+Content:
+``drop column``
+[link: /commands/categories/filters.md] ��@191b08e8c8d4fc94095c5ec5795d0a05a6da7de0905508941584d3df81792ef7�WTitle: title: drop column
+Path: Signature
+Content:
+``> drop column {flags} (columns)``
+��@35353ab0cdf2dc256ccfc0e4d4f6b3680db0a65871f663a8dca144499e1444f5�\Title: title: drop column
+Path: Flags
+Content:
+``--left, -l``
+: Drop columns from the left.
+��@444a4fefdb5a77dd8db9d195f9aca263e1828b3c1d819d463adeacbf03588416�zTitle: title: drop column
+Path: Parameters
+Content:
+``columns``
+: Starting from the end, the number of columns to remove.
+��@a892e91494e104b8d65e086e1862deba9dec86b4041cfab4704df6765e1c76a8�dTitle: title: drop column
+Path: Input/output types:
+Content:
+input
+output
+table
+table
+record
+record
+��@d886bd06f7d9b4e6bc0a556ab3602b72c6d5fe26ac3f3678318858584386963b��Title: title: drop column
+Path: Examples
+Content:
+Remove the last column of a table
+```Fenced(Borrowed("nu"))
+> [[lib, extension]; [nu-lib, rs] [nu-core, rb]] | drop column
+╭───┬─────────╮
+│ # │   lib   │
+├───┼─────────┤
+│ 0 │ nu-lib  │
+│ 1 │ nu-core │
+╰───┴─────────╯
+
+
+```
+Remove the last column of a record
+```Fenced(Borrowed("nu"))
+> {lib: nu-lib, extension: rs} | drop column
+╭─────┬────────╮
+│ lib │ nu-lib │
+╰─────┴────────╯
+
+```
+Remove the first column of a table
+```Fenced(Borrowed("nu"))
+> [[lib, extension]; [nu-lib, rs] [nu-core, rb]] | drop column --left
+╭───┬───────────╮
+│ # │ extension │
+├───┼───────────┤
+│ 0 │ rs        │
+│ 1 │ rb        │
+╰───┴───────────╯
+
+
+```
+Remove the first column of a record
+```Fenced(Borrowed("nu"))
+> {lib: nu-lib, extension: rs} | drop column --left
+╭───────────┬────╮
+│ extension │ rs │
+╰───────────┴────╯
+
+```

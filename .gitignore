@@ -29,3 +29,10 @@ crates/**/target/
 # Misc
 /node_modules/
 .DS_Store
+
+# External docs / rebuildable corpora
+external/nushell.github.io/
+
+# Large generated corpus artifacts (rebuildable)
+data/nu_docs_vectors.nuon
+build/nu_ingest/

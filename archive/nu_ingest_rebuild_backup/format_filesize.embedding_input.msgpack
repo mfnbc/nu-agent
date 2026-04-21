@@ -1,0 +1,62 @@
+–’Ù@d4fbdb122310649fc36d53d9e773c4144af6a037aa35a15d3f1098141643240eÙzTitle: title: format filesize
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``format filesize``
+[link: /commands/categories/strings.md] ’Ù@93edda1da37de3a8b361e5f10362c7522f633c82d6cfc366d1031f755d72db49ÙlTitle: title: format filesize
+Path: Signature
+Content:
+``> format filesize {flags} (format value) ...rest``
+’Ù@267cd8e0e6d3d59061fd708e6c324a42f557416c4499cfca5fba6df3e3329848ÙÍTitle: title: format filesize
+Path: Parameters
+Content:
+``format value``
+: The format into which convert the file sizes.
+``...rest``
+: For a data structure input, format filesizes at the given cell paths.
+’Ù@d1b5834dd789d03ef406b9f201b71d04605f97330b42230ad4a83771309fa7cdÙxTitle: title: format filesize
+Path: Input/output types:
+Content:
+input
+output
+filesize
+string
+table
+table
+record
+record
+’Ù@64e9d986c3b8e407bc1740947ec5cbd859039f54d2af674c5a4c68393af99205ÚWTitle: title: format filesize
+Path: Examples
+Content:
+Convert the size column to KB.
+```Fenced(Borrowed("nu"))
+> ls | format filesize kB size
+
+
+```
+Convert the apparent column to B.
+```Fenced(Borrowed("nu"))
+> du | format filesize B apparent
+
+
+```
+Convert the size data to MB.
+```Fenced(Borrowed("nu"))
+> 4GB | format filesize MB
+4000 MB
+
+```
+’Ù@f852e21e5caefbeb54e74f92846bfbd097d87f220b96e4b11893a778faf4f224ÙyTitle: title: format filesize
+Path: Notes
+Content:
+Decimal precision is controlled by 
+``$env.config.float_precision``
+.

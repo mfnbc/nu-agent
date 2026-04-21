@@ -1,0 +1,63 @@
+���@483790e3f1b74561b36bb834fb1eb50ad112c686757fb1199bd4277034e78a83لTitle: title: polars str-replace
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars str-replace``
+[link: /commands/categories/dataframe.md] ��@b3aa248e733007fb9e6ac108e91e471f73c91cb748a8c579c14da8af77212e86�\Title: title: polars str-replace
+Path: Signature
+Content:
+``> polars str-replace {flags} ``
+��@df3062b14bd77cfe3b9ea9049d10c7caf830a0171ba0472c8fe0893bad37b0a7ٟTitle: title: polars str-replace
+Path: Flags
+Content:
+``--pattern, -p {string}``
+: Regex pattern to be matched.
+``--replace, -r {string}``
+: Replacing string.
+��@dcaedce5cae08724cbfdd3cb8b348bafa37532102f52c6dddde0de038d651edfٹTitle: title: polars str-replace
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@172e19161f3746296948d08a602b264c7c16cfb913286354a3102937c252bd15��Title: title: polars str-replace
+Path: Examples
+Content:
+Replaces string in column
+```Fenced(Borrowed("nu"))
+> [[a]; [abc] [abcabc]] | polars into-df | polars select (polars col a | polars str-replace --pattern ab --replace AB) | polars collect
+╭───┬────────╮
+│ # │   a    │
+├───┼────────┤
+│ 0 │ ABc    │
+│ 1 │ ABcabc │
+╰───┴────────╯
+
+
+```
+Replaces string
+```Fenced(Borrowed("nu"))
+> [abc abc abc] | polars into-df | polars str-replace --pattern ab --replace AB
+╭───┬─────╮
+│ # │  0  │
+├───┼─────┤
+│ 0 │ ABc │
+│ 1 │ ABc │
+│ 2 │ ABc │
+╰───┴─────╯
+
+
+```

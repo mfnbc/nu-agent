@@ -1,0 +1,81 @@
+•’Ù@a9427579b3e56ed530ba0800b1dfb35ea8c17f5b73de8b5b4ccaf085e047b169Ù»Title: title: 'This week in Nushell #317'
+Path: This Week in Nushell #317
+Content:
+
+
+
+
+Published Friday, 2025-09-19, including PRs merged Friday, 2025-09-12 through Thursday, 2025-09-18.
+’Ù@d73b6c1c98dfef171b0029fa86b160d7d9889c22b5c550b4e7ce485f5229f7cfÚ‰Title: title: 'This week in Nushell #317'
+Path: Nushell
+Content:
+@cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/16707] Fixed building 
+``cargo check -p nu-cli --features sqlite``
+ (#16707)
+[link: https://github.com/nushell/nushell/pull/16690] Loaded experimental options before command context is loaded (#16690)
+[link: https://github.com/nushell/nushell/pull/16684] Bumped 
+``rusqlite``
+ to 0.37 (#16684)
+[link: https://github.com/nushell/nushell/pull/16629] Added batch config for tables (#16629)
+@ayax79:
+[link: https://github.com/nushell/nushell/pull/16703] Upgraded Polars to 50.1 (#16703)
+@132ikl:
+[link: https://github.com/nushell/nushell/pull/16702] Fixed CI artifact upload on Windows runner (#16702)
+[link: https://github.com/nushell/nushell/pull/16701] Refactored toolkit.nu into module (#16701)
+[link: https://github.com/nushell/nushell/pull/16686] Added 
+``network``
+ feature to top-level crate (#16686)
+[link: https://github.com/nushell/nushell/pull/16682] Gated SQLite history behind existing 
+``sqlite``
+ feature (#16682)
+[link: https://github.com/nushell/nushell/pull/16669] Allowed variables in columns of table literals (#16669)
+@Bahex:
+[link: https://github.com/nushell/nushell/pull/16699] Improved ast-grep rules (#16699)
+[link: https://github.com/nushell/nushell/pull/16698] Gated some plugin related tests behind the "plugin" feature (#16698)
+[link: https://github.com/nushell/nushell/pull/16674] Set up ast-grep with custom lints (#16674)
+[link: https://github.com/nushell/nushell/pull/16668] Cleaned up parser (#16668)
+[link: https://github.com/nushell/nushell/pull/16626] Refactored API for embedded config files (#16626)
+@blindFS:
+[link: https://github.com/nushell/nushell/pull/16696] Cleaned up unnecessary parser code (#16696)
+[link: https://github.com/nushell/nushell/pull/16694] Fixed panic on goto std files in LSP (#16694)
+[link: https://github.com/nushell/nushell/pull/16628] Added more LSP test cases (#16628)
+[link: https://github.com/nushell/nushell/pull/16596] Refactored check_call dedup (#16596)
+@sholderbach:
+[link: https://github.com/nushell/nushell/pull/16691] Fixed 
+``ast-grep``
+ config (#16691)
+[link: https://github.com/nushell/nushell/pull/16671] Updated Rust to 1.88.0 and used let-chains (#16671)
+@Sheape:
+[link: https://github.com/nushell/nushell/pull/16689] Bumped 
+``bytesize``
+ to 2.1.0 (#16689)
+[link: https://github.com/nushell/nushell/pull/16688] Improved error messages for invalid binary strings (#16688)
+[link: https://github.com/nushell/nushell/pull/16680] Aligned 
+``query db``
+ description with other database commands (#16680)
+@simonborje:
+[link: https://github.com/nushell/nushell/pull/16640] Expanded alias when sending command to external completion (#16640)
+@app/dependabot:
+[link: https://github.com/nushell/nushell/pull/16704] Bumped plist from 1.7.0 to 1.8.0 (#16704)
+[link: https://github.com/nushell/nushell/pull/16479] Bumped scraper from 0.23.1 to 0.24.0 (#16479)
+’Ù@116a9ae0885a8d146e2e8809b561f6e4e8b9c03b94da3fbb9594d9bf57771070Ú!Title: title: 'This week in Nushell #317'
+Path: Documentation
+Content:
+@NotTheDr01ds:
+[link: https://github.com/nushell/nushell.github.io/pull/2038] Published TWiN 315 and 316 (#2038)
+@partrita:
+[link: https://github.com/nushell/nushell.github.io/pull/2001] Added Korean documents (#2001)
+’Ù@72e35b8061a4cc4f3fea3c2c166d25113e0512ad8fef59124f5271cf9438993bÚ.Title: title: 'This week in Nushell #317'
+Path: VSCode Extension
+Content:
+@fdncred:
+[link: https://github.com/nushell/vscode-nushell-lang/pull/220] Updated changelog for another pre-release (#220)
+[link: https://github.com/nushell/vscode-nushell-lang/pull/219] Disabled auto-reveal output panel (#219)
+’Ù@2059cfef1a0ae8d8e55d5b82cddc5293029b19995517e05b5b67763a1264c852ÙªTitle: title: 'This week in Nushell #317'
+Path: reedline
+Content:
+@cptpiepmatz:
+[link: https://github.com/nushell/reedline/pull/950] Bumped 
+``rusqlite``
+ to 0.37 (#950)

@@ -1,0 +1,168 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-04-twin0093.mdŸ@f8611b6f3beadd1e2197e5823a31dbd23402d26a7c0dcfd4f7fe83d41c03e33d∏This week in Nushell #93ëßNushell⁄	'jonathandturner 
+[link: https://github.com/nushell/nushell/pull/3557] added more fixes for bigint duration
+, 
+[link: https://github.com/nushell/nushell/pull/3554] switched duration back to bigint
+, 
+[link: https://github.com/nushell/nushell/pull/3553] bumped to 0.32.1
+, 
+[link: https://github.com/nushell/nushell/pull/3552] finished removing arg deserialization
+, 
+[link: https://github.com/nushell/nushell/pull/3535] retained tag when accessing a var
+, 
+[link: https://github.com/nushell/nushell/pull/3527] updateed Cargo.lock
+, 
+[link: https://github.com/nushell/nushell/pull/3526] update Cargo.toml for nu-pretty-hex
+, 
+[link: https://github.com/nushell/nushell/pull/3521] released to 0.32
+, and 
+[link: https://github.com/nushell/nushell/pull/3514] autogenerate missing docs
+efx 
+[link: https://github.com/nushell/nushell/pull/3556] ported group-by date to engine-p
+inet56 created 
+[link: https://github.com/nushell/nushell/pull/3550] README: output from -> output to
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3548] added list of installed plugins to version command
+, 
+[link: https://github.com/nushell/nushell/pull/3544] accommodated decimals when converting gjson numbers
+, and 
+[link: https://github.com/nushell/nushell/pull/3539] fixed the prompt
+stepnivlk 
+[link: https://github.com/nushell/nushell/pull/3530] fixed VCS markers not showing up in textview
+Garfield96 created 
+[link: https://github.com/nushell/nushell/pull/3529] from sqlite: Add parameter --tables
+, 
+[link: https://github.com/nushell/nushell/pull/3523] bumped rusqlite from 0.24.2 to 0.25.3
+, and 
+[link: https://github.com/nushell/nushell/pull/3522] to sqlite: Fix panic caused by empty input tables
+ahkrr created 
+[link: https://github.com/nushell/nushell/pull/3524] fix: filename quoting # and update and unify surf dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/3519] feat: add attribute selection to nu_plugion_selector
+andrasio 
+[link: https://github.com/nushell/nushell/pull/3518] ensured correct partial key=value flag.
+, and 
+[link: https://github.com/nushell/nushell/pull/3515] added support for key=value named flag support.
+lily-mara 
+[link: https://github.com/nushell/nushell/pull/3516] resolved issues with 
+``rm *``
+ globbing
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/3502] added dataframe commands
+íêê⁄	^Title: This week in Nushell #93
+Path: Nushell
+Content:
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/3557] added more fixes for bigint duration
+, 
+[link: https://github.com/nushell/nushell/pull/3554] switched duration back to bigint
+, 
+[link: https://github.com/nushell/nushell/pull/3553] bumped to 0.32.1
+, 
+[link: https://github.com/nushell/nushell/pull/3552] finished removing arg deserialization
+, 
+[link: https://github.com/nushell/nushell/pull/3535] retained tag when accessing a var
+, 
+[link: https://github.com/nushell/nushell/pull/3527] updateed Cargo.lock
+, 
+[link: https://github.com/nushell/nushell/pull/3526] update Cargo.toml for nu-pretty-hex
+, 
+[link: https://github.com/nushell/nushell/pull/3521] released to 0.32
+, and 
+[link: https://github.com/nushell/nushell/pull/3514] autogenerate missing docs
+efx 
+[link: https://github.com/nushell/nushell/pull/3556] ported group-by date to engine-p
+inet56 created 
+[link: https://github.com/nushell/nushell/pull/3550] README: output from -> output to
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3548] added list of installed plugins to version command
+, 
+[link: https://github.com/nushell/nushell/pull/3544] accommodated decimals when converting gjson numbers
+, and 
+[link: https://github.com/nushell/nushell/pull/3539] fixed the prompt
+stepnivlk 
+[link: https://github.com/nushell/nushell/pull/3530] fixed VCS markers not showing up in textview
+Garfield96 created 
+[link: https://github.com/nushell/nushell/pull/3529] from sqlite: Add parameter --tables
+, 
+[link: https://github.com/nushell/nushell/pull/3523] bumped rusqlite from 0.24.2 to 0.25.3
+, and 
+[link: https://github.com/nushell/nushell/pull/3522] to sqlite: Fix panic caused by empty input tables
+ahkrr created 
+[link: https://github.com/nushell/nushell/pull/3524] fix: filename quoting # and update and unify surf dependency
+, and 
+[link: https://github.com/nushell/nushell/pull/3519] feat: add attribute selection to nu_plugion_selector
+andrasio 
+[link: https://github.com/nushell/nushell/pull/3518] ensured correct partial key=value flag.
+, and 
+[link: https://github.com/nushell/nushell/pull/3515] added support for key=value named flag support.
+lily-mara 
+[link: https://github.com/nushell/nushell/pull/3516] resolved issues with 
+``rm *``
+ globbing
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/3502] added dataframe commands
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-04-twin0093.mdŸ@4515ef7450c90b3189ba9db9e2cf445bd93d367b06cd29847507ac1ab6f64fa2∏This week in Nushell #93ë©ExtensionŸcfdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/33] updated for nushell 0.32.0
+íêêŸúTitle: This week in Nushell #93
+Path: Extension
+Content:
+fdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/33] updated for nushell 0.32.0
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-04-twin0093.mdŸ@6ad9d573df582a67e926ee47c29cf1fef5f8371e9bec80d4e78eb20f00d99da5∏This week in Nushell #93ë≠Documentation⁄Tjonathandturner 
+[link: https://github.com/nushell/nushell.github.io/pull/143] updated starship info
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/140] added 0.32 blog
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/136] updated config.js
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/135] updated ToC
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/134] updated text and examples for 0.32
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/133] Add/update command docs
+LovecraftianHorror fixed 
+[link: https://github.com/nushell/nushell.github.io/pull/141] a minor nit fixes
+andrasio created 
+[link: https://github.com/nushell/nushell.github.io/pull/138] variables_y_subexpresiones.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/137] actualizaci√≥n: matem√°ticas.md
+íêê⁄ëTitle: This week in Nushell #93
+Path: Documentation
+Content:
+jonathandturner 
+[link: https://github.com/nushell/nushell.github.io/pull/143] updated starship info
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/140] added 0.32 blog
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/136] updated config.js
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/135] updated ToC
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/134] updated text and examples for 0.32
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/133] Add/update command docs
+LovecraftianHorror fixed 
+[link: https://github.com/nushell/nushell.github.io/pull/141] a minor nit fixes
+andrasio created 
+[link: https://github.com/nushell/nushell.github.io/pull/138] variables_y_subexpresiones.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/137] actualizaci√≥n: matem√°ticas.md
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-04-twin0093.mdŸ@16f893fb776ff4ad02bbed39974b83b5ea8cbb81909a8fa577f14c6784df4326∏This week in Nushell #93ë™Nu_Scripts⁄µfdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/59] several attempts at making a test script faster
+, 
+[link: https://github.com/nushell/nu_scripts/pull/58] updated gradient for better nushell comparisons
+, 
+[link: https://github.com/nushell/nu_scripts/pull/57] added script to partially generate tmLanguage settings for extension
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/56] added for to some scripts
+íêê⁄ÔTitle: This week in Nushell #93
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/59] several attempts at making a test script faster
+, 
+[link: https://github.com/nushell/nu_scripts/pull/58] updated gradient for better nushell comparisons
+, 
+[link: https://github.com/nushell/nu_scripts/pull/57] added script to partially generate tmLanguage settings for extension
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/56] added for to some scripts

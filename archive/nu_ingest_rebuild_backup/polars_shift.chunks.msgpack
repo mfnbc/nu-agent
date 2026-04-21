@@ -1,0 +1,156 @@
+���Tarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_shift.md�@3c5f14c0a2b5bc0cfe074fd6b150d1843dc0afc2aa42ca930836057c917507d7�title: polars shift��0(/commands/categories/dataframe or lazyframe.md)�
+
+
+
+
+
+
+
+
+``polars shift``
+����uTitle: title: polars shift
+Path: (/commands/categories/dataframe or lazyframe.md)
+Content:
+
+
+
+
+
+
+
+
+
+``polars shift``
+��Tarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_shift.md�@ebed7e06edab4809c42fd6f9e44e7cea85395ef1276758e008882d94d83c4c7d�title: polars shift��Signature�$``> polars shift {flags} (period)``
+����XTitle: title: polars shift
+Path: Signature
+Content:
+``> polars shift {flags} (period)``
+��Tarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_shift.md�@6fa04f5f3c193114a6f773fa636589c434e0991ad4d977a5f1b87d3e25faa91a�title: polars shift��Flags�J``--fill, -f {any}``
+: Expression used to fill the null values (lazy df).
+����zTitle: title: polars shift
+Path: Flags
+Content:
+``--fill, -f {any}``
+: Expression used to fill the null values (lazy df).
+��Tarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_shift.md�@c47c065d578f950bf087229717afec1a77ee79830455b0c521fe5026f71998f1�title: polars shift��Parameters�``period``
+: Shift period.
+����PTitle: title: polars shift
+Path: Parameters
+Content:
+``period``
+: Shift period.
+��Tarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_shift.md�@69ce3aa6ea412253ccc2071e29f2088e045c2c8cb9fbd851dad3ee5709df90cc�title: polars shift��Input/output types:�uinput
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+���ٳTitle: title: polars shift
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��Tarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_shift.md�@9d2ef90b78b9876d58bd357ff6f1c77ebf82a092a361b54774bc2e2e364fc723�title: polars shift��Examples��Shifts the values by a given period
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-df | polars shift 2 | polars drop-nulls
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 2 │
+╰───┴───╯
+
+
+```
+Shifts the values by a given period, fill absent values with 0
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-lazy | polars shift 2 --fill 0 | polars collect
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+│ 2 │ 1 │
+│ 3 │ 2 │
+│ 4 │ 2 │
+╰───┴───╯
+
+
+```
+Shift values of a column, fill absent values with 0
+```Fenced(Borrowed("nu"))
+> [[a]; [1] [2] [2] [3] [3]]
+                    | polars into-lazy
+                    | polars with-column {b: (polars col a | polars shift 2 --fill 0)}
+                    | polars collect
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 0 │
+│ 1 │ 2 │ 0 │
+│ 2 │ 2 │ 1 │
+│ 3 │ 3 │ 2 │
+│ 4 │ 3 │ 2 │
+╰───┴───┴───╯
+
+
+```
+�����Title: title: polars shift
+Path: Examples
+Content:
+Shifts the values by a given period
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-df | polars shift 2 | polars drop-nulls
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 2 │
+╰───┴───╯
+
+
+```
+Shifts the values by a given period, fill absent values with 0
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-lazy | polars shift 2 --fill 0 | polars collect
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 0 │
+│ 1 │ 0 │
+│ 2 │ 1 │
+│ 3 │ 2 │
+│ 4 │ 2 │
+╰───┴───╯
+
+
+```
+Shift values of a column, fill absent values with 0
+```Fenced(Borrowed("nu"))
+> [[a]; [1] [2] [2] [3] [3]]
+                    | polars into-lazy
+                    | polars with-column {b: (polars col a | polars shift 2 --fill 0)}
+                    | polars collect
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 0 │
+│ 1 │ 2 │ 0 │
+│ 2 │ 2 │ 1 │
+│ 3 │ 3 │ 2 │
+│ 4 │ 3 │ 2 │
+╰───┴───┴───╯
+
+
+```

@@ -1,0 +1,46 @@
+���@cee5bd5c97da146820aab85e3c9fc01455ee861807b56181b28be849c88bb396�xTitle: title: polars query
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars query``
+[link: /commands/categories/dataframe.md] ��@e2ecff7e24ecd7788d2f030885d5a1b68fbbac8864fa3278bcecdccbde5e9eac�UTitle: title: polars query
+Path: Signature
+Content:
+``> polars query {flags} (sql)``
+��@68ebe04dd7203a14137bf616dc4b1bd644ed9dd6a3aa9eb9ce9be7cd5b0b7128�JTitle: title: polars query
+Path: Parameters
+Content:
+``sql``
+: Sql query.
+��@ddaae3bf39f1bc4a61105c7656bc0d2cec5cc023d45d590dcae509a789e109a2ُTitle: title: polars query
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@416a7dbf8356a4310e91485eca4781fdbf8343ac642046dc24a2e20624fa3042�;Title: title: polars query
+Path: Examples
+Content:
+Query dataframe using SQL
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars query 'select a from df'
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 3 │
+╰───┴───╯
+
+
+```

@@ -1,0 +1,137 @@
+”’Ù@888282f7b580c0d4cf188e77ffc2089827603032b1ad5ded7073329b637700cdÙ±Title: This week in Nushell #124
+Path: Nushell
+Content:
+ilius 
+[link: https://github.com/nushell/nushell/pull/4241] fixed docs/sample_config/config.toml: use env.PROMPT_COMMAND
+’Ù@550e1af226f28055124cceec10a271ab6581a6fa86a6a76d9a41a31aa3b5eb63Ú?Title: This week in Nushell #124
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/122] added the ability to have a right hand prompt
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/121] move oh-my.nu to engine-q folder
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/120] updated 
+``into column_path``
+ to 
+``into column-path``
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/119] updates to help with windows parsing
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/118] a fancy git prompt for engine-q
+’Ù@8bdb16e91f8ee126e14cd2270bcea1bbeb1162791df0eecf8cfb50c4292ba4aaÚ“Title: This week in Nushell #124
+Path: engine-q
+Content:
+jt created 
+[link: https://github.com/nushell/engine-q/pull/696] Fix short flags with extra
+, and 
+[link: https://github.com/nushell/engine-q/pull/695] Default the values of named params
+, and 
+[link: https://github.com/nushell/engine-q/pull/684] Fix path external
+, and 
+[link: https://github.com/nushell/engine-q/pull/682] Expand external command names
+, and 
+[link: https://github.com/nushell/engine-q/pull/681] Make ls more forgiving
+, and 
+[link: https://github.com/nushell/engine-q/pull/679] Allow int/float to coerce in type checker
+, and 
+[link: https://github.com/nushell/engine-q/pull/675] Each needs to clone its env
+, and 
+[link: https://github.com/nushell/engine-q/pull/674] Add shells support to auto-cd
+, and 
+[link: https://github.com/nushell/engine-q/pull/673] More shell fixes
+, and 
+[link: https://github.com/nushell/engine-q/pull/672] Fix directory change lag
+, and 
+[link: https://github.com/nushell/engine-q/pull/671] Add shells support
+, and 
+[link: https://github.com/nushell/engine-q/pull/668] Limit when we expand external args
+, and 
+[link: https://github.com/nushell/engine-q/pull/667] Some cleanups for cd/PWD
+, and 
+[link: https://github.com/nushell/engine-q/pull/665] Move $nu.env to $env
+, and 
+[link: https://github.com/nushell/engine-q/pull/663] Use default prompt as fallback
+, and 
+[link: https://github.com/nushell/engine-q/pull/662] Let describe know about binary
+, and 
+[link: https://github.com/nushell/engine-q/pull/660] Port fetch (with fixes)
+, and 
+[link: https://github.com/nushell/engine-q/pull/659] Some error improvements
+, and 
+[link: https://github.com/nushell/engine-q/pull/657] Lex comment spans correctly
+, and 
+[link: https://github.com/nushell/engine-q/pull/655] bump reedline
+, and 
+[link: https://github.com/nushell/engine-q/pull/653] Highlight block and record
+, and 
+[link: https://github.com/nushell/engine-q/pull/652] Fix list and table print
+, and 
+[link: https://github.com/nushell/engine-q/pull/651] Fix build breakage - bump ansi term
+, and 
+[link: https://github.com/nushell/engine-q/pull/650] Fix perf regression with stmts
+, and 
+[link: https://github.com/nushell/engine-q/pull/643] Allow pipelines across multiple lines if end in pipe
+, and 
+[link: https://github.com/nushell/engine-q/pull/642] Plugin before config
+, and 
+[link: https://github.com/nushell/engine-q/pull/641] Add fuzzy/ignore flag to get
+, and 
+[link: https://github.com/nushell/engine-q/pull/638] Add parser tracing, fix 629
+, and 
+[link: https://github.com/nushell/engine-q/pull/637] Cleanup binary stream print a little
+, and 
+[link: https://github.com/nushell/engine-q/pull/636] Bump reedline, again
+, and 
+[link: https://github.com/nushell/engine-q/pull/635] Bump reedline, again
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/692] added repository name and current tag to gstat
+, and 
+[link: https://github.com/nushell/engine-q/pull/691] added CR, LF and CRLF to char command
+, and 
+[link: https://github.com/nushell/engine-q/pull/678] Fixes how environment is cloned inside tight loops
+, and 
+[link: https://github.com/nushell/engine-q/pull/587] Use only $nu.env.PWD for getting the current directory
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/686] double prompt
+fdncred created 
+[link: https://github.com/nushell/engine-q/pull/666] tweak 
+``source``
+ parsing to allow quotes around string
+, and 
+[link: https://github.com/nushell/engine-q/pull/654] add docs about coloring and theming
+, and 
+[link: https://github.com/nushell/engine-q/pull/639] make prompt indicators configurable
+onthebridgetonowhere 
+[link: https://github.com/nushell/engine-q/pull/664] moved fetch to extra and clean up some code
+stormasm 
+[link: https://github.com/nushell/engine-q/pull/628] moved get_columns from the table_viewer to a central location
+, and 
+[link: https://github.com/nushell/engine-q/pull/617] ported over from nushell the column flag for the length command
+’Ù@77126b6e7e3c2b921f200df50b44b355f933c6b56755e60a1e2271992e164f83Ú;Title: This week in Nushell #124
+Path: reedline
+Content:
+elferherrera 
+[link: https://github.com/nushell/reedline/pull/242] removed position function
+, and 
+[link: https://github.com/nushell/reedline/pull/238] corrected extra line
+, and 
+[link: https://github.com/nushell/reedline/pull/237] corrected extra line
+, and 
+[link: https://github.com/nushell/reedline/pull/230] Big buffer
+jt created 
+[link: https://github.com/nushell/reedline/pull/241] Double prompt
+, and 
+[link: https://github.com/nushell/reedline/pull/229] strip ansi before estimate
+, and 
+[link: https://github.com/nushell/reedline/pull/228] Estimate wrapping
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/235] added issue templates
+, and 
+[link: https://github.com/nushell/reedline/pull/234] improved and highlight history search
+, and 
+[link: https://github.com/nushell/reedline/pull/233] Insert strings directly
+, and 
+[link: https://github.com/nushell/reedline/pull/232] bumped dependency versions
+, and 
+[link: https://github.com/nushell/reedline/pull/231] Improve correctness of move operations

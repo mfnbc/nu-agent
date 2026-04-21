@@ -1,0 +1,17 @@
+ëóŸearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/00_types_overview.mdŸ@d3aa5539018f828edcbd9aaa487b85eafc9933e54292baf456cd63d6ff81abaa∏Types in the Nu Languageë®Overview⁄‰Nu is strongly typed and gradually typed.
+Strongly typed:
+ Types are strictly enforced.
+Gradually typed:
+ A mix between static (types are checked at compile time) type checks and dynamic (types are checked at runtime).
+Gradual typing is a clarification of optional typing where the developer could choose or not choose to add type annotations to declarations. This paper from Jeremy Siek is here: 
+[link: https://jsiek.github.io/home/WhatIsGradualTyping.html] What is Gradual Typing?
+íêê⁄Title: Types in the Nu Language
+Path: Overview
+Content:
+Nu is strongly typed and gradually typed.
+Strongly typed:
+ Types are strictly enforced.
+Gradually typed:
+ A mix between static (types are checked at compile time) type checks and dynamic (types are checked at runtime).
+Gradual typing is a clarification of optional typing where the developer could choose or not choose to add type annotations to declarations. This paper from Jeremy Siek is here: 
+[link: https://jsiek.github.io/home/WhatIsGradualTyping.html] What is Gradual Typing?

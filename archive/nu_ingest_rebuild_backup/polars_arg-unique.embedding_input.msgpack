@@ -1,0 +1,42 @@
+���@1554bf8beee2cc85f7da6d16217c561be97861a9e4b7d54f6710b5d7c8938289قTitle: title: polars arg-unique
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars arg-unique``
+[link: /commands/categories/dataframe.md] ��@55e13ceb41d74ddb8b869e9ddda4f1caf6f713736869f5b7fb5a955c98865429�ZTitle: title: polars arg-unique
+Path: Signature
+Content:
+``> polars arg-unique {flags} ``
+��@690dbb41302289973956bb1d29aec60a87ecfdfe1aaeb5c782a03a7effb08c31ٔTitle: title: polars arg-unique
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@e5d9a31f2a855aaa3cc1e6101e9ee3e4529c7e3a68e76ac23bbb19825436e35a��Title: title: polars arg-unique
+Path: Examples
+Content:
+Returns indexes for unique values
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-df | polars arg-unique
+╭───┬────────────╮
+│ # │ arg_unique │
+├───┼────────────┤
+│ 0 │          0 │
+│ 1 │          1 │
+│ 2 │          3 │
+╰───┴────────────╯
+
+
+```

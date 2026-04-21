@@ -1,0 +1,175 @@
+”’Ù@d6852312300de78edd5df9e80825f54a95dfb8b11851c30408ad10457aba10d8ÚMTitle: This week in Nushell #137
+Path: Nushell
+Content:
+jt 
+[link: https://github.com/nushell/nushell/pull/5136] let 'each' also send input to block
+, and 
+[link: https://github.com/nushell/nushell/pull/5135] Soften the block arity checking
+, and 
+[link: https://github.com/nushell/nushell/pull/5132] Revert "nu-cli/completions: added a cache layer for fetching completions"
+, and 
+[link: https://github.com/nushell/nushell/pull/5123] Move 'keep' to 'take'
+, and 
+[link: https://github.com/nushell/nushell/pull/5118] Add datetime to math-like
+, and 
+[link: https://github.com/nushell/nushell/pull/5116] Improve describe to be more accurate
+, and 
+[link: https://github.com/nushell/nushell/pull/5115] Remove external name exceptions
+, and 
+[link: https://github.com/nushell/nushell/pull/5111] Add unary not
+, and 
+[link: https://github.com/nushell/nushell/pull/5105] Load plugins for scripts and commands, too
+, and 
+[link: https://github.com/nushell/nushell/pull/5090] Add raw strings, use raw strings for env
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/5134] doc change from engine-q to nushell
+fdncred 
+[link: https://github.com/nushell/nushell/pull/5133] added ability to opt in to normal string replacement in 
+``replace``
+ cmd
+, and 
+[link: https://github.com/nushell/nushell/pull/5124] add keep deprecated commands
+, and 
+[link: https://github.com/nushell/nushell/pull/5120] update 
+``str find-replace``
+ to 
+``str replace``
+, and 
+[link: https://github.com/nushell/nushell/pull/5100] enables find to search records with regex
+, and 
+[link: https://github.com/nushell/nushell/pull/5087] new 
+``glob``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/5086] update shadow-rs, update git2, remove indexmap from 
+``version``
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/5130] short descriptions
+, and 
+[link: https://github.com/nushell/nushell/pull/5104] use arc to avoid cloning entire engine for menus
+, and 
+[link: https://github.com/nushell/nushell/pull/5092] allow record as text style
+, and 
+[link: https://github.com/nushell/nushell/pull/5085] Generic menus
+rgwood 
+[link: https://github.com/nushell/nushell/pull/5129] fixed command descriptions+examples
+, and 
+[link: https://github.com/nushell/nushell/pull/5117] Change string contains operators to regex
+, and 
+[link: https://github.com/nushell/nushell/pull/5097] Trim newline from 
+``input``
+ result
+, and 
+[link: https://github.com/nushell/nushell/pull/5096] Add some command search terms
+, and 
+[link: https://github.com/nushell/nushell/pull/5095] Fix Format for non-basic data types
+, and 
+[link: https://github.com/nushell/nushell/pull/5084] Set LAST_EXIT_CODE on parse error
+, and 
+[link: https://github.com/nushell/nushell/pull/5083] Fix Python plugin (missing search terms)
+, and 
+[link: https://github.com/nushell/nushell/pull/5081] Fix for search terms in 
+``help --find``
+, and 
+[link: https://github.com/nushell/nushell/pull/5080] Tweak append+prepend help
+herlon214 created 
+[link: https://github.com/nushell/nushell/pull/5126] nu-cli/completions: removed default filter for command
+, and 
+[link: https://github.com/nushell/nushell/pull/5122] nu-cli/completions: fix file completions filtering, clippy fixes
+, and 
+[link: https://github.com/nushell/nushell/pull/5114] nu-cli/completions: added a cache layer for fetching completions
+, and 
+[link: https://github.com/nushell/nushell/pull/5108] nu-cli/completions: prioritize non hidden folders
+, and 
+[link: https://github.com/nushell/nushell/pull/5102] nu-cli: refactor completions
+, and 
+[link: https://github.com/nushell/nushell/pull/5078] feature: Add some context to completions
+rybertm 
+[link: https://github.com/nushell/nushell/pull/5119] implemented rest of 
+``touch``
+ flags
+kubouch 
+[link: https://github.com/nushell/nushell/pull/5099] added env.nu file for environment config
+michel-slm 
+[link: https://github.com/nushell/nushell/pull/5094] included license text in all crates
+Hofer-Julian 
+[link: https://github.com/nushell/nushell/pull/5075] removed enqine-q from issue template
+EliKor 
+[link: https://github.com/nushell/nushell/pull/5073] added quiet and feedback to mv command
+’Ù@f4d06445818f107c8bd172d3281e9b0d319ee854a92ed4f3287350782dbf664cÚ¼Title: This week in Nushell #137
+Path: Documentation
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell.github.io/pull/381] tweaked words/type-os
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/380] translated working with lists and strings to zh-CN from commit: 13129315c
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/378] Translate types_of_data and loading_data to zh-cn from commit: c13a71d11
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/375] Translate thinking_in_nushell and moving_around to zh-cn 
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/374] Translate installation to zh-cn from commit: c13a71d11
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/373] Translate table of contents and README from commit: c13a71d11
+elferherrera created 
+[link: https://github.com/nushell/nushell.github.io/pull/379] Reedline menus
+rgwood 
+[link: https://github.com/nushell/nushell.github.io/pull/377] documented regex operator changes
+jt 
+[link: https://github.com/nushell/nushell.github.io/pull/376] refreshed commands
+BatmanAoD 
+[link: https://github.com/nushell/nushell.github.io/pull/372] indicated that 
+``which``
+ works like Bash's 
+``type``
+AadamZ5 
+[link: https://github.com/nushell/nushell.github.io/pull/370] added record to table example
+chtenb 
+[link: https://github.com/nushell/nushell.github.io/pull/369] used tip blocks (Fixes #365)
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/367] Add migration instruction for git bash users
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/366] Update environment.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/364] Update line_editor.md
+mvolkmann 
+[link: https://github.com/nushell/nushell.github.io/pull/368] added link to an alternate way to enable Starship
+AaronC81 
+[link: https://github.com/nushell/nushell.github.io/pull/345] described interpolated string escape workarounds
+’Ù@cfb5260ca7c720f8cd1358e28760344e871efcde8b7f96f34444ac11e3efdf0eÚLTitle: This week in Nushell #137
+Path: Nu_Scripts
+Content:
+efx 
+[link: https://github.com/nushell/nu_scripts/pull/201] fixed git gone
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/200] updated scripts to support 
+``str replace``
+Euphrasiologist added 
+[link: https://github.com/nushell/nu_scripts/pull/199] Up function
+’Ù@d9c450e7f06ea5cda7dc8646def91293655f808d91d407c2f62075333621c61aÚÕTitle: This week in Nushell #137
+Path: reedline
+Content:
+elferherrera added 
+[link: https://github.com/nushell/reedline/pull/390] Short description
+, and 
+[link: https://github.com/nushell/reedline/pull/389] short descriptions
+, and 
+[link: https://github.com/nushell/reedline/pull/378] generic reedline menus
+fdncred 
+[link: https://github.com/nushell/reedline/pull/388] changed up prompt with traditional nushell colors
+, and 
+[link: https://github.com/nushell/reedline/pull/381] clean up query output so that it's closer to matching what key bindings want
+stormasm 
+[link: https://github.com/nushell/reedline/pull/387] fixed example in readme
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/386] Added Ctrl-Delete/Backspace as default keybindings
+, and 
+[link: https://github.com/nushell/reedline/pull/385] Escape Ctrl-R history search with 
+``ESC``
+, and 
+[link: https://github.com/nushell/reedline/pull/379] [
+API
+]
+ Allow the 
+``Completer``
+ impl to be stateful

@@ -1,0 +1,47 @@
+���@005cecae8ffc5d3872fbfcfb15e598e15d26bf988c7f12fb9ba10cadc56d009eلTitle: title: polars concat-str
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars concat-str``
+[link: /commands/categories/expression.md] ��@f7ab0d8267773f4ce7dc344ce76d549e4b37ea9d5abd952736718cd4d26a2b7b�zTitle: title: polars concat-str
+Path: Signature
+Content:
+``> polars concat-str {flags} (separator) (concat expressions)``
+��@cb55819120c81c1de53c0df11b70811d491743231ef7295f76f38d3c7013f138��Title: title: polars concat-str
+Path: Parameters
+Content:
+``separator``
+: Separator used during the concatenation.
+``concat expressions``
+: Expression(s) that define the string concatenation.
+��@b4e1787c8e12d3ac9e62249d4b30d290fa5691b5635c082747863d4809e8f9ee�fTitle: title: polars concat-str
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_expression
+��@4ee727776ff7d70d5c243623ea80c2ab495597cf0a3af028f4ab9cbf56711736�=Title: title: polars concat-str
+Path: Examples
+Content:
+Creates a concat string expression
+```Fenced(Borrowed("nu"))
+> let df = ([[a b c]; [one two 1] [three four 2]] | polars into-df);
+    $df | polars with-column ((polars concat-str "-" [(polars col a) (polars col b) ((polars col c) * 2)]) | polars as concat)
+╭───┬───────┬──────┬───┬──────────────╮
+│ # │   a   │  b   │ c │    concat    │
+├───┼───────┼──────┼───┼──────────────┤
+│ 0 │ one   │ two  │ 1 │ one-two-2    │
+│ 1 │ three │ four │ 2 │ three-four-4 │
+╰───┴───────┴──────┴───┴──────────────╯
+
+
+```

@@ -1,0 +1,69 @@
+•—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/is-terminal.mdÙ@50ce6f37cbcea3624b85f4b3851c1398fc1e205286fdecb1b50d67f36e2ad8dd²title: is-terminal‘¨platformÙB
+
+
+
+
+
+
+
+
+``is-terminal``
+[link: /commands/categories/platform.md] ’ÙtTitle: title: is-terminal
+Path: platform
+Content:
+
+
+
+
+
+
+
+
+
+``is-terminal``
+[link: /commands/categories/platform.md] —ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/is-terminal.mdÙ@f9cd57146dbf58fa4200d959fe909258d0a4794e6f5dd90bb4f86afafc55d7c6²title: is-terminal‘©Signature»``> is-terminal {flags} ``
+’ÙNTitle: title: is-terminal
+Path: Signature
+Content:
+``> is-terminal {flags} ``
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/is-terminal.mdÙ@ec7ca19a1b2a49069b47c2346ea0aee93477a9fd37e4988713a6090101151074²title: is-terminal‘¥FlagsÙ”``--stdin, -i``
+: Check if stdin is a terminal.
+``--stdout, -o``
+: Check if stdout is a terminal.
+``--stderr, -e``
+: Check if stderr is a terminal.
+’ÙÃTitle: title: is-terminal
+Path: Flags
+Content:
+``--stdin, -i``
+: Check if stdin is a terminal.
+``--stdout, -o``
+: Check if stdout is a terminal.
+``--stderr, -e``
+: Check if stderr is a terminal.
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/is-terminal.mdÙ@61bc901f13c941fe12ae62be6edd55a2df8231562149bdcd0c613b72d5deb046²title: is-terminal‘³Input/output types:ºinput
+output
+nothing
+bool
+’ÙWTitle: title: is-terminal
+Path: Input/output types:
+Content:
+input
+output
+nothing
+bool
+—ÙSarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/is-terminal.mdÙ@9b9073a78d50b641ec42d2d7055577c8aa3d066178b636a981f17f7b74cfdcaf²title: is-terminal‘¨ExamplesÙİReturn "terminal attached" if standard input is attached to a terminal, and "no terminal" if not.
+```Fenced(Borrowed("nu"))
+> if (is-terminal --stdin) { "terminal attached" } else { "no terminal" }
+terminal attached
+
+```
+’ÚTitle: title: is-terminal
+Path: Examples
+Content:
+Return "terminal attached" if standard input is attached to a terminal, and "no terminal" if not.
+```Fenced(Borrowed("nu"))
+> if (is-terminal --stdin) { "terminal attached" } else { "no terminal" }
+terminal attached
+
+```

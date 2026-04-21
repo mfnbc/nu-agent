@@ -1,0 +1,33 @@
+”’Ù@755fb72765cf0cfaca6b14cee325603e4fe156717e202fd1e06d3b34fa765823ÙzTitle: title: scope engine-stats
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``scope engine-stats``
+[link: /commands/categories/core.md] ’Ù@cdfcfd77a6085eefd9dfdbc436033a4ab3a96fbbcd7f0d9f72ecaaa1727519faÙ\Title: title: scope engine-stats
+Path: Signature
+Content:
+``> scope engine-stats {flags} ``
+’Ù@b432aadcc4d5f09429ffbe9738e955cb817255347caa144146e45167c8a9ccc0Ù]Title: title: scope engine-stats
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+’Ù@83c839a67a77a45124a105a1338fa1c676f99331061cf9dc30e21484f04a282dÙšTitle: title: scope engine-stats
+Path: Examples
+Content:
+Show the stats on the current engine state.
+```Fenced(Borrowed("nu"))
+> scope engine-stats
+
+
+```

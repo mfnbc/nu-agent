@@ -1,0 +1,61 @@
+���@15f58a16b26ab5aea6f5e8cf53a726209c2fc15bc5336fc330bb1074cdbfa2baـTitle: title: polars is-unique
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars is-unique``
+[link: /commands/categories/dataframe.md] ��@b11b642dc64d86dad6557a3b96f32ccc3885a07198b284c9c4524eafaa65d081�XTitle: title: polars is-unique
+Path: Signature
+Content:
+``> polars is-unique {flags} ``
+��@cd004cd3c13c5e094bcd08f6218324d8614d4e6f96bc023a534339685a799d6fٓTitle: title: polars is-unique
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@808ee7a1a27289dca5f137a175c8ae89bf127adf32503568ac6b4f3a8ec9cbef��Title: title: polars is-unique
+Path: Examples
+Content:
+Create mask indicating unique values
+```Fenced(Borrowed("nu"))
+> [5 6 6 6 8 8 8] | polars into-df | polars is-unique
+╭───┬───────────╮
+│ # │ is_unique │
+├───┼───────────┤
+│ 0 │ true      │
+│ 1 │ false     │
+│ 2 │ false     │
+│ 3 │ false     │
+│ 4 │ false     │
+│ 5 │ false     │
+│ 6 │ false     │
+╰───┴───────────╯
+
+
+```
+Create mask indicating duplicated rows in a dataframe
+```Fenced(Borrowed("nu"))
+> [[a, b]; [1 2] [1 2] [3 3] [3 3] [1 1]] | polars into-df | polars is-unique
+╭───┬───────────╮
+│ # │ is_unique │
+├───┼───────────┤
+│ 0 │ false     │
+│ 1 │ false     │
+│ 2 │ false     │
+│ 3 │ false     │
+│ 4 │ true      │
+╰───┴───────────╯
+
+
+```

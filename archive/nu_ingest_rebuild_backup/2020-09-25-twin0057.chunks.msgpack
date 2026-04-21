@@ -1,0 +1,101 @@
+ëóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2020-09-25-twin0057.mdŸ@bc8fa0ff64c27278785e5b9b4ea8a32859f1d4ea106f4d7acf39df6e6dab0308≥This week in Nu #57ë≥This week in Nu #57⁄Ggillespiecd 
+[link: https://github.com/nushell/nushell/pull/2598] removed unused files in nu-data
+, 
+[link: https://github.com/nushell/nushell/pull/2597] consolidated suggestion code
+, 
+[link: https://github.com/nushell/nushell/pull/2595] cleaned up 'did you mean'
+, added 
+[link: https://github.com/nushell/nushell/pull/2586] spaces between column suggestions
+fdncred 
+[link: https://github.com/nushell/nushell/pull/2594] improved Windows builds
+, 
+[link: https://github.com/nushell/nushell/pull/2579] added more table themes
+, 
+[link: https://github.com/nushell/book/pull/132] updated the operator map in the book
+luccasmmg 
+[link: https://github.com/nushell/nushell/pull/2590] removed the path check for 
+``rm -f``
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/2588] released 0.20
+, 
+[link: https://github.com/nushell/nushell/pull/2585] upgraded bigint/bigdecimal
+, 
+[link: https://github.com/nushell/nushell/pull/2581] renamed some internal symbols
+notryanb 
+[link: https://github.com/nushell/nushell/pull/2587] added csv support to 
+``fetch``
+coolshaurya 
+[link: https://github.com/nushell/nushell/pull/2584] improved 
+``help commands``
+ when showing subcommands
+mattclarke 
+[link: https://github.com/nushell/nushell/pull/2582] added tests for 
+``ls -a``
+radekvit 
+[link: https://github.com/nushell/nushell/pull/2580] implemented passthrough for 
+``benchmark``
+, 
+[link: https://github.com/nushell/nushell/pull/2578] fixed panics in 
+``random int``
+, 
+[link: https://github.com/nushell/nushell/pull/2576] added global mode to 
+``str trim``
+, 
+[link: https://github.com/nushell/nushell/pull/2571] added system, user, and idle time to 
+``benchmark``
+jzaefferer 
+[link: https://github.com/nushell/demo/pull/63] added a custom panic handler to the demo
+, and 
+[link: https://github.com/nushell/demo/pull/62] fixed a broken api call in the demo
+íêê⁄ÖTitle: This week in Nu #57
+Path: This week in Nu #57
+Content:
+gillespiecd 
+[link: https://github.com/nushell/nushell/pull/2598] removed unused files in nu-data
+, 
+[link: https://github.com/nushell/nushell/pull/2597] consolidated suggestion code
+, 
+[link: https://github.com/nushell/nushell/pull/2595] cleaned up 'did you mean'
+, added 
+[link: https://github.com/nushell/nushell/pull/2586] spaces between column suggestions
+fdncred 
+[link: https://github.com/nushell/nushell/pull/2594] improved Windows builds
+, 
+[link: https://github.com/nushell/nushell/pull/2579] added more table themes
+, 
+[link: https://github.com/nushell/book/pull/132] updated the operator map in the book
+luccasmmg 
+[link: https://github.com/nushell/nushell/pull/2590] removed the path check for 
+``rm -f``
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/2588] released 0.20
+, 
+[link: https://github.com/nushell/nushell/pull/2585] upgraded bigint/bigdecimal
+, 
+[link: https://github.com/nushell/nushell/pull/2581] renamed some internal symbols
+notryanb 
+[link: https://github.com/nushell/nushell/pull/2587] added csv support to 
+``fetch``
+coolshaurya 
+[link: https://github.com/nushell/nushell/pull/2584] improved 
+``help commands``
+ when showing subcommands
+mattclarke 
+[link: https://github.com/nushell/nushell/pull/2582] added tests for 
+``ls -a``
+radekvit 
+[link: https://github.com/nushell/nushell/pull/2580] implemented passthrough for 
+``benchmark``
+, 
+[link: https://github.com/nushell/nushell/pull/2578] fixed panics in 
+``random int``
+, 
+[link: https://github.com/nushell/nushell/pull/2576] added global mode to 
+``str trim``
+, 
+[link: https://github.com/nushell/nushell/pull/2571] added system, user, and idle time to 
+``benchmark``
+jzaefferer 
+[link: https://github.com/nushell/demo/pull/63] added a custom panic handler to the demo
+, and 
+[link: https://github.com/nushell/demo/pull/62] fixed a broken api call in the demo

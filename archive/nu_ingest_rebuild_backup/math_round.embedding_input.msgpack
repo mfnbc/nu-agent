@@ -1,0 +1,81 @@
+���@43d078ea00e029756ce2544c9808c0e89de7d9dfa410716679b97740f6f2f81c�jTitle: title: math round
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math round``
+[link: /commands/categories/math.md] ��@abdcc236c7e5a69723917266dfdde406e985e9a4bafa94e51934c74e6a0edf71�LTitle: title: math round
+Path: Signature
+Content:
+``> math round {flags} ``
+��@723a346f741114d83abaea8917a1a51001ae1447e3dc47a4eb8b5313f309c4c2�bTitle: title: math round
+Path: Flags
+Content:
+``--precision, -p {number}``
+: Digits of precision.
+��@98962aeda81a9fe7f726b6fb834165f0552356ec1e801ea451479d5d344a6307ِTitle: title: math round
+Path: Input/output types:
+Content:
+input
+output
+number
+number
+list
+<
+number
+>
+
+list
+<
+number
+>
+
+range
+list
+<
+number
+>
+
+��@6b159552a327a6c2f1a67840c84ef19d01566fa2ef905bda653d4e0e743d14dc�%Title: title: math round
+Path: Examples
+Content:
+Apply the round function to a list of numbers.
+```Fenced(Borrowed("nu"))
+> [1.5 2.3 -3.1] | math round
+╭───┬────╮
+│ 0 │  2 │
+│ 1 │  2 │
+│ 2 │ -3 │
+╰───┴────╯
+
+
+```
+Apply the round function with precision specified.
+```Fenced(Borrowed("nu"))
+> [1.555 2.333 -3.111] | math round --precision 2
+╭───┬───────╮
+│ 0 │  1.56 │
+│ 1 │  2.33 │
+│ 2 │ -3.11 │
+╰───┴───────╯
+
+
+```
+Apply negative precision to a list of numbers.
+```Fenced(Borrowed("nu"))
+> [123, 123.3, -123.4] | math round --precision -1
+╭───┬──────╮
+│ 0 │  120 │
+│ 1 │  120 │
+│ 2 │ -120 │
+╰───┴──────╯
+
+
+```

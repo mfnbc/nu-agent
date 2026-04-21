@@ -1,0 +1,211 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-11-24-twin0222.mdŸ@cfa76f5d8952a52dfbb3aa3097f1cf01954580881376d0ffdfc4edae220331a8πThis week in Nushell #222ëßNushell⁄
+6WindSoilder 
+[link: https://github.com/nushell/nushell/pull/11057] made it possible to pass switch values dynamically
+, and 
+[link: https://github.com/nushell/nushell/pull/10851] improved redirection so it supports redirecting stderr while piping stdout to the next command
+ysthakur created 
+[link: https://github.com/nushell/nushell/pull/11006] a spread operator for list literals
+amtoine 
+[link: https://github.com/nushell/nushell/pull/11097] deprecated 
+``std clip``
+, and 
+[link: https://github.com/nushell/nushell/pull/10999] removed 
+``def-env``
+ and 
+``export def-env``
+hustcer made lots of fixes to the release workflows: 
+[link: https://github.com/nushell/nushell/pull/11146] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11145] 2
+, 
+[link: https://github.com/nushell/nushell/pull/11121] 3
+drbrain did several internal refactorings to help with error messages (
+[link: https://github.com/nushell/nushell/pull/11126] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11125] 2
+, 
+[link: https://github.com/nushell/nushell/pull/11124] 3
+, 
+[link: https://github.com/nushell/nushell/pull/11123] 4
+, 
+[link: https://github.com/nushell/nushell/pull/11120] 5
+, 
+[link: https://github.com/nushell/nushell/pull/11119] 6
+, 
+[link: https://github.com/nushell/nushell/pull/11118] 7
+, 
+[link: https://github.com/nushell/nushell/pull/11094] 8
+, 
+[link: https://github.com/nushell/nushell/pull/11093] 9
+, 
+[link: https://github.com/nushell/nushell/pull/10983] 10
+) and 
+[link: https://github.com/nushell/nushell/pull/10970] added a new 
+``is-terminal``
+ command to determine if stdin/out/err are a terminal
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11122] moved more commands to the opaque 
+``Record``
+ type
+, 
+[link: https://github.com/nushell/nushell/pull/11115] bumped 
+``procfs``
+ to 0.16.0
+, 
+[link: https://github.com/nushell/nushell/pull/11114] bumped the Nu version to 
+``0.87.2``
+, and 
+[link: https://github.com/nushell/nushell/pull/11075] used the new record API in 
+``describe --detailed``
+, and 
+[link: https://github.com/nushell/nushell/pull/11052] improved developer documentation
+danielsomerfield 
+[link: https://github.com/nushell/nushell/pull/11112] fixed the toolkit to run for the whole workspace on 'check pr'
+IanManske 
+[link: https://github.com/nushell/nushell/pull/11066] refactored 
+``Value``
+ cell path functions to fix bugs
+tskinn 
+[link: https://github.com/nushell/nushell/pull/11005] added a new 
+``mktemp``
+ command
+MarikaChlebowska 
+[link: https://github.com/nushell/nushell/pull/10962] added a more descriptive error message when passing a list to 
+``from_csv``
+íêê⁄
+nTitle: This week in Nushell #222
+Path: Nushell
+Content:
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/11057] made it possible to pass switch values dynamically
+, and 
+[link: https://github.com/nushell/nushell/pull/10851] improved redirection so it supports redirecting stderr while piping stdout to the next command
+ysthakur created 
+[link: https://github.com/nushell/nushell/pull/11006] a spread operator for list literals
+amtoine 
+[link: https://github.com/nushell/nushell/pull/11097] deprecated 
+``std clip``
+, and 
+[link: https://github.com/nushell/nushell/pull/10999] removed 
+``def-env``
+ and 
+``export def-env``
+hustcer made lots of fixes to the release workflows: 
+[link: https://github.com/nushell/nushell/pull/11146] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11145] 2
+, 
+[link: https://github.com/nushell/nushell/pull/11121] 3
+drbrain did several internal refactorings to help with error messages (
+[link: https://github.com/nushell/nushell/pull/11126] 1
+, 
+[link: https://github.com/nushell/nushell/pull/11125] 2
+, 
+[link: https://github.com/nushell/nushell/pull/11124] 3
+, 
+[link: https://github.com/nushell/nushell/pull/11123] 4
+, 
+[link: https://github.com/nushell/nushell/pull/11120] 5
+, 
+[link: https://github.com/nushell/nushell/pull/11119] 6
+, 
+[link: https://github.com/nushell/nushell/pull/11118] 7
+, 
+[link: https://github.com/nushell/nushell/pull/11094] 8
+, 
+[link: https://github.com/nushell/nushell/pull/11093] 9
+, 
+[link: https://github.com/nushell/nushell/pull/10983] 10
+) and 
+[link: https://github.com/nushell/nushell/pull/10970] added a new 
+``is-terminal``
+ command to determine if stdin/out/err are a terminal
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/11122] moved more commands to the opaque 
+``Record``
+ type
+, 
+[link: https://github.com/nushell/nushell/pull/11115] bumped 
+``procfs``
+ to 0.16.0
+, 
+[link: https://github.com/nushell/nushell/pull/11114] bumped the Nu version to 
+``0.87.2``
+, and 
+[link: https://github.com/nushell/nushell/pull/11075] used the new record API in 
+``describe --detailed``
+, and 
+[link: https://github.com/nushell/nushell/pull/11052] improved developer documentation
+danielsomerfield 
+[link: https://github.com/nushell/nushell/pull/11112] fixed the toolkit to run for the whole workspace on 'check pr'
+IanManske 
+[link: https://github.com/nushell/nushell/pull/11066] refactored 
+``Value``
+ cell path functions to fix bugs
+tskinn 
+[link: https://github.com/nushell/nushell/pull/11005] added a new 
+``mktemp``
+ command
+MarikaChlebowska 
+[link: https://github.com/nushell/nushell/pull/10962] added a more descriptive error message when passing a list to 
+``from_csv``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-11-24-twin0222.mdŸ@54f0dab4f1d9e9646904da5ff02c73463c9ca7560c6c3c9245f869a7a4d4cad8πThis week in Nushell #222ë≠Documentation⁄ÿKtoks created 
+[link: https://github.com/nushell/nushell.github.io/pull/1154] Update creating_errors.md
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1153] Clean up contributor book
+ppenguin created 
+[link: https://github.com/nushell/nushell.github.io/pull/1152] Add 
+``parse``
+ examples to 
+Parsing
+arnau created 
+[link: https://github.com/nushell/nushell.github.io/pull/1151] Unifies all cookbook codeblocks to use the same style.
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1150] Add a cookbook comparing jq and nushell
+132ikl created 
+[link: https://github.com/nushell/nushell.github.io/pull/1142] Add a snippet to suggest using the ? operator for environmental variables
+íêê⁄Title: This week in Nushell #222
+Path: Documentation
+Content:
+Ktoks created 
+[link: https://github.com/nushell/nushell.github.io/pull/1154] Update creating_errors.md
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1153] Clean up contributor book
+ppenguin created 
+[link: https://github.com/nushell/nushell.github.io/pull/1152] Add 
+``parse``
+ examples to 
+Parsing
+arnau created 
+[link: https://github.com/nushell/nushell.github.io/pull/1151] Unifies all cookbook codeblocks to use the same style.
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1150] Add a cookbook comparing jq and nushell
+132ikl created 
+[link: https://github.com/nushell/nushell.github.io/pull/1142] Add a snippet to suggest using the ? operator for environmental variables
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-11-24-twin0222.mdŸ@2503291d7537b6993a157e9a2c0f7a787b4d610258e4cdbea5dd8ea93e3db047πThis week in Nushell #222ë™Nu_Scripts⁄[amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/674] add 
+``clip``
+ from standard library
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/673] Using def --env instead of def-env
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/671] rename 
+``cmd parse``
+ to 
+``argx``
+ to improve importing
+íêê⁄ñTitle: This week in Nushell #222
+Path: Nu_Scripts
+Content:
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/674] add 
+``clip``
+ from standard library
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/673] Using def --env instead of def-env
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/671] rename 
+``cmd parse``
+ to 
+``argx``
+ to improve importing

@@ -1,0 +1,56 @@
+“’Ù@f98f5f7a71bbd398d511c4d93e9c85e6627bb4540ebd81c62539625013ad5f47ÙÒTitle: This week in Nushell #108
+Path: This week in Nushell #108
+Content:
+Big news this week - 
+[link: https://virtualenv.pypa.io/en/latest/changelog.html#v20-8-0-2021-09-16] virtualenv added Nushell support
+!
+’Ù@7e55e700bd28a87efb5e16b735a77be3f5e190d9f33827cb05477d4288855cd1ÚÞTitle: This week in Nushell #108
+Path: Nushell
+Content:
+aminya 
+[link: https://github.com/nushell/nushell/pull/4021] fixed enabling SIMD
+jt created 
+[link: https://github.com/nushell/nushell/pull/4019] bump 0.37.1
+, and 
+[link: https://github.com/nushell/nushell/pull/4009] temporarily remove the circular dep
+, and 
+[link: https://github.com/nushell/nushell/pull/4007] Update main.wxs
+, and 
+[link: https://github.com/nushell/nushell/pull/4006] released to 0.37
+kubouch 
+[link: https://github.com/nushell/nushell/pull/4015] moved nu-path tests to integration tests
+, and updated 
+[link: https://github.com/nushell/nushell/pull/4008] path commands: Put column path args behid flag; Allow 
+``path join``
+ appending without flag
+, and added 
+[link: https://github.com/nushell/nushell/pull/3998] Small fixes and refactors to paths & source command
+tw4452852 
+[link: https://github.com/nushell/nushell/pull/4014] added command 
+``g``
+ to switch shell quickly
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/4013] updated to polars 0.16
+, and 
+[link: https://github.com/nushell/nushell/pull/4003] changed name to PROMPT_COMMAND
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4004] added table selector for downloading web tables
+’Ù@a819db65b4eb8633936914f784b0f4c104f2de0499e7bfde2d788e510f0b18e6ÚnTitle: This week in Nushell #108
+Path: engine-q
+Content:
+jt added 
+[link: https://github.com/nushell/engine-q/pull/49] very early proof-of-concept git branch completion
+, and added 
+[link: https://github.com/nushell/engine-q/pull/46] block param types
+elferherrera improved 
+[link: https://github.com/nushell/engine-q/pull/48] error check on def and alias
+, and improved 
+[link: https://github.com/nushell/engine-q/pull/40] parse errors for def, let and alias
+stormasm created 
+[link: https://github.com/nushell/engine-q/pull/47] more block param and build string tests in concert with lists
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/45] allowed parsing left-unbounded range (..10)
+, 
+[link: https://github.com/nushell/engine-q/pull/44] floating point ranges
+, and 
+[link: https://github.com/nushell/engine-q/pull/43] added stepping support & reversing to ranges

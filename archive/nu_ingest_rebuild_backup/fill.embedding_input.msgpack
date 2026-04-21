@@ -1,0 +1,128 @@
+���@c50eb8d17657347f48e5593c5eeeededa00c7daf41256fc1063eb40208e79da0�lTitle: title: fill
+Path: conversions
+Content:
+
+
+
+
+
+
+
+
+
+``fill``
+[link: /commands/categories/conversions.md] ��@6a152f88a69401c6eaf3e7bfb8a8d094c0ff77ece05b020fdf6bb9c7193e1484�@Title: title: fill
+Path: Signature
+Content:
+``> fill {flags} ``
+��@a95596c5ee3c15d0bc283033e8fc4decbf2de4abe42e311af2a033a55f5a0741�?Title: title: fill
+Path: Flags
+Content:
+``--width, -w {int}``
+: The width of the output. Defaults to 1.
+``--alignment, -a {string}``
+: The alignment of the output. Defaults to Left (Left(l), Right(r), Center(c/m), MiddleRight(cr/mr)).
+``--character, -c {string}``
+: The character to fill with. Defaults to ' ' (space).
+��@dfd30e05a8960f0fd559cd615d821a4fcf0b26611e3bbbd8f4d781d9d674a6c0�Title: title: fill
+Path: Input/output types:
+Content:
+input
+output
+int
+string
+float
+string
+string
+string
+filesize
+string
+list
+<
+int
+>
+
+list
+<
+string
+>
+
+list
+<
+float
+>
+
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+list
+<
+filesize
+>
+
+list
+<
+string
+>
+
+list
+<
+any
+>
+
+list
+<
+string
+>
+
+��@52c95b20106863f8ce6a4fd2e03ff88366cf46f5b086b28438ffa6346b2035ff�CTitle: title: fill
+Path: Examples
+Content:
+Fill a string on the left side to a width of 15 with the character '─'.
+```Fenced(Borrowed("nu"))
+> 'nushell' | fill --alignment l --character '─' --width 15
+nushell────────
+
+```
+Fill a string on the right side to a width of 15 with the character '─'.
+```Fenced(Borrowed("nu"))
+> 'nushell' | fill --alignment r --character '─' --width 15
+────────nushell
+
+```
+Fill an empty string with 10 '─' characters.
+```Fenced(Borrowed("nu"))
+> '' | fill --character '─' --width 10
+──────────
+
+```
+Fill a number on the left side to a width of 5 with the character '0'.
+```Fenced(Borrowed("nu"))
+> 1 | fill --alignment right --character '0' --width 5
+00001
+
+```
+Fill a number on both sides to a width of 5 with the character '0'.
+```Fenced(Borrowed("nu"))
+> 1.1 | fill --alignment center --character '0' --width 5
+01.10
+
+```
+Fill a filesize on both sides to a width of 10 with the character '0'.
+```Fenced(Borrowed("nu"))
+> 1kib | fill --alignment middle --character '0' --width 10
+0001024000
+
+```

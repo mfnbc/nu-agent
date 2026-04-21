@@ -1,0 +1,66 @@
+���@9ddd8b50cb8f9a99d35866f634e1893a4502320a14b2d24852785e5ad0d7dc10�vTitle: title: polars over
+Path: lazyframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars over``
+[link: /commands/categories/lazyframe.md] ��@8058d945cece8e644e28ea173bf1470fac8f292ebd18f87902d81e9a23fd0da8�UTitle: title: polars over
+Path: Signature
+Content:
+``> polars over {flags} ...rest``
+��@f9bce45d365179497a9b6f972f14f4556202e6c3b631c014c986b7f5c22ce107�rTitle: title: polars over
+Path: Parameters
+Content:
+``...rest``
+: Expression(s) that define the partition window.
+��@4195e5f4a2c74024146df49ccf02e8fd56fcada1ca421ac5bfca209e0192a498�nTitle: title: polars over
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+��@28e08c8beb2b4a83bf18986c5ce409dfc0ac55f9b0152d762dab1379e17334c0��Title: title: polars over
+Path: Examples
+Content:
+Compute expression over an aggregation window
+```Fenced(Borrowed("nu"))
+> [[a b]; [x 2] [x 4] [y 6] [y 4]]
+        | polars into-lazy
+        | polars select a (polars col b | polars cumulative sum | polars over a | polars as cum_b)
+        | polars collect
+╭───┬───┬───────╮
+│ # │ a │ cum_b │
+├───┼───┼───────┤
+│ 0 │ x │     2 │
+│ 1 │ x │     6 │
+│ 2 │ y │     6 │
+│ 3 │ y │    10 │
+╰───┴───┴───────╯
+
+
+```
+Compute expression over an aggregation window where partitions are defined by expressions
+```Fenced(Borrowed("nu"))
+> [[a b]; [x 2] [X 4] [Y 6] [y 4]]
+        | polars into-lazy
+        | polars select a (polars col b | polars cumulative sum | polars over (polars col a | polars lowercase) | polars as cum_b)
+        | polars collect
+╭───┬───┬───────╮
+│ # │ a │ cum_b │
+├───┼───┼───────┤
+│ 0 │ x │     2 │
+│ 1 │ X │     6 │
+│ 2 │ Y │     6 │
+│ 3 │ y │    10 │
+╰───┴───┴───────╯
+
+
+```

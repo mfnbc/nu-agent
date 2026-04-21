@@ -1,0 +1,80 @@
+”—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-09-03-twin0106.mdÙ@e2ea9b3eb49f871e3507d007fd51b69069fa3d1d98d1a75392693fcfe6427f7c¹This week in Nushell #106‘§NushellÚ²andrasio 
+[link: https://github.com/nushell/nushell/pull/3988] allowed knowing the command name tag given no input.
+, and added the ability to 
+[link: https://github.com/nushell/nushell/pull/3986] create errors from tables
+lily-mara 
+[link: https://github.com/nushell/nushell/pull/3987] added subcommand 
+``into filesize``
+jt 
+[link: https://github.com/nushell/nushell/pull/3983] noved sys, ps, fetch, post to internal commands
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3975] added a few more chars and abbreviations to 
+``char``
+, and 
+[link: https://github.com/nushell/nushell/pull/3973] added more escapes to support ansi art
+aminya created 
+[link: https://github.com/nushell/nushell/pull/3974] feat: spawn the executables directly if possible
+Marwes 
+[link: https://github.com/nushell/nushell/pull/3961] removed duplicate dependencies
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/3730] nu-path crate refactor
+’ÚêTitle: This week in Nushell #106
+Path: Nushell
+Content:
+andrasio 
+[link: https://github.com/nushell/nushell/pull/3988] allowed knowing the command name tag given no input.
+, and added the ability to 
+[link: https://github.com/nushell/nushell/pull/3986] create errors from tables
+lily-mara 
+[link: https://github.com/nushell/nushell/pull/3987] added subcommand 
+``into filesize``
+jt 
+[link: https://github.com/nushell/nushell/pull/3983] noved sys, ps, fetch, post to internal commands
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3975] added a few more chars and abbreviations to 
+``char``
+, and 
+[link: https://github.com/nushell/nushell/pull/3973] added more escapes to support ansi art
+aminya created 
+[link: https://github.com/nushell/nushell/pull/3974] feat: spawn the executables directly if possible
+Marwes 
+[link: https://github.com/nushell/nushell/pull/3961] removed duplicate dependencies
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/3730] nu-path crate refactor
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-09-03-twin0106.mdÙ@846f76dc889747aeafca59a2c0c5036d8582bfd4d56ae75f0878885e7228b58a¹This week in Nushell #106‘©ExtensionÙˆfdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/39] updated to try and find nushell so it can be used as a terminal
+’ÙÂTitle: This week in Nushell #106
+Path: Extension
+Content:
+fdncred 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/39] updated to try and find nushell so it can be used as a terminal
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-09-03-twin0106.mdÙ@68c671a6cbf8b3af597214649c542562a817421f9ea5b7883670f99b987203e3¹This week in Nushell #106‘­DocumentationÙsfilaretov 
+[link: https://github.com/nushell/nushell.github.io/pull/190] documented removing environment variables
+’Ù±Title: This week in Nushell #106
+Path: Documentation
+Content:
+filaretov 
+[link: https://github.com/nushell/nushell.github.io/pull/190] documented removing environment variables
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-09-03-twin0106.mdÙ@6f5c6790772fba6c3febee7e49a306916f6797890e4333340dee137103aba56e¹This week in Nushell #106‘ªNu_ScriptsÚèfdncred 
+[link: https://github.com/nushell/nu_scripts/pull/96] added username/password as env vars so that we don't hit rate limit
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/95] added a nyancat script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/94] readd maintainer time
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/92] updated maintainer_time.nu
+andrasio created 
+[link: https://github.com/nushell/nu_scripts/pull/93] Infrastructure initial setup.
+’Ú#Title: This week in Nushell #106
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/96] added username/password as env vars so that we don't hit rate limit
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/95] added a nyancat script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/94] readd maintainer time
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/92] updated maintainer_time.nu
+andrasio created 
+[link: https://github.com/nushell/nu_scripts/pull/93] Infrastructure initial setup.

@@ -1,0 +1,59 @@
+–’Ù@0a02bc32f633e7a60a7c8629238349c3bd0860619b9b4b55cded43c75076df15ÙvTitle: title: decode base32
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``decode base32``
+[link: /commands/categories/formats.md] ’Ù@ae9db8a08cad3c512e8c27d6f4b392bb0984f89ef45d666e44a4b422a45ef98cÙRTitle: title: decode base32
+Path: Signature
+Content:
+``> decode base32 {flags} ``
+’Ù@e2620f151c92a1977785e28d3004393d413a847c3c955523cc9ae4f3961c63e7ÙVTitle: title: decode base32
+Path: Flags
+Content:
+``--nopad``
+: Do not pad the output.
+’Ù@dba1029ac831eefe7219c335721d24d74f3efafc4bfe3c959c8fecae7f1bffadÙZTitle: title: decode base32
+Path: Input/output types:
+Content:
+input
+output
+string
+binary
+’Ù@ace0ac579c6e17abce453cbfeaa0824937e31c7dbb1ec471f6cb0785ffac89a5Ú|Title: title: decode base32
+Path: Examples
+Content:
+Decode arbitrary binary data
+```Fenced(Borrowed("nu"))
+> "AEBAGBAF" | decode base32
+Length: 5 (0x5) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 02 03 04  05                                      â€¢â€¢â€¢â€¢â€¢
+
+
+```
+Decode an encoded string
+```Fenced(Borrowed("nu"))
+> "NBUQ====" | decode base32 | decode
+
+
+```
+Parse a string without padding
+```Fenced(Borrowed("nu"))
+> "NBUQ" | decode base32 --nopad
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   68 69                                                hi
+
+
+```
+’Ù@86b46b87657c0f766fc0897f7fd9d476905aeddaf22786e8caeae37938437cafÙ–Title: title: decode base32
+Path: Notes
+Content:
+The default alphabet is taken from RFC 4648, section 6.
+Note this command will collect stream input.

@@ -1,0 +1,37 @@
+•’Ù@cbd9a652874972d9a6cd66446ef836cf10b35f7e56642181717b47ed3d5a4b7cÙrTitle: title: to msgpackz
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to msgpackz``
+[link: /commands/categories/formats.md] ’Ù@78278cf83af1baf2482582c13d5bb2f333a4b7a1cfa662278778251c91379241ÙNTitle: title: to msgpackz
+Path: Signature
+Content:
+``> to msgpackz {flags} ``
+’Ù@f08eaa5bfe239c4fe535898190c29d20afdfaa20b8aa8d52472864e1e091d931ÚTitle: title: to msgpackz
+Path: Flags
+Content:
+``--quality, -q {int}``
+: Quality of brotli compression (default 3).
+``--window-size, -w {int}``
+: Window size for brotli compression (default 20).
+``--serialize, -s``
+: Serialize nushell types that cannot be deserialized.
+’Ù@b6b09f207c5dd5f8ac419608fb14f39b6dfb466adbf0f7f63847b23bd234cfbcÙUTitle: title: to msgpackz
+Path: Input/output types:
+Content:
+input
+output
+any
+binary
+’Ù@5ebe8b97da58d5b2b5810f8d2584b00b8bbc73ad4083a502312647e93b7a0e7dÙvTitle: title: to msgpackz
+Path: Notes
+Content:
+This is the format used by the plugin registry file ($nu.plugin-path).

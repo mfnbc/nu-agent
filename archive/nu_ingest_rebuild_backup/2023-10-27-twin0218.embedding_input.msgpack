@@ -1,0 +1,123 @@
+”’Ù@28a9e69792140360926726ad007bb6ecf1daf90b165008f193ade1cc2d3e03cdÚ
+eTitle: This week in Nushell #218
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10837] updated the NU_LIB_DIRS delimiter for command line
+, and 
+[link: https://github.com/nushell/nushell/pull/10821] fixed 
+``main``
+ not building due to errors later found in describe
+gaetschwartz 
+[link: https://github.com/nushell/nushell/pull/10836] fixed 
+``describe -d``
+ for lazy records
+, 
+[link: https://github.com/nushell/nushell/pull/10795] added a 
+``detailed``
+ flag for 
+``describe``
+, and 
+[link: https://github.com/nushell/nushell/pull/10728] made debug info lazy
+WindSoilder fixed redirection bugs: 
+[link: https://github.com/nushell/nushell/pull/10835] 1
+, 
+[link: https://github.com/nushell/nushell/pull/10816] 2
+tertsdiepraam 
+[link: https://github.com/nushell/nushell/pull/10488] implemented whoami using uutils
+hudclark 
+[link: https://github.com/nushell/nushell/pull/10829] extended pattern matching to support 
+``null``
+ literals
+, and 
+[link: https://github.com/nushell/nushell/pull/10814] improved the 
+``--flexible``
+ flag on 
+``from tsv``
+ and 
+``from csv``
+ayax79 
+[link: https://github.com/nushell/nushell/pull/10828] added dataframe support for small int types
+ludwig-austermann created 
+[link: https://github.com/nushell/nushell/pull/10824] readded the 
+``--update``
+ flag to 
+``cp``
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10818] reverted "Bump regex from 1.9.6 to 1.10.2"
+amtoine 
+[link: https://github.com/nushell/nushell/pull/10850] updated 
+``str downcase``
+ to use 
+``to_lowercase``
+, and 
+[link: https://github.com/nushell/nushell/pull/10827] deprecated 
+``glob --not``
+ in favor of 
+``glob --exclude``
+, and 
+[link: https://github.com/nushell/nushell/pull/10710] expand paths and split PATH in 
+``std path add``
+, and 
+[link: https://github.com/nushell/nushell/pull/10277] synced 
+``$env.config.filesize.metric``
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10807] finished removing the 
+``profile``
+ command and related data
+CAD97 
+[link: https://github.com/nushell/nushell/pull/10806] improved 
+``registry value``
+ return types
+, and 
+[link: https://github.com/nushell/nushell/pull/10804] removed the registry clean_string hack
+hustcer 
+[link: https://github.com/nushell/nushell/pull/10801] moved 
+``ansi link``
+ from extra to default feature
+, 
+[link: https://github.com/nushell/nushell/pull/10798] renamed 
+``str size``
+ to 
+``str stats``
+, 
+[link: https://github.com/nushell/nushell/pull/10797] updated Nushell version to v0.86 for release script
+stfacc 
+[link: https://github.com/nushell/nushell/pull/10796] fixed theming to not use white text in the default light theme
+’Ù@24e65e7f23e4533a71b8aa414318cca8f389bd26c24a47e6360115b6b1787ac2ÙÊTitle: This week in Nushell #218
+Path: Extension
+Content:
+Yakiyo created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/161] automatically publish extension to open vsx registry on release
+’Ù@ca1989e529b9e44886c2e36be7ccd29d70315d9ee703d749a3c30128e04f71e5ÚTitle: This week in Nushell #218
+Path: Documentation
+Content:
+xBLACKICEx created 
+[link: https://github.com/nushell/nushell.github.io/pull/1129] zh-CN translation update dataframes
+Roba1993 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1128] Book scripts with sub-commands
+CBenoit created 
+[link: https://github.com/nushell/nushell.github.io/pull/1127] Add a note on theming Reedlineâ€™s menus
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/1124] Update list of "types" i.e. syntax shapes for 
+``def``
+s
+rukai created 
+[link: https://github.com/nushell/nushell.github.io/pull/1123] add translation for bash "command 2>&1 | less"
+Stromberg90 created 
+[link: https://github.com/nushell/nushell.github.io/pull/1121] Fixed typo.
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/1118] Update shiki, vuepress plugins and Nushell grammar
+hatunike created 
+[link: https://github.com/nushell/nushell.github.io/pull/1117] Update types_of_data.md with "into float"
+’Ù@f1aee4049236cb6f9e344fba1bb9fc2e5fa52ab16404f049377afd10af748d97ÚíTitle: This week in Nushell #218
+Path: Nu_Scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/651] fix conflicts between git-completions.nu and git-aliases.nu
+amtoine created 
+[link: https://github.com/nushell/nu_scripts/pull/650] make hooks a module
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/648] make the themes a module
+Hullabaloo-and-Howdy-Do created 
+[link: https://github.com/nushell/nu_scripts/pull/649] null-stream.nu as stdlib-candidate

@@ -1,0 +1,156 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-18-twin0260.mdŸ@e9d35f9c1a807049f1b7022a429627766b9ad57b540ac76bebefaf4502bbe1edπThis week in Nushell #260ëßNushell⁄	fdncred 
+[link: https://github.com/nushell/nushell/pull/13629] updated to latest reedline
+, 
+[link: https://github.com/nushell/nushell/pull/13625] added the osc633e escape for VS Code
+, 
+[link: https://github.com/nushell/nushell/pull/13613] created a better error message for bad glob patterns
+, 
+[link: https://github.com/nushell/nushell/pull/13612] allowed glob to take a glob or a string as input
+, and 
+[link: https://github.com/nushell/nushell/pull/13609] added more helpful error with text/xml
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/13626] removed code duplication in glob
+ and 
+[link: https://github.com/nushell/nushell/pull/13599] included only 
+``*.nu``
+ files in the vendor autoload
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/13605] made 
+``ls -lf``
+ output full path in symbolic target
+ and 
+[link: https://github.com/nushell/nushell/pull/13553] added support for SyntaxShape::OneOf in named args
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/13595] implemented parse time type checking for range
+weirdan 
+[link: https://github.com/nushell/nushell/pull/13631] dropped outdated 
+``touch -d``
+ example
+, 
+[link: https://github.com/nushell/nushell/pull/13628] removed unused 
+``fs_extra``
+ and 
+``hamcrest2``
+ dependencies
+, and 
+[link: https://github.com/nushell/nushell/pull/13610] added fallback to extension-based content type detection when parsing 
+``Content-Type``
+ header fails
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13624] incremented the eager dataframe cache value before returning it
+qfel 
+[link: https://github.com/nushell/nushell/pull/13618] preferred process name over executable path
+ and 
+[link: https://github.com/nushell/nushell/pull/13596] fixed handling of spaces in executable names
+devyn 
+[link: https://github.com/nushell/nushell/pull/13597] added 
+``--raw``
+ switch to 
+``print``
+ for binary data
+ and 
+[link: https://github.com/nushell/nushell/pull/13585] added parse error for external commands used in assignment without caret
+Aakash788 
+[link: https://github.com/nushell/nushell/pull/13600] fixed: Only home dir path in pwd will be replaced with 
+``~``
+ in titlebar
+playdohface 
+[link: https://github.com/nushell/nushell/pull/13589] made error-message more helpful when user invokes a non-executable file (#13477)
+íêê⁄	DTitle: This week in Nushell #260
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/13629] updated to latest reedline
+, 
+[link: https://github.com/nushell/nushell/pull/13625] added the osc633e escape for VS Code
+, 
+[link: https://github.com/nushell/nushell/pull/13613] created a better error message for bad glob patterns
+, 
+[link: https://github.com/nushell/nushell/pull/13612] allowed glob to take a glob or a string as input
+, and 
+[link: https://github.com/nushell/nushell/pull/13609] added more helpful error with text/xml
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/13626] removed code duplication in glob
+ and 
+[link: https://github.com/nushell/nushell/pull/13599] included only 
+``*.nu``
+ files in the vendor autoload
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/13605] made 
+``ls -lf``
+ output full path in symbolic target
+ and 
+[link: https://github.com/nushell/nushell/pull/13553] added support for SyntaxShape::OneOf in named args
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/13595] implemented parse time type checking for range
+weirdan 
+[link: https://github.com/nushell/nushell/pull/13631] dropped outdated 
+``touch -d``
+ example
+, 
+[link: https://github.com/nushell/nushell/pull/13628] removed unused 
+``fs_extra``
+ and 
+``hamcrest2``
+ dependencies
+, and 
+[link: https://github.com/nushell/nushell/pull/13610] added fallback to extension-based content type detection when parsing 
+``Content-Type``
+ header fails
+ayax79 
+[link: https://github.com/nushell/nushell/pull/13624] incremented the eager dataframe cache value before returning it
+qfel 
+[link: https://github.com/nushell/nushell/pull/13618] preferred process name over executable path
+ and 
+[link: https://github.com/nushell/nushell/pull/13596] fixed handling of spaces in executable names
+devyn 
+[link: https://github.com/nushell/nushell/pull/13597] added 
+``--raw``
+ switch to 
+``print``
+ for binary data
+ and 
+[link: https://github.com/nushell/nushell/pull/13585] added parse error for external commands used in assignment without caret
+Aakash788 
+[link: https://github.com/nushell/nushell/pull/13600] fixed: Only home dir path in pwd will be replaced with 
+``~``
+ in titlebar
+playdohface 
+[link: https://github.com/nushell/nushell/pull/13589] made error-message more helpful when user invokes a non-executable file (#13477)
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-18-twin0260.mdŸ@5269da9ce04f9b18ecb11b03582787de9316a15e13f527100c1826c02191819cπThis week in Nushell #260ë≠Documentation⁄UNotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1507] corrected a few links and added table-links in Types
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1505] reworked Completions and Externs chapters
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1492] updated the Book - Types chapter
+íêê⁄ìTitle: This week in Nushell #260
+Path: Documentation
+Content:
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1507] corrected a few links and added table-links in Types
+, 
+[link: https://github.com/nushell/nushell.github.io/pull/1505] reworked Completions and Externs chapters
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1492] updated the Book - Types chapter
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-18-twin0260.mdŸ@a94a6af691f09c17c243367ed5dce1dc7341513afdd9d9414a288db3f082084cπThis week in Nushell #260ë™Nu_Scripts⁄&AucaCoyan 
+[link: https://github.com/nushell/nu_scripts/pull/933] added worktree completions
+koffydrop 
+[link: https://github.com/nushell/nu_scripts/pull/930] updated scoop completions
+christoph-blessing 
+[link: https://github.com/nushell/nu_scripts/pull/929] fixed network option missing type
+íêê⁄aTitle: This week in Nushell #260
+Path: Nu_Scripts
+Content:
+AucaCoyan 
+[link: https://github.com/nushell/nu_scripts/pull/933] added worktree completions
+koffydrop 
+[link: https://github.com/nushell/nu_scripts/pull/930] updated scoop completions
+christoph-blessing 
+[link: https://github.com/nushell/nu_scripts/pull/929] fixed network option missing type
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2024-08-18-twin0260.mdŸ@35060cacc78a3bae42d8d1ecba4bd65f342c1a95f0f53f5455a6e2ffe707aff7πThis week in Nushell #260ë®reedlineŸntisonkun 
+[link: https://github.com/nushell/reedline/pull/813] implemented ClearScreen with crossterm's Clear
+íêêŸßTitle: This week in Nushell #260
+Path: reedline
+Content:
+tisonkun 
+[link: https://github.com/nushell/reedline/pull/813] implemented ClearScreen with crossterm's Clear

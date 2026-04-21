@@ -11,20 +11,7 @@ export def main [--name: string] {
     let safe_name = ($name | str replace "'" "\\'")
     let q = ("MATCH (c:Command {name: '" + $safe_name + "'}) OPTIONAL MATCH (c)-[:DESCRIBED_IN]->(ch:Chunk) RETURN c.signature AS signature, ch.data.content AS description, ch.data.code_blocks AS examples")
 
-    # Check for presence of the kuzu-query binary in PATH
-    if (which kuzu-query | length) > 0 {
-        try {
-            let rows = (kuzu-query $q | from json)
-            let signature = ($rows | first 1 | get signature) | default ""
-            let descriptions = ($rows | where description != null | get description) | default []
-            let examples = ($rows | where examples != null | get examples) | default []
-
-            return { status: "ok", backend: "kuzu", name: $name, signature: $signature, description: $descriptions, examples: $examples }
-        } catch { |err|
-            # if kuzu-query fails, fallthrough to JSON fallback
-            null
-        }
-    }
+    # Note: Kùzu integration removed. Always use the local command_map / corpus fallback.
 
     # Fallback: use command_map.nuon + (data/nu_docs_vectors.nuon or data/nu_docs.msgpack)
     if not ("data/command_map.nuon" | path exists) {

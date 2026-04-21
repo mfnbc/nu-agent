@@ -1,0 +1,134 @@
+”—ÙGarchive/external_nushell_repo_backup/nushell.github.io/cookbook/help.mdÙ@716c0410ee1fcd86ffeec6c6c6f0876d07fc1930b6674ac72b8b896569c39fb4«title: Help‘¤HelpÙWThe 
+``help``
+ command is a good way to become familiar with all that Nu has to offer.
+’Ù~Title: title: Help
+Path: Help
+Content:
+The 
+``help``
+ command is a good way to become familiar with all that Nu has to offer.
+—ÙGarchive/external_nushell_repo_backup/nushell.github.io/cookbook/help.mdÙ@0aba93ed1b3db9dc6dfaf8fe0889898b1611a8a1f3f2f4ba368413af7adb8ece«title: Help‘Ù"How to see all supported commands:Ù-```Fenced(Borrowed("nu"))
+help commands
+
+```
+’ÙrTitle: title: Help
+Path: How to see all supported commands:
+Content:
+```Fenced(Borrowed("nu"))
+help commands
+
+```
+—ÙGarchive/external_nushell_repo_backup/nushell.github.io/cookbook/help.mdÙ@ede931f9ed1d43cb87b40ab010663e579b1093b7c2ca09b631b028acc2cbd911«title: Help‘Ù!Specific information on a commandÚ+To find more specific information on a command, use 
+``help <COMMAND>``
+. This works for regular commands (i.e. 
+``http``
+) and subcommands (i.e. 
+``http get``
+):
+```Fenced(Borrowed("nu"))
+help http get
+# => Fetch the contents from a URL.
+# => 
+# => Performs HTTP GET operation.
+# => 
+# => Search terms: network, fetch, pull, request, download, curl, wget
+# => 
+# => Usage:
+# =>   > http get {flags} <URL>
+# => 
+# => Flags:
+# =>   -h, --help - Display the help message for this command
+# =>   -u, --user <Any> - the username when authenticating
+# =>   -p, --password <Any> - the password when authenticating
+# =>   -t, --timeout <Int> - timeout period in seconds
+# =>   -H, --headers <Any> - custom headers you want to add
+# =>   -r, --raw - fetch contents as text rather than a table
+# => 
+# => Signatures:
+# =>   <nothing> | http get <string> -> <any>
+# => 
+# => Parameters:
+# =>   URL <string>: the URL to fetch the contents from
+# => 
+# => Examples:
+# =>   http get content from example.com
+# =>   > http get https://www.example.com
+# => 
+# =>   http get content from example.com, with username and password
+# =>   > http get -u myuser -p mypass https://www.example.com
+# => 
+# =>   http get content from example.com, with custom header
+# =>   > http get -H [my-header-key my-header-value] https://www.example.com
+
+```
+’ÚoTitle: title: Help
+Path: Specific information on a command
+Content:
+To find more specific information on a command, use 
+``help <COMMAND>``
+. This works for regular commands (i.e. 
+``http``
+) and subcommands (i.e. 
+``http get``
+):
+```Fenced(Borrowed("nu"))
+help http get
+# => Fetch the contents from a URL.
+# => 
+# => Performs HTTP GET operation.
+# => 
+# => Search terms: network, fetch, pull, request, download, curl, wget
+# => 
+# => Usage:
+# =>   > http get {flags} <URL>
+# => 
+# => Flags:
+# =>   -h, --help - Display the help message for this command
+# =>   -u, --user <Any> - the username when authenticating
+# =>   -p, --password <Any> - the password when authenticating
+# =>   -t, --timeout <Int> - timeout period in seconds
+# =>   -H, --headers <Any> - custom headers you want to add
+# =>   -r, --raw - fetch contents as text rather than a table
+# => 
+# => Signatures:
+# =>   <nothing> | http get <string> -> <any>
+# => 
+# => Parameters:
+# =>   URL <string>: the URL to fetch the contents from
+# => 
+# => Examples:
+# =>   http get content from example.com
+# =>   > http get https://www.example.com
+# => 
+# =>   http get content from example.com, with username and password
+# =>   > http get -u myuser -p mypass https://www.example.com
+# => 
+# =>   http get content from example.com, with custom header
+# =>   > http get -H [my-header-key my-header-value] https://www.example.com
+
+```
+—ÙGarchive/external_nushell_repo_backup/nushell.github.io/cookbook/help.mdÙ@d4c6fc758742d5dfb6874163906dcea1f9f38af3f76128ae9f4a7bbbfad754d7«title: Help‘³Custom help commandÙûIf you want to change the 
+``help``
+ output, you can create your own custom command named 
+``help``
+ and it will also be used for all 
+``--help``
+ invocations. An example of this is in the standard library.
+```Fenced(Borrowed("nu"))
+use std/help
+
+```
+’Ú1Title: title: Help
+Path: Custom help command
+Content:
+If you want to change the 
+``help``
+ output, you can create your own custom command named 
+``help``
+ and it will also be used for all 
+``--help``
+ invocations. An example of this is in the standard library.
+```Fenced(Borrowed("nu"))
+use std/help
+
+```

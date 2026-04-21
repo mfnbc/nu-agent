@@ -1,0 +1,59 @@
+–’Ù@2bd0a47ba1907da976ff61c76ec7027ff859fda6a6b471e4e9951f060aa68cdbÙvTitle: title: encode base64
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``encode base64``
+[link: /commands/categories/formats.md] ’Ù@30aa8cdd9e8206b60620e74d3680b132986436904c53422c9c5b4d592f1029eeÙRTitle: title: encode base64
+Path: Signature
+Content:
+``> encode base64 {flags} ``
+’Ù@f8f60d55d30510936f9e2f678315ae65697a909469ffeb5f49ba0eae671c9505Ù‚Title: title: encode base64
+Path: Flags
+Content:
+``--url``
+: Use the URL-safe Base64 version.
+``--nopad``
+: Don't pad the output.
+’Ù@1c35c88876ac52773a98e093daa4511789fce5e4e6d5a8490b28eb81a3a23b51ÙhTitle: title: encode base64
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+binary
+string
+’Ù@3917ee14f3e0cb8b66a4c2f1b3b785dbf250adc3f181a0209d3b05897c701a5fÚoTitle: title: encode base64
+Path: Examples
+Content:
+Encode a string with Base64
+```Fenced(Borrowed("nu"))
+> "Alphabet from A to Z" | encode base64
+QWxwaGFiZXQgZnJvbSBBIHRvIFo=
+
+```
+Encode arbitrary data
+```Fenced(Borrowed("nu"))
+> 0x[BE EE FF] | encode base64
+vu7/
+
+```
+Use a URL-safe alphabet
+```Fenced(Borrowed("nu"))
+> 0x[BE EE FF] | encode base64 --url
+vu7_
+
+```
+’Ù@cd61c3c79364a32559d95af76778ac4a38285a8b88df13aee20a0d4f38c18772Ù¸Title: title: encode base64
+Path: Notes
+Content:
+The default alphabet is taken from RFC 4648, section 4.  A URL-safe version is available.
+Note this command will collect stream input.

@@ -1,0 +1,96 @@
+���@8d86ecc8ff01881b1462317fcc054d6fb24bf4ca655fe5b16d8776a3b08f9ea1�nTitle: title: transpose
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``transpose``
+[link: /commands/categories/filters.md] ��@25dd29036ca47fb58b1677c51ccfe6f16a076e09a940ccb3ad3c83330897de9d�QTitle: title: transpose
+Path: Signature
+Content:
+``> transpose {flags} ...rest``
+��@3fa6dedd2569f82caa7467e9362ebdfd947b51687f65f97d7bf6751d179f0ccc�!Title: title: transpose
+Path: Flags
+Content:
+``--header-row, -r``
+: Use the first input column as the table header-row (or keynames when combined with --as-record).
+``--ignore-titles, -i``
+: Don't transpose the column names into values.
+``--as-record, -d``
+: Transfer to record if the result is a table and contains only one row.
+``--keep-last, -l``
+: On repetition of record fields due to 
+``header-row``
+, keep the last value obtained.
+``--keep-all, -a``
+: On repetition of record fields due to 
+``header-row``
+, keep all the values obtained.
+��@05b1c264e56c90db478e986de5ccfb4b462e9a65c7d68163db7488d08a8d011f�kTitle: title: transpose
+Path: Parameters
+Content:
+``...rest``
+: The names to give columns once transposed.
+��@94c9fd8b2c4c2ea0b583fdcbc72f1a3617e85b224ad3961a43b4ae77b5fc1b1a�_Title: title: transpose
+Path: Input/output types:
+Content:
+input
+output
+table
+any
+record
+table
+��@eb30c917a1a99bbe947bb3ef972908a6d270d2a1b0e0bff669260ff803b84893�zTitle: title: transpose
+Path: Examples
+Content:
+Transposes the table contents with default column names.
+```Fenced(Borrowed("nu"))
+> [[c1 c2]; [1 2]] | transpose
+╭───┬─────────┬─────────╮
+│ # │ column0 │ column1 │
+├───┼─────────┼─────────┤
+│ 0 │ c1      │       1 │
+│ 1 │ c2      │       2 │
+╰───┴─────────┴─────────╯
+
+
+```
+Transposes the table contents with specified column names.
+```Fenced(Borrowed("nu"))
+> [[c1 c2]; [1 2]] | transpose key val
+╭───┬─────┬─────╮
+│ # │ key │ val │
+├───┼─────┼─────┤
+│ 0 │ c1  │   1 │
+│ 1 │ c2  │   2 │
+╰───┴─────┴─────╯
+
+
+```
+Transposes the table without column names and specify a new column name.
+```Fenced(Borrowed("nu"))
+> [[c1 c2]; [1 2]] | transpose --ignore-titles val
+╭───┬─────╮
+│ # │ val │
+├───┼─────┤
+│ 0 │   1 │
+│ 1 │   2 │
+╰───┴─────╯
+
+
+```
+Transfer back to record with -d flag.
+```Fenced(Borrowed("nu"))
+> {c1: 1, c2: 2} | transpose | transpose --ignore-titles -r -d
+╭────┬───╮
+│ c1 │ 1 │
+│ c2 │ 2 │
+╰────┴───╯
+
+```

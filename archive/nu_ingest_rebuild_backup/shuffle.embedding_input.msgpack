@@ -1,0 +1,41 @@
+”’Ù@21b083211b77486dac4f2584e293440b61e0bf9228086b6bc21eccd5e23f988aÙjTitle: title: shuffle
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``shuffle``
+[link: /commands/categories/filters.md] ’Ù@5cd98a7b652b2b1d82f3beb37da595ce508b9a13e6211fbd2b8466f664ed7652ÙFTitle: title: shuffle
+Path: Signature
+Content:
+``> shuffle {flags} ``
+’Ù@ba057a2aba7acc29ebcfc6f097cfafbee00d1a2889a13129aa197c4d9540cf90ÙbTitle: title: shuffle
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+’Ù@98a6bb14f45cd38866606ebd3d5f0983931b4622fbf1051994983a2f57a13b05ÙåTitle: title: shuffle
+Path: Examples
+Content:
+Shuffle rows randomly (execute it several times and see the difference).
+```Fenced(Borrowed("nu"))
+> [[version patch]; ['1.0.0' false] ['3.0.1' true] ['2.0.0' false]] | shuffle
+
+
+```

@@ -1,0 +1,78 @@
+–’Ù@655c3db23e844095202d8754792627c5b65fc74076b6fbadcb1498362246e775ÙvTitle: title: input listen
+Path: platform
+Content:
+
+
+
+
+
+
+
+
+
+``input listen``
+[link: /commands/categories/platform.md] ’Ù@3b4c93c0bf4e217629108fd1de169216833cecffdd6584edcb3270bce243be7aÙPTitle: title: input listen
+Path: Signature
+Content:
+``> input listen {flags} ``
+’Ù@3336bb7b2d8d3c8dfd4f3c709e7977d48f24bfb65bfbee820fbde0a871d95c3aÚ]Title: title: input listen
+Path: Flags
+Content:
+``--types, -t {list<string>}``
+: Listen for event of specified types only (can be one of: focus, key, mouse, paste, resize).
+``--raw, -r``
+: Add raw_code field with numeric value of keycode and raw_flags with bit mask flags.
+``--timeout, -o {duration}``
+: How long to wait for input before returning.
+’Ù@60a4bd3ebcc051e17f6e4bd7872252bd5d3152e6a6157a929765d14df5091657Ù‹Title: title: input listen
+Path: Input/output types:
+Content:
+input
+output
+nothing
+record
+<
+keycode: string, modifiers: list
+<
+string
+>
+>
+
+’Ù@5fb9390dbf4cc283e3084bece3d34cd79a5d9375046ab5c7192a9e9066ddd059Ù°Title: title: input listen
+Path: Examples
+Content:
+Listen for a keyboard shortcut and find out how nu receives it.
+```Fenced(Borrowed("nu"))
+> input listen --types [key]
+
+
+```
+’Ù@07fc58e5f67ef30d4b11b3a30e25795feab3226cfe5eb7b56bf290a5574c1764ÚYTitle: title: input listen
+Path: Notes
+Content:
+There are 5 different type of events: focus, key, mouse, paste, resize. Each will produce a
+
+corresponding record, distinguished by type field:
+```Fenced(Borrowed(""))
+    { type: focus event: (gained|lost) }
+    { type: key key_type: <key_type> code: <string> modifiers: [ <modifier> ... ] }
+    { type: mouse col: <int> row: <int> kind: <string> modifiers: [ <modifier> ... ] }
+    { type: paste content: <string> }
+    { type: resize col: <int> row: <int> }
+
+```
+There are 6 
+``modifier``
+ variants: shift, control, alt, super, hyper, meta.
+
+There are 4 
+``key_type``
+ variants:
+
+f - f1, f2, f3 ... keys
+
+char - alphanumeric and special symbols (a, A, 1, $ ...)
+
+media - dedicated media keys (play, pause, tracknext ...)
+
+other - keys not falling under previous categories (up, down, backspace, enter ...)

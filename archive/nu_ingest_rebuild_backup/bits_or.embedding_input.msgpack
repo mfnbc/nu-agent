@@ -1,0 +1,100 @@
+���@2c835826ce526dc25890268eee3212a22ded3cd682494fdc73bf90b1a6f4f264�dTitle: title: bits or
+Path: bits
+Content:
+
+
+
+
+
+
+
+
+
+``bits or``
+[link: /commands/categories/bits.md] ��@f0d2ad70c1ff79b9f6825940ce6f45383e8948448133eeb47b4bd4ba11a4c782�NTitle: title: bits or
+Path: Signature
+Content:
+``> bits or {flags} (target)``
+��@38cade1b75ec0952873fad3561e109c11cd7fb7b1a186806c2f7032c8e96024aٌTitle: title: bits or
+Path: Flags
+Content:
+``--endian, -e {string}``
+: Byte encode endian, available options: native(default), little, big.
+��@3259b50e2cece8277e4f7396b20cb439eeed0a292782129913f92598c9a150ac�_Title: title: bits or
+Path: Parameters
+Content:
+``target``
+: Right-hand side of the operation.
+��@401f1f31ffdf4b3245e7f87121508dbaaf0e59f0c6cd811a3f12eadbcde76e81ٚTitle: title: bits or
+Path: Input/output types:
+Content:
+input
+output
+int
+int
+binary
+binary
+list
+<
+int
+>
+
+list
+<
+int
+>
+
+list
+<
+binary
+>
+
+list
+<
+binary
+>
+
+��@39a3f882c65febfbb56df7984b8b09bb13839d9fd235491374a645d6fea6d3e1��Title: title: bits or
+Path: Examples
+Content:
+Apply bits or to two numbers
+```Fenced(Borrowed("nu"))
+> 2 | bits or 6
+6
+
+```
+Apply bitwise or to a list of numbers
+```Fenced(Borrowed("nu"))
+> [8 3 2] | bits or 2
+╭───┬────╮
+│ 0 │ 10 │
+│ 1 │  3 │
+│ 2 │  2 │
+╰───┴────╯
+
+
+```
+Apply bitwise or to binary data
+```Fenced(Borrowed("nu"))
+> 0x[88 cc] | bits or 0x[42 32]
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ca fe                                                ××
+
+
+```
+Apply bitwise or to binary data of varying lengths with specified endianness
+```Fenced(Borrowed("nu"))
+> 0x[c0 ff ee] | bits or 0x[ff] --endian big
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   c0 ff ff                                             ×××
+
+
+```
+Apply bitwise or to input binary data smaller than the operor
+```Fenced(Borrowed("nu"))
+> 0x[ff] | bits or 0x[12 34 56] --endian little
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ff 34 56                                             ×4V
+
+
+```

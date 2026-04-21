@@ -1,0 +1,83 @@
+���@626d9b534ee420cdcfab4456dc1fd7e930af4977fcf81847df4611b0438a488b�pTitle: title: str length
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str length``
+[link: /commands/categories/strings.md] ��@a4c581d5a48de2d5062740b147eb35756cd4ecb1f4165b4d9347cc8b7f7a2f50�STitle: title: str length
+Path: Signature
+Content:
+``> str length {flags} ...rest``
+��@bf7efc411445fb88889ef2377c360007da407cf221365107dc4cb75c0008729f�Title: title: str length
+Path: Flags
+Content:
+``--grapheme-clusters, -g``
+: Count length in grapheme clusters (all visible chars have length 1).
+``--utf-8-bytes, -b``
+: Count length in UTF-8 bytes (default; all non-ASCII chars have length 2+).
+``--chars, -c``
+: Count length in chars.
+��@b7769cf047263510c177359315db6d23e3b64e6b7db94781b73464974aa02dd2٘Title: title: str length
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, replace strings at the given cell paths with their length.
+��@69be22c29fa785255fced58d62f1f36e9e1ee6f311e6d7469fe8e4cdae542c82ٍTitle: title: str length
+Path: Input/output types:
+Content:
+input
+output
+string
+int
+list
+<
+string
+>
+
+list
+<
+int
+>
+
+table
+table
+record
+record
+��@6bdb9ece25cb52c0c3c002b4800d92421c1c838300d648266c8fe487b312bfb0�VTitle: title: str length
+Path: Examples
+Content:
+Return the lengths of a string in bytes.
+```Fenced(Borrowed("nu"))
+> 'hello' | str length
+5
+
+```
+Count length of a string in grapheme clusters.
+```Fenced(Borrowed("nu"))
+> '🇯🇵ほげ ふが ぴよ' | str length  --grapheme-clusters
+9
+
+```
+Return the lengths of multiple strings in bytes.
+```Fenced(Borrowed("nu"))
+> ['hi' 'there'] | str length
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 5 │
+╰───┴───╯
+
+
+```
+Return the lengths of a string in chars.
+```Fenced(Borrowed("nu"))
+> 'hällo' | str length --chars
+5
+
+```

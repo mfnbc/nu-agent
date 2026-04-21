@@ -1,0 +1,33 @@
+”’Ù@48d5c0cd315e7d48486e54d43c53621b6ee81f3eea707b78bebc4c98f328cb5cÙfTitle: title: is-admin
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``is-admin``
+[link: /commands/categories/core.md] ’Ù@5288cca3ecd39a466348e16b213bd504b4e1894c8fdc319a90f29510c0a88423ÙHTitle: title: is-admin
+Path: Signature
+Content:
+``> is-admin {flags} ``
+’Ù@1d3850ea60a7c1d1ff90ecddb1e6a023a9b5f1dc66732b92ffd2f160ad7b5146ÙTTitle: title: is-admin
+Path: Input/output types:
+Content:
+input
+output
+nothing
+bool
+’Ù@657cb086e96d8d4986140fbc12f4d86e42af4491026b36f3248aba80d0773bc9ÙéTitle: title: is-admin
+Path: Examples
+Content:
+Return 'iamroot' if nushell is running with admin/root privileges, and 'iamnotroot' if not.
+```Fenced(Borrowed("nu"))
+> if (is-admin) { "iamroot" } else { "iamnotroot" }
+iamnotroot
+
+```

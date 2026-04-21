@@ -1,0 +1,71 @@
+–’Ù@08fb718afc9f9f18d96d29efd906a4a04995da6e6cfaa9eaf37d5a18d20a95d5ÙpTitle: title: ansi link
+Path: platform
+Content:
+
+
+
+
+
+
+
+
+
+``ansi link``
+[link: /commands/categories/platform.md] ’Ù@94bdea6f83a1468cb75f213ffbf9a8c55e3500ed3056a041d59b19e958e624b2ÙQTitle: title: ansi link
+Path: Signature
+Content:
+``> ansi link {flags} ...rest``
+’Ù@cbcaa3c7d113c2cdd3a40e015aef0e03aab2899254751cec54f6a548278d18c7Ù·Title: title: ansi link
+Path: Flags
+Content:
+``--text, -t {string}``
+: Link text. Uses uri as text if absent. In case of
+
+tables, records and lists applies this text to all elements.
+’Ù@59c8312cb23638a9b5bce3d0838e1c9162b60ec88d3957372e4e7f844ff8c07aÙŽTitle: title: ansi link
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, add links to all strings at the given cell paths.
+’Ù@d5e79411c3a2f04bca50db2918ac79c070c16f632451bf18ac9ec2aba94b64d9Ù’Title: title: ansi link
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+’Ù@9117c0f7f754e293259c150d4c14f1da05909b8db625c491b2d9f19677519410Ú¡Title: title: ansi link
+Path: Examples
+Content:
+Create a link to open some file
+```Fenced(Borrowed("nu"))
+> 'file:///file.txt' | ansi link --text 'Open Me!'
+Open Me!
+
+```
+Create a link without text
+```Fenced(Borrowed("nu"))
+> 'https://www.nushell.sh/' | ansi link
+https://www.nushell.sh/
+
+```
+Format a table column into links
+```Fenced(Borrowed("nu"))
+> [[url text]; [https://example.com Text]] | ansi link url
+
+
+```

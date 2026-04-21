@@ -1,0 +1,119 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-18-twin0095.mdŸ@8d3ec2419654f6f72e5d88b88314ffbe214df571fe88a151dba6a11531cb270d∏This week in Nushell #95ë¨Package newsŸ»You can now install Nushell directly from the 
+[link: https://github.com/microsoft/winget-pkgs/tree/master/manifests/n/Nushell/Nushell/0.32.0] official winget packages
+ using 
+``winget install nu``
+.
+íêê⁄Title: This week in Nushell #95
+Path: Package news
+Content:
+You can now install Nushell directly from the 
+[link: https://github.com/microsoft/winget-pkgs/tree/master/manifests/n/Nushell/Nushell/0.32.0] official winget packages
+ using 
+``winget install nu``
+.
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-18-twin0095.mdŸ@5bca0b751701cc375044f0cf2e0ed552d1bfba7dc36b359b9b21295b177c0657∏This week in Nushell #95ëßNushell⁄	
+andrasio 
+[link: https://github.com/nushell/nushell/pull/3645] cleaned up nu-completion dependencies.
+, 
+[link: https://github.com/nushell/nushell/pull/3632] supported version option in Nu bin.
+, 
+[link: https://github.com/nushell/nushell/pull/3631] extracted completions into subcrate.
+, connected 
+[link: https://github.com/nushell/nushell/pull/3624] Nu's rest arguments are source(s) files scripts to run.
+, 
+[link: https://github.com/nushell/nushell/pull/3621] removeed 'help' Nu bin positional support.
+, and updated 
+[link: https://github.com/nushell/nushell/pull/3619] Nu to bootstrap itself from main.
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/3644] fixed the ignore example
+, 
+[link: https://github.com/nushell/nushell/pull/3643] relaxed groups and blocks to output at pipeline level
+, 
+[link: https://github.com/nushell/nushell/pull/3642] fixed issue in external subexpression paths
+, 
+[link: https://github.com/nushell/nushell/pull/3639] added back disks and net to sys
+, 
+[link: https://github.com/nushell/nushell/pull/3627] added file not found error for nu cmd args
+, and 
+[link: https://github.com/nushell/nushell/pull/3612] refactored rarely changing engine state into its own struct
+chrisfinazzo fixed a 
+[link: https://github.com/nushell/nushell/pull/3635] Shellcheck issue
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3634] fixed FlatShape::Garbage's default foreground color
+vladdoster added 
+[link: https://github.com/nushell/nushell/pull/3630] (docs) update README.md
+NiklasJonsson fixed the parser to 
+[link: https://github.com/nushell/nushell/pull/3628] only discard command comment if prev token was comment
+reaganmcf added 
+[link: https://github.com/nushell/nushell/pull/3618] Plugin: from_mp4 and UntaggedValue::duration fix
+itsme-alan 
+[link: https://github.com/nushell/nushell/pull/3615] added winget installation instructions 
+voanhduy1512 
+[link: https://github.com/nushell/nushell/pull/3613] fixed syntax hightlight when using Circumflex-Operator
+, and 
+[link: https://github.com/nushell/nushell/pull/3611] added support to run external command with string evaluation
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/3608] dataframe commands
+sambordo1 
+[link: https://github.com/nushell/nushell/pull/3607] ported mkdir to engine-p
+íêê⁄	ATitle: This week in Nushell #95
+Path: Nushell
+Content:
+andrasio 
+[link: https://github.com/nushell/nushell/pull/3645] cleaned up nu-completion dependencies.
+, 
+[link: https://github.com/nushell/nushell/pull/3632] supported version option in Nu bin.
+, 
+[link: https://github.com/nushell/nushell/pull/3631] extracted completions into subcrate.
+, connected 
+[link: https://github.com/nushell/nushell/pull/3624] Nu's rest arguments are source(s) files scripts to run.
+, 
+[link: https://github.com/nushell/nushell/pull/3621] removeed 'help' Nu bin positional support.
+, and updated 
+[link: https://github.com/nushell/nushell/pull/3619] Nu to bootstrap itself from main.
+jonathandturner 
+[link: https://github.com/nushell/nushell/pull/3644] fixed the ignore example
+, 
+[link: https://github.com/nushell/nushell/pull/3643] relaxed groups and blocks to output at pipeline level
+, 
+[link: https://github.com/nushell/nushell/pull/3642] fixed issue in external subexpression paths
+, 
+[link: https://github.com/nushell/nushell/pull/3639] added back disks and net to sys
+, 
+[link: https://github.com/nushell/nushell/pull/3627] added file not found error for nu cmd args
+, and 
+[link: https://github.com/nushell/nushell/pull/3612] refactored rarely changing engine state into its own struct
+chrisfinazzo fixed a 
+[link: https://github.com/nushell/nushell/pull/3635] Shellcheck issue
+fdncred 
+[link: https://github.com/nushell/nushell/pull/3634] fixed FlatShape::Garbage's default foreground color
+vladdoster added 
+[link: https://github.com/nushell/nushell/pull/3630] (docs) update README.md
+NiklasJonsson fixed the parser to 
+[link: https://github.com/nushell/nushell/pull/3628] only discard command comment if prev token was comment
+reaganmcf added 
+[link: https://github.com/nushell/nushell/pull/3618] Plugin: from_mp4 and UntaggedValue::duration fix
+itsme-alan 
+[link: https://github.com/nushell/nushell/pull/3615] added winget installation instructions 
+voanhduy1512 
+[link: https://github.com/nushell/nushell/pull/3613] fixed syntax hightlight when using Circumflex-Operator
+, and 
+[link: https://github.com/nushell/nushell/pull/3611] added support to run external command with string evaluation
+elferherrera added 
+[link: https://github.com/nushell/nushell/pull/3608] dataframe commands
+sambordo1 
+[link: https://github.com/nushell/nushell/pull/3607] ported mkdir to engine-p
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-18-twin0095.mdŸ@8b775e6673926e09961969647f885d4f375be60c187c143c71ec435d0b9c47a9∏This week in Nushell #95ë≠DocumentationŸtsholderbach 
+[link: https://github.com/nushell/nushell.github.io/pull/147] fixed missed mention of duration literal
+íêêŸ±Title: This week in Nushell #95
+Path: Documentation
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell.github.io/pull/147] fixed missed mention of duration literal
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-06-18-twin0095.mdŸ@a473b8325420ff31a447479b35a4984984b382ca62800dcbbc62ad426fde4560∏This week in Nushell #95ë™Nu_ScriptsŸsandrasio 
+[link: https://github.com/nushell/nu_scripts/pull/65] added nu-completion subcrate to the release script
+íêêŸ≠Title: This week in Nushell #95
+Path: Nu_Scripts
+Content:
+andrasio 
+[link: https://github.com/nushell/nu_scripts/pull/65] added nu-completion subcrate to the release script

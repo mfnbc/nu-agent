@@ -1,0 +1,60 @@
+•’Ù@1abed9bc22204aae489db90bb71e566018a25b457e3799f6630c835b5b2212fdÙnTitle: title: bytes build
+Path: bytes
+Content:
+
+
+
+
+
+
+
+
+
+``bytes build``
+[link: /commands/categories/bytes.md] ’Ù@e23fb9d4370ff25987bb7f975b942da68cedad22df3a08fdef000b3a7a9daf45ÙUTitle: title: bytes build
+Path: Signature
+Content:
+``> bytes build {flags} ...rest``
+’Ù@3034c1a9cbadda349df5da6e3078b982ac6d890188f00613d372bb2a1ab4b070ÙQTitle: title: bytes build
+Path: Parameters
+Content:
+``...rest``
+: List of bytes.
+’Ù@bb2db149b5144dbaeaaef0f2c66bffc47133033671c38bc40b526554197a8e0dÙYTitle: title: bytes build
+Path: Input/output types:
+Content:
+input
+output
+nothing
+binary
+’Ù@79342c01effacef3ee323595f982bd2c27fdd8e6be0f3f3eafc356f982f4945eÚMTitle: title: bytes build
+Path: Examples
+Content:
+Builds binary data from 0x
+[
+01 02
+]
+, 0x
+[
+03
+]
+, 0x
+[
+04
+]
+.
+```Fenced(Borrowed("nu"))
+> bytes build 0x[01 02] 0x[03] 0x[04]
+Length: 4 (0x4) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   01 02 03 04                                          â€¢â€¢â€¢â€¢
+
+
+```
+Builds binary data from byte numbers.
+```Fenced(Borrowed("nu"))
+> bytes build 255 254 253 252
+Length: 4 (0x4) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   ff fe fd fc                                          Ã—Ã—Ã—Ã—
+
+
+```

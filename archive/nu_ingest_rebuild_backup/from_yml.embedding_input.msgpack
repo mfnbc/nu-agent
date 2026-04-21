@@ -1,0 +1,50 @@
+���@355aa26f2c471aa10534d03e83aac45383badbb38eeb7aa66140a46886184431�lTitle: title: from yml
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``from yml``
+[link: /commands/categories/formats.md] ��@d9d6a7dbcb1ed2d931dee3f3469ab58bf1b26b7863908f007c33d681989aa1ea�HTitle: title: from yml
+Path: Signature
+Content:
+``> from yml {flags} ``
+��@712fb12717159236abe061e7d92a4f752b4ce5b1fb8762d1dd583abacf5dd27a�RTitle: title: from yml
+Path: Input/output types:
+Content:
+input
+output
+string
+any
+��@011d1b752e5640ebdbbdbbb30019df8925a95c6bd4a9ddbdacef042389e9235e��Title: title: from yml
+Path: Examples
+Content:
+Converts yaml formatted string to table.
+```Fenced(Borrowed("nu"))
+> 'a: 1' | from yml
+╭───┬───╮
+│ a │ 1 │
+╰───┴───╯
+
+```
+Converts yaml formatted string to table.
+```Fenced(Borrowed("nu"))
+> '[ a: 1, b: [1, 2] ]' | from yml
+╭───┬────┬───────────╮
+│ # │ a  │     b     │
+├───┼────┼───────────┤
+│ 0 │  1 │    ❎     │
+│ 1 │ ❎ │ ╭───┬───╮ │
+│   │    │ │ 0 │ 1 │ │
+│   │    │ │ 1 │ 2 │ │
+│   │    │ ╰───┴───╯ │
+╰───┴────┴───────────╯
+
+
+```

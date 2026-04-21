@@ -1,0 +1,43 @@
+–’Ù@834e0b3390871e9946f3c6ef0d82ce8a03b94d53e7584cab555a860a912f28c8ÙbTitle: title: exit
+Path: shells
+Content:
+
+
+
+
+
+
+
+
+
+``exit``
+[link: /commands/categories/shells.md] ’Ù@fa3bcb11581bab75f1090cf36162b81e92118360fade566651fdeaaecaa26637ÙKTitle: title: exit
+Path: Signature
+Content:
+``> exit {flags} (exit_code)``
+’Ù@c07dec052aa56e6fa520fd96786671e59e84d9e44a1af982deafe1f42689e125ÙETitle: title: exit
+Path: Flags
+Content:
+``--abort``
+: Exit by abort.
+’Ù@0daf196830f209ea5fc116ea1f5287a6a0c3063b547a3bff5c6e8a2898acbe98ÙcTitle: title: exit
+Path: Parameters
+Content:
+``exit_code``
+: Exit code to return immediately with.
+’Ù@ba35f775d2d943078f48343e46695d643714ce04ccc442faba56235998da0329ÙSTitle: title: exit
+Path: Input/output types:
+Content:
+input
+output
+nothing
+nothing
+’Ù@02e72442d5519d51a89f17c2fabb1abd11cd7dbab48c52a6c7b32fb3f5044521ÙiTitle: title: exit
+Path: Examples
+Content:
+Exit the current shell
+```Fenced(Borrowed("nu"))
+> exit
+
+
+```

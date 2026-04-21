@@ -1,0 +1,114 @@
+”’Ù@fa5f477adec32baf464b929e801659d0194fb0ca074736e9bbb4f1b438cabb98ÚóTitle: This week in Nushell #157
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/6423] added the ast command to peek at the internals of nushell
+, and 
+[link: https://github.com/nushell/nushell/pull/6406] convert string duration to named duration
+, and 
+[link: https://github.com/nushell/nushell/pull/6395] add a plugin registration script
+, and 
+[link: https://github.com/nushell/nushell/pull/6394] add another split words example
+, and 
+[link: https://github.com/nushell/nushell/pull/6383] add edit distance/levenshtein command
+, and 
+[link: https://github.com/nushell/nushell/pull/6370] add MessagePack as a plugin protocol
+, and 
+[link: https://github.com/nushell/nushell/pull/6369] fix the way lists are rendered in markdown
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/6420] tried to make argument with quotes for external command better
+, and 
+[link: https://github.com/nushell/nushell/pull/6384] Plugin: Add benchmark for different encoding protocol
+, and 
+[link: https://github.com/nushell/nushell/pull/6375] Rename overlay commands
+nibon7 
+[link: https://github.com/nushell/nushell/pull/6418] made run_external parameter required
+, and 
+[link: https://github.com/nushell/nushell/pull/6411] Fix the span of "invalid time zone"
+, and 
+[link: https://github.com/nushell/nushell/pull/6409] register-plugin.nu: refactor register plugin
+, and 
+[link: https://github.com/nushell/nushell/pull/6400] register-plugin.nu: remove 
+``.exe``
+ extension match to simplify code
+, and 
+[link: https://github.com/nushell/nushell/pull/6385] Add test cases for $nu.config-path change
+, and 
+[link: https://github.com/nushell/nushell/pull/6366] Get 
+``$nu.config-path``
+ and 
+``$nu.env-path``
+ from 
+``EngineState``
+herlon214 created 
+[link: https://github.com/nushell/nushell/pull/6412] nu-command/filters: drop column check positive value
+, and 
+[link: https://github.com/nushell/nushell/pull/6389] nu-cli: merge completions tests into one file
+, and 
+[link: https://github.com/nushell/nushell/pull/6295] feat: external completions for commands/flags
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/6404] Always report errors in 
+``cp``
+, and 
+[link: https://github.com/nushell/nushell/pull/6396] Make 
+``cp``
+ errors more specific+accurate
+, and 
+[link: https://github.com/nushell/nushell/pull/6371] Add pause and cls to cmd.exe exceptions
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/6398] fixed search terms for 
+``str distance``
+, and 
+[link: https://github.com/nushell/nushell/pull/6390] [
+Experiment
+]
+ Reenable CI build cache for tests
+, and 
+[link: https://github.com/nushell/nushell/pull/6380] Test command names and search terms for redundancy
+kubouch 
+[link: https://github.com/nushell/nushell/pull/6382] allowed "export-env" parsing in modules
+, and 
+[link: https://github.com/nushell/nushell/pull/6357] Allow parsing modules as scripts
+merelymyself 
+[link: https://github.com/nushell/nushell/pull/6379] preserved space by letting 
+``to nuon``
+ only add quotes when necessary
+, and 
+[link: https://github.com/nushell/nushell/pull/6376] let 
+``to nuon``
+ convert column names with spaces
+, and 
+[link: https://github.com/nushell/nushell/pull/6257] default to file completion after first command, add 
+``command``
+ option for completions
+’Ù@0db988a5526bcd0c8a471e3bede0be7c99430ca175feaef7c30701f57ea95fd5ÚvTitle: This week in Nushell #157
+Path: Documentation
+Content:
+CAD97 created 
+[link: https://github.com/nushell/nushell.github.io/pull/573] Note status of calling CMD builtins from Nushell
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/572] Note Windows caveat in Escaping to the System
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/571] Mention coming_from_cmd in coming_to_nu
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/570] Update coming_from_cmd.md for nu 0.77
+amtoine created 
+[link: https://github.com/nushell/nushell.github.io/pull/565] FIX: 
+``overlay remove``
+ flags
+’Ù@13cc017bee588d6154002a9c4cc5fc952f1c5e0534179f38e251303b6a73ccb7ÚTitle: This week in Nushell #157
+Path: Nu_Scripts
+Content:
+Yethal created 
+[link: https://github.com/nushell/nu_scripts/pull/283] Add function to remove diacritics from string
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/282] remove engine-q references
+e2dk4r created 
+[link: https://github.com/nushell/nu_scripts/pull/281] custom completions: scoop: add some missing command completions
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/280] custom completions: scoop: add some missing command completions
+’Ù@1bcedc54abe75def432be535a73539c2e2f7967aca4af53c5ca1d919787298aeÙšTitle: This week in Nushell #157
+Path: reedline
+Content:
+morzel85 created 
+[link: https://github.com/nushell/reedline/pull/466] README.md outline cleanup

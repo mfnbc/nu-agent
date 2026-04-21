@@ -1,0 +1,313 @@
+ïóŸearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/other_types/block.mdŸ@454f078129d909be9e58603b42215b49c11943741efd29b2761cc089814b344a•Blockë•BlockŸ÷Description:
+
+A syntactic form used by some Nushell keywords (e.g., 
+``if``
+ and 
+``for``
+)
+Annotation:
+
+N/A
+Literal Syntax:
+
+N/A
+Casts:
+
+N/A
+See also:
+
+[link: /book/types_of_data.md#blocks] Types of Data - Blocks
+íêêŸ¯Title: Block
+Path: Block
+Content:
+Description:
+
+A syntactic form used by some Nushell keywords (e.g., 
+``if``
+ and 
+``for``
+)
+Annotation:
+
+N/A
+Literal Syntax:
+
+N/A
+Casts:
+
+N/A
+See also:
+
+[link: /book/types_of_data.md#blocks] Types of Data - Blocks
+óŸearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/other_types/block.mdŸ@88353bb4dd525506018ea7d0f3555a92b61a8a35868ac58c67618eb8b24b6e0a•BlockëπAdditional Language Notes⁄wUnlike closures, blocks:
+Don't close over variables
+Don't have parameters
+Can't be passed as a value
+Can
+ access mutable variable in the parent scope.
+Example - Mutate a variable inside the block used in an 
+[link: /commands/docs/if.md] ``if``
+ call
+```Fenced(Borrowed("nu"))
+mut x = 1
+
+if true {
+
+    $x += 1000
+
+}
+
+print $x
+
+```
+Result:
+```Fenced(Borrowed("nu"))
+1001
+
+```
+íêê⁄≠Title: Block
+Path: Additional Language Notes
+Content:
+Unlike closures, blocks:
+Don't close over variables
+Don't have parameters
+Can't be passed as a value
+Can
+ access mutable variable in the parent scope.
+Example - Mutate a variable inside the block used in an 
+[link: /commands/docs/if.md] ``if``
+ call
+```Fenced(Borrowed("nu"))
+mut x = 1
+
+if true {
+
+    $x += 1000
+
+}
+
+print $x
+
+```
+Result:
+```Fenced(Borrowed("nu"))
+1001
+
+```
+óŸearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/other_types/block.mdŸ@15e26de3cc9427574fbf9ce9e2ba67c6828c499c546fc1f552e070f5ce01d1df•BlockëÆLanguage Notes⁄˚A block consists of any Nushell code enclosed in curly braces: 
+``{``
+, 
+``}``
+ 
+in certain specific Nushell constructs.
+ In other cases code enclosed between braces is a closure.
+A block is not a data type like a closure and cannot be used to type a variable, custom command parameter, its input type, or its return type. You will get a type error if you try this.
+```Fenced(Borrowed("nu"))
+let b: block = {}
+
+Error:   √ó Blocks are not support as first-class values
+
+  ‚ï≠‚îÄ[entry #9:1:8]
+
+1 ‚îÇ let p: block = {}
+
+  ¬∑        ‚îÄ‚îÄ‚î¨‚îÄ‚îÄ
+
+  ¬∑          ‚ï∞‚îÄ‚îÄ blocks are not supported as values
+
+  ‚ï∞‚îÄ‚îÄ‚îÄ‚îÄ
+
+  help: Use 'closure' instead of 'block'
+
+```
+A closure that takes no parameters may look like a block but is actually a closure. For example:
+```Fenced(Borrowed("nu"))
+> { echo foo } | describe
+
+closure
+
+# Alternatively
+
+> {|| echo foo } | describe
+
+closure
+
+```
+A block establishes a new variable scope. Variables defined within the new scope having the same name as a variable in an outer scope will alias (a.k.a. shadow) that name for the lifetime of that block's scope. Example:
+```Fenced(Borrowed("nu"))
+# Outer scope:
+
+let x: int = 9
+
+if true {
+
+  # inner scope
+
+  let x: string = '8'
+
+  $x | describe
+
+  # => string
+
+}
+
+echo $x
+
+# => 9
+
+```
+íêê⁄&Title: Block
+Path: Language Notes
+Content:
+A block consists of any Nushell code enclosed in curly braces: 
+``{``
+, 
+``}``
+ 
+in certain specific Nushell constructs.
+ In other cases code enclosed between braces is a closure.
+A block is not a data type like a closure and cannot be used to type a variable, custom command parameter, its input type, or its return type. You will get a type error if you try this.
+```Fenced(Borrowed("nu"))
+let b: block = {}
+
+Error:   √ó Blocks are not support as first-class values
+
+  ‚ï≠‚îÄ[entry #9:1:8]
+
+1 ‚îÇ let p: block = {}
+
+  ¬∑        ‚îÄ‚îÄ‚î¨‚îÄ‚îÄ
+
+  ¬∑          ‚ï∞‚îÄ‚îÄ blocks are not supported as values
+
+  ‚ï∞‚îÄ‚îÄ‚îÄ‚îÄ
+
+  help: Use 'closure' instead of 'block'
+
+```
+A closure that takes no parameters may look like a block but is actually a closure. For example:
+```Fenced(Borrowed("nu"))
+> { echo foo } | describe
+
+closure
+
+# Alternatively
+
+> {|| echo foo } | describe
+
+closure
+
+```
+A block establishes a new variable scope. Variables defined within the new scope having the same name as a variable in an outer scope will alias (a.k.a. shadow) that name for the lifetime of that block's scope. Example:
+```Fenced(Borrowed("nu"))
+# Outer scope:
+
+let x: int = 9
+
+if true {
+
+  # inner scope
+
+  let x: string = '8'
+
+  $x | describe
+
+  # => string
+
+}
+
+echo $x
+
+# => 9
+
+```
+óŸearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/other_types/block.mdŸ@02ab240fe88eaf2682f508a90eb5787c292dd9f56ab203f17aab6cf764ee5fb9•BlockëªMutable variables in blocks⁄™Unlike closures, mutable variables are exposed within the inner scope of the block and can be modified. Once modified, the mutable variable is changed to the value to which it was set in the scope of the block.
+E.g.
+```Fenced(Borrowed("nu"))
+# This won't work
+mut x = 9
+do { $x += 1 }
+# => Error: Capture of mutable variable.
+# But this will work:
+if true { $x += 1 }
+# => 10
+
+```
+Note: Aliasing still occurs within the block:
+```Fenced(Borrowed("nu"))
+mut x = 9
+if true { mut x = 8; $x += 100; echo $x }
+# => 108
+echo $x
+# => 9
+
+```
+::: important
+
+For both the if/else and try expressions, the value of the last expression in the block for whichever clause is executed is returned. This is not true
+
+for any of the looping constructs. If you try to assign the result of calling a for or while loop the type of the result will always be 
+``nothing``
+.
+To capture the result of a loop, you can define a mutable variable before the loop and mutate it inside the body of the loop. However, the more idiomatic Nushell way to do it is with a command like 
+``each``
+ which takes a closure. The last expression evaluated in the closure is returned and available to further items in the pipeline.
+
+:::
+íêê⁄‚Title: Block
+Path: Mutable variables in blocks
+Content:
+Unlike closures, mutable variables are exposed within the inner scope of the block and can be modified. Once modified, the mutable variable is changed to the value to which it was set in the scope of the block.
+E.g.
+```Fenced(Borrowed("nu"))
+# This won't work
+mut x = 9
+do { $x += 1 }
+# => Error: Capture of mutable variable.
+# But this will work:
+if true { $x += 1 }
+# => 10
+
+```
+Note: Aliasing still occurs within the block:
+```Fenced(Borrowed("nu"))
+mut x = 9
+if true { mut x = 8; $x += 100; echo $x }
+# => 108
+echo $x
+# => 9
+
+```
+::: important
+
+For both the if/else and try expressions, the value of the last expression in the block for whichever clause is executed is returned. This is not true
+
+for any of the looping constructs. If you try to assign the result of calling a for or while loop the type of the result will always be 
+``nothing``
+.
+To capture the result of a loop, you can define a mutable variable before the loop and mutate it inside the body of the loop. However, the more idiomatic Nushell way to do it is with a command like 
+``each``
+ which takes a closure. The last expression evaluated in the closure is returned and available to further items in the pipeline.
+
+:::
+óŸearchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/other_types/block.mdŸ@d3eaf8db3ee78869ba3e6745b44a35a895f9848f4d174d2b013b0ce4f37aafa4•BlockëŸ(Common commands that can be used with a Ÿ~``block``
+``if``
+/
+``else``
+``loop``
+``while``
+``for``
+``try``
+But not the body of the catch clause which is always a closure
+íêêŸ√Title: Block
+Path: Common commands that can be used with a 
+Content:
+``block``
+``if``
+/
+``else``
+``loop``
+``while``
+``for``
+``try``
+But not the body of the catch clause which is always a closure

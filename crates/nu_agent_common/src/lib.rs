@@ -31,7 +31,7 @@ pub struct DocRecord {
 
 pub fn read_embedding_input<P: AsRef<Path>>(path: P) -> Result<Vec<EmbeddingRecord>> {
     let p = path.as_ref();
-    // infer by extension: .msgpack or .mpk => read as MessagePack array, otherwise expect JSONL
+    // infer by extension: .msgpack or .mpk => read as MessagePack array, otherwise expect NUON (textual JSON array)
     if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
         if ext.eq_ignore_ascii_case("msgpack") || ext.eq_ignore_ascii_case("mpk") {
             // Read entire file and parse as a single msgpack array of records
@@ -42,7 +42,7 @@ pub fn read_embedding_input<P: AsRef<Path>>(path: P) -> Result<Vec<EmbeddingReco
         }
     }
 
-    // Default: expect NUON or JSONL. If path ends with .nuon, read via Nushell-friendly JSON text.
+    // Default: expect NUON. If path ends with .nuon, read via Nushell-friendly JSON text.
     if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
         if ext.eq_ignore_ascii_case("nuon") {
             // NUON is textual JSON-like; read as string then parse as JSON array
@@ -51,23 +51,10 @@ pub fn read_embedding_input<P: AsRef<Path>>(path: P) -> Result<Vec<EmbeddingReco
             return Ok(v);
         }
     }
-
-    // Otherwise, JSONL
-    let f = File::open(path)?;
-    let reader = BufReader::new(f);
-    let mut out = Vec::new();
-
-    for line in reader.lines() {
-        let line = line?;
-        if line.trim().is_empty() {
-            continue;
-        }
-
-        let rec: EmbeddingRecord = serde_json::from_str(&line)?;
-        out.push(rec);
-    }
-
-    Ok(out)
+    // If we reach here, try to read as NUON (textual JSON array) as a last resort
+    let s = std::fs::read_to_string(p)?;
+    let v: Vec<EmbeddingRecord> = serde_json::from_str(&s)?;
+    Ok(v)
 }
 
 pub fn write_embeddings<P: AsRef<Path>>(path: P, embeddings: &[EmbeddingOut]) -> Result<()> {
@@ -81,13 +68,9 @@ pub fn write_embeddings<P: AsRef<Path>>(path: P, embeddings: &[EmbeddingOut]) ->
             return Ok(());
         }
     }
-
-    let file = File::create(path)?;
-    for e in embeddings {
-        let s = serde_json::to_string(e)?;
-        use std::io::Write;
-        writeln!(&file, "{}", s)?;
-    }
+    // Default: write as NUON (pretty JSON array) for human inspection
+    let s = serde_json::to_string_pretty(embeddings)?;
+    std::fs::write(p, s.as_bytes())?;
     Ok(())
 }
 

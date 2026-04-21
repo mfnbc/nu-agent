@@ -1,0 +1,33 @@
+”’Ù@989a993072578be3582693656c1a1a4d835894dd4e90010d4792f84e82a0de91Ù€Title: title: query webpage-info
+Path: network
+Content:
+
+
+
+
+
+
+
+
+
+``query webpage-info``
+[link: /commands/categories/network.md] ’Ù@b17a00bd942c4da19727e9efe5552544e2bef7f6b2100d718b50d6232147d55aÙ\Title: title: query webpage-info
+Path: Signature
+Content:
+``> query webpage-info {flags} ``
+’Ù@e5ef2274ec0a081028460504b6e2fe391b100ad74f50ba92264652b75e7a2d26Ù_Title: title: query webpage-info
+Path: Input/output types:
+Content:
+input
+output
+string
+record
+’Ù@feefd5d4141417b396e7f7c7ef55b369280bcd485812902a9efd334736e266cfÙ¾Title: title: query webpage-info
+Path: Examples
+Content:
+extract detailed info from phoronix.com website
+```Fenced(Borrowed("nu"))
+> http get https://phoronix.com | query webpage-info
+
+
+```

@@ -1,0 +1,120 @@
+“’Ù@8494c44a06da4e1d3424b80c775ab09946650291bda0e7bdcc19afa2287ad9bdÚ¡Title: This week in Nushell #216
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/10689] changed Type::Float => SyntaxShape::Number to SyntaxShape::Float
+, and 
+[link: https://github.com/nushell/nushell/pull/10685] changed a canonicalize test to use a more deeply rooted folder
+, and 
+[link: https://github.com/nushell/nushell/pull/10678] renamed nushell's cp command to cp-old making coreutils the default cp
+amtoine 
+[link: https://github.com/nushell/nushell/pull/10686] added Ellie to the standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/10675] added Direnv to integrations
+, and 
+[link: https://github.com/nushell/nushell/pull/10620] added examples with 
+``..``
+ and 
+``/``
+ to 
+``path join``
+, and 
+[link: https://github.com/nushell/nushell/pull/10342] removed 
+``random decimal``
+, and 
+[link: https://github.com/nushell/nushell/pull/10341] removed 
+``into decimal``
+kubouch 
+[link: https://github.com/nushell/nushell/pull/10642] fixed parsing of signature inp/out types in predecls
+, and 
+[link: https://github.com/nushell/nushell/pull/10637] fixed wrong parsing of signatures in predecl scan
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/10683] added a stub 
+``dfr``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/10672] updated 
+``polars``
+ to 
+``0.33``
+, and 
+[link: https://github.com/nushell/nushell/pull/10629] relaxed type-check of key-less 
+``table``
+/
+``record``
+, and 
+[link: https://github.com/nushell/nushell/pull/9740] fixed output types of 
+``math``
+ commands to be narrower
+Hofer-Julian 
+[link: https://github.com/nushell/nushell/pull/10660] deprecated 
+``to xml --pretty {int}``
+ in favor of 
+``--indent {int}``
+, and 
+[link: https://github.com/nushell/nushell/pull/10645] added long options for formats
+, and 
+[link: https://github.com/nushell/nushell/pull/10641] added long options for filters
+, and 
+[link: https://github.com/nushell/nushell/pull/10622] let 
+``run_in_login_mode``
+ succeed even with broken local config
+lavafroth 
+[link: https://github.com/nushell/nushell/pull/10705] moved the 
+``partial_from``
+ function to the single place it is invoked
+, and 
+[link: https://github.com/nushell/nushell/pull/10658] preserved relative paths for local files
+quat1024 
+[link: https://github.com/nushell/nushell/pull/10680] updated string casing to use 
+``heck``
+ (again)
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/10659] fixed clippy
+CAD97 
+[link: https://github.com/nushell/nushell/pull/10652] fixed clippy in registry_query.rs
+, and 
+[link: https://github.com/nushell/nushell/pull/10648] fixed registry query flag validation
+bobhy 
+[link: https://github.com/nushell/nushell/pull/10706] fixed dirs to update current ring slot before leaving it
+gaetschwartz 
+[link: https://github.com/nushell/nushell/pull/10639] improved an error message
+DanyPDev 
+[link: https://github.com/nushell/nushell/pull/10623] added themes to help command when available #10318
+brunerm99 
+[link: https://github.com/nushell/nushell/pull/10589] improved the error if required field of 
+``url join``
+ is invalid
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/10580] fixed a truncation issue in the 
+``explore``
+ expanded view
+’Ù@8754b282caf4a7a890a77e21e625ab02b14a020237306b7699fd57b6da888591Ú*Title: This week in Nushell #216
+Path: Documentation
+Content:
+joergsch created 
+[link: https://github.com/nushell/nushell.github.io/pull/1108] repeat variable assignment
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1107] fix variable name
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1104] prevent same entry in $env.PATH
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1102] Update dataframes.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1101] Update table.md
+KAAtheWiseGit created 
+[link: https://github.com/nushell/nushell.github.io/pull/1106] book/overlays: fix tip div formatting
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1105] Fix a minor typo in 
+``working_with_lists``
+cptpiepmatz created 
+[link: https://github.com/nushell/nushell.github.io/pull/1100] Added "Use hooks to export state via environment variables" Section in setup.md
+petrisch created 
+[link: https://github.com/nushell/nushell.github.io/pull/1099] Fixing #460 changing .html links to .md links
+’Ù@eb38a4c824137355f15d8c04518622b6ed8e1739ad2fd3b94ab39a091961ffdaÙÿTitle: This week in Nushell #216
+Path: Nu_Scripts
+Content:
+cptpiepmatz created 
+[link: https://github.com/nushell/nu_scripts/pull/632] Use Existing Path Env Var for FNM
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/631] mask-completions

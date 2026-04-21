@@ -1,0 +1,31 @@
+ëóŸNarchive/external_nushell_repo_backup/nushell.github.io/book/getting_started.mdŸ@e8d67d053a9b1e1f02049723e3b5b64ac90e5aa7726f388f2cda897087b16f83•prev:ëØGetting Started⁄Â
+
+
+
+
+Let's get started! :elephant:
+The next sections will give you a 
+[link: quick_tour.md] short tour of Nushell by example
+ (including how to get help from within Nushell) and show you how to 
+[link: moving_around.md] move around your file system
+.
+Then, because Nushell takes some design decisions that are quite different from typical shells or dynamic scripting languages, make sure to check out 
+[link: thinking_in_nu.md] Thinking in Nu
+ where we explain some of these concepts.
+íêê⁄Title: prev:
+Path: Getting Started
+Content:
+
+
+
+
+
+Let's get started! :elephant:
+The next sections will give you a 
+[link: quick_tour.md] short tour of Nushell by example
+ (including how to get help from within Nushell) and show you how to 
+[link: moving_around.md] move around your file system
+.
+Then, because Nushell takes some design decisions that are quite different from typical shells or dynamic scripting languages, make sure to check out 
+[link: thinking_in_nu.md] Thinking in Nu
+ where we explain some of these concepts.

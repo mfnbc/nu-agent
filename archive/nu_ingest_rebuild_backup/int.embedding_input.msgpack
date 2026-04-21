@@ -1,0 +1,37 @@
+’’Ù@b77f55815ca7437657ea4804ee2f7321b7c67f75db3dafb58c4a73b226d642c2ÚØTitle: Integer
+Path: Integer
+Content:
+Description:
+
+Numbers without a fractional component (positive, negative, and 0)
+Annotation:
+
+``int``
+
+Literal syntax:
+
+A decimal, hex, octal, or binary numeric value without a decimal place. E.g., 
+``-100``
+, 
+``0``
+, 
+``50``
+, 
+``+50``
+, 
+``0xff``
+ (hex), 
+``0o234``
+ (octal), 
+``0b10101``
+ (binary)
+Casts
+:
+[link: /commands/docs/into_int.md] ``into int``
+See also:
+
+[link: /book/types_of_data.md#integers] Types of Data - Integers
+’Ù@961b3b141fe74f9472074eea54b6e05aa3c502c609631e0cfaa489ab006bf92cÙ—Title: Integer
+Path: Additional Language Notes
+Content:
+Integers are internally represented as signed 64-bit numbers with two's-complement arithmetic.

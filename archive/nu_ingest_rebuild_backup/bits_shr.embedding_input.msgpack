@@ -1,0 +1,94 @@
+–’Ù@f9644e7d5ac44c9474bc59b780942c7ca0953f74133a53d09191540d19f1148cÙfTitle: title: bits shr
+Path: bits
+Content:
+
+
+
+
+
+
+
+
+
+``bits shr``
+[link: /commands/categories/bits.md] ’Ù@e798c63e712624d9892b0e2bb3d6cef19b0dce8f326fd678e83e3ffa9d090773ÙNTitle: title: bits shr
+Path: Signature
+Content:
+``> bits shr {flags} (bits)``
+’Ù@dea1282b3dbffb55e738bf82efda5eed2472c668561c36e63a50a5dacd0ebb3fÚTitle: title: bits shr
+Path: Flags
+Content:
+``--signed, -s``
+: Always treat input number as a signed number.
+``--number-bytes, -n {int}``
+: The word size in number of bytes. Must be 
+``1``
+, 
+``2``
+, 
+``4``
+, or 
+``8``
+ (defaults to the smallest of those that fits the input number).
+’Ù@eda43d17953b48236b9cf81dc514dabc6f7c0dfd520e72a0b3aeb27aad818e56Ù[Title: title: bits shr
+Path: Parameters
+Content:
+``bits``
+: Number of bits to shift right.
+’Ù@ef007f5867e3309a512e9a4f1fc5301a0458d243a301618b245d5b243e2ec45dÙ›Title: title: bits shr
+Path: Input/output types:
+Content:
+input
+output
+int
+int
+binary
+binary
+list
+<
+int
+>
+
+list
+<
+int
+>
+
+list
+<
+binary
+>
+
+list
+<
+binary
+>
+
+’Ù@9321e79fd66a872ca2c72dae836e7274f67c5bb9a95ed12c5b8a64d7bcaefc87Ú)Title: title: bits shr
+Path: Examples
+Content:
+Shift right a number with 2 bits
+```Fenced(Borrowed("nu"))
+> 8 | bits shr 2
+2
+
+```
+Shift right a list of numbers
+```Fenced(Borrowed("nu"))
+> [15 35 2] | bits shr 2
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ 0 â”‚ 3 â”‚
+â”‚ 1 â”‚ 8 â”‚
+â”‚ 2 â”‚ 0 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+
+```
+Shift right a binary value
+```Fenced(Borrowed("nu"))
+> 0x[4f f4] | bits shr 4
+Length: 2 (0x2) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   04 ff                                                â€¢Ã—
+
+
+```

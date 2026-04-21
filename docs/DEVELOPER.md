@@ -12,9 +12,9 @@ Quickstart (local)
 
    cargo test --manifest-path crates/nu_plugin_rag/Cargo.toml
 
-3. Run the deterministic embedding runner on the example input:
+3. Run the deterministic embedding runner on the example input (MessagePack-first):
 
-   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.jsonl --output build/embeddings_example.jsonl --dim 16
+   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.msgpack --output build/embeddings_example.msgpack --dim 16
 
 4. Use the Nushell helper scripts to run the prep/build steps (requires `nu`):
 
@@ -28,9 +28,9 @@ Quick Start (concise)
    cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
    ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
 
-2) Test deterministic embedding runner:
+2) Test deterministic embedding runner (MessagePack-first):
 
-   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.jsonl --output build/embeddings_example.jsonl --dim 16
+   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.msgpack --output build/embeddings_example.msgpack --dim 16
 
 3) Nushell interactive path (preferred for Nushell users):
 

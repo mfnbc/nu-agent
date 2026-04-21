@@ -1,0 +1,75 @@
+���@789b74309da41dec7b1cbb2f4ddb4f2e6286a850703be5c11ca68fef5eb7fd3eٌTitle: title: str screaming-snake-case
+Path: strings
+Content:
+
+
+
+
+
+
+
+
+
+``str screaming-snake-case``
+[link: /commands/categories/strings.md] ��@1835a3109daec547e1b497c16f32e7209f249aa7fb746b208f1f7c1f7f407c14�oTitle: title: str screaming-snake-case
+Path: Signature
+Content:
+``> str screaming-snake-case {flags} ...rest``
+��@0c7f9cf8a1bbb961d4f32e3b6ac9155f9bcc6102ce30e9ccebfdebd452550929ٔTitle: title: str screaming-snake-case
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert strings at the given cell paths.
+��@4b4229e285d17e8c87278082c31c5c03084dec552003b848c12ea0f3edc811f3١Title: title: str screaming-snake-case
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+table
+table
+record
+record
+��@8e15725191533e6a8c02dc7a3ce270435ae4e62070264da777673c212beb5005��Title: title: str screaming-snake-case
+Path: Examples
+Content:
+convert a string to SCREAMING_SNAKE_CASE
+```Fenced(Borrowed("nu"))
+>  "NuShell" | str screaming-snake-case
+NU_SHELL
+
+```
+convert a string to SCREAMING_SNAKE_CASE
+```Fenced(Borrowed("nu"))
+>  "this_is_the_second_case" | str screaming-snake-case
+THIS_IS_THE_SECOND_CASE
+
+```
+convert a string to SCREAMING_SNAKE_CASE
+```Fenced(Borrowed("nu"))
+> "this-is-the-first-case" | str screaming-snake-case
+THIS_IS_THE_FIRST_CASE
+
+```
+convert a column from a table to SCREAMING_SNAKE_CASE
+```Fenced(Borrowed("nu"))
+> [[lang, gems]; [nu_test, 100]] | str screaming-snake-case lang
+╭───┬─────────┬──────╮
+│ # │  lang   │ gems │
+├───┼─────────┼──────┤
+│ 0 │ NU_TEST │  100 │
+╰───┴─────────┴──────╯
+
+
+```

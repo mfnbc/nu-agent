@@ -1,0 +1,118 @@
+���Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_str-join.md�@864f7de84c847167c0d24ca0d659fb499c2b69d6e2104a8020af802983cb886c�title: polars str-join��dataframe�G
+
+
+
+
+
+
+
+
+``polars str-join``
+[link: /commands/categories/dataframe.md] ����~Title: title: polars str-join
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars str-join``
+[link: /commands/categories/dataframe.md] ��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_str-join.md�@a0c6a22ac96c634dd3fa6517e111563379e1047abe6bd6212b5e02493fa1e3bf�title: polars str-join��Signature�&``> polars str-join {flags} (other)``
+����]Title: title: polars str-join
+Path: Signature
+Content:
+``> polars str-join {flags} (other)``
+��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_str-join.md�@91cad785ad6e21383b94a7aded18ae58691fef9911fe3c2f9de9f3b886ac13c5�title: polars str-join��Flags��``--delimiter, -d {string}``
+: Delimiter to join strings within an expression. Other dataframe when used with a dataframe.
+``--ignore-nulls, -n``
+: Ignore null values. Only available when used as an expression.
+����Title: title: polars str-join
+Path: Flags
+Content:
+``--delimiter, -d {string}``
+: Delimiter to join strings within an expression. Other dataframe when used with a dataframe.
+``--ignore-nulls, -n``
+: Ignore null values. Only available when used as an expression.
+��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_str-join.md�@443379163350194a09a4507ca2cae916d3cb4edee42f4ab686266bc32391fb45�title: polars str-join��Parametersٙ``other``
+: Other dataframe with a single series of strings to be concatenated. Required when used with a dataframe, ignored when used as an expression.
+�����Title: title: polars str-join
+Path: Parameters
+Content:
+``other``
+: Other dataframe with a single series of strings to be concatenated. Required when used with a dataframe, ignored when used as an expression.
+��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_str-join.md�@a950927fa3ec6f2fd41dd3d67c15158abe385a15566bfdfa1b36dbffccb961ab�title: polars str-join��Input/output types:�uinput
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+���ٶTitle: title: polars str-join
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��Warchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_str-join.md�@e90d1db6586dd221bc07a9c6213022ea537a608f82bf2bd90bb207fd1548d6f5�title: polars str-join��Examples�Join strings in a column
+```Fenced(Borrowed("nu"))
+> [[a]; [abc] [abc] [abc]] | polars into-df | polars select (polars col a | polars str-join -d ',') | polars collect
+╭───┬─────────────╮
+│ # │      a      │
+├───┼─────────────┤
+│ 0 │ abc,abc,abc │
+╰───┴─────────────╯
+
+
+```
+StrJoin strings across two series
+```Fenced(Borrowed("nu"))
+> let other = ([za xs cd] | polars into-df);
+    [abc abc abc] | polars into-df | polars str-join $other
+╭───┬───────╮
+│ # │   0   │
+├───┼───────┤
+│ 0 │ abcza │
+│ 1 │ abcxs │
+│ 2 │ abccd │
+╰───┴───────╯
+
+
+```
+����9Title: title: polars str-join
+Path: Examples
+Content:
+Join strings in a column
+```Fenced(Borrowed("nu"))
+> [[a]; [abc] [abc] [abc]] | polars into-df | polars select (polars col a | polars str-join -d ',') | polars collect
+╭───┬─────────────╮
+│ # │      a      │
+├───┼─────────────┤
+│ 0 │ abc,abc,abc │
+╰───┴─────────────╯
+
+
+```
+StrJoin strings across two series
+```Fenced(Borrowed("nu"))
+> let other = ([za xs cd] | polars into-df);
+    [abc abc abc] | polars into-df | polars str-join $other
+╭───┬───────╮
+│ # │   0   │
+├───┼───────┤
+│ 0 │ abcza │
+│ 1 │ abcxs │
+│ 2 │ abccd │
+╰───┴───────╯
+
+
+```

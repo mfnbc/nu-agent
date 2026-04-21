@@ -1,0 +1,547 @@
+š’Ù@ae9c8ff14ee5a2aabb634e677b4742454779c7d6a5687b2b3a4ddfcdcd4a7164ÚÖTitle: prev:
+Path: How Nushell Code Gets Run
+Content:
+
+
+
+
+
+In 
+[link: ./thinking_in_nu.md#think-of-nushell-as-a-compiled-language] Thinking in Nu
+, we encouraged you to 
+"Think of Nushell as a compiled language"
+ due to the way in which Nushell code is processed. We also covered several code examples that won't work in Nushell due that process.
+The underlying reason for this is a strict separation of the 
+parsing and evaluation
+ stages that 
+disallows 
+``eval``
+-like functionality
+. In this section, we'll explain in detail what this means, why we're doing it, and what the implications are. The explanation aims to be as simple as possible, but it might help if you've programmed in another language before.
+[
+[
+toc
+]
+]
+’Ù@03c68a7f1b8c21e0b7afaa6d763214506343d831183c720828a763caaa11e412Ú¹Title: prev:
+Path: Interpreted Languages
+Content:
+Nushell, Python, and Bash (and many others) are 
+"interpreted"
+ languages.
+Let's start with a simple "Hello, World!" Nushell program:
+```Fenced(Borrowed("nu"))
+# hello.nu
+
+print "Hello, World!"
+
+```
+Of course, this runs as expected using 
+``nu hello.nu``
+. A similar program written in Python or Bash would look (and behave) nearly the same.
+In 
+"interpreted languages"
+ code usually gets handled something like this:
+```Fenced(Borrowed("text"))
+Source Code â†’ Interpreter â†’ Result
+
+```
+Nushell follows this pattern, and its "Interpreter" is split into two parts:
+``Source Code â†’ Parser â†’ Intermediate Representation (IR)``
+``IR â†’ Evaluation Engine â†’ Result``
+First, the source code is analyzed by the Parser and converted into an intermediate representation (IR), which in Nushell's case is just a collection of data structures. Then, these data structures are passed to the Engine for evaluation and output of the results.
+This, as well, is common in interpreted languages. For example, Python's source code is typically 
+[link: https://github.com/python/cpython/blob/main/InternalDocs/interpreter.md] converted into bytecode
+ before evaluation.
+’Ù@d23907d080b0433b5e72ede15237623f109b616200d34e34730c808d71bdd118ÚTitle: prev:
+Path: Compiled Languages
+Content:
+On the other side are languages that are typically "compiled", such as C, C++, or Rust. For example, here's a simple 
+"Hello, World!"
+ in Rust:
+```Fenced(Borrowed("rust"))
+// main.rs
+
+fn main() {
+    println!("Hello, World!");
+}
+
+```
+To "run" this code, it must be:
+Compiled into 
+[link: https://en.wikipedia.org/wiki/Machine_code] machine code instructions
+The compilation results stored as a binary file on the disk
+The first two steps are handled with 
+``rustc main.rs``
+.
+Then, to produce a result, you need to run the binary (
+``./main``
+), which passes the instructions to the CPU
+So:
+``Source Code â‡’ Compiler â‡’ Machine Code``
+``Machine Code â‡’ CPU â‡’ Result``
+::: important
+
+You can see that the compile-run sequence is not much different from the parse-evaluate sequence of an interpreter. You begin with source code, parse (or compile) it into some state (e.g., bytecode, IR, machine code), then evaluate (or run) the IR to get a result. You could think of machine code as just another type of IR and the CPU as its interpreter.
+One big difference, however, between interpreted and compiled languages is that interpreted languages typically implement an 
+``eval``
+ function
+ while compiled languages do not. What does this mean?
+
+:::
+’Ù@d14081f4e00d55ffb26610a7529a550b9517dd8ed874251524e2a47b3b0ce495ÚÄTitle: prev:
+Path: Dynamic vs. Static Languages
+Content:
+::: tip Terminology
+
+In general, the difference between a dynamic and static language is how much of the source code is resolved during Compilation (or Parsing) vs. Evaluation/Runtime:
+"Static"
+ languages perform more code analysis (e.g., type-checking, 
+[link: https://doc.rust-lang.org/stable/book/ch04-00-understanding-ownership.html] data ownership
+) during Compilation/Parsing.
+"Dynamic"
+ languages perform more code analysis, including 
+``eval``
+ of additional code, during Evaluation/Runtime.
+For the purposes of this discussion, the primary difference between a static and dynamic language is whether or not it has an 
+``eval``
+ function.
+:::
+’Ù@88125247ceb99e56fdf80bd97df47c3fb75e03dee513127eb2d0cbcf3ba00b69Ú	Title: prev:
+Path: Eval Function
+Content:
+Most dynamic, interpreted languages have an 
+``eval``
+ function. For example, 
+[link: https://docs.python.org/3/library/functions.html#eval] Python 
+``eval``
+ (also, 
+[link: https://docs.python.org/3/library/functions.html#exec] Python 
+``exec``
+) or 
+[link: https://linux.die.net/man/1/bash] Bash 
+``eval``
+.
+The argument to an 
+``eval``
+ is 
+"source code inside of source code"
+, typically conditionally or dynamically computed. This means that, when an interpreted language encounters an 
+``eval``
+ in source code during Parse/Eval, it typically interrupts the normal Evaluation process to start a new Parse/Eval on the source code argument to the 
+``eval``
+.
+Here's a simple Python 
+``eval``
+ example to demonstrate this (potentially confusing!) concept:
+```Fenced(Borrowed("python:line-numbers"))
+# hello_eval.py
+
+print("Hello, World!")
+eval("print('Hello, Eval!')")
+
+```
+When you run the file (
+``python hello_eval.py``
+), you'll see two messages: 
+"Hello, World!"
+ and 
+"Hello, Eval!"
+. Here is what happens:
+The entire program is Parsed
+(Line 3) 
+``print("Hello, World!")``
+ is Evaluated
+(Line 4) In order to evaluate 
+``eval("print('Hello, Eval!')")``
+:
+``print('Hello, Eval!')``
+ is Parsed
+``print('Hello, Eval!')``
+ is Evaluated
+::: tip More fun
+
+Consider 
+``eval("eval(\"print('Hello, Eval!')\")")``
+ and so on!
+
+:::
+Notice how the use of 
+``eval``
+ here adds a new "meta" step into the execution process. Instead of a single Parse/Eval, the 
+``eval``
+ creates additional, "recursive" Parse/Eval steps instead. This means that the bytecode produced by the Python interpreter can be further modified during the evaluation.
+Nushell does not allow this.
+As mentioned above, without an 
+``eval``
+ function to modify the bytecode during the interpretation process, there's very little difference (at a high level) between the Parse/Eval process of an interpreted language and that of the Compile/Run in compiled languages like C++ and Rust.
+::: tip Takeaway
+
+This is why we recommend that you 
+"think of Nushell as a compiled language"
+. Despite being an interpreted language, its lack of 
+``eval``
+ gives it some of the characteristic benefits as well as limitations common in traditional static, compiled languages.
+
+:::
+We'll dig deeper into what it means in the next section.
+’Ù@e45e421aad8c00a1e81b1ac27781800cfa75f6809a9b5cd9cf98d9eee9693f35ÚGTitle: prev:
+Path: Implications
+Content:
+Consider this Python example:
+```Fenced(Borrowed("python:line-numbers"))
+exec("def hello(): print('Hello eval!')")
+hello()
+
+```
+::: note
+
+We're using 
+``exec``
+ in this example instead of 
+``eval``
+ because it can execute any valid Python code rather than being limited to 
+``eval``
+ expressions. The principle is similar in both cases, though.
+
+:::
+During interpretation:
+The entire program is Parsed
+In order to Evaluate Line 1:
+``def hello(): print('Hello eval!')``
+ is Parsed
+``def hello(): print('Hello eval!')``
+ is Evaluated
+(Line 2) 
+``hello()``
+ is evaluated.
+Note, that until step 2.2, the interpreter has no idea that a function 
+``hello``
+ even exists! This makes 
+[link: https://en.wikipedia.org/wiki/Static_program_analysis] static analysis
+ of dynamic languages challenging. In this example, the existence of the 
+``hello``
+ function cannot be checked just by parsing (compiling) the source code. The interpreter must evaluate (run) the code to discover it.
+In a static, compiled language, a missing function is guaranteed to be caught at compile-time.
+In a dynamic, interpreted language, however, it becomes a 
+possible
+ runtime error. If the 
+``eval``
+-defined function is conditionally called, the error may not be discovered until that condition is met in production.
+::: important
+
+In Nushell, there are 
+exactly two steps
+:
+Parse the entire source code
+Evaluate the entire source code
+This is the complete Parse/Eval sequence.
+
+:::
+::: tip Takeaway
+
+By not allowing 
+``eval``
+-like functionality, Nushell prevents these types of 
+``eval``
+-related bugs. Calling a non-existent definition is guaranteed to be caught at parse-time in Nushell.
+Furthermore, after parsing completes, we can be certain the bytecode (IR) won't change during evaluation. This gives us a deep insight into the resulting bytecode (IR), allowing for powerful and reliable static analysis and IDE integration which can be challenging to achieve with more dynamic languages.
+In general, you have more peace of mind that errors will be caught earlier when scaling Nushell programs.
+
+:::
+’Ù@42fbf9a419888ef97f8bcc3ca523d76e675daa1fa6c2f5a040c08a17a6ce4de4Ú
+ÆTitle: prev:
+Path: The Nushell REPL
+Content:
+As with most any shell, Nushell has a 
+"Readâ†’Evalâ†’Print Loop"
+ (
+[link: https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop] REPL
+) that is started when you run 
+``nu``
+ without any file. This is often thought of, but isn't quite the same, as the 
+"commandline"
+.
+::: tip Note
+
+In this section, the 
+``> ``
+ character at the beginning of a line in a code-block is used to represent the commandline 
+prompt
+. For instance:
+```Fenced(Borrowed("nu"))
+> some code...
+
+```
+Code after the prompt in the following examples is executed by pressing the 
+Enter
+ key. For example:
+```Fenced(Borrowed("nu"))
+> print "Hello world!"
+# => Hello world!
+
+> ls
+# => prints files and directories...
+
+```
+The above means:
+From inside Nushell (launched with 
+``nu``
+):
+Type 
+``print "Hello world!"``
+Press 
+Enter
+Nushell will display the result
+Type 
+``ls``
+Press 
+Enter
+Nushell will display the result
+:::
+When you press 
+Enter
+ after typing a commandline, Nushell:
+(Read):
+ Reads the commandline input
+(Evaluate):
+ Parses the commandline input
+(Evaluate):
+ Evaluates the commandline input
+(Evaluate):
+ Merges the environment (such as the current working directory) to the internal Nushell state
+(Print):
+ Displays the results (if non-
+``null``
+)
+(Loop):
+ Waits for another input
+In other words, each REPL invocation is its own separate parse-evaluation sequence. By merging the environment back to the Nushell's state, we maintain continuity between the REPL invocations.
+Compare a simplified version of the 
+[link: ./thinking_in_nu.md#example-change-to-a-different-directory-cd-and-source-a-file] ``cd``
+ example
+ from 
+"Thinking in Nu"
+:
+```Fenced(Borrowed("nu"))
+cd spam
+source-env foo.nu
+
+```
+There we saw that this cannot work (as a script or other single expression) because the directory will be changed 
+after
+ the parse-time 
+[link: /commands/docs/source-env.md] ``source-env``
+ keyword
+ attempts to read the file.
+Running these commands as separate REPL entries, however, works:
+```Fenced(Borrowed("nu"))
+> cd spam
+> source-env foo.nu
+# Yay, works!
+
+```
+To see why, let's break down what happens in the example:
+Read the 
+``cd spam``
+ commandline.
+Parse the 
+``cd spam``
+ commandline.
+Evaluate the 
+``cd spam``
+ commandline.
+Merge environment (including the current directory) into the Nushell state.
+Read and Parse 
+``source-env foo.nu``
+.
+Evaluate 
+``source-env foo.nu``
+.
+Merge environment (including any changes from 
+``foo.nu``
+) into the Nushell state.
+When 
+``source-env``
+ tries to open 
+``foo.nu``
+ during the parsing in Step 5, it can do so because the directory change from Step 3 was merged into the Nushell state during Step 4. As a result, it's visible in the following Parse/Eval cycles.
+’Ù@414d2917a1d9e4467902d7428ad089a0b5393c69d5deff84fcde98e590f2828fÚ™Title: prev:
+Path: Multiline REPL Commandlines
+Content:
+Keep in mind that this only works for 
+separate
+ commandlines.
+In Nushell, it's possible to group multiple commands into one commandline using:
+A semicolon:
+```Fenced(Borrowed("nu"))
+cd spam; source-env foo.nu
+
+```
+A newline:
+```Fenced(Borrowed(""))
+> cd span
+
+  source-env foo.nu
+
+```
+Notice there is no "prompt" before the second line. This type of multiline commandline is usually created with a 
+[link: ./line_editor.md#keybindings] keybinding
+ to insert a Newline when 
+Alt
++
+Enter
+ or 
+Shift
++ 
+Enter
+ is pressed.
+These two examples behave exactly the same in the Nushell REPL. The entire commandline (both statements) are processed a single Readâ†’Evalâ†’Print Loop. As such, they will fail the same way that the earlier script-example did.
+::: tip
+
+Multiline commandlines are very useful in Nushell, but watch out for any out-of-order Parser-keywords.
+
+:::
+’Ù@059a238fa0dcafc0982241a8478288d6b55c9c0831633ad0ddc214a6af1dca59Ú]Title: prev:
+Path: Parse-time Constant Evaluation
+Content:
+While it is impossible to add parsing into the evaluation stage and yet still maintain our static-language benefits, we can safely add 
+a little bit
+ of evaluation into parsing.
+::: tip Terminology
+
+In the text below, we use the term 
+"constant"
+ to refer to:
+A 
+``const``
+ definition
+The result of any command that outputs a constant value when provide constant inputs.
+:::
+By their nature, 
+constants
+ and constant values are known at Parse-time. This, of course, is in sharp contrast to 
+variable
+ declarations and values.
+As a result, we can utilize constants as safe, known arguments to parse-time keywords like 
+[link: /commands/docs/source.md] ``source``
+, 
+[link: /commands/docs/use.md] ``use``
+, and related commands.
+Consider 
+[link: ./thinking_in_nu.md#example-dynamically-creating-a-filename-to-be-sourced] this example
+ from 
+"Thinking in Nu"
+:
+```Fenced(Borrowed("nu"))
+let my_path = "~/nushell-files"
+source $"($my_path)/common.nu"
+
+```
+As noted there, we 
+can
+, however, do the following instead:
+```Fenced(Borrowed("nu:line-numbers"))
+const my_path = "~/nushell-files"
+source $"($my_path)/common.nu"
+
+```
+Let's analyze the Parse/Eval process for this version:
+The entire program is Parsed into IR.
+Line 1: The 
+``const``
+ definition is parsed. Because it is a constant assignment (and 
+``const``
+ is also a parser-keyword), that assignment can also be Evaluated at this stage. Its name and value are stored by the Parser.
+Line 2: The 
+``source``
+ command is parsed. Because 
+``source``
+ is also a parser-keyword, it is Evaluated at this stage. In this example, however, it can be 
+successfully
+ parsed since its argument is 
+known
+ and can be retrieved at this point.
+The source-code of 
+``~/nushell-files/common.nu``
+ is parsed. If it is invalid, then an error will be generated, otherwise the IR results will be included in evaluation in the next stage.
+The entire IR is Evaluated:
+Line 1: The 
+``const``
+ definition is Evaluated. The variable is added to the runtime stack.
+Line 2: The IR result from parsing 
+``~/nushell-files/common.nu``
+ is Evaluated.
+::: important
+An 
+``eval``
+ adds additional parsing during evaluation
+Parse-time constants do the opposite, adding additional evaluation to the parser.
+:::
+Also keep in mind that the evaluation allowed during parsing is 
+very restricted
+. It is limited to only a small subset of what is allowed during a regular evaluation.
+For example, the following is not allowed:
+```Fenced(Borrowed("nu"))
+const foo_contents = (open foo.nu)
+
+```
+Put differently, only a small subset of commands and expressions can generate a constant value. For a command to be allowed:
+It must be designed to output a constant value
+All of its inputs must also be constant values, literals, or composite types (e.g., records, lists, tables) of literals.
+In general, the commands and resulting expressions will be fairly simple and 
+without side effects
+. Otherwise, the parser could all-too-easily enter an unrecoverable state. Imagine, for instance, attempting to assign an infinite stream to a constant. The Parse stage would never complete!
+::: tip
+
+You can see which Nushell commands can return constant values using:
+```Fenced(Borrowed("nu"))
+help commands | where is_const
+
+```
+:::
+For example, the 
+``path join``
+ command can output a constant value. Nushell also defines several useful paths in the 
+``$nu``
+ constant record. These can be combined to create useful parse-time constant evaluations like:
+```Fenced(Borrowed("nu"))
+const my_startup_modules =  $nu.default-config-dir | path join "my-mods"
+use $"($my_startup_modules)/my-utils.nu"
+
+```
+::: note Additional Notes
+
+Compiled ("static") languages also tend to have a way to convey some logic at compile time. For instance:
+C's preprocessor
+Rust macros
+[link: https://kristoff.it/blog/what-is-zig-comptime] Zig's comptime
+, which was an inspiration for Nushell's parse-time constant evaluation.
+There are two reasons for this:
+Increasing Runtime Performance:
+ Logic in the compilation stage doesn't need to be repeated during runtime.
+This isn't currently applicable to Nushell, since the parsed results (IR) are not stored beyond Evaluation. However, this has certainly been considered as a possible future feature.
+As with Nushell's parse-time constant evaluations, these features help (safely) work around limitations caused by the absence of an 
+``eval``
+ function.
+:::
+’Ù@dda0d8b12c41055b52b78e9145fa2b25858fb314d8251af89166bf9ac7b724d9ÚqTitle: prev:
+Path: Conclusion
+Content:
+Nushell operates in a scripting language space typically dominated by 
+"dynamic"
+, 
+"interpreted"
+ languages, such as Python, Bash, Zsh, Fish, and many others. Nushell is also 
+"interpreted"
+ since code is run immediately (without a separate, manual compilation).
+However, is not 
+"dynamic"
+ in that it does not have an 
+``eval``
+ construct. In this respect, it shares more in common with 
+"static"
+, compiled languages like Rust or Zig.
+This lack of 
+``eval``
+ is often surprising to many new users and is why it can be helpful to think of Nushell as a compiled, and static, language.

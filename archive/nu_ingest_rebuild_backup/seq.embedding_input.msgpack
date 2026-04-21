@@ -1,0 +1,91 @@
+���@0383f03b387c97a52bd981c687f64e19f6cb285cb00a8ad4b7785595835f06cc�hTitle: title: seq
+Path: generators
+Content:
+
+
+
+
+
+
+
+
+
+``seq``
+[link: /commands/categories/generators.md] ��@081c5ebed4da03ee639e1222df3a7fc189d45b48cf6b35450d33235783743ad9�ETitle: title: seq
+Path: Signature
+Content:
+``> seq {flags} ...rest``
+��@999d2bb78bfaff3079123ad227aaf5e39d525c3d6698a1f9e21900ed8cfc1912�KTitle: title: seq
+Path: Parameters
+Content:
+``...rest``
+: Sequence values.
+��@39221c8dda9dca7d4811ca0b91cd721914b27a5e72f5b1cf2dac5d736ca07fa4�[Title: title: seq
+Path: Input/output types:
+Content:
+input
+output
+nothing
+list
+<
+number
+>
+
+��@004da0ab10b6f408c9b09970f791d4bb97288672d1e9748aa684c60270ab1b83�ATitle: title: seq
+Path: Examples
+Content:
+sequence 1 to 10
+```Fenced(Borrowed("nu"))
+> seq 1 10
+╭───┬────╮
+│ 0 │  1 │
+│ 1 │  2 │
+│ 2 │  3 │
+│ 3 │  4 │
+│ 4 │  5 │
+│ 5 │  6 │
+│ 6 │  7 │
+│ 7 │  8 │
+│ 8 │  9 │
+│ 9 │ 10 │
+╰───┴────╯
+
+
+```
+sequence 1.0 to 2.0 by 0.1s
+```Fenced(Borrowed("nu"))
+> seq 1.0 0.1 2.0
+╭────┬──────╮
+│  0 │ 1.00 │
+│  1 │ 1.10 │
+│  2 │ 1.20 │
+│  3 │ 1.30 │
+│  4 │ 1.40 │
+│  5 │ 1.50 │
+│  6 │ 1.60 │
+│  7 │ 1.70 │
+│  8 │ 1.80 │
+│  9 │ 1.90 │
+│ 10 │ 2.00 │
+╰────┴──────╯
+
+
+```
+sequence 1 to 5, then convert to a string with a pipe separator
+```Fenced(Borrowed("nu"))
+> seq 1 5 | str join '|'
+
+
+```
+��@d690e592726d31adb2e31038d2d7a8f5dd7ceb7cf626943c4de6810d3baf35cb��Title: title: seq
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/seq_char.md] ``seq char``
+Print a sequence of ASCII characters.
+built-in
+[link: /commands/docs/seq_date.md] ``seq date``
+Print sequences of dates.
+built-in

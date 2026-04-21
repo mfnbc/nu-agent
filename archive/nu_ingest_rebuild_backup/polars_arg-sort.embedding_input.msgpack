@@ -1,0 +1,82 @@
+���@aa9bd9cb5dcbc3d7b0a420c0dd8cbbdb2a1d01c613e9dbdc4dea7d7465327e28�~Title: title: polars arg-sort
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars arg-sort``
+[link: /commands/categories/dataframe.md] ��@ff5c1d17040925c6f29b7583e5f1c5b827b7c8c5372503af0e8989d84226ccad�VTitle: title: polars arg-sort
+Path: Signature
+Content:
+``> polars arg-sort {flags} ``
+��@489756867336f051d1ca852b44307ca937720019966dde101b9b8a1d13202842�!Title: title: polars arg-sort
+Path: Flags
+Content:
+``--reverse, -r``
+: Reverse order.
+``--nulls-last, -n``
+: Nulls ordered last.
+``--limit, -l {int}``
+: Limit a sort output, this is for optimization purposes and might be ignored.
+``--maintain-order, -m``
+: Maintain order on sorted items.
+��@5678a3d313c491b854520dc64f1bbd447044aa37b1390bbf6201dfdd1fbd9067ْTitle: title: polars arg-sort
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@b108cd03e006f8814a5d0560f0f978955f07c1f072871884f308dcef7709192b��Title: title: polars arg-sort
+Path: Examples
+Content:
+Returns indexes for a sorted series
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-df | polars arg-sort
+╭───┬──────────╮
+│ # │ arg_sort │
+├───┼──────────┤
+│ 0 │        0 │
+│ 1 │        1 │
+│ 2 │        2 │
+│ 3 │        3 │
+│ 4 │        4 │
+╰───┴──────────╯
+
+
+```
+Returns indexes for a sorted series
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-df | polars arg-sort --reverse
+╭───┬──────────╮
+│ # │ arg_sort │
+├───┼──────────┤
+│ 0 │        3 │
+│ 1 │        4 │
+│ 2 │        1 │
+│ 3 │        2 │
+│ 4 │        0 │
+╰───┴──────────╯
+
+
+```
+Returns indexes for a sorted series and applying a limit
+```Fenced(Borrowed("nu"))
+> [1 2 2 3 3] | polars into-df | polars arg-sort --limit 2
+╭───┬──────────╮
+│ # │ arg_sort │
+├───┼──────────┤
+│ 0 │        0 │
+│ 1 │        1 │
+╰───┴──────────╯
+
+
+```

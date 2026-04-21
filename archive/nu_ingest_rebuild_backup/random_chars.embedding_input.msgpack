@@ -1,0 +1,50 @@
+•’Ù@cf11a829cd05bf3db46349f2a2848de5262b46ad3e92a1a0a01dc28458431f10ÙrTitle: title: random chars
+Path: random
+Content:
+
+
+
+
+
+
+
+
+
+``random chars``
+[link: /commands/categories/random.md] ’Ù@6fb2aa953a6effec1b68aa2278048f892bca1a464e19ffe3543d2e60f5044c19ÙPTitle: title: random chars
+Path: Signature
+Content:
+``> random chars {flags} ``
+’Ù@e34bfa769cdf08742bdadf55425258706972addd01121d455b3dc7e4ef08f350ÙwTitle: title: random chars
+Path: Flags
+Content:
+``--length, -l {oneof<int, filesize>}``
+: Number of chars (default 25)
+’Ù@69ae26ed050faeb929f43164661d6d08159ff904074a1d685b5ae9d722d6d3caÙZTitle: title: random chars
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+’Ù@e64b70f0fe5390278c655a4c3656ae01be21c841944e2e34db74b78bfcc4133aÚUTitle: title: random chars
+Path: Examples
+Content:
+Generate a string with 25 random chars.
+```Fenced(Borrowed("nu"))
+> random chars
+
+
+```
+Generate random chars with specified length.
+```Fenced(Borrowed("nu"))
+> random chars --length 20
+
+
+```
+Generate one kilobyte of random chars.
+```Fenced(Borrowed("nu"))
+> random chars --length 1kb
+
+
+```

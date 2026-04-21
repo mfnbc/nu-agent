@@ -1,0 +1,105 @@
+•—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_tsv.mdÙ@375f9f9ddc060fb47e8293f78cd5bd5f409bbf674280be3c244ba22c07d4ff75­title: to tsv‘§formatsÙ<
+
+
+
+
+
+
+
+
+``to tsv``
+[link: /commands/categories/formats.md] ’ÙhTitle: title: to tsv
+Path: formats
+Content:
+
+
+
+
+
+
+
+
+
+``to tsv``
+[link: /commands/categories/formats.md] —ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_tsv.mdÙ@b61ccda3cc5c48be2204b6c70c0a1b40f2e6b5b90c29a016e15b6b8e0cbef7c8­title: to tsv‘©Signature¶``> to tsv {flags} ``
+’ÙDTitle: title: to tsv
+Path: Signature
+Content:
+``> to tsv {flags} ``
+—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_tsv.mdÙ@3af4e4c289ee15bc6a2a1990d420c7532cb28b4ca7fa383e7922ddfff33ca22f­title: to tsv‘¥FlagsÙ’``--noheaders, -n``
+: Do not output the column names as the first row.
+``--columns {list<string>}``
+: The names (in order) of the columns to use.
+’Ù¼Title: title: to tsv
+Path: Flags
+Content:
+``--noheaders, -n``
+: Do not output the column names as the first row.
+``--columns {list<string>}``
+: The names (in order) of the columns to use.
+—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_tsv.mdÙ@70594f388d17a7daa1ee375c76db9217efa8a05f7466dbe29cf6a5572c271e42­title: to tsv‘³Input/output types:Ù(input
+output
+record
+string
+table
+string
+’Ù`Title: title: to tsv
+Path: Input/output types:
+Content:
+input
+output
+record
+string
+table
+string
+—ÙNarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/to_tsv.mdÙ@39c5c98f24eecc47561104fa380393c03e4c11298ffb0959ae1bd9b6af0a155a­title: to tsv‘¨ExamplesÚ›Outputs a TSV string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [[foo bar]; [1 2]] | to tsv
+foobar
+12
+
+
+```
+Outputs a TSV string representing the contents of this record.
+```Fenced(Borrowed("nu"))
+> {a: 1 b: 2} | to tsv
+ab
+12
+
+
+```
+Outputs a TSV stream with column names pre-determined.
+```Fenced(Borrowed("nu"))
+> [[foo bar baz]; [1 2 3]] | to tsv --columns [baz foo]
+bazfoo
+31
+
+
+```
+’ÚÈTitle: title: to tsv
+Path: Examples
+Content:
+Outputs a TSV string representing the contents of this table.
+```Fenced(Borrowed("nu"))
+> [[foo bar]; [1 2]] | to tsv
+foobar
+12
+
+
+```
+Outputs a TSV string representing the contents of this record.
+```Fenced(Borrowed("nu"))
+> {a: 1 b: 2} | to tsv
+ab
+12
+
+
+```
+Outputs a TSV stream with column names pre-determined.
+```Fenced(Borrowed("nu"))
+> [[foo bar baz]; [1 2 3]] | to tsv --columns [baz foo]
+bazfoo
+31
+
+
+```

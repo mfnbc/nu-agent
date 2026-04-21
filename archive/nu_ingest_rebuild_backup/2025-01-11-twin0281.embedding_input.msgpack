@@ -1,0 +1,143 @@
+“’Ù@f8c8aff3223f5a38b6e5ce751505d6494ce667cdbdf5d621cc3d861beb224285ÚLTitle: This week in Nushell #281
+Path: Nushell
+Content:
+blindFS 
+[link: https://github.com/nushell/nushell/pull/14805] fixed PWD env_var for LSP
+, 
+[link: https://github.com/nushell/nushell/pull/14802] added inlay hints of variable types and command params for LSP
+, 
+[link: https://github.com/nushell/nushell/pull/14789] fixed unknown span for special variables 
+``$in/$it``
+, 
+[link: https://github.com/nushell/nushell/pull/14770] added document_symbols and workspace_symbols for LSP
+, and 
+[link: https://github.com/nushell/nushell/pull/14742] implemented use of lsp-textdocument to handle utf16 position for LSP
+cptpiepmatz 
+[link: https://github.com/nushell/nushell/pull/14798] made 
+``table``
+ only check for 
+``use_ansi_coloring``
+ config value
+, 
+[link: https://github.com/nushell/nushell/pull/14797] added 
+``"whereis"``
+ and 
+``"get-command"``
+ to 
+``which``
+ search terms
+, and 
+[link: https://github.com/nushell/nushell/pull/14679] handled permission denied error at 
+``nu_engine::glob_from``
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14795] upgraded to Rust version 1.82
+, 
+[link: https://github.com/nushell/nushell/pull/14772] fixed 
+``stor reset``
+ when there are foreign keys
+, and 
+[link: https://github.com/nushell/nushell/pull/14698] improved closure serialization
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14785] removed file accidentally re-introduced by merge
+, 
+[link: https://github.com/nushell/nushell/pull/14766] fixed extra newline on empty lists when $env.config.table.show_empty is set
+, 
+[link: https://github.com/nushell/nushell/pull/14758] added newline to empty list output
+, 
+[link: https://github.com/nushell/nushell/pull/14757] changed 
+``PipelineData::into_value``
+ to use internal 
+``Value``
+'s span before passed in span
+, 
+[link: https://github.com/nushell/nushell/pull/14756] fixed config reset to use scaffold config files
+, 
+[link: https://github.com/nushell/nushell/pull/14755] prevented ndots expansion if prefixed with 
+``./``
+, 
+[link: https://github.com/nushell/nushell/pull/14750] added doccomments to 
+``find``
+ functions in EngineState and StateWorkingSet
+, 
+[link: https://github.com/nushell/nushell/pull/14749] added flag to 
+``debug profile``
+ to output duration field as Value::Duration
+, and 
+[link: https://github.com/nushell/nushell/pull/14741] added run-time type checking for command pipeline input
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14782] updated typos workflow to 
+``1.29.4``
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14773] enabled conditional 
+``source``
+ and 
+``use``
+ patterns by allowing 
+``null``
+ as a no-op module
+, 
+[link: https://github.com/nushell/nushell/pull/14763] made small, backwards compatible enhancements to std
+, and 
+[link: https://github.com/nushell/nushell/pull/14687] fixed nuon conversions of range values
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell/pull/14764] converted Path to 
+``list``
+ in main and preserved case
+, and 
+[link: https://github.com/nushell/nushell/pull/14726] removed deprecated commands
+hustcer 
+[link: https://github.com/nushell/nushell/pull/14803] prevented release workflow from triggering on nightly tags
+dead10ck 
+[link: https://github.com/nushell/nushell/pull/14760] expanded custom values on table display
+userwiths 
+[link: https://github.com/nushell/nushell/pull/14747] fixed root directory traversal issue
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/14738] made custom completions inherit case_sensitive option from $env.config
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14708] prevented auto cd from canonicalizing symbolic path
+Chen1Plus 
+[link: https://github.com/nushell/nushell/pull/14699] fixed wrong error message of 
+``save``
+ command on Windows
+ChetanXpro 
+[link: https://github.com/nushell/nushell/pull/14592] fixed handling of zero-size cursor in binary viewer for explore command
+’Ù@162dce1eea32a925427af0050849a19fabb153a0ac0deb5fa13aa00c0aaf342aÚTitle: This week in Nushell #281
+Path: Documentation
+Content:
+sholderbach 
+[link: https://github.com/nushell/nushell.github.io/pull/1743] fixed 
+``usage``
+ to 
+``description``
+ in plugin documentation
+emad-elsaid 
+[link: https://github.com/nushell/nushell.github.io/pull/1742] corrected docs for emacsclient
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1741] removed deprecated/removed split-by command from Map table
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1729] removed "Edit this page" and contributors list from Command docs
+jesper-olsen 
+[link: https://github.com/nushell/nushell.github.io/pull/1739] updated using_modules.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/1738] updated scripts.md
+lodagro 
+[link: https://github.com/nushell/nushell.github.io/pull/1736] fixed example typo in thinking_in_nu.md
+maxim-uvarov 
+[link: https://github.com/nushell/nushell.github.io/pull/1735] fixed typo in configuration.md 
+``($nu.data-dir)/vendor/autoloads``
+’Ù@fe3f1336eff4758d9e1d85d208e0c4ae2569f7d1d7cc9dd6ae43fcc146a84c51Ú0Title: This week in Nushell #281
+Path: Nu_Scripts
+Content:
+132ikl 
+[link: https://github.com/nushell/nu_scripts/pull/1013] fixed 
+``path with-parent``
+ example output
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/1011] renamed path replace-extension to path with-extension, added with-stem and with-parent
+ehdevries 
+[link: https://github.com/nushell/nu_scripts/pull/1012] excluded prompt indicator in panache-git so users can choose their own
+Bahex 
+[link: https://github.com/nushell/nu_scripts/pull/1009] added 
+``clip copy``
+ and 
+``clip paste``

@@ -1,0 +1,61 @@
+”’Ù@253d48f13092f7254b241c7de00902ea71281f16b959a9c655785166592424baÙhTitle: title: length
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``length``
+[link: /commands/categories/filters.md] ’Ù@8d5f4aea87a29319999e479ef8ff2545a1f23f8c095df5ca88477ba833720673ÙDTitle: title: length
+Path: Signature
+Content:
+``> length {flags} ``
+’Ù@5b8ae78295966502cd975e143ba016d3f7b00239baff736f20ba955eeb122342Ù…Title: title: length
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+any
+>
+
+int
+binary
+int
+nothing
+int
+SQLiteQueryBuilder
+int
+’Ù@4d6b33f9170d6a93afab38750858a1340d07e0c505cfc51c49f2231f70efccc1ÚžTitle: title: length
+Path: Examples
+Content:
+Count the number of items in a list
+```Fenced(Borrowed("nu"))
+> [1 2 3 4 5] | length
+5
+
+```
+Count the number of rows in a table
+```Fenced(Borrowed("nu"))
+> [{a:1 b:2}, {a:2 b:3}] | length
+2
+
+```
+Count the number of bytes in binary data
+```Fenced(Borrowed("nu"))
+> 0x[01 02] | length
+2
+
+```
+Count the length a null value
+```Fenced(Borrowed("nu"))
+> null | length
+0
+
+```

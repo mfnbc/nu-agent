@@ -1,0 +1,107 @@
+•—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-01-twin0110.mdÙ@e6a6700af49cc53778a0c4e5f813faa4a4fb2eaa9c10af17e72025b02287f673¹This week in Nushell #110‘§NushellÚ<fdncred 
+[link: https://github.com/nushell/nushell/pull/4058] removed ansi colors if this is not a tty
+, and added 
+[link: https://github.com/nushell/nushell/pull/4048] new command: into column_path
+luccasmmg 
+[link: https://github.com/nushell/nushell/pull/4043] fixed 90 degrees tables problem
+lildata 
+[link: https://github.com/nushell/nushell/pull/4040] corrected typo
+ArtoLord 
+[link: https://github.com/nushell/nushell/pull/4039] added 
+``-c``
+ flag to 
+``update cells``
+ subcommand
+gilescope removed 
+[link: https://github.com/nushell/nushell/pull/4038] unused deps
+’ÚtTitle: This week in Nushell #110
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/4058] removed ansi colors if this is not a tty
+, and added 
+[link: https://github.com/nushell/nushell/pull/4048] new command: into column_path
+luccasmmg 
+[link: https://github.com/nushell/nushell/pull/4043] fixed 90 degrees tables problem
+lildata 
+[link: https://github.com/nushell/nushell/pull/4040] corrected typo
+ArtoLord 
+[link: https://github.com/nushell/nushell/pull/4039] added 
+``-c``
+ flag to 
+``update cells``
+ subcommand
+gilescope removed 
+[link: https://github.com/nushell/nushell/pull/4038] unused deps
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-01-twin0110.mdÙ@22dcbd427678572a326faa9386a446e1879987afac33a26fc59e50c5291cc57a¹This week in Nushell #110‘­DocumentationÙZaminya 
+[link: https://github.com/nushell/nushell.github.io/pull/198] fixed git rm merged
+’Ù˜Title: This week in Nushell #110
+Path: Documentation
+Content:
+aminya 
+[link: https://github.com/nushell/nushell.github.io/pull/198] fixed git rm merged
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-01-twin0110.mdÙ@c28b51aa691adc1694beb6a87d66d072fde912e7acc782684e66ca8aef7ce58e¹This week in Nushell #110‘ªNu_ScriptsÙhfdncred 
+[link: https://github.com/nushell/nu_scripts/pull/98] added a script to get your local weather
+’Ù£Title: This week in Nushell #110
+Path: Nu_Scripts
+Content:
+fdncred 
+[link: https://github.com/nushell/nu_scripts/pull/98] added a script to get your local weather
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-01-twin0110.mdÙ@72023a5f9196100a76ff182c4b6c09dfce2417ce2581f5bb0a921c6fccf7baff¹This week in Nushell #110‘¨engine-qÚýkubouch 
+[link: https://github.com/nushell/engine-q/pull/79] disabled crossterm raw mode on panic
+, 
+[link: https://github.com/nushell/engine-q/pull/71] fixed wrong error span
+, and added 
+[link: https://github.com/nushell/engine-q/pull/69] simple module implementation
+jntrnr 
+[link: https://github.com/nushell/engine-q/pull/78] added sys command
+, 
+[link: https://github.com/nushell/engine-q/pull/77] added a vertical record view
+, 
+[link: https://github.com/nushell/engine-q/pull/76] added 'from json'
+, 
+[link: https://github.com/nushell/engine-q/pull/75] prepared nu_commands for porting
+, moved to 
+[link: https://github.com/nushell/engine-q/pull/73] more forgiving def parse
+, 
+[link: https://github.com/nushell/engine-q/pull/72] added import lists
+, 
+[link: https://github.com/nushell/engine-q/pull/70] added support for module imports
+, 
+[link: https://github.com/nushell/engine-q/pull/68] improved table for lists
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/66] table as string output
+’Ú6Title: This week in Nushell #110
+Path: engine-q
+Content:
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/79] disabled crossterm raw mode on panic
+, 
+[link: https://github.com/nushell/engine-q/pull/71] fixed wrong error span
+, and added 
+[link: https://github.com/nushell/engine-q/pull/69] simple module implementation
+jntrnr 
+[link: https://github.com/nushell/engine-q/pull/78] added sys command
+, 
+[link: https://github.com/nushell/engine-q/pull/77] added a vertical record view
+, 
+[link: https://github.com/nushell/engine-q/pull/76] added 'from json'
+, 
+[link: https://github.com/nushell/engine-q/pull/75] prepared nu_commands for porting
+, moved to 
+[link: https://github.com/nushell/engine-q/pull/73] more forgiving def parse
+, 
+[link: https://github.com/nushell/engine-q/pull/72] added import lists
+, 
+[link: https://github.com/nushell/engine-q/pull/70] added support for module imports
+, 
+[link: https://github.com/nushell/engine-q/pull/68] improved table for lists
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/66] table as string output
+—ÙRarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-10-01-twin0110.mdÙ@5f8ab7daeb68c45cc9c153971655c82bf0c91a0fa4f348415310a267459333f9¹This week in Nushell #110‘¨reedlineÙmsherubthakur 
+[link: https://github.com/nushell/reedline/pull/150] added tests line buffer (and fix methods)
+’Ù¦Title: This week in Nushell #110
+Path: reedline
+Content:
+sherubthakur 
+[link: https://github.com/nushell/reedline/pull/150] added tests line buffer (and fix methods)

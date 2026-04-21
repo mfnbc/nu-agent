@@ -1,0 +1,54 @@
+•’Ù@784ce9bd30ae3bf164b8536940d96236ee4b5dc2ef2a79341b14550a0241c236ÙlTitle: title: math arccos
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math arccos``
+[link: /commands/categories/math.md] ’Ù@7016ca6170c69665934919d58ade62401b36697ab9cf2c29d072e4c44ad178d3ÙNTitle: title: math arccos
+Path: Signature
+Content:
+``> math arccos {flags} ``
+’Ù@3ebbfc9b772ce4a354127b04809e0fb5164a85404894cbd0073c2414bae56f11ÙfTitle: title: math arccos
+Path: Flags
+Content:
+``--degrees, -d``
+: Return degrees instead of radians.
+’Ù@fb90349e4ad00f52d16eeb95e34ca09a0059277be8362d27adc57c6833308438ÙxTitle: title: math arccos
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’Ù@efc0fa58f88d118683b5d99bd1065a245355c476cef740c842b19065dbb0d7b2ÙãTitle: title: math arccos
+Path: Examples
+Content:
+Get the arccosine of 1
+```Fenced(Borrowed("nu"))
+> 1 | math arccos
+0.0
+
+```
+Get the arccosine of -1 in degrees
+```Fenced(Borrowed("nu"))
+> -1 | math arccos --degrees
+180.0
+
+```

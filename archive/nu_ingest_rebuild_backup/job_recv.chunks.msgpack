@@ -1,0 +1,140 @@
+–—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_recv.mdÙ@20284c6f6c1e382740691474963c4935c2fb8a0faa83880d459a80fbcc0acf36¯title: job recv‘¬experimentalÙC
+
+
+
+
+
+
+
+
+``job recv``
+[link: /commands/categories/experimental.md] ’ÙvTitle: title: job recv
+Path: experimental
+Content:
+
+
+
+
+
+
+
+
+
+``job recv``
+[link: /commands/categories/experimental.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_recv.mdÙ@7c3611e38f4e488ab848c329073b03ada2f873301c7b1824a8bdd34bbdce852d¯title: job recv‘©Signature¸``> job recv {flags} ``
+’ÙHTitle: title: job recv
+Path: Signature
+Content:
+``> job recv {flags} ``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_recv.mdÙ@1c6c0654f106250d35c12cb4ad0fbe8f734d37cced27afb5d1f995b864f0bdf9¯title: job recv‘¥FlagsÙk``--tag {int}``
+: A tag for the message.
+``--timeout {duration}``
+: The maximum time duration to wait for.
+’Ù—Title: title: job recv
+Path: Flags
+Content:
+``--tag {int}``
+: A tag for the message.
+``--timeout {duration}``
+: The maximum time duration to wait for.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_recv.mdÙ@0566b13b444f077a2ace28a9bdfc094e2d1c9984954a5afc2b6cd208de18a368¯title: job recv‘³Input/output types:¹input
+output
+nothing
+any
+’ÙSTitle: title: job recv
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_recv.mdÙ@f38f88a1f8fd3b53ab95b68637df6a23488b848445a3c89e6bd786e83957c0a3¯title: job recv‘¨ExamplesÚÅBlock the current thread while no message arrives.
+```Fenced(Borrowed("nu"))
+> job recv
+
+
+```
+Receive a message, wait for at most 10 seconds.
+```Fenced(Borrowed("nu"))
+> job recv --timeout 10sec
+
+
+```
+Get a message or fail if no message is available immediately.
+```Fenced(Borrowed("nu"))
+> job recv --timeout 0sec
+
+
+```
+Receive a message from a newly-spawned job.
+```Fenced(Borrowed("nu"))
+> job spawn { sleep 1sec; 'hi' | job send 0 }; job recv
+
+
+```
+’ÚôTitle: title: job recv
+Path: Examples
+Content:
+Block the current thread while no message arrives.
+```Fenced(Borrowed("nu"))
+> job recv
+
+
+```
+Receive a message, wait for at most 10 seconds.
+```Fenced(Borrowed("nu"))
+> job recv --timeout 10sec
+
+
+```
+Get a message or fail if no message is available immediately.
+```Fenced(Borrowed("nu"))
+> job recv --timeout 0sec
+
+
+```
+Receive a message from a newly-spawned job.
+```Fenced(Borrowed("nu"))
+> job spawn { sleep 1sec; 'hi' | job send 0 }; job recv
+
+
+```
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/job_recv.mdÙ@4475fb8ae05a005b77ab4edb2375f08bc3f2fb1d9097e056a1fe42580f6e463d¯title: job recv‘¥NotesÚWhen messages are sent to the current process, they get stored in what is called the "mailbox".
+
+This commands reads and returns a message from the mailbox, in a first-in-first-out fashion.
+Messages may have numeric flags attached to them. This commands supports filtering out messages that do not satisfy a given tag, by using the 
+``tag``
+ flag.
+
+If no tag is specified, this command will accept any message.
+If no message with the specified tag (if any) is available in the mailbox, this command will block the current thread until one arrives.
+
+By default this command block indefinitely until a matching message arrives, but a timeout duration can be specified.
+
+If a timeout duration of zero is specified, it will succeed only if there already is a message in the mailbox.
+Note: When using par-each, only one thread at a time can utilize this command.
+
+In the case of two or more threads running this command, they will wait until other threads are done using it,
+
+in no particular order, regardless of the specified timeout parameter.
+’Ú>Title: title: job recv
+Path: Notes
+Content:
+When messages are sent to the current process, they get stored in what is called the "mailbox".
+
+This commands reads and returns a message from the mailbox, in a first-in-first-out fashion.
+Messages may have numeric flags attached to them. This commands supports filtering out messages that do not satisfy a given tag, by using the 
+``tag``
+ flag.
+
+If no tag is specified, this command will accept any message.
+If no message with the specified tag (if any) is available in the mailbox, this command will block the current thread until one arrives.
+
+By default this command block indefinitely until a matching message arrives, but a timeout duration can be specified.
+
+If a timeout duration of zero is specified, it will succeed only if there already is a message in the mailbox.
+Note: When using par-each, only one thread at a time can utilize this command.
+
+In the case of two or more threads running this command, they will wait until other threads are done using it,
+
+in no particular order, regardless of the specified timeout parameter.

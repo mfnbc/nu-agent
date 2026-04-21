@@ -1,0 +1,18 @@
+[package]
+name = "flat_index"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+fastembed = "5"
+rmp-serde = "1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1"
+rmpv = "1"
+faiss = { version = "0.9", optional = true }
+rayon = { version = "1.9", optional = false }
+
+[features]
+default = []
+faiss = ["dep:faiss"]

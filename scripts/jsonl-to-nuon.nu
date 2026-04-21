@@ -1,7 +1,7 @@
 # Convert a JSONL file to NUON
-# Usage: nu scripts/jsonl-to-nuon.nu --input data/nu_docs_vectors.jsonl --output data/nu_docs_vectors.nuon
+# Usage: nu scripts/nuon-to-nuon.nu --input data/nu_docs_vectors.nuon --output data/nu_docs_vectors.nuon
 
-export def main [--input: string = "data/nu_docs_vectors.jsonl", --output: string = "data/nu_docs_vectors.nuon"] {
+export def main [--input: string = "data/nu_docs_vectors.nuon", --output: string = "data/nu_docs_vectors.nuon"] {
     if (not ($input | path exists)) { error make { msg: "input not found: ($input)" } }
 
     let rows = []

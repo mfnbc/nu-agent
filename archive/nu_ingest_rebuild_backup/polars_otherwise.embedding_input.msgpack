@@ -1,0 +1,65 @@
+���@663f37403e13951645e3605510f1d7d502294e73d80d57c0e5741f12fa062610قTitle: title: polars otherwise
+Path: expression
+Content:
+
+
+
+
+
+
+
+
+
+``polars otherwise``
+[link: /commands/categories/expression.md] ��@4a66711b885034992f18238e7a10547e2932dd208333dfed6a7a4bc3f64bf604�nTitle: title: polars otherwise
+Path: Signature
+Content:
+``> polars otherwise {flags} (otherwise expression)``
+��@25a346c71e9c075ba1137d3b2f34e5a38f971c996e6b52b2324eff6516ae5772وTitle: title: polars otherwise
+Path: Parameters
+Content:
+``otherwise expression``
+: Expression to apply when no when predicate matches.
+��@4fc8fb8742a088d2260c9dbaf7ea103ef8c62e14f1edf2ecafd8b746aa77f6f9�eTitle: title: polars otherwise
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_expression
+��@8a27cb9e47994fb7e2672e8d5569601a00635f8451005549a98dd69d3b2483ff� Title: title: polars otherwise
+Path: Examples
+Content:
+Create a when conditions
+```Fenced(Borrowed("nu"))
+> polars when ((polars col a) > 2) 4 | polars otherwise 5
+
+
+```
+Create a when conditions
+```Fenced(Borrowed("nu"))
+> polars when ((polars col a) > 2) 4 | polars when ((polars col a) < 0) 6 | polars otherwise 0
+
+
+```
+Create a new column for the dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [6 2] [1 4] [4 1]]
+   | polars into-lazy
+   | polars with-column (
+    polars when ((polars col a) > 2) 4 | polars otherwise 5 | polars as c
+     )
+   | polars with-column (
+    polars when ((polars col a) > 5) 10 | polars when ((polars col a) < 2) 6 | polars otherwise 0 | polars as d
+     )
+   | polars collect
+╭───┬───┬───┬───┬────╮
+│ # │ a │ b │ c │ d  │
+├───┼───┼───┼───┼────┤
+│ 0 │ 6 │ 2 │ 4 │ 10 │
+│ 1 │ 1 │ 4 │ 5 │  6 │
+│ 2 │ 4 │ 1 │ 4 │  0 │
+╰───┴───┴───┴───┴────╯
+
+
+```

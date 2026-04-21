@@ -1,0 +1,89 @@
+“—Ùharchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/basic_types/datetime.mdÙ@6471a48997da1dbd7e474e5f7f7242cfecc130bf7930c7275dd49f0aecae3b2b¨Datetime‘¨DatetimeÚ¶Description:
+
+Represents a specific point in time using international standard date time descriptors
+Annotation:
+
+``datetime``
+
+Literal syntax:
+
+RFC 3339
+Date-only: 
+``2022-02-02``
+
+Date and time (GMT): 
+``2022-02-02T14:30:00``
+
+Date and time including timezone offset: 
+``2022-02-02T14:30:00+05:00``
+
+Casts:
+
+[link: /commands/docs/into_datetime.md] ``into datetime``
+See also:
+
+[link: /book/types_of_data.md#dates] Types of Data - Dates
+’ÚŞTitle: Datetime
+Path: Datetime
+Content:
+Description:
+
+Represents a specific point in time using international standard date time descriptors
+Annotation:
+
+``datetime``
+
+Literal syntax:
+
+RFC 3339
+Date-only: 
+``2022-02-02``
+
+Date and time (GMT): 
+``2022-02-02T14:30:00``
+
+Date and time including timezone offset: 
+``2022-02-02T14:30:00+05:00``
+
+Casts:
+
+[link: /commands/docs/into_datetime.md] ``into datetime``
+See also:
+
+[link: /book/types_of_data.md#dates] Types of Data - Dates
+—Ùharchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/basic_types/datetime.mdÙ@e36376178dcc5ff03332c8a36c0d03dbc7f1954ad2eedf83c699c40b3ad7205d¨Datetime‘¹Additional language notesÙ™Dates and times are held together in the 
+``datetime``
+ type. Date values used by the system are timezone-aware. By default, dates use the UTC timezone.
+’ÙÒTitle: Datetime
+Path: Additional language notes
+Content:
+Dates and times are held together in the 
+``datetime``
+ type. Date values used by the system are timezone-aware. By default, dates use the UTC timezone.
+—Ùharchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/basic_types/datetime.mdÙ@d7184211573c909236b6b8a1e7a4325e2ba5be14f686af57b9ebeb646c036ce7¨Datetime‘Ù&Common commands that can be used with ÙÙ``datetime``
+Many of Nushell's builtin commands are datetime aware and output or use 
+``datetime``
+ values
+
+for fields and expressions. For example:
+``date``
+ and its subcommands
+``format date``
+``ls``
+``ps``
+``sys``
+’ÚTitle: Datetime
+Path: Common commands that can be used with 
+Content:
+``datetime``
+Many of Nushell's builtin commands are datetime aware and output or use 
+``datetime``
+ values
+
+for fields and expressions. For example:
+``date``
+ and its subcommands
+``format date``
+``ls``
+``ps``
+``sys``

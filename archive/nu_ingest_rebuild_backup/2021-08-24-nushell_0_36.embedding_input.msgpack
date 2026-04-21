@@ -1,0 +1,119 @@
+���@a2c9d085a12ab82589dfbd31629478d7adc5449b4dccdc3c2e8db468ff8102b2��Title: title: Nushell 0.36
+Path: Nushell 0.36
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.36 of Nu. This release fixes some long-standing issues with history, improves the help system, improves dataframes, and much more.
+��@c55a305a7d04c7da2b0107dc72798158478564e16550760f7caf4467e1e5cc51�Title: title: Nushell 0.36
+Path: Where to get it
+Content:
+Nu 0.36 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.36.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+��@e68d4d7bb166eba774403d36176da37b7898d9b2ed57011d722a2c45fb2996eb�$Title: title: Nushell 0.36
+Path: Help now has search (fdncred)
+Content:
+You can now use 
+``help -f <term>``
+ and search the help for text. This can come in handy if you know roughly what you want but can't remember the name of the command:
+```Fenced(Borrowed(""))
+> help -f string
+────┬──────────────────────────┬────────────────────────────────────────────────┬─────────────
+ #  │           name           │                     usage                      │ extra_usage
+────┼──────────────────────────┼────────────────────────────────────────────────┼─────────────
+  0 │ ansi strip               │ strip ansi escape sequences from string        │
+  1 │ build-string             │ Builds a string from the arguments.            │
+  2 │ dataframe concatenate    │ [Series] Concatenates strings with other array │
+  3 │ dataframe contains       │ [Series] Checks if a pattern is contained in a │
+    │                          │ string                                         │
+  4 │ dataframe replace        │ [Series] Replace the leftmost (sub)string by a │
+    │                          │ regex pattern                                  │
+...
+
+```
+��@d8faa32e8401f44a1b6010f1823f0f1da47f11e7b86e708d69008f571b083868��Title: title: Nushell 0.36
+Path: Built-in tutor (sophiajt)
+Content:
+In addition to the new help search, we've also started to build out a built-in Nushell tutorial. You can navigate by topic or search the help text for a string.
+Screenshot showing the tutor command running 'tutor table'
+We've only added a few topics so far, but we hope to grow these topics (with your help) over the coming releases.
+��@feb2ea10d10368cc50f60d48e078716529aa8fc9ebe33d8efddcd052ba10cc51��Title: title: Nushell 0.36
+Path: New commands and features
+Content:
+[link: https://github.com/nushell/nushell/pull/3917] ``drop nth``
+ - drops the given rows (andrasio)
+[link: https://github.com/nushell/nushell/pull/3918] ``PROMPT_STRING``
+ environment variable
+ - configures the script to run to create the prompt directly from the environment (elferherrera)
+[link: https://github.com/nushell/nushell/pull/3919] ``zip``
+ - combine two lists into one list of pairs (andrasio)
+��@659f20e59a08ef3c462b19867bc0c570bf2e63e859e24b9edcb8a02715344c17�2Title: title: Nushell 0.36
+Path: Dataframe improvements (elferherrera)
+Content:
+[link: https://github.com/nushell/nushell/pull/3894] datetime commands
+[link: https://github.com/nushell/nushell/pull/3907] describe command
+[link: https://github.com/nushell/nushell/pull/3960] rolling and cumulative commands
+��@1f5b7bb02769716ff4d4975d3669b009d1a6fdf798eb02063682fa1ef10bb06c�xTitle: title: Nushell 0.36
+Path: Important bugfixes (lily-mara, gwenn, sophiajt)
+Content:
+A long-standing issue with history getting garbled when you have multiple shells open sending history updates is hopefully 
+[link: https://github.com/kkawakam/rustyline/pull/560] now fixed
+. Thanks to the rustyline maintainers for helping find the root cause and creating a fix for it.
+��@0442c0f6785210655e545c12100c9b3245c3adeed850a9781ea41ebb9607780c�%Title: title: Nushell 0.36
+Path: Additional improvements
+Content:
+waldyrious fixed 
+[link: https://github.com/nushell/nushell/pull/3890] a typo
+, and fixed 
+[link: https://github.com/nushell/nushell/pull/3891] issue templates
+fdncred started a list of 
+[link: https://github.com/nushell/nushell/pull/3895] projects that officially support Nushell
+RealCundo added 
+[link: https://github.com/nushell/nushell/pull/3888] PartialEq to ReturnValue
+hedonihilist improved 
+[link: https://github.com/nushell/nushell/pull/3902] how DirInfo calculates directory size
+soumil-07 
+[link: https://github.com/nushell/nushell/pull/3905] worked around a BigDecimal issue that broke 
+``math floor``
+sophiajt added 
+[link: https://github.com/nushell/nushell/pull/3906] ``in``
+ and 
+``not-in``
+ for strings
+, changed the 
+[link: https://github.com/nushell/nushell/pull/3924] release build to focus on binary size
+baoyachi 
+[link: https://github.com/nushell/nushell/pull/3914] updated shadow-rs, which fixes some datetime issues and more
+knottio added 
+[link: https://github.com/nushell/nushell/pull/3921] trailing slash when completing symlinked directory
+fdncred fixed 
+[link: https://github.com/nushell/nushell/pull/3923] ``fetch``
+ to better follow redirects
+, and improved the 
+[link: https://github.com/nushell/nushell/pull/3962] issue template
+filaretov fixed 
+[link: https://github.com/nushell/nushell/pull/3936] unaliasing to only affect the current scope
+kubouch fixed 
+[link: https://github.com/nushell/nushell/pull/3939] an issue where 
+``source``
+ couldn't handle paths with emojis
+��@49c6cd67b00775c726963c9cd78ed66e844f5ac3799d12b9763c09f8bf97003a��Title: title: Nushell 0.36
+Path: Looking ahead
+Content:
+The ability to search help and improve a built-in tutorial gives us a lot of opportunities to make Nushell more user-friendly, especially to users who are just getting started learning what Nushell can do. If you're interested, these are some good places to 
+[link: https://github.com/nushell/nushell/blob/main/crates/nu-command/src/commands/core_commands/tutor.rs] jump in and help
+ if you have specific topics or areas of interest.
+The projects we reported on last time, engine-q and reedline, are steadily improving. We're currently working through any remaining issues so that we can begin experimenting with integrating them into Nushell.

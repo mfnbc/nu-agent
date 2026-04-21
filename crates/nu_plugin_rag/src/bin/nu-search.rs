@@ -1,13 +1,11 @@
 use anyhow::{anyhow, Context, Result};
 use clap::Parser;
-use nu_plugin_rag::{DocRecord, EmbeddingOut, EmbeddingRecord};
+use nu_plugin_rag::DocRecord;
 use rayon::prelude::*;
 use rmp_serde::decode::from_read;
-use rmp_serde::encode::write as rmp_write;
-use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
 use std::fs::File;
-use std::io::{self, Read};
+use std::io::{self, Read, Write};
 use std::path::Path;
 
 /// Nu-search: fast linear scan over normalized embeddings stored in a MessagePack
@@ -103,7 +101,7 @@ fn read_query_vec(path_opt: Option<&str>, explicit_format: Option<&str>) -> Resu
         } else {
             // Try MessagePack decode
             let mut de = rmp_serde::Deserializer::new(&buf[..]);
-            if let Ok(v) = Deserialize::deserialize::<Vec<f32>>(&mut de) {
+            if let Ok(v) = rmp_serde::from_read_ref::<_, Vec<f32>>(&buf) {
                 return Ok(v);
             }
             // Fallback: attempt whitespace parse
@@ -170,7 +168,7 @@ fn main() -> Result<()> {
         }
     }
 
-    // Compute dot products in parallel
+    // Compute dot products in parallel (document embeddings are expected normalized)
     let mut scores: Vec<(usize, f32)> = docs
         .par_iter()
         .enumerate()
@@ -206,16 +204,11 @@ fn main() -> Result<()> {
 
     match args.out_format.as_str() {
         "msgpack" => {
-            // write MessagePack to stdout
             let buf = rmp_serde::to_vec(&results).context("encoding results to msgpack")?;
             let mut out = io::stdout();
             out.write_all(&buf)?;
         }
-        "nuon" => {
-            // NUON is textual JSON-like; print JSON for now as NUON-compatible
-            println!("{}", serde_json::to_string_pretty(&results)?);
-        }
-        "json" => {
+        "nuon" | "json" => {
             println!("{}", serde_json::to_string_pretty(&results)?);
         }
         "lines" => {

@@ -1,0 +1,61 @@
+•’Ù@38b653ed1179f7e5fa45979c239e4275fbfd01ec49d4c44ea38bf4ff5064dcf5ÙlTitle: title: job
+Path: experimental
+Content:
+
+
+
+
+
+
+
+
+
+``job``
+[link: /commands/categories/experimental.md] ’Ù@9417b5c4b93347811871dd91446d58bc9f138941d793b326ef2f3df3ae49f766Ù>Title: title: job
+Path: Signature
+Content:
+``> job {flags} ``
+’Ù@ac77b71110237316ff217d9d5107e4b87a11b56065d7396b1269c9d31f9b2616ÙQTitle: title: job
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+’Ù@454f4b088a0cb2689b54e34e8f65b2481562190ae2e3e8533ee04b5e27b06493Ù”Title: title: job
+Path: Notes
+Content:
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+’Ù@b334a7eba35b6a6553cce5f880c51ea74f74d1dea307240e1150119275313c58Ú€Title: title: job
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/job_describe.md] ``job describe``
+Add a description to a background job.
+built-in
+[link: /commands/docs/job_flush.md] ``job flush``
+Clear this job's mailbox.
+built-in
+[link: /commands/docs/job_id.md] ``job id``
+Get id of current job.
+built-in
+[link: /commands/docs/job_kill.md] ``job kill``
+Kill a background job.
+built-in
+[link: /commands/docs/job_list.md] ``job list``
+List background jobs.
+built-in
+[link: /commands/docs/job_recv.md] ``job recv``
+Read a message from a job's mailbox.
+built-in
+[link: /commands/docs/job_send.md] ``job send``
+Send a message to the mailbox of a job.
+built-in
+[link: /commands/docs/job_spawn.md] ``job spawn``
+Spawn a background job and retrieve its ID.
+built-in
+[link: /commands/docs/job_unfreeze.md] ``job unfreeze``
+Unfreeze a frozen process job in foreground.
+built-in

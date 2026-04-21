@@ -1,0 +1,110 @@
+ñóŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-07-nushell_0_41.mdŸ@73977f0ddd37ca6f47921a96393f508f1c707d9c0c4b5af5619ef434267d501e≥title: Nushell 0.41ë¨Nushell 0.41⁄`
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.41 of Nu. This release is a bugfix release of 0.41.
+íêê⁄óTitle: title: Nushell 0.41
+Path: Nushell 0.41
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.41 of Nu. This release is a bugfix release of 0.41.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-07-nushell_0_41.mdŸ@25b422522dcfa13aca394614120cedca15df2fdd6066a69c8b253c24766925b9≥title: Nushell 0.41ëØWhere to get it⁄ﬂNu 0.41 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.41.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+íêê⁄Title: title: Nushell 0.41
+Path: Where to get it
+Content:
+Nu 0.41 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.41.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-07-nushell_0_41.mdŸ@60ad9e1e8254bc73591a4c70292670fccc09f5020de9d8098ed35febf8b52645≥title: Nushell 0.41ë®FeaturesŸp[link: https://github.com/nushell/nushell/pull/4175] Add -l/--login flag for compat with other shells
+ (ahouts)
+íêêŸ£Title: title: Nushell 0.41
+Path: Features
+Content:
+[link: https://github.com/nushell/nushell/pull/4175] Add -l/--login flag for compat with other shells
+ (ahouts)
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-07-nushell_0_41.mdŸ@17b9e8c20e938362e7bb0d16fa9b78ed7df38833f27cc1c69886a23829fd5bba≥title: Nushell 0.41ë•Fixes⁄X[link: https://github.com/nushell/nushell/pull/4156] ``save --append``
+ will now create a file if missing
+ (BraulioVM)
+[link: https://github.com/nushell/nushell/pull/4135] Upgraded dependencies
+ (ahkrr)
+[link: https://github.com/nushell/nushell/pull/4152] Corrected spelling in crate docs and code docs
+ (EdwardBetts)
+[link: https://github.com/nushell/nushell/pull/4155] Fixed the markup in some of the crate docs
+ (tshepang)
+[link: https://github.com/nushell/nushell/pull/4157] external arguments are now sanitized more
+ (BraulioVM)
+[link: https://github.com/nushell/nushell/pull/4173] upx/strip has been removed after feedback from users
+ (fdncred)
+[link: https://github.com/nushell/nushell/pull/4174] Clipboard capability via arboard removed
+ (sophiajt)
+[link: https://github.com/nushell/nushell/pull/4178] Removed some unnecessary allocation
+ (ahouts)
+íêê⁄àTitle: title: Nushell 0.41
+Path: Fixes
+Content:
+[link: https://github.com/nushell/nushell/pull/4156] ``save --append``
+ will now create a file if missing
+ (BraulioVM)
+[link: https://github.com/nushell/nushell/pull/4135] Upgraded dependencies
+ (ahkrr)
+[link: https://github.com/nushell/nushell/pull/4152] Corrected spelling in crate docs and code docs
+ (EdwardBetts)
+[link: https://github.com/nushell/nushell/pull/4155] Fixed the markup in some of the crate docs
+ (tshepang)
+[link: https://github.com/nushell/nushell/pull/4157] external arguments are now sanitized more
+ (BraulioVM)
+[link: https://github.com/nushell/nushell/pull/4173] upx/strip has been removed after feedback from users
+ (fdncred)
+[link: https://github.com/nushell/nushell/pull/4174] Clipboard capability via arboard removed
+ (sophiajt)
+[link: https://github.com/nushell/nushell/pull/4178] Removed some unnecessary allocation
+ (ahouts)
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-07-nushell_0_41.mdŸ@03ee2ceb5a1b52e46a069bcec168c3dc3eae40276d0553e71b241e7650649c0c≥title: Nushell 0.41ë±Engine-q progress⁄kAs engine-q matures, our energy continues to be directed towards it. Over 
+[link: https://github.com/nushell/engine-q/pulls?page=1&q=is%3Apr+is%3Aclosed] 80 PRs
+ have been merged into engine-q since the last Nushell release. As engine-q nears readiness for early adopters to begin using it, we've begun concentrating on closing the remaining gaps in functionality so that it can be used as a daily shell. Once ready, Nushell will have its core functionality replaced by engine-q and from there on we'll be using the new engine. We're planning to change the version number significantly to reflect the jump in features.
+íêê⁄ßTitle: title: Nushell 0.41
+Path: Engine-q progress
+Content:
+As engine-q matures, our energy continues to be directed towards it. Over 
+[link: https://github.com/nushell/engine-q/pulls?page=1&q=is%3Apr+is%3Aclosed] 80 PRs
+ have been merged into engine-q since the last Nushell release. As engine-q nears readiness for early adopters to begin using it, we've begun concentrating on closing the remaining gaps in functionality so that it can be used as a daily shell. Once ready, Nushell will have its core functionality replaced by engine-q and from there on we'll be using the new engine. We're planning to change the version number significantly to reflect the jump in features.
+óŸVarchive/external_nushell_repo_backup/nushell.github.io/blog/2021-12-07-nushell_0_41.mdŸ@fe21527f6e73c2a6fd63faee1fae8ad44a5aa2d2d6143852dca2c5ad3e2c96e3≥title: Nushell 0.41ëØLooking forward⁄RAs we enter the holidays, the focus of the Nushell effort continues to be on engine-q. There are still 
+[link: https://github.com/nushell/engine-q/issues/242] many commands left to port
+ and more places to jump in. If you'd like to help, come join us on the 
+[link: https://discord.gg/NtAbbGn] discord
+. We'd be happy to show you around.
+íêê⁄åTitle: title: Nushell 0.41
+Path: Looking forward
+Content:
+As we enter the holidays, the focus of the Nushell effort continues to be on engine-q. There are still 
+[link: https://github.com/nushell/engine-q/issues/242] many commands left to port
+ and more places to jump in. If you'd like to help, come join us on the 
+[link: https://discord.gg/NtAbbGn] discord
+. We'd be happy to show you around.

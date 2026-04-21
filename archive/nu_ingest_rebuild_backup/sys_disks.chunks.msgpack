@@ -1,0 +1,54 @@
+”—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_disks.mdÙ@acda6c51d65496732845a7a9ff50c3716077a6fbf0f9872accff0ce4942618c2°title: sys disks‘¦systemÙ>
+
+
+
+
+
+
+
+
+``sys disks``
+[link: /commands/categories/system.md] ’ÙlTitle: title: sys disks
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``sys disks``
+[link: /commands/categories/system.md] —ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_disks.mdÙ@9ea28f025c31e345e6a22f4c3e220e08642d45bfd58f5c6e0537d86b31c43376°title: sys disks‘©Signature¹``> sys disks {flags} ``
+’ÙJTitle: title: sys disks
+Path: Signature
+Content:
+``> sys disks {flags} ``
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_disks.mdÙ@973aed70ae1ccae5a5797581bf0f24cc6d15b78af1cd674baf158c16d845cd6d°title: sys disks‘³Input/output types:»input
+output
+nothing
+table
+’ÙVTitle: title: sys disks
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+—ÙQarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/sys_disks.mdÙ@bbdf7f5d8b2af1a1addeaf6816fcf8e61ea751bac15f4078b229590345563581°title: sys disks‘¨ExamplesÙMShow info about the system disks
+```Fenced(Borrowed("nu"))
+> sys disks
+
+
+```
+’Ù}Title: title: sys disks
+Path: Examples
+Content:
+Show info about the system disks
+```Fenced(Borrowed("nu"))
+> sys disks
+
+
+```

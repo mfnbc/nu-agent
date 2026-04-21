@@ -1,0 +1,61 @@
+���@50e2eb005160e86708e0b2bc8269943213841505eb81b8a5cab8c1a310f2f9b9�~Title: title: polars fill-nan
+Path: lazyframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars fill-nan``
+[link: /commands/categories/lazyframe.md] ��@34aa44e93a190abffa426417077e8c54a5ee4c0c211b0435fc1d9d945366306c�\Title: title: polars fill-nan
+Path: Signature
+Content:
+``> polars fill-nan {flags} (fill)``
+��@92e1f4fb15ed5a621a699754e6046b271598f5df35d5a068536383dc2af7aa39�mTitle: title: polars fill-nan
+Path: Parameters
+Content:
+``fill``
+: Expression to use to fill the NAN values.
+��@aacaa5caa3185335b06bdf89a8ed751c8b4470306a8714d4397bb714c6db7646ْTitle: title: polars fill-nan
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@bb5308a863dacdc2c366a835577e4ef69782a23862ee264373ea54803e39ab72��Title: title: polars fill-nan
+Path: Examples
+Content:
+Fills the NaN values with 0
+```Fenced(Borrowed("nu"))
+> [1 2 NaN 3 NaN] | polars into-df | polars fill-nan 0
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 2 │
+│ 2 │ 0 │
+│ 3 │ 3 │
+│ 4 │ 0 │
+╰───┴───╯
+
+
+```
+Fills the NaN values of a whole dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [0.2 1] [0.1 NaN]] | polars into-df | polars fill-nan 0
+╭───┬──────┬───╮
+│ # │  a   │ b │
+├───┼──────┼───┤
+│ 0 │ 0.20 │ 1 │
+│ 1 │ 0.10 │ 0 │
+╰───┴──────┴───╯
+
+
+```

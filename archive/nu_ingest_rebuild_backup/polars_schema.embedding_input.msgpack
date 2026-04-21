@@ -1,0 +1,41 @@
+•’Ù@893fdad13aa41a44f2e427c7626ed972a0159a3f23e1f95589cdaa47e092706cÙzTitle: title: polars schema
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars schema``
+[link: /commands/categories/dataframe.md] ’Ù@086070830bd53ca58847a71cd3fcd96192584446c5154a0eafd96e55ff2185c8ÙRTitle: title: polars schema
+Path: Signature
+Content:
+``> polars schema {flags} ``
+’Ù@380964f92ae1c330e2263b1e5ad51ba58cc94c1d8a094c472cf3f907729847c4ÙeTitle: title: polars schema
+Path: Flags
+Content:
+``--datatype-list, -l``
+: Creates a lazy dataframe.
+’Ù@c7556fe9cf48e98ab39bca9055f9f874f9d55f684bc58950651f721da976d091ÙWTitle: title: polars schema
+Path: Input/output types:
+Content:
+input
+output
+any
+record
+’Ù@bb0a8d6bd327a22008800f19124be6a00525cd56c90d70cae56592c3628e75bcÚTitle: title: polars schema
+Path: Examples
+Content:
+Dataframe schema
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 "foo"] [3 "bar"]] | polars into-df | polars schema
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â•®
+â”‚ a â”‚ i64 â”‚
+â”‚ b â”‚ str â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â•¯
+
+```

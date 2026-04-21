@@ -1,0 +1,74 @@
+”—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arccosh.mdÙ@4fa1440f7e2eef3645f2744a6d6b85d75c3bf6e88f81e43c7bccab8aa82b10c1³title: math arccosh‘¤mathÙ?
+
+
+
+
+
+
+
+
+``math arccosh``
+[link: /commands/categories/math.md] ’ÙnTitle: title: math arccosh
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math arccosh``
+[link: /commands/categories/math.md] —ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arccosh.mdÙ@213bc0f701f6f1a73b081d16259aa70d28dc6c121337c24232344d536e9c9f52³title: math arccosh‘©Signature¼``> math arccosh {flags} ``
+’ÙPTitle: title: math arccosh
+Path: Signature
+Content:
+``> math arccosh {flags} ``
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arccosh.mdÙ@552ec9d7e72a90b2666f4e4bd0939be3931de02c0e5bb3278e320c2e4fb04d39³title: math arccosh‘³Input/output types:Ù;input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’ÙyTitle: title: math arccosh
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+—ÙTarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_arccosh.mdÙ@7f504a7f4e8760921316bbac37b0344eacb114c6ee9ef4ae3c9167c01ad1d7e5³title: math arccosh‘¨ExamplesÙKGet the arccosh of 1
+```Fenced(Borrowed("nu"))
+> 1 | math arccosh
+0.0
+
+```
+’Ù~Title: title: math arccosh
+Path: Examples
+Content:
+Get the arccosh of 1
+```Fenced(Borrowed("nu"))
+> 1 | math arccosh
+0.0
+
+```

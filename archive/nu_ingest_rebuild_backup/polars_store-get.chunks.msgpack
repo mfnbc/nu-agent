@@ -1,0 +1,103 @@
+•—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-get.mdÙ@a7e865fac6a26bf0a086fccd804fb73efdd29103cab9e2a18c0558c4d1e0f00e·title: polars store-get‘©dataframeÙH
+
+
+
+
+
+
+
+
+``polars store-get``
+[link: /commands/categories/dataframe.md] ’Ù€Title: title: polars store-get
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars store-get``
+[link: /commands/categories/dataframe.md] —ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-get.mdÙ@7dda85b8ca08872b42a770e915a3cae3bae3f5c705fc97d9451e273d07c79570·title: polars store-get‘©SignatureÙ%``> polars store-get {flags} (key)``
+’Ù]Title: title: polars store-get
+Path: Signature
+Content:
+``> polars store-get {flags} (key)``
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-get.mdÙ@c9010b8d0ab0671ba8680b320de9abea42a73ab02390344e15d9940c90c3d062·title: polars store-get‘ªParametersÙ!``key``
+: Key of objects to get.
+’ÙZTitle: title: polars store-get
+Path: Parameters
+Content:
+``key``
+: Key of objects to get.
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-get.mdÙ@f3e47b1f137b55f1045927a3e3bcb0bc76356648afe990abe9d83a306db72559·title: polars store-get‘³Input/output types:Ù«input
+output
+any
+polars_dataframe
+any
+polars_lazyframe
+any
+polars_expression
+any
+polars_group_by
+any
+polars_when
+any
+polars_datatype
+any
+polars_schema
+any
+polars_selector
+’ÙíTitle: title: polars store-get
+Path: Input/output types:
+Content:
+input
+output
+any
+polars_dataframe
+any
+polars_lazyframe
+any
+polars_expression
+any
+polars_group_by
+any
+polars_when
+any
+polars_datatype
+any
+polars_schema
+any
+polars_selector
+—ÙXarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_store-get.mdÙ@7609dc822085cefc4bc475a75170bee2fbface4df7eb59bea0ef43599638dd9b·title: polars store-get‘¨ExamplesÚ^Get a stored object
+```Fenced(Borrowed("nu"))
+> let df = ([[a b];[1 2] [3 4]] | polars into-df);
+    polars store-ls | get key | first | polars store-get $in
+â•­â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ # â”‚ a â”‚ b â”‚
+â”œâ”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¤
+â”‚ 0 â”‚ 1 â”‚ 2 â”‚
+â”‚ 1 â”‚ 3 â”‚ 4 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â•¯
+
+
+```
+’Ú•Title: title: polars store-get
+Path: Examples
+Content:
+Get a stored object
+```Fenced(Borrowed("nu"))
+> let df = ([[a b];[1 2] [3 4]] | polars into-df);
+    polars store-ls | get key | first | polars store-get $in
+â•­â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ # â”‚ a â”‚ b â”‚
+â”œâ”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¤
+â”‚ 0 â”‚ 1 â”‚ 2 â”‚
+â”‚ 1 â”‚ 3 â”‚ 4 â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â•¯
+
+
+```

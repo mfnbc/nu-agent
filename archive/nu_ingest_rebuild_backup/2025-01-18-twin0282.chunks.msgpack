@@ -1,0 +1,130 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-01-18-twin0282.mdŸ@2f6657f6c58f2f9644b8534e2b83cb2967b0de4f3bc2d9ed984bddb2492175abπThis week in Nushell #282ëßNushell⁄blindFS 
+[link: https://github.com/nushell/nushell/pull/14851] added cancellable heavy requests for LSP
+, 
+[link: https://github.com/nushell/nushell/pull/14837] implemented workspace-wide operations for LSP
+, 
+[link: https://github.com/nushell/nushell/pull/14818] fixed goto definition on variables in match guard
+, 
+[link: https://github.com/nushell/nushell/pull/14817] adjusted span of $it/$in to the first character of its scope
+, and 
+[link: https://github.com/nushell/nushell/pull/14809] added inlay hints of types in assignments for LSP
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14848] fixed issue with variable names ending in duration suffix on the right side of a range
+, and 
+[link: https://github.com/nushell/nushell/pull/14821] added a new 
+``help pipe-and-redirect``
+ command
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14847] fixed error propagation in export-env
+, 
+[link: https://github.com/nushell/nushell/pull/14841] added new operators 'has' and 'not-has'
+, and 
+[link: https://github.com/nushell/nushell/pull/14804] added pipeline input support to 
+``generate``
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/14846] replaced skim with nucleo for faster completions
+Tyarel8 
+[link: https://github.com/nushell/nushell/pull/14845] made 'into datetime' a noop when input is already a datetime
+hustcer 
+[link: https://github.com/nushell/nushell/pull/14835] updated Nu to 0.101.0 for workflow and pinned ubuntu-latest to 22.04 for riscv64gc build
+ChrisDenton 
+[link: https://github.com/nushell/nushell/pull/14832] used non-canonicalized paths in shell integrations
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14827] replaced icons in grid with devicons + color
+, and 
+[link: https://github.com/nushell/nushell/pull/14819] finished removing terminal_size dependency
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14825] renamed/deprecated 'range' to 'slice'
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14765] removed required positional arguments from 'run-external' and 'exec'
+íêê⁄ITitle: This week in Nushell #282
+Path: Nushell
+Content:
+blindFS 
+[link: https://github.com/nushell/nushell/pull/14851] added cancellable heavy requests for LSP
+, 
+[link: https://github.com/nushell/nushell/pull/14837] implemented workspace-wide operations for LSP
+, 
+[link: https://github.com/nushell/nushell/pull/14818] fixed goto definition on variables in match guard
+, 
+[link: https://github.com/nushell/nushell/pull/14817] adjusted span of $it/$in to the first character of its scope
+, and 
+[link: https://github.com/nushell/nushell/pull/14809] added inlay hints of types in assignments for LSP
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/14848] fixed issue with variable names ending in duration suffix on the right side of a range
+, and 
+[link: https://github.com/nushell/nushell/pull/14821] added a new 
+``help pipe-and-redirect``
+ command
+Bahex 
+[link: https://github.com/nushell/nushell/pull/14847] fixed error propagation in export-env
+, 
+[link: https://github.com/nushell/nushell/pull/14841] added new operators 'has' and 'not-has'
+, and 
+[link: https://github.com/nushell/nushell/pull/14804] added pipeline input support to 
+``generate``
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/14846] replaced skim with nucleo for faster completions
+Tyarel8 
+[link: https://github.com/nushell/nushell/pull/14845] made 'into datetime' a noop when input is already a datetime
+hustcer 
+[link: https://github.com/nushell/nushell/pull/14835] updated Nu to 0.101.0 for workflow and pinned ubuntu-latest to 22.04 for riscv64gc build
+ChrisDenton 
+[link: https://github.com/nushell/nushell/pull/14832] used non-canonicalized paths in shell integrations
+fdncred 
+[link: https://github.com/nushell/nushell/pull/14827] replaced icons in grid with devicons + color
+, and 
+[link: https://github.com/nushell/nushell/pull/14819] finished removing terminal_size dependency
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/14825] renamed/deprecated 'range' to 'slice'
+132ikl 
+[link: https://github.com/nushell/nushell/pull/14765] removed required positional arguments from 'run-external' and 'exec'
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-01-18-twin0282.mdŸ@ab21cef40d987e3450b1803fa20fad5af1d1eeee416916677e926906a73dc19eπThis week in Nushell #282ë≠Documentation⁄kai687 
+[link: https://github.com/nushell/nushell.github.io/pull/1750] showed link for save command
+schlich 
+[link: https://github.com/nushell/nushell.github.io/pull/1749] updated hooks.md
+WindSoilder 
+[link: https://github.com/nushell/nushell.github.io/pull/1748] added pipeline examples
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1746] added package dependencies for Nix on macOS
+AdrienLemaire 
+[link: https://github.com/nushell/nushell.github.io/pull/1745] added command_not_found hook for nixos
+íêê⁄MTitle: This week in Nushell #282
+Path: Documentation
+Content:
+kai687 
+[link: https://github.com/nushell/nushell.github.io/pull/1750] showed link for save command
+schlich 
+[link: https://github.com/nushell/nushell.github.io/pull/1749] updated hooks.md
+WindSoilder 
+[link: https://github.com/nushell/nushell.github.io/pull/1748] added pipeline examples
+NotTheDr01ds 
+[link: https://github.com/nushell/nushell.github.io/pull/1746] added package dependencies for Nix on macOS
+AdrienLemaire 
+[link: https://github.com/nushell/nushell.github.io/pull/1745] added command_not_found hook for nixos
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-01-18-twin0282.mdŸ@366eb9b3f1acde63727a6245a15af63d8bb1193f53bea5e84e6747556f494ef0πThis week in Nushell #282ë™Nu_Scripts⁄ñmelMass 
+[link: https://github.com/nushell/nu_scripts/pull/1017] updated imgcat and added support for kitty
+LoicRiegel 
+[link: https://github.com/nushell/nu_scripts/pull/1016] removed duplicate in git-completions.nu
+sholderbach 
+[link: https://github.com/nushell/nu_scripts/pull/1015] updated release excerpt script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/1014] renamed 'range' to 'slice'
+íêê⁄—Title: This week in Nushell #282
+Path: Nu_Scripts
+Content:
+melMass 
+[link: https://github.com/nushell/nu_scripts/pull/1017] updated imgcat and added support for kitty
+LoicRiegel 
+[link: https://github.com/nushell/nu_scripts/pull/1016] removed duplicate in git-completions.nu
+sholderbach 
+[link: https://github.com/nushell/nu_scripts/pull/1015] updated release excerpt script
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/1014] renamed 'range' to 'slice'
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2025-01-18-twin0282.mdŸ@a321848c9947743a64c20b7e23e3061fbab727372919a560a5e61a9ff17f16b1πThis week in Nushell #282ë®reedlineŸdsholderbach 
+[link: https://github.com/nushell/reedline/pull/872] fixed new clippy lint from 1.84.0
+íêêŸùTitle: This week in Nushell #282
+Path: reedline
+Content:
+sholderbach 
+[link: https://github.com/nushell/reedline/pull/872] fixed new clippy lint from 1.84.0

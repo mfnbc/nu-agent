@@ -1,0 +1,99 @@
+•—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/seq_char.mdÙ@346f6f472f5ab38aa17177a31c1f1caa8b50e7f6f46d7a401b49a7a056a3a514¯title: seq char‘ªgeneratorsÙA
+
+
+
+
+
+
+
+
+``seq char``
+[link: /commands/categories/generators.md] ’ÙrTitle: title: seq char
+Path: generators
+Content:
+
+
+
+
+
+
+
+
+
+``seq char``
+[link: /commands/categories/generators.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/seq_char.mdÙ@c2be04e36611bb423e201b33f7dd0d28168bd4638284572774a25d3927d3a341¯title: seq char‘©SignatureÙ%``> seq char {flags} (start) (end)``
+’ÙUTitle: title: seq char
+Path: Signature
+Content:
+``> seq char {flags} (start) (end)``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/seq_char.mdÙ@e6516f9cca747194f3ac9f715d7bb65ad695610080e0c7b380d5df5275de18c8¯title: seq char‘ªParametersÙf``start``
+: Start of character sequence (inclusive).
+``end``
+: End of character sequence (inclusive).
+’Ù—Title: title: seq char
+Path: Parameters
+Content:
+``start``
+: Start of character sequence (inclusive).
+``end``
+: End of character sequence (inclusive).
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/seq_char.mdÙ@9dd6b389196bd4d86f24ff72b66c0622939cf854ef09a91e178d6bc255367ac9¯title: seq char‘³Input/output types:Ù&input
+output
+nothing
+list
+<
+string
+>
+
+’Ù`Title: title: seq char
+Path: Input/output types:
+Content:
+input
+output
+nothing
+list
+<
+string
+>
+
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/seq_char.mdÙ@909d5a923827bed8b0494fe5753a437ce3bcca2d6dfd30b25bc38282afeed353¯title: seq char‘¨ExamplesÚ:sequence a to e
+```Fenced(Borrowed("nu"))
+> seq char a e
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ 0 â”‚ a â”‚
+â”‚ 1 â”‚ b â”‚
+â”‚ 2 â”‚ c â”‚
+â”‚ 3 â”‚ d â”‚
+â”‚ 4 â”‚ e â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+
+```
+Sequence a to e, and join the characters with a pipe
+```Fenced(Borrowed("nu"))
+> seq char a e | str join '|'
+
+
+```
+’ÚiTitle: title: seq char
+Path: Examples
+Content:
+sequence a to e
+```Fenced(Borrowed("nu"))
+> seq char a e
+â•­â”€â”€â”€â”¬â”€â”€â”€â•®
+â”‚ 0 â”‚ a â”‚
+â”‚ 1 â”‚ b â”‚
+â”‚ 2 â”‚ c â”‚
+â”‚ 3 â”‚ d â”‚
+â”‚ 4 â”‚ e â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â•¯
+
+
+```
+Sequence a to e, and join the characters with a pipe
+```Fenced(Borrowed("nu"))
+> seq char a e | str join '|'
+
+
+```

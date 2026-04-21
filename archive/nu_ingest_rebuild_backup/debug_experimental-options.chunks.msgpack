@@ -1,0 +1,47 @@
+“—Ùbarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_experimental-options.mdÙ@a0ba2d0837372105052a7e04e5892f26401a50e052ac6e4de07f4f56949f6f94Ù!title: debug experimental-options‘¥debugÙN
+
+
+
+
+
+
+
+
+``debug experimental-options``
+[link: /commands/categories/debug.md] ’ÙŒTitle: title: debug experimental-options
+Path: debug
+Content:
+
+
+
+
+
+
+
+
+
+``debug experimental-options``
+[link: /commands/categories/debug.md] —Ùbarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_experimental-options.mdÙ@e211ca3d946dfbe4248bac4cb30e8b5eb6e84a2f208e8ccb76c242f416feb431Ù!title: debug experimental-options‘©SignatureÙ*``> debug experimental-options {flags} ``
+’ÙlTitle: title: debug experimental-options
+Path: Signature
+Content:
+``> debug experimental-options {flags} ``
+—Ùbarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/debug_experimental-options.mdÙ@46984377f8d9dec7056d4d74a13573092fb8504f296779d70f3b2f89a39b43e7Ù!title: debug experimental-options‘³Input/output types:Ù…input
+output
+nothing
+table
+<
+identifier: string, enabled: bool, status: string, description: string, since: string, issue: string
+>
+
+’ÙÑTitle: title: debug experimental-options
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+<
+identifier: string, enabled: bool, status: string, description: string, since: string, issue: string
+>
+

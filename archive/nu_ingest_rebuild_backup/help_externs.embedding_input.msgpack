@@ -1,0 +1,55 @@
+–’Ù@f73265151bbc90c8f7e8defe19fc1c7b839e899696f9aadbb5ad5b33ed9da845ÙnTitle: title: help externs
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``help externs``
+[link: /commands/categories/core.md] ’Ù@f9bd32718e5b8e802a56405f964a3debce3417da0ca66c5c6450e977074c4cc2ÙWTitle: title: help externs
+Path: Signature
+Content:
+``> help externs {flags} ...rest``
+’Ù@166405e5f3ad4e6944bd1658f40dcc21139833e57fedf4d00f12746d9fee3fffÙ{Title: title: help externs
+Path: Flags
+Content:
+``--find, -f {string}``
+: String to find in extern names and descriptions.
+’Ù@f96254482e77f5a7ce2f43ae128530f57093f450c1f614d746879dd3d4cf5c03ÙfTitle: title: help externs
+Path: Parameters
+Content:
+``...rest``
+: The name of extern to get help on.
+’Ù@3d215e977df915db03830e572816b40a8095e0b21589901c7d48ef2ed999d35bÙYTitle: title: help externs
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@18f8550a585ec3aeba82df247ba3ff2f1cfd4dfabe0371adf1da32bc13d87a72Ú4Title: title: help externs
+Path: Examples
+Content:
+Show all externs.
+```Fenced(Borrowed("nu"))
+> help externs
+
+
+```
+Show help for single extern.
+```Fenced(Borrowed("nu"))
+> help externs smth
+
+
+```
+Search for string in extern names and descriptions.
+```Fenced(Borrowed("nu"))
+> help externs --find smth
+
+
+```

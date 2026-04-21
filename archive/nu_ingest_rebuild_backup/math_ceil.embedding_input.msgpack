@@ -1,0 +1,54 @@
+���@fa1ec40ac58860a627ee8b0c513849c8fe19fc319d25f032b044e564a2637351�hTitle: title: math ceil
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math ceil``
+[link: /commands/categories/math.md] ��@cc65ed17c91b4daf0fb020877d70996b536c07e9322a4ffe18ef30052727f821�JTitle: title: math ceil
+Path: Signature
+Content:
+``> math ceil {flags} ``
+��@03f9dc1067b6d985c1fc6035b54033e5d115d3ee274d9394633a2a023550f442ىTitle: title: math ceil
+Path: Input/output types:
+Content:
+input
+output
+number
+int
+list
+<
+number
+>
+
+list
+<
+int
+>
+
+range
+list
+<
+number
+>
+
+��@4615b49c395eb2d9e3d7fdd546303d82d92bd10910b7841afd7b7a9cce21189f�Title: title: math ceil
+Path: Examples
+Content:
+Apply the ceil function to a list of numbers.
+```Fenced(Borrowed("nu"))
+> [1.5 2.3 -3.1] | math ceil
+╭───┬────╮
+│ 0 │  2 │
+│ 1 │  3 │
+│ 2 │ -3 │
+╰───┴────╯
+
+
+```

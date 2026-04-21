@@ -1,0 +1,129 @@
+——ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry_query.mdÙ@b0a310784cb3c691eaf508bd7ce95fd9d923d38947392bd2da6f4c2cbcdac314µtitle: registry query‘¦systemÙC
+
+
+
+
+
+
+
+
+``registry query``
+[link: /commands/categories/system.md] ’ÙvTitle: title: registry query
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``registry query``
+[link: /commands/categories/system.md] —ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry_query.mdÙ@b3f5fb64d11b60db244ffb2f58505f682784a7fb47c5fce10dc1879f8f162783µtitle: registry query‘©SignatureÙ+``> registry query {flags} (key) (value)``
+’ÙaTitle: title: registry query
+Path: Signature
+Content:
+``> registry query {flags} (key) (value)``
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry_query.mdÙ@5a20ea418f022857bdf6b00268a0dee1f908f158cb321c27bae86f7c1e1a4dd2µtitle: registry query‘¥FlagsÚ.``--hkcr``
+: query the hkey_classes_root hive
+``--hkcu``
+: query the hkey_current_user hive
+``--hklm``
+: query the hkey_local_machine hive
+``--hku``
+: query the hkey_users hive
+``--hkpd``
+: query the hkey_performance_data hive
+``--hkpt``
+: query the hkey_performance_text hive
+``--hkpnls``
+: query the hkey_performance_nls_text hive
+``--hkcc``
+: query the hkey_current_config hive
+``--hkdd``
+: query the hkey_dyn_data hive
+``--hkculs``
+: query the hkey_current_user_local_settings hive
+``--no-expand, -u``
+: do not expand %ENV% placeholders in REG_EXPAND_SZ
+’Ú`Title: title: registry query
+Path: Flags
+Content:
+``--hkcr``
+: query the hkey_classes_root hive
+``--hkcu``
+: query the hkey_current_user hive
+``--hklm``
+: query the hkey_local_machine hive
+``--hku``
+: query the hkey_users hive
+``--hkpd``
+: query the hkey_performance_data hive
+``--hkpt``
+: query the hkey_performance_text hive
+``--hkpnls``
+: query the hkey_performance_nls_text hive
+``--hkcc``
+: query the hkey_current_config hive
+``--hkdd``
+: query the hkey_dyn_data hive
+``--hkculs``
+: query the hkey_current_user_local_settings hive
+``--no-expand, -u``
+: do not expand %ENV% placeholders in REG_EXPAND_SZ
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry_query.mdÙ@97658f99b3c97bee9e26dca917738bb2a9f1c5d9a6dd21db0406b5079e77356bµtitle: registry query‘ªParametersÙZ``key``
+: Registry key to query.
+``value``
+: Optionally supply a registry value to query.
+’Ù‘Title: title: registry query
+Path: Parameters
+Content:
+``key``
+: Registry key to query.
+``value``
+: Optionally supply a registry value to query.
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry_query.mdÙ@6b493a803910bbbc0ccf6ec6fe2078669d77fe78286d7dc31ac299328f297affµtitle: registry query‘³Input/output types:¹input
+output
+nothing
+any
+’ÙYTitle: title: registry query
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry_query.mdÙ@73612664e4b422126861e5668b5c227ad2a17112d47b34375f7cadaa3e7e6eadµtitle: registry query‘¨ExamplesÙşQuery the HKEY_CURRENT_USER hive
+```Fenced(Borrowed("nu"))
+> registry query --hkcu environment
+
+
+```
+Query the HKEY_LOCAL_MACHINE hive
+```Fenced(Borrowed("nu"))
+> registry query --hklm 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
+
+
+```
+’Ú3Title: title: registry query
+Path: Examples
+Content:
+Query the HKEY_CURRENT_USER hive
+```Fenced(Borrowed("nu"))
+> registry query --hkcu environment
+
+
+```
+Query the HKEY_LOCAL_MACHINE hive
+```Fenced(Borrowed("nu"))
+> registry query --hklm 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
+
+
+```
+—ÙVarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry_query.mdÙ@6f0c80efa6ac6eec619a30067b770d0660859712edf9ad4bc9b3e25a39404cc5µtitle: registry query‘¥NotesÙ-Currently supported only on Windows systems.
+’Ù_Title: title: registry query
+Path: Notes
+Content:
+Currently supported only on Windows systems.

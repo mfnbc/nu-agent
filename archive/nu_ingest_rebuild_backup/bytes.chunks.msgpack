@@ -1,0 +1,125 @@
+•—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bytes.mdÙ@07b8746385f88f1c43f61e1c447e867b60b819297b3ae4c5fde5c255ffe6b364¬title: bytes‘¥bytesÙ9
+
+
+
+
+
+
+
+
+``bytes``
+[link: /commands/categories/bytes.md] ’ÙbTitle: title: bytes
+Path: bytes
+Content:
+
+
+
+
+
+
+
+
+
+``bytes``
+[link: /commands/categories/bytes.md] —ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bytes.mdÙ@27bba48aaaf2a77e63ded137fb1a5207b4d713e7709ddc6c3a7b42296ffc2c3a¬title: bytes‘©Signatureµ``> bytes {flags} ``
+’ÙBTitle: title: bytes
+Path: Signature
+Content:
+``> bytes {flags} ``
+—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bytes.mdÙ@9f05be2c51398a4120daeae8d4e14c6e35dee7fd643e427bb4ebfab45f91b992¬title: bytes‘³Input/output types:¼input
+output
+nothing
+string
+’ÙSTitle: title: bytes
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bytes.mdÙ@6325cb33b78d338a57866eb7b164e139239d5e0d59e1c446700f5148663a7701¬title: bytes‘¥NotesÙmYou must use one of the following subcommands. Using this command as-is will only produce this help message.
+’Ù–Title: title: bytes
+Path: Notes
+Content:
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/bytes.mdÙ@7a0c6c070bf05237bd3683e52b86c3cb8f1c9271970ecb7edb63acbf4723a98e¬title: bytes‘¬Subcommands:Úˆname
+description
+type
+[link: /commands/docs/bytes_add.md] ``bytes add``
+Add specified bytes to the binary input.
+built-in
+[link: /commands/docs/bytes_at.md] ``bytes at``
+Get bytes from the input defined by a range.
+built-in
+[link: /commands/docs/bytes_build.md] ``bytes build``
+Create a binary value from the provided arguments.
+built-in
+[link: /commands/docs/bytes_collect.md] ``bytes collect``
+Concatenate multiple binary into a single binary, with an optional separator between each.
+built-in
+[link: /commands/docs/bytes_ends-with.md] ``bytes ends-with``
+Check if binary data ends with a pattern.
+built-in
+[link: /commands/docs/bytes_index-of.md] ``bytes index-of``
+Returns start index of first occurrence of pattern in bytes, or -1 if no match.
+built-in
+[link: /commands/docs/bytes_length.md] ``bytes length``
+Output the length of any bytes in the pipeline.
+built-in
+[link: /commands/docs/bytes_remove.md] ``bytes remove``
+Remove specified bytes from the input.
+built-in
+[link: /commands/docs/bytes_replace.md] ``bytes replace``
+Find and replace bytes in binary data.
+built-in
+[link: /commands/docs/bytes_reverse.md] ``bytes reverse``
+Reverse the bytes in the pipeline.
+built-in
+[link: /commands/docs/bytes_split.md] ``bytes split``
+Split input into multiple items using a separator.
+built-in
+[link: /commands/docs/bytes_starts-with.md] ``bytes starts-with``
+Check if binary data starts with a pattern.
+built-in
+’Ú¸Title: title: bytes
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/bytes_add.md] ``bytes add``
+Add specified bytes to the binary input.
+built-in
+[link: /commands/docs/bytes_at.md] ``bytes at``
+Get bytes from the input defined by a range.
+built-in
+[link: /commands/docs/bytes_build.md] ``bytes build``
+Create a binary value from the provided arguments.
+built-in
+[link: /commands/docs/bytes_collect.md] ``bytes collect``
+Concatenate multiple binary into a single binary, with an optional separator between each.
+built-in
+[link: /commands/docs/bytes_ends-with.md] ``bytes ends-with``
+Check if binary data ends with a pattern.
+built-in
+[link: /commands/docs/bytes_index-of.md] ``bytes index-of``
+Returns start index of first occurrence of pattern in bytes, or -1 if no match.
+built-in
+[link: /commands/docs/bytes_length.md] ``bytes length``
+Output the length of any bytes in the pipeline.
+built-in
+[link: /commands/docs/bytes_remove.md] ``bytes remove``
+Remove specified bytes from the input.
+built-in
+[link: /commands/docs/bytes_replace.md] ``bytes replace``
+Find and replace bytes in binary data.
+built-in
+[link: /commands/docs/bytes_reverse.md] ``bytes reverse``
+Reverse the bytes in the pipeline.
+built-in
+[link: /commands/docs/bytes_split.md] ``bytes split``
+Split input into multiple items using a separator.
+built-in
+[link: /commands/docs/bytes_starts-with.md] ``bytes starts-with``
+Check if binary data starts with a pattern.
+built-in

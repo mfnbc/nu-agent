@@ -1,0 +1,54 @@
+”—ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/scope_engine-stats.mdÙ@755fb72765cf0cfaca6b14cee325603e4fe156717e202fd1e06d3b34fa765823¹title: scope engine-stats‘¤coreÙE
+
+
+
+
+
+
+
+
+``scope engine-stats``
+[link: /commands/categories/core.md] ’ÙzTitle: title: scope engine-stats
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``scope engine-stats``
+[link: /commands/categories/core.md] —ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/scope_engine-stats.mdÙ@cdfcfd77a6085eefd9dfdbc436033a4ab3a96fbbcd7f0d9f72ecaaa1727519fa¹title: scope engine-stats‘©SignatureÙ"``> scope engine-stats {flags} ``
+’Ù\Title: title: scope engine-stats
+Path: Signature
+Content:
+``> scope engine-stats {flags} ``
+—ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/scope_engine-stats.mdÙ@b432aadcc4d5f09429ffbe9738e955cb817255347caa144146e45167c8a9ccc0¹title: scope engine-stats‘³Input/output types:¹input
+output
+nothing
+any
+’Ù]Title: title: scope engine-stats
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+—ÙZarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/scope_engine-stats.mdÙ@83c839a67a77a45124a105a1338fa1c676f99331061cf9dc30e21484f04a282d¹title: scope engine-stats‘¨ExamplesÙaShow the stats on the current engine state.
+```Fenced(Borrowed("nu"))
+> scope engine-stats
+
+
+```
+’ÙšTitle: title: scope engine-stats
+Path: Examples
+Content:
+Show the stats on the current engine state.
+```Fenced(Borrowed("nu"))
+> scope engine-stats
+
+
+```

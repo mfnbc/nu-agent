@@ -1,0 +1,57 @@
+���@9a568c2d16e204b6ae80ad11b47bbbe718c9f8ee02ade0c1f9a6d50a15fdfa78ـTitle: title: polars into-repr
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars into-repr``
+[link: /commands/categories/dataframe.md] ��@027d89981a03a5d89f29dc9bb5d82fd63732770e9b4278403d9c9827a689bf37�XTitle: title: polars into-repr
+Path: Signature
+Content:
+``> polars into-repr {flags} ``
+��@664cafbf4f9db5d2f64a8fa14bf15f469641713d75d538afabcaad8a57467684�Title: title: polars into-repr
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+string
+polars_lazyframe
+string
+��@b9a9a6759fc07c78928ccd289b60c8e88eaa01ae37db1ff18160d1b8fc04a64a�XTitle: title: polars into-repr
+Path: Examples
+Content:
+Shows dataframe in repr format
+```Fenced(Borrowed("nu"))
+> [[a b]; [2025-01-01 2] [2025-01-02 4]] | polars into-df | polars into-repr
+shape: (2, 2)
+┌─────────────────────────┬─────┐
+│ a                       ┆ b   │
+│ ---                     ┆ --- │
+│ datetime[ns, UTC]       ┆ i64 │
+╞═════════════════════════╪═════╡
+│ 2025-01-01 00:00:00 UTC ┆ 2   │
+│ 2025-01-02 00:00:00 UTC ┆ 4   │
+└─────────────────────────┴─────┘
+
+```
+Shows lazy dataframe in repr format
+```Fenced(Borrowed("nu"))
+> [[a b]; [2025-01-01 2] [2025-01-02 4]] | polars into-lazy | polars into-repr
+shape: (2, 2)
+┌─────────────────────────┬─────┐
+│ a                       ┆ b   │
+│ ---                     ┆ --- │
+│ datetime[ns, UTC]       ┆ i64 │
+╞═════════════════════════╪═════╡
+│ 2025-01-01 00:00:00 UTC ┆ 2   │
+│ 2025-01-02 00:00:00 UTC ┆ 4   │
+└─────────────────────────┴─────┘
+
+```

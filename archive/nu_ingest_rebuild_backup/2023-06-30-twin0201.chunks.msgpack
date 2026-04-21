@@ -1,0 +1,202 @@
+îóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-30-twin0201.mdŸ@35d0cbd73d125b720dbbc3864b291c846a27f8be62719ef1926d175043eda317πThis week in Nushell #201ëßNushell⁄Éfdncred 
+[link: https://github.com/nushell/nushell/pull/9559] updated the ide-check help text
+, 
+[link: https://github.com/nushell/nushell/pull/9557] added input_output type to 
+``input list``
+ to return string
+, and 
+[link: https://github.com/nushell/nushell/pull/9549] updated sqlparser dep to 0.34
+, and 
+[link: https://github.com/nushell/nushell/pull/9534] convert a string to a raw binary string of 0s and 1s
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/9522] added a better error message if env var is used as var
+, and 
+[link: https://github.com/nushell/nushell/pull/9515] improved type hovers
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9531] fixed cd permissions when user belongs to folder group
+, and 
+[link: https://github.com/nushell/nushell/pull/8948] ``rename``
+: add -b flag to support closure input
+nibon7 
+[link: https://github.com/nushell/nushell/pull/9571] fixed cargo-build-nu
+, and 
+[link: https://github.com/nushell/nushell/pull/9554] refactored cargo-build-nu
+, and 
+[link: https://github.com/nushell/nushell/pull/9542] fixed release workflows
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/9552] fixed colours in table and table -e
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9543] bumped Nu to 
+``0.82.1``
+ dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/9532] pinned reedline to 
+``0.21``
+ for release
+, and 
+[link: https://github.com/nushell/nushell/pull/9530] Bump version for 
+``0.82.0``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/9445] Skip 
+``strum``
+ in regular 
+``nu-protocol``
+ build
+Yethal 
+[link: https://github.com/nushell/nushell/pull/9533] pre-registered plugins inside docker container
+stormasm 
+[link: https://github.com/nushell/nushell/pull/9516] modified the bits command in nu-cmd-extra to improve visibility
+Taywee added the ability to 
+[link: https://github.com/nushell/nushell/pull/9502] format negative datetimes with rfc3339 (#9501)
+atahabaki created 
+[link: https://github.com/nushell/nushell/pull/9290] a new subcommand for str, str-expand.
+TrMen added 
+[link: https://github.com/nushell/nushell/pull/9032] tests for examples of 
+``use``
+íêê⁄ªTitle: This week in Nushell #201
+Path: Nushell
+Content:
+fdncred 
+[link: https://github.com/nushell/nushell/pull/9559] updated the ide-check help text
+, 
+[link: https://github.com/nushell/nushell/pull/9557] added input_output type to 
+``input list``
+ to return string
+, and 
+[link: https://github.com/nushell/nushell/pull/9549] updated sqlparser dep to 0.34
+, and 
+[link: https://github.com/nushell/nushell/pull/9534] convert a string to a raw binary string of 0s and 1s
+jntrnr 
+[link: https://github.com/nushell/nushell/pull/9522] added a better error message if env var is used as var
+, and 
+[link: https://github.com/nushell/nushell/pull/9515] improved type hovers
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/9531] fixed cd permissions when user belongs to folder group
+, and 
+[link: https://github.com/nushell/nushell/pull/8948] ``rename``
+: add -b flag to support closure input
+nibon7 
+[link: https://github.com/nushell/nushell/pull/9571] fixed cargo-build-nu
+, and 
+[link: https://github.com/nushell/nushell/pull/9554] refactored cargo-build-nu
+, and 
+[link: https://github.com/nushell/nushell/pull/9542] fixed release workflows
+zhiburt 
+[link: https://github.com/nushell/nushell/pull/9552] fixed colours in table and table -e
+sholderbach 
+[link: https://github.com/nushell/nushell/pull/9543] bumped Nu to 
+``0.82.1``
+ dev version
+, and 
+[link: https://github.com/nushell/nushell/pull/9532] pinned reedline to 
+``0.21``
+ for release
+, and 
+[link: https://github.com/nushell/nushell/pull/9530] Bump version for 
+``0.82.0``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/9445] Skip 
+``strum``
+ in regular 
+``nu-protocol``
+ build
+Yethal 
+[link: https://github.com/nushell/nushell/pull/9533] pre-registered plugins inside docker container
+stormasm 
+[link: https://github.com/nushell/nushell/pull/9516] modified the bits command in nu-cmd-extra to improve visibility
+Taywee added the ability to 
+[link: https://github.com/nushell/nushell/pull/9502] format negative datetimes with rfc3339 (#9501)
+atahabaki created 
+[link: https://github.com/nushell/nushell/pull/9290] a new subcommand for str, str-expand.
+TrMen added 
+[link: https://github.com/nushell/nushell/pull/9032] tests for examples of 
+``use``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-30-twin0201.mdŸ@0984c3e5d0cb4d8b78837b3dc8134821ba5bf5cc110809a801e19f23a52a4eedπThis week in Nushell #201ë≠Documentation⁄ãwaldyrious 
+[link: https://github.com/nushell/nushell.github.io/pull/967] fixed typo in 2023-06-27-nushell_0_82.md
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/965] Refresh commands docs for Nu v0.82
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/964] Fix reference to latest release in the nightly section
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/963] Fix blog post link
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/957] Add blogpost planning towards 1.0 and slowing releases
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/945] Release notes for 
+``0.82.0``
+ release
+tminich created 
+[link: https://github.com/nushell/nushell.github.io/pull/962] Flags with dashes
+eopb created 
+[link: https://github.com/nushell/nushell.github.io/pull/961] Remove reference to 
+``build-string``
+ from 
+``working_with_strings.md``
+JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell.github.io/pull/959] Fix custom completion scripts
+mh-trimble created 
+[link: https://github.com/nushell/nushell.github.io/pull/951] Update aliases.md and setup.md
+íêê⁄…Title: This week in Nushell #201
+Path: Documentation
+Content:
+waldyrious 
+[link: https://github.com/nushell/nushell.github.io/pull/967] fixed typo in 2023-06-27-nushell_0_82.md
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/965] Refresh commands docs for Nu v0.82
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/964] Fix reference to latest release in the nightly section
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/963] Fix blog post link
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/957] Add blogpost planning towards 1.0 and slowing releases
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/945] Release notes for 
+``0.82.0``
+ release
+tminich created 
+[link: https://github.com/nushell/nushell.github.io/pull/962] Flags with dashes
+eopb created 
+[link: https://github.com/nushell/nushell.github.io/pull/961] Remove reference to 
+``build-string``
+ from 
+``working_with_strings.md``
+JoaquinTrinanes created 
+[link: https://github.com/nushell/nushell.github.io/pull/959] Fix custom completion scripts
+mh-trimble created 
+[link: https://github.com/nushell/nushell.github.io/pull/951] Update aliases.md and setup.md
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-30-twin0201.mdŸ@2f9336e026e689f57fc76fcb561b7df65b9825a5a6c4f8d7191e7ad9d91e8b59πThis week in Nushell #201ë™Nu_Scripts⁄/bobhy created 
+[link: https://github.com/nushell/nu_scripts/pull/542] full line v2; with git status!
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/539] upgrade to 0.82
+Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/537] fix: fix default fg and bg coloring for hl.nu
+íêê⁄jTitle: This week in Nushell #201
+Path: Nu_Scripts
+Content:
+bobhy created 
+[link: https://github.com/nushell/nu_scripts/pull/542] full line v2; with git status!
+fj0r created 
+[link: https://github.com/nushell/nu_scripts/pull/539] upgrade to 0.82
+Neur1n created 
+[link: https://github.com/nushell/nu_scripts/pull/537] fix: fix default fg and bg coloring for hl.nu
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-06-30-twin0201.mdŸ@68c9b5ab3253da8ff95dfff32ae298bd352406b0046d5a1a6466c3d99e27a152πThis week in Nushell #201ë®reedline⁄Qnibon7 created 
+[link: https://github.com/nushell/reedline/pull/599] Remove unneeded features of chrono
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/598] always disable bracketed paste after read_line
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/596] Bump version for 
+``0.21.0``
+ release
+íêê⁄äTitle: This week in Nushell #201
+Path: reedline
+Content:
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/599] Remove unneeded features of chrono
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/598] always disable bracketed paste after read_line
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/596] Bump version for 
+``0.21.0``
+ release

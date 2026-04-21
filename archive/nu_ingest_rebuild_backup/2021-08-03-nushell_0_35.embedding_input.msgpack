@@ -1,0 +1,127 @@
+–’Ù@0eb8628ca44bc3bc93f544be9cfd9a275099bd583c90e41a0618ace6652ef795Ú¼Title: title: Nushell 0.35
+Path: Nushell 0.35
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing 0.35 of Nu. This release shows off a lot of dataframe progress and lots of command polish.
+’Ù@efc6793cf7ca0742d8659180bbe23900169b2e8036557cc98e9539edc082b8c4ÚTitle: title: Nushell 0.35
+Path: Where to get it
+Content:
+Nu 0.35 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.35.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the goodies, you can install 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+’Ù@69da7aead3b462731023df20fbe198d85de0fccea7794796dfc59749fc149e75Ú~Title: title: Nushell 0.35
+Path: New commands
+Content:
+[link: https://github.com/nushell/nushell/pull/3811] ``into path``
+ (realcundo)
+[link: https://github.com/nushell/nushell/pull/3833] ``date humanize``
+ (zkat)
+[link: https://github.com/nushell/nushell/pull/3836] ``hash sha256``
+ (with 
+[link: https://github.com/nushell/nushell/pull/3841] additional improvements
+) (realcundo)
+’Ù@9f1d4d9205d9801cac9b30f47877ce3cd29f5b99b6eadb6646fba356cc155d7fÚTitle: title: Nushell 0.35
+Path: Dataframe improvements (elferherrera)
+Content:
+[link: https://github.com/nushell/nushell/pull/3776] Improved join operation
+[link: https://github.com/nushell/nushell/pull/3781] Faster CSV reading and encoding
+[link: https://github.com/nushell/nushell/pull/3805] New shape command
+[link: https://github.com/nushell/nushell/pull/3812] Remove Series and treat all dataframe structures the same
+[link: https://github.com/nushell/nushell/pull/3839] Support for appending dataframes
+[link: https://github.com/nushell/nushell/pull/3864] Allow dataframes to hold more kinds of data
+[link: https://github.com/nushell/nushell/pull/3874] Simplified contains command
+[link: https://github.com/nushell/nushell/pull/3875] Pretty printing for nested dataframes
+’Ù@99ca94353c06767002bad26e063107b417c1d8886c04115cab31199ea6518119Ú	CTitle: title: Nushell 0.35
+Path: Additional improvements
+Content:
+Hinting is 
+[link: https://github.com/nushell/nushell/pull/3780] now configurable
+ (fdncred)
+[link: https://github.com/nushell/nushell/pull/3767] Improvements to our winget releases
+ and 
+[link: https://github.com/nushell/nushell/pull/3819] publish workflows
+ (TechWatching)
+More commands 
+[link: https://github.com/nushell/nushell/pull/3794] got some additional cleanup
+ (sambordo1)
+Startup times 
+[link: https://github.com/nushell/nushell/pull/3854] now have a detailed breakdown
+ (fdncred)
+You can now 
+[link: https://github.com/nushell/nushell/pull/3845] compare durations
+ (fdncred)
+Fixed 
+[link: https://github.com/nushell/nushell/pull/3804] docs for 
+``completion_type``
+ (dirtybit)
+Fixed 
+[link: https://github.com/nushell/nushell/pull/3807] theme for text viewing
+ (fdncred)
+[link: https://github.com/nushell/nushell/pull/3832] ``describe``
+ no longer outputs using colors
+ (fdncred)
+String intepolation 
+[link: https://github.com/nushell/nushell/pull/3866] now handles Unicode better
+ (fdncred)
+Fixed 
+[link: https://github.com/nushell/nushell/pull/3829] path separator in 
+``pathvar``
+ (nathom)
+[link: https://github.com/nushell/nushell/pull/3821] Power operations can now be negative
+ (jafriyie1)
+Issues now 
+[link: https://github.com/nushell/nushell/pull/3818] use GitHub forms
+ (zkat)
+Fixed a typo 
+[link: https://github.com/nushell/nushell/pull/3824] in our github release configuration
+ (zkat)
+Date formatting now 
+[link: https://github.com/nushell/nushell/pull/3834] uses the chrono_humanize crate
+ (zkat)
+Updated the 
+[link: https://github.com/nushell/nushell/pull/3848] docs on implementing a command
+ (margguo)
+Cleaned up 
+[link: https://github.com/nushell/nushell/pull/3853] some stale dependencies
+ (elferherrera)
+Improved 
+[link: https://github.com/nushell/nushell/pull/3857] how 
+``select``
+ handles empty cells
+ (realcundo)
+Added 
+[link: https://github.com/nushell/nushell/pull/3863] named block params to 
+``all?``
+ (sophiajt)
+[link: https://github.com/nushell/nushell/pull/3869] Better handling of environment shorthands
+ (lily-mara)
+Added 
+[link: https://github.com/nushell/nushell/pull/3870] support for multi-doc yaml files
+ (realcundo)
+Added 
+[link: https://github.com/nushell/nushell/pull/3878] a new crate to support Nu serialization more directly with serde
+ (lily-mara)
+’Ù@e56d824fa10ed5f334cef9023312d8ec44b49b4dcaf865b19be3e77f0c8483c9ÚÅTitle: title: Nushell 0.35
+Path: Looking ahead
+Content:
+We're hard at work at bringing more dataframe support into nushell itself, which will allow us to use it for more actions, and extend support to dataframes to existing commands.
+We're also working on the new 
+[link: https://github.com/sophiajt/engine-q] parsing/evaluation engine
+ which is proving to be both faster and more correct than the current nushell engine. We're excited to keep evolving it and then integrating it into Nushell. This engine will also be fast enough, and correct enough, to drive completions as Nu scripts. This will allow us to add intelligent completions that work with both internal and external commands.
+Finally, we're nearing the goal for 
+[link: https://github.com/sophiajt/reedline] reedline
+, which is now solid enough, and complete enough, to use for daily work. We're hoping to polish it up and then experiment with moving Nushell to use it in the coming release (or two).

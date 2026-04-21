@@ -1,0 +1,18 @@
+‘’Ù@96fced416a964fe6647610a60e78ed184a7f0a5bea6a56d091e85c428a01d8d4ÚøTitle: This week in Nu #70
+Path: This week in Nu #70
+Content:
+jonathandturner added the 
+[link: https://github.com/nushell/nushell/pull/2802] ``set-env``
+ command
+ for setting environment variables in scope, added the 
+[link: https://github.com/nushell/nushell/pull/2803] ``source``
+ command
+ for running a script in the current context/scope, simplified 
+[link: https://github.com/nushell/nushell/pull/2805] ``if``
+ to be standalone rather than stream-based
+, added 
+[link: https://github.com/nushell/nushell/pull/2808] experimental support for flags in custom commands
+, added support for 
+[link: https://github.com/nushell/nushell/pull/2814] custom subcommands
+scrabsha fixed 
+[link: https://github.com/nushell/nushell/pull/2813] broken links in the README

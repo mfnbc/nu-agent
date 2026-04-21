@@ -1,0 +1,74 @@
+”—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_ln.mdÙ@a3660445b0d3607bf2a0d7d20bebfd621cf88becb6dc14e891f5329fec4c45a5®title: math ln‘¤mathÙ:
+
+
+
+
+
+
+
+
+``math ln``
+[link: /commands/categories/math.md] ’ÙdTitle: title: math ln
+Path: math
+Content:
+
+
+
+
+
+
+
+
+
+``math ln``
+[link: /commands/categories/math.md] —ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_ln.mdÙ@cb3918ef1cd7fecc08cd0fa5e08df68a38f511ebab5c6b82eba40e96f194c0eb®title: math ln‘©Signature·``> math ln {flags} ``
+’ÙFTitle: title: math ln
+Path: Signature
+Content:
+``> math ln {flags} ``
+—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_ln.mdÙ@5bc8094800fb0a0c5b4b4696c29422fcd2de346bb28dcdb2e3b6a66f366035dc®title: math ln‘³Input/output types:Ù;input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+’ÙtTitle: title: math ln
+Path: Input/output types:
+Content:
+input
+output
+number
+float
+list
+<
+number
+>
+
+list
+<
+float
+>
+
+—ÙOarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/math_ln.mdÙ@46637f3c409b823ef571b88a1f979b98d1a434741daab47761dfc1196436c007®title: math ln‘¨ExamplesÙsGet the natural logarithm of e
+```Fenced(Borrowed("nu"))
+> 2.7182818 | math ln | math round --precision 4
+1.0
+
+```
+’Ù¡Title: title: math ln
+Path: Examples
+Content:
+Get the natural logarithm of e
+```Fenced(Borrowed("nu"))
+> 2.7182818 | math ln | math round --precision 4
+1.0
+
+```

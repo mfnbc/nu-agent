@@ -1,0 +1,59 @@
+–’Ù@cf0371a5116888f2a455c96e968428ce81676deceefedbbd0f97e59b6fe2d528ÙfTitle: title: kill
+Path: platform
+Content:
+
+
+
+
+
+
+
+
+
+``kill``
+[link: /commands/categories/platform.md] ’Ù@957e4edf2c765c24df452ec2de64603eb988b4d3dd85660cf52d2840bb27e522ÙGTitle: title: kill
+Path: Signature
+Content:
+``> kill {flags} ...rest``
+’Ù@cd948f6c42798f47e265b9555cb612ecd381ac764e11af63dca562cb19cd6b8fÙüTitle: title: kill
+Path: Flags
+Content:
+``--force, -f``
+: Forcefully kill the process.
+``--quiet, -q``
+: Won't print anything to the console.
+``--signal, -s {int}``
+: Signal decimal number to be sent instead of the default 15 (unsupported on Windows).
+’Ù@6491a5e4fc39cbd9395ef1fd33283604270d08d3737286c6562df2682ec897deÙkTitle: title: kill
+Path: Parameters
+Content:
+``...rest``
+: Process ids of processes that are to be killed.
+’Ù@8a236df502758c7b8e1e50647dc10628edffa57c76a2e2c2dbbcb9145001130aÙOTitle: title: kill
+Path: Input/output types:
+Content:
+input
+output
+nothing
+any
+’Ù@cdfb12ec1647a66ec0ec0a1eea1f986ffcc942b50fb03aeb784d6b2f3ee5958eÚ(Title: title: kill
+Path: Examples
+Content:
+Kill the pid using the most memory.
+```Fenced(Borrowed("nu"))
+> ps | sort-by mem | last | kill $in.pid
+
+
+```
+Force kill a given pid.
+```Fenced(Borrowed("nu"))
+> kill --force 12345
+
+
+```
+Send INT signal.
+```Fenced(Borrowed("nu"))
+> kill -s 2 12345
+
+
+```

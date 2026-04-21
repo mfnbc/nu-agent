@@ -1,0 +1,50 @@
+•’Ù@c5caba9fb00385c4d6bf5c10cbed43652ce879c0062f662dafb038ddaaba9e21ÙlTitle: title: is-empty
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``is-empty``
+[link: /commands/categories/filters.md] ’Ù@31eadcee6ae53f6182787d680e45b047ca06ecc7d077dcaebd0c5266429793deÙOTitle: title: is-empty
+Path: Signature
+Content:
+``> is-empty {flags} ...rest``
+’Ù@2e6d557ebe1dc9dbb8394558e38c9fd532f38815ff6ca9b0beb8fc110380f68bÙlTitle: title: is-empty
+Path: Parameters
+Content:
+``...rest``
+: The names of the columns to check emptiness.
+’Ù@d66f057e66085b4365b226835f61b447559bfbaced14a8d2f44c4ac880582de8ÙPTitle: title: is-empty
+Path: Input/output types:
+Content:
+input
+output
+any
+bool
+’Ù@c2fca3623ec90f50f347c5881d4f4586afce136e2cd5a4545a2454865661686bÚVTitle: title: is-empty
+Path: Examples
+Content:
+Check if a string is empty
+```Fenced(Borrowed("nu"))
+> '' | is-empty
+true
+
+```
+Check if a list is empty
+```Fenced(Borrowed("nu"))
+> [] | is-empty
+true
+
+```
+Check if more than one column are empty
+```Fenced(Borrowed("nu"))
+> [[meal size]; [arepa small] [taco '']] | is-empty meal size
+false
+
+```

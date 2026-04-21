@@ -12,27 +12,26 @@ def main [] {
   $chunks | to msgpack | save -f data/nu_docs.msgpack
   $chunks | to nuon --indent 2 | save -f data/nu_docs_vectors.nuon
 
-  # Build command_map: map command name (lowercase) -> { id, display }
-  let pairs = (
+  # Build command_map: produce pairs (k,v) and reduce into a single record
+  let command_pairs = (
     $chunks
     | where { |x| ($x.taxonomy.commands? | default []) != [] }
     | each { |chunk|
-      let cmds_raw = (try { $chunk.taxonomy.commands } catch { [] })
-      let cmds = ($cmds_raw | default [])
-      if ($cmds != []) { $cmds | each { |cmd| { cmd: $cmd, id: $chunk.id } } } else { [] }
-    }
+        let cmds = (try { $chunk.taxonomy.commands } catch { [] })
+        if ($cmds != []) { $cmds | each { |cmd| { k: $cmd, v: $chunk.id } } } else { [] }
+      }
     | flatten
   )
 
-  # Build command_map via explicit loop to avoid reduce/version issues
-  let command_map = {}
-  for p in $pairs {
-    let key = ($p.cmd | str downcase)
-    let existing = (try { $command_map | get $key } catch { null })
-    if ($existing == null) {
-      let command_map = ($command_map | upsert ($key) { id: $p.id, display: $p.cmd })
-    }
-  }
+  # Use reduce to build a record mapping lowercase command -> { id, display }
+  let command_map = (
+    $command_pairs
+    | reduce --fold {} { |pair, acc|
+        let key = ($pair.k | str downcase)
+        let existing = (try { $acc | get $key } catch { null })
+        if ($existing == null) { $acc | upsert $key { id: $pair.v, display: $pair.k } } else { $acc }
+      }
+  )
 
   # Persist command map as NUON for Nushell-native consumption
   ($command_map | to nuon --indent 2) | save -f data/command_map.nuon

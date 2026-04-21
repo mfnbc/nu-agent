@@ -1,0 +1,483 @@
+üíŸ@bbe95a90b332fa25e8fb548425639984cdd00392def93c9a515bb99b1178dc53⁄ŒTitle: title: Nushell 0.71
+Path: Nushell 0.71
+Content:
+
+
+
+
+Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.
+Today, we're releasing version 0.71 of Nu. This release includes new operators, better consistency, improved completions, and more.
+íŸ@bb8e38fd910c2f1e4c69910709c59602f519c4f51fa3dfebaf8a6f9eb8481d9f⁄gTitle: title: Nushell 0.71
+Path: Where to get it
+Content:
+Nu 0.71 is available as 
+[link: https://github.com/nushell/nushell/releases/tag/0.71.0] pre-built binaries
+ or from 
+[link: https://crates.io/crates/nu] crates.io
+. If you have Rust installed you can install it using 
+``cargo install nu``
+.
+If you want all the built-in goodies, such as support for dataframes and SQLite databases, you can install it via 
+``cargo install nu --features=extra``
+.
+As part of this release, we also publish a set of optional plugins you can install and use with Nu. To install, use 
+``cargo install nu_plugin_<plugin name>``
+.
+íŸ@500a7cd461f595c55c25b405b375de4971b1c2bab181610a1adec5dd8d53513b⁄ÙTitle: title: Nushell 0.71
+Path:  operator (merelymyself)
+Content:
+``++``
+In this release, you can now use the 
+[link: https://github.com/nushell/nushell/pull/6766] ``++``
+ operator to append lists together
+.
+For example, you can combine two lists into a new lists made up of the both lists:
+```Fenced(Borrowed("nu"))
+> [1, 2] ++ [3, 4]
+
+```
+Note: Currently, this operator cannot be used to join two tables. This functionality is still being worked on and will likely be present in the next version.
+íŸ@63e9642c862deeb194e9b1c2578b5edacc67638be0bd1bdeca1824c1e960e95d⁄Title: title: Nushell 0.71
+Path: Improved consistency across commands and types
+Content:
+Nushell continues improve quality of the language and shell with a set of consistency improvements in this release. These include:
+More 
+[link: https://github.com/nushell/nushell/pull/6951] iterating filter commands
+ now support the 
+``$in``
+ variable consistently (webbedspace)
+Lists 
+[link: https://github.com/nushell/nushell/pull/6932] now support 
+``upsert``
+ (fdncred)
+``merge``
+ can now also 
+[link: https://github.com/nushell/nushell/pull/6919] operate on records
+ (webbedspace)
+``str substring``
+ can 
+[link: https://github.com/nushell/nushell/pull/6867] take ranges
+ (rgwood)
+``from``
+ and 
+``to``
+ now 
+[link: https://github.com/nushell/nushell/pull/6856] show help info
+ (rgwood)
+íŸ@8414de6c428c0105116a00cf16146b2601c5adb29314f8d81d59898f054b8e88⁄•Title: title: Nushell 0.71
+Path: Right prompts can now be on the last line (nibon7)
+Content:
+Previously the right prompt appeared only on the same line where the user input started. Now you can choose to 
+[link: https://github.com/nushell/nushell/pull/6781] place the right prompt part on the last line of user input
+.
+
+This feature is not enabled by default, you can enable it using the 
+``config nu``
+ command to modify the config.nu file, just set 
+``render_right_prompt_on_last_line``
+ to true:
+```Fenced(Borrowed(""))
+let-env config {
+  render_right_prompt_on_last_line : true
+  ...
+}
+
+```
+Default
+Default right prompt
+Right prompt at bottom
+Right prompt on the last line
+íŸ@b2ed51ed40d44723dbc3c57e7ec74f2282bf5b90267461bdd5552ee6a27d05f4⁄zTitle: title: Nushell 0.71
+Path:  hook (perbothner)
+Content:
+``display_output``
+You're now able to configure a new hook, 
+[link: https://github.com/nushell/nushell/pull/6915] called 
+``display_output``
+, which will become the default way that you view data.
+Using this, you can for example, use 
+``table --expand``
+ to always see fully expanded tables.
+If your terminal supports it, you can this to render a more full-featured output. For example, DomTerm could be used by setting the 
+``display_output``
+ hook to: 
+``to html --partial --no-color | domterm hcat``
+, sending html to the terminal to be rendered when displaying values.
+íŸ@5a62e2fb96e4f0fd8ff8411be39017dfd55ea20b2cafa08890f1e6dc6fc2f8b1⁄ÌTitle: title: Nushell 0.71
+Path: Updated PR Review Process
+Content:
+Recently, we have been fortunate to see a rise in submitted pull requests (PRs) and we are super grateful for this growing desire to improve Nushell.
+
+Unfortunately, in some cases, a well-intended PR does not match the direction Nushell is going, forcing us to close it which leads to wasted time and effort.
+
+To help focus PRs in the future, we kindly ask potential contributors to first reach out to us before making a substantial change to Nushell, especially if the change will affect user experience.
+
+We updated our 
+[link: https://github.com/nushell/nushell/blob/main/CONTRIBUTING.md] contributing guide
+ as well as the PR template to reflect this policy.
+
+To summarize:
+If you want to make some change to Nushell that is more involved than simple bug-fixing, please go to 
+[link: https://discordapp.com/invite/NtAbbGn] Discord
+ or a 
+[link: https://github.com/nushell/nushell/issues/new/choose] GitHub issue
+ and chat with some core team members and/or other contributors about it.
+After getting a green light from the core team, implement the feature, open a pull request (PR) and write a full description of the change.
+If your PR includes any user-facing features (such as adding a flag to a command), clearly list them in the PR description.
+Then, core team members and other regular contributors will review the PR and suggest changes.
+When we all agree, the PR will be merged.
+If your PR includes any user-facing features, make sure the changes are also reflected in 
+[link: https://github.com/nushell/nushell.github.io] the documentation
+ after the PR is merged.
+Congratulate yourself, you just improved Nushell! :-)
+We hope the new policy will help us make the PR review process smoother.
+íŸ@882aae2879122923b4f3f77c205be384614805c757eb624425e015fd7a6a9430⁄>Title: title: Nushell 0.71
+Path: Completion actions now more familiar (dandavison)
+Content:
+We've also recently improved how completions work in Nushell to feel closer to how other shells work. Specifically:
+Completion goes "as far as possible". So, the entire word if there's a unique completion, or else up to the shared prefix of possible completions.
+Removes the quick completion behavior whereby a word was completed automatically as soon as the input came to have a unique completion.
+Tab now completes instead of selecting the next menu item (this can be configured)
+íŸ@26c3fea5f1728d7428f3aafdd636bf960353d67a688b52263db80ec36e0e0ed8⁄$Title: title: Nushell 0.71
+Path: Breaking changes
+Content:
+New 
+``--force (-f)``
+ flag for the 
+``mv``
+ command. This change alters 
+``mv``
+ default behavior. By default overwriting existing files is now prevented (You can use 
+``alias mv = mv -f``
+ in you config to get the old defaults back). (
+[link: https://github.com/nushell/nushell/pull/6904] #6904
+)
+The column name for the command name in 
+``$nu.scope.commands``
+ has been changed from 
+``command``
+ to 
+``name``
+. Thus, 
+``$nu.scope.commands | where name =~ zip``
+ would give you specific command info. (
+[link: https://github.com/nushell/nushell/pull/7007] #7007
+)
+The 
+``str distance``
+ command now directly returns an 
+``Int``
+ instead of a record 
+``{"distance": <Int>}``
+ (
+[link: https://github.com/nushell/nushell/pull/6963] #6963
+)
+The argument order of 
+``format filesize``
+ was made consistent with other commands that accept a 
+``CellPath``
+ to specify fields that should be affected by it. Now the string specifying the format is the first positional argument and the cell path is specified in the following positional argument(s). (
+[
+#6879
+]
+https://github.com/nushell/nushell/pull/6879)
+The 
+``--perf``
+ flag for Nu was removed as part of an effort to simplify diagnostics logging 
+[link: https://github.com/nushell/nushell/pull/6834] #6834
+íŸ@f41276d16d8922596c03ec34c808b2ced3caa05ea20d779df5864e758a13cbb0⁄?Title: title: Nushell 0.71
+Path: Next Steps
+Content:
+We've drafted a version of the 
+[link: https://github.com/nushell/nushell.github.io/pull/656] design philosophy for 0.80
+, and would love to get your feedback. If you'd like to become part of the effort, please 
+[link: https://discord.gg/NtAbbGn] join the discord
+.
+íŸ@b219b60b958a344b86d71ccae1ac589cd9389e227a053a1de618849e2d592fff⁄ ˆTitle: title: Nushell 0.71
+Path: Nushell
+Content:
+sophiajt created 
+[link: https://github.com/nushell/nushell/pull/7061] bump to 0.71, use 1.63 toolchain
+, and 
+[link: https://github.com/nushell/nushell/pull/6995] Remove unnecessary clone in par-each
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/7050] Pin reedline to 
+``0.14.0``
+ release
+, and 
+[link: https://github.com/nushell/nushell/pull/7046] Make the example names unique across workspace
+, and 
+[link: https://github.com/nushell/nushell/pull/7023] Update reedline
+, and 
+[link: https://github.com/nushell/nushell/pull/7019] Make example binaries proper cargo examples
+, and 
+[link: https://github.com/nushell/nushell/pull/6966] Refactor ansi stripping into 
+``nu-util``
+ functions
+, and 
+[link: https://github.com/nushell/nushell/pull/6965] Remove inadvertent dep on original 
+``ansi_term``
+, and 
+[link: https://github.com/nushell/nushell/pull/6953] Update reedline to latest dev
+, and 
+[link: https://github.com/nushell/nushell/pull/6945] Remove unused dependencies
+, and 
+[link: https://github.com/nushell/nushell/pull/6940] Move nu-test-support into dev deps on nu-command
+, and 
+[link: https://github.com/nushell/nushell/pull/6924] Update 
+``nix``
+ crate to 
+``0.25``
+ and narrow features
+, and 
+[link: https://github.com/nushell/nushell/pull/6897] Fix 
+``each while``
+ behavior when printing and maybe in other situations by fusing the iterator
+, and 
+[link: https://github.com/nushell/nushell/pull/6877] Wrap 
+``open``
+ parse errors from 
+``from``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/6870] Remove unnecessary 
+``#[allow(...)]``
+ annotations
+, and 
+[link: https://github.com/nushell/nushell/pull/6648] Reduce required dependencies for diagnostics
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/7038] Revert "Fix for escaping backslashes in interpolated strings (fixes #6737)"
+, and 
+[link: https://github.com/nushell/nushell/pull/7005] bump rust-toolchain to 1.64
+, and 
+[link: https://github.com/nushell/nushell/pull/6982] category tweak
+, and 
+[link: https://github.com/nushell/nushell/pull/6963] change str distance to output value::int
+, and 
+[link: https://github.com/nushell/nushell/pull/6962] tweak upsert help text
+, and 
+[link: https://github.com/nushell/nushell/pull/6932] enable ability to upsert into a list like update
+, and 
+[link: https://github.com/nushell/nushell/pull/6814] bump to dev version 0.70.1
+dandavison created 
+[link: https://github.com/nushell/nushell/pull/7035] Add accidentally missing tests of some command examples 
+, and 
+[link: https://github.com/nushell/nushell/pull/7031] Add an expected result to date format test
+, and 
+[link: https://github.com/nushell/nushell/pull/6863] Expose reedline EditCommand::Complete command
+, and 
+[link: https://github.com/nushell/nushell/pull/6835] Update reedline to fix history search filtering
+, and 
+[link: https://github.com/nushell/nushell/pull/6802] Tab inline completion
+, and 
+[link: https://github.com/nushell/nushell/pull/6790] Minor cleanup: simplify and reduce allocations in pipeline data loop
+1Kinoti created 
+[link: https://github.com/nushell/nushell/pull/7021] added some search-terms to the 
+``platform``
+ category
+gavinfoley created 
+[link: https://github.com/nushell/nushell/pull/7020] Fix for escaping backslashes in interpolated strings (fixes #6737)
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/7008] Update contributing guide and PR template
+dmatos2012 created 
+[link: https://github.com/nushell/nushell/pull/7007] Rename column name from command to name for consistency
+, and 
+[link: https://github.com/nushell/nushell/pull/6997] highlight term on PipelineData::Value()
+SUPERCILEX created 
+[link: https://github.com/nushell/nushell/pull/7006] Run a round of clippy --fix to fix a ton of lints
+, and 
+[link: https://github.com/nushell/nushell/pull/6975] Improve do command docs
+IanManske created 
+[link: https://github.com/nushell/nushell/pull/7001] Fix panic when encountering ENOTTY.
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/6961] Refactor: finish refactor on commands which take optional cell paths.
+, and 
+[link: https://github.com/nushell/nushell/pull/6944] frently error message for access beyond end
+, and 
+[link: https://github.com/nushell/nushell/pull/6879] Refactor: introduce general 
+``operate``
+ commands to reduce duplicate code
+, and 
+[link: https://github.com/nushell/nushell/pull/6793] Allow captured stderr saving to file
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/6951] Fix 
+``$in``
+ in blocks given to 
+``any``
+ and 
+``all``
+, and 
+[link: https://github.com/nushell/nushell/pull/6919] Update merge to also take single records (closes #5281)
+, and 
+[link: https://github.com/nushell/nushell/pull/6913] Further edits to help messages
+, and 
+[link: https://github.com/nushell/nushell/pull/6868] Mildly edited a small handful of help messages
+jenshnielsen created 
+[link: https://github.com/nushell/nushell/pull/6949] Use nt-api 4 on Windows
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/6948] Fix double cache read in CI
+, and 
+[link: https://github.com/nushell/nushell/pull/6935] Fix feature flag for 
+``open-df``
+ test
+, and 
+[link: https://github.com/nushell/nushell/pull/6923] Update PR template to mention user-facing changes
+, and 
+[link: https://github.com/nushell/nushell/pull/6892] Improve error message for 
+``get 0``
+ on non-collection types
+, and 
+[link: https://github.com/nushell/nushell/pull/6867] Support ranges in 
+``str substring``
+, and 
+[link: https://github.com/nushell/nushell/pull/6858] Fixes for 
+``ps``
+ on Linux
+, and 
+[link: https://github.com/nushell/nushell/pull/6856] Print command help in base from+to commands
+, and 
+[link: https://github.com/nushell/nushell/pull/6834] Diagnostics logging streamlining+tweaks
+paper-lark created 
+[link: https://github.com/nushell/nushell/pull/6931] Fix bug with alias handling when searching for matching brackets
+, and 
+[link: https://github.com/nushell/nushell/pull/6655] Highlight matching brackets / parentheses
+PerBothner created 
+[link: https://github.com/nushell/nushell/pull/6915] New "display_output" hook.
+kambala-decapitator created 
+[link: https://github.com/nushell/nushell/pull/6912] fix description of build-string's second example
+melMass created 
+[link: https://github.com/nushell/nushell/pull/6904] fix: ‚ú® "saner" default for mv
+, and 
+[link: https://github.com/nushell/nushell/pull/6903] docs: üìù add "map" to each's search terms
+zhiburt created 
+[link: https://github.com/nushell/nushell/pull/6884] [
+WIP
+]
+ table: Show truncated record differently
+, and 
+[link: https://github.com/nushell/nushell/pull/6850] table/ Fix paging indexing
+, and 
+[link: https://github.com/nushell/nushell/pull/6847] ``table -e``
+ Fix stackoverflow (cause endless empty list)
+, and 
+[link: https://github.com/nushell/nushell/pull/6842] ``table -e``
+ align key to 2nd line
+, and 
+[link: https://github.com/nushell/nushell/pull/6710] nu-table: Check perf improvements
+FilipAndersson245 created 
+[link: https://github.com/nushell/nushell/pull/6865] Bumps windows dependency
+nibon7 created 
+[link: https://github.com/nushell/nushell/pull/6860] path: fix error message
+, and 
+[link: https://github.com/nushell/nushell/pull/6837] rm: don't update target_exists every time in the loop
+, and 
+[link: https://github.com/nushell/nushell/pull/6836] Add missing 
+``shape_directory``
+ to default_config.nu
+, and 
+[link: https://github.com/nushell/nushell/pull/6815] rm: fix error span when targets doesn't exists
+, and 
+[link: https://github.com/nushell/nushell/pull/6781] Add support to render right prompt on last line of the prompt
+, and 
+[link: https://github.com/nushell/nushell/pull/6701] Prepend directory to the binary tarball
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/6841] Update ci workflow actions, fix #6713
+ChrisDenton created 
+[link: https://github.com/nushell/nushell/pull/6824] Try not to use verbatim paths for UNC shares
+Decodetalkers created 
+[link: https://github.com/nushell/nushell/pull/6799] fix: fixcd
+, and 
+[link: https://github.com/nushell/nushell/pull/6791] feat: coredump
+merelymyself created 
+[link: https://github.com/nushell/nushell/pull/6766] make 
+``++``
+ append lists
+, and 
+[link: https://github.com/nushell/nushell/pull/6752] add more helpful error for calling a decl that exists in a module
+íŸ@fb47c087404a6afc05acbde97e0adb457c82f7634e4d103bbd69e48fc06e3625Ÿ¶Title: title: Nushell 0.71
+Path: Extension
+Content:
+melMass created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/68] fix: ‚ö°Ô∏è add path for arm brew
+íŸ@4314edf54a2829ca35acdbd102bdce97255336b74b0257246eb77275ca57864a⁄mTitle: title: Nushell 0.71
+Path: Documentation
+Content:
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/664] Add review process change
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/612] Update Modules and Overlays chapters
+webbedspace created 
+[link: https://github.com/nushell/nushell.github.io/pull/663] Fix let-env Path example to be accurate for Windows
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/661] Update types_of_data.md
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/660] Updated working_with_strings.md (closes #640)
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/657] Simplified examples by removing unneeded 
+``echo``
+ calls
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/646] Add categories column to command_reference
+PerBothner created 
+[link: https://github.com/nushell/nushell.github.io/pull/662] Document display_output hook
+dmatos2012 created 
+[link: https://github.com/nushell/nushell.github.io/pull/659] docs: document changes from #7007
+seanbuckley created 
+[link: https://github.com/nushell/nushell.github.io/pull/655] Update oh-my-posh install link
+rapenne-s created 
+[link: https://github.com/nushell/nushell.github.io/pull/654] Mention nushell also run on BSD systems
+melMass created 
+[link: https://github.com/nushell/nushell.github.io/pull/653] docs: documents the changes to mv (branch release 0.71)
+nibon7 created 
+[link: https://github.com/nushell/nushell.github.io/pull/651] add right prompt guide
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/650] add right prompt release notes
+kambala-decapitator created 
+[link: https://github.com/nushell/nushell.github.io/pull/649] fix description of build-string's second example
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/644] Refresh commands docs for nu v0.70
+íŸ@635b8fa639bce87d0ab559e3b8670360d4ed8fca8d45276fd597a3c008a0196c⁄©Title: title: Nushell 0.71
+Path: Nu scripts
+Content:
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/311] oh-my-nu-v2 script - a new prompt for 8bit/24bit terminals
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/308] tweak no back progress bar example
+1Kinoti created 
+[link: https://github.com/nushell/nu_scripts/pull/310] Make the default for the 
+``up``
+ command (in the filesystem directory) 1
+SUPERCILEX created 
+[link: https://github.com/nushell/nu_scripts/pull/309] Add prompt with exit code and command duration
+WindSoilder created 
+[link: https://github.com/nushell/nu_scripts/pull/307] fix conda deactivate error when activate with no-prompt
+íŸ@8376ecc3dd6d3703b931d0a79f5c5f44015bbf2ba898445779c9b302559293a5⁄ÍTitle: title: Nushell 0.71
+Path: Reedline
+Content:
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/512] Use 
+``Box::default()``
+ in more places
+, and 
+[link: https://github.com/nushell/reedline/pull/511] Prepare the 
+``0.14.0``
+ release
+, and 
+[link: https://github.com/nushell/reedline/pull/510] Fix the additional moves of normal mode 
+``hjkl``
+, and 
+[link: https://github.com/nushell/reedline/pull/506] Split the main example binary into examples
+, and 
+[link: https://github.com/nushell/reedline/pull/505] Update workflow to new actions (alternative)
+jcgruenhage created 
+[link: https://github.com/nushell/reedline/pull/504] fix: actually use sqlite-dynlib feature
+nibon7 created 
+[link: https://github.com/nushell/reedline/pull/501] show right prompt on indicator line in last line mode
+, and 
+[link: https://github.com/nushell/reedline/pull/492] render right prompt on the last line of the left prompt
+perlindgren created 
+[link: https://github.com/nushell/reedline/pull/500] Custom validator and prompt code examples
+dandavison created 
+[link: https://github.com/nushell/reedline/pull/498] Tab inline completion
+CozyPenguin created 
+[link: https://github.com/nushell/reedline/pull/494] change cursor shape depending on edit mode

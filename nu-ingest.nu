@@ -71,15 +71,15 @@ def ingest-file [file: string, out_dir: string, source_override: string, attach_
   let parent_dir = ($out_path | path parse | get parent)
   mkdir $parent_dir
 
-  let jsonl = (
+  let nuon = (
     $chunks
     | each { |chunk| $chunk | to json -r }
     | str join (char nl)
   )
 
-  $jsonl | save -f $out_path
+  $nuon | save -f $out_path
 
-  let embedding_jsonl = (
+  let embedding_nuon = (
     $chunks
     | each { |chunk|
         {
@@ -91,7 +91,7 @@ def ingest-file [file: string, out_dir: string, source_override: string, attach_
     | str join (char nl)
   )
 
-  $embedding_jsonl | save -f $embedding_path
+  $embedding_nuon | save -f $embedding_path
 
   {
     file: $file
@@ -140,7 +140,7 @@ def output-path [file: string, out_dir: string, suffix: string] {
   let parent = ($parsed.parent | default "")
   let stem = ($parsed.stem | default "document")
 
-  let filename = $"($stem).($suffix).jsonl"
+  let filename = $"($stem).($suffix).nuon"
 
   if ($parent | str length) > 0 {
     $out_dir | path join $parent | path join $filename

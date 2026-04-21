@@ -1,0 +1,217 @@
+ìóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-14-twin0177.mdŸ@628fbc6b76f752747ed00bf4e01852fa92d165e78ddc8a25d4d5a864422f40acπThis week in Nushell #177ëßNushell⁄fdncred created 
+[link: https://github.com/nushell/nushell/pull/7745] Add cursor shape configuration for each edit mode
+, and 
+[link: https://github.com/nushell/nushell/pull/7739] update base64 implementation to newer crate
+, and 
+[link: https://github.com/nushell/nushell/pull/7726] update release-pkg comments for manual runs
+, and 
+[link: https://github.com/nushell/nushell/pull/7716] experiment with dependabot and rust dependencies
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/7743] dependency update: update polar to 0.26.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7717] spanned error on path exists command
+, and 
+[link: https://github.com/nushell/nushell/pull/7685] Auto-Completion: put 
+``tildes around filenames with parentheses](https://github.com/nushell/nushell/pull/7712), and [don't expand tilde if we quote external arguments](https://github.com/nushell/nushell/pull/7711), and [Support redirect``
+err
+``and``
+out
+`
+ to different streams
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/7740] Trim quotes when shelling out to cmd.exe
+, and 
+[link: https://github.com/nushell/nushell/pull/7722] Combine benchmarks to speed up 
+``cargo bench``
+ build times
+, and 
+[link: https://github.com/nushell/nushell/pull/7713] Remove 
+``engine_state``
+ clones in REPL eval
+, and 
+[link: https://github.com/nushell/nushell/pull/7710] Revert "Primitives now use color closures..."
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7738] Disallow 
+``encode``
+'s silent conversion to HTML entities (and add 
+``-i``
+/
+``--ignore-errors``
+ flag to re-allow it)
+, and 
+[link: https://github.com/nushell/nushell/pull/7708] Improve wording of 
+``str replace``
+ help messages
+nanoqsh created 
+[link: https://github.com/nushell/nushell/pull/7737] Detailed message during core dumped
+murex971 created 
+[link: https://github.com/nushell/nushell/pull/7736] Add search terms in random and expression categories
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/7734] Bump uuid from 1.1.2 to 1.2.2
+, and 
+[link: https://github.com/nushell/nushell/pull/7732] Bump once_cell from 1.16.0 to 1.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7731] Bump git2 from 0.15.0 to 0.16.0
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/7723] Fix generated doc for 
+``explore``
+ commands
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/7721] Bump to 
+``0.74.1``
+ development version
+, and 
+[link: https://github.com/nushell/nushell/pull/7719] Commit the lockfile for 0.74
+, and 
+[link: https://github.com/nushell/nushell/pull/7718] Bump version to 
+``0.74.0``
+, and 
+[link: https://github.com/nushell/nushell/pull/7543] Fix line-end trimming in subexpression
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/7720] Add const support for all overlay commands
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/7709] clean up some extra logging code in the cli
+Xoffio created 
+[link: https://github.com/nushell/nushell/pull/7661] Progress bar Implementation
+íêê⁄TTitle: This week in Nushell #177
+Path: Nushell
+Content:
+fdncred created 
+[link: https://github.com/nushell/nushell/pull/7745] Add cursor shape configuration for each edit mode
+, and 
+[link: https://github.com/nushell/nushell/pull/7739] update base64 implementation to newer crate
+, and 
+[link: https://github.com/nushell/nushell/pull/7726] update release-pkg comments for manual runs
+, and 
+[link: https://github.com/nushell/nushell/pull/7716] experiment with dependabot and rust dependencies
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/7743] dependency update: update polar to 0.26.1
+, and 
+[link: https://github.com/nushell/nushell/pull/7717] spanned error on path exists command
+, and 
+[link: https://github.com/nushell/nushell/pull/7685] Auto-Completion: put 
+``tildes around filenames with parentheses](https://github.com/nushell/nushell/pull/7712), and [don't expand tilde if we quote external arguments](https://github.com/nushell/nushell/pull/7711), and [Support redirect``
+err
+``and``
+out
+`
+ to different streams
+rgwood created 
+[link: https://github.com/nushell/nushell/pull/7740] Trim quotes when shelling out to cmd.exe
+, and 
+[link: https://github.com/nushell/nushell/pull/7722] Combine benchmarks to speed up 
+``cargo bench``
+ build times
+, and 
+[link: https://github.com/nushell/nushell/pull/7713] Remove 
+``engine_state``
+ clones in REPL eval
+, and 
+[link: https://github.com/nushell/nushell/pull/7710] Revert "Primitives now use color closures..."
+webbedspace created 
+[link: https://github.com/nushell/nushell/pull/7738] Disallow 
+``encode``
+'s silent conversion to HTML entities (and add 
+``-i``
+/
+``--ignore-errors``
+ flag to re-allow it)
+, and 
+[link: https://github.com/nushell/nushell/pull/7708] Improve wording of 
+``str replace``
+ help messages
+nanoqsh created 
+[link: https://github.com/nushell/nushell/pull/7737] Detailed message during core dumped
+murex971 created 
+[link: https://github.com/nushell/nushell/pull/7736] Add search terms in random and expression categories
+dependabot
+[
+bot
+]
+ created 
+[link: https://github.com/nushell/nushell/pull/7734] Bump uuid from 1.1.2 to 1.2.2
+, and 
+[link: https://github.com/nushell/nushell/pull/7732] Bump once_cell from 1.16.0 to 1.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/7731] Bump git2 from 0.15.0 to 0.16.0
+hustcer created 
+[link: https://github.com/nushell/nushell/pull/7723] Fix generated doc for 
+``explore``
+ commands
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/7721] Bump to 
+``0.74.1``
+ development version
+, and 
+[link: https://github.com/nushell/nushell/pull/7719] Commit the lockfile for 0.74
+, and 
+[link: https://github.com/nushell/nushell/pull/7718] Bump version to 
+``0.74.0``
+, and 
+[link: https://github.com/nushell/nushell/pull/7543] Fix line-end trimming in subexpression
+kubouch created 
+[link: https://github.com/nushell/nushell/pull/7720] Add const support for all overlay commands
+stormasm created 
+[link: https://github.com/nushell/nushell/pull/7709] clean up some extra logging code in the cli
+Xoffio created 
+[link: https://github.com/nushell/nushell/pull/7661] Progress bar Implementation
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-14-twin0177.mdŸ@ea4d2681d986c4e4fa1694a640aa170f8586d0814251d90d2a5b4041dfb1e617πThis week in Nushell #177ë≠Documentation⁄òrgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/740] Disable prefetch setting
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/736] Refresh commands docs for nu v0.74
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/735] Link to the new parse-eval page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/734] Start Design Notes chapter; Add parse-eval notes
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/733] update breaking changes
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/715] Release notes for 
+``0.74``
+íêê⁄÷Title: This week in Nushell #177
+Path: Documentation
+Content:
+rgwood created 
+[link: https://github.com/nushell/nushell.github.io/pull/740] Disable prefetch setting
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/736] Refresh commands docs for nu v0.74
+kubouch created 
+[link: https://github.com/nushell/nushell.github.io/pull/735] Link to the new parse-eval page
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/734] Start Design Notes chapter; Add parse-eval notes
+WindSoilder created 
+[link: https://github.com/nushell/nushell.github.io/pull/733] update breaking changes
+sholderbach created 
+[link: https://github.com/nushell/nushell.github.io/pull/715] Release notes for 
+``0.74``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-01-14-twin0177.mdŸ@495fd462eb99f8d08b48b4e2cf1a6a9e8046a035584c64d00f701bae03b21963πThis week in Nushell #177ë™Nu_Scripts⁄(stormasm created 
+[link: https://github.com/nushell/nu_scripts/pull/344] add a Readme to the make_release directory
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/343] Add initial dependency resolver for nu release
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/342] fix some bugs when on slash
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/341] ``nu_release.nu``
+ crate order fixup
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/340] Fix the crate order in 
+``nu_release.nu``
+íêê⁄cTitle: This week in Nushell #177
+Path: Nu_Scripts
+Content:
+stormasm created 
+[link: https://github.com/nushell/nu_scripts/pull/344] add a Readme to the make_release directory
+kubouch created 
+[link: https://github.com/nushell/nu_scripts/pull/343] Add initial dependency resolver for nu release
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/342] fix some bugs when on slash
+sholderbach created 
+[link: https://github.com/nushell/nu_scripts/pull/341] ``nu_release.nu``
+ crate order fixup
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/340] Fix the crate order in 
+``nu_release.nu``

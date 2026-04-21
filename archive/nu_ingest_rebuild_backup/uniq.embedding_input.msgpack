@@ -1,0 +1,97 @@
+���@6bc0573b42479a0b38d7731b62cf5f8292fd9e6100415c75d3dcebbb98d08370�dTitle: title: uniq
+Path: filters
+Content:
+
+
+
+
+
+
+
+
+
+``uniq``
+[link: /commands/categories/filters.md] ��@7eac9e280248846c7636f2ce3ced29a8496284eeb8e3db76d885b4eef2b4d9d4�@Title: title: uniq
+Path: Signature
+Content:
+``> uniq {flags} ``
+��@d1743952d69f72a22d34b26e55bf1591013a97fc35e1a22be9029eea69eaa2ca�TTitle: title: uniq
+Path: Flags
+Content:
+``--count, -c``
+: Return a table containing the distinct input values together with their counts.
+``--repeated, -d``
+: Return the input values that occur more than once.
+``--ignore-case, -i``
+: Compare input values case-insensitively.
+``--unique, -u``
+: Return the input values that occur once only.
+��@aa4680585d285acae5a1d3bb6d9b974c2c12d663ee55c2e08c28bf05b3c584cc�_Title: title: uniq
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+any
+>
+
+list
+<
+any
+>
+
+��@90835066cffe8b2ca9ffcc0cb6f661b5994e657855a4e5e41c942fe02e19e4a4�?Title: title: uniq
+Path: Examples
+Content:
+Return the distinct values of a list/table (remove duplicates so that each value occurs once only).
+```Fenced(Borrowed("nu"))
+> [2 3 3 4] | uniq
+╭───┬───╮
+│ 0 │ 2 │
+│ 1 │ 3 │
+│ 2 │ 4 │
+╰───┴───╯
+
+
+```
+Return the input values that occur more than once.
+```Fenced(Borrowed("nu"))
+> [1 2 2] | uniq -d
+╭───┬───╮
+│ 0 │ 2 │
+╰───┴───╯
+
+
+```
+Return the input values that occur once only.
+```Fenced(Borrowed("nu"))
+> [1 2 2] | uniq --unique
+╭───┬───╮
+│ 0 │ 1 │
+╰───┴───╯
+
+
+```
+Ignore differences in case when comparing input values.
+```Fenced(Borrowed("nu"))
+> ['hello' 'goodbye' 'Hello'] | uniq --ignore-case
+╭───┬─────────╮
+│ 0 │ hello   │
+│ 1 │ goodbye │
+╰───┴─────────╯
+
+
+```
+Return a table containing the distinct input values together with their counts.
+```Fenced(Borrowed("nu"))
+> [1 2 2] | uniq --count
+╭───┬───────┬───────╮
+│ # │ value │ count │
+├───┼───────┼───────┤
+│ 0 │     1 │     1 │
+│ 1 │     2 │     2 │
+╰───┴───────┴───────╯
+
+
+```

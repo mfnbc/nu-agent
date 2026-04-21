@@ -1,0 +1,64 @@
+•’Ù@52a392fbb7069697071ce6b5cd76fe2546cb869cb258cb5ade6368617cac93d1ÙpTitle: title: path basename
+Path: path
+Content:
+
+
+
+
+
+
+
+
+
+``path basename``
+[link: /commands/categories/path.md] ’Ù@a1a359aaf7aa95a238b03b45e06b23e4d6ba984f921f9f9e3bc00c38c7bb1c36ÙRTitle: title: path basename
+Path: Signature
+Content:
+``> path basename {flags} ``
+’Ù@f019e33a054081449a5948d7bea90f628a768caf351bbb6e706d085c6ec72e33ÙŠTitle: title: path basename
+Path: Flags
+Content:
+``--replace, -r {string}``
+: Return original path with basename replaced by this string.
+’Ù@c08216ce1fab29dc561d0fe40bb79334421dc6eb7c178b587fd5d3f52ca12dc2Ù|Title: title: path basename
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+’Ù@7a211acdcded292c4f6e063f464aa6caf653ec7e00aaac4060222f9085c347b5ÚùTitle: title: path basename
+Path: Examples
+Content:
+Get basename of a path.
+```Fenced(Borrowed("nu"))
+> '/home/joe/test.txt' | path basename
+test.txt
+
+```
+Get basename of a list of paths.
+```Fenced(Borrowed("nu"))
+> [ /home/joe, /home/doe ] | path basename
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ joe â”‚
+â”‚ 1 â”‚ doe â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â•¯
+
+
+```
+Replace basename of a path.
+```Fenced(Borrowed("nu"))
+> '/home/joe/test.txt' | path basename --replace 'spam.png'
+/home/joe/spam.png
+
+```

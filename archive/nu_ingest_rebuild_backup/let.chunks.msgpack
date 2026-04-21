@@ -1,0 +1,134 @@
+–—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/let.mdÙ@97a4b2c1dc6ac79ff98ded4a4ce56317fc25eef756347283cc0a2ab70c8b28a9ªtitle: let‘¤coreÙ6
+
+
+
+
+
+
+
+
+``let``
+[link: /commands/categories/core.md] ’Ù\Title: title: let
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``let``
+[link: /commands/categories/core.md] —ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/let.mdÙ@d22faa75073a01a146e5b2a04f6b255c6cb9323f8fbca98df30ba93c7df02e2bªtitle: let‘©SignatureÙ-``> let {flags} (var_name) (initial_value)``
+’ÙXTitle: title: let
+Path: Signature
+Content:
+``> let {flags} (var_name) (initial_value)``
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/let.mdÙ@7d33920a4ef45bfa8302a463fb8218657e616a54eae7490406d3dae2dc7df6a1ªtitle: let‘ªParametersÙ_``var_name``
+: The variable name to create.
+``initial_value``
+: Equals sign followed by value.
+’Ù‹Title: title: let
+Path: Parameters
+Content:
+``var_name``
+: The variable name to create.
+``initial_value``
+: Equals sign followed by value.
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/let.mdÙ@9f48deaeb910715ba072bd710a88e3d63e587ff6df060706b3f321c22da83843ªtitle: let‘³Input/output types:µinput
+output
+any
+any
+’ÙJTitle: title: let
+Path: Input/output types:
+Content:
+input
+output
+any
+any
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/let.mdÙ@c747a4e17ccda9b2762d421de2d8cd56683667a37a0361f6e701fab256bcbcbfªtitle: let‘¨ExamplesÚŒSet a variable to a value (no output).
+```Fenced(Borrowed("nu"))
+> let x = 10
+
+
+```
+Set a variable to the result of an expression (no output).
+```Fenced(Borrowed("nu"))
+> let x = 10 + 100
+
+
+```
+Set a variable based on the condition (no output).
+```Fenced(Borrowed("nu"))
+> let x = if false { -1 } else { 1 }
+
+
+```
+Set a variable to the output of a pipeline.
+```Fenced(Borrowed("nu"))
+> ls | let files
+
+
+```
+Use let in the middle of a pipeline to assign and pass the value.
+```Fenced(Borrowed("nu"))
+> 10 | let x | $x + 5
+15
+
+```
+Use let in the middle of a pipeline, then consume value with $in.
+```Fenced(Borrowed("nu"))
+> 10 | let x | $in + 5
+15
+
+```
+’Ú¶Title: title: let
+Path: Examples
+Content:
+Set a variable to a value (no output).
+```Fenced(Borrowed("nu"))
+> let x = 10
+
+
+```
+Set a variable to the result of an expression (no output).
+```Fenced(Borrowed("nu"))
+> let x = 10 + 100
+
+
+```
+Set a variable based on the condition (no output).
+```Fenced(Borrowed("nu"))
+> let x = if false { -1 } else { 1 }
+
+
+```
+Set a variable to the output of a pipeline.
+```Fenced(Borrowed("nu"))
+> ls | let files
+
+
+```
+Use let in the middle of a pipeline to assign and pass the value.
+```Fenced(Borrowed("nu"))
+> 10 | let x | $x + 5
+15
+
+```
+Use let in the middle of a pipeline, then consume value with $in.
+```Fenced(Borrowed("nu"))
+> 10 | let x | $in + 5
+15
+
+```
+—ÙKarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/let.mdÙ@b8bfdb58b9e1fc8352ab3f461406f33a2550457c77dfcc3537eb200eb9101a39ªtitle: let‘¥NotesÙgThis command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html
+’ÙTitle: title: let
+Path: Notes
+Content:
+This command is a parser keyword. For details, check:
+
+https://www.nushell.sh/book/thinking_in_nu.html

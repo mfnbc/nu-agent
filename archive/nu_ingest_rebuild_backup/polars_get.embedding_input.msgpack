@@ -1,0 +1,46 @@
+���@6017df849811ea1037ab8cb2e1626163c8361152731fede49d09bae19bed0572�tTitle: title: polars get
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars get``
+[link: /commands/categories/dataframe.md] ��@2f9c1d7884ba3c6f0b0fee12e452fb33e6ac0cda9be5e98a0e091434df661ba2�STitle: title: polars get
+Path: Signature
+Content:
+``> polars get {flags} ...rest``
+��@794abc3891ebbab5572a5bbec897cf96312bfd12b105c9127471f22898fed96b�aTitle: title: polars get
+Path: Parameters
+Content:
+``...rest``
+: Column names to sort dataframe.
+��@df5dd302f2edfb5c6d9dbb6eb94144bd110f64c5ce81a3723f39fdc6259d6efeٍTitle: title: polars get
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+��@7c0f39264ea9f6fdd9423ab51573a3521dfa2e8e5d92702cd91aee8346f92ea4�(Title: title: polars get
+Path: Examples
+Content:
+Returns the selected column
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars get a
+╭───┬───╮
+│ # │ a │
+├───┼───┤
+│ 0 │ 1 │
+│ 1 │ 3 │
+╰───┴───╯
+
+
+```

@@ -1,0 +1,33 @@
+”’Ù@639becf3bf5582b6340b3be4cbc00645c02f3bc242f4f0f78792047f603de250ÙdTitle: title: uname
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``uname``
+[link: /commands/categories/system.md] ’Ù@7abb557a97f875e92831c44ae5a07bb7cdc5450c6e65616ed0a41a1941fef41dÙBTitle: title: uname
+Path: Signature
+Content:
+``> uname {flags} ``
+’Ù@e2a8ab797a9bbb12ca3a6e2750276f772a4935c15ac1c6c3d402e363e5ba5349ÙRTitle: title: uname
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@d324c886fb5736f732b40c359bcf9383c3ce18805e7b2fd51e136e690e845b6fÙjTitle: title: uname
+Path: Examples
+Content:
+Print all information
+```Fenced(Borrowed("nu"))
+> uname
+
+
+```

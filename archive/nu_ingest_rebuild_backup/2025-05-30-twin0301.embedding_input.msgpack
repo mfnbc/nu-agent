@@ -1,0 +1,98 @@
+—’Ù@1b7c4d2e4fdb448fb826fbd29c548a4ba7dfa2f4df50494dc5d81baa6584d8eeÙÏTitle: title: 'This Week in Nushell #301'
+Path: This week in Nushell #301
+Content:
+
+
+
+
+Belatedly published 2025-06-10 for PRs the week ending May 30th.
+Thank you as always to all the contributors this week!
+’Ù@4721deb114bd7d59122307f335d94bf71193a3e946f283fcc141dad9a8853b09Ú
+0Title: title: 'This Week in Nushell #301'
+Path: Nushell
+Content:
+Tyarel8 
+[link: https://github.com/nushell/nushell/pull/15843] added comparison support to 
+``bench``
+ command
+weirdan 
+[link: https://github.com/nushell/nushell/pull/15842] set content_type for 
+``view span``
+ output
+new-years-eve 
+[link: https://github.com/nushell/nushell/pull/15839] refactored 
+``find``
+ to handle regex and non-regex searches consistently
+hustcer:
+[link: https://github.com/nushell/nushell/pull/15835] fixed build failure of aarch64 and armv7 musl targets
+[link: https://github.com/nushell/nushell/pull/15828] allowed specifying MSI version via env var and workflow input
+[link: https://github.com/nushell/nushell/pull/15815] updated comments of release-pkg.nu for MSI package building
+[link: https://github.com/nushell/nushell/pull/15809] bumped dev version to 0.104.2
+[link: https://github.com/nushell/nushell/pull/15808] used nushell's fork for winget-pkgs publishing
+pyz4:
+[link: https://github.com/nushell/nushell/pull/15834] expanded 
+``polars shift``
+ to allow expression inputs
+[link: https://github.com/nushell/nushell/pull/15826] added Value::Record to 
+``NuExpression::can_downcast``
+ logic
+[link: https://github.com/nushell/nushell/pull/15822] added 
+``polars math``
+ expression
+cptpiepmatz:
+[link: https://github.com/nushell/nushell/pull/15820] moved job errors into 
+``ShellError::Job``
+ variant
+[link: https://github.com/nushell/nushell/pull/15817] improved error for prefix-only path for PWD
+[link: https://github.com/nushell/nushell/pull/15812] switched to 
+``ring``
+ as crypto provider instead of 
+``aws_lc``
+[link: https://github.com/nushell/nushell/pull/15810] added 
+``rustls``
+ for TLS
+rritik772 
+[link: https://github.com/nushell/nushell/pull/15818] fixed #15813 - passing infinity to random float causes error
+noahfraiture 
+[link: https://github.com/nushell/nushell/pull/15804] added default http protocol when none specified
+WindSoilder 
+[link: https://github.com/nushell/nushell/pull/15798] ensured block is compiled when parsing 
+``source``
+vivainio 
+[link: https://github.com/nushell/nushell/pull/15792] optimized kv get by selecting only one row from storage db
+Villa01 
+[link: https://github.com/nushell/nushell/pull/15787] improved error handling for unsupported --theme in to html
+ysthakur 
+[link: https://github.com/nushell/nushell/pull/15772] handled multiple exact matches
+jjflash95 
+[link: https://github.com/nushell/nushell/pull/15601] fixed #15571 panic on write to source parquet file
+flovilmart 
+[link: https://github.com/nushell/nushell/pull/15369] implemented reedline for input
+’Ù@580a23e06e47c567ff85bd044c9177ff473b0ae1ef15d8bc4e042251b600c8b0Ù¤Title: title: 'This Week in Nushell #301'
+Path: Awesome Nu
+Content:
+HaoZeke 
+[link: https://github.com/nushell/awesome-nu/pull/124] updated docs with rattler-build
+’Ù@b374f8a6884b8f86d82d7857b6a5dfc75fc081f6aaf1c8b2f8756a10920f1ea6Ù›Title: title: 'This Week in Nushell #301'
+Path: Integrations
+Content:
+hustcer 
+[link: https://github.com/nushell/integrations/pull/53] released Nu 0.104.1
+’Ù@f35b12273fcc33b2925c2bdbae44a0ef351a3ff9bbf90bb95ec5988c13f4c950ÚTitle: title: 'This Week in Nushell #301'
+Path: plugin-examples
+Content:
+cptpiepmatz:
+[link: https://github.com/nushell/plugin-examples/pull/4] switched from wget to checkout for testing.nu
+[link: https://github.com/nushell/plugin-examples/pull/3] bumped versions to 0.104.2
+’Ù@2483ccf2d5134be958566af733f937b8a56d79b05ca2f4f3b5ee2d98f31f31efÙ™Title: title: 'This Week in Nushell #301'
+Path: nufmt
+Content:
+x10an14 
+[link: https://github.com/nushell/nufmt/pull/70] fixed Nix build & direnv config
+’Ù@f8ecb1738b15032c10954045ff826da97bac676372d0b7998a05a7c651ae9523Ú3Title: title: 'This Week in Nushell #301'
+Path: Documentation
+Content:
+hustcer 
+[link: https://github.com/nushell/nushell.github.io/pull/1924] added initial 0.104.1 release notes
+ysthakur 
+[link: https://github.com/nushell/nushell.github.io/pull/1897] removed mention of positional on custom completer page

@@ -1,0 +1,54 @@
+”—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/history_session.mdÙ@d68b838ad57564b310d43cc45931f70b279bc9b56a9441ca419d5c11d6526b1b¶title: history session‘§historyÙE
+
+
+
+
+
+
+
+
+``history session``
+[link: /commands/categories/history.md] ’ÙzTitle: title: history session
+Path: history
+Content:
+
+
+
+
+
+
+
+
+
+``history session``
+[link: /commands/categories/history.md] —ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/history_session.mdÙ@1a98964fb0abd03f4df89b612c2c6dcb86ff737af3c4c3cdac89834b2f204a50¶title: history session‘©Signature¿``> history session {flags} ``
+’ÙVTitle: title: history session
+Path: Signature
+Content:
+``> history session {flags} ``
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/history_session.mdÙ@743cb43253069bdac8a524fd8aaee54edd6833e95780f399152d97988f973a12¶title: history session‘³Input/output types:¹input
+output
+nothing
+int
+’ÙZTitle: title: history session
+Path: Input/output types:
+Content:
+input
+output
+nothing
+int
+—ÙWarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/history_session.mdÙ@01ba3c7acb61ec5399505644f14a4be35f71a451ccba70beeeb99c978923ecb8¶title: history session‘¨ExamplesÙNGet current history session
+```Fenced(Borrowed("nu"))
+> history session
+
+
+```
+’Ù„Title: title: history session
+Path: Examples
+Content:
+Get current history session
+```Fenced(Borrowed("nu"))
+> history session
+
+
+```

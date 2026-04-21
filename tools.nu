@@ -9,8 +9,6 @@ export const TOOL_NAMES = [
   "apply-edit"
   "check-nu-syntax"
   "self-check"
-  "inspect-rig-plan"
-  "inspect-kuzu-plan"
   "inspect-chunk"
   "search-embedding-input"
   "resolve-command-doc"
@@ -174,26 +172,28 @@ export def "search-chunks" [--path: string, --pattern: string] {
 
   let input_type = ($path | path type)
   let files = if $input_type == 'dir' {
-    glob $"($path)/**/*.chunks.jsonl" | sort
-  } else if ($path | str ends-with ".chunks.jsonl") {
+    glob $"($path)/**/*.chunks.nuon" | sort
+  } else if ($path | str ends-with ".chunks.nuon") {
     [$path]
   } else {
-    error make { msg: "search-chunks expects a directory or a .chunks.jsonl file" }
+    error make { msg: "search-chunks expects a directory or a .chunks.nuon file" }
   }
 
   if (($files | length) == 0) {
-    error make { msg: $"No chunk JSONL files found under: ($path)" }
+    error make { msg: $"No chunk NUON files found under: ($path)" }
   }
 
   $files
   | each { |file|
       try {
-        open --raw $file
-        | lines
-        | enumerate
-        | where { |row| ($row.item | str trim) != "" }
-        | each { |row|
-            let chunk = ($row.item | from json)
+        let rows = if ($file | str ends-with ".msgpack") {
+          open $file | from msgpack
+        } else {
+          open $file | from nuon
+        }
+
+        $rows
+        | each { |chunk|
             let searchable = [
               { field: "id", value: $chunk.id }
               { field: "identity.source", value: $chunk.identity.source }
@@ -215,7 +215,6 @@ export def "search-chunks" [--path: string, --pattern: string] {
             if (($matched | length) > 0) {
               {
                 file: $file,
-                line: ($row.index + 1),
                 chunk_id: $chunk.id,
                 matched_fields: ($matched | get field),
                 chunk: $chunk
@@ -223,8 +222,7 @@ export def "search-chunks" [--path: string, --pattern: string] {
             } else {
               null
             }
-          }
-        | compact
+        } | compact
       } catch { [] }
     }
   | flatten
@@ -261,67 +259,10 @@ export def "inspect-rig-plan" [--path: string, --table: string = "", --limit: in
   }
 }
 
-export def "inspect-kuzu-plan" [--path: string, --kind: string = "plan", --limit: int = 10] {
-  if (($path | default "" | str trim | str length) == 0) {
-    error make { msg: "Missing required plan path" }
-  }
-
-  if not ($path | path exists) {
-    error make { msg: $"Kùzu plan not found: ($path)" }
-  }
-
-  let plan_path = ($path | path expand)
-  let plan = (open --raw $plan_path | from json)
-  let nodes_csv = ($plan.nodes_csv? | default null)
-  let edges_csv = ($plan.edges_csv? | default null)
-
-  match ($kind | str downcase) {
-    "plan" => {
-      {
-        plan: $plan_path,
-        out_dir: ($plan.out_dir? | default null),
-        node_count: ($plan.node_count? | default null),
-        edge_count: ($plan.edge_count? | default null),
-        sources: ($plan.sources? | default [])
-      }
-    }
-    "nodes" => {
-      if $nodes_csv == null {
-        error make { msg: "Plan missing nodes_csv" }
-      }
-      if not ($nodes_csv | path exists) {
-        error make { msg: $"nodes_csv not found: ($nodes_csv)" }
-      }
-      let rows = (open $nodes_csv)
-      let sample = if $limit > 0 { $rows | take $limit } else { $rows }
-      {
-        plan: $plan_path,
-        nodes_csv: ($nodes_csv | path expand),
-        limit: $limit,
-        rows: $sample
-      }
-    }
-    "edges" => {
-      if $edges_csv == null {
-        error make { msg: "Plan missing edges_csv" }
-      }
-      if not ($edges_csv | path exists) {
-        error make { msg: $"edges_csv not found: ($edges_csv)" }
-      }
-      let rows = (open $edges_csv)
-      let sample = if $limit > 0 { $rows | take $limit } else { $rows }
-      {
-        plan: $plan_path,
-        edges_csv: ($edges_csv | path expand),
-        limit: $limit,
-        rows: $sample
-      }
-    }
-    _ => {
-      error make { msg: "Invalid kind for inspect-kuzu-plan; expected plan|nodes|edges" }
-    }
-  }
-}
+# inspect-kuzu-plan functionality removed. Kùzu import/inspection was an archival
+# opt-in feature tied to a separate project. If you need similar functionality,
+# restore or reimplement it in a separate adapter repository and call it from
+# this project as an external opt-in step.
 
 export def "inspect-chunk" [--path: string, --id: string, --neighbors] {
   if (($path | default "" | str trim | str length) == 0) {
@@ -334,25 +275,26 @@ export def "inspect-chunk" [--path: string, --id: string, --neighbors] {
 
   let input_type = ($path | path type)
   let files = if $input_type == 'dir' {
-    glob $"($path)/**/*.chunks.jsonl" | sort
-  } else if ($path | str ends-with ".chunks.jsonl") {
+    glob $"($path)/**/*.chunks.nuon" | sort
+  } else if ($path | str ends-with ".chunks.nuon") {
     [$path]
   } else {
-    error make { msg: "inspect-chunk expects a directory or a .chunks.jsonl file" }
+    error make { msg: "inspect-chunk expects a directory or a .chunks.nuon file" }
   }
 
   if (($files | length) == 0) {
-    error make { msg: $"No chunk JSONL files found under: ($path)" }
+    error make { msg: $"No chunk NUON files found under: ($path)" }
   }
 
   let found = (
     $files
     | each { |file|
         let chunks = (
-          open --raw $file
-          | lines
-          | where { |line| ($line | str trim) != "" }
-          | each { |line| $line | from json }
+          if ($file | str ends-with ".msgpack") {
+            open $file | from msgpack
+          } else {
+            open $file | from nuon
+          }
         )
 
         let indexed = ($chunks | enumerate)

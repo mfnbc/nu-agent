@@ -1,0 +1,30 @@
+”’Ù@6ab4c6a352221710b4cebc5c9914ef9f148a996fc567fd791d4bee58b214d392Ù‚Title: title: help pipe-and-redirect
+Path: core
+Content:
+
+
+
+
+
+
+
+
+
+``help pipe-and-redirect``
+[link: /commands/categories/core.md] ’Ù@7c35c422e1da248f49ef950d8a739cad445b8ba3e7d19245a47aad3a66d2aebfÙdTitle: title: help pipe-and-redirect
+Path: Signature
+Content:
+``> help pipe-and-redirect {flags} ``
+’Ù@dcb227a651850ca4a7cc61b4ede843644b0cb7bab73302adaf9c5a34701ff23bÙcTitle: title: help pipe-and-redirect
+Path: Input/output types:
+Content:
+input
+output
+nothing
+table
+’Ù@c345ea90494c8c7b682787a21745923aafe9c3a9b98175f045da8ec99e36f398ÙÌTitle: title: help pipe-and-redirect
+Path: Notes
+Content:
+This command contains basic usage of pipe and redirect symbol, for more detail, check:
+
+https://www.nushell.sh/lang-guide/chapters/pipelines.html

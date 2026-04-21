@@ -1,0 +1,59 @@
+���@d3a43fd27d5ea08c302f8e3ae4d813c25fcffaf9cfc48379d14bad0f23fa5228�|Title: title: polars get-day
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars get-day``
+[link: /commands/categories/dataframe.md] ��@6a3da6de153431bd214f8ed01f2f4e22f0b4c74bd05b7141719148b7c1e4e7bc�TTitle: title: polars get-day
+Path: Signature
+Content:
+``> polars get-day {flags} ``
+��@e5a901c126d69a1c5250c0695479c68621f93e5a6b589e66017774bf2608cac6ٵTitle: title: polars get-day
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+polars_dataframe
+polars_lazyframe
+polars_lazyframe
+polars_expression
+polars_expression
+��@9eaae6022a40a11419a41388141307122f6a6a54b9c1759c2c0dab6d27a4aa67��Title: title: polars get-day
+Path: Examples
+Content:
+Returns day from a date
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars get-day
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 4 │
+│ 1 │ 4 │
+╰───┴───╯
+
+
+```
+Returns day from a date in an expression
+```Fenced(Borrowed("nu"))
+> let dt = ('2020-08-04T16:39:18+00:00' | into datetime --timezone 'UTC');
+    let df = ([$dt $dt] | polars into-df);
+    $df | polars select (polars col 0 | polars get-day)
+╭───┬───╮
+│ # │ 0 │
+├───┼───┤
+│ 0 │ 4 │
+│ 1 │ 4 │
+╰───┴───╯
+
+
+```

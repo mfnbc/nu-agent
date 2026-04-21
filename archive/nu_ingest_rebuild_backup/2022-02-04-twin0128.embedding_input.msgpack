@@ -1,0 +1,124 @@
+”’Ù@f20c1c892e3e7e86397a28a0bce7038d503e2c26ffe9c0117d92ed5304aaa102Ù±Title: This week in Nushell #128
+Path: Extension
+Content:
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/46] update info-from-package-json to 1.1.0
+’Ù@ecd45ed7d3b7a57844223339464dad93566ab90512c6c0ef987471adc17c9c8fÚTitle: This week in Nushell #128
+Path: Documentation
+Content:
+Hofer-Julian created 
+[link: https://github.com/nushell/nushell.github.io/pull/216] Fix mistake introduced in #215
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/215] Add exponential to operators
+’Ù@42954ad16983d1149a36e5a7dcabe4e48474f446be8f9f67af941ccc1025e461ÚUTitle: This week in Nushell #128
+Path: engine-q
+Content:
+fdncred 
+[link: https://github.com/nushell/engine-q/pull/930] fixed lines tests
+, and 
+[link: https://github.com/nushell/engine-q/pull/928] fixed find tests
+, and 
+[link: https://github.com/nushell/engine-q/pull/925] fixed cal tests
+, and 
+[link: https://github.com/nushell/engine-q/pull/919] added case-insensitive sorting
+, and 
+[link: https://github.com/nushell/engine-q/pull/917] add 
+``--du``
+ to 
+``ls``
+ command
+, and 
+[link: https://github.com/nushell/engine-q/pull/916] ``du``
+ command
+, and 
+[link: https://github.com/nushell/engine-q/pull/915] added defaults for colors
+, and 
+[link: https://github.com/nushell/engine-q/pull/909] Windows ps update
+, and 
+[link: https://github.com/nushell/engine-q/pull/904] should be inclusive
+, and 
+[link: https://github.com/nushell/engine-q/pull/885] fixes process path being truncated
+, and 
+[link: https://github.com/nushell/engine-q/pull/870] query command with json, web, xml
+jt 
+[link: https://github.com/nushell/engine-q/pull/927] added support for quick completions
+, and 
+[link: https://github.com/nushell/engine-q/pull/926] improved subcommand completions
+, and added 
+[link: https://github.com/nushell/engine-q/pull/922] Command tests
+, and 
+[link: https://github.com/nushell/engine-q/pull/913] added initial nu-test-support port
+, and 
+[link: https://github.com/nushell/engine-q/pull/902] Add a fallback if Windows external spawn fails
+, and 
+[link: https://github.com/nushell/engine-q/pull/901] Wait on the plugin child to prevent zombies
+, and 
+[link: https://github.com/nushell/engine-q/pull/898] Use 'table' during internal->external
+, and 
+[link: https://github.com/nushell/engine-q/pull/895] Ignore clippy's erroneous warnings
+, and 
+[link: https://github.com/nushell/engine-q/pull/892] Port 
+``detect columns``
+, and 
+[link: https://github.com/nushell/engine-q/pull/887] Add support for 
+``def-env``
+ and 
+``export def-env``
+, and 
+[link: https://github.com/nushell/engine-q/pull/881] Variables should error on use rather than value span
+kubouch 
+[link: https://github.com/nushell/engine-q/pull/921] allowed def-env to hide environment variables
+, and 
+[link: https://github.com/nushell/engine-q/pull/894] allowed viewing the source code of blocks
+sholderbach created 
+[link: https://github.com/nushell/engine-q/pull/920] Update reedline to paste multiple command lines
+, and 
+[link: https://github.com/nushell/engine-q/pull/914] Obligatory reedline bump
+elferherrera created 
+[link: https://github.com/nushell/engine-q/pull/906] list keybinding options
+, and 
+[link: https://github.com/nushell/engine-q/pull/905] Reedline bump
+, and 
+[link: https://github.com/nushell/engine-q/pull/896] reedline bump
+stormasm created 
+[link: https://github.com/nushell/engine-q/pull/890] add help --find to help doc
+, and 
+[link: https://github.com/nushell/engine-q/pull/886] add in a table test with multiple columns
+voidash created 
+[link: https://github.com/nushell/engine-q/pull/883] Add strftime cheatsheet for 
+``into datetime``
+ (#869)
+onthebridgetonowhere created 
+[link: https://github.com/nushell/engine-q/pull/880] Port rotate
+, and 
+[link: https://github.com/nushell/engine-q/pull/877] Port rename
+eggcaker created 
+[link: https://github.com/nushell/engine-q/pull/878] Update 3rd_Party_Prompts.md
+chen244 created 
+[link: https://github.com/nushell/engine-q/pull/860] Maybe solve the none bug?
+’Ù@0f0acad60f56a0082877830f7d9369a177263e508629e3dfc8718d86973f498eÚFTitle: This week in Nushell #128
+Path: reedline
+Content:
+jt 
+[link: https://github.com/nushell/reedline/pull/296] added support for quick completions
+sholderbach created 
+[link: https://github.com/nushell/reedline/pull/295] Clean engine by coalesced painting and abstraction
+, and 
+[link: https://github.com/nushell/reedline/pull/293] Improve default keybindings slightly for vi
+, and 
+[link: https://github.com/nushell/reedline/pull/292] Polishing in the painter
+, and 
+[link: https://github.com/nushell/reedline/pull/287] Init prompt without superfluous line at the bottom
+elferherrera created 
+[link: https://github.com/nushell/reedline/pull/290] Continous history index
+, and 
+[link: https://github.com/nushell/reedline/pull/289] increase default page size
+, and 
+[link: https://github.com/nushell/reedline/pull/288] continuous history
+, and 
+[link: https://github.com/nushell/reedline/pull/286] growing menu
+, and 
+[link: https://github.com/nushell/reedline/pull/284] dynamic menu
+fdncred created 
+[link: https://github.com/nushell/reedline/pull/285] list things with 
+``reedline --list``

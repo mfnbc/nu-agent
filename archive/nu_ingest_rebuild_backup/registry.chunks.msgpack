@@ -1,0 +1,59 @@
+•—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry.mdÙ@0255cffbfc639da56582cfffce21f9f39f7481e8fe299395e3c8af4ade0a4a12¯title: registry‘¦systemÙ=
+
+
+
+
+
+
+
+
+``registry``
+[link: /commands/categories/system.md] ’ÙjTitle: title: registry
+Path: system
+Content:
+
+
+
+
+
+
+
+
+
+``registry``
+[link: /commands/categories/system.md] —ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry.mdÙ@11162cf4ebdc657b7da2bfaf2e3bd2b2f543c9f4857e5f47245967b0b704ab1f¯title: registry‘©Signature¸``> registry {flags} ``
+’ÙHTitle: title: registry
+Path: Signature
+Content:
+``> registry {flags} ``
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry.mdÙ@eff049e3d2836d779d87f376a54defa7ad828a41a4b7f2f35718dfc5983494c0¯title: registry‘³Input/output types:¼input
+output
+nothing
+string
+’ÙVTitle: title: registry
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry.mdÙ@9d1e0bfb861a8807866716d79e627a7991723d0e1d3738650fde020cf8eedf24¯title: registry‘¥NotesÙmYou must use one of the following subcommands. Using this command as-is will only produce this help message.
+’Ù™Title: title: registry
+Path: Notes
+Content:
+You must use one of the following subcommands. Using this command as-is will only produce this help message.
+—ÙParchive/external_nushell_repo_backup/nushell.github.io/commands/docs/registry.mdÙ@d0e32b6a45d1e2ae498427891b37edfd371dc01c17461817dcc775438189f53d¯title: registry‘¬Subcommands:Ùwname
+description
+type
+[link: /commands/docs/registry_query.md] ``registry query``
+Query the Windows registry.
+built-in
+’ÙªTitle: title: registry
+Path: Subcommands:
+Content:
+name
+description
+type
+[link: /commands/docs/registry_query.md] ``registry query``
+Query the Windows registry.
+built-in

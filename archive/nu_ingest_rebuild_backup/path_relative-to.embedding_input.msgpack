@@ -1,0 +1,72 @@
+–’Ù@a402fe03e1a4ca1f68850d89c1ad321629ed5d3e154e46667962e917ee454934ÙvTitle: title: path relative-to
+Path: path
+Content:
+
+
+
+
+
+
+
+
+
+``path relative-to``
+[link: /commands/categories/path.md] ’Ù@a79cc015db1cd73c86da5585f151822d651091e8c2fca59d69e7984e7a6b6c3dÙ^Title: title: path relative-to
+Path: Signature
+Content:
+``> path relative-to {flags} (path)``
+’Ù@08a4f299afd5a0256c46f26dc65737a8503ad58ecf69197efabd469d3fa6aff5ÙgTitle: title: path relative-to
+Path: Parameters
+Content:
+``path``
+: Parent shared with the input path.
+’Ù@012f1b4fa66755668efda4fb7e163cf81f95aeec0fddeedcf3534efb545dfbcfÙTitle: title: path relative-to
+Path: Input/output types:
+Content:
+input
+output
+string
+string
+list
+<
+string
+>
+
+list
+<
+string
+>
+
+’Ù@bbdfabac6be9885b6ff052e80daa3fb92923064191ffbb52bfe22b6de8c5c55dÚYTitle: title: path relative-to
+Path: Examples
+Content:
+Find a relative path from two absolute paths.
+```Fenced(Borrowed("nu"))
+> '/home/viking' | path relative-to '/home'
+viking
+
+```
+Find a relative path from absolute paths in list.
+```Fenced(Borrowed("nu"))
+> [ /home/viking, /home/spam ] | path relative-to '/home'
+â•­â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â•®
+â”‚ 0 â”‚ viking â”‚
+â”‚ 1 â”‚ spam   â”‚
+â•°â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â•¯
+
+
+```
+Find a relative path from two relative paths.
+```Fenced(Borrowed("nu"))
+> 'eggs/bacon/sausage/spam' | path relative-to 'eggs/bacon/sausage'
+spam
+
+```
+’Ù@b3d9fdeaaf2a1906fc06d9f86f718ce0786a71215364b1e928c638967cc6ca47ÙÒTitle: title: path relative-to
+Path: Notes
+Content:
+Can be used only when the input and the argument paths are either both
+
+absolute or both relative. The argument path needs to be a parent of the input
+
+path.

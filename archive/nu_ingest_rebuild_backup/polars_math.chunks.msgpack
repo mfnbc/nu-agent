@@ -1,0 +1,218 @@
+���Sarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_math.md�@977ca7d2302bc5ad0b9541b09c34932b8e08dd58afa5bd293fcbe03133977491�title: polars math��dataframe�C
+
+
+
+
+
+
+
+
+``polars math``
+[link: /commands/categories/dataframe.md] ����vTitle: title: polars math
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars math``
+[link: /commands/categories/dataframe.md] ��Sarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_math.md�@3bdbb355510fe7b94dca3e0d08edcdc9ff8c73e71c755b9eb2be8335d9981925�title: polars math��Signature�)``> polars math {flags} (type) ...rest``
+����\Title: title: polars math
+Path: Signature
+Content:
+``> polars math {flags} (type) ...rest``
+��Sarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_math.md�@e2ba86fbda92ec67412e5bf255864f0202531fd5cfcb2164eadc56eb55b50227�title: polars math��Parametersٌ``type``
+: Function name. See extra description for full list of accepted values.
+``...rest``
+: Extra arguments required by some functions.
+�����Title: title: polars math
+Path: Parameters
+Content:
+``type``
+: Function name. See extra description for full list of accepted values.
+``...rest``
+: Extra arguments required by some functions.
+��Sarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_math.md�@3af55874c5f161413f587508154626232f01a687bf272f97990a40dd03b5cb2f�title: polars math��Input/output types:�Sinput
+output
+polars_expression
+polars_expression
+polars_selector
+polars_expression
+���ِTitle: title: polars math
+Path: Input/output types:
+Content:
+input
+output
+polars_expression
+polars_expression
+polars_selector
+polars_expression
+��Sarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_math.md�@edf5d31315cad949863f1b93c5e23c59f29f3bc12fab005857bc39d394d71866�title: polars math��Examples�7Apply function to column expression
+```Fenced(Borrowed("nu"))
+> [[a]; [0] [-1] [2] [-3] [4]]
+                    | polars into-df
+                    | polars select [
+                        (polars col a | polars math abs | polars as a_abs)
+                        (polars col a | polars math sign | polars as a_sign)
+                        (polars col a | polars math exp | polars as a_exp)]
+                    | polars collect
+╭───┬───────┬────────┬───────╮
+│ # │ a_abs │ a_sign │ a_exp │
+├───┼───────┼────────┼───────┤
+│ 0 │     0 │      0 │  1.00 │
+│ 1 │     1 │     -1 │  0.37 │
+│ 2 │     2 │      1 │  7.39 │
+│ 3 │     3 │     -1 │  0.05 │
+│ 4 │     4 │      1 │ 54.60 │
+╰───┴───────┴────────┴───────╯
+
+
+```
+Specify arguments for select functions. See description for more information.
+```Fenced(Borrowed("nu"))
+> [[a]; [0] [1] [2] [4] [8] [16]]
+                    | polars into-df
+                    | polars select [
+                        (polars col a | polars math log 2 | polars as a_base2)]
+                    | polars collect
+╭───┬─────────╮
+│ # │ a_base2 │
+├───┼─────────┤
+│ 0 │    -inf │
+│ 1 │    0.00 │
+│ 2 │    1.00 │
+│ 3 │    2.00 │
+│ 4 │    3.00 │
+│ 5 │    4.00 │
+╰───┴─────────╯
+
+
+```
+Specify arguments for select functions. See description for more information.
+```Fenced(Borrowed("nu"))
+> [[a b]; [0 0] [1 1] [2 2] [3 3] [4 4] [5 5]]
+                    | polars into-df
+                    | polars select [
+                        (polars col a | polars math dot (polars col b) | polars as ab)]
+                    | polars collect
+╭───┬───────╮
+│ # │  ab   │
+├───┼───────┤
+│ 0 │ 55.00 │
+╰───┴───────╯
+
+
+```
+����iTitle: title: polars math
+Path: Examples
+Content:
+Apply function to column expression
+```Fenced(Borrowed("nu"))
+> [[a]; [0] [-1] [2] [-3] [4]]
+                    | polars into-df
+                    | polars select [
+                        (polars col a | polars math abs | polars as a_abs)
+                        (polars col a | polars math sign | polars as a_sign)
+                        (polars col a | polars math exp | polars as a_exp)]
+                    | polars collect
+╭───┬───────┬────────┬───────╮
+│ # │ a_abs │ a_sign │ a_exp │
+├───┼───────┼────────┼───────┤
+│ 0 │     0 │      0 │  1.00 │
+│ 1 │     1 │     -1 │  0.37 │
+│ 2 │     2 │      1 │  7.39 │
+│ 3 │     3 │     -1 │  0.05 │
+│ 4 │     4 │      1 │ 54.60 │
+╰───┴───────┴────────┴───────╯
+
+
+```
+Specify arguments for select functions. See description for more information.
+```Fenced(Borrowed("nu"))
+> [[a]; [0] [1] [2] [4] [8] [16]]
+                    | polars into-df
+                    | polars select [
+                        (polars col a | polars math log 2 | polars as a_base2)]
+                    | polars collect
+╭───┬─────────╮
+│ # │ a_base2 │
+├───┼─────────┤
+│ 0 │    -inf │
+│ 1 │    0.00 │
+│ 2 │    1.00 │
+│ 3 │    2.00 │
+│ 4 │    3.00 │
+│ 5 │    4.00 │
+╰───┴─────────╯
+
+
+```
+Specify arguments for select functions. See description for more information.
+```Fenced(Borrowed("nu"))
+> [[a b]; [0 0] [1 1] [2 2] [3 3] [4 4] [5 5]]
+                    | polars into-df
+                    | polars select [
+                        (polars col a | polars math dot (polars col b) | polars as ab)]
+                    | polars collect
+╭───┬───────╮
+│ # │  ab   │
+├───┼───────┤
+│ 0 │ 55.00 │
+╰───┴───────╯
+
+
+```
+��Sarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/polars_math.md�@4ba99d9be430cb9301c242bec3059f6d951ead85345ffacca983b2f8788eb64f�title: polars math��Notes�hThis is an incomplete implementation of the available functions listed here: https://docs.pola.rs/api/python/stable/reference/expressions/computation.html.
+```Indented
+    The following functions are currently available:
+
+    - abs
+
+    - cos
+
+    - dot <expression>
+
+    - exp
+
+    - log <base; default e>
+
+    - log1p
+
+    - sign
+
+    - sin
+
+    - sqrt
+
+```
+�����Title: title: polars math
+Path: Notes
+Content:
+This is an incomplete implementation of the available functions listed here: https://docs.pola.rs/api/python/stable/reference/expressions/computation.html.
+```Indented
+    The following functions are currently available:
+
+    - abs
+
+    - cos
+
+    - dot <expression>
+
+    - exp
+
+    - log <base; default e>
+
+    - log1p
+
+    - sign
+
+    - sin
+
+    - sqrt
+
+```

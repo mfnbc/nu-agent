@@ -1,0 +1,99 @@
+–’Ù@9289873479111bb28f4379cea6fbbec199d3cd3a55ddea5ec6a31193a03d7284ÙzTitle: title: format bits
+Path: conversions
+Content:
+
+
+
+
+
+
+
+
+
+``format bits``
+[link: /commands/categories/conversions.md] ’Ù@364f313e81d192d91ac4c4a20272d3f80e4a3710c372e9e4ee1f533b83252033ÙUTitle: title: format bits
+Path: Signature
+Content:
+``> format bits {flags} ...rest``
+’Ù@3cc2bd3063a19b745eebe0153589864688620804da209bdf58e7eb69000cce8fÙêTitle: title: format bits
+Path: Flags
+Content:
+``--endian, -e {string}``
+: Byte encode endian. Only applies to int, filesize, duration and bool, as well as tables and records of those. Available options: native, little, big(default).
+’Ù@363dcdd6e40995d4235e9617cecb43c03594986f3e448da8506ac360942927a2Ù„Title: title: format bits
+Path: Parameters
+Content:
+``...rest``
+: For a data structure input, convert data at the given cell paths.
+’Ù@9579873f2f61b4a1c5c66872e43c7011f555e93742556cc7398d70965f6e6fa5Ù·Title: title: format bits
+Path: Input/output types:
+Content:
+input
+output
+binary
+string
+int
+string
+filesize
+string
+duration
+string
+string
+string
+bool
+string
+table
+table
+record
+record
+’Ù@78f50845d9ef061b6ddc105bc8c7c49f920d4e1737108d2674eedd2d041c661dÚ¥Title: title: format bits
+Path: Examples
+Content:
+convert a binary value into a string, padded to 8 places with 0s
+```Fenced(Borrowed("nu"))
+> 0x[1] | format bits
+00000001
+
+```
+convert an int into a string, padded to 8 places with 0s
+```Fenced(Borrowed("nu"))
+> 1 | format bits
+00000001
+
+```
+convert an int into a string, padded to 8 places with 0s (big endian)
+```Fenced(Borrowed("nu"))
+> 258 | format bits
+00000001 00000010
+
+```
+convert an int into a string, padded to 8 places with 0s (little endian)
+```Fenced(Borrowed("nu"))
+> 258 | format bits --endian little
+00000010 00000001
+
+```
+convert a filesize value into a string, padded to 8 places with 0s
+```Fenced(Borrowed("nu"))
+> 1b | format bits
+00000001
+
+```
+convert a duration value into a string, padded to 8 places with 0s
+```Fenced(Borrowed("nu"))
+> 1ns | format bits
+00000001
+
+```
+convert a boolean value into a string, padded to 8 places with 0s
+```Fenced(Borrowed("nu"))
+> true | format bits
+00000001
+
+```
+convert a string into a raw binary string, padded with 0s to 8 places
+```Fenced(Borrowed("nu"))
+> 'nushell.sh' | format bits
+01101110 01110101 01110011 01101000 01100101 01101100 01101100 00101110 01110011 01101000
+
+```

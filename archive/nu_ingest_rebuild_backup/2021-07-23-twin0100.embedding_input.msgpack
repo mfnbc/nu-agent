@@ -1,0 +1,59 @@
+•’Ù@b52db2295659365c70c09c6bdd6bad606b55fe0a15881b861c4a03578d04c90bÙiTitle: This week in Nushell #100
+Path: This week in Nushell #100
+Content:
+We reached #100!! ðŸŽ‰ðŸŽ‰ðŸŽ‰
+’Ù@e57c7d8d1df7d99209de39f788864c52936a0c08e5b16d9112df745d2bf6b14dÚ%Title: This week in Nushell #100
+Path: Nushell
+Content:
+fdncred added 
+[link: https://github.com/nushell/nushell/pull/3807] ``bat``
+ theme wasn't getting set properly
+zkat 
+[link: https://github.com/nushell/nushell/pull/3824] fixed typo in release.yml
+, and 
+[link: https://github.com/nushell/nushell/pull/3818] converted templates to github forms
+elferherrera 
+[link: https://github.com/nushell/nushell/pull/3823] added 
+``replace``
+ command
+, and 
+[link: https://github.com/nushell/nushell/pull/3805] dataframe Shape command
+TechWatching 
+[link: https://github.com/nushell/nushell/pull/3819] added worflow to publish package in winget
+realcundo 
+[link: https://github.com/nushell/nushell/pull/3811] implemented into path conversion
+kubouch 
+[link: https://github.com/nushell/nushell/pull/3808] fixed expected age of mockup files in example tests
+dirtybit 
+[link: https://github.com/nushell/nushell/pull/3804] fixed docs for the config variable 
+``completion_type``
+sambordo1 
+[link: https://github.com/nushell/nushell/pull/3794] ported capitalize to engine-p
+’Ù@194d94e03ec77274a31ecb48037c5ba790e0e3b30984bd36de8574cb359fb4edÚŒTitle: This week in Nushell #100
+Path: Documentation
+Content:
+zkat created 
+[link: https://github.com/nushell/nushell.github.io/pull/173] there's no values column anymore
+, and 
+[link: https://github.com/nushell/nushell.github.io/pull/172] added xls/xlsx
+fhalim 
+[link: https://github.com/nushell/nushell.github.io/pull/171] added some clarifying statements about string interpolation
+LittleboyHarry 
+[link: https://github.com/nushell/nushell.github.io/pull/169] updated count.md: command 
+``count``
+ has been migrated to 
+``length``
+dirtybit 
+[link: https://github.com/nushell/nushell.github.io/pull/168] fixed config variable name used in an example
+’Ù@f0eed3c9d168d4c67fb495bda5b157897396bf1102014ea1d8314a753aa2ce7bÚTitle: This week in Nushell #100
+Path: Nu_Scripts
+Content:
+x3rAx created 
+[link: https://github.com/nushell/nu_scripts/pull/75] ðŸ“¦ NEW: Config with separate startup script and edit commands
+dirtybit 
+[link: https://github.com/nushell/nu_scripts/pull/74] fixed broken links to scripts
+’Ù@0efc1fe7213069819573c1081a3b50a9999cfe2a2c1d8af98823a53a5cdaf2cbÙ‘Title: This week in Nushell #100
+Path: Packaging
+Content:
+pin added Nushell to the 
+[link: https://pkgsrc.se/shells/nushell] netbsd package repo

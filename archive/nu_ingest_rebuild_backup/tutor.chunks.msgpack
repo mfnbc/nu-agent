@@ -1,0 +1,80 @@
+–—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/tutor.mdÙ@740b6ae8f18cb5904053fd20a102483a1e54e8c7d85a6ba989760d72345a6ff1¬title: tutor‘¤miscÙ8
+
+
+
+
+
+
+
+
+``tutor``
+[link: /commands/categories/misc.md] ’Ù`Title: title: tutor
+Path: misc
+Content:
+
+
+
+
+
+
+
+
+
+``tutor``
+[link: /commands/categories/misc.md] —ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/tutor.mdÙ@bf595969254aa025bf66d7548179994f626f965feeeb53f0452769e95503e792¬title: tutor‘©Signature½``> tutor {flags} (search)``
+’ÙJTitle: title: tutor
+Path: Signature
+Content:
+``> tutor {flags} (search)``
+—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/tutor.mdÙ@e1533179885cca6eb30ef7ab8ebbdbc414de4f8b5630cd7135cb71246849539c¬title: tutor‘¥FlagsÙ8``--find, -f {string}``
+: Search tutorial for a phrase.
+’ÙaTitle: title: tutor
+Path: Flags
+Content:
+``--find, -f {string}``
+: Search tutorial for a phrase.
+—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/tutor.mdÙ@66eced9029dbb33cd170d5162f82da6093d5e834aa6d05b8a7907ae6de98f4ff¬title: tutor‘ªParametersÙH``search``
+: Item to search for, or 'list' to list available tutorials.
+’ÙvTitle: title: tutor
+Path: Parameters
+Content:
+``search``
+: Item to search for, or 'list' to list available tutorials.
+—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/tutor.mdÙ@3693941745c6dfafc409e88bf31f8f35528302f1e93cb2512cbce3f00faad880¬title: tutor‘³Input/output types:¼input
+output
+nothing
+string
+’ÙSTitle: title: tutor
+Path: Input/output types:
+Content:
+input
+output
+nothing
+string
+—ÙMarchive/external_nushell_repo_backup/nushell.github.io/commands/docs/tutor.mdÙ@cce8400dc529fb881e35573fc5cf2c6e37103bcfb677900d20481d5e3a78595a¬title: tutor‘¨ExamplesÙ”Begin the tutorial.
+```Fenced(Borrowed("nu"))
+> tutor begin
+
+
+```
+Search a tutorial by phrase.
+```Fenced(Borrowed("nu"))
+> tutor --find "$in"
+
+
+```
+’ÙÀTitle: title: tutor
+Path: Examples
+Content:
+Begin the tutorial.
+```Fenced(Borrowed("nu"))
+> tutor begin
+
+
+```
+Search a tutorial by phrase.
+```Fenced(Borrowed("nu"))
+> tutor --find "$in"
+
+
+```

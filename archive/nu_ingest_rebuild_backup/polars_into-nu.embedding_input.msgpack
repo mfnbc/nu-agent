@@ -1,0 +1,82 @@
+���@6899f4f9c0be800491231f85ff23b09c4f29251a66318e14ea2c6990e9439323�|Title: title: polars into-nu
+Path: dataframe
+Content:
+
+
+
+
+
+
+
+
+
+``polars into-nu``
+[link: /commands/categories/dataframe.md] ��@c596909fae480895b9b694974e644f2f2d5622d9604105313794bd0097dd7261�TTitle: title: polars into-nu
+Path: Signature
+Content:
+``> polars into-nu {flags} ``
+��@accdb87dc3bb9f8af99c5aeb77952b3985aa22c135d30467c0a01cd27bd9b4bdٱTitle: title: polars into-nu
+Path: Flags
+Content:
+``--rows, -n {number}``
+: Number of rows to be shown.
+``--tail, -t``
+: Shows tail rows.
+``--index, -i``
+: Add an index column.
+��@19b1dd6525a98d733b9eac6d570b2c721e8a0faa84b3af0afaf31ae5a27c2b54��Title: title: polars into-nu
+Path: Input/output types:
+Content:
+input
+output
+polars_dataframe
+table
+polars_lazyframe
+table
+polars_expression
+any
+polars_group_by
+any
+polars_when
+any
+polars_datatype
+any
+polars_schema
+any
+polars_selector
+any
+��@e5f814db9c25f66fe67b20f5c1d0733b665c4216018874ebb0747299be0144f7��Title: title: polars into-nu
+Path: Examples
+Content:
+Shows head rows from dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [3 4]] | polars into-df | polars into-nu --index
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 0 │ 1 │ 2 │
+│ 1 │ 3 │ 4 │
+╰───┴───┴───╯
+
+
+```
+Shows tail rows from dataframe
+```Fenced(Borrowed("nu"))
+> [[a b]; [1 2] [5 6] [3 4]] | polars into-df | polars into-nu --tail --rows 1 --index
+╭───┬───┬───╮
+│ # │ a │ b │
+├───┼───┼───┤
+│ 2 │ 3 │ 4 │
+╰───┴───┴───╯
+
+
+```
+Convert a col expression into a nushell value
+```Fenced(Borrowed("nu"))
+> polars col a | polars into-nu --index
+╭───────┬────────╮
+│ expr  │ column │
+│ value │ a      │
+╰───────┴────────╯
+
+```

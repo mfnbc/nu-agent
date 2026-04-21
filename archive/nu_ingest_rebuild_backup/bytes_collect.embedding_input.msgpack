@@ -1,0 +1,54 @@
+•’Ù@ca2b6b2e282fcfbdc5fb2e66e0783b9feb59da48a30fb5c36dafdc0ee17ddacdÙrTitle: title: bytes collect
+Path: bytes
+Content:
+
+
+
+
+
+
+
+
+
+``bytes collect``
+[link: /commands/categories/bytes.md] ’Ù@b64bb646e07b2c492c695b88034274dabb1a229d5da94e89a7ea2fd939d9258bÙ]Title: title: bytes collect
+Path: Signature
+Content:
+``> bytes collect {flags} (separator)``
+’Ù@5bd28a41c4b706540af7512af6a9f1c991f147d46461fed4e25db9284f3a8243ÙvTitle: title: bytes collect
+Path: Parameters
+Content:
+``separator``
+: Optional separator to use when creating binary.
+’Ù@44fb2a9275bf06a1d3b0e1fa9998a1f2e8a7f6cb6f0e67a48f97a4cc5405d061ÙqTitle: title: bytes collect
+Path: Input/output types:
+Content:
+input
+output
+list
+<
+binary
+>
+
+binary
+table
+binary
+’Ù@93275077c98ab7edf1648f3430a2fe8ae622c132950b296579ec51ecf5a665a9ÚLTitle: title: bytes collect
+Path: Examples
+Content:
+Create a byte array from input.
+```Fenced(Borrowed("nu"))
+> [0x[11] 0x[13 15]] | bytes collect
+Length: 3 (0x3) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   11 13 15                                             â€¢â€¢â€¢
+
+
+```
+Create a byte array from input with a separator.
+```Fenced(Borrowed("nu"))
+> [0x[11] 0x[33] 0x[44]] | bytes collect 0x[01]
+Length: 5 (0x5) bytes | null_char printable whitespace ascii_other non_ascii
+00000000:   11 01 33 01  44                                      â€¢â€¢3â€¢D
+
+
+```

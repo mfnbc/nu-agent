@@ -1,0 +1,283 @@
+ïóŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-14-twin0190.mdŸ@bf3ffd6ba36f38c9a1579c663801bdcc0da16d15d30739cd07159d5dc3cbe346πThis week in Nushell #190ëßNushell⁄h1Kinoti 
+[link: https://github.com/nushell/nushell/pull/8886] used 
+``let-else``
+ syntax where possible
+jt 
+[link: https://github.com/nushell/nushell/pull/8881] improved hovers, including for custom commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8864] Make -I take in a ;-delimited list
+, and 
+[link: https://github.com/nushell/nushell/pull/8857] Adds multi-file support to IDE support
+, and 
+[link: https://github.com/nushell/nushell/pull/8846] Relax the closure syntax, highlight differently
+, and 
+[link: https://github.com/nushell/nushell/pull/8845] Revert numberlike parsing restriction
+, and 
+[link: https://github.com/nushell/nushell/pull/8833] Add option to not load std-lib. Default tests to not use std-lib
+, and 
+[link: https://github.com/nushell/nushell/pull/8830] Only add the std lib files once
+presidento created 
+[link: https://github.com/nushell/nushell/pull/8877] std: remove logging example
+, and 
+[link: https://github.com/nushell/nushell/pull/8850] Move unit test runner to standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/8776] stdlib test runner: implement 
+``setup``
+ and 
+``teardown``
+ commands to unit tests
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/8876] Run coverage immediately
+, and 
+[link: https://github.com/nushell/nushell/pull/8867] Reenable CI coverage
+, and 
+[link: https://github.com/nushell/nushell/pull/8866] Fix span of multibyte short flags
+, and 
+[link: https://github.com/nushell/nushell/pull/8832] Move CLI related commands to 
+``nu-cli``
+, and 
+[link: https://github.com/nushell/nushell/pull/8822] Follow up #8758 with a style fix
+fdncred 
+[link: https://github.com/nushell/nushell/pull/8875] limited the ide-check error amount
+, and 
+[link: https://github.com/nushell/nushell/pull/8873] change include dirs separator to colon
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/8871] ``rm``
+: enable trash flag on android and ios platrofm
+, and 
+[link: https://github.com/nushell/nushell/pull/8860] optimize hash md5 for binary input
+, and 
+[link: https://github.com/nushell/nushell/pull/8843] Remove autoprinting of 
+``for``
+ loop
+vaishaag 
+[link: https://github.com/nushell/nushell/pull/8868] corrected error description for unknown external commands
+pingiun 
+[link: https://github.com/nushell/nushell/pull/8861] added $env.CURRENT_FILE variable
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8855] FEATURE: do not use theme-independant colors in the default configs
+, and 
+[link: https://github.com/nushell/nushell/pull/8841] stdlib: make helper modules available in std
+, and 
+[link: https://github.com/nushell/nushell/pull/8815] stdlib: refactor into a multi-module library
+, and 
+[link: https://github.com/nushell/nushell/pull/8799] stdlib: add completion to 
+``help``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8708] DEV: make all "comments" real md comments in the PR template
+federicoviscomi created 
+[link: https://github.com/nushell/nushell/pull/8849] Parser panic for signature with multibyte char for short flag #8821
+nibon7 
+[link: https://github.com/nushell/nushell/pull/8842] fixed process_range on 32-bit platforms
+hustcer 
+[link: https://github.com/nushell/nushell/pull/8840] upgraded to nu v0.78 for binaries release workflow
+dependabot 
+[link: https://github.com/nushell/nushell/pull/8838] bumped sys-locale from 0.2.4 to 0.3.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8837] Bump winreg from 0.11.0 to 0.50.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8836] Bump rstest from 0.16.0 to 0.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8835] Bump umask from 2.0.0 to 2.1.0
+MariaSolOs 
+[link: https://github.com/nushell/nushell/pull/8820] added git hooks for formatting and running 
+``clippy``
+bobhy 
+[link: https://github.com/nushell/nushell/pull/8805] picked up fix in dtparse for nanosec truncation noted at bottom of #8337
+íêê⁄†Title: This week in Nushell #190
+Path: Nushell
+Content:
+1Kinoti 
+[link: https://github.com/nushell/nushell/pull/8886] used 
+``let-else``
+ syntax where possible
+jt 
+[link: https://github.com/nushell/nushell/pull/8881] improved hovers, including for custom commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8864] Make -I take in a ;-delimited list
+, and 
+[link: https://github.com/nushell/nushell/pull/8857] Adds multi-file support to IDE support
+, and 
+[link: https://github.com/nushell/nushell/pull/8846] Relax the closure syntax, highlight differently
+, and 
+[link: https://github.com/nushell/nushell/pull/8845] Revert numberlike parsing restriction
+, and 
+[link: https://github.com/nushell/nushell/pull/8833] Add option to not load std-lib. Default tests to not use std-lib
+, and 
+[link: https://github.com/nushell/nushell/pull/8830] Only add the std lib files once
+presidento created 
+[link: https://github.com/nushell/nushell/pull/8877] std: remove logging example
+, and 
+[link: https://github.com/nushell/nushell/pull/8850] Move unit test runner to standard library
+, and 
+[link: https://github.com/nushell/nushell/pull/8776] stdlib test runner: implement 
+``setup``
+ and 
+``teardown``
+ commands to unit tests
+sholderbach created 
+[link: https://github.com/nushell/nushell/pull/8876] Run coverage immediately
+, and 
+[link: https://github.com/nushell/nushell/pull/8867] Reenable CI coverage
+, and 
+[link: https://github.com/nushell/nushell/pull/8866] Fix span of multibyte short flags
+, and 
+[link: https://github.com/nushell/nushell/pull/8832] Move CLI related commands to 
+``nu-cli``
+, and 
+[link: https://github.com/nushell/nushell/pull/8822] Follow up #8758 with a style fix
+fdncred 
+[link: https://github.com/nushell/nushell/pull/8875] limited the ide-check error amount
+, and 
+[link: https://github.com/nushell/nushell/pull/8873] change include dirs separator to colon
+WindSoilder created 
+[link: https://github.com/nushell/nushell/pull/8871] ``rm``
+: enable trash flag on android and ios platrofm
+, and 
+[link: https://github.com/nushell/nushell/pull/8860] optimize hash md5 for binary input
+, and 
+[link: https://github.com/nushell/nushell/pull/8843] Remove autoprinting of 
+``for``
+ loop
+vaishaag 
+[link: https://github.com/nushell/nushell/pull/8868] corrected error description for unknown external commands
+pingiun 
+[link: https://github.com/nushell/nushell/pull/8861] added $env.CURRENT_FILE variable
+amtoine created 
+[link: https://github.com/nushell/nushell/pull/8855] FEATURE: do not use theme-independant colors in the default configs
+, and 
+[link: https://github.com/nushell/nushell/pull/8841] stdlib: make helper modules available in std
+, and 
+[link: https://github.com/nushell/nushell/pull/8815] stdlib: refactor into a multi-module library
+, and 
+[link: https://github.com/nushell/nushell/pull/8799] stdlib: add completion to 
+``help``
+ commands
+, and 
+[link: https://github.com/nushell/nushell/pull/8708] DEV: make all "comments" real md comments in the PR template
+federicoviscomi created 
+[link: https://github.com/nushell/nushell/pull/8849] Parser panic for signature with multibyte char for short flag #8821
+nibon7 
+[link: https://github.com/nushell/nushell/pull/8842] fixed process_range on 32-bit platforms
+hustcer 
+[link: https://github.com/nushell/nushell/pull/8840] upgraded to nu v0.78 for binaries release workflow
+dependabot 
+[link: https://github.com/nushell/nushell/pull/8838] bumped sys-locale from 0.2.4 to 0.3.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8837] Bump winreg from 0.11.0 to 0.50.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8836] Bump rstest from 0.16.0 to 0.17.0
+, and 
+[link: https://github.com/nushell/nushell/pull/8835] Bump umask from 2.0.0 to 2.1.0
+MariaSolOs 
+[link: https://github.com/nushell/nushell/pull/8820] added git hooks for formatting and running 
+``clippy``
+bobhy 
+[link: https://github.com/nushell/nushell/pull/8805] picked up fix in dtparse for nanosec truncation noted at bottom of #8337
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-14-twin0190.mdŸ@b2d0296266567d56eab11291556fae8e5812feda4cf921b9319304d0cef74d1fπThis week in Nushell #190ë©Extension⁄˜fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/103] update vscode launch json so we can see debug messages from client
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/101] update files to model after jakt
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/98] limit the amount of errors returned by ide-check
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/97] respect the setting to enable or disable hints/inlays
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/96] change include dir separator from semicolon to colon
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/95] revert vscodeignore changes
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/94] add include dirs setting to extension
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/89] utilize nushell IDE features with built-in vscode LSP functionality
+jt created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/102] Have launch build instead of watch
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/100] Delete tmp file on exit
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/99] Limit buffer calculation to buffer size not text size
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/93] Move runCompiler to be in charge of the script include flag
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/92] Add support for -I call to nushell
+íêê⁄1Title: This week in Nushell #190
+Path: Extension
+Content:
+fdncred created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/103] update vscode launch json so we can see debug messages from client
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/101] update files to model after jakt
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/98] limit the amount of errors returned by ide-check
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/97] respect the setting to enable or disable hints/inlays
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/96] change include dir separator from semicolon to colon
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/95] revert vscodeignore changes
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/94] add include dirs setting to extension
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/89] utilize nushell IDE features with built-in vscode LSP functionality
+jt created 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/102] Have launch build instead of watch
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/100] Delete tmp file on exit
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/99] Limit buffer calculation to buffer size not text size
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/93] Move runCompiler to be in charge of the script include flag
+, and 
+[link: https://github.com/nushell/vscode-nushell-lang/pull/92] Add support for -I call to nushell
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-14-twin0190.mdŸ@6b01a5bb81677c58868fb0568f66341f04cf99b66f6ce44fa6e1620ca5079228πThis week in Nushell #190ë≠DocumentationŸˇhustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/867] Fix i18n script for nu v0.78
+SamirTalwar created 
+[link: https://github.com/nushell/nushell.github.io/pull/852] Update the Direnv recipe to use a block, rather than 
+``code:``
+íêê⁄=Title: This week in Nushell #190
+Path: Documentation
+Content:
+hustcer created 
+[link: https://github.com/nushell/nushell.github.io/pull/867] Fix i18n script for nu v0.78
+SamirTalwar created 
+[link: https://github.com/nushell/nushell.github.io/pull/852] Update the Direnv recipe to use a block, rather than 
+``code:``
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-14-twin0190.mdŸ@569257cd3d6af55291165d262d87e5a61a7e1210e902aec8b2cd2fe710ff46b6πThis week in Nushell #190ë™Nu_Scripts⁄~Hofer-Julian created 
+[link: https://github.com/nushell/nu_scripts/pull/447] conda: Add 
+``||``
+ to closure
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/442] Speeding up activating conda environment
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/446] Add --all aliases for exa
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/445] move assets so they're more accessible
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/444] a little cleanup
+Kissaki created 
+[link: https://github.com/nushell/nu_scripts/pull/443] Fix winget-completions.nu for nushell v0.78 closure syntax change
+íêê⁄πTitle: This week in Nushell #190
+Path: Nu_Scripts
+Content:
+Hofer-Julian created 
+[link: https://github.com/nushell/nu_scripts/pull/447] conda: Add 
+``||``
+ to closure
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/442] Speeding up activating conda environment
+fnuttens created 
+[link: https://github.com/nushell/nu_scripts/pull/446] Add --all aliases for exa
+fdncred created 
+[link: https://github.com/nushell/nu_scripts/pull/445] move assets so they're more accessible
+, and 
+[link: https://github.com/nushell/nu_scripts/pull/444] a little cleanup
+Kissaki created 
+[link: https://github.com/nushell/nu_scripts/pull/443] Fix winget-completions.nu for nushell v0.78 closure syntax change
+óŸRarchive/external_nushell_repo_backup/nushell.github.io/blog/2023-04-14-twin0190.mdŸ@3a4a908b96843b4be9a1588bd13d0116d410796cca577e791530c6be4d64892aπThis week in Nushell #190ë®reedlineŸmWindSoilder created 
+[link: https://github.com/nushell/reedline/pull/560] Update crossterm to version 0.26.1
+íêêŸ¶Title: This week in Nushell #190
+Path: reedline
+Content:
+WindSoilder created 
+[link: https://github.com/nushell/reedline/pull/560] Update crossterm to version 0.26.1
