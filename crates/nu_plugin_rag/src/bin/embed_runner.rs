@@ -5,7 +5,9 @@ use serde_json::Value;
 use std::fs;
 
 // fastembed for local embeddings; persist MessagePack as canonical output
-use fastembed::text::TextEmbedding;
+use fastembed::TextEmbedding;
+use uuid::Uuid;
+use tokio;
 
 #[derive(Parser, Debug)]
     #[command(

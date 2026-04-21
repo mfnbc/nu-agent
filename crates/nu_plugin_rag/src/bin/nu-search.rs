@@ -3,6 +3,7 @@ use clap::Parser;
 use nu_plugin_rag::DocRecord;
 use rayon::prelude::*;
 use rmp_serde::decode::from_read;
+use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
 use std::fs::File;
 use std::io::{self, Read, Write};
