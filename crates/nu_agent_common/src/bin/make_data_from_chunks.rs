@@ -18,6 +18,8 @@ fn main() -> anyhow::Result<()> {
     let mut cmd_map: HashMap<String, serde_json::Map<String, Value>> = HashMap::new();
     let mut embed_out = File::create(out_embed)?;
     let mut vec_rows: Vec<Value> = Vec::new();
+    // collect embedding input rows here
+    let mut embed_rows: Vec<Value> = Vec::new();
 
     for line in reader.lines() {
         let line = line?;
@@ -63,9 +65,13 @@ fn main() -> anyhow::Result<()> {
         // collect embedding_input if present
         if let Some(e) = v.get("embedding_input") {
             if let Some(id) = v.get("id").and_then(|x| x.as_str()) {
-                let text = if e.is_string() { e.as_str().unwrap().to_string() } else { e.to_string() };
+                let text = if e.is_string() {
+                    e.as_str().unwrap().to_string()
+                } else {
+                    e.to_string()
+                };
                 let o = serde_json::json!({"id": id, "text": text});
-                vec!push_embed(&mut embed_rows, o);
+                embed_rows.push(o);
             }
         }
     }
