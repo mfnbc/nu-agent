@@ -3,7 +3,7 @@ use clap::Parser;
 use nu_plugin_rag::DocRecord;
 use rayon::prelude::*;
 use rmp_serde::decode::from_read;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use serde_json::Value as JsonValue;
 use std::fs::File;
 use std::io::{self, Read, Write};
@@ -101,8 +101,7 @@ fn read_query_vec(path_opt: Option<&str>, explicit_format: Option<&str>) -> Resu
             return Ok(nums);
         } else {
             // Try MessagePack decode
-            let mut de = rmp_serde::Deserializer::new(&buf[..]);
-            if let Ok(v) = rmp_serde::from_read_ref::<_, Vec<f32>>(&buf) {
+            if let Ok(v) = rmp_serde::from_slice::<Vec<f32>>(&buf) {
                 return Ok(v);
             }
             // Fallback: attempt whitespace parse
