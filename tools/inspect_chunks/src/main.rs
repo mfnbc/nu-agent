@@ -2,6 +2,7 @@ use rmp_serde::from_slice;
 use serde::Deserialize;
 use std::fs;
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 struct Taxonomy {
     commands: Option<Vec<String>>,
@@ -9,6 +10,7 @@ struct Taxonomy {
     idiom_weight: Option<i32>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Deserialize)]
 struct OutRecord {
     path: String,

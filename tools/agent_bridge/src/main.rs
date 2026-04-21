@@ -107,19 +107,18 @@ fn main() -> anyhow::Result<()> {
         std::process::exit(2);
     }
     let mut json_out = false;
-    let mut query = String::new();
-    if args.len() == 2 {
-        query = args[1].clone();
+    let query: String = if args.len() == 2 {
+        args[1].clone()
     } else {
         // support: agent_bridge --json "query"
         if args[1] == "--json" || args[1] == "-j" {
             json_out = true;
-            query = args[2].clone();
+            args[2].clone()
         } else {
             // join remaining args as the query (allow unquoted)
-            query = args[1..].join(" ");
+            args[1..].join(" ")
         }
-    }
+    };
 
     // load index JSON produced earlier
     let idx_data = fs::read("data/nu_idioms.index").context("read index JSON")?;
