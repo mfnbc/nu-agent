@@ -6,6 +6,7 @@ use serde_json::Value as JsonValue;
 use std::collections::HashMap;
 use std::fs;
 
+#[allow(dead_code)]
 #[derive(Debug)]
 struct Chunk {
     id: String,
