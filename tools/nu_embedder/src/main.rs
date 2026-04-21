@@ -1,8 +1,58 @@
 use anyhow::Context;
-use fastembed::{InitOptions, TextEmbedding};
 use serde::{Deserialize, Serialize};
 use std::fs::File;
 use std::io::{Read, Write};
+
+// Remote embedding helper
+fn remote_embed_texts(inputs: &[String]) -> anyhow::Result<Vec<Vec<f32>>> {
+    let default_url = "http://172.19.224.1:1234/v1/embeddings";
+    let default_model = "text-embedding-mxbai-embed-large-v1";
+    let url = std::env::var("EMBEDDING_REMOTE_URL").unwrap_or_else(|_| default_url.to_string());
+    let api_key = std::env::var("EMBEDDING_API_KEY").ok();
+    let model = std::env::var("EMBEDDING_MODEL").unwrap_or_else(|_| default_model.to_string());
+    let client = reqwest::blocking::Client::new();
+    let body = serde_json::json!({ "model": model, "input": inputs });
+    let body_str = serde_json::to_string(&body)?;
+    let mut req = client
+        .post(&url)
+        .header("Content-Type", "application/json")
+        .body(body_str);
+    if let Some(k) = api_key {
+        req = req.header("Authorization", format!("Bearer {}", k));
+    }
+    let resp = req.send()?;
+    let status = resp.status();
+    let text = resp.text()?;
+    if !status.is_success() {
+        anyhow::bail!("remote embedding request failed: {}: {}", status, text);
+    }
+    let v: serde_json::Value = serde_json::from_str(&text)?;
+    // parse embeddings
+    if let Some(e) = v.get("embeddings") {
+        let parsed: Vec<Vec<f32>> = serde_json::from_value(e.clone())?;
+        return Ok(parsed);
+    }
+    if let Some(data) = v.get("data") {
+        let arr = data
+            .as_array()
+            .ok_or_else(|| anyhow::anyhow!("unexpected data field"))?;
+        let mut out = Vec::with_capacity(arr.len());
+        for item in arr {
+            if let Some(emb) = item.get("embedding") {
+                let vecf: Vec<f32> = serde_json::from_value(emb.clone())?;
+                out.push(vecf);
+            } else {
+                anyhow::bail!("unexpected data item shape")
+            }
+        }
+        return Ok(out);
+    }
+    if v.is_array() {
+        let parsed: Vec<Vec<f32>> = serde_json::from_value(v)?;
+        return Ok(parsed);
+    }
+    anyhow::bail!("unexpected remote embedding response: {}", text)
+}
 
 #[derive(Deserialize)]
 struct EmbIn {
@@ -91,9 +141,7 @@ fn main() -> anyhow::Result<()> {
         docs.push(EmbIn { id, text });
     }
 
-    // Initialize fastembed model using defaults (let the library pick a reasonable local model).
-    let mut model =
-        TextEmbedding::try_new(InitOptions::default().with_show_download_progress(true))?;
+    // Use remote embedding service
 
     // Optionally limit docs for a smoke test
     let docs_to_process: Vec<EmbIn> = match limit {
@@ -127,7 +175,7 @@ fn main() -> anyhow::Result<()> {
 
     for chunk in docs_to_process.chunks(batch_size) {
         let texts: Vec<String> = chunk.iter().map(|d| d.text.clone()).collect();
-        let emb_vectors = model.embed(texts, None)?;
+        let emb_vectors = remote_embed_texts(&texts)?;
 
         for (i, v) in emb_vectors.into_iter().enumerate() {
             // L2-normalize vector

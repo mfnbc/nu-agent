@@ -50,7 +50,6 @@ fn main() -> Result<()> {
 
             // Attempt to read a local prepare catalog for approved artifacts to download.
             let mut downloaded = false;
-            let fastembed_checksum: Option<String> = None;
 
             let catalog_path =
                 std::path::Path::new("crates/nu_plugin_rag/data/prepare_catalog.json");
@@ -139,7 +138,7 @@ fn main() -> Result<()> {
             let marker = format!("{}/prepare-deps.ok", cache_dir);
             let _ = std::fs::write(&marker, "ok");
 
-            let resp = json!({"status":"ok", "action":"prepare-deps", "cache_dir": cache_dir, "fastembed_downloaded": downloaded, "fastembed_checksum": fastembed_checksum, "marker": marker});
+            let resp = json!({"status":"ok", "action":"prepare-deps", "cache_dir": cache_dir, "artifacts_downloaded": downloaded, "marker": marker});
             println!("{}", resp);
         }
         Commands::Build {

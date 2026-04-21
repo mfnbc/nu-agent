@@ -1,12 +1,6 @@
 {
   "artifacts": [
-    {
-      "name": "fastembed",
-      "description": "Rust-built FastEmbed binary (placeholder)",
-      "url": "https://example.com/fastembed-linux-x86_64",
-      "blake3": ""
-    }
-    ,
+    
     {
       "name": "mxbai-embed-large-v1-model",
       "description": "MixedBread mxbai-embed-large-v1 ONNX model (fp32)",

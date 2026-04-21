@@ -54,7 +54,9 @@ pub fn blake3_of_file(path: &std::path::Path) -> anyhow::Result<String> {
 /// previously present in the embed_runner binary so callers (including tests)
 /// can invoke it directly.
 pub fn embed_and_write(input: &str, output: &str, vector_out: Option<&str>) -> anyhow::Result<()> {
-    use fastembed::TextEmbedding;
+    // Embeddings are produced via the configured remote embedding service. The
+    // repository no longer contains a local native embedding binary fallback.
+    // The remote path is used elsewhere in this file to call the service.
     use serde_json::Value;
     use std::fs;
 
@@ -78,10 +80,123 @@ pub fn embed_and_write(input: &str, output: &str, vector_out: Option<&str>) -> a
         );
     }
 
-    let mut model = TextEmbedding::try_new(Default::default())?;
+    // Remote-only embedding: require EMBEDDING_REMOTE_URL to be set. This keeps the
+    // runtime surface simple and avoids loading any native ONNX runtime dependencies.
+
+    // Collect texts in order so we can batch to whichever backend is configured.
+    let texts: Vec<String> = chunks
+        .iter()
+        .map(|chunk| {
+            chunk
+                .get("embedding_input")
+                .or_else(|| chunk.get("text"))
+                .or_else(|| chunk.get("data"))
+                .and_then(|v| v.as_str())
+                .map(|s| s.to_string())
+                .unwrap_or_default()
+        })
+        .collect();
+
+    // Embeddings are remote-only by default. The remote service is configured via
+    // EMBEDDING_REMOTE_URL / EMBEDDING_MODEL / EMBEDDING_API_KEY. A deterministic
+    // fallback is available for tests.
+    fn parse_embeddings_from_value(v: serde_json::Value) -> Option<Vec<Vec<f32>>> {
+        // Try { "embeddings": [[...], ...] }
+        if let Some(e) = v.get("embeddings") {
+            if e.is_array() {
+                let parsed: Result<Vec<Vec<f32>>, _> = serde_json::from_value(e.clone());
+                if let Ok(p) = parsed {
+                    return Some(p);
+                }
+            }
+        }
+
+        // Try { "data": [{"embedding": [...]}, ...] }
+        if let Some(data) = v.get("data") {
+            if let Some(arr) = data.as_array() {
+                let mut out = Vec::with_capacity(arr.len());
+                for item in arr {
+                    if let Some(emb) = item.get("embedding") {
+                        if let Ok(vecf) = serde_json::from_value::<Vec<f32>>(emb.clone()) {
+                            out.push(vecf);
+                            continue;
+                        }
+                    }
+                    // Some APIs return embedding under "vector" or different key
+                    if let Some(emb) = item.get("vector") {
+                        if let Ok(vecf) = serde_json::from_value::<Vec<f32>>(emb.clone()) {
+                            out.push(vecf);
+                            continue;
+                        }
+                    }
+                    return None;
+                }
+                return Some(out);
+            }
+        }
+
+        // Try array-of-arrays at top level
+        if v.is_array() {
+            if let Ok(parsed) = serde_json::from_value::<Vec<Vec<f32>>>(v) {
+                return Some(parsed);
+            }
+        }
+
+        None
+    }
+
+    // Performs a blocking POST to a remote embedding service. The service is expected
+    // to accept JSON { "model": "...", "inputs": ["text1", ...] } and return either
+    // { "embeddings": [[...], ...] } or { "data": [{"embedding": [...]}, ...] }
+    fn remote_embed(
+        url: &str,
+        api_key: Option<String>,
+        inputs: &[String],
+        model: &str,
+    ) -> anyhow::Result<Vec<Vec<f32>>> {
+        let client = reqwest::blocking::Client::new();
+        let body = serde_json::json!({ "model": model, "input": inputs });
+        let mut req = client.post(url);
+        // Avoid relying on reqwest's `json` helper in case the feature set differs;
+        // send a JSON body explicitly.
+        let body_str = serde_json::to_string(&body)?;
+        req = req
+            .header("Content-Type", "application/json")
+            .body(body_str);
+        if let Some(k) = api_key {
+            req = req.header("Authorization", format!("Bearer {}", k));
+        }
+        let resp = req.send()?;
+        let status = resp.status();
+        let text = resp.text()?;
+        if !status.is_success() {
+            anyhow::bail!("remote embedding request failed: {}: {}", status, text);
+        }
+        let v: serde_json::Value = serde_json::from_str(&text)?;
+        if let Some(embs) = parse_embeddings_from_value(v) {
+            if embs.len() != inputs.len() {
+                anyhow::bail!(
+                    "remote embedding service returned {} embeddings for {} inputs",
+                    embs.len(),
+                    inputs.len()
+                );
+            }
+            return Ok(embs);
+        }
+        anyhow::bail!("unexpected remote embedding response: {}", text)
+    }
+
+    // Default: use local service at 172.19.224.1:1234 with MXBAI embedding model.
+    let default_url = "http://172.19.224.1:1234/v1/embeddings";
+    let default_model = "text-embedding-mxbai-embed-large-v1";
+
+    let url = std::env::var("EMBEDDING_REMOTE_URL").unwrap_or_else(|_| default_url.to_string());
+    let api_key = std::env::var("EMBEDDING_API_KEY").ok();
+    let model = std::env::var("EMBEDDING_MODEL").unwrap_or_else(|_| default_model.to_string());
+    let embeddings_all: Vec<Vec<f32>> = remote_embed(&url, api_key, &texts, &model)?;
 
     let mut produced = Vec::with_capacity(chunks.len());
-    for chunk in chunks.iter() {
+    for (idx, chunk) in chunks.iter().enumerate() {
         let id = chunk
             .get("id")
             .and_then(Value::as_str)
@@ -98,16 +213,9 @@ pub fn embed_and_write(input: &str, output: &str, vector_out: Option<&str>) -> a
             .map(|s| s.to_string())
             .unwrap_or_default();
         let heading_path = chunk.get("heading_path").cloned().unwrap_or(Value::Null);
-        let text = chunk
-            .get("embedding_input")
-            .or_else(|| chunk.get("text"))
-            .or_else(|| chunk.get("data"))
-            .and_then(|v| v.as_str())
-            .map(|s| s.to_string())
-            .unwrap_or_default();
 
-        let embeddings = model.embed(vec![text.clone()], None)?;
-        let embedding = embeddings.into_iter().next().unwrap_or_default();
+        let text = texts.get(idx).cloned().unwrap_or_default();
+        let embedding = embeddings_all.get(idx).cloned().unwrap_or_default();
 
         let mut obj = serde_json::Map::new();
         obj.insert("id".to_string(), Value::String(id.clone()));

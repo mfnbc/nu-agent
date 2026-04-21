@@ -10,7 +10,7 @@
 ### Stack
 - Rust: performance and parsing/shredding
 - Nushell: routing, validation, and pipeline control
-- Rig: local embeddings via `rig-fastembed`
+ - Rig: local embeddings were previously implemented with `rig-fastembed`; this repository now uses a remote embedding service by default
 - External adapters: optional structural/graph retrieval maintained outside this repository
 
 ### Execution model
@@ -21,7 +21,7 @@
 ## 2. The 3-Tier Retrieval Engine
 
 ### Tier 1: Semantic
-- `rig-fastembed` with BGE-Small
+ - Remote embedding service (configurable via EMBEDDING_REMOTE_URL and EMBEDDING_MODEL)
 - Fuzzy topical recall from Nu documentation and other corpora
 
 ### Tier 2: Structural (external adapter)

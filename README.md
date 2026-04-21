@@ -215,9 +215,8 @@ Key points:
 
 Note: The repository previously contained a vendored FAISS tree under
 `build/faiss_local` (FAISS demos and C/Python bindings). That directory has been
-archived/removed from the active tree in favor of the Rust `fastembed`-based
-embedding path used by the `nu_plugin_rag` crate. FAISS remains available in
-history if needed, but it is not part of the default build or runtime path.
+archived/removed from the active tree. The project now uses a remote embedding
+service by default (configurable via EMBEDDING_REMOTE_URL and EMBEDDING_MODEL).
 
 ### Running the pipeline
 

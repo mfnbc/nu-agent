@@ -3,11 +3,12 @@ name = "agent_bridge"
 version = "0.1.0"
 edition = "2021"
 
+# Local fastembed support removed; use remote embedding service (EMBEDDING_REMOTE_URL / EMBEDDING_MODEL)
 [dependencies]
 anyhow = "1"
 rmp-serde = "1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1"
 rayon = "1.9"
-fastembed = "5"
+reqwest = { version = "0.11", features = ["blocking", "rustls-tls"] }
 # serde_bytes removed: not used directly in agent_bridge source

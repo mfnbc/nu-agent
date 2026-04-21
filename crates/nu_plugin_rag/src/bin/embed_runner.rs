@@ -5,7 +5,7 @@ use clap::Parser;
 #[command(
     author,
     version,
-    about = "Embed runner: generates embeddings with fastembed and writes MessagePack output"
+    about = "Embed runner: generates embeddings via remote embedding service and writes MessagePack output"
 )]
 struct Args {
     /// Input corpus (.nuon preferred)

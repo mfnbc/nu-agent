@@ -1,5 +1,4 @@
 use anyhow::Context;
-use fastembed::{InitOptions, TextEmbedding};
 use rayon::prelude::*;
 use rmp_serde::from_slice;
 use serde_json::Value as JsonValue;
@@ -131,11 +130,48 @@ fn main() -> anyhow::Result<()> {
     let flat = v["vectors"].as_array().unwrap();
     let vectors: Vec<f32> = flat.iter().map(|x| x.as_f64().unwrap() as f32).collect();
 
-    // embed query
-    let mut model =
-        TextEmbedding::try_new(InitOptions::default().with_show_download_progress(false))?;
-    let qv = model.embed(vec![query.to_string()], None)?;
-    let qv = &qv[0];
+    // embed query using remote embedding service
+    let texts = vec![query.to_string()];
+    let default_url = "http://172.19.224.1:1234/v1/embeddings";
+    let default_model = "text-embedding-mxbai-embed-large-v1";
+    let url = std::env::var("EMBEDDING_REMOTE_URL").unwrap_or_else(|_| default_url.to_string());
+    let api_key = std::env::var("EMBEDDING_API_KEY").ok();
+    let model_name = std::env::var("EMBEDDING_MODEL").unwrap_or_else(|_| default_model.to_string());
+    let client = reqwest::blocking::Client::new();
+    let body = serde_json::json!({ "model": model_name, "input": texts });
+    let body_str = serde_json::to_string(&body)?;
+    let mut req = client
+        .post(&url)
+        .header("Content-Type", "application/json")
+        .body(body_str);
+    if let Some(k) = api_key {
+        req = req.header("Authorization", format!("Bearer {}", k));
+    }
+    let resp = req.send()?;
+    let status = resp.status();
+    let text = resp.text()?;
+    if !status.is_success() {
+        anyhow::bail!("remote embedding request failed: {}: {}", status, text);
+    }
+    let v: serde_json::Value = serde_json::from_str(&text)?;
+    let qv = if let Some(e) = v.get("embeddings") {
+        let parsed: Vec<Vec<f32>> = serde_json::from_value(e.clone())?;
+        parsed[0].clone()
+    } else if let Some(data) = v.get("data") {
+        let arr = data
+            .as_array()
+            .ok_or_else(|| anyhow::anyhow!("unexpected data field"))?;
+        if let Some(emb) = arr[0].get("embedding") {
+            serde_json::from_value(emb.clone())?
+        } else {
+            anyhow::bail!("unexpected data item shape")
+        }
+    } else if v.is_array() {
+        let parsed: Vec<Vec<f32>> = serde_json::from_value(v)?;
+        parsed[0].clone()
+    } else {
+        anyhow::bail!("unexpected remote embedding response: {}", text)
+    };
     let norm: f32 = qv.iter().map(|x| x * x).sum::<f32>().sqrt();
     let qnorm: Vec<f32> = if norm > 0.0 {
         qv.iter().map(|x| x / norm).collect()
