@@ -50,7 +50,7 @@ Primary use cases, in order:
 2. Retrieval / knowledge base
 - Deterministic ingestion from Markdown, UXLC, and StarLing.
 - Rig for local embeddings only.
-- Kùzu for exact structural/linguistic graph lookup.
+- Structural graph work is an external adapter concern; keep this repository focused on corpus preparation and lookup tools.
 - `nu-agent` consumes evidence, not raw corpus search.
 
 3. Automation

@@ -31,14 +31,32 @@ Conceptually:
 
 ## Files
 
-- `mod.nu` - core pipeline (schema build, parse/validate, execution)
-- `api.nu` - `http post` wrapper with strict no-prose system prompt
-- `tools.nu` - canonical Nushell tools
- - `rig_plan.nu` - deterministic LanceDB job manifest generator for Rig embedding input
- - `rig_run.nu` - Rig FastEmbed execution harness (dry-run/execute/validate)
- - Kùzu node/edge export planner (removed from the default repo; archival/opt-in integration)
-- `RULES.md` - hard project constraints
-- `PLAN.md` - current status and next steps
+Core agent surface:
+
+- `mod.nu` — thin aggregator that re-exports the public commands (`airun`, `run-json`, `enrich`) and canonical tools.
+- `agent/runtime.nu` — builds tool schemas at runtime, validates model output, and executes whitelisted commands.
+- `agent/schema.nu` — inspects Nushell command signatures and enforces the whitelist/argument contract.
+- `agent/llm.nu` — JSON-only response parsing and repair around the LLM API.
+- `agent/enrichment.nu` — single-record enrichment entrypoint and schema validation.
+- `agent/json.nu` — shared JSON helpers used by multiple layers.
+- `api.nu` — `http post` wrapper with strict no-prose system prompt.
+- `tools.nu` — canonical Nushell tools plus the single-source `TOOL_REGISTRY` metadata.
+
+Optional retrieval tooling (not required for the agent runtime):
+
+- `scripts/ingest-docs.nu` — wraps shredding, command-map generation, and embedding production into a single command.
+- `scripts/make-data-from-chunks.nu` — normalises shredder output into the `data/` and `build/nu_ingest/` stores used by the tools.
+  (Note: `make-data-from-chunks.nu` will automatically aggregate per-file `.chunks.msgpack`
+  outputs from `build/nu_ingest/` into a consolidated `chunks.msgpack` if the consolidated
+  corpus is missing.)
+- `target/debug/embed_runner`, `target/debug/nu-search` — binaries built from `crates/nu_plugin_rag` that generate deterministic embeddings and let you smoke-test similarity search.
+
+See `docs/RAG.md` for an end-to-end walkthrough of the pipeline.
+
+Reference docs:
+
+- `RULES.md` — hard project constraints.
+- `PLAN.md` — current status and next steps.
 
 ## Canonical Tools
 
@@ -49,7 +67,6 @@ Conceptually:
 - `search-chunks --path <string> --pattern <string>`
 - `replace-in-file --path <string> --pattern <string> --replacement <string>`
 - `inspect-rig-plan --path <string> [--table <string>] [--limit <int>]`
- - (inspect-kuzu-plan removed; Kùzu integration is archival/opt-in)
 - `inspect-chunk --path <string> --id <string> [--neighbors]`
 - `search-embedding-input --path <string> --pattern <string> [--limit <int>]`
 - `propose-edit --path <string> --pattern <string> --replacement <string>`
@@ -92,32 +109,18 @@ use ./mod.nu *
 run-json --calls '[{"name":"list-files","arguments":{"path":"."}}]'
 ```
 
-Deterministic Markdown ingestion:
+RAG pipeline quick start:
 
 ```bash
-./nu-ingest README.md --out-dir build/nu-ingest
+cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
 ```
 
-This writes NUON chunks, embedding-input jobs (NUON) and a manifest under the output directory. Each Markdown file produces `<name>.chunks.nuon` and `<name>.embedding_input.nuon` (preferred) and a canonical MessagePack embeddings file for binary-first consumers.
-
-Generate a LanceDB ingestion plan for Rig/FastEmbed:
-
-```nu
-use ./rig_plan.nu *
-rig-plan build/nu-ingest/manifest.json --lancedb-dir build/lancedb --out build/rig-plan.json
-```
-
-Inspect (or execute) the deterministic Rig FastEmbed commands:
-
-```nu
-use ./rig_run.nu *
-rig-run build/rig-plan.json                    # dry-run (default)
-rig-run build/rig-plan.json --validate         # add dataset presence check (skips if not executed)
-# rig-run build/rig-plan.json --execute        # execute when Rig & LanceDB are available
-# rig-run build/rig-plan.json --execute --validate   # execute and verify LanceDB dataset
-```
-
-Kùzu export/import tooling has been removed from the default repository. If you require graph ingestion or specialized DB imports, implement them in a separate adapter repository and invoke them as an opt-in step.
+The script shreds the Markdown, normalises chunk/command data, emits embedding
+inputs, and (when the compiled `embed_runner` binary is available) writes
+deterministic embeddings. See `docs/RAG.md` for the full walkthrough, including
+commands for git sources (`scripts/prep-nu-rag.nu`) and optional smoke-search
+steps.
 
 Repo-local CLI wrapper:
 
@@ -195,7 +198,7 @@ let schema = (token-seed-schema)
 That seed record is then sent to the LLM, which fills in the missing fields while
 preserving the same JSON object shape.
 
-## RAG Pipeline & nu_plugin_rag (Upcoming)
+## RAG Pipeline & nu_plugin_rag
 
 This repository now includes a documented plan and Nushell-first tooling for building
 a Retrieval-Augmented Generation (RAG) artifact from Nushell documentation and other
@@ -207,71 +210,44 @@ Key points:
   are required by the core pipeline.
 - A repo-local plugin called `nu_plugin_rag` is planned to expose commands such as
   `rag.prepare-deps`, `rag.build`, `rag.status`, and `rag.rebuild` as Nushell commands.
-- The pipeline is intentionally idempotent and safe-by-default: CSV exports for Kùzu
-  and plan files for Rig/FastEmbed are produced by default; importing into Kùzu or
-  writing a LanceDB dataset is always opt-in.
-- See docs/RAG.md for the artifact layout, command surface, caching rules, and
-  developer notes.
+- The pipeline is intentionally idempotent and safe-by-default: ingestion writes chunk, command, and embedding artefacts to disk; database imports remain opt-in and external.
+- See `docs/RAG.md` for the canonical walkthrough, artefact layout, and contributor notes.
 
 Note: The repository previously contained a vendored FAISS tree under
 `build/faiss_local` (FAISS demos and C/Python bindings). That directory has been
 archived/removed from the active tree in favor of the Rust `fastembed`-based
-embedding path used by the `nu_plugin_rag` and `tools/nu_embedder` crates.
-FAISS remains available as an optional/archival artifact in project history if
-needed, but it is not part of the default build or runtime path.
+embedding path used by the `nu_plugin_rag` crate. FAISS remains available in
+history if needed, but it is not part of the default build or runtime path.
 
-There are lightweight Nushell wrappers in `scripts/` to help run the prep/build/import
-steps. Two simple execution modes are supported so you can pick whichever is easiest:
+### Running the pipeline
 
-1) Direct CLI mode (no Nushell required)
+1. **Build the Rust helpers once**
 
-   - Build the plugin binaries:
-
-     cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
-
-   - Run the orchestrator (this runs the basic pipeline steps and writes a small manifest):
-
-     ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
-
-   - Run the deterministic embedding runner directly (for testing):
-
-   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.nuon --output build/embeddings_example.msgpack --dim 16
-
-   # To generate a raw query vector (MessagePack array of floats) suitable for
-   # passing to nu-search or other consumers, use --vector-out. This writes a
-   # MessagePack array of f32 to the given path (not a full DocRecord array):
-
-   ./crates/nu_plugin_rag/target/debug/embed_runner --input - --vector-out build/query_example.msgpack
-
-2) Nushell wrapper mode (preferred if you use Nushell interactively)
-
-   - Ensure `nu` is on PATH, then run the prep wrapper (this sources a local shim and calls the plugin binary):
-
-     nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
-
-     - Kùzu import helpers and scripts have been removed from the active defaults. If you need a graph-DB import workflow, implement it in a separate opt-in adapter and call it from this repo.
-
-Using Nu Documentation (example)
---------------------------------
-
-To build a RAG corpus from the official Nushell docs and produce embeddings:
-
-1. Build the plugin binaries:
-
+   ```bash
    cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+   ```
 
-2. Run the orchestrator against the nushell docs repo (the CLI will clone it):
+   This produces `target/debug/embed_runner` and `target/debug/nu-search`, which
+the scripts rely on when generating embeddings and running smoke searches.
 
-   ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+2. **Ingest Markdown and generate embeddings**
 
-3. If embeddings weren't produced automatically, run embed_runner over the embedding_input files:
+   ```bash
+   nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
+   # or: nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs --force
+   ```
 
-   for f in build/rag/nu-docs/embedding_input/*.embedding_input.nuon; do
-     out=build/rag/nu-docs/embeddings/$(basename "$f" .embedding_input.nuon).embeddings.msgpack
-     ./crates/nu_plugin_rag/target/debug/embed_runner --input "$f" --output "$out"
-   done
+   This runs the shredder, normalises chunk/command data, emits embedding inputs,
+   and (when `embed_runner` is available) writes deterministic embeddings into
+   `--out-dir/embeddings/`.
 
-4. Produce a query vector and search using nu-search as described in docs/RAG.md Minimal Example.
+3. **Querying the artefacts**
 
-The Nushell wrappers are small and call the plugin binaries under `crates/nu_plugin_rag/target/debug/`.
-If you prefer Makefile shortcuts, use `make plugin-build` and `make build`.
+   ```nu
+   use ./tools.nu *
+   resolve-command-doc --name "open"
+   search-nu-concepts --query "pipeline" --limit 3
+   ```
+
+   You can also run `target/debug/nu-search` directly against the generated
+embeddings for quick similarity checks.

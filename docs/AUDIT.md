@@ -54,7 +54,7 @@ for incremental builds. Use blake3 of sources and intermediate artifacts.
 - Repair/LLM-retry logic exists but is intentionally conservative.
 
 Recommendation: Expand `self-check` (tools.nu) into an automated preflight for
-`rag.build` to avoid executing dangerous commands. Keep `apply-edit` guarded.
+`scripts/ingest-docs.nu` (verify required binaries, warn when artefacts are missing). Keep `apply-edit` guarded.
 
 5) Embeddings & external dependencies
 -------------------------------------
@@ -64,20 +64,18 @@ Recommendation: Expand `self-check` (tools.nu) into an automated preflight for
   Rust-only constraint: either find a Rust-native implementation or vendor a
   vetted Rust-built binary and verify checksums.
 
-Recommendation: Add `rag.prepare-deps` to fetch prebuilt Rust FastEmbed and
-model artifacts into a cache dir and avoid any runtime execution unless user
-explicitly runs the prep step.
+Recommendation: Add a `prepare-deps` helper that can fetch prebuilt FastEmbed models into a cache dir and keep the ingestion runtime deterministic.
 
-6) Kùzu & Rig handling
-----------------------
+6) Graph adapters & Rig handling
+--------------------------------
 
-- The repo emits plan files and expects Kùzu import and LanceDB population to be
-  opt-in. This is correct for safe, auditable behavior. Use CSVs as canonical
-  exports for Kùzu.
+- The repo emits plan files and expects any downstream graph or LanceDB population to be
+  opt-in. This is correct for safe, auditable behavior. Keep portable artifacts (NUON/MsgPack/CSV)
+  as the canonical exchange format.
 
-Recommendation: Emit plan JSON with CSV paths and header schema for any external
-import adapters. Kùzu import helpers were removed from this repository; implement
-DB import utilities as separate opt-in adapters.
+Recommendation: Emit plan JSON with clear artifact paths and header schema for any external
+import adapters. Database import utilities were removed from this repository; implement
+those as separate opt-in adapters.
 
 7) Tests & CI
 -------------
@@ -86,17 +84,14 @@ DB import utilities as separate opt-in adapters.
   new plugin crate. This is sufficient for now but expand to integration steps
   when embeddings and orchestration are implemented.
 
-Recommendation: Add an integration test that runs `rag.build` on the small
+Recommendation: Add an integration test that runs `scripts/prep-nu-rag.nu` on the small
 example corpus using the deterministic embed runner.
 
 8) Next developer tasks (prioritized)
 -------------------------------------
 
-1. Implement rag-manifest.json writer and use it for cache decisions.
-2. Implement rag.prepare-deps to download and verify vetted Rust helper
-   binaries + model artifacts.
-3. Replace deterministic embed runner with a connector to a vetted Rust FastEmbed
-   binary or a Rust-native embedding crate.
-4. Implement the full rag.build orchestrator in nu_plugin_rag, honoring caching
-   and writing manifest.
-5. Add an integration test that runs the full pipeline on examples/ (deterministic mode).
+1. Emit an ingestion manifest summarising chunk counts, command-map coverage, and embedding artefacts.
+2. Add a cache check so repeated runs of `scripts/ingest-docs.nu` can skip unchanged sources.
+3. Harden `resolve-command-doc`/`search-nu-concepts` with integration tests that cover missing corpus scenarios.
+4. Package the ingestion pipeline as an optional `nu_plugin` once the scripts stabilise.
+5. Add an integration test that exercises the end-to-end pipeline on the `examples/` corpus (shred → normalise → embed → search).

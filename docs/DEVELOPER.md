@@ -4,7 +4,7 @@ Developer notes: build, run, test
 Quickstart (local)
 -------------------
 
-1. Build Rust crates (workspace):
+1. Build the Rust workspace (produces `target/debug/embed_runner` and `target/debug/nu-search`):
 
    cargo build --workspace
 
@@ -12,44 +12,43 @@ Quickstart (local)
 
    cargo test --manifest-path crates/nu_plugin_rag/Cargo.toml
 
-3. Run the deterministic embedding runner on the example input (MessagePack-first):
+3. Run the deterministic embedding runner on the example input:
 
-   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.msgpack --output build/embeddings_example.msgpack --dim 16
+   ./target/debug/embed_runner --input examples/embedding_input_example.msgpack --output build/embeddings_example.msgpack
 
-4. Use the Nushell helper scripts to run the prep/build steps (requires `nu`):
+4. Use the ingestion script to build a RAG bundle (see `docs/RAG.md` for details):
 
-   nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+   nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
+   # or: nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs --force
 
 Quick Start (concise)
 ---------------------
 
-1) Build and run CLI orchestrator (no Nushell):
+1) Build the helper binaries:
 
    cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
-   ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
 
-2) Test deterministic embedding runner (MessagePack-first):
+2) Shred & ingest Markdown:
 
-   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.msgpack --output build/embeddings_example.msgpack --dim 16
+   nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/readme --force
 
-3) Nushell interactive path (preferred for Nushell users):
+3) Generate a query vector and run a search:
 
-   nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+   printf '[{"embedding_input":"how to list files"}]' > build/rag/readme/query.embed.nuon
+   ./target/debug/embed_runner --input build/rag/readme/query.embed.nuon --vector-out build/rag/readme/query.msgpack
+   ./target/debug/nu-search --input build/rag/readme/embeddings/corpus.embeddings.msgpack --query-vec build/rag/readme/query.msgpack --top-k 3 --out-format json
 
 
 Notes about nu_plugin integration
 --------------------------------
 
-- The current nu_plugin exposure is a CLI stub in `crates/nu_plugin_rag/src/bin/nu_plugin_rag.rs`.
-- `scripts/rag.shim.nu` provides Nushell functions that call the binary for local development.
-- Converting the CLI into a real nu_plugin involves implementing the nu_plugin ABI and exporting
-  Nushell commands directly; that work is planned after the orchestrator and embedding runner are
-  stabilized.
+- The plugin crate currently exposes binaries (`embed_runner`, `nu-search`) consumed by the Nushell scripts.
+- Converting the ingestion pipeline into a first-class `nu_plugin` remains future work once the scripts stabilise.
 
 Where to extend
 ---------------
 
-- Add the manifest writer in `crates/nu_plugin_rag/src/manifest.rs` and call it from the build
-  orchestrator.
-- Implement actual dependency preparation in `crates/nu_plugin_rag/src/prepare_deps.rs`.
-- Replace the placeholder deterministic embeddings with a real embedding path in `crates/nu_plugin_rag/src/embeddings.rs`.
+- Emit a manifest during ingestion (chunk counts, command coverage, embedding metadata).
+- Add checksum-based caching so reruns skip unchanged Markdown files.
+- Package the ingestion pipeline as an optional `nu_plugin` when ready.
+- Replace the placeholder deterministic embeddings with a vetted FastEmbed path once the dependency story is locked.

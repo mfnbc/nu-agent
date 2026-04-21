@@ -8,7 +8,7 @@ Retrieval is a separate deterministic pipeline:
 - Rust shredding
 - Nushell ingestion routing
 - Rig embeddings
-- Kùzu graph retrieval
+- Optional downstream graph systems (maintained externally)
 - `nu-agent` synthesis
 
 ## Layers
@@ -18,16 +18,18 @@ Retrieval is a separate deterministic pipeline:
 - Injects strict no-prose system prompts
 - Normalizes model responses
 
-### 2. Core orchestration layer (`mod.nu`)
-- Builds tool schemas from Nushell signatures
-- Validates tool call JSON
-- Executes tool calls serially
-- Handles enrichment validation and repair
+### 2. Agent core modules (`agent/`)
+- `runtime.nu` builds tool schemas from live Nushell signatures, validates call JSON, and executes tools serially.
+- `schema.nu` inspects command signatures and enforces the whitelist/argument contract derived from `tools.nu`.
+- `llm.nu` normalizes JSON-only responses from the LLM API and performs repair prompts when needed.
+- `enrichment.nu` validates single-record schemas and orchestrates enrichment retries.
+- `json.nu` provides small shared helpers used by the other modules.
+- `mod.nu` is now a thin aggregator that re-exports the public surface (`airun`, `run-json`, `enrich`).
 
 ### 3. Tool layer (`tools.nu`)
 - Whitelisted Nushell commands only
 - File operations, syntax checks, self-checks
-- Retrieval helpers: `search-chunks`, `inspect-chunk`, `search-embedding-input`, plan inspectors for Rig/LanceDB + Kùzu
+- Retrieval helpers (optional): `search-chunks`, `inspect-chunk`, `search-embedding-input`, plan inspectors for Rig/LanceDB
 - No arbitrary shell execution
 
 ### 4. Semantic document shredding (`shredder/`)
@@ -52,7 +54,7 @@ Retrieval is a separate deterministic pipeline:
 - Future home for success/error aggregation
 
 ### 8. Graph ingestion planning (removed)
-- Graph ingestion planning and Kùzu execution harnesses have been removed from the default repository. If graph exports or DB imports are required, implement them as separate adapter projects and invoke them as opt-in steps.
+- Graph ingestion planning and execution harnesses have been removed from the default repository. If graph exports or database imports are required, implement them as separate adapter projects and invoke them as opt-in steps.
 
 ## Design rules
 

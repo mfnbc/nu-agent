@@ -1,165 +1,140 @@
-RAG Pipeline (nu_plugin_rag)
-=================================
+RAG Pipeline Guide
+===================
+
+This guide describes the **single supported path** for producing a
+deterministic Retrieval-Augmented Generation (RAG) bundle from a Markdown
+corpus. The implementation is entirely **Nushell for orchestration** and
+**Rust for heavy lifting**—no other runtimes are involved.
 
 Overview
 --------
 
-This document describes the Nushell-first Retrieval-Augmented Generation (RAG)
-preparation pipeline planned for this repository. The implementation is Rust + Nushell
-only: the orchestration and lightweight shims are Nushell scripts; heavy work and
-model/runtime tools are Rust binaries or downloaded Rust-built artifacts. No Python
-or other languages are required.
+Running the pipeline produces:
 
-Goals
------
+- `data/nu_docs.msgpack` and `data/nu_docs_vectors.nuon` – canonical chunk
+  stores used by the agent runtime.
+- `data/command_map.{nuon,msgpack}` – lowercase command → `{ id, display }`
+  records consumed by `resolve-command-doc`.
+- `build/nu_ingest/embedding_input.{nuon,msgpack,json}` – embedding-input
+  tables.
+- `<out-dir>/embeddings/corpus.embeddings.msgpack` – deterministic embeddings
+  written as MessagePack arrays (when the embedding helper is available).
 
-- Provide an idempotent `prep` step that downloads and verifies required artifacts
-  (models, helper binaries) into a configurable cache directory.
- - Offer a single `rag.build` workflow that performs: clone -> shred -> ingest -> embed -> rig plan -> optional rig run -> manifest.
-- Default to producing auditable artifacts (chunks JSONL, embedding inputs, embeddings,
-  Rig plan, Kùzu CSVs). Importing into Kùzu or populating a LanceDB is opt-in.
-- Remain extensible to additional corpora (StarLing, chess, etc.) via source adapters.
+Quick start (local checkout)
+----------------------------
 
-User-facing commands (nu_plugin_rag)
-----------------------------------
+```bash
+# 1. Build the Rust helpers (embed_runner + nu-search)
+cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 
-- rag.prepare-deps [--out-dir <dir>] [--model mixedbread]
-  - Downloads verified model files and Rust-built helper binaries (if required).
-  - Writes paths and checksums into the local cache and prints a JSON manifest.
+# 2. Run the ingestion script over Markdown (README shown here)
+nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
 
- - rag.build --input <path-or-git-url> --out-dir <dir> [--attach-code-blocks] [--emb-provider local-fastembed] [--force] [--execute-rig false]
-  - Full pipeline orchestration. Produces the artifact layout under <out-dir>.
-  - By default, does not execute rig_run; graph DB import tools (Kùzu/LanceDB) are opt-in and external adapters.
+# 3. Optional smoke search
+printf '[{"embedding_input":"how to list files"}]' > build/rag/demo/query.embed.nuon
+./target/debug/embed_runner --input build/rag/demo/query.embed.nuon --vector-out build/rag/demo/query.msgpack
+./target/debug/nu-search --input build/rag/demo/embeddings/corpus.embeddings.msgpack \
+  --query-vec build/rag/demo/query.msgpack --top-k 3 --out-format json
+```
 
-- rag.status --out-dir <dir>
-  - Validate presence and checksums of artifacts and report a structured status.
+The ingestion script:
 
- - rag.rebuild --parts <shred|ingest|embed|rig> --input --out-dir
-  - Partial rebuild of specified pipeline stages.
+1. Runs `nu-shredder` over every Markdown file under `--path`.
+2. Normalises the chunk/command data via `scripts/make-data-from-chunks.nu`.
+3. Writes canonical artefacts under `data/` and `build/nu_ingest/`.
+4. Copies those artefacts into `--out-dir`.
+5. Runs `embed_runner` when it can find the compiled binary.
 
-Preferred artifact formats
+Git sources / remote docs
 -------------------------
 
-For Nushell-native tooling we prefer NUON (Nushell Object Notation) or MessagePack
-for persisted corpus artifacts. These formats preserve structured types, are
-efficient to parse from Nushell, and avoid brittle newline-delimited JSON parsing.
+To ingest a git repository (e.g., the Nushell docs) without cloning it
+nowhere else, use the wrapper:
 
-Special cases: when a database binary is the most appropriate backing store
-(for example `sqlite` files, LanceDB/Parquet-backed indexes, or other local DB
-engines like SurrealDB), treat those as optional, opt-in artifacts. Importing
-into a binary database is allowed only when the import can be performed as a
-one-off command (e.g., a single sqlite3 invocation that loads a CSV or executes
-an import SQL script). This keeps the pipeline reproducible and avoids long-
-running services during ingestion. The pipeline will emit portable intermediary
-artifacts (NUON/MsgPack/CSV) that can be imported into these databases when the
-user explicitly requests it.
+```bash
+nu scripts/prep-nu-rag.nu \
+  --input https://github.com/nushell/nushell.github.io.git \
+  --out-dir build/rag/nu-docs --force
+```
 
-Artifact layout
----------------
+`prep-nu-rag.nu` ensures the Rust helpers exist, clones the repo into
+`<out-dir>/sources/<name>/`, and hands control to `scripts/ingest-docs.nu`.
+Use `--force` to wipe existing `build/nu_ingest/`/`data/` directories before
+the run.
 
-Default structure under <out-dir>:
+Detailed pipeline
+-----------------
 
-- sources/<name>/ (git clone or local path)
- - chunks/*.chunks.nuon
-- embedding_input/*.embedding_input.nuon (preferred) and embeddings/*.embeddings.msgpack for embeddings
- - embeddings/*.embeddings.msgpack (fallback)
-- rig/rig-plan.json
-- rig/lancedb/ (if executed)
-  (Kùzu CSV exports removed from default flow; implement outside this repo if needed.)
-- rag-manifest.json
+The orchestration script is a thin wrapper around the following steps:
 
-Kùzu import policy
+1. **Shredding (`nu-shredder`)** – Streams Markdown with `pulldown-cmark` and
+   appends deterministic chunk records to `build/nu_ingest/chunks.msgpack` and
+   embedding-input records to `build/nu_ingest/embedding_input.msgpack`.
+2. **Normalisation (`scripts/make-data-from-chunks.nu`)** –
+   - Writes `data/nu_docs.msgpack`, `data/nu_docs_vectors.nuon`, and
+     `data/command_map.{nuon,msgpack}`.
+   - Emits embedding-input tables in NUON, MsgPack, and JSON (the JSON file is
+     what the embedding runner consumes directly).
+3. **Embedding (`embed_runner`)** – Reads the JSON embedding-input file and
+   writes deterministic embeddings as MsgPack arrays. A query vector can be
+   generated by supplying `--vector-out` instead of `--output`.
+4. **Packaging** – Copies all artefacts into the requested `--out-dir` so the
+   consumer has an isolated bundle (`chunks/`, `embedding_input/`, `embeddings/`,
+   `data/`).
+
+Tool reference
+--------------
+
+| Tool / Script | Purpose |
+|---------------|---------|
+| `nu-shredder` | Rust binary that shreds Markdown into deterministic chunk records. |
+| `scripts/ingest-docs.nu` | Preferred entry point; walks a directory, runs the shredder, normalises outputs, writes artefacts, and runs embeddings. |
+| `scripts/make-data-from-chunks.nu` | Normalises shredder output; invoked automatically by `ingest-docs`. |
+| `scripts/prep-nu-rag.nu` | Helper that builds the Rust binaries (if necessary), clones git sources, and calls `ingest-docs`. |
+| `target/debug/embed_runner` | Generates deterministic embeddings (MessagePack). |
+| `target/debug/nu-search` | Lightweight MessagePack search helper for smoke tests. |
+| `test-ingest.nu` | Smoke test that exercises `scripts/ingest-docs.nu` against `README.md`. |
+
+Artefact layout (`--out-dir`)
+-----------------------------
+
+```
+<out-dir>/
+  chunks/
+    corpus.chunks.msgpack
+    corpus.chunks.nuon              (present when shredder emits NUON)
+  embedding_input/
+    corpus.embedding_input.nuon
+    corpus.embedding_input.msgpack  (currently a placeholder; use JSON for embeddings)
+    corpus.embedding_input.embed.nuon  # JSON ready for embed_runner
+  embeddings/
+    corpus.embeddings.msgpack       # created when embed_runner is available
+  data/
+    nu_docs.msgpack
+    nu_docs_vectors.nuon
+    command_map.nuon
+    command_map.msgpack
+  sources/                          # only when using prep-nu-rag
+    <clone>/ ...
+```
+
+Known gaps / TODOs
 ------------------
 
-The pipeline emits node and edge CSVs suitable for Kùzu import. CSVs are the
-portable, auditable artifacts; importing into a local Kùzu instance (which creates
-binary DB files) is optional and must be explicitly requested using
- Graph DB imports (Kùzu/LanceDB) are considered external adapters and are not part of the default pipeline.
+- **Manifest & caching** – Runs always shred every Markdown file; emit a
+  manifest (chunk count, command coverage, embedding metadata) and skip
+  unchanged files via checksums.
+- **Embedding input MsgPack** – The generated MessagePack file is a placeholder.
+  Either teach `embed_runner` to read NUON directly or emit a proper binary
+  representation.
+- **Integration tests** – Extend `test-ingest.nu` (or add a new fixture) to
+  cover a small multi-file corpus and assert embeddings + search results.
+- **Optional adapters** – Graph/LanceDB imports remain external. Document the
+  expected artefacts clearly when building an adapter.
 
-Caching & idempotency
----------------------
+See also
+--------
 
-- Use blake3 checksums of source files, chunk outputs, and embedding inputs to
-  determine whether a step can be skipped.
-- Embeddings are keyed by embedding_input checksums; existing embeddings are reused
-  unless `--force` is specified.
- - rig_run is opt-in and will be skipped unless requested. Graph DB imports are external.
-
-Security & downloads
---------------------
-
-- All downloads must use HTTPS and are verified against expected blake3/sha256 sums.
-- The `rag.prepare-deps` step performs downloads only when explicitly invoked by the
-  user.
-
-Extensibility
--------------
-
-Source adapters can be added as Rust modules that convert domain-specific inputs
-(StarLing export, PGN chess collections) into Markdown or directly into chunk JSONL
-and embedding inputs. Adapters are small Rust binaries or library modules that
-conform to the SourceProvider interface.
-
-Developer notes
----------------
-
-- The plugin is expected to live in `crates/nu_plugin_rag` and expose Nushell commands
-  via the `nu_plugin` crate.
-- The embedding runner is Rust-only; it will attempt to use a Rust-native FastEmbed
- - The embedding runner is Rust-only; it will attempt to use a Rust-native FastEmbed
-  or a vetted Rust binary distribution if a native crate is not available.
-- The embed_runner binary writes two kinds of outputs:
-  - Full document embeddings: a MessagePack array of DocRecord objects written with --output (each record contains id, text, embedding, metadata).
-  - Query vector: a MessagePack array of f32 written with --vector-out (useful for passing to nu-search or other consumers that expect a single vector).
-
-Minimal Example
----------------
-
-Quick, copy-paste example that runs the minimal three-step flow locally (build -> embed docs -> generate query vector -> search):
-
-1. Build the plugin binaries:
-
-   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
-
-2. Produce document embeddings (full DocRecord MessagePack array):
-
-   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.nuon --output build/embeddings.msgpack
-
-3. Produce a query vector (raw MessagePack array of f32):
-
-   printf '[{"embedding_input":"how to filter tables"}]' > build/query.nuon
-   cat build/query.nuon | ./crates/nu_plugin_rag/target/debug/embed_runner --input - --vector-out build/query.msgpack
-
-4. Run nu-search against the produced artifacts:
-
-   ./crates/nu_plugin_rag/target/debug/nu-search --input build/embeddings.msgpack --query-vec build/query.msgpack --top-k 3 --out-format json
-
-This produces a JSON array of top-k hits. Use --out-format nuon or msgpack if you prefer those formats.
-
-Using Nu Documentation
------------------------
-
-The primary corpus we target is the Nushell documentation (the `nushell.github.io` site). You can point the build command at the repo URL and the plugin will clone it, shred Markdown files, generate embedding inputs, and attempt to run the embedding step when possible.
-
-1. Build the plugin binaries:
-
-   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
-
-2. Run the build step against the nushell docs repository (the CLI will clone the repo):
-
-   ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
-
-   This will create `build/rag/nu-docs/sources/<repo>` and emit `chunks/`, `embedding_input/`, and `*.embeddings.msgpack` files under the out-dir when possible.
-
-3. If the embedding step did not run automatically (for example `embed_runner` not found), run it over the generated embedding inputs:
-
-   for f in build/rag/nu-docs/embedding_input/*.embedding_input.nuon; do
-     out=build/rag/nu-docs/embeddings/$(basename "$f" .embedding_input.nuon).embeddings.msgpack
-     ./crates/nu_plugin_rag/target/debug/embed_runner --input "$f" --output "$out"
-   done
-
-4. Produce a query vector and run nu-search as in the Minimal Example above, pointing `--input` at the produced embeddings file and `--query-vec` at the query MessagePack file.
-
-This workflow gives nu-agent access to the canonical Nushell docs so it can produce idiomatic Nushell suggestions and code. You can run the same pipeline against a local clone by passing a filesystem path instead of a git URL to `--input`.
-- See `scripts/prep-nu-rag.nu` for a convenience Nushell wrapper that calls the
-  prepare and build steps.
+- `README.md` – high-level project overview and agent usage.
+- `docs/DEVELOPER.md` – notes for contributors (build/test commands).
+- `docs/NEXT_SESSION_PROMPT.md` – canonical “resume work” prompt.

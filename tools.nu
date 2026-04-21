@@ -1,3 +1,111 @@
+export const TOOL_REGISTRY = {
+  "read-file": {
+    description: "Read a text file and return its contents."
+    required: ["path"]
+    allowed: ["path"]
+    argument_descriptions: { path: "Path to the file to read." }
+  }
+  "write-file": {
+    description: "Write content to a file, syntax-checking .nu files first."
+    required: ["path", "content"]
+    allowed: ["path", "content"]
+    argument_descriptions: { path: "Path to write to.", content: "Text content to write." }
+  }
+  "list-files": {
+    description: "List files and directories at a path."
+    required: ["path"]
+    allowed: ["path"]
+    argument_descriptions: { path: "Directory or file path to inspect." }
+  }
+  "search": {
+    description: "Search for a regex pattern in files under a path."
+    required: ["pattern", "path"]
+    allowed: ["pattern", "path"]
+    argument_descriptions: { pattern: "Regex pattern to match.", path: "File or directory path to search." }
+  }
+  "search-chunks": {
+    description: "Search ingested chunk NUON files for matching evidence."
+    required: ["pattern", "path"]
+    allowed: ["pattern", "path"]
+    argument_descriptions: { pattern: "Regex pattern to match against chunk fields.", path: "Directory or .chunks.nuon file to search." }
+  }
+  "replace-in-file": {
+    description: "Replace matching text in a file and preview the result."
+    required: ["path", "pattern", "replacement"]
+    allowed: ["path", "pattern", "replacement"]
+    argument_descriptions: { path: "File to edit.", pattern: "Regex pattern to replace.", replacement: "Replacement text." }
+  }
+  "propose-edit": {
+    description: "Preview a file edit without writing it."
+    required: ["path", "pattern", "replacement"]
+    allowed: ["path", "pattern", "replacement"]
+    argument_descriptions: { path: "File to preview.", pattern: "Regex pattern to replace.", replacement: "Replacement text." }
+  }
+  "apply-edit": {
+    description: "Apply a proposed file edit, syntax-checking .nu files first."
+    required: ["file", "after"]
+    allowed: ["file", "after"]
+    argument_descriptions: { file: "File to update.", after: "Final edited file content." }
+  }
+  "check-nu-syntax": {
+    description: "Check a Nushell file for syntax errors without executing it."
+    required: ["path"]
+    allowed: ["path"]
+    argument_descriptions: { path: "Path to the .nu file to check." }
+  }
+  "self-check": {
+    description: "Run local health checks for registered commands and source files."
+    required: []
+    allowed: []
+    argument_descriptions: {}
+  }
+  "inspect-rig-plan": {
+    description: "Inspect a Rig/FastEmbed LanceDB plan file."
+    required: ["path"]
+    allowed: ["path", "table", "limit"]
+    argument_descriptions: {
+      path: "Path to the Rig plan JSON file."
+      table: "Optional table or job id to filter results."
+      limit: "Optional maximum number of jobs to return."
+    }
+  }
+  "inspect-chunk": {
+    description: "Retrieve a specific chunk (and optional neighbors) from chunk JSONL files."
+    required: ["path", "id"]
+    allowed: ["path", "id", "neighbors"]
+    argument_descriptions: {
+      path: "Directory or .chunks.nuon file to inspect."
+      id: "Chunk id to retrieve."
+      neighbors: "Include previous/next chunks when present."
+    }
+  }
+  "search-embedding-input": {
+    description: "Search embedding_input JSONL records for matching text."
+    required: ["path", "pattern"]
+    allowed: ["path", "pattern", "limit"]
+    argument_descriptions: {
+      path: "Directory or .embedding_input.nuon file to search."
+      pattern: "Regex pattern to match against embedding_input text."
+      limit: "Optional maximum number of hits to return."
+    }
+  }
+  "resolve-command-doc": {
+    description: "Resolve exact command documentation from the locally ingested command map (or return informative error)."
+    required: ["name"]
+    allowed: ["name"]
+    argument_descriptions: { name: "Command name to resolve (exact)." }
+  }
+  "search-nu-concepts": {
+    description: "Search ingested concept vectors (fallback to JSONL scan) for relevant documentation evidence."
+    required: ["query"]
+    allowed: ["query", "limit"]
+    argument_descriptions: {
+      query: "Search text to match against ingested docs."
+      limit: "Optional maximum number of results to return."
+    }
+  }
+}
+
 export const TOOL_NAMES = [
   "read-file"
   "write-file"
@@ -259,10 +367,9 @@ export def "inspect-rig-plan" [--path: string, --table: string = "", --limit: in
   }
 }
 
-# inspect-kuzu-plan functionality removed. Kùzu import/inspection was an archival
-# opt-in feature tied to a separate project. If you need similar functionality,
-# restore or reimplement it in a separate adapter repository and call it from
-# this project as an external opt-in step.
+# Graph import planning functionality was removed. If you need similar features,
+# reimplement them in a separate adapter repository and call it from this project
+# as an external opt-in step.
 
 export def "inspect-chunk" [--path: string, --id: string, --neighbors] {
   if (($path | default "" | str trim | str length) == 0) {

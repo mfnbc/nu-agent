@@ -19,7 +19,7 @@ Available tools (deterministic semantics unless stated):
 - If resolve-command-doc returns no match (or the user's intent is conceptual), call search-nu-concepts and use its top-ranked chunks as context. Provide citations to chunk ids.
 - Always include the chunk heading_path and chunk id when quoting or summarizing code examples.
 - If code changes are suggested to the repository, indicate the minimal patch and the affected file paths and lines, but do NOT modify files directly unless explicitly authorized.
-- When composing answers that rely on vector search, include a short 'Sources' section listing chunk ids and Kùzu nodes used.
+- When composing answers that rely on vector search, include a short 'Sources' section listing chunk ids referenced.
 
 Tool usage examples (pseudocode):
 
@@ -29,7 +29,7 @@ Tool usage examples (pseudocode):
 > search-nu-concepts "join two tables by column"
   -> returns ranked chunks: use their text and heading_path to craft an answer and show chunk ids.
 
-If you need to modify ingestion, run the 'scripts/ingest-docs.nu' to rebuild the local vector index and Kùzu nodes.
+If you need to modify ingestion, run the 'scripts/ingest-docs.nu' to rebuild the local vector index.
 
 Keep answers concise, always ground non-trivial claims with citations, and prefer deterministic tools for exactness.
 Do NOT reveal chain-of-thought, internal reasoning, or step-by-step deliberation. Output only the final structured responses required by the task.

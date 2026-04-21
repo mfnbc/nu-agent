@@ -10,8 +10,8 @@
 ### Stack
 - Rust: performance and parsing/shredding
 - Nushell: routing, validation, and pipeline control
-- Kùzu: embedded graph / structural retrieval
 - Rig: local embeddings via `rig-fastembed`
+- External adapters: optional structural/graph retrieval maintained outside this repository
 
 ### Execution model
 - One local binary family
@@ -24,8 +24,8 @@
 - `rig-fastembed` with BGE-Small
 - Fuzzy topical recall from Nu documentation and other corpora
 
-### Tier 2: Structural
-- Kùzu embedded graph
+### Tier 2: Structural (external adapter)
+- Optional graph or relational stores maintained outside this repository
 - Exact command signatures
 - Hierarchy
 - Linguistic cognate trees / Semitic relations
@@ -58,13 +58,13 @@
 - StarLing PAA / Semitic etymology data
 
 ### Goal
-- Use Kùzu graph topology to resolve contradictions in rough notes
+- Use structured graph/topology (when available) to resolve contradictions in rough notes
 - Traverse linkage such as:
   - Surface Form -> Lemma -> Root -> Cognates
 
 ## 5. Current Task
 
-- Active: LanceDB execution harness (`rig_plan.nu` + `rig_run.nu`). Kùzu planning/execution harness removed from active defaults (archival/opt-in).
-- Next: add graph validation checks (edges/nodes counts) after real Kùzu import
+- Active: LanceDB execution harness (`rig_plan.nu` + `rig_run.nu`). Graph planning/execution harnesses are intentionally external.
+- Next: add validation checks around generated artifacts once external graph adapters exist.
 - Next: hydrate LanceDB tables with actual vectors and expose retrieval tools over the merged stores
-- Retrieval helpers now available: chunk inspection, Rig/Kùzu plan inspectors
+- Retrieval helpers now available: chunk inspection and Rig plan inspectors

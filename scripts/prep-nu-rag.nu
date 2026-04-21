@@ -1,8 +1,5 @@
 #!/usr/bin/env nu
-
-# Prep and build a RAG artifact for Nushell docs (wrapper)
-
-source ./scripts/rag.shim.nu
+# Convenience wrapper: build the Rust helpers (if needed) and run the ingestion pipeline.
 
 export def main [
   --input: string = "https://github.com/nushell/nushell.github.io.git"
@@ -10,21 +7,41 @@ export def main [
   --attach-code-blocks
   --force
 ] {
-  echo "{\"step\": \"prepare-deps\"}" | from json
+  let embed_runner_path = [
+    "./target/debug/embed_runner"
+    "./crates/nu_plugin_rag/target/debug/embed_runner"
+  ]
+  let embed_runner_present = (
+    ($embed_runner_path
+      | where { |p| ($p | path exists) }
+      | length) > 0
+  )
 
-  # Call rag.prepare-deps if available, otherwise print guidance
-  if (scope commands | any { |c| $c.name == "rag.prepare-deps" }) {
-    rag.prepare-deps --out-dir $nu.env.NU_AGENT_MODEL_DIR? | echo
-  } else {
-    echo "{\"warning\": \"rag.prepare-deps not available; run it after plugin installation\"}" | from json
+  if not $embed_runner_present {
+    print "Building nu_plugin_rag helpers (cargo build)..."
+    ^cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml | ignore
   }
 
-  echo "{\"step\": \"build\"}" | from json
-
-  if (scope commands | any { |c| $c.name == "rag.build" }) {
-    rag.build --input $input --out-dir $out_dir --attach-code-blocks $attach_code_blocks --force $force
+  let source_path = if ($input | str starts-with "http://") or ($input | str starts-with "https://") {
+    let checkout = (($out_dir | path join "sources") | path join "nu-docs")
+    if not ($checkout | path exists) {
+      print $"Cloning ($input) -> ($checkout)"
+      let parent = ($checkout | path parse | get parent | default "")
+      if ($parent | str length) > 0 { mkdir $parent }
+      ^git clone $input $checkout | ignore
+    }
+    $checkout
   } else {
-    echo "{\"error\": \"rag.build not available; install nu_plugin_rag\"}" | from json
-    1
+    $input
   }
+
+  print "Running ingestion pipeline..."
+  let base_args = [
+    "scripts/ingest-docs.nu"
+    "--path" $source_path
+    "--out-dir" $out_dir
+  ]
+  let args1 = if $force { ($base_args | append "--force") } else { $base_args }
+  let args_final = if $attach_code_blocks { ($args1 | append "--attach-code-blocks") } else { $args1 }
+  ^nu ...$args_final
 }

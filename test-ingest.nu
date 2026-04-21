@@ -1,115 +1,72 @@
 #!/usr/bin/env nu
 
-use ./tools.nu *
-use ./rig_plan.nu *
-use ./rig_run.nu *
-
 export def main [] {
-  let out_dir = "build/test-smoke-ingest"
+  let embed_runner_candidates = [
+    "./target/debug/embed_runner"
+    "./crates/nu_plugin_rag/target/debug/embed_runner"
+    "./target/release/embed_runner"
+    "./crates/nu_plugin_rag/target/release/embed_runner"
+  ]
 
-  if ($out_dir | path exists) {
-    rm -r $out_dir
-  }
-
-  let _ = (./nu-ingest README.md --out-dir $out_dir)
-
-  let result = {
-    manifest: ($out_dir | path join "manifest.json")
-    chunks: ($out_dir | path join "README.chunks.nuon")
-    embedding: ($out_dir | path join "README.embedding_input.nuon")
-  }
-
-  if not ($result.manifest | path exists) {
-    error make { msg: "Expected manifest.json to be written" }
-  }
-
-  if not ($result.chunks | path exists) {
-    error make { msg: "Expected chunk NUON to be written" }
-  }
-
-  if not ($result.embedding | path exists) {
-    error make { msg: "Expected embedding input NUON to be written" }
-  }
-
-  let embedding_first = (
-    open --raw $result.embedding
-    | lines
-    | first
-    | from json
+  let embed_runner = (
+    $embed_runner_candidates
+    | where { |p| ($p | path exists) }
+    | get 0?
+    | default ""
   )
 
-  let embedding_keys = ($embedding_first | columns)
-  let embedding_missing = (["id" "embedding_input"] | where { |k| $k not-in $embedding_keys })
-
-  if (($embedding_missing | length) > 0) {
-    error make { msg: "Embedding input JSONL missing required keys" }
+  if ($embed_runner | str length) == 0 {
+    ^cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml | ignore
   }
 
-  let plan_path = ($out_dir | path join "rig-plan.json")
-  let plan = (rig-plan $result.manifest --lancedb-dir "build/test-smoke-lancedb" --collection-prefix "test_" --out $plan_path)
+  let embed_runner = (
+    $embed_runner_candidates
+    | where { |p| ($p | path exists) }
+    | get 0?
+    | default ""
+  )
 
-  if (($plan.jobs | length) == 0) {
-    error make { msg: "Expected rig-plan to produce at least one job" }
+  if ($embed_runner | str length) == 0 {
+    error make { msg: "embed_runner binary missing after build" }
   }
 
-  let job0 = ($plan.jobs | first)
-  let rig_inspect = (inspect-rig-plan --path $plan_path --limit 1)
+  let out_dir = "build/test-rag"
+  if ($out_dir | path exists) { rm -r $out_dir }
 
-  if ($rig_inspect.job_total <= 0) {
-    error make { msg: "inspect-rig-plan should report jobs" }
+  ^nu scripts/ingest-docs.nu --path README.md --out-dir $out_dir --force
+
+  if not ("data/nu_docs.msgpack" | path exists) {
+    error make { msg: "Expected data/nu_docs.msgpack to exist" }
   }
 
-  if (($rig_inspect.jobs | length) == 0) {
-    error make { msg: "inspect-rig-plan limit should return sample jobs" }
+  let embeddings_path = ($out_dir | path join "embeddings/corpus.embeddings.msgpack")
+  if not ($embeddings_path | path exists) {
+    error make { msg: "Expected embeddings to be generated" }
   }
 
-  let embedding_hits = (search-embedding-input --path $out_dir --pattern "nu-agent" --limit 5)
-
-  if ($embedding_hits.total <= 0) {
-    error make { msg: "search-embedding-input should find matches" }
-  }
-  let required_job_keys = ["id" "embedding_job" "lancedb_table" "chunk_file"]
-  let missing_job_keys = ($required_job_keys | where { |k| $k not-in ($job0 | columns) })
-
-  if (($missing_job_keys | length) > 0) {
-    error make { msg: "Rig plan entry missing required keys" }
+  let embedding_count = (open --raw $embeddings_path | from msgpack | length)
+  if $embedding_count == 0 {
+    error make { msg: "Embeddings file is empty" }
   }
 
-  let rig_run_results = (rig-run $plan_path)
+  let search_binary = (
+    ["./target/debug/nu-search", "./crates/nu_plugin_rag/target/debug/nu-search", "./target/release/nu-search", "./crates/nu_plugin_rag/target/release/nu-search"]
+    | where { |p| ($p | path exists) }
+    | get 0?
+    | default null
+  )
 
-  if (($rig_run_results | length) == 0) {
-    error make { msg: "Expected rig-run to return at least one result" }
+  if $search_binary != null {
+    let query_spec = "build/test-rag/query.embed.nuon"
+    [[embedding_input]; ["how to list files"]] | to json | save -f $query_spec
+    let query_vec = ($out_dir | path join "query.msgpack")
+    ^$embed_runner --input $query_spec --vector-out $query_vec | ignore
+
+    let results = (^$search_binary --input $embeddings_path --query-vec $query_vec --top-k 1 --out-format json | from json)
+    if (($results | length) == 0) {
+      error make { msg: "nu-search returned no results" }
+    }
   }
 
-  if (($rig_run_results | first | get status) != "dry-run") {
-    error make { msg: "rig-run should default to dry-run" }
-  }
-
-  let rig_validated = (rig-run $plan_path --validate)
-  let validation0 = ($rig_validated | first | get validation)
-
-  if (($validation0.status? | default "") != "skipped") {
-    error make { msg: "Validation should skip when not executed" }
-  }
-
-  let rig_execute_results = (rig-run $plan_path --execute --rig-bin "false" --validate)
-
-  if (($rig_execute_results | first | get status) != "error") {
-    error make { msg: "rig-run should report errors when execution fails" }
-  }
-
-  if (($rig_execute_results | first | get validation | get status) != "skipped") {
-    error make { msg: "Validation should skip when execution fails" }
-  }
-
-  # Kùzu planning and import removed from default test flow. If you need graph
-  # export validation, add it in an external adapter and call it explicitly.
-
-  let hits = (search-chunks --path $out_dir --pattern "Enrichment Contract")
-
-  if (($hits | length) == 0) {
-    error make { msg: "Expected search-chunks to return evidence from ingested chunks" }
-  }
-
-  print "Passed ingestion smoke test."
+  print "Ingestion smoke test passed."
 }

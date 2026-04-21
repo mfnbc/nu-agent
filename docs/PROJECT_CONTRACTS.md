@@ -62,7 +62,7 @@ The Rust splitter emits one JSON object per chunk with the following shape:
    - `manifest.json`
 3. `rig_plan.nu` converts ingestion manifests into LanceDB job plans for Rig/FastEmbed.
 4. `rig_run.nu` derives deterministic Rig FastEmbed command invocations (dry-run by default, optional execution + LanceDB validation).
-5. Kùzu planning/import scripts were previously provided as opt-in archival helpers. Kùzu integration has been removed from the core repository; implement graph export/import in a separate adapter if required.
+5. Graph planning/import scripts are not part of this repository. Implement any graph export/import in a separate adapter if required.
 7. Later layers will add:
    - deterministic vector indexing
    - keyword graph ingestion
@@ -87,9 +87,9 @@ The Rust splitter emits one JSON object per chunk with the following shape:
 - Nu docs are one ingestion corpus
 - UXLC / Leningrad Codex can be ingested as a separate corpus
 - StarLing / Semitic data can be ingested as graph-enriched lexical data
-- Kùzu graph topology may represent surface form -> lemma -> root -> cognate relationships
+- External graph topology may represent surface form -> lemma -> root -> cognate relationships
 
 ## Golden rule
 
 Retrieval tools must return evidence, not conclusions.
-Canonical evidence commands: `search-chunks`, `inspect-chunk`, `search-embedding-input`, `inspect-rig-plan`.
+Canonical evidence commands: `search-chunks`, `inspect-chunk`, `search-embedding-input`, `resolve-command-doc`.

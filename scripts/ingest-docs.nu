@@ -1,100 +1,132 @@
-# Nushell ingestion script: shred markdown, embed, populate Kùzu, and persist vectors
-# Usage: nu scripts/ingest-docs.nu --path "docs/"
+#!/usr/bin/env nu
+# High-level ingestion helper: shred Markdown, build command maps, and generate embeddings.
 
-def main [path:string = "docs/"] {
-    print "Step 1: Shredding Markdown..."
-
-    # Ensure data dir exists
-    if not ("data" | path exists) { mkdir data }
-
-    # If a precomputed chunks.msgpack or chunks.nuon exists in build/nu_ingest, reuse it
-    # as the canonical shredder output to avoid re-running the shredder. Otherwise,
-    # run the shredder over the provided path.
-    let chunks = if ("build/nu_ingest/chunks.msgpack" | path exists) {
-        (open build/nu_ingest/chunks.msgpack | from msgpack)
-    } else if ("build/nu_ingest/chunks.nuon" | path exists) {
-        (open build/nu_ingest/chunks.nuon | from nuon)
-    } else {
-        # Collect markdown files (recursive glob) using find-like fallback
-        let md_files = (glob ($path) | where {|it| $it.type == "File" } )
-        # Run shredder per-file and collect chunk JSONL records
-        md_files | where { |f| ($f.name | str ends-with ".md") } | each { |file|
-            if ("./shredder" | path exists) {
-                ./shredder $file.name
-            } else {
-                cargo run --manifest-path shredder/Cargo.toml -- $file.name
-            }
-        } | flatten
-    }
-
-    print "Step 2: Vectorizing (LanceDB/Rig)..."
-    # Pipe the chunks into the embed_runner. The embed_runner prefers MessagePack (.msgpack)
-    # or NUON (.nuon) inputs and writes MessagePack outputs by default. We reuse the
-    # deterministic engine by default; use --engine tract if you've prepared the model
-    # via prepare-deps and want semantic embeddings.
-
-    # Locate embed_runner binary in common build locations; prefer workspace target/debug
-    let embed_bin_candidates = ["./target/debug/embed_runner", "./target/release/embed_runner", "./crates/nu_plugin_rag/target/debug/embed_runner", "./crates/nu_plugin_rag/target/release/embed_runner"]
-    let embed_bin = (echo $embed_bin_candidates | each { |p| if ($p | path exists) { $p } else { "" } } | where { |x| $x != "" } | first 1 | default "")
-    if ($embed_bin == "") {
-        print "embed_runner not found in target dirs; build with: cargo build -p nu_plugin_rag"
-        return
-    }
-
-    # Prepare embeddings. Prefer MessagePack embedding_input emitted by the shredder.
-    if ("build/nu_ingest/embeddings.msgpack" | path exists) {
-        print "Using existing build/nu_ingest/embeddings.msgpack"
-    } else {
-        # Prefer a MessagePack embedding_input file produced by the shredder or a NUON
-        # corpus. The embed_runner will accept .msgpack or .nuon and will emit a
-        # canonical embeddings.msgpack output.
-        let candidates = ["build/nu_ingest/embedding_input.msgpack", "build/nu_ingest/embedding_input.nuon", "data/nu_docs_vectors.nuon", "build/nu_ingest/chunks.msgpack", "build/nu_ingest/chunks.nuon"]
-        let chosen = (echo $candidates | each { |p| if ($p | path exists) { $p } else { "" } } | where { |x| $x != "" } | first 1 | default "")
-        if ($chosen == "") { error make { msg: "No embedding_input available; run shredder to produce chunks (.msgpack/.nuon)" } }
-        do { ^$embed_bin --input $chosen --output build/nu_ingest/embeddings.msgpack } | each { |l| echo $l }
-    }
-
-    # Live documentation: sample one-liner showing how to bridge vector search (nu-search)
-    # and Nushell traversal. This is a convenience hint and does not run during ingestion.
-    echo "# Example: embed text, search, then traverse metadata"
-    echo "# embed_runner --input query.nuon --output query_embedding.msgpack" \
-         "&& nu-search --input data/nu_docs.msgpack --query-vec query_embedding.msgpack --top-k 3 --out-format nuon | from nuon | each { |hit| open data/nu_docs.msgpack | from msgpack | where id == $hit.id | get taxonomy.commands } | flatten | uniq"
-
-    print "Step 3: Building command map from chunks (no Kùzu provisioning)..."
-    # Build an in-memory map command -> chunk_id from the canonical corpus (NUON or chunks)
-    let corpus = if ("data/nu_docs_vectors.nuon" | path exists) { open data/nu_docs_vectors.nuon } else { $chunks }
-    let command_pairs = (
-        $corpus
-        | each { |chunk|
-            let cmds_raw = (try { $chunk.taxonomy.commands } catch { [] })
-            let cmds = ($cmds_raw | default [])
-            if ($cmds != []) { $cmds | each { |cmd| { cmd: $cmd, id: $chunk.id } } } else { [] }
+def should-keep-file [path: string, allow_non_english: bool] {
+  if $allow_non_english {
+    true
+  } else {
+    let segments = ($path | path split)
+    let has_foreign_locale = (
+      $segments
+      | any { |seg|
+          let lower = ($seg | str downcase)
+          let looks_like_locale = ($lower =~ '^[a-z]{2}(-[a-z0-9]+)?$')
+          ($looks_like_locale) and (not ($lower | str starts-with "en"))
         }
-        | flatten
     )
-
-    let command_map = {}
-    for p in $command_pairs {
-        let key = ($p.cmd | str downcase)
-        let existing = (try { $command_map | get $key } catch { null })
-        if ($existing == null) {
-            let command_map = ($command_map | upsert ($key) { id: $p.id, display: $p.cmd })
-        }
-    }
-
-    # Persist the command map so resolve-command-doc can work without Kùzu (NUON)
-    ($command_map | to nuon --indent 2) | save -f data/command_map.nuon
-
-    print "Step 4: Persisting canonical MessagePack store (data/nu_docs.msgpack)..."
-    # Ensure we have a canonical MessagePack blob for downstream consumers
-    if ("build/nu_ingest/embeddings.msgpack" | path exists) {
-        cp build/nu_ingest/embeddings.msgpack data/nu_docs.msgpack
-    } else {
-        # As a last resort, persist NUON
-        $corpus | to nuon --indent 2 | save -f "data/nu_docs_vectors.nuon"
-    }
-
-    print "Ingestion complete: data/nu_docs_vectors.nuon and data/command_map.nuon created."
+    not $has_foreign_locale
+  }
 }
 
-main
+export def main [
+  --path: string = "docs/"
+  --out-dir: string = "build/rag/run"
+  --source: string = ""
+  --attach-code-blocks
+  --force
+  --allow-non-english
+] {
+  let input_path = ($path | path expand)
+
+  if not ($input_path | path exists) {
+    error make { msg: $"Input path not found: ($path)" }
+  }
+
+  if $force {
+    if ("build/nu_ingest" | path exists) { rm -r build/nu_ingest }
+    if ("data" | path exists) { rm -r data }
+  }
+
+  if not ("build/nu_ingest" | path exists) { mkdir build/nu_ingest }
+  if not ($out_dir | path exists) { mkdir $out_dir }
+
+  let files = if (($input_path | path type) == "dir") {
+    glob ($input_path | path join "**/*.md")
+      | each { |f| $f | path expand }
+      | where { |f| ($f | path type) == "file" }
+      | where { |f| should-keep-file $f $allow_non_english }
+  } else {
+    [$input_path]
+    | where { |f| should-keep-file $f $allow_non_english }
+  }
+
+  if (($files | length) == 0) {
+    error make { msg: $"No markdown files found under: ($path)" }
+  }
+
+  let file_count = ($files | length)
+  print $"Shredding ($file_count) markdown files..."
+
+  for file in $files {
+    if ($source | str length) > 0 {
+      if $attach_code_blocks {
+        ./nu-shredder $file --source $source --attach-code-blocks
+      } else {
+        ./nu-shredder $file --source $source
+      }
+    } else {
+      if $attach_code_blocks {
+        ./nu-shredder $file --attach-code-blocks
+      } else {
+        ./nu-shredder $file
+      }
+    }
+  }
+
+  print "Normalising chunk outputs..."
+  nu scripts/make-data-from-chunks.nu
+
+  # Prepare output layout
+  let chunks_dir = ($out_dir | path join "chunks")
+  let embedding_dir = ($out_dir | path join "embedding_input")
+  let data_dir = ($out_dir | path join "data")
+  if not ($chunks_dir | path exists) { mkdir $chunks_dir }
+  if not ($embedding_dir | path exists) { mkdir $embedding_dir }
+  if not ($data_dir | path exists) { mkdir $data_dir }
+
+  cp --force data/nu_docs.msgpack ($data_dir | path join "nu_docs.msgpack")
+  cp --force data/nu_docs_vectors.nuon ($data_dir | path join "nu_docs_vectors.nuon")
+  cp --force data/command_map.nuon ($data_dir | path join "command_map.nuon")
+  if ("data/command_map.msgpack" | path exists) {
+    cp --force data/command_map.msgpack ($data_dir | path join "command_map.msgpack")
+  }
+
+  cp --force build/nu_ingest/chunks.msgpack ($chunks_dir | path join "corpus.chunks.msgpack")
+  if ("build/nu_ingest/chunks.nuon" | path exists) {
+    cp --force build/nu_ingest/chunks.nuon ($chunks_dir | path join "corpus.chunks.nuon")
+  }
+
+  cp --force build/nu_ingest/embedding_input.nuon ($embedding_dir | path join "corpus.embedding_input.nuon")
+  cp --force build/nu_ingest/embedding_input.msgpack ($embedding_dir | path join "corpus.embedding_input.msgpack")
+  if ("build/nu_ingest/embedding_input.embed.nuon" | path exists) {
+    cp --force build/nu_ingest/embedding_input.embed.nuon ($embedding_dir | path join "corpus.embedding_input.embed.nuon")
+  }
+
+  let embed_runner_candidates = [
+    "./target/debug/embed_runner"
+    "./crates/nu_plugin_rag/target/debug/embed_runner"
+    "./target/release/embed_runner"
+    "./crates/nu_plugin_rag/target/release/embed_runner"
+  ]
+
+  let embed_runner = (
+    $embed_runner_candidates
+    | where { |p| ($p | path exists) }
+    | get 0?
+    | default ""
+  )
+
+  if ($embed_runner | str length) > 0 {
+    let embeddings_dir = ($out_dir | path join "embeddings")
+    if not ($embeddings_dir | path exists) { mkdir $embeddings_dir }
+    let embed_input = "build/nu_ingest/embedding_input.embed.nuon"
+    let embed_output = ($embeddings_dir | path join "corpus.embeddings.msgpack")
+
+    print $"Running embed_runner -> ($embed_output)"
+    ^$embed_runner --input $embed_input --output $embed_output | ignore
+  } else {
+    print "embed_runner binary not found; skip embedding generation (run cargo build first)"
+  }
+
+  print $"Ingestion complete. Outputs duplicated under: ($out_dir)"
+}
