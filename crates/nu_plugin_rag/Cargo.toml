@@ -16,9 +16,9 @@ reqwest = { version = "0.11", features = ["blocking", "rustls-tls"] }
 chrono = { version = "0.4", features = ["serde"] }
 nu_agent_common = { path = "../nu_agent_common" }
 
-# Fastembed + SurrealDB for local embeddings + persistence
-# Align with tools/nu_embedder which uses fastembed = "5"
-fastembed = "5"
+# Fastembed removed: embeddings are produced via remote embedding service
+
+
 # Persistence/DB crates removed: we persist MessagePack files as the canonical store.
 
 # Utilities used by nu-search
