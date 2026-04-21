@@ -179,7 +179,7 @@ fn main() -> Result<()> {
     let k = args.top_k.min(scores.len());
     // Select top-k without full sort
     if scores.len() > k {
-        let (left, _) = scores.select_nth_unstable_by(k, |a, b| {
+        let (left, _, _) = scores.select_nth_unstable_by(k, |a, b| {
             a.1.partial_cmp(&b.1).unwrap_or(std::cmp::Ordering::Equal)
         });
         scores = left.to_vec();
@@ -196,7 +196,7 @@ fn main() -> Result<()> {
         obj.insert("score".to_string(), JsonValue::from(score));
         obj.insert("idx".to_string(), JsonValue::from(idx));
         if args.with_snippet {
-            let s = doc.text.clone().unwrap_or_default();
+            let s = doc.text.clone();
             let snippet: String = s.chars().take(160).collect();
             obj.insert("snippet".to_string(), JsonValue::String(snippet));
         }

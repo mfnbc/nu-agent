@@ -55,7 +55,7 @@ async fn main() -> Result<()> {
     }
 
     // Init fastembed model (sync). Use defaults — fastembed will pick a reasonable local model.
-    let model = TextEmbedding::try_new(Default::default())?;
+    let mut model = TextEmbedding::try_new(Default::default())?;
 
     // Collect embeddings so we can write them out as a single MessagePack array.
     let mut produced = Vec::with_capacity(chunks.len());
@@ -101,9 +101,9 @@ async fn main() -> Result<()> {
         obj.insert("path".to_string(), Value::String(path));
         obj.insert("title".to_string(), Value::String(title));
         obj.insert("heading_path".to_string(), heading_path);
-        obj.insert("text".to_string(), Value::String(text));
+        obj.insert("text".to_string(), Value::String(text.clone()));
         obj.insert("commands".to_string(), commands);
-        obj.insert("embedding".to_string(), serde_json::to_value(embedding)?);
+        obj.insert("embedding".to_string(), serde_json::to_value(&embedding)?);
 
         // Always record the produced embedding for persistence.
         let mut meta = serde_json::Map::new();
@@ -128,7 +128,7 @@ async fn main() -> Result<()> {
 
         let rec = serde_json::json!({
             "id": id.clone(),
-            "text": text,
+            "text": text.clone(),
             "embedding": embedding,
             "metadata": Value::Object(meta),
         });
