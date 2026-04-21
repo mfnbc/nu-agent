@@ -13,6 +13,7 @@ struct EmbRec {
     vector: Vec<f32>,
 }
 
+#[allow(dead_code)]
 #[derive(Deserialize)]
 struct ChunkRec {
     id: String,
@@ -20,6 +21,7 @@ struct ChunkRec {
     taxonomy: Option<Taxonomy>,
 }
 
+#[allow(dead_code)]
 #[derive(Deserialize)]
 struct Taxonomy {
     idiom_weight: Option<i32>,

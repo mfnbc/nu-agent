@@ -128,7 +128,7 @@ fn is_normalized(v: &[f32], eps: f32) -> bool {
     (sum - 1.0).abs() <= eps
 }
 
-fn write_results_msgpack<P: AsRef<Path>>(path: Option<P>, records: &Vec<JsonValue>) -> Result<()> {
+fn _write_results_msgpack<P: AsRef<Path>>(path: Option<P>, records: &Vec<JsonValue>) -> Result<()> {
     let buf = rmp_serde::to_vec(records).context("encoding results to msgpack")?;
     match path {
         Some(p) => std::fs::write(p, buf).context("writing msgpack results file")?,

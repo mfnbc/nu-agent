@@ -107,17 +107,17 @@ fn main() -> anyhow::Result<()> {
         std::process::exit(2);
     }
     let mut json_out = false;
-    let mut query = String::new();
+    let mut _query = String::new();
     if args.len() == 2 {
         query = args[1].clone();
     } else {
         // support: agent_bridge --json "query"
         if args[1] == "--json" || args[1] == "-j" {
             json_out = true;
-            query = args[2].clone();
+            _query = args[2].clone();
         } else {
             // join remaining args as the query (allow unquoted)
-            query = args[1..].join(" ");
+            _query = args[1..].join(" ");
         }
     }
 
@@ -134,7 +134,7 @@ fn main() -> anyhow::Result<()> {
     // embed query
     let mut model =
         TextEmbedding::try_new(InitOptions::default().with_show_download_progress(false))?;
-    let qv = model.embed(vec![query.to_string()], None)?;
+    let qv = model.embed(vec![_query.to_string()], None)?;
     let qv = &qv[0];
     let norm: f32 = qv.iter().map(|x| x * x).sum::<f32>().sqrt();
     let qnorm: Vec<f32> = if norm > 0.0 {
@@ -210,7 +210,7 @@ fn main() -> anyhow::Result<()> {
     if json_out {
         // Output minimal JSON suitable for programmatic consumption
         let out = serde_json::json!({
-            "query": query,
+            "query": _query,
             "results": top_entries,
         });
         println!("{}", serde_json::to_string_pretty(&out)?);

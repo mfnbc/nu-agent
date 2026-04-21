@@ -38,7 +38,7 @@ fn main() -> anyhow::Result<()> {
         }
     }
     with_score.sort_by(|a, b| b.1.cmp(&a.1));
-    let mut shown = 0;
+    let mut _shown = 0;
     for (r, sc) in with_score.iter().take(10) {
         println!("SCORE: {}", sc);
         println!("PATH: {}", r.path);
@@ -51,7 +51,7 @@ fn main() -> anyhow::Result<()> {
             println!("EMBEDDING_INPUT_SAMPLE:\n{}", sample);
         }
         println!("---");
-        shown += 1;
+        _shown += 1;
     }
 
     // Final sanity check: print full 'text' for stor_insert and metadata_set if present
