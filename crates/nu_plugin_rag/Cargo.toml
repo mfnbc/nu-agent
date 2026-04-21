@@ -13,8 +13,6 @@ tempfile = "3"
 which = "4"
 dirs = "5"
 reqwest = { version = "0.11", features = ["blocking", "rustls-tls"] }
-tokenizers = "0.14"
-ndarray = "0.15"
 chrono = { version = "0.4", features = ["serde"] }
 nu_agent_common = { path = "../nu_agent_common" }
 
@@ -26,7 +24,6 @@ fastembed = "5"
 # Utilities used by nu-search
 rayon = "1"
 rmp-serde = "1"
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 uuid = { version = "1", features = ["v4"] }
 
 

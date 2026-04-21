@@ -10,10 +10,11 @@ def main [query: string, --limit: int = 3, --keep-temp: bool = $false] {
     # Prefer a prebuilt binary for faster interactive runs; fall back to cargo run.
     let q = { embedding_input: $query } | to nuon
     let embed_bin = "./target/debug/embed_runner"
+    # Use --vector-out to write a raw MessagePack vector (query vector) to the temp file
     let embed_cmd = if ("$embed_bin" | path exists) {
-        ^$embed_bin --input - --output $tmp_path
+        ^$embed_bin --input - --vector-out $tmp_path
     } else {
-        ^cargo run -p nu_plugin_rag --bin embed_runner -- --input - --output $tmp_path
+        ^cargo run -p nu_plugin_rag --bin embed_runner -- --input - --vector-out $tmp_path
     }
 
     echo $q | do { $embed_cmd } | each { |l| echo $l }

@@ -38,7 +38,7 @@ fn main() -> Result<()> {
     match cli.cmd {
         Commands::PrepareDeps { out_dir } => {
             // Prepare dependencies: create cache dir and optionally download vetted artifacts.
-            let cache_dir = if out_dir.len() > 0 {
+            let cache_dir = if !out_dir.is_empty() {
                 out_dir
             } else {
                 dirs::cache_dir()
@@ -301,7 +301,7 @@ fn main() -> Result<()> {
                                 let out_file = format!("{}/{}.embeddings.msgpack", out_dir, stem);
                                 let embed_bin = "crates/nu_plugin_rag/target/debug/embed_runner";
                                 if std::path::Path::new(&embed_bin).exists() {
-                                    let _ = std::process::Command::new(&embed_bin)
+                                    let _ = std::process::Command::new(embed_bin)
                                         .args([
                                             "--input",
                                             path.to_str().unwrap(),

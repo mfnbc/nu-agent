@@ -10,3 +10,6 @@ members = [
     "tools/flat_index",
     "tools/agent_bridge",
 ]
+
+# Use Cargo resolver v2 for consistent dependency resolution across 2021-edition members
+resolver = "2"

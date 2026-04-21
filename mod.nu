@@ -336,9 +336,11 @@ def call-llm-json [task: string, tools: list] {
     if not ($raw | str starts-with "[") {
       # Attempt to extract the first JSON array substring from the text.
       try {
-        let start = ($raw | str find "[" )
-        let end = ($raw | str rfind "]" )
+        # Use index-of for compatibility with Nushell 0.111.0 and later
+        let start = ($raw | str index-of "[")
+        let end = ($raw | str index-of -e "]")
         if ($start >= 0) and ($end >= $start) {
+          # substring expects start and length; include the closing bracket
           let candidate = ($raw | str substring $start (($end - $start) + 1))
           let parsed = (coerce-json $candidate)
           parsed

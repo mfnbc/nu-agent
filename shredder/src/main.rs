@@ -1,4 +1,4 @@
-use blake3;
+// blake3 functions are used via blake3::Hasher below; no top-level import needed
 use pulldown_cmark::{CodeBlockKind, Event, Options, Parser, Tag};
 use rmp_serde::to_vec_named;
 use serde::Deserialize;
@@ -360,15 +360,10 @@ fn main() -> anyhow::Result<()> {
     for rec in &combined_records {
         for cmd in &rec.taxonomy.commands {
             let key = cmd.to_lowercase();
-            if !cmd_map.contains_key(&key) {
-                cmd_map.insert(
-                    key,
-                    CmdEntry {
-                        id: rec.id.clone(),
-                        display: cmd.clone(),
-                    },
-                );
-            }
+            cmd_map.entry(key).or_insert_with(|| CmdEntry {
+                id: rec.id.clone(),
+                display: cmd.clone(),
+            });
         }
     }
 

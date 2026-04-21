@@ -41,7 +41,7 @@ fn main() -> anyhow::Result<()> {
                     for c in arr {
                         if let Some(cmd_str) = c.as_str() {
                             let key = cmd_str.to_lowercase();
-                            if !cmd_map.contains_key(&key) {
+                            cmd_map.entry(key).or_insert_with(|| {
                                 // id from v.id
                                 let id = v
                                     .get("id")
@@ -54,8 +54,8 @@ fn main() -> anyhow::Result<()> {
                                     "display".to_string(),
                                     Value::String(cmd_str.to_string()),
                                 );
-                                cmd_map.insert(key, map);
-                            }
+                                map
+                            });
                         }
                     }
                 }

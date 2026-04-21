@@ -16,9 +16,13 @@ jobs:
         with:
           toolchain: stable
           profile: minimal
-      - name: Cargo test shredder
-        working-directory: ./shredder
-        run: cargo test --locked
-      - name: Cargo test nu_plugin_rag
-        working-directory: ./crates/nu_plugin_rag
-        run: cargo test --locked
+      - name: Run cargo test (workspace)
+        run: cargo test --workspace --locked
+
+      - name: Install Nushell (for script-based integration test)
+        run: |
+          cargo install nu-cli --locked
+
+      - name: Run scripts/test-pipeline.nu
+        run: |
+          nu --no-config-file scripts/test-pipeline.nu

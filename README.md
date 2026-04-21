@@ -235,7 +235,13 @@ steps. Two simple execution modes are supported so you can pick whichever is eas
 
    - Run the deterministic embedding runner directly (for testing):
 
-      ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.nuon --output build/embeddings_example.msgpack --dim 16
+   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.nuon --output build/embeddings_example.msgpack --dim 16
+
+   # To generate a raw query vector (MessagePack array of floats) suitable for
+   # passing to nu-search or other consumers, use --vector-out. This writes a
+   # MessagePack array of f32 to the given path (not a full DocRecord array):
+
+   ./crates/nu_plugin_rag/target/debug/embed_runner --input - --vector-out build/query_example.msgpack
 
 2) Nushell wrapper mode (preferred if you use Nushell interactively)
 
@@ -243,7 +249,29 @@ steps. Two simple execution modes are supported so you can pick whichever is eas
 
      nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
 
-    - Kùzu import helpers and scripts have been removed from the active defaults. If you need a graph-DB import workflow, implement it in a separate opt-in adapter and call it from this repo.
+     - Kùzu import helpers and scripts have been removed from the active defaults. If you need a graph-DB import workflow, implement it in a separate opt-in adapter and call it from this repo.
+
+Using Nu Documentation (example)
+--------------------------------
+
+To build a RAG corpus from the official Nushell docs and produce embeddings:
+
+1. Build the plugin binaries:
+
+   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+
+2. Run the orchestrator against the nushell docs repo (the CLI will clone it):
+
+   ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+
+3. If embeddings weren't produced automatically, run embed_runner over the embedding_input files:
+
+   for f in build/rag/nu-docs/embedding_input/*.embedding_input.nuon; do
+     out=build/rag/nu-docs/embeddings/$(basename "$f" .embedding_input.nuon).embeddings.msgpack
+     ./crates/nu_plugin_rag/target/debug/embed_runner --input "$f" --output "$out"
+   done
+
+4. Produce a query vector and search using nu-search as described in docs/RAG.md Minimal Example.
 
 The Nushell wrappers are small and call the plugin binaries under `crates/nu_plugin_rag/target/debug/`.
 If you prefer Makefile shortcuts, use `make plugin-build` and `make build`.

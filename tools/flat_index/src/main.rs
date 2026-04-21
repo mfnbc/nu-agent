@@ -1,7 +1,7 @@
 use anyhow::Context;
 use fastembed::{InitOptions, TextEmbedding};
 use rayon::prelude::*;
-use rmp_serde::{from_slice, Deserializer};
+use rmp_serde::from_slice;
 use serde::Deserialize;
 use serde_json::Value as JsonValue;
 use std::collections::HashMap;
@@ -28,51 +28,35 @@ struct Taxonomy {
 }
 
 fn build_index(vec_path: &str, chunks_path: &str, out_index: &str) -> anyhow::Result<()> {
-    // Read vectors
+    // Read vectors (support multiple machine-only MessagePack formats)
     let buf = fs::read(vec_path).context("read vectors")?;
-    // Support either JSON-lines (.json) or MessagePack
-    let vecs: Vec<EmbRec> = if vec_path.ends_with(".json") {
-        let s = String::from_utf8(buf)?;
-        let mut items: Vec<EmbRec> = Vec::new();
-        for line in s.lines() {
-            if line.trim().is_empty() {
-                continue;
-            }
-            let v: serde_json::Value = serde_json::from_str(line)?;
-            let id = v
-                .get("id")
-                .and_then(|x| x.as_str())
-                .unwrap_or("")
-                .to_string();
-            let vec_arr = v.get("vector").and_then(|x| x.as_array()).unwrap();
-            let vec_f: Vec<f32> = vec_arr.iter().map(|n| n.as_f64().unwrap() as f32).collect();
-            items.push(EmbRec { id, vector: vec_f });
-        }
-        items
-    } else {
-        match from_slice::<Vec<EmbRec>>(&buf) {
-            Ok(v) => v,
-            Err(e) => {
-                // Stream decode
-                let mut items: Vec<EmbRec> = Vec::new();
-                let mut de = Deserializer::new(&buf[..]);
-                loop {
-                    match EmbRec::deserialize(&mut de) {
-                        Ok(val) => items.push(val),
-                        Err(err2) => {
-                            let msg = format!("stream decode error: {}", err2);
-                            if msg.contains("EOF") || msg.contains("eof") {
-                                break;
-                            } else {
-                                return Err(anyhow::anyhow!(e)
-                                    .context("deserializing vectors stream")
-                                    .context(err2));
-                            }
-                        }
-                    }
+
+    // First try: MessagePack array of EmbRec { id, vector }
+    let vecs: Vec<EmbRec> = match from_slice::<Vec<EmbRec>>(&buf) {
+        Ok(v) => v,
+        Err(_) => {
+            // Fallback: decode the entire buffer as a MessagePack array of maps
+            // and extract `vector` or `embedding` fields (embed_runner uses `embedding`).
+            let vals: Vec<JsonValue> = match from_slice(&buf) {
+                Ok(v) => v,
+                Err(e) => {
+                    return Err(anyhow::anyhow!(e).context("deserializing generic msgpack array"))
                 }
-                items
+            };
+            let mut items: Vec<EmbRec> = Vec::new();
+            for val in vals {
+                let id = val
+                    .get("id")
+                    .and_then(|x| x.as_str())
+                    .map(|s| s.to_string())
+                    .unwrap_or_default();
+                let vec_opt = val.get("vector").or_else(|| val.get("embedding"));
+                if let Some(arr) = vec_opt.and_then(|x| x.as_array()) {
+                    let vec_f: Vec<f32> = arr.iter().map(|n| n.as_f64().unwrap() as f32).collect();
+                    items.push(EmbRec { id, vector: vec_f });
+                }
             }
+            items
         }
     };
     if vecs.is_empty() {

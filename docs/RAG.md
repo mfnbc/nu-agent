@@ -106,6 +106,60 @@ Developer notes
 - The plugin is expected to live in `crates/nu_plugin_rag` and expose Nushell commands
   via the `nu_plugin` crate.
 - The embedding runner is Rust-only; it will attempt to use a Rust-native FastEmbed
+ - The embedding runner is Rust-only; it will attempt to use a Rust-native FastEmbed
   or a vetted Rust binary distribution if a native crate is not available.
+- The embed_runner binary writes two kinds of outputs:
+  - Full document embeddings: a MessagePack array of DocRecord objects written with --output (each record contains id, text, embedding, metadata).
+  - Query vector: a MessagePack array of f32 written with --vector-out (useful for passing to nu-search or other consumers that expect a single vector).
+
+Minimal Example
+---------------
+
+Quick, copy-paste example that runs the minimal three-step flow locally (build -> embed docs -> generate query vector -> search):
+
+1. Build the plugin binaries:
+
+   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+
+2. Produce document embeddings (full DocRecord MessagePack array):
+
+   ./crates/nu_plugin_rag/target/debug/embed_runner --input examples/embedding_input_example.nuon --output build/embeddings.msgpack
+
+3. Produce a query vector (raw MessagePack array of f32):
+
+   printf '[{"embedding_input":"how to filter tables"}]' > build/query.nuon
+   cat build/query.nuon | ./crates/nu_plugin_rag/target/debug/embed_runner --input - --vector-out build/query.msgpack
+
+4. Run nu-search against the produced artifacts:
+
+   ./crates/nu_plugin_rag/target/debug/nu-search --input build/embeddings.msgpack --query-vec build/query.msgpack --top-k 3 --out-format json
+
+This produces a JSON array of top-k hits. Use --out-format nuon or msgpack if you prefer those formats.
+
+Using Nu Documentation
+-----------------------
+
+The primary corpus we target is the Nushell documentation (the `nushell.github.io` site). You can point the build command at the repo URL and the plugin will clone it, shred Markdown files, generate embedding inputs, and attempt to run the embedding step when possible.
+
+1. Build the plugin binaries:
+
+   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+
+2. Run the build step against the nushell docs repository (the CLI will clone the repo):
+
+   ./crates/nu_plugin_rag/target/debug/nu_plugin_rag build --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+
+   This will create `build/rag/nu-docs/sources/<repo>` and emit `chunks/`, `embedding_input/`, and `*.embeddings.msgpack` files under the out-dir when possible.
+
+3. If the embedding step did not run automatically (for example `embed_runner` not found), run it over the generated embedding inputs:
+
+   for f in build/rag/nu-docs/embedding_input/*.embedding_input.nuon; do
+     out=build/rag/nu-docs/embeddings/$(basename "$f" .embedding_input.nuon).embeddings.msgpack
+     ./crates/nu_plugin_rag/target/debug/embed_runner --input "$f" --output "$out"
+   done
+
+4. Produce a query vector and run nu-search as in the Minimal Example above, pointing `--input` at the produced embeddings file and `--query-vec` at the query MessagePack file.
+
+This workflow gives nu-agent access to the canonical Nushell docs so it can produce idiomatic Nushell suggestions and code. You can run the same pipeline against a local clone by passing a filesystem path instead of a git URL to `--input`.
 - See `scripts/prep-nu-rag.nu` for a convenience Nushell wrapper that calls the
   prepare and build steps.
