@@ -119,30 +119,7 @@ fn build_index(vec_path: &str, chunks_path: &str, out_index: &str) -> anyhow::Re
         weights.push(*id_to_weight.get(&e.id).unwrap_or(&0));
     }
 
-    // If compiled with the 'faiss' feature, build a FAISS IndexFlatIP and persist it.
-    #[cfg(feature = "faiss")]
-    {
-        use faiss::{index_factory, MetricType};
-        // Build an IndexFlatIP (inner product) with dim
-        let mut idx = faiss::IndexFlat::new(dim as i32, MetricType::InnerProduct)?;
-        // add vectors
-        idx.add(&flat)?;
-        // persist index
-        idx.write_index(out_index)?;
-        // additionally persist metadata as JSON
-        let meta = serde_json::json!({"dim": dim, "ids": ids, "paths": paths, "weights": weights});
-        fs::write(
-            format!("{}.meta.json", out_index),
-            serde_json::to_vec(&meta)?,
-        )?;
-        println!(
-            "wrote FAISS index to {} (dim={}, count={})",
-            out_index,
-            dim,
-            vecs.len()
-        );
-        return Ok(());
-    }
+    // FAISS support removed: fallback writes a raw JSON index file (portable, Rust-only)
     // Fallback: write out a raw JSON index file
     let index = serde_json::json!({"dim": dim, "ids": ids, "paths": paths, "weights": weights, "vectors": flat});
     fs::write(out_index, serde_json::to_vec(&index)?).context("write index")?;
