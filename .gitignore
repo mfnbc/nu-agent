@@ -36,3 +36,4 @@ external/nushell.github.io/
 # Large generated corpus artifacts (rebuildable)
 data/nu_docs_vectors.nuon
 build/nu_ingest/
+.fastembed_cache/
