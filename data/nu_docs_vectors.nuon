@@ -1,0 +1,947 @@
+[
+  [
+    path,
+    id,
+    title,
+    heading_path,
+    text,
+    taxonomy,
+    embedding_input
+  ];
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "23f5ec5a08538be900a80bbbdf874d34331e47aaf5c5704459f7d8539f845aa8",
+    nu-agent,
+    [
+      nu-agent
+    ],
+    "Deterministic Nushell tool orchestrator.
+``nu-agent``
+ is a helper for Nushell only. It is not a general-purpose coding assistant.
+
+It is also the single-item primitive for deterministic data enrichment: one structured record in, one validated JSON result out.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: nu-agent
+Content:
+Deterministic Nushell tool orchestrator.
+``nu-agent``
+ is a helper for Nushell only. It is not a general-purpose coding assistant.
+
+It is also the single-item primitive for deterministic data enrichment: one structured record in, one validated JSON result out.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "7a469834c3c1997052f037165c4f7323fd93487265a19e97ef3d0c6077eaa2ba",
+    nu-agent,
+    [
+      "Core Contract"
+    ],
+    "Input: prompt/task + Nushell tool schema
+Model output: JSON array of tool calls only
+Runtime output: structured results; enrichment mode emits validated JSON on stdout
+Conceptually:
+``(Prompt + ToolSchema) -> JSON Calls -> Nushell Tool Execution -> Table``
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Core Contract
+Content:
+Input: prompt/task + Nushell tool schema
+Model output: JSON array of tool calls only
+Runtime output: structured results; enrichment mode emits validated JSON on stdout
+Conceptually:
+``(Prompt + ToolSchema) -> JSON Calls -> Nushell Tool Execution -> Table``
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "f34543530708012885870b6728f453c2a9454eb2e521d81fdf783241d5612e3c",
+    nu-agent,
+    [
+      "Project Guarantees"
+    ],
+    "JSON-only LLM output (
+``[{ name, arguments }]``
+)
+No prose/explanations/markdown from the model
+System prompt defines the model as a Nushell expert
+System prompt defines the model as Nushell-only controller/developer
+Whitelist-only callable tools (
+``TOOL_NAMES``
+ in 
+``tools.nu``
+)
+Serial execution (no parallel scheduler yet)
+Stateless core (state is controller/user owned)
+No external text-processing tool dependency in core path (
+``jq``
+, 
+``grep``
+, 
+``patch``
+, etc.)
+Single-item execution only; batching lives outside 
+``nu-agent``
+Enrichment output is strict JSON only on stdout after validation and retry
+Schema validation rejects extra keys and enforces required/non-null keys
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Project Guarantees
+Content:
+JSON-only LLM output (
+``[{ name, arguments }]``
+)
+No prose/explanations/markdown from the model
+System prompt defines the model as a Nushell expert
+System prompt defines the model as Nushell-only controller/developer
+Whitelist-only callable tools (
+``TOOL_NAMES``
+ in 
+``tools.nu``
+)
+Serial execution (no parallel scheduler yet)
+Stateless core (state is controller/user owned)
+No external text-processing tool dependency in core path (
+``jq``
+, 
+``grep``
+, 
+``patch``
+, etc.)
+Single-item execution only; batching lives outside 
+``nu-agent``
+Enrichment output is strict JSON only on stdout after validation and retry
+Schema validation rejects extra keys and enforces required/non-null keys
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "9bf89275e5d523de4b5dc5c1c2ea5deb36f70fb54d700a8a9b969f715696e40d",
+    nu-agent,
+    [
+      Files
+    ],
+    "Core agent surface:
+``mod.nu``
+ — thin aggregator that re-exports the public commands (
+``airun``
+, 
+``run-json``
+, 
+``enrich``
+) and canonical tools.
+``agent/runtime.nu``
+ — builds tool schemas at runtime, validates model output, and executes whitelisted commands.
+``agent/schema.nu``
+ — inspects Nushell command signatures and enforces the whitelist/argument contract.
+``agent/llm.nu``
+ — JSON-only response parsing and repair around the LLM API.
+``agent/enrichment.nu``
+ — single-record enrichment entrypoint and schema validation.
+``agent/json.nu``
+ — shared JSON helpers used by multiple layers.
+``api.nu``
+ — 
+``http post``
+ wrapper with strict no-prose system prompt.
+``tools.nu``
+ — canonical Nushell tools plus the single-source 
+``TOOL_REGISTRY``
+ metadata.
+Optional retrieval tooling (not required for the agent runtime):
+``scripts/ingest-docs.nu``
+ — wraps shredding, command-map generation, and embedding production into a single command.
+``scripts/make-data-from-chunks.nu``
+ — normalises shredder output into the 
+``data/``
+ and 
+``build/nu_ingest/``
+ stores used by the tools.
+``target/debug/embed_runner``
+, 
+``target/debug/nu-search``
+ — binaries built from 
+``crates/nu_plugin_rag``
+ that generate deterministic embeddings and let you smoke-test similarity search.
+See 
+``docs/RAG_HAPPY_PATH.md``
+ for an end-to-end walkthrough of the current pipeline.
+Reference docs:
+``RULES.md``
+ — hard project constraints.
+``PLAN.md``
+ — current status and next steps.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Files
+Content:
+Core agent surface:
+``mod.nu``
+ — thin aggregator that re-exports the public commands (
+``airun``
+, 
+``run-json``
+, 
+``enrich``
+) and canonical tools.
+``agent/runtime.nu``
+ — builds tool schemas at runtime, validates model output, and executes whitelisted commands.
+``agent/schema.nu``
+ — inspects Nushell command signatures and enforces the whitelist/argument contract.
+``agent/llm.nu``
+ — JSON-only response parsing and repair around the LLM API.
+``agent/enrichment.nu``
+ — single-record enrichment entrypoint and schema validation.
+``agent/json.nu``
+ — shared JSON helpers used by multiple layers.
+``api.nu``
+ — 
+``http post``
+ wrapper with strict no-prose system prompt.
+``tools.nu``
+ — canonical Nushell tools plus the single-source 
+``TOOL_REGISTRY``
+ metadata.
+Optional retrieval tooling (not required for the agent runtime):
+``scripts/ingest-docs.nu``
+ — wraps shredding, command-map generation, and embedding production into a single command.
+``scripts/make-data-from-chunks.nu``
+ — normalises shredder output into the 
+``data/``
+ and 
+``build/nu_ingest/``
+ stores used by the tools.
+``target/debug/embed_runner``
+, 
+``target/debug/nu-search``
+ — binaries built from 
+``crates/nu_plugin_rag``
+ that generate deterministic embeddings and let you smoke-test similarity search.
+See 
+``docs/RAG_HAPPY_PATH.md``
+ for an end-to-end walkthrough of the current pipeline.
+Reference docs:
+``RULES.md``
+ — hard project constraints.
+``PLAN.md``
+ — current status and next steps.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "94f1bb0e2089366851ba3d60b8ede917c28d80b783f6cbfc372dd014d004b242",
+    nu-agent,
+    [
+      "Canonical Tools"
+    ],
+    "``read-file --path <string>``
+``write-file --path <string> --content <string>``
+``list-files --path <string>``
+``search --pattern <string> --path <string>``
+``search-chunks --path <string> --pattern <string>``
+``replace-in-file --path <string> --pattern <string> --replacement <string>``
+``inspect-rig-plan --path <string> [--table <string>] [--limit <int>]``
+``inspect-chunk --path <string> --id <string> [--neighbors]``
+``search-embedding-input --path <string> --pattern <string> [--limit <int>]``
+``propose-edit --path <string> --pattern <string> --replacement <string>``
+``apply-edit --file <string> --after <string>``
+``check-nu-syntax --path <string>``
+``self-check``
+Schema is strict: unsupported argument types are rejected early, and invalid JSON output from the model is wrapped with a project-specific error.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Canonical Tools
+Content:
+``read-file --path <string>``
+``write-file --path <string> --content <string>``
+``list-files --path <string>``
+``search --pattern <string> --path <string>``
+``search-chunks --path <string> --pattern <string>``
+``replace-in-file --path <string> --pattern <string> --replacement <string>``
+``inspect-rig-plan --path <string> [--table <string>] [--limit <int>]``
+``inspect-chunk --path <string> --id <string> [--neighbors]``
+``search-embedding-input --path <string> --pattern <string> [--limit <int>]``
+``propose-edit --path <string> --pattern <string> --replacement <string>``
+``apply-edit --file <string> --after <string>``
+``check-nu-syntax --path <string>``
+``self-check``
+Schema is strict: unsupported argument types are rejected early, and invalid JSON output from the model is wrapped with a project-specific error.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "613973c9dc55e6ecb0561fcadb3ed690d7e00feb3003e0bfbc7eb05d5e97b542",
+    nu-agent,
+    [
+      "Module Exports"
+    ],
+    "``enrich --task <string> --record <json> --schema <json>``
+ — single-item structured enrichment; validates output against a schema
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Module Exports
+Content:
+``enrich --task <string> --record <json> --schema <json>``
+ — single-item structured enrichment; validates output against a schema
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "ddb81ff5a38f47ee13d4d9a010ee2d30744a848d5c93f1d7a755751c73e59690",
+    nu-agent,
+    [
+      Usage
+    ],
+    "Example with Nushell:
+```nu
+use ./mod.nu *
+airun --task \"refactor\"
+
+```
+Single-item enrichment example:
+```nu
+use ./mod.nu *
+enrich --task \"annotate workout\" --record '{\"exercise\":\"squat\",\"reps\":5}' --schema '{\"allowed\":[\"label\",\"notes\"],\"required\":[\"label\"],\"non_null\":[\"label\"]}'
+
+```
+Repo-local CLI wrapper for enrichment:
+```bash
+NU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task \"annotate workout\" --record '{\"exercise\":\"squat\",\"reps\":5}' --schema '{\"allowed\":[\"label\"],\"required\":[\"label\"],\"non_null\":[\"label\"]}'
+
+```
+Deterministic local execution test (no LLM):
+```nu
+use ./mod.nu *
+run-json --calls '[{\"name\":\"list-files\",\"arguments\":{\"path\":\".\"}}]'
+
+```
+Build a minimal RAG bundle from Markdown:
+```bash
+nu scripts/prep-nu-rag.nu --input README.md --out-dir build/rag/demo
+
+```
+This wipes the prior 
+``build/nu_ingest``
+/
+``data``
+ directories (with 
+``--force``
+), runs the shredder over the input, materialises the command map and chunk stores, and—if the 
+``embed_runner``
+ binary is available—writes deterministic embeddings under 
+``build/rag/demo/embeddings/``
+.
+The helper leaves human-readable and machine-friendly copies of every artefact:
+``build/rag/demo/data/nu_docs_vectors.nuon``
+ and 
+``data/nu_docs.msgpack``
+``build/rag/demo/embedding_input/``
+ with NUON, MsgPack, and JSON views
+``build/rag/demo/embeddings/corpus.embeddings.msgpack``
+ (when embeddings are generated)
+From there you can query the corpus using the existing tools:
+```nu
+use ./tools.nu *
+resolve-command-doc --name \"open\"
+search-nu-concepts --query \"list files\" --limit 3
+
+```
+Graph/database import tooling is intentionally external. If you need a graph store or LanceDB dataset, implement it in a separate adapter and point it at the artefacts produced by the pipeline above.
+Repo-local CLI wrapper:
+```bash
+NU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task \"refactor\"
+
+```
+The CLI requires 
+``NU_AGENT_CHAT_URL``
+ so it points at your local or test LLM endpoint.
+
+It prints a short notice before calling the model, since some local models can take several minutes to respond.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+        high_priority
+      ],
+      idiom_weight: 1
+    },
+    "Title: nu-agent
+Path: Usage
+Content:
+Example with Nushell:
+```nu
+use ./mod.nu *
+airun --task \"refactor\"
+
+```
+Single-item enrichment example:
+```nu
+use ./mod.nu *
+enrich --task \"annotate workout\" --record '{\"exercise\":\"squat\",\"reps\":5}' --schema '{\"allowed\":[\"label\",\"notes\"],\"required\":[\"label\"],\"non_null\":[\"label\"]}'
+
+```
+Repo-local CLI wrapper for enrichment:
+```bash
+NU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task \"annotate workout\" --record '{\"exercise\":\"squat\",\"reps\":5}' --schema '{\"allowed\":[\"label\"],\"required\":[\"label\"],\"non_null\":[\"label\"]}'
+
+```
+Deterministic local execution test (no LLM):
+```nu
+use ./mod.nu *
+run-json --calls '[{\"name\":\"list-files\",\"arguments\":{\"path\":\".\"}}]'
+
+```
+Build a minimal RAG bundle from Markdown:
+```bash
+nu scripts/prep-nu-rag.nu --input README.md --out-dir build/rag/demo
+
+```
+This wipes the prior 
+``build/nu_ingest``
+/
+``data``
+ directories (with 
+``--force``
+), runs the shredder over the input, materialises the command map and chunk stores, and—if the 
+``embed_runner``
+ binary is available—writes deterministic embeddings under 
+``build/rag/demo/embeddings/``
+.
+The helper leaves human-readable and machine-friendly copies of every artefact:
+``build/rag/demo/data/nu_docs_vectors.nuon``
+ and 
+``data/nu_docs.msgpack``
+``build/rag/demo/embedding_input/``
+ with NUON, MsgPack, and JSON views
+``build/rag/demo/embeddings/corpus.embeddings.msgpack``
+ (when embeddings are generated)
+From there you can query the corpus using the existing tools:
+```nu
+use ./tools.nu *
+resolve-command-doc --name \"open\"
+search-nu-concepts --query \"list files\" --limit 3
+
+```
+Graph/database import tooling is intentionally external. If you need a graph store or LanceDB dataset, implement it in a separate adapter and point it at the artefacts produced by the pipeline above.
+Repo-local CLI wrapper:
+```bash
+NU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task \"refactor\"
+
+```
+The CLI requires 
+``NU_AGENT_CHAT_URL``
+ so it points at your local or test LLM endpoint.
+
+It prints a short notice before calling the model, since some local models can take several minutes to respond.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "38c51ab31555357294a4828ef263bf79146adfe3e0691c5b7a83a4a32478d9a3",
+    nu-agent,
+    [
+      Notes
+    ],
+    "Prefer 
+``propose-edit``
+ -> 
+``apply-edit``
+ for inspectable edits.
+For multi-step requests, the model must emit every requested tool call in order.
+For edit preview requests, 
+``propose-edit``
+ should be used so the preview is surfaced.
+Rust is allowed only as 
+``nu_plugin``
+ extensions exposed back as Nushell tools.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Notes
+Content:
+Prefer 
+``propose-edit``
+ -> 
+``apply-edit``
+ for inspectable edits.
+For multi-step requests, the model must emit every requested tool call in order.
+For edit preview requests, 
+``propose-edit``
+ should be used so the preview is surfaced.
+Rust is allowed only as 
+``nu_plugin``
+ extensions exposed back as Nushell tools.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "7bd6fa364ac758803fc66e44146a16aa29de0b91e3538e03c35b840242cc34fb",
+    nu-agent,
+    [
+      "LLM Backend Configuration"
+    ],
+    "``api.nu``
+ supports OpenAI-compatible endpoints via env vars:
+``NU_AGENT_CHAT_URL``
+ (default: 
+``https://api.openai.com/v1/chat/completions``
+)
+``NU_AGENT_MODEL``
+ (default: 
+``gpt-4o``
+)
+``NU_AGENT_API_KEY``
+ (optional; falls back to 
+``OPENAI_API_KEY``
+)
+Example for LM Studio:
+```nu
+$env.NU_AGENT_CHAT_URL = \"http://127.0.0.1:1234/v1/chat/completions\"
+$env.NU_AGENT_MODEL = \"qwen2.5-coder-7b-instruct\"
+
+```
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+        high_priority
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: LLM Backend Configuration
+Content:
+``api.nu``
+ supports OpenAI-compatible endpoints via env vars:
+``NU_AGENT_CHAT_URL``
+ (default: 
+``https://api.openai.com/v1/chat/completions``
+)
+``NU_AGENT_MODEL``
+ (default: 
+``gpt-4o``
+)
+``NU_AGENT_API_KEY``
+ (optional; falls back to 
+``OPENAI_API_KEY``
+)
+Example for LM Studio:
+```nu
+$env.NU_AGENT_CHAT_URL = \"http://127.0.0.1:1234/v1/chat/completions\"
+$env.NU_AGENT_MODEL = \"qwen2.5-coder-7b-instruct\"
+
+```
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "3c7244b89f1dbd29112a295eebfce6e8b9d6161b3201f310aa5225e247add099",
+    nu-agent,
+    [
+      "Enrichment Contract"
+    ],
+    "``nu-agent``
+ is designed to enrich one record at a time.
+Input: one structured record plus a target schema and prompt
+Output: one validated JSON result on stdout
+Errors: diagnostics on stderr and non-zero exit code
+Batch iteration, retries across a dataset, and persistence live in a separate batch tool
+``enrich``
+ is the stable single-item entrypoint
+Recommended caller pattern:
+```nu
+let result = (try {
+  ./nu-agent --task \"annotate workout\" --record '{\"exercise\":\"squat\"}' --schema '{\"allowed\":[\"exercise\"],\"required\":[\"exercise\"],\"non_null\":[\"exercise\"]}' --validate-only
+} catch { |err|
+  error make { msg: ($err.msg? | default \"nu-agent enrichment failed\") }
+})
+
+```
+For now, keep stderr free-form and let Nushell 
+``try/catch``
+ handle failures. Do not depend on parsing stderr as JSON.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+        high_priority
+      ],
+      idiom_weight: 1
+    },
+    "Title: nu-agent
+Path: Enrichment Contract
+Content:
+``nu-agent``
+ is designed to enrich one record at a time.
+Input: one structured record plus a target schema and prompt
+Output: one validated JSON result on stdout
+Errors: diagnostics on stderr and non-zero exit code
+Batch iteration, retries across a dataset, and persistence live in a separate batch tool
+``enrich``
+ is the stable single-item entrypoint
+Recommended caller pattern:
+```nu
+let result = (try {
+  ./nu-agent --task \"annotate workout\" --record '{\"exercise\":\"squat\"}' --schema '{\"allowed\":[\"exercise\"],\"required\":[\"exercise\"],\"non_null\":[\"exercise\"]}' --validate-only
+} catch { |err|
+  error make { msg: ($err.msg? | default \"nu-agent enrichment failed\") }
+})
+
+```
+For now, keep stderr free-form and let Nushell 
+``try/catch``
+ handle failures. Do not depend on parsing stderr as JSON.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "6180f75c64ea967a278b8885c721de143d14b73b18f7664f3aba6b19b49db710",
+    nu-agent,
+    [
+      "Token Seed Pass"
+    ],
+    "The first seed pass can turn a normalized Hebrew token into a structured record:
+```nu
+use ./mod.nu *
+
+let token = {
+  surface: \"אַ֥שְֽׁרֵי־\"
+  volume: \"Ketuvim\"
+  book: \"Tehillim\"
+  chapter: 1
+  verse: 1
+}
+
+let seed = (token-seed-input $token)
+let prompt = (seed-prompt $seed)
+let schema = (token-seed-schema)
+
+```
+That seed record is then sent to the LLM, which fills in the missing fields while
+
+preserving the same JSON object shape.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+        high_priority
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Token Seed Pass
+Content:
+The first seed pass can turn a normalized Hebrew token into a structured record:
+```nu
+use ./mod.nu *
+
+let token = {
+  surface: \"אַ֥שְֽׁרֵי־\"
+  volume: \"Ketuvim\"
+  book: \"Tehillim\"
+  chapter: 1
+  verse: 1
+}
+
+let seed = (token-seed-input $token)
+let prompt = (seed-prompt $seed)
+let schema = (token-seed-schema)
+
+```
+That seed record is then sent to the LLM, which fills in the missing fields while
+
+preserving the same JSON object shape.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "a01ad4af1c6f5ab105566df5db8a56b37cc936554dbfbd5094e39a03d553802f",
+    nu-agent,
+    [
+      "RAG Pipeline & nu_plugin_rag"
+    ],
+    "This repository now includes a documented plan and Nushell-first tooling for building
+
+a Retrieval-Augmented Generation (RAG) artifact from Nushell documentation and other
+
+corpora. The goals and orchestration are described in docs/RAG.md.
+Key points:
+The preferred workflow is Nushell + Rust only. No Python or other scripting languages
+
+are required by the core pipeline.
+A repo-local plugin called 
+``nu_plugin_rag``
+ is planned to expose commands such as
+
+``rag.prepare-deps``
+, 
+``rag.build``
+, 
+``rag.status``
+, and 
+``rag.rebuild``
+ as Nushell commands.
+The pipeline is intentionally idempotent and safe-by-default: ingestion writes chunk, command, and embedding artefacts to disk; database imports remain opt-in and external.
+See 
+``docs/RAG.md``
+ and the walkthrough in 
+``docs/RAG_HAPPY_PATH.md``
+ for the artifact layout, caching rules, and developer notes.
+Note: The repository previously contained a vendored FAISS tree under
+
+``build/faiss_local``
+ (FAISS demos and C/Python bindings). That directory has been
+
+archived/removed from the active tree. The project now uses a remote embedding
+service by default (configurable via EMBEDDING_REMOTE_URL and EMBEDDING_MODEL).
+FAISS remains available in history if needed, but it is not part of the default
+build or runtime path.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: RAG Pipeline & nu_plugin_rag
+Content:
+This repository now includes a documented plan and Nushell-first tooling for building
+
+a Retrieval-Augmented Generation (RAG) artifact from Nushell documentation and other
+
+corpora. The goals and orchestration are described in docs/RAG.md.
+Key points:
+The preferred workflow is Nushell + Rust only. No Python or other scripting languages
+
+are required by the core pipeline.
+A repo-local plugin called 
+``nu_plugin_rag``
+ is planned to expose commands such as
+
+``rag.prepare-deps``
+, 
+``rag.build``
+, 
+``rag.status``
+, and 
+``rag.rebuild``
+ as Nushell commands.
+The pipeline is intentionally idempotent and safe-by-default: ingestion writes chunk, command, and embedding artefacts to disk; database imports remain opt-in and external.
+See 
+``docs/RAG.md``
+ and the walkthrough in 
+``docs/RAG_HAPPY_PATH.md``
+ for the artifact layout, caching rules, and developer notes.
+Note: The repository previously contained a vendored FAISS tree under
+
+``build/faiss_local``
+ (FAISS demos and C/Python bindings). That directory has been
+
+archived/removed from the active tree. The project now uses a remote embedding
+service by default (configurable via EMBEDDING_REMOTE_URL and EMBEDDING_MODEL). FAISS
+remains available in history if needed, but it is not part of the default build or
+runtime path.
+"
+  ],
+  [
+    "/home/michael/prj/nu-agent/README.md",
+    "5c557d7cb2981e69d64680fde4e9d73e0dbee0b8610f9fba06aaf66560fbd196",
+    nu-agent,
+    [
+      "Running the pipeline"
+    ],
+    "Build the Rust helpers once
+```bash
+cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+
+```
+This produces 
+``target/debug/embed_runner``
+ and 
+``target/debug/nu-search``
+, which
+
+the scripts rely on when generating embeddings and running smoke searches.
+Ingest Markdown and generate embeddings
+```bash
+nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+
+```
+The wrapper clones the repository if needed, runs the shredder over every
+
+Markdown file, builds the command map and chunk stores, and (when
+
+``embed_runner``
+ is available) writes deterministic embeddings to
+
+``build/rag/nu-docs/embeddings/``
+.
+Optional manual control
+If you prefer to run the steps individually, see
+
+``docs/RAG_HAPPY_PATH.md``
+ for the exact commands (
+``nu-shredder``
+,
+
+``scripts/make-data-from-chunks.nu``
+, and 
+``embed_runner``
+).
+Querying the artefacts
+```nu
+use ./tools.nu *
+
+resolve-command-doc --name \"open\"
+
+search-nu-concepts --query \"pipeline\" --limit 3
+
+```
+You can also run 
+``target/debug/nu-search``
+ directly against the generated
+
+embeddings for quick similarity checks.
+",
+    {
+      commands: [
+
+      ],
+      tags: [
+        high_priority
+      ],
+      idiom_weight: 0
+    },
+    "Title: nu-agent
+Path: Running the pipeline
+Content:
+Build the Rust helpers once
+```bash
+cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+
+```
+This produces 
+``target/debug/embed_runner``
+ and 
+``target/debug/nu-search``
+, which
+
+the scripts rely on when generating embeddings and running smoke searches.
+Ingest Markdown and generate embeddings
+```bash
+nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs
+
+```
+The wrapper clones the repository if needed, runs the shredder over every
+
+Markdown file, builds the command map and chunk stores, and (when
+
+``embed_runner``
+ is available) writes deterministic embeddings to
+
+``build/rag/nu-docs/embeddings/``
+.
+Optional manual control
+If you prefer to run the steps individually, see
+
+``docs/RAG_HAPPY_PATH.md``
+ for the exact commands (
+``nu-shredder``
+,
+
+``scripts/make-data-from-chunks.nu``
+, and 
+``embed_runner``
+).
+Querying the artefacts
+```nu
+use ./tools.nu *
+
+resolve-command-doc --name \"open\"
+
+search-nu-concepts --query \"pipeline\" --limit 3
+
+```
+You can also run 
+``target/debug/nu-search``
+ directly against the generated
+
+embeddings for quick similarity checks.
+"
+  ]
+]
