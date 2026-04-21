@@ -43,7 +43,7 @@ fn build_index(vec_path: &str, chunks_path: &str, out_index: &str) -> anyhow::Re
                 .unwrap_or("")
                 .to_string();
             let vec_arr = v.get("vector").and_then(|x| x.as_array()).unwrap();
-            let mut vec_f: Vec<f32> = vec_arr.iter().map(|n| n.as_f64().unwrap() as f32).collect();
+            let vec_f: Vec<f32> = vec_arr.iter().map(|n| n.as_f64().unwrap() as f32).collect();
             items.push(EmbRec { id, vector: vec_f });
         }
         items
@@ -141,7 +141,7 @@ fn query_index(index_path: &str, q: &str, topk: usize) -> anyhow::Result<()> {
     let paths = v["paths"].as_array().unwrap();
     let weights = v["weights"].as_array().unwrap();
     let flat = v["vectors"].as_array().unwrap();
-    let mut vectors: Vec<f32> = flat.iter().map(|x| x.as_f64().unwrap() as f32).collect();
+    let vectors: Vec<f32> = flat.iter().map(|x| x.as_f64().unwrap() as f32).collect();
 
     // embed query
     let mut model =

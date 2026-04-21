@@ -5,7 +5,6 @@ use serde::Deserialize;
 use serde::Serialize;
 use std::env;
 use std::fs;
-use std::io::Write;
 
 #[derive(Serialize)]
 struct NuDocChunk<'a> {
@@ -304,7 +303,7 @@ fn main() -> anyhow::Result<()> {
     // Read existing combined chunks.msgpack (if present), append current records,
     // and write back as a single MessagePack array with named maps.
     let combined_chunks_path = out_dir.join("chunks.msgpack");
-    let mut combined_records: Vec<OutRecord> = if combined_chunks_path.exists() {
+    let combined_records: Vec<OutRecord> = if combined_chunks_path.exists() {
         match std::fs::read(&combined_chunks_path) {
             Ok(data) => match rmp_serde::from_slice::<Vec<OutRecord>>(&data) {
                 Ok(mut existing) => {
@@ -327,7 +326,7 @@ fn main() -> anyhow::Result<()> {
 
     // Similarly aggregate embedding_input into build/nu_ingest/embedding_input.msgpack
     let combined_emb_path = out_dir.join("embedding_input.msgpack");
-    let mut combined_emb: Vec<EmbRec> = if combined_emb_path.exists() {
+    let combined_emb: Vec<EmbRec> = if combined_emb_path.exists() {
         match std::fs::read(&combined_emb_path) {
             Ok(data) => match rmp_serde::from_slice::<Vec<EmbRec>>(&data) {
                 Ok(mut existing) => {

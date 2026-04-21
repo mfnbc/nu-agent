@@ -2,8 +2,6 @@ use anyhow::Result;
 use rmp_serde::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
 use std::fs;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
 use std::path::Path;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

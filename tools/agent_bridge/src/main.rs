@@ -2,7 +2,6 @@ use anyhow::Context;
 use fastembed::{InitOptions, TextEmbedding};
 use rayon::prelude::*;
 use rmp_serde::from_slice;
-use serde::Deserialize;
 use serde_json::Value as JsonValue;
 use std::collections::HashMap;
 use std::fs;
@@ -192,7 +191,7 @@ fn main() -> anyhow::Result<()> {
             body = chunks[*idx].text.clone();
         }
         // truncate to 1500 characters (preserve UTF-8 boundaries)
-        let mut truncated = if body.chars().count() > 1500 {
+        let truncated = if body.chars().count() > 1500 {
             let s: String = body.chars().take(1500).collect();
             format!("{}... [truncated]", s)
         } else {

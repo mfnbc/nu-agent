@@ -1,6 +1,5 @@
 use anyhow::Context;
-use fastembed::{EmbeddingModel, InitOptions, TextEmbedding};
-use rmp_serde::Deserializer;
+use fastembed::{InitOptions, TextEmbedding};
 use serde::{Deserialize, Serialize};
 use std::fs::File;
 use std::io::{Read, Write};

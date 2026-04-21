@@ -1,7 +1,7 @@
 use serde_json::Value;
 use std::collections::HashMap;
 use std::fs::{self, File};
-use std::io::{self, BufRead, BufReader, Write};
+use std::io::{BufRead, BufReader, Write};
 
 fn main() -> anyhow::Result<()> {
     let in_path = "build/nu_ingest/chunks.nuon";
@@ -16,7 +16,7 @@ fn main() -> anyhow::Result<()> {
     let reader = BufReader::new(f);
 
     let mut cmd_map: HashMap<String, serde_json::Map<String, Value>> = HashMap::new();
-    let mut embed_out = File::create(out_embed)?;
+    let _embed_out = File::create(out_embed)?;
     let mut vec_rows: Vec<Value> = Vec::new();
     // collect embedding input rows here
     let mut embed_rows: Vec<Value> = Vec::new();

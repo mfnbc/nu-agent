@@ -6,7 +6,6 @@ use std::fs;
 
 // fastembed for local embeddings; persist MessagePack as canonical output
 use fastembed::TextEmbedding;
-use uuid::Uuid;
 use tokio;
 
 #[derive(Parser, Debug)]
