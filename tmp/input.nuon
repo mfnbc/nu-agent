@@ -1,0 +1,4 @@
+[
+  { "id": "1", "embedding_input": "Hello world" },
+  { "id": "2", "embedding_input": "Rust is great for systems work" }
+]

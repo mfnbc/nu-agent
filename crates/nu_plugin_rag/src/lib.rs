@@ -154,26 +154,76 @@ pub fn embed_and_write(input: &str, output: &str, vector_out: Option<&str>) -> a
         inputs: &[String],
         model: &str,
     ) -> anyhow::Result<Vec<Vec<f32>>> {
-        let client = reqwest::blocking::Client::new();
+        use std::thread::sleep;
+        use std::time::Duration;
+
+        let timeout_ms: u64 = std::env::var("EMBEDDING_REQUEST_TIMEOUT_MS")
+            .ok()
+            .and_then(|s| s.parse().ok())
+            .unwrap_or(10_000);
+        let retries: usize = std::env::var("EMBEDDING_REQUEST_RETRIES")
+            .ok()
+            .and_then(|s| s.parse().ok())
+            .unwrap_or(3);
+
+        let client = reqwest::blocking::Client::builder()
+            .timeout(Duration::from_millis(timeout_ms))
+            .build()?;
         let body = serde_json::json!({ "model": model, "input": inputs });
-        let mut req = client.post(url);
         // Avoid relying on reqwest's `json` helper in case the feature set differs;
         // send a JSON body explicitly.
         let body_str = serde_json::to_string(&body)?;
-        req = req
-            .header("Content-Type", "application/json")
-            .body(body_str);
-        if let Some(k) = api_key {
-            req = req.header("Authorization", format!("Bearer {}", k));
+
+        let mut last_err: Option<anyhow::Error> = None;
+        let mut v: serde_json::Value = serde_json::Value::Null;
+        for attempt in 0..retries {
+            let mut req = client
+                .post(url)
+                .header("Content-Type", "application/json")
+                .body(body_str.clone());
+            if let Some(k) = api_key.clone() {
+                req = req.header("Authorization", format!("Bearer {}", k));
+            }
+            match req.send() {
+                Ok(resp) => {
+                    let status = resp.status();
+                    match resp.text() {
+                        Ok(text) => {
+                            if !status.is_success() {
+                                if status.is_server_error() && attempt + 1 < retries {
+                                    last_err = Some(anyhow::anyhow!(
+                                        "remote embedding request failed (status {}): {}",
+                                        status,
+                                        text
+                                    ));
+                                    sleep(Duration::from_millis(250 * 2u64.pow(attempt as u32)));
+                                    continue;
+                                }
+                                anyhow::bail!(
+                                    "remote embedding request failed: {}: {}",
+                                    status,
+                                    text
+                                );
+                            }
+                            v = serde_json::from_str(&text)?;
+                            break;
+                        }
+                        Err(e) => last_err = Some(anyhow::anyhow!(e)),
+                    }
+                }
+                Err(e) => last_err = Some(anyhow::anyhow!(e)),
+            }
+            if attempt + 1 < retries {
+                sleep(Duration::from_millis(250 * 2u64.pow(attempt as u32)));
+            }
         }
-        let resp = req.send()?;
-        let status = resp.status();
-        let text = resp.text()?;
-        if !status.is_success() {
-            anyhow::bail!("remote embedding request failed: {}: {}", status, text);
+        if v.is_null() {
+            if let Some(e) = last_err {
+                return Err(e);
+            }
+            anyhow::bail!("remote embedding request failed: unknown error");
         }
-        let v: serde_json::Value = serde_json::from_str(&text)?;
-        if let Some(embs) = parse_embeddings_from_value(v) {
+        if let Some(embs) = parse_embeddings_from_value(v.clone()) {
             if embs.len() != inputs.len() {
                 anyhow::bail!(
                     "remote embedding service returned {} embeddings for {} inputs",
@@ -183,7 +233,7 @@ pub fn embed_and_write(input: &str, output: &str, vector_out: Option<&str>) -> a
             }
             return Ok(embs);
         }
-        anyhow::bail!("unexpected remote embedding response: {}", text)
+        anyhow::bail!("unexpected remote embedding response: {:?}", v)
     }
 
     // Default: use local service at 172.19.224.1:1234 with MXBAI embedding model.

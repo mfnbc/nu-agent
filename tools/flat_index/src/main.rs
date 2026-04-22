@@ -137,23 +137,70 @@ fn query_index(index_path: &str, q: &str, topk: usize) -> anyhow::Result<()> {
     let url = std::env::var("EMBEDDING_REMOTE_URL").unwrap_or_else(|_| default_url.to_string());
     let api_key = std::env::var("EMBEDDING_API_KEY").ok();
     let model_name = std::env::var("EMBEDDING_MODEL").unwrap_or_else(|_| default_model.to_string());
-    let client = reqwest::blocking::Client::new();
+    use std::thread::sleep;
+    use std::time::Duration;
+
+    let timeout_ms: u64 = std::env::var("EMBEDDING_REQUEST_TIMEOUT_MS")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(10_000);
+    let retries: usize = std::env::var("EMBEDDING_REQUEST_RETRIES")
+        .ok()
+        .and_then(|s| s.parse().ok())
+        .unwrap_or(3);
+
+    let client = reqwest::blocking::Client::builder()
+        .timeout(Duration::from_millis(timeout_ms))
+        .build()?;
+
     let body = serde_json::json!({ "model": model_name, "input": texts });
     let body_str = serde_json::to_string(&body)?;
-    let mut req = client
-        .post(&url)
-        .header("Content-Type", "application/json")
-        .body(body_str);
-    if let Some(k) = api_key {
-        req = req.header("Authorization", format!("Bearer {}", k));
+
+    let mut last_err: Option<anyhow::Error> = None;
+    let mut v: serde_json::Value = serde_json::Value::Null;
+    for attempt in 0..retries {
+        let mut req = client
+            .post(&url)
+            .header("Content-Type", "application/json")
+            .body(body_str.clone());
+        if let Some(k) = api_key.clone() {
+            req = req.header("Authorization", format!("Bearer {}", k));
+        }
+        match req.send() {
+            Ok(resp) => {
+                let status = resp.status();
+                match resp.text() {
+                    Ok(text) => {
+                        if !status.is_success() {
+                            if status.is_server_error() && attempt + 1 < retries {
+                                last_err = Some(anyhow::anyhow!(
+                                    "remote embedding request failed (status {}): {}",
+                                    status,
+                                    text
+                                ));
+                                sleep(Duration::from_millis(250 * 2u64.pow(attempt as u32)));
+                                continue;
+                            }
+                            anyhow::bail!("remote embedding request failed: {}: {}", status, text);
+                        }
+                        v = serde_json::from_str(&text)?;
+                        break;
+                    }
+                    Err(e) => last_err = Some(anyhow::anyhow!(e)),
+                }
+            }
+            Err(e) => last_err = Some(anyhow::anyhow!(e)),
+        }
+        if attempt + 1 < retries {
+            sleep(Duration::from_millis(250 * 2u64.pow(attempt as u32)));
+        }
     }
-    let resp = req.send()?;
-    let status = resp.status();
-    let text = resp.text()?;
-    if !status.is_success() {
-        anyhow::bail!("remote embedding request failed: {}: {}", status, text);
+    if v.is_null() {
+        if let Some(e) = last_err {
+            return Err(e);
+        }
+        anyhow::bail!("remote embedding request failed: unknown error");
     }
-    let v: serde_json::Value = serde_json::from_str(&text)?;
     let qv = if let Some(e) = v.get("embeddings") {
         let parsed: Vec<Vec<f32>> = serde_json::from_value(e.clone())?;
         parsed[0].clone()
@@ -170,7 +217,7 @@ fn query_index(index_path: &str, q: &str, topk: usize) -> anyhow::Result<()> {
         let parsed: Vec<Vec<f32>> = serde_json::from_value(v)?;
         parsed[0].clone()
     } else {
-        anyhow::bail!("unexpected remote embedding response: {}", text)
+        anyhow::bail!("unexpected remote embedding response: {:?}", v)
     };
     // L2-normalize query
     let norm: f32 = qv.iter().map(|x| x * x).sum::<f32>().sqrt();
