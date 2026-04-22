@@ -60,6 +60,24 @@ def main [] {
         (try { open $tmp | from msgpack --objects | collect } catch { try { open $tmp | from json } catch { open $tmp } })
     }
 
+    # Verify embedding provider is available (unless dry run). This sends a
+    # small probe request to the configured EMBEDDING_REMOTE_URL and verifies
+    # the response shape contains embeddings. Fail fast with a helpful message
+    # if the provider is unreachable or returns an unexpected shape.
+    if ($env.EMBEDDING_DRY_RUN? | default "") != "1" {
+        let probe_body = { model: $model_name, input: ["health-check"] }
+        let probe_resp = try { http post --content-type application/json $remote_url $probe_body } catch {
+            error make { msg: ($"Failed to contact embedding provider at {($remote_url)}. Check EMBEDDING_REMOTE_URL and network connectivity.") }
+        }
+
+        # Normalize possible response shapes to an embedding list using
+        # the same heuristics used later when handling real responses.
+        let probe_embs = (try { $probe_resp.embeddings } catch { try { $probe_resp.data | each { |d| (try { $d.embedding } catch { $d }) } } catch { $probe_resp })
+        if ($probe_embs | length) == 0 {
+            error make { msg: ($"Embedding provider at {($remote_url)} returned no embeddings for probe. Verify EMBEDDING_MODEL and provider contract.") }
+        }
+    }
+
     let chunks = (
         $recs_final
         | each { |r|
