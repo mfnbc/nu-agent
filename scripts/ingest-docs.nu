@@ -56,21 +56,31 @@ export def main [
 
   let file_count = ($files | length)
   print $"Shredding ($file_count) markdown files..."
+  # Locate shredder binary (compiled Rust in crates/nu_plugin_rag or top-level)
+  let shredder_candidates = [
+    "./target/debug/shredder",
+    "./crates/nu_plugin_rag/target/debug/shredder",
+    "./target/release/shredder",
+    "./crates/nu_plugin_rag/target/release/shredder"
+  ]
+  let shredder = (
+    $shredder_candidates
+    | where { |p| ($p | path exists) }
+    | get 0?
+    | default "./shredder"
+  )
 
   for file in $files {
+    let cmd = $shredder
     if ($source | str length) > 0 {
-      if $attach_code_blocks {
-        ./nu-shredder $file --source $source --attach-code-blocks
-      } else {
-        ./nu-shredder $file --source $source
-      }
-    } else {
-      if $attach_code_blocks {
-        ./nu-shredder $file --attach-code-blocks
-      } else {
-        ./nu-shredder $file
-      }
+      cmd = ($cmd + " --source " + $source)
     }
+    if $attach_code_blocks {
+      cmd = ($cmd + " --attach-code-blocks")
+    }
+    cmd = ($cmd + " " + $file)
+    # run the shredder command
+    ^$cmd | ignore
   }
 
   print "Normalising chunk outputs..."
