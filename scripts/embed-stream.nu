@@ -1,8 +1,8 @@
 #!/usr/bin/env nu
 
 # 1. Capture environment variables safely
-let remote_url = ($env.EMBEDDING_REMOTE_URL? | default "http://localhost:1234/v1/embeddings")
-let model_name = ($env.EMBEDDING_MODEL? | default "mixedbread-ai/mxbai-embed-large-v1")
+let remote_url = ($env.EMBEDDING_REMOTE_URL? | default "http://172.19.224.1:1234/v1/embeddings")
+let model_name = ($env.EMBEDDING_MODEL? | default "text-embedding-mxbai-embed-large-v1")
 let batch_size = ($env.EMBEDDING_BATCH_SIZE? | default 8 | into int)
 let max_chars = ($env.EMBEDDING_MAX_CHARS? | default 1800 | into int)
 let overlap = ($env.EMBEDDING_OVERLAP_CHARS? | default 200 | into int)
