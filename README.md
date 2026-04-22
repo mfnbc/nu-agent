@@ -218,6 +218,13 @@ Note: The repository previously contained a vendored FAISS tree under
 archived/removed from the active tree. The project now uses a remote embedding
 service by default (configurable via EMBEDDING_REMOTE_URL and EMBEDDING_MODEL).
 
+The repository previously included a small example mock embedding server script
+(`scripts/mock_embedding_server.py`) for local experimentation. That file has
+been removed from the tree to avoid accidental use in UAT. If you need a mock
+server for CI or local testing, consider running a temporary HTTP server that
+matches the provider contract (POST {"model":..., "input":[...]}) and returns
+{ "embeddings": [[...], ...] } or { "data": [{"embedding": [...]}, ...] }.
+
 ### Running the pipeline
 
 1. **Build the Rust helpers once**
