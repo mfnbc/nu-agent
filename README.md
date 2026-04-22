@@ -49,7 +49,8 @@ Optional retrieval tooling (not required for the agent runtime):
   (Note: `make-data-from-chunks.nu` will automatically aggregate per-file `.chunks.msgpack`
   outputs from `build/nu_ingest/` into a consolidated `chunks.msgpack` if the consolidated
   corpus is missing.)
-- `target/debug/embed_runner`, `target/debug/nu-search` — binaries built from `crates/nu_plugin_rag` that generate deterministic embeddings and let you smoke-test similarity search.
+- `scripts/embed-and-stream.nu` — Nushell streaming embed runner (preferred). This streams inputs to the configured remote embedding service and writes a MessagePack stream of maps.
+- `crates/nu_plugin_rag/flat_index` — Rust binary for binary-safe index building and query. Use this for fast numeric operations (vector indexing and dot-product search).
 
 See `docs/RAG.md` for an end-to-end walkthrough of the pipeline.
 
