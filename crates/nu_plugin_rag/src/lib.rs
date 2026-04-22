@@ -1,3 +1,6 @@
+pub mod commands;
+pub mod state;
+
 use anyhow::Result;
 use rmp_serde::Deserializer;
 use serde::{Deserialize, Serialize};

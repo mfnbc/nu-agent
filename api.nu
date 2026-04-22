@@ -9,7 +9,7 @@ export def enrichment-system-prompt [] {
 }
 
 def build-chat-body [system: string, prompt: string, tools: list] {
-  let model = ($env.NU_AGENT_MODEL? | default "gpt-4o")
+  let model = ($env.NU_AGENT_MODEL? | default "google/gemma-4-26b-a4b")
 
   {
     model: $model,
@@ -24,7 +24,7 @@ def build-chat-body [system: string, prompt: string, tools: list] {
 }
 
 def post-chat [body: string] {
-  let chat_url = ($env.NU_AGENT_CHAT_URL? | default "https://api.openai.com/v1/chat/completions")
+  let chat_url = ($env.NU_AGENT_CHAT_URL? | default "http://172.19.224.1:1234/v1/chat/completions")
   let api_key = ($env.NU_AGENT_API_KEY? | default ($env.OPENAI_API_KEY? | default ""))
 
   # Some endpoints (eg. /v1/completions) expect a different request shape.
@@ -42,15 +42,36 @@ def post-chat [body: string] {
     let comp_body = { model: ($parsed.model), prompt: $prompt, max_tokens: ($parsed.max_tokens? | default 1500), temperature: ($parsed.temperature? | default 0), top_p: ($parsed.top_p? | default 1) } | to json
 
     if ($api_key | str length) > 0 {
-      http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --max-time 120sec --full $chat_url $comp_body
+      try {
+        http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --max-time 120sec --full $chat_url $comp_body
+      } catch { |_|
+        # Fallback to curl when the `http` builtin is not available or header types are problematic
+        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer " + $api_key + "\" --data-binary @-")
+        bash -lc $cmd <<< $comp_body
+      }
     } else {
-      http post -t application/json --max-time 120sec --full $chat_url $comp_body
+      try {
+        http post -t application/json --max-time 120sec --full $chat_url $comp_body
+      } catch { |_|
+        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" --data-binary @-")
+        bash -lc $cmd <<< $comp_body
+      }
     }
   } else {
     if ($api_key | str length) > 0 {
-      http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --max-time 120sec --full $chat_url $body
+      try {
+        http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --max-time 120sec --full $chat_url $body
+      } catch { |_|
+        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer " + $api_key + "\" --data-binary @-")
+        bash -lc $cmd <<< $body
+      }
     } else {
-      http post -t application/json --max-time 120sec --full $chat_url $body
+      try {
+        http post -t application/json --max-time 120sec --full $chat_url $body
+      } catch { |_|
+        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" --data-binary @-")
+        bash -lc $cmd <<< $body
+      }
     }
   }
 

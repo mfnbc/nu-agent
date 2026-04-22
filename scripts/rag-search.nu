@@ -1,7 +1,7 @@
 # Nushell helper: rag-search
 # Usage: nu scripts/rag-search.nu "how to filter tables" --limit 3
 
-def main [query: string, --limit: int = 3, --keep-temp: bool = $false] {
+def main [query: string, --limit: int = 3, --keep-temp = $false] {
     # Create a temporary file for the query vector
     let tmp = (mktemp --suffix .msgpack)
     let tmp_path = ($tmp | get path)

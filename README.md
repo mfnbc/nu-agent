@@ -44,15 +44,12 @@ Core agent surface:
 
 Optional retrieval tooling (not required for the agent runtime):
 
-- `scripts/ingest-docs.nu` — wraps shredding, command-map generation, and embedding production into a single command.
-- `scripts/make-data-from-chunks.nu` — normalises shredder output into the `data/` and `build/nu_ingest/` stores used by the tools.
-  (Note: `make-data-from-chunks.nu` will automatically aggregate per-file `.chunks.msgpack`
-  outputs from `build/nu_ingest/` into a consolidated `chunks.msgpack` if the consolidated
-  corpus is missing.)
-- `scripts/embed-and-stream.nu` — Nushell streaming embed runner (preferred). This streams inputs to the configured remote embedding service and writes a MessagePack stream of maps.
-- `crates/nu_plugin_rag/flat_index` — Rust binary for binary-safe index building and query. Use this for fast numeric operations (vector indexing and dot-product search).
+- `scripts/ingest-docs.nu` — high-level ingestion helper: shred Markdown, normalise chunks and command maps, and prepare embedding inputs.
+- `scripts/make-data-from-chunks.nu` — normalises shredder output into `data/` and `build/nu_ingest/`.
+- `scripts/embed-and-stream.nu` — streaming embed helper; prefer using the repo plugin `rag` commands for in-shell workflows.
+- `crates/nu_plugin_rag` — Rust plugin + helpers: exposes `rag` plugin commands for embedding, indexing, search, persistence, and management.
 
-See `docs/RAG.md` for an end-to-end walkthrough of the pipeline.
+See `docs/RAG.md` for a concise, up-to-date walkthrough of the RAG pipeline and the `rag` plugin command set.
 
 Reference docs:
 
@@ -219,12 +216,9 @@ Note: The repository previously contained a vendored FAISS tree under
 archived/removed from the active tree. The project now uses a remote embedding
 service by default (configurable via EMBEDDING_REMOTE_URL and EMBEDDING_MODEL).
 
-The repository previously included a small example mock embedding server script
-(`scripts/mock_embedding_server.py`) for local experimentation. That file has
-been removed from the tree to avoid accidental use in UAT. If you need a mock
-server for CI or local testing, consider running a temporary HTTP server that
-matches the provider contract (POST {"model":..., "input":[...]}) and returns
-{ "embeddings": [[...], ...] } or { "data": [{"embedding": [...]}, ...] }.
+If you need a mock embedding server for CI or local testing, run a temporary
+HTTP server that matches the provider contract (POST {"model":..., "input":[...]})
+and returns either { "embeddings": [[...], ...] } or { "data": [{"embedding": [...]}, ...] }.
 
 ### Running the pipeline
 

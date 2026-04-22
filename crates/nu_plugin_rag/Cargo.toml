@@ -14,3 +14,8 @@ blake3 = "1"
 pulldown-cmark = "0.9"
 text-splitter = { version = "0.13", features = ["tokenizers"] }
 tokenizers = { version = "0.19", features = ["http"] }
+nu-plugin = "0.92.0"
+nu-protocol = "0.92.0"
+nu-engine = "0.92.0"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+walkdir = "2"

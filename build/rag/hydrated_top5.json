@@ -1,0 +1,58 @@
+[
+  {
+    "score": 0.578364908695221,
+    "id": "24ff020586da75cf7c3bc0f8b14df7a71f2df56563319a912484a06a98cda61b",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "JSON-only LLM output (\n``[{ name, arguments }]``\n)\nNo prose/explanations/markdown from the model\nSystem prompt defines the model as a Nushell expert\nSystem prompt defines the model as Nushell-only controller/developer\nWhitelist-only callable tools (\n``TOOL_NAMES``\n in \n``tools.nu``\n)\nSerial execution (no parallel scheduler yet)\nStateless core (state is controller/user owned)\nNo external text-processing tool dependency in core path (\n``jq``\n, \n``grep``\n, \n``patch``\n, etc.)\nSingle-item execution only; batching lives outside \n``nu-agent``\nEnrichment output is strict JSON only on stdout after validation and retry\nSchema validation rejects extra keys and enforces required/non-null keys\n"
+  },
+  {
+    "score": 0.5692000389099121,
+    "id": "9c0728cd77d5121fb4ec1313208b282c1e80a16c9486fb59bdb2255fc2f02a5e",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "``read-file --path <string>``\n``write-file --path <string> --content <string>``\n``list-files --path <string>``\n``search --pattern <string> --path <string>``\n``search-chunks --path <string> --pattern <string>``\n``replace-in-file --path <string> --pattern <string> --replacement <string>``\n``inspect-rig-plan --path <string> [--table <string>] [--limit <int>]``\n``inspect-chunk --path <string> --id <string> [--neighbors]``\n``search-embedding-input --path <string> --pattern <string> [--limit <int>]``\n``propose-edit --path <string> --pattern <string> --replacement <string>``\n``apply-edit --file <string> --after <string>``\n``check-nu-syntax --path <string>``\n``self-check``\nSchema is strict: unsupported argument types are rejected early, and invalid JSON output from the model is wrapped with a project-specific error.\n"
+  },
+  {
+    "score": 0.5570083856582642,
+    "id": "e663e021f351119893588b75947949bc774a61641365344f3d8448e3b3797dfe",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "``api.nu``\n supports OpenAI-compatible endpoints via env vars:\n``NU_AGENT_CHAT_URL``\n (default: \n``https://api.openai.com/v1/chat/completions``\n)\n``NU_AGENT_MODEL``\n (default: \n``gpt-4o``\n)\n``NU_AGENT_API_KEY``\n (optional; falls back to \n``OPENAI_API_KEY``\n)\nExample for LM Studio:\n```nu\n$env.NU_AGENT_CHAT_URL = \"http://127.0.0.1:1234/v1/chat/completions\"\n$env.NU_AGENT_MODEL = \"qwen2.5-coder-7b-instruct\"\n\n```\n"
+  },
+  {
+    "score": 0.556921660900116,
+    "id": "21296b0b4a8490b3901d769225efbdb3f3a2c4b4d13d0b5b15c8e61a30d6f0f4",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "``nu-agent``\n is designed to enrich one record at a time.\nInput: one structured record plus a target schema and prompt\nOutput: one validated JSON result on stdout\nErrors: diagnostics on stderr and non-zero exit code\nBatch iteration, retries across a dataset, and persistence live in a separate batch tool\n``enrich``\n is the stable single-item entrypoint\nRecommended caller pattern:\n```nu\nlet result = (try {\n  ./nu-agent --task \"annotate workout\" --record '{\"exercise\":\"squat\"}' --schema '{\"allowed\":[\"exercise\"],\"required\":[\"exercise\"],\"non_null\":[\"exercise\"]}' --validate-only\n} catch { |err|\n  error make { msg: ($err.msg? | default \"nu-agent enrichment failed\") }\n})\n\n```\nFor now, keep stderr free-form and let Nushell \n``try/catch``\n handle failures. Do not depend on parsing stderr as JSON.\n"
+  },
+  {
+    "score": 0.5423588752746582,
+    "id": "c227f432362d907cbec96f9400f4338a92bbb0b543fb7552f6922ff62e66179e",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "Core agent surface:\n``mod.nu``\n — thin aggregator that re-exports the public commands (\n``airun``\n, \n``run-json``\n, \n``enrich``\n) and canonical tools.\n``agent/runtime.nu``\n — builds tool schemas at runtime, validates model output, and executes whitelisted commands.\n``agent/schema.nu``\n — inspects Nushell command signatures and enforces the whitelist/argument contract.\n``agent/llm.nu``\n — JSON-only response parsing and repair around the LLM API.\n``agent/enrichment.nu``\n — single-record enrichment entrypoint and schema validation.\n``agent/json.nu``\n — shared JSON helpers used by multiple layers.\n``api.nu``\n — \n``http post``\n wrapper with strict no-prose system prompt.\n``tools.nu``\n — canonical Nushell tools plus the single-source \n``TOOL_REGISTRY``\n metadata.\nOptional retrieval tooling (not required for the agent runtime):\n``scripts/ingest-docs.nu``\n — wraps shredding, command-map generation, and embedding production into a single command.\n``scripts/make-data-from-chunks.nu``\n — normalises shredder output into the \n``data/``\n and \n``build/nu_ingest/``\n stores used by the tools.\n\n(Note: \n``make-data-from-chunks.nu``\n will automatically aggregate per-file \n``.chunks.msgpack``\n\noutputs from \n``build/nu_ingest/``\n into a consolidated \n``chunks.msgpack``\n if the consolidated\n\ncorpus is missing.)\n``scripts/embed-and-stream.nu``\n — Nushell streaming embed runner (preferred). This streams inputs to the configured remote embedding service and writes a MessagePack stream of maps.\n``crates/nu_plugin_rag/flat_index``\n — Rust binary for binary-safe index building and query. Use this for fast numeric operations (vector indexing and dot-product search).\nSee \n``docs/RAG.md``\n for an end-to-end walkthrough of the pipeline.\nReference docs:\n``RULES.md``\n — hard project constraints.\n``PLAN.md``\n — current status and next steps.\n"
+  },
+  {
+    "score": 0.5371856093406677,
+    "id": "5c9a8bbdcd88619c7e1f8a5445aeb214df2d950213bb2c9d8975320c451e809e",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "The first seed pass can turn a normalized Hebrew token into a structured record:\n```nu\nuse ./mod.nu *\n\nlet token = {\n  surface: \"אַ֥שְֽׁרֵי־\"\n  volume: \"Ketuvim\"\n  book: \"Tehillim\"\n  chapter: 1\n  verse: 1\n}\n\nlet seed = (token-seed-input $token)\nlet prompt = (seed-prompt $seed)\nlet schema = (token-seed-schema)\n\n```\nThat seed record is then sent to the LLM, which fills in the missing fields while\n\npreserving the same JSON object shape.\n"
+  },
+  {
+    "score": 0.5255650877952576,
+    "id": "254fc6a96fe96019ff189f42286c40a85ad7add5f2221f5e400ec8846d6c0dae",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "``enrich --task <string> --record <json> --schema <json>``\n — single-item structured enrichment; validates output against a schema\n"
+  },
+  {
+    "score": 0.5139966011047363,
+    "id": "e8515577c187cd4458dfcfac51c6476c1b1fd684ef444e50786e1d60fbcbee7f",
+    "title": "nu-agent",
+    "path": "README.md",
+    "text": "Example with Nushell:\n```nu\nuse ./mod.nu *\nairun --task \"refactor\"\n\n```\nSingle-item enrichment example:\n```nu\nuse ./mod.nu *\nenrich --task \"annotate workout\" --record '{\"exercise\":\"squat\",\"reps\":5}' --schema '{\"allowed\":[\"label\",\"notes\"],\"required\":[\"label\"],\"non_null\":[\"label\"]}'\n\n```\nRepo-local CLI wrapper for enrichment:\n```bash\nNU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task \"annotate workout\" --record '{\"exercise\":\"squat\",\"reps\":5}' --schema '{\"allowed\":[\"label\"],\"required\":[\"label\"],\"non_null\":[\"label\"]}'\n\n```\nDeterministic local execution test (no LLM):\n```nu\nuse ./mod.nu *\nrun-json --calls '[{\"name\":\"list-files\",\"arguments\":{\"path\":\".\"}}]'\n\n```\nRAG pipeline quick start:\n```bash\ncargo build --manifest-path crates/nu_plugin_rag/Cargo.toml\nnu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force\n\n```\nThe script shreds the Markdown, normalises chunk/command data, emits embedding\n\ninputs, and (when the compiled \n``embed_runner``\n binary is available) writes\n\ndeterministic embeddings. See \n``docs/RAG.md``\n for the full walkthrough, including\n\ncommands for git sources (\n``scripts/prep-nu-rag.nu``\n) and optional smoke-search\n\nsteps.\nRepo-local CLI wrapper:\n```bash\nNU_AGENT_CHAT_URL=http://127.0.0.1:1234/v1/chat/completions ./nu-agent --task \"refactor\"\n\n```\nThe CLI requires \n``NU_AGENT_CHAT_URL``\n so it points at your local or test LLM endpoint.\n\nIt prints a short notice before calling the model, since some local models can take several minutes to respond.\n"
+  }
+]

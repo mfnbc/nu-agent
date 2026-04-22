@@ -1,0 +1,5 @@
+[
+  { "id": "q1", "text": "how to install nushell and get started" },
+  { "id": "q2", "text": "usage of the open command in nushell" },
+  { "id": "q3", "text": "how to compose pipelines in nushell" }
+]

@@ -1,0 +1,10 @@
+[
+  { "id": "q_install", "text": "how to install nushell" },
+  { "id": "q_pipeline", "text": "how to use pipelines in nushell" },
+  { "id": "q_open", "text": "open command usage" },
+  { "id": "q_loading_data", "text": "loading data into nushell" },
+  { "id": "q_modules", "text": "how to create and use modules" },
+  { "id": "q_plugins", "text": "writing plugins for nushell" },
+  { "id": "q_scripts", "text": "writing scripts in nushell" },
+  { "id": "q_parallelism", "text": "parallelism in nushell" }
+]

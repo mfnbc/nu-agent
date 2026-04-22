@@ -139,6 +139,8 @@ fn main() -> anyhow::Result<()> {
     let prepend_passage = args.iter().any(|a| a == "--prepend-passage")
         || std::env::var("SHREDDER_PREPEND_PASSAGE").ok().as_deref() == Some("1");
 
+    let json_out = args.iter().any(|a| a == "--json");
+
     let raw = fs::read_to_string(path).context("reading input file")?;
     let (title, text) = extract_title_and_text(&raw);
 
@@ -150,7 +152,7 @@ fn main() -> anyhow::Result<()> {
             tok_name
         );
         match chunk_text_by_tokens(&text, tok_name, max_tokens, overlap_tokens) {
-            Ok(mut c) => {
+            Ok(c) => {
                 eprintln!(
                     "shredder: tokenizer split into {} chunks in {:?}",
                     c.len(),
@@ -183,8 +185,13 @@ fn main() -> anyhow::Result<()> {
             heading_path: None,
             embedding_input: c,
         };
-        let buf = to_vec_named(&rec)?;
-        out.write_all(&buf)?;
+        if json_out {
+            let s = serde_json::to_string(&rec)? + "\n";
+            out.write_all(s.as_bytes())?;
+        } else {
+            let buf = to_vec_named(&rec)?;
+            out.write_all(&buf)?;
+        }
     }
 
     Ok(())
