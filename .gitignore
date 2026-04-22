@@ -37,3 +37,4 @@ external/nushell.github.io/
 data/nu_docs_vectors.nuon
 build/nu_ingest/
 data/
+build/smoke/
