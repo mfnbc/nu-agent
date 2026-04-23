@@ -20,8 +20,12 @@ let tokenizer = (try { $env.SHREDDER_TOKENIZER } catch { "mixedbread-ai/mxbai-em
 
 print ("running shredder with tokenizer: " + $tokenizer)
 # Run shredder and capture stdout to file (shredder writes msgpack to stdout)
-let cmd = ($shred_bin + " '" + $input + "' --tokenizer '" + $tokenizer + "' --max-tokens 512 --overlap-tokens 64 > '" + $shredded + "'")
-let _ = try { bash -lc $cmd } catch { error make { msg: ("shredder execution failed: " + $cmd) } }
+let cmd = ($shred_bin + " '" + $input + "' --tokenizer '" + $tokenizer + "' --max-tokens 512 --overlap-tokens 64")
+let proc = (do { $cmd } | capture)
+if $proc.exit_code != 0 {
+  error make { msg: ("shredder execution failed: " + ($proc.stderr | str trim)) }
+}
+$proc.stdout | save -f $shredded
 
 if not ($shredded | path exists) { error make { msg: "shredded output not produced" } }
 
@@ -33,7 +37,10 @@ let embeddings_out = ($out_dir | path join "embeddings.msgpack")
 
 print "running embed-and-stream.nu in dry-run"
 let cmd2 = ("EMBEDDING_DRY_RUN=1 nu '" + $embed_script + "' '" + $shredded + "' '" + $embeddings_out + "'")
-let _ = try { bash -lc $cmd2 } catch { error make { msg: ("embed-and-stream execution failed: " + $cmd2) } }
+let proc2 = (do { $cmd2 } | capture)
+if $proc2.exit_code != 0 {
+  error make { msg: ("embed-and-stream execution failed: " + ($proc2.stderr | str trim)) }
+}
 
 if not ($embeddings_out | path exists) { error make { msg: "embeddings output not produced" } }
 
