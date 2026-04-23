@@ -49,33 +49,28 @@ def post-chat [body: string] {
     if ($api_key | str length) > 0 {
       try {
         http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --max-time 120sec --full $chat_url $comp_body
-      } catch { |_|
-        # Fallback to curl when the `http` builtin is not available or header types are problematic
-        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer " + $api_key + "\" --data-binary @-")
-        bash -lc $cmd <<< $comp_body
+      } catch { |err|
+        error make { msg: ($"HTTP post failed and no shell fallback allowed: ({err.msg? | default (err | to text)})") }
       }
     } else {
       try {
         http post -t application/json --max-time 120sec --full $chat_url $comp_body
-      } catch { |_|
-        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" --data-binary @-")
-        bash -lc $cmd <<< $comp_body
+      } catch { |err|
+        error make { msg: ($"HTTP post failed and no shell fallback allowed: ({err.msg? | default (err | to text)})") }
       }
     }
   } else {
     if ($api_key | str length) > 0 {
       try {
         http post -t application/json -H [ $"Authorization: Bearer ($api_key)" ] --max-time 120sec --full $chat_url $body
-      } catch { |_|
-        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer " + $api_key + "\" --data-binary @-")
-        bash -lc $cmd <<< $body
+      } catch { |err|
+        error make { msg: ($"HTTP post failed and no shell fallback allowed: ({err.msg? | default (err | to text)})") }
       }
     } else {
       try {
         http post -t application/json --max-time 120sec --full $chat_url $body
-      } catch { |_|
-        $cmd = $("curl -sS -X POST \"" + $chat_url + "\" -H \"Content-Type: application/json\" --data-binary @-")
-        bash -lc $cmd <<< $body
+      } catch { |err|
+        error make { msg: ($"HTTP post failed and no shell fallback allowed: ({err.msg? | default (err | to text)})") }
       }
     }
   }
