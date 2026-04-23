@@ -72,3 +72,16 @@ export def call-llm-json [task: string, tools: list] {
     }
   }
 }
+
+export def call-llm-consultant [role: string, prompt: string] {
+  # Consultant mode: use the consultant system prompt and return prose
+  let system = (consultant-system-prompt $role)
+  let body = ((build-chat-body $system $prompt []) | to json)
+  let message = (post-chat $body)
+
+  if ($message.content? | default "" | str trim | str length) > 0 {
+    ($message.content | str trim)
+  } else {
+    error make { msg: "LLM consultant did not return content" }
+  }
+}

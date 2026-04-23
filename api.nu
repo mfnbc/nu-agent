@@ -8,6 +8,11 @@ export def enrichment-system-prompt [] {
   Do NOT reveal chain-of-thought, internal reasoning, or step-by-step deliberation. Output only the structured JSON required."
 }
 
+export def consultant-system-prompt [role: string] {
+  let r = ($role | default "Consultant")
+  $"You are an expert {r}. You will be given structured data (tables, records, JSON) produced by deterministic tools. Your job is to provide a natural-language interpretation, synthesis, and recommendations based only on the provided data and the user's query. Do NOT attempt to call any tools or modify files. Do NOT output JSON or tool-calls. Output clear, well-structured prose that answers the user's question and cites the provided data when appropriate. Do NOT reveal chain-of-thought or internal reasoning."
+}
+
 def build-chat-body [system: string, prompt: string, tools: list] {
   let model = ($env.NU_AGENT_MODEL? | default "google/gemma-4-26b-a4b")
 
