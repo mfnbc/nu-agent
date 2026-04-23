@@ -19,6 +19,8 @@ def build-chat-body [system: string, prompt: string, tools: list] {
 
   {
     model: $model,
+    # Instruct the model endpoint to suppress internal reasoning artifacts when supported
+    reasoning_format: ($env.NU_AGENT_REASONING_FORMAT? | default "none"),
     temperature: 0,
     top_p: 1,
     messages: [
