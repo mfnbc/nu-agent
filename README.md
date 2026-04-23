@@ -15,6 +15,21 @@ Conceptually:
 
 `(Prompt + ToolSchema) -> JSON Calls -> Nushell Tool Execution -> Table`
 
+## Project Contracts
+
+This project is organised around a small set of intersecting contracts that define scope, responsibilities, and the developer/operator surface:
+
+1) Enrichment
+ - Single-item structured enrichment is the primary runtime contract: one validated record in, one JSON result out. This is implemented by the `enrich` entrypoints and the validation/repair helpers under `agent/`.
+
+2) Nushell + Rust Development
+ - The canonical development model is Nushell-first with Rust plugins for heavy lifting. Nushell provides structured data flow and orchestration; Rust plugins (for example `crates/nu_plugin_rag`) provide performant, auditable numeric and binary operations. Plugins are exposed back into Nushell as functions the agent or humans can call.
+
+3) Data Pipelining
+ - Ingestion, shredding, embedding, and retrieval are responsibility of the RAG tooling and supporting scripts. The `nu_plugin_rag` crate and `scripts/` orchestrate chunking, embedding generation, index building, and search. Treat these pipelines as project-level resources with their own lifecycle (plan, run, resume, audit).
+
+Treat these contracts as first-class resources when designing prompts, workflows, and automation: they map responsibilities to project subsystems (architect/planner, Nushell orchestrator, Rust plugin implementer, and data pipeline operator).
+
 ## Project Guarantees
 
 - JSON-only LLM output (`[{ name, arguments }]`)
