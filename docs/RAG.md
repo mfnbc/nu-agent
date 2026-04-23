@@ -47,6 +47,20 @@ Notes and caveats
 - `rag index-add` performs batched inserts (default batch-size=100) to reduce Mutex
   contention during mass ingestion. Use `--quiet` to suppress progress messages.
 
+- Import helper: the repository includes a helper binary `import_nu_docs` that
+  performs progressive ingestion, batching, and checkpointing. Build and run:
+
+   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+   ./target/debug/import_nu_docs
+
+  Defaults used by `import_nu_docs` (can be overridden via env vars):
+   - EMBEDDING_REMOTE_URL default: http://172.19.224.1:1234/v1/embeddings
+   - EMBEDDING_MODEL default: text-embedding-mxbai-embed-large-v1
+   - Partial checkpoint: /tmp/partial_nu_wiki.msgpack (flushed every 500 chunks)
+   - Final index output: ./data/nu_wiki.msgpack
+   - Embed batch size: 64
+   - Shredder/tokenizer: controlled with SHREDDER_TOKENIZER (defaults to mixedbread tokenizer in shredder)
+
 Testing
 -------
 

@@ -36,6 +36,21 @@ Shredder tokenizer usage
  - The shredder binary supports tokenizer-aware splitting via the tokenizers + text-splitter crates.
  - Recommended for Mixedbread (mxbai-embed-large-v1) models to ensure chunk token counts match the remote model's tokenizer.
  - Example (prefer this when using Mixedbread remote embeddings):
-     SHREDDER_TOKENIZER=mixedbread-ai/mxbai-embed-large-v1 ./target/debug/shredder README.md --max-tokens 512 --overlap-tokens 64 --prepend-passage > out.msgpack
+     SHREDDER_TOKENIZER=mixedbread-ai/mxbai-embed-large-v1 ./target/debug/shredder README.md --max-tokens 480 --overlap-tokens 50 --prepend-passage > out.msgpack
 
- - If tokenizer loading fails or network is unavailable, shredder will fall back to a safe char-based chunker and log the fallback to stderr.
+- If tokenizer loading fails or network is unavailable, shredder will fall back to a safe char-based chunker and log the fallback to stderr.
+
+Import helper
+ - A helper binary `import_nu_docs` is included to ingest a repo of Markdown (the
+   importer used the `external/nushell.github.io` tree in prior runs). Build and run:
+
+     cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+     ./target/debug/import_nu_docs
+
+ - Runtime defaults used by `import_nu_docs`:
+   - EMBEDDING_REMOTE_URL default: http://172.19.224.1:1234/v1/embeddings
+   - EMBEDDING_MODEL default: text-embedding-mxbai-embed-large-v1
+   - Partial checkpoint path: /tmp/partial_nu_wiki.msgpack (auto-flushed every 500 chunks)
+   - Final index path: ./data/nu_wiki.msgpack
+   - Embed batch size: 64
+   - Shredder/tokenizer: honor SHREDDER_TOKENIZER when present
