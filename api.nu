@@ -85,9 +85,12 @@ def post-chat [body: string] {
   let choice = $res.body.choices.0
 
   if ($choice.message? | default null) != null {
-    # Annotate chat-style responses so callers can detect origin and
-    # apply any extra cleaning or stricter parsing if needed.
-    ($choice.message | merge { metadata: { response_type: "chat" } })
+    # Chat-style responses: return only the content and metadata to avoid
+    # exposing internal "reasoning" fields or chain-of-thought artifacts.
+    let msg = $choice.message
+    let content = (msg.content? | default "" | str trim)
+    let meta = (msg.metadata? | default {})
+    ({ content: $content, metadata: ($meta | merge { response_type: "chat" }) })
   } else if ($choice.text? | default "" | str trim | str length) > 0 {
     # Turn completion-style choice into an object compatible with
     # call-llm/call-llm-content expectations (provide .content) and
