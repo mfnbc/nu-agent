@@ -59,16 +59,9 @@ export const TOOL_REGISTRY = {
     allowed: []
     argument_descriptions: {}
   }
-  "inspect-rig-plan": {
-    description: "Inspect a Rig/FastEmbed LanceDB plan file."
-    required: ["path"]
-    allowed: ["path", "table", "limit"]
-    argument_descriptions: {
-      path: "Path to the Rig plan JSON file."
-      table: "Optional table or job id to filter results."
-      limit: "Optional maximum number of jobs to return."
-    }
-  }
+  # "inspect-rig-plan" was removed: graph/rig import planning is no longer part
+  # of the canonical toolset. If you need similar functionality reimplement as an
+  # external adapter and call it as an opt-in step.
   "inspect-chunk": {
     description: "Retrieve a specific chunk (and optional neighbors) from chunk JSONL files."
     required: ["path", "id"]

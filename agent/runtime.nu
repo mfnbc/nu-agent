@@ -118,7 +118,9 @@ def invoke-tool [call] {
     "list-files" => { list-files --path $args.path }
     "search" => { search --pattern $args.pattern --path $args.path }
     "search-chunks" => { search-chunks --pattern $args.pattern --path $args.path }
-    "inspect-rig-plan" => { inspect-rig-plan --path $args.path --table ($args.table? | default "") --limit ($args.limit? | default 0) }
+    # inspect-rig-plan removed from canonical toolset; graph/rig plan inspection
+    # is no longer part of the core runtime. Reimplement as an external opt-in
+    # adapter if required.
     "inspect-chunk" => {
       let include_neighbors = ($args.neighbors? | default false)
       if $include_neighbors {
