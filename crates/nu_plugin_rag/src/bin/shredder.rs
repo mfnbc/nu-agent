@@ -105,13 +105,17 @@ fn main() -> anyhow::Result<()> {
         .unwrap_or(200);
 
     // Tokenizer-based options
+    // Default tokenizer: prefer Mixedbread's tokenizer for mxbai-embed-large-v1 so
+    // token counts match the embedding model. This avoids "too many tokens" errors.
     let tokenizer_name = args
         .iter()
         .position(|a| a == "--tokenizer")
         .and_then(|i| args.get(i + 1))
         .map(|s| s.to_string())
-        .or_else(|| std::env::var("SHREDDER_TOKENIZER").ok());
+        .or_else(|| std::env::var("SHREDDER_TOKENIZER").ok())
+        .or_else(|| Some("mixedbread-ai/mxbai-embed-large-v1".to_string()));
 
+    // Default max tokens: leave safety headroom below model limit (480 of 512)
     let max_tokens = args
         .iter()
         .position(|a| a == "--max-tokens")
@@ -122,8 +126,9 @@ fn main() -> anyhow::Result<()> {
                 .ok()
                 .and_then(|s| s.parse().ok())
         })
-        .unwrap_or(512);
+        .unwrap_or(480);
 
+    // Default overlap in tokens: moderate overlap (50 tokens)
     let overlap_tokens = args
         .iter()
         .position(|a| a == "--overlap-tokens")
@@ -134,7 +139,7 @@ fn main() -> anyhow::Result<()> {
                 .ok()
                 .and_then(|s| s.parse().ok())
         })
-        .unwrap_or(64);
+        .unwrap_or(50);
 
     let prepend_passage = args.iter().any(|a| a == "--prepend-passage")
         || std::env::var("SHREDDER_PREPEND_PASSAGE").ok().as_deref() == Some("1");
