@@ -22,8 +22,13 @@ This project is organised around a small set of intersecting contracts that defi
 1) Enrichment
  - Single-item structured enrichment is the primary runtime contract: one validated record in, one JSON result out. This is implemented by the `enrich` entrypoints and the validation/repair helpers under `agent/`.
 
-2) Nushell + Rust Development
- - The canonical development model is Nushell-first with Rust plugins for heavy lifting. Nushell provides structured data flow and orchestration; Rust plugins (for example `crates/nu_plugin_rag`) provide performant, auditable numeric and binary operations. Plugins are exposed back into Nushell as functions the agent or humans can call.
+2) Nushell + Rust Development (Developer Contract)
+ - The developer contract is intentionally different from the single-item enrichment contract. It is oriented around code and repo changes and is best expressed as diffs/patches and / or Nushell `.try` preview files rather than a single JSON input/output.
+ - Preferred exchange for developer tasks:
+   - The agent (or human) proposes changes as unified diffs or Nushell-generated `.try` preview files. These artifacts are reviewable, auditable, and map cleanly to code-review workflows.
+   - Apply is explicit: after review, a follow-up command or patch with an explicit `--apply`/`--confirm` flag performs the write. Default behavior should be dry-run / preview.
+ - Nushell is still the canonical orchestrator: use `open --raw`, `lines`, `str replace`, and `.try` workflows to build previews. For larger multi-file edits a unified diff (patch) remains an acceptable, reviewable artifact; we grandfather `diff`/`patch` for developer use but prefer in-nu approaches where practical.
+ - Rust plugins (for example `crates/nu_plugin_rag`) provide performant, auditable numeric and binary operations and can be used to apply patches reliably in environments that lack system patch/git binaries.
 
 3) Data Pipelining
  - Ingestion, shredding, embedding, and retrieval are responsibility of the RAG tooling and supporting scripts. The `nu_plugin_rag` crate and `scripts/` orchestrate chunking, embedding generation, index building, and search. Treat these pipelines as project-level resources with their own lifecycle (plan, run, resume, audit).
