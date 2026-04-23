@@ -56,23 +56,54 @@ Reference docs:
 - `RULES.md` — hard project constraints.
 - `PLAN.md` — current status and next steps.
 
-## Canonical Tools
+## Canonical Execution Model
 
-- `read-file --path <string>`
-- `write-file --path <string> --content <string>`
-- `list-files --path <string>`
-- `search --pattern <string> --path <string>`
-- `search-chunks --path <string> --pattern <string>`
-- `replace-in-file --path <string> --pattern <string> --replacement <string>`
-- `inspect-rig-plan --path <string> [--table <string>] [--limit <int>]`
-- `inspect-chunk --path <string> --id <string> [--neighbors]`
-- `search-embedding-input --path <string> --pattern <string> [--limit <int>]`
-- `propose-edit --path <string> --pattern <string> --replacement <string>`
-- `apply-edit --file <string> --after <string>`
-- `check-nu-syntax --path <string>`
-- `self-check`
+The canonical executor for agent-driven actions in this repository is the Nushell runtime (`nu`). Rather than inventing a separate RPC-style tool API, the model should emit exact Nushell commands (or a small list of Nushell command strings) which the runtime will execute inside `nu` and return structured Nushell output.
 
-Schema is strict: unsupported argument types are rejected early, and invalid JSON output from the model is wrapped with a project-specific error.
+Key points:
+- The agent runs inside Nushell. If a command runs in `nu` (implemented as a Nushell function or a vetted Rust plugin), it is acceptable in the current environment.
+- Do not assume the agent can run arbitrary system binaries. `nu` is the canonical execution layer and should be used for file I/O and transformations.
+- For now the repository continues to implement many helper Nushell functions (tools in tools.nu) for developer convenience; however, the model should still emit Nushell commands (see examples below).
+
+Safe edit workflow (recommended)
+- Use a propose → apply pattern for any file-modifying operation:
+  1. Propose: the LLM re-reads the file and emits Nushell commands that build the new content in memory and save a preview to `<path>.try`. This is a NO-WRITE preview step.
+  2. Inspect: human or automated checks review `<path>.try`.
+  3. Apply: on explicit confirmation, the LLM emits Nushell commands to read `<path>.try` and save the result to the real path (atomic/backup strategies recommended).
+
+Example propose (write preview to .try):
+{"commands":["$orig=(open --raw src/foo.nu)","$new=($orig | str replace \"OldTitle\" \"NewTitle\")","$new | save -f src/foo.nu.try"]}
+
+Example apply (explicit):
+{"commands":["$c=(open --raw src/foo.nu.try)","$c | save -f src/foo.nu"]}
+
+LLM output contract
+- The model should return EXACTLY one JSON object. Two supported shapes:
+  - commands array:
+    { "commands": ["open --raw README.md", "$c=(open --raw file | str replace 'a' 'b')", "$c | save -f file.try"] }
+  - script:
+    { "script": "open --raw README.md\n$c=(open --raw file | str replace 'a' 'b')\n$c | save -f file.try" }
+- Each command is executed sequentially in a single `nu` session so variables persist across steps.
+- The runtime returns a structured run-log with per-command status, stdout/stderr, and any serialisable Nushell value.
+
+Grandfathered diff/patch (temporary)
+- `diff` and `patch` are grandfathered and permitted for now, but runtime defaults MUST be dry-run:
+  - If `patch` is used without an explicit `--apply` or `--confirm` flag, treat it as a preview and do not modify repository files.
+  - Prefer in-nu edits (open/lines/str replace/take/drop/str join) when possible; resort to `diff`/`patch` only when necessary.
+
+Audit and safety
+- All agent-executed commands should be logged (timestamp, run id, command summary, status). By default logs are written to stderr; an env var (AGENT_AUDIT_PATH) may be used to write an append-only audit file.
+- Lightweight validation may optionally reject obvious external-shell invocations (e.g., `bash`, `sh`, `python`, or use of $nu.current-exe). In your constrained runtime these checks are advisory.
+
+Developer helpers
+- Developer-only helper functions (search-chunks, inspect-chunk, resolve-command-doc, etc.) remain implemented in tools.nu for human and developer use; they are not required to be emitted by the model. The model should instead emit Nushell commands that use these helpers when helpful (e.g., `use ./tools.nu *; resolve-command-doc --name \"open\"`).
+
+Why this change
+- Aligns docs with the policy: the canonical tool is `nu`, not a separate RPC surface.
+- Simplifies LLM behavior: it emits the actual Nushell commands it needs.
+- Keeps edits auditable and safe by default (propose → apply, .try files, dry-run for patch).
+
+See the "RAG Pipeline & nu_plugin_rag" and "Running the pipeline" sections for examples of how to author ingestion and retrieval workflows using `nu` and the repo plugins.
 
 ## Module Exports
 
