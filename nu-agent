@@ -6,7 +6,25 @@ export def main [
   --record: string
   --schema: string
   --validate-only
+  --consultant-role: string
+  --consultant-prompt: string
 ] {
+  # Consultant one-shot mode: if consultant-prompt is provided, call the
+  # consultant helper and print the prose response.
+  if (($consultant_prompt | default "" | str length) > 0) {
+    if (($env.NU_AGENT_CHAT_URL? | default "" | str length) == 0) {
+      error make { msg: "NU_AGENT_CHAT_URL is required for consultant mode. Set it to your LLM endpoint before running nu-agent" }
+    }
+
+    let role = ($consultant_role | default "Consultant")
+    let prompt = $consultant_prompt
+
+    # Defensive error formatting: sometimes the caught error is a plain string
+    # rather than an object with .msg; avoid using a cell path on a string.
+    let res = try { consult --role $role --prompt $prompt } catch { |e| error make { msg: (try { ($e.msg? | default ($e | to text)) } catch { ($e | to text) }) } }
+    print $res
+    return
+  }
   if (($record | default "" | str length) > 0) or (($schema | default "" | str length) > 0) {
     if (($task | default "" | str length) == 0) {
       error make { msg: "Missing required --task argument for enrichment mode" }

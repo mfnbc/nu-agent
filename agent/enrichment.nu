@@ -1,7 +1,18 @@
-# Enrichment flow helpers for nu-agent
+# Enrichment contract adapter for nu-agent.
+#
+# Single record + task + schema → validated JSON record. Built on top of the
+# thin LLM client in llm.nu. All prompt construction, JSON parsing, validation,
+# and repair logic lives here; the thin client has no awareness of JSON shapes
+# or enrichment schemas.
+#
+# Public surface unchanged from the previous api.nu-based implementation:
+#   enrich --task <string> --record <json> --schema <json> [--validate-only]
+#   validate-enrichment-output <record> <schema>
 
-use ../api.nu *
+use ../llm.nu *
 use ./json.nu [coerce-json]
+
+const SYSTEM_PROMPT = "You are a Nushell enrichment assistant operating inside the Structured Data Workbench. Given a single record and the target schema, return ONLY a valid JSON object or array that matches the schema. Do not output prose, markdown, or code fences. Do not add extra keys or null out required fields. Prefer deterministic, minimal changes and do not perform side effects. Use the propose->apply pattern for file edits. Do NOT reveal chain-of-thought or internal reasoning."
 
 def enrichment-schema-parts [schema] {
   let schema_type = ($schema | describe)
@@ -77,7 +88,7 @@ export def validate-enrichment-output [output, schema] {
   $output
 }
 
-def enrichment-prompt [task: string, record, schema] {
+def enrichment-user-prompt [task: string, record, schema] {
   $"Task: ($task)\nInput record: (($record | to json))\nTarget schema: (($schema | to json))\nReturn only a valid JSON object that matches the target schema exactly. Do not add extra keys."
 }
 
@@ -85,9 +96,19 @@ def enrichment-repair-prompt [task: string, record, schema, broken: string, reas
   $"Task: ($task)\nInput record: (($record | to json))\nTarget schema: (($schema | to json))\nThe previous answer was invalid.\nAnswer was: ($broken)\nReason: ($reason)\nReturn only a valid JSON object that matches the target schema exactly. Do not add extra keys."
 }
 
+# Compose the Enrichment message array and dispatch through the thin client.
+# This is the only place the adapter talks to the LLM.
+def call-enrichment [user_prompt: string] {
+  let messages = [
+    { role: "system", content: $SYSTEM_PROMPT }
+    { role: "user", content: $user_prompt }
+  ]
+  (call-llm $messages)
+}
+
 def run-enrichment [task: string, record, schema] {
-  let prompt = (enrichment-prompt $task $record $schema)
-  let raw = (call-llm-content $prompt)
+  let user_prompt = (enrichment-user-prompt $task $record $schema)
+  let raw = (call-enrichment $user_prompt)
 
   try {
     let parsed = (coerce-json $raw)
@@ -95,7 +116,7 @@ def run-enrichment [task: string, record, schema] {
   } catch { |err|
     let reason = ($err.msg? | default ($err | to text))
     let repair_prompt = (enrichment-repair-prompt $task $record $schema $raw $reason)
-    let repaired_raw = (call-llm-content $repair_prompt)
+    let repaired_raw = (call-enrichment $repair_prompt)
     let repaired_parsed = (coerce-json $repaired_raw)
 
     try {

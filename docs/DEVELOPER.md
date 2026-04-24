@@ -1,68 +1,90 @@
-Developer notes: build, run, test
-================================
+# Developer notes
 
-Quickstart (local)
--------------------
+Build, run, and smoke-test the nu-agent core.
 
-1. Build the Rust workspace (produces `target/debug/embed_runner` and `target/debug/nu-search`):
+**Current state (2026-04-24):** the core (thin client + three contract adapters + Operator runtime) is working and covered by four smoke tests. The RAG retrieval layer is broken at multiple levels — see [STATUS.md](STATUS.md) Known Warts. This document covers what actually runs today.
 
-   cargo build --workspace
+## Prerequisites
 
-2. Run unit tests for the plugin crate:
+- **Nushell.** The `nu-agent` wrapper's shebang points at `~/.cargo/bin/nu`; any recent Nushell works if invoked via `nu scripts/…`.
+- **An OpenAI-compatible LLM endpoint.** The thin client (`llm.nu`) hardcodes `http://172.19.224.1:1234/v1/chat/completions` and a Gemma-family model. To point elsewhere, edit the constants at the top of `llm.nu`. The `NU_AGENT_CHAT_URL` env var is currently a CLI-wrapper guard only; reconciling the two into one config path is future work.
+- **For the RAG tooling** (optional, currently partial): Rust toolchain + `cargo`.
 
-   cargo test --manifest-path crates/nu_plugin_rag/Cargo.toml
+## Build the Rust helpers
 
-3. Run the deterministic embedding runner on the example input:
+The nu-agent core is pure Nushell — no build step. The RAG pipeline's Rust components do:
 
-   ./target/debug/embed_runner --input examples/embedding_input_example.msgpack --output build/embeddings_example.msgpack
+```bash
+cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+```
 
-4. Use the ingestion script to build a RAG bundle (see `docs/RAG.md` for details):
+Produces `target/debug/embed_runner`, `target/debug/nu-search`, `target/debug/import_nu_docs`, and `target/debug/nu_plugin_rag`. See [RAG.md](RAG.md) for the intended pipeline and [STATUS.md](STATUS.md) for what currently works.
 
-   nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
-   # or: nu scripts/prep-nu-rag.nu --input https://github.com/nushell/nushell.github.io.git --out-dir build/rag/nu-docs --force
+## Run the CLI
 
-Quick Start (concise)
----------------------
+`./nu-agent` is the repo-root wrapper over `mod.nu`. Three modes:
 
-1) Build the helper binaries:
+```bash
+export NU_AGENT_CHAT_URL="http://127.0.0.1:1234/v1/chat/completions"   # any non-empty value works as a guard
 
-   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+# Enrichment — one record in, one validated JSON record out
+./nu-agent \
+  --task "annotate workout" \
+  --record '{"exercise":"squat","reps":5}' \
+  --schema '{"allowed":["label","notes"],"required":["label"],"non_null":["label"]}'
 
-2) Shred & ingest Markdown:
+# Consultant — role + prompt → prose synthesis over supplied context
+./nu-agent \
+  --consultant-role "Nutritionist" \
+  --consultant-prompt "What patterns do you see in this week's food log: ..."
 
-   nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/readme --force
+# Operator — natural-language task → tool calls → executed
+./nu-agent --task "list files in the current directory"
+```
 
-3) Generate a query vector and run a search:
+## Smoke tests
 
-   printf '[{"embedding_input":"how to list files"}]' > build/rag/readme/query.embed.nuon
-   ./target/debug/embed_runner --input build/rag/readme/query.embed.nuon --vector-out build/rag/readme/query.msgpack
-    ./target/debug/nu-search --input build/rag/readme/embeddings/corpus.embeddings.msgpack --query-vec build/rag/readme/query.msgpack --top-k 3 --out-format json
+Four scripts under `scripts/` cover the core paths end-to-end. Run from the repo root.
 
+```bash
+nu scripts/smoke-call-llm.nu        # thin client: messages → response
+nu scripts/smoke-enrich.nu          # Enrichment adapter
+nu scripts/smoke-consultant.nu      # Consultant adapter
+nu scripts/smoke-operator.nu        # Operator adapter + runtime dispatch end-to-end
+```
 
-Notes about nu_plugin integration
---------------------------------
+Each prints its test inputs, the LLM response, and a final `smoke: OK` / `smoke: FAIL` line. Exit status is non-zero on failure. Typical runtime is 5–30 seconds per smoke depending on model latency.
 
-- The plugin crate currently exposes binaries (`embed_runner`, `nu-search`) consumed by the Nushell scripts.
- - The plugin crate currently exposes binaries (`embed_runner`, `nu-search`, `import_nu_docs`, `shredder`) consumed by the Nushell scripts.
-- Converting the ingestion pipeline into a first-class `nu_plugin` remains future work once the scripts stabilise.
+These smokes are the repo's executable documentation — if you change a primitive or adapter, re-run the relevant smoke (and any that might regress across the thin-client boundary).
 
-Where to extend
----------------
+## Module structure
 
-- Emit a manifest during ingestion (chunk counts, command coverage, embedding metadata).
-- Add checksum-based caching so reruns skip unchanged Markdown files.
-- Package the ingestion pipeline as an optional `nu_plugin` when ready.
-- Replace the placeholder deterministic embeddings with a vetted FastEmbed path once the dependency story is locked.
+The public surface is re-exported through `mod.nu`:
 
-Importer notes
- - The `import_nu_docs` binary performs resumable ingestion with a partial
-   checkpoint at /tmp/partial_nu_wiki.msgpack and writes the final index to
-   ./data/nu_wiki.msgpack. It embeds in batches of 64 and flushes the partial
-   checkpoint every 500 chunks by default. Environment variables control the
-   embedding and chat endpoints (EMBEDDING_REMOTE_URL, EMBEDDING_MODEL,
-   NU_AGENT_CHAT_URL, NU_AGENT_MODEL).
+- `enrich`, `validate-enrichment-output` (from `agent/enrichment.nu`)
+- `consult` (from `agent/consultant.nu`)
+- `airun`, `run-json` (from `agent/runtime.nu`)
+- Everything exported by `tools.nu` and `seed-template.nu`
 
-Shredder tokens
- - The shredder binary defaults were adjusted to favor tokenizer-aware splitting
-   for Mixedbread (`mixedbread-ai/mxbai-embed-large-v1`) with max_tokens=480 and
-   overlap_tokens=50 to avoid exceeding 512 token limits when using that model.
+Import in your own scripts with `use ./mod.nu *` from the repo root (or the appropriate relative path).
+
+## Adding a new contract adapter
+
+Pattern used by Enrichment, Consultant, and Operator:
+
+1. Create `agent/<adapter>.nu`.
+2. Define a `const SYSTEM_PROMPT = "..."` at the top of the file.
+3. Write a private `call-<adapter>` function that builds `[{system}, {user}]` messages and dispatches through `call-llm` (or `call-llm-raw` if you need `tools` or other body fields).
+4. Add a public entrypoint with flag-based arguments (`--task`, `--prompt`, etc.).
+5. Add a `scripts/smoke-<adapter>.nu` that exercises the adapter end-to-end.
+6. Export through `mod.nu` if the adapter should be a first-class public command.
+
+Safety rules from [RULES.md](../RULES.md): no bash/curl fallbacks; no external text-processing tools (`jq`, `grep`, `sed`, `awk`, `patch`) in the core path; Rust allowed only as `nu_plugin` extensions.
+
+## See also
+
+- [ARCHITECTURE.md](ARCHITECTURE.md) — how the pieces fit together.
+- [CONTRACTS.md](CONTRACTS.md) — contract semantics and system-prompt templates.
+- [STATUS.md](STATUS.md) — current state, known warts, deferred work.
+- [RAG.md](RAG.md) — retrieval pipeline (currently partially broken).
+- [../RULES.md](../RULES.md) — hard invariants.

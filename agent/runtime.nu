@@ -2,7 +2,7 @@
 
 use ../tools.nu *
 use ./schema.nu [build-tool-schema canonical-tool-name validate-call-args validate-calls]
-use ./llm.nu [call-llm-json parse-json-calls-safe]
+use ./operator.nu [call-operator parse-json-calls-safe]
 
 def nu-target-path [call] {
   let name = (canonical-tool-name $call.name)
@@ -34,7 +34,7 @@ def repair-nu-prompt [call, content: string, reason: string] {
 
 def repair-nu-call [call, content: string, reason: string, tools: list] {
   let prompt = (repair-nu-prompt $call $content $reason)
-  let repaired = (call-llm-json $prompt $tools)
+  let repaired = (call-operator $prompt $tools)
 
   validate-calls $repaired
 
@@ -187,7 +187,7 @@ export def run-json [--calls: string] {
 
 export def airun [--task: string] {
   let tools = build-tool-schema
-  let calls = (call-llm-json $task $tools)
+  let calls = (call-operator $task $tools)
   validate-calls $calls
   let results = (run-calls $calls $tools)
   let expected = (expected-call-count $task)
@@ -196,7 +196,7 @@ export def airun [--task: string] {
   # prompt it once more with the already-executed results. No further retry.
   if ($expected != null) and (($calls | length) < $expected) {
     let prompt = (continue-prompt $task $results)
-    let calls2 = (call-llm-json $prompt $tools)
+    let calls2 = (call-operator $prompt $tools)
     validate-calls $calls2
     $results ++ (run-calls $calls2 $tools)
   } else {

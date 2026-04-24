@@ -1,7 +1,9 @@
 Edifice: RAG Pipeline (concise)
 ================================
 
-This repository's RAG tooling now centers on a single, Nushell-first edifice:
+> **Current state (2026-04-24):** the retrieval layer is broken at multiple levels — orphaned `nu-search` binary, incompatible corpus formats on disk, `nu_plugin_rag` plugin rejects the `--stdio` handshake during `plugin add`. See [STATUS.md](STATUS.md) Known Warts for specifics. The pipeline described below is the **intended** shape; repairing it is a deferred milestone.
+
+This repository's RAG tooling is designed as a single, Nushell-first edifice:
 
 - Lightweight Rust helpers for numeric work live in crates/nu_plugin_rag.
 - A repo-local Nushell plugin (nu_plugin_rag) exposes in-shell RAG commands

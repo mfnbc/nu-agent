@@ -44,7 +44,7 @@ nu-agent is a helper for Nushell only. It is not a general-purpose coding assist
 - Retrieval tools must return evidence, not conclusions.
 - Retrieval is deterministic; no LLM-based searching.
 - Durable contracts should live in `docs/` so they survive context resets.
-- The canonical long-lived architecture statement lives in `docs/ARCHITECTURAL_MANIFEST.md`.
+- Canonical architecture, contract model, and status live in `docs/VISION.md`, `docs/CONTRACTS.md`, `docs/ARCHITECTURE.md`, and `docs/STATUS.md`.
 
 ## Editing Rules
 
