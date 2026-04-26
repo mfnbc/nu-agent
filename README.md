@@ -1,24 +1,10 @@
-# nu-agent
+**nu-agent** is a Nushell-native tool that uses LLMs as a structured interface for personal data. 
 
-**A query tool for the self-describing-record world, and the bootstrapping core of a Nushell-native personal data ecosystem.**
+It accepts selection of a pre-determined *contract* which acts as a system prompt, a contract appropriate user prompt, and routes it to an LLM. The result is a validated, structured record according to the contract.
 
-nu-agent is to a Nushell-based personal data system what `psql` is to PostgreSQL — a client that takes a query and returns records. The difference is the query language: instead of SQL, nu-agent accepts a natural-language prompt plus a [contract](docs/CONTRACTS.md), routes it through an LLM, and emits JSON tool-calls that execute through Nushell. It is deliberately narrow (single record in, single validated result out), and narrow on purpose — the narrowness is what makes invocations composable.
-
-## Core shape
-
-```
-(prompt + contract) → LLM → JSON tool-calls → Nushell execution → records
-```
+## Key traits:
 
 One invocation is one query. Batching, iteration, scheduling, and cross-invocation workflows happen *outside* nu-agent. See [docs/VISION.md](docs/VISION.md) for the ecosystem this enables and [docs/CONTRACTS.md](docs/CONTRACTS.md) for the full contract catalogue.
-
-## Who it is for
-
-- Developers building **wings** — domain-specific toolkits for personal data (workouts, ledger, chess, astronomy, reading, bible tokens, notes).
-- People who want natural-language access to structured personal data without surrendering that data to opaque apps.
-- Nushell users who want the LLM to participate in their shell as a disciplined query partner, not a chatbot.
-
-nu-agent is **not** a general-purpose coding assistant. Its scope is Nushell + `nu_plugin` Rust crates, and its mandate is narrow queries and `.try`-preview code edits.
 
 ## Quickstart
 
@@ -26,8 +12,7 @@ nu-agent is **not** a general-purpose coding assistant. Its scope is Nushell + `
 # Build the Rust helpers (shredder, embed_runner, import_nu_docs, nu_plugin_rag).
 cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 
-# The CLI wrapper requires NU_AGENT_CHAT_URL as a guard. Any non-empty value works;
-# the actual endpoint is currently hardcoded in llm.nu.
+# The CLI wrapper requires NU_AGENT_CHAT_URL as a guard.
 export NU_AGENT_CHAT_URL="http://127.0.0.1:1234/v1/chat/completions"
 
 # Run a single-record enrichment.
@@ -38,7 +23,7 @@ export NU_AGENT_CHAT_URL="http://127.0.0.1:1234/v1/chat/completions"
 ```
 
 For the RAG pipeline over Markdown docs:
-
+[TODO: The LLM is assumed to need nushell command help most immediately, this should show how to git clone the nushell documentation and prepare a RAG for use in writing nushell code commands]
 ```bash
 nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
 ```
@@ -46,10 +31,24 @@ nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
 See [docs/DEVELOPER.md](docs/DEVELOPER.md) for the full build/run/test flow and [docs/RAG.md](docs/RAG.md) for the retrieval pipeline walkthrough.
 
 ## Configuration
+[TODO: Create a "models" configuration json file. Each model should be given a set of designation tags to a contract, for instance...
+
+embed: Indicates embedding models (e.g., sentence-transformers). 
+vision: For models handling images (e.g., ViT, CLIP).
+tool: Suggests the model can call or use external tools (e.g., function-calling LLMs). 
+reasoning: Implies strong logical or chain-of-thought reasoning (e.g., models trained on math/code). 
+text2text-generation: For models that convert input text to output text (e.g., translation, summarization). 
+conversational: Models designed for dialogue. 
+audio, speech: For speech recognition or audio generation.
+multimodal: Models handling multiple data types (e.g., text and image). 
+llm: General tag for large language models. 
+diffusers: For diffusion models used in image generation.
+
+"tool" model, or "vision" model, or "embedding" model, in the style of the huggingface repository. It should also be given a rating of "common", "rare", "epic", "legendary" to denote the relative strength of that model and associated greater cost, and be designated as shiney to denote in their classification they are better than others. RESEARCH: Is there a way to just get the huggingface tags for each model if it is simply named in the config?]
 
 The LLM endpoint URL, model name, request timeout, and reasoning-suppression flags are currently **hardcoded** as constants at the top of `llm.nu`. To point at a different endpoint or model, edit that file directly.
 
-The CLI wrapper (`./nu-agent`) requires `NU_AGENT_CHAT_URL` to be set to any non-empty value as a guard against running without explicit configuration intent. The actual endpoint is in `llm.nu`; reconciling the two into a single deliberate configuration path is planned when env-var configurability returns.
+[TODO: I need to find a better way to do this. Having two different expectations of the LLM endpoints is confusing.] The CLI wrapper (`./nu-agent`) requires `NU_AGENT_CHAT_URL` to be set to any non-empty value as a guard against running without explicit configuration intent. The actual endpoint is in `llm.nu`; reconciling the two into a single deliberate configuration path is planned when env-var configurability returns.
 
 ## Documentation
 
