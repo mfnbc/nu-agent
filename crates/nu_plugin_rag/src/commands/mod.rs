@@ -1,2 +1,3 @@
 pub mod embed;
-pub mod index;
+pub mod shred;
+pub mod similarity;

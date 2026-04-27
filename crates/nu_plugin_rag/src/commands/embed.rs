@@ -43,45 +43,6 @@ impl Embed {
         out
     }
 
-    /// Send a batch of texts to the embedding HTTP API and parse embeddings.
-    pub fn http_embed_texts(
-        client: &reqwest::blocking::Client,
-        url: &str,
-        model: &str,
-        texts: &[String],
-    ) -> Result<Vec<Vec<f32>>, LabeledError> {
-        let payload = json!({"model": model, "input": texts});
-        match client.post(url).json(&payload).send() {
-            Ok(resp) => match resp.json::<serde_json::Value>() {
-                Ok(json_resp) => {
-                    if let Some(arr) = json_resp.get("data").and_then(|d| d.as_array()) {
-                        let mut out: Vec<Vec<f32>> = Vec::new();
-                        for item in arr.iter() {
-                            if let Some(emb_v) = item.get("embedding").and_then(|e| e.as_array()) {
-                                let mut vec_f: Vec<f32> = Vec::with_capacity(emb_v.len());
-                                for num in emb_v.iter() {
-                                    if let Some(n) = num.as_f64() {
-                                        vec_f.push(n as f32);
-                                    }
-                                }
-                                out.push(vec_f);
-                            }
-                        }
-                        Ok(out)
-                    } else {
-                        Err(LabeledError::new(
-                            "missing data.embedding in response".to_string(),
-                        ))
-                    }
-                }
-                Err(e) => Err(LabeledError::new(format!(
-                    "failed to parse json response: {}",
-                    e
-                ))),
-            },
-            Err(e) => Err(LabeledError::new(format!("http request failed: {}", e))),
-        }
-    }
 }
 
 impl PluginCommand for Embed {
