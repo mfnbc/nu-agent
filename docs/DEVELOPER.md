@@ -14,7 +14,7 @@ Build, run, and smoke-test the nu-agent core.
 
 The nu-agent core is pure Nushell — no build step. The RAG pipeline's Rust components do:
 
-```bash
+```nu
 cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 ```
 
@@ -24,17 +24,21 @@ Produces `target/debug/embed_runner`, `target/debug/nu-search`, `target/debug/im
 
 `./nu-agent` is the repo-root wrapper over `mod.nu`. Three modes:
 
-```bash
+```nu
 # Enrichment — one record in, one validated JSON record out
-./nu-agent \
-  --task "annotate workout" \
-  --record '{"exercise":"squat","reps":5}' \
-  --schema '{"allowed":["label","notes"],"required":["label"],"non_null":["label"]}'
+(
+  ./nu-agent
+    --task "annotate workout"
+    --record '{"exercise":"squat","reps":5}'
+    --schema '{"allowed":["label","notes"],"required":["label"],"non_null":["label"]}'
+)
 
 # Consultant — role + prompt → prose synthesis over supplied context
-./nu-agent \
-  --consultant-role "Nutritionist" \
-  --consultant-prompt "What patterns do you see in this week's food log: ..."
+(
+  ./nu-agent
+    --consultant-role "Nutritionist"
+    --consultant-prompt "What patterns do you see in this week's food log: ..."
+)
 
 # Operator — natural-language task → tool calls → executed
 ./nu-agent --task "list files in the current directory"
@@ -44,7 +48,7 @@ Produces `target/debug/embed_runner`, `target/debug/nu-search`, `target/debug/im
 
 Four scripts under `scripts/` cover the core paths end-to-end. Run from the repo root.
 
-```bash
+```nu
 nu scripts/smoke-call-llm.nu        # thin client: messages → response
 nu scripts/smoke-enrich.nu          # Enrichment adapter
 nu scripts/smoke-consultant.nu      # Consultant adapter

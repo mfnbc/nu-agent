@@ -8,21 +8,23 @@ One invocation is one query. Batching, iteration, scheduling, and cross-invocati
 
 ## Quickstart
 
-```bash
+```nu
 # Build the Rust helpers (shredder, embed_runner, import_nu_docs, nu_plugin_rag).
 cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 
 # Run a single-record enrichment. The LLM endpoint is hardcoded in llm.nu;
 # default points at a local LAN endpoint.
-./nu-agent \
-  --task "annotate workout" \
-  --record '{"exercise":"squat","reps":5}' \
-  --schema '{"allowed":["label","notes"],"required":["label"],"non_null":["label"]}'
+(
+  ./nu-agent
+    --task "annotate workout"
+    --record '{"exercise":"squat","reps":5}'
+    --schema '{"allowed":["label","notes"],"required":["label"],"non_null":["label"]}'
+)
 ```
 
 For the RAG pipeline over Markdown docs:
 [TODO: The LLM is assumed to need nushell command help most immediately, this should show how to git clone the nushell documentation and prepare a RAG for use in writing nushell code commands]
-```bash
+```nu
 nu scripts/ingest-docs.nu --path README.md --out-dir build/rag/demo --force
 ```
 

@@ -30,9 +30,9 @@ Quick start (build + register plugin)
 
 3. Use the commands directly in Nushell. Example: create and save an index:
 
-   [ { id: "a", text: "alpha beta" }, { id: "b", text: "beta yellow" } ] \
-   | rag embed --mock --column text \
-   | rag index-create demo_index \
+   [ { id: "a", text: "alpha beta" }, { id: "b", text: "beta yellow" } ]
+   | rag embed --mock --column text
+   | rag index-create demo_index
    | rag index-add demo_index
 
    rag index-save demo_index --path /tmp/demo.msgpack
