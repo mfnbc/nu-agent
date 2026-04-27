@@ -97,12 +97,7 @@ impl PluginCommand for Embed {
 
     fn signature(&self) -> Signature {
         Signature::build(self.name())
-            .named(
-                "mock",
-                SyntaxShape::Boolean,
-                "Use deterministic mock embeddings",
-                Some('m'),
-            )
+            .switch("mock", "Use deterministic mock embeddings", Some('m'))
             .named(
                 "batch-size",
                 SyntaxShape::Int,

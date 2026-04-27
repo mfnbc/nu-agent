@@ -232,12 +232,7 @@ impl PluginCommand for IndexAdd {
                 "Buffer size for batched index-add (lock once per batch)",
                 Some('b'),
             )
-            .named(
-                "quiet",
-                SyntaxShape::Boolean,
-                "Suppress progress messages",
-                Some('q'),
-            )
+            .switch("quiet", "Suppress progress messages", Some('q'))
             .input_output_type(Type::Any, Type::Nothing)
     }
 
@@ -416,9 +411,8 @@ impl PluginCommand for IndexSearch {
                 "Provide an explicit query vector (list of numbers)",
                 Some('q'),
             )
-            .named(
+            .switch(
                 "mock",
-                SyntaxShape::Boolean,
                 "Use deterministic mock embeddings for text queries",
                 Some('m'),
             )
@@ -434,9 +428,8 @@ impl PluginCommand for IndexSearch {
                 "Embedding model name for live text queries",
                 Some('o'),
             )
-            .named(
+            .switch(
                 "with-doc",
-                SyntaxShape::Boolean,
                 "Include the original document value in results",
                 Some('w'),
             )
