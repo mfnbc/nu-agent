@@ -140,7 +140,7 @@ See [RAG.md](RAG.md) for the intended pipeline and [STATUS.md](STATUS.md) for wh
 ## Design rules
 
 - **Determinism over cleverness.** Retrieval returns evidence, not conclusions. Tool dispatch is serial. LLM temperature is 0.
-- **Explicit contracts over implicit behaviour.** Every invocation picks exactly one contract; the contract's shape (role × corpus × tool-set × output) is stated up front.
+- **Explicit contracts over implicit behaviour.** Every invocation picks exactly one contract; the contract's shape (Role × Action-Scope) is stated up front.
 - **The thin client does exactly one thing.** All contract semantics live in adapters. The thin client has no knowledge of tools, JSON shapes, or enrichment schemas.
 - **Each adapter is independently smoke-tested.** Changes to a primitive or adapter re-run the relevant smoke (`scripts/smoke-*.nu`).
 - **Chunking is independent from indexing.** Shredder produces chunks regardless of what indexes consume them.

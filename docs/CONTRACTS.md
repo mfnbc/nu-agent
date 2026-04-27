@@ -1,35 +1,30 @@
 # Contracts
 
-This document defines what a **contract** is, enumerates the core contracts nu-agent ships with, specifies the system-prompt template for each, and describes how contracts compose.
-
-A contract narrows the aperture of a single nu-agent invocation so that the LLM's behaviour, the data it sees, the tools it can call, and the output it must produce are all specified up front. Every invocation of nu-agent chooses exactly one contract.
+A contract narrows the aperture of a single nu-agent invocation. Every invocation chooses one.
 
 ## The contract tuple
 
-A contract is a specific tuple describing Role and Action Scope.
+A contract is specified along **two dimensions**: **Role** (who the LLM is) and **Action Scope** (what it may do).
 
-- Domain: Defines the LLM's expertise, specialty or discipline
-- Role: Defines the LLM's persona (e.g., Consultant, Developer, Operator).
-- Action Scope: Defines what the LLM can do:
-  - Consult: Provide analysis or prose (read-only).
-  - Investigate: Search and retrieve data (read + query).
-  - Enact: Execute commands to manipulate data (read + write/execute).:
-- Corpus: General body of knowledge for the LLM, directory locations of local respositories and even repositories that are vectorized for direct RAG query results injection.
-- Tool-set — which Nushell commands the LLM is allowed to call. The default tool-set is a small whitelist (`TOOL_NAMES` in `tools.nu`); individual contracts may extend the whitelist with domain tools from a wing.
-- Output-shape — what must come back from the LLM. Choices: a JSON array of tool-calls, a single validated record, a `.try` preview file, or prose.
+### Role
 
-The execution shape (e.g., sequential, plan-then-execute, loop) should be defined within the contract. 
+- **Domain** — expertise or discipline (chess, nutrition, ledger, software, the substrate itself).
+- **Persona** — Operator, Consultant, Developer, or a domain-specialised role (Nutritionist, Chess-Coach, Ledger-Auditor, Lexicographer).
 
-This makes the contract a complete specification: it dictates not just what data and tools are available, but how the LLM's output is processed and executed (e.g., single tool-call, DAG of calls, iterative refinement).
+### Action Scope
 
-
-## Why strictness is the feature
-
-The rules in this document — JSON-only output, whitelist, propose-before-apply, single-record enrichment, no shell drift, strict output validation — read as a pile of restrictions, but they are the opposite of that. They are what makes each invocation **narrow enough to stack**. UNIX `cat` stacks because it does one thing. If the nu-agent primitive tried to do two things, the skyscraper this ecosystem is trying to build would fall over. Every strict rule here is a narrowness decision that buys compositional power elsewhere.
+- **Action** — the verb:
+  - **Consult** — prose (read-only).
+  - **Investigate** — search and retrieve (read + query).
+  - **Enact** — execute (read + write).
+- **Corpus** — repositories or vectorised reference corpora the LLM may read.
+- **Tool-set** — Nushell commands the LLM may call. Default is the `TOOL_NAMES` whitelist in `tools.nu`; contracts may extend it from a wing.
+- **Output-shape** — JSON tool-call array, validated record, `.try` preview, or prose.
+- **Execution-shape** — single dispatch, sequential, plan-then-execute, iterative refinement, DAG.
 
 ## See also
 
-- [VISION.md](VISION.md) — the ecosystem this contract model serves.
-- [ARCHITECTURE.md](ARCHITECTURE.md) — where each contract is implemented in the code.
-- [../RULES.md](../RULES.md) — the shortest-possible list of hard invariants.
-- [RAG.md](RAG.md) — the retrieval pipeline Ingest-Operator maintains.
+- [VISION.md](VISION.md) — the ecosystem.
+- [ARCHITECTURE.md](ARCHITECTURE.md) — implementation.
+- [../RULES.md](../RULES.md) — invariants.
+- [RAG.md](RAG.md) — retrieval pipeline.
