@@ -183,13 +183,31 @@ impl PluginCommand for Shred {
         let tokenizer_result: Result<Tokenizer, String> = if let Some(path) = tokenizer_path.as_ref() {
             // Resolve relative paths against nu's current dir — plugin process
             // cwd is set at first spawn and may diverge from the user's shell.
+            // Try engine.get_current_dir() first; fall back to $PWD env var.
             let resolved = if std::path::Path::new(path).is_relative() {
-                match engine.get_current_dir() {
-                    Ok(cwd) => std::path::Path::new(&cwd)
-                        .join(path)
-                        .to_string_lossy()
-                        .into_owned(),
-                    Err(_) => path.clone(),
+                let cwd: Option<String> = engine
+                    .get_current_dir()
+                    .ok()
+                    .or_else(|| {
+                        engine
+                            .get_env_var("PWD")
+                            .ok()
+                            .flatten()
+                            .and_then(|v| v.coerce_string().ok())
+                    });
+                match cwd {
+                    Some(d) => {
+                        let r = std::path::Path::new(&d)
+                            .join(path)
+                            .to_string_lossy()
+                            .into_owned();
+                        eprintln!("rag shred: resolved tokenizer path '{}' against cwd '{}' → '{}'", path, d, r);
+                        r
+                    }
+                    None => {
+                        eprintln!("rag shred: could not determine nu's cwd (engine.get_current_dir + $PWD both failed); using '{}' as-is", path);
+                        path.clone()
+                    }
                 }
             } else {
                 path.clone()
