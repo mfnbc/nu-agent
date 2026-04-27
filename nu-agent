@@ -14,5 +14,5 @@ export def main [
     ($env.FILE_PWD | path join "contracts" "architect.toml")
   }
   print --stderr "Calling Nushell Data Architect. May take several minutes."
-  consult $contract_path $prompt
+  run $contract_path $prompt
 }

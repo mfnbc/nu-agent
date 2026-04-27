@@ -94,3 +94,42 @@ export def call-llm-raw [body: record] {
 export def call-llm [messages: list] {
   (call-llm-raw { messages: $messages })
 }
+
+# Like call-llm-raw, but returns the full message record (content +
+# tool_calls + role) instead of collapsing to a content string. Used by
+# the Investigate action where the engine needs to decide whether the
+# response is a tool call or a final answer.
+export def call-llm-message [body: record] {
+  let defaults = {
+    model: $MODEL
+    temperature: 0
+    top_p: 1
+    reasoning_format: "none"
+    include_reasoning: false
+  }
+  let merged_body = ($defaults | merge $body)
+
+  let headers = {
+    "Content-Type": "application/json"
+    Connection: "close"
+    Accept: "application/json"
+  }
+
+  let http_out = (
+    http post
+      -t application/json
+      --full
+      -H $headers
+      $CHAT_URL
+      $merged_body
+      --max-time $TIMEOUT
+  )
+
+  if $http_out.status >= 400 {
+    let body_text = try { ($http_out.body | to json) } catch { $http_out.body }
+    error make { msg: $"LLM request failed with status ($http_out.status): ($body_text)" }
+  }
+
+  let parsed_body = try { ($http_out.body | from json) } catch { $http_out.body }
+  ($parsed_body.choices.0.message)
+}
