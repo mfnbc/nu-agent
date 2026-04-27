@@ -5,8 +5,10 @@
 # When the contract declares `action.corpus`, retrieval pre-step runs:
 # embed the user prompt, open the corpus, take top-k chunks via
 # `rag similarity`, inject them as a system message before the user turn.
-
-plugin use rag
+#
+# Plugin commands (rag embed, rag similarity) must be registered via
+# `plugin add ./crates/nu_plugin_rag/target/debug/nu_plugin_rag` once before
+# this engine is invoked.
 
 use ./llm.nu *
 
