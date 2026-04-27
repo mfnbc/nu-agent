@@ -25,7 +25,7 @@ let results = (rag index-search integrity_test "alpha" --mock --with-doc -f text
 echo $results
 
 # Basic assertion: top doc should contain 'alpha'
-let top_text = ($results | first | get doc | into string?)
+let top_text = ($results | first | get doc | into string)
 if ($top_text | str contains "alpha") {
     echo "INTEGRITY PASS"
 } else {
