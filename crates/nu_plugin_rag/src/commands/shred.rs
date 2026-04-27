@@ -30,6 +30,11 @@ impl Shred {
         Tokenizer::from_file(path).map_err(|e| format!("loading tokenizer from '{}': {}", path, e))
     }
 
+    // TODO: tokenizers 0.19 has a URL parser bug that makes Tokenizer::from_pretrained
+    // fail with RelativeUrlWithoutBase when fetching from HuggingFace. Workaround in
+    // production is --tokenizer-path with a pre-downloaded tokenizer.json. When
+    // tokenizers crate is bumped to 0.20+, verify this path works again and consider
+    // dropping the pre-download step from the README quickstart.
     fn load_tokenizer_pretrained(name: &str) -> Result<Tokenizer, String> {
         Tokenizer::from_pretrained(name, None)
             .map_err(|e| format!("loading tokenizer '{}': {}", name, e))
