@@ -2,37 +2,17 @@
 use ./mod.nu *
 
 export def main [
-  --task: string
-  --record: string
-  --schema: string
-  --validate-only
-  --consultant-role: string
-  --consultant-prompt: string
+  --prompt: string = ""
+  --contract: string = ""
 ] {
-  # Consultant one-shot mode: if consultant-prompt is provided, call the
-  # consultant helper and print the prose response.
-  if (($consultant_prompt | default "" | str length) > 0) {
-    let role = ($consultant_role | default "Consultant")
-    let prompt = $consultant_prompt
-
-    # Defensive error formatting: sometimes the caught error is a plain string
-    # rather than an object with .msg; avoid using a cell path on a string.
-    let res = try { consult --role $role --prompt $prompt } catch { |e| error make { msg: (try { ($e.msg? | default ($e | to text)) } catch { ($e | to text) }) } }
-    print $res
-    return
+  if ($prompt | str length) == 0 {
+    error make { msg: "Missing required --prompt argument. Example: nu-agent --prompt \"How do I stream records to an HTTP endpoint?\"" }
   }
-  if (($record | default "" | str length) > 0) or (($schema | default "" | str length) > 0) {
-    if (($task | default "" | str length) == 0) {
-      error make { msg: "Missing required --task argument for enrichment mode" }
-    }
-
-    enrich --task $task --record $record --schema $schema --validate-only=$validate_only
+  let contract_path = if ($contract | str length) > 0 {
+    $contract
   } else {
-    if (($task | default "" | str length) == 0) {
-      error make { msg: "Missing required --task argument. Example: nu-agent --task \"refactor\"" }
-    }
-
-    print --stderr "Starting nu-agent. The selected model may take several minutes to respond."
-    airun --task $task
+    ($env.FILE_PWD | path join "contracts" "architect.toml")
   }
+  print --stderr "Calling Nushell Data Architect. May take several minutes."
+  consult $contract_path $prompt
 }
