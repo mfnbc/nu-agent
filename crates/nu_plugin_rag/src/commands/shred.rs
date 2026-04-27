@@ -196,18 +196,11 @@ impl PluginCommand for Shred {
                             .and_then(|v| v.coerce_string().ok())
                     });
                 match cwd {
-                    Some(d) => {
-                        let r = std::path::Path::new(&d)
-                            .join(path)
-                            .to_string_lossy()
-                            .into_owned();
-                        eprintln!("rag shred: resolved tokenizer path '{}' against cwd '{}' → '{}'", path, d, r);
-                        r
-                    }
-                    None => {
-                        eprintln!("rag shred: could not determine nu's cwd (engine.get_current_dir + $PWD both failed); using '{}' as-is", path);
-                        path.clone()
-                    }
+                    Some(d) => std::path::Path::new(&d)
+                        .join(path)
+                        .to_string_lossy()
+                        .into_owned(),
+                    None => path.clone(),
                 }
             } else {
                 path.clone()

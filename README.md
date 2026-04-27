@@ -18,16 +18,25 @@ plugin use rag
 mkdir external
 git clone https://github.com/nushell/nushell.github.io.git external/nushell.github.io
 
-# 4. Build the corpus (one-time, takes 10-30 minutes)
+# 4. Pre-download the mxbai tokenizer (one-time)
+# `tokenizers = 0.19` has a URL parser bug that prevents Tokenizer::from_pretrained
+# from fetching from HuggingFace, so we load from a local file instead.
+mkdir tokenizers
+http get https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/tokenizer.json | save tokenizers/mxbai.json
+
+# 5. Build the corpus (one-time, takes 10-30 minutes)
+# The where-clause filters out translated docs (zh-CN, de, fr, etc.) — any path
+# segment that looks like a BCP-47 language tag.
 mkdir data
 (ls external/nushell.github.io/**/*.md
- | each { |f| open $f.name | rag shred --source $f.name }
+ | where { |f| not ($f.name =~ '/[a-z]{2}(-[A-Z]{2,3})?/') }
+ | each { |f| open $f.name | rag shred --source $f.name --tokenizer-path tokenizers/mxbai.json }
  | flatten
  | rag embed --column embedding_input
  | save --force data/nu_docs.msgpack)
 
-# 5. Ask the architect
-./nu-agent --prompt "How do I list files recursively in Nushell?"
+# 6. Ask the architect
+./nu-agent --prompt "How do I find the highest disk usage files in Nushell?"
 ```
 
 ## How it works

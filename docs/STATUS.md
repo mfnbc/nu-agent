@@ -2,7 +2,7 @@
 
 Snapshot of nu-agent's implementation state, known warts, and near-term direction.
 
-**Last updated:** 2026-04-27
+**Last updated:** 2026-04-27 (corpus + token-aware chunking online)
 
 ## Implemented and stable
 
@@ -28,7 +28,8 @@ Snapshot of nu-agent's implementation state, known warts, and near-term directio
 
 ### Corpus
 
-- **`data/nu_docs.msgpack`** — full Nushell documentation corpus (~4233 chunks from `external/nushell.github.io`). Built via the canonical `ls **/*.md | rag shred | rag embed | save` pipeline. Architect grounding verified end-to-end 2026-04-27.
+- **`data/nu_docs.msgpack`** — Nushell documentation corpus from `external/nushell.github.io`, English-only, token-aware chunked at 480 tokens / 50 overlap. Built via the canonical `ls **/*.md | where (not language-coded path) | rag shred --tokenizer-path | rag embed | save` pipeline. Architect grounding verified end-to-end 2026-04-27 — produces idiomatic `ls **/* | where type == file | sort-by size --reverse | first 10` for "highest disk usage files" instead of the bash confabulation it gave with no corpus, or the `du -s` partial confabulation it gave with the earlier char-truncated corpus.
+- **`tokenizers/mxbai.json`** — pre-downloaded `mixedbread-ai/mxbai-embed-large-v1` tokenizer JSON (711 kB). Required because `tokenizers = 0.19` can't fetch via `Tokenizer::from_pretrained` (URL parser bug); `rag shred --tokenizer-path` uses `Tokenizer::from_file` instead.
 
 ### Documentation
 
@@ -41,7 +42,6 @@ Snapshot of nu-agent's implementation state, known warts, and near-term directio
 
 ## In flight
 
-- **Tokenizer-aware chunking.** Currently falls back to char-based 1800/200 due to a `tokenizers = 0.19` URL parser bug. Fix planned: either bump `tokenizers` to 0.20+ or add a `--tokenizer-path` flag and pre-download `tokenizer.json`. See Known warts.
 - **Doc reconciliation.** ARCHITECTURE.md and RULES.md still describe the pre-2026-04-27 architecture (3 contract adapters, tools.nu whitelist, 8-command index plugin). Need to be rewritten to match the engine + 3-command plugin reality.
 
 ## Deferred
@@ -52,7 +52,9 @@ Snapshot of nu-agent's implementation state, known warts, and near-term directio
 
 ## Known warts
 
-**Tokenizer URL bug.** `Tokenizer::from_pretrained` from `tokenizers = 0.19` (with `http` feature) fails with `RelativeUrlWithoutBase` when fetching the mxbai tokenizer from HuggingFace. The shred command catches the error and falls back to char-based chunking. Functional but suboptimal — chunk boundaries aren't token-aware, which can produce chunks that exceed the embedding model's 512-token context (truncated server-side). Fix paths: bump `tokenizers` to 0.20+, or add a `--tokenizer-path` flag and load via `Tokenizer::from_file` from a pre-downloaded `tokenizer.json`.
+**`tokenizers = 0.19` URL parser bug** prevents `Tokenizer::from_pretrained` from fetching from HuggingFace (`RelativeUrlWithoutBase`). **Workaround in place:** `rag shred --tokenizer-path tokenizers/mxbai.json` loads the tokenizer from a pre-downloaded file via `Tokenizer::from_file`. End-to-end pipeline works. Future cleanup: bump `tokenizers` to 0.20+ to restore `--tokenizer` (HF name) as a no-pre-download convenience.
+
+**Char-based fallback at 1500/100** is still in `rag shred` for when `--tokenizer-path` is absent or the file is unreadable. Sized to fit within mxbai's 512-token context for English prose, but code-heavy or CJK content can still overflow at the embedding endpoint. Always pass `--tokenizer-path` for production ingests.
 
 **Script sprawl in `scripts/`.** The directory mixes ingestion helpers, RAG search scripts, and debug one-offs without organisation. Some files (e.g. `rag-search.nu` invoking `embed_runner --input -`) are non-functional under the current binary contracts. Audit and prune pending.
 
@@ -67,10 +69,10 @@ Snapshot of nu-agent's implementation state, known warts, and near-term directio
 ## Near-term next steps
 
 1. **Rewrite ARCHITECTURE.md and RULES.md** to match the post-refactor reality (engine + plugin + contracts).
-2. **Fix the tokenizer URL bug** — preferred path: `--tokenizer-path` flag + pre-downloaded `tokenizer.json`.
-3. **Audit `scripts/` and root `test-*.nu`** — remove cruft, organise survivors.
-4. **Build a second contract** to validate the contract-as-data abstraction with more than one persona.
-5. **Bible-wing migration.** Extract Hebrew/UXLC artefacts to their own repo.
+2. **Audit `scripts/` and root `test-*.nu`** — remove cruft, organise survivors.
+3. **Build a second contract** to validate the contract-as-data abstraction with more than one persona.
+4. **Bible-wing migration.** Extract Hebrew/UXLC artefacts to their own repo.
+5. **Bump `tokenizers` to 0.20+** to restore `--tokenizer` HF-name convenience alongside `--tokenizer-path`.
 
 ## See also
 
