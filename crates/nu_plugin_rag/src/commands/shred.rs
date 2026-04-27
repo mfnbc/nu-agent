@@ -12,20 +12,27 @@ use crate::state::RagPlugin;
 pub struct Shred;
 
 impl Shred {
-    fn chunk_text_by_tokens(
+    fn chunk_text_with_tokenizer(
         text: &str,
-        tokenizer_name: &str,
+        tok: Tokenizer,
         max_tokens: usize,
         overlap: usize,
     ) -> Result<Vec<String>, String> {
-        let tok = Tokenizer::from_pretrained(tokenizer_name, None)
-            .map_err(|e| format!("loading tokenizer '{}': {}", tokenizer_name, e))?;
         let mut cfg = ChunkConfig::new(max_tokens).with_sizer(tok);
         cfg = cfg
             .with_overlap(overlap)
             .map_err(|e| format!("with_overlap: {}", e))?;
         let splitter = TextSplitter::new(cfg);
         Ok(splitter.chunks(text).map(|s| s.to_string()).collect())
+    }
+
+    fn load_tokenizer_from_file(path: &str) -> Result<Tokenizer, String> {
+        Tokenizer::from_file(path).map_err(|e| format!("loading tokenizer from '{}': {}", path, e))
+    }
+
+    fn load_tokenizer_pretrained(name: &str) -> Result<Tokenizer, String> {
+        Tokenizer::from_pretrained(name, None)
+            .map_err(|e| format!("loading tokenizer '{}': {}", name, e))
     }
 
     fn chunk_text_by_chars(text: &str, max_chars: usize, overlap: usize) -> Vec<String> {
@@ -107,9 +114,15 @@ impl PluginCommand for Shred {
                 None,
             )
             .named(
+                "tokenizer-path",
+                SyntaxShape::String,
+                "Path to a local tokenizer.json (preferred — avoids HuggingFace fetch)",
+                None,
+            )
+            .named(
                 "tokenizer",
                 SyntaxShape::String,
-                "HuggingFace tokenizer name (default mixedbread-ai/mxbai-embed-large-v1)",
+                "HuggingFace tokenizer name to fetch (default mixedbread-ai/mxbai-embed-large-v1)",
                 None,
             )
             .switch(
@@ -141,6 +154,9 @@ impl PluginCommand for Shred {
             .map_err(|e| LabeledError::new(format!("--overlap-tokens: {}", e)))?
             .map(|v| v as usize)
             .unwrap_or(50);
+        let tokenizer_path = call
+            .get_flag::<String>("tokenizer-path")
+            .map_err(|e| LabeledError::new(format!("--tokenizer-path: {}", e)))?;
         let tokenizer_name = call
             .get_flag::<String>("tokenizer")
             .map_err(|e| LabeledError::new(format!("--tokenizer: {}", e)))?
@@ -164,17 +180,26 @@ impl PluginCommand for Shred {
 
         let (title, text) = Self::extract_title_and_text(&raw);
 
-        let chunks =
-            match Self::chunk_text_by_tokens(&text, &tokenizer_name, max_tokens, overlap_tokens) {
-                Ok(c) => c,
-                Err(e) => {
-                    eprintln!(
-                        "rag shred: tokenizer '{}' failed ({}); falling back to char-based",
-                        tokenizer_name, e
-                    );
-                    Self::chunk_text_by_chars(&text, 1800, 200)
-                }
-            };
+        let tokenizer_result: Result<Tokenizer, String> = if let Some(path) = tokenizer_path.as_ref() {
+            Self::load_tokenizer_from_file(path)
+        } else {
+            Self::load_tokenizer_pretrained(&tokenizer_name)
+        };
+
+        let chunks = match tokenizer_result
+            .and_then(|tok| Self::chunk_text_with_tokenizer(&text, tok, max_tokens, overlap_tokens))
+        {
+            Ok(c) => c,
+            Err(e) => {
+                eprintln!(
+                    "rag shred: tokenizer split failed ({}); falling back to char-based",
+                    e
+                );
+                // Conservative defaults sized to fit within mxbai-embed-large-v1's 512-token
+                // context with margin for code-heavy content (which tokenizes denser than prose).
+                Self::chunk_text_by_chars(&text, 1500, 100)
+            }
+        };
 
         let mut out: Vec<Value> = Vec::with_capacity(chunks.len());
         for chunk in chunks {
