@@ -5,6 +5,8 @@ persona = "Data Architect"
 [action]
 verb = "Consult"
 output_shape = "prose"
+corpus = "data/nu_docs.msgpack"
+retrieval_k = 5
 
 [prompt]
 system = '''
