@@ -136,7 +136,7 @@ impl PluginCommand for Shred {
     fn run(
         &self,
         _plugin: &Self::Plugin,
-        _engine: &EngineInterface,
+        engine: &EngineInterface,
         call: &EvaluatedCall,
         input: PipelineData,
     ) -> Result<PipelineData, LabeledError> {
@@ -181,7 +181,20 @@ impl PluginCommand for Shred {
         let (title, text) = Self::extract_title_and_text(&raw);
 
         let tokenizer_result: Result<Tokenizer, String> = if let Some(path) = tokenizer_path.as_ref() {
-            Self::load_tokenizer_from_file(path)
+            // Resolve relative paths against nu's current dir — plugin process
+            // cwd is set at first spawn and may diverge from the user's shell.
+            let resolved = if std::path::Path::new(path).is_relative() {
+                match engine.get_current_dir() {
+                    Ok(cwd) => std::path::Path::new(&cwd)
+                        .join(path)
+                        .to_string_lossy()
+                        .into_owned(),
+                    Err(_) => path.clone(),
+                }
+            } else {
+                path.clone()
+            };
+            Self::load_tokenizer_from_file(&resolved)
         } else {
             Self::load_tokenizer_pretrained(&tokenizer_name)
         };
