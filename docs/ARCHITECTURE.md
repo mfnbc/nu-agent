@@ -80,7 +80,7 @@ Operator is supported by three files because tool-call dispatch is materially mo
   - Consultant: `--consultant-role --consultant-prompt`
   - General tool-calling: `--task` (routes to `airun`)
 
-  Requires `NU_AGENT_CHAT_URL` environment variable to be set as a guard. The actual endpoint URL is hardcoded in `llm.nu`; reconciling the two into one deliberate configuration path is part of the eventual config-return work.
+  Endpoint, model, timeout, and reasoning-suppression flags are hardcoded in `llm.nu`. The default targets a local LAN endpoint; edit the constants at the top of `llm.nu` to use a different endpoint or model.
 
 ### Retrieval pipeline (partial — currently broken)
 

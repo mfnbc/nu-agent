@@ -7,7 +7,7 @@ Build, run, and smoke-test the nu-agent core.
 ## Prerequisites
 
 - **Nushell.** The `nu-agent` wrapper's shebang points at `~/.cargo/bin/nu`; any recent Nushell works if invoked via `nu scripts/…`.
-- **An OpenAI-compatible LLM endpoint.** The thin client (`llm.nu`) hardcodes `http://172.19.224.1:1234/v1/chat/completions` and a Gemma-family model. To point elsewhere, edit the constants at the top of `llm.nu`. The `NU_AGENT_CHAT_URL` env var is currently a CLI-wrapper guard only; reconciling the two into one config path is future work.
+- **An OpenAI-compatible LLM endpoint.** The thin client (`llm.nu`) hardcodes `http://172.19.224.1:1234/v1/chat/completions` and a Gemma-family model. The default targets a local LAN endpoint; to use something else, edit the constants at the top of `llm.nu`.
 - **For the RAG tooling** (optional, currently partial): Rust toolchain + `cargo`.
 
 ## Build the Rust helpers
@@ -25,8 +25,6 @@ Produces `target/debug/embed_runner`, `target/debug/nu-search`, `target/debug/im
 `./nu-agent` is the repo-root wrapper over `mod.nu`. Three modes:
 
 ```bash
-export NU_AGENT_CHAT_URL="http://127.0.0.1:1234/v1/chat/completions"   # any non-empty value works as a guard
-
 # Enrichment — one record in, one validated JSON record out
 ./nu-agent \
   --task "annotate workout" \

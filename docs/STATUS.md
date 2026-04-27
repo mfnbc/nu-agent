@@ -26,7 +26,7 @@ Snapshot of nu-agent's implementation state, known warts, and near-term directio
 
 ### CLI entrypoint
 
-- **`./nu-agent`** — repo-local wrapper. Enrichment and general tool-call entry. Requires `NU_AGENT_CHAT_URL`; accepts `NU_AGENT_MODEL` and `NU_AGENT_API_KEY` overrides.
+- **`./nu-agent`** — repo-local wrapper. Enrichment, Consultant, and general tool-call entry. Endpoint and model hardcoded in `llm.nu`.
 
 ### RAG pipeline (partial — retrieval layer is broken; see Deferred + Known warts)
 

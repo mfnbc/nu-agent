@@ -12,10 +12,8 @@ One invocation is one query. Batching, iteration, scheduling, and cross-invocati
 # Build the Rust helpers (shredder, embed_runner, import_nu_docs, nu_plugin_rag).
 cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 
-# The CLI wrapper requires NU_AGENT_CHAT_URL as a guard.
-export NU_AGENT_CHAT_URL="http://127.0.0.1:1234/v1/chat/completions"
-
-# Run a single-record enrichment.
+# Run a single-record enrichment. The LLM endpoint is hardcoded in llm.nu;
+# default points at a local LAN endpoint.
 ./nu-agent \
   --task "annotate workout" \
   --record '{"exercise":"squat","reps":5}' \
@@ -46,9 +44,7 @@ diffusers: For diffusion models used in image generation.
 
 "tool" model, or "vision" model, or "embedding" model, in the style of the huggingface repository. It should also be given a rating of "common", "rare", "epic", "legendary" to denote the relative strength of that model and associated greater cost, and be designated as shiney to denote in their classification they are better than others. RESEARCH: Is there a way to just get the huggingface tags for each model if it is simply named in the config?]
 
-The LLM endpoint URL, model name, request timeout, and reasoning-suppression flags are currently **hardcoded** as constants at the top of `llm.nu`. To point at a different endpoint or model, edit that file directly.
-
-[TODO: I need to find a better way to do this. Having two different expectations of the LLM endpoints is confusing.] The CLI wrapper (`./nu-agent`) requires `NU_AGENT_CHAT_URL` to be set to any non-empty value as a guard against running without explicit configuration intent. The actual endpoint is in `llm.nu`; reconciling the two into a single deliberate configuration path is planned when env-var configurability returns.
+The LLM endpoint URL, model name, request timeout, and reasoning-suppression flags are currently **hardcoded** as constants at the top of `llm.nu`. The default points at a local LAN endpoint. To use a different endpoint or model, edit `llm.nu` directly.
 
 ## Documentation
 
