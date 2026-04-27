@@ -28,12 +28,11 @@ Snapshot of nu-agent's implementation state, known warts, and near-term directio
 
 - **`./nu-agent`** — repo-local wrapper. Enrichment, Consultant, and general tool-call entry. Endpoint and model hardcoded in `llm.nu`.
 
-### RAG pipeline (partial — retrieval layer is broken; see Deferred + Known warts)
+### RAG pipeline (Phase 1 plugin migration complete; `rag shred` plugin command pending)
 
-- **`shredder/`** — Rust `pulldown-cmark` semantic Markdown splitter producing Nu Doc Chunk JSONL. Independent binary, builds and runs.
-- **`target/debug/embed_runner`** — produces query and corpus embeddings against a remote embedding endpoint. Confirmed working (2026-04-24): takes `--input <path>` (nuon list of `{embedding_input: "..."}`), writes a raw MessagePack vector to `--vector-out`.
-- **`target/debug/import_nu_docs`** — ingests Markdown into `data/nu_wiki.msgpack`.
-- **`scripts/ingest-docs.nu`** / **`scripts/prep-nu-rag.nu`** — ingestion orchestration. Not re-verified this session.
+- **`crates/nu_plugin_rag/`** — Nushell plugin built against nu 0.111. Exposes `rag embed`, `rag index-create`, `rag index-add`, `rag index-search`, `rag index-save`, `rag index-load`, `rag index-stats`, `rag index-list`, `rag index-remove`. Plugin handshake working.
+- **`crates/nu_plugin_rag/target/debug/shredder`** — tokenizer-aware markdown chunker (mixedbread tokenizer via `text-splitter`). Standalone binary; pending wrap as `rag shred` plugin command.
+- **`crates/nu_plugin_rag/target/debug/embed_runner`** — standalone embedder utility (kept for CLI scripting; `rag embed` is the plugin equivalent).
 
 ### Smoke tests
 
@@ -63,12 +62,10 @@ Snapshot of nu-agent's implementation state, known warts, and near-term directio
 
 ## Known warts
 
-**RAG retrieval layer is broken at three levels** (discovered 2026-04-24):
+**RAG pipeline gaps remaining after Phase 1:**
 
-- `target/debug/nu-search` — the binary exists but its Rust source has been removed from the tree. Its expected corpus format (`[{id, embedding, value}, ...]` at top level) does not match either msgpack on disk.
-- `data/nu_docs.msgpack` contains text records (`path`, `id`, `title`, `heading_path`, `text`, `taxonomy`) with **no embeddings**. `data/nu_wiki.msgpack` contains embeddings but in the `nu_plugin_rag` wrapped format (`{dimension, docs: [{id, vector, value}]}`), which neither `nu-search` nor any registered plugin can consume right now.
-- `nu_plugin_rag` binary rejects the Nushell plugin `--stdio` handshake — its CLI parser expects a `<COMMAND>` subcommand and errors with `unexpected argument '--stdio'`. `docs/RAG.md` claims this was previously fixed but the current build regresses. Blocks `plugin add`.
-- `scripts/rag-search.nu` (inherited) invokes `embed_runner --input -` (stdin), which the current binary rejects — it requires a file path. The script is therefore non-functional.
+- **`rag shred` plugin command not yet implemented.** Tokenizer-aware chunking lives in the standalone `shredder` binary (`crates/nu_plugin_rag/src/bin/shredder.rs`); needs wrapping as a plugin command so the canonical pipeline `rag shred → rag embed → rag index-add` works end-to-end.
+- **`scripts/rag-search.nu` (inherited)** invokes `embed_runner --input -` (stdin), which the current binary rejects — it requires a file path. Non-functional; rewrite or delete during Phase 4.
 
 **Script sprawl in `scripts/`.** The directory mixes at least three kinds of work without organisation:
 

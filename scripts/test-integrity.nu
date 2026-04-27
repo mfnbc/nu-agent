@@ -2,8 +2,8 @@
 # Round-trip Integrity Test for nu_plugin_rag
 
 # 1) Build & register plugin (one-time):
-#    cargo build -p nu_plugin_rag
-#    plugin add nu_plugin_rag "./target/debug/nu_plugin_rag"
+#    cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+#    plugin add ./crates/nu_plugin_rag/target/debug/nu_plugin_rag
 
 # 2) Create three inline records, embed (mock), save, remove, load, and search
 [ { id: "a", text: "alpha beta gamma" } , { id: "b", text: "beta yellow fruit" } , { id: "c", text: "rust code plugin" } ]

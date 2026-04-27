@@ -49,24 +49,15 @@ Notes and caveats
 - `rag index-add` performs batched inserts (default batch-size=100) to reduce Mutex
   contention during mass ingestion. Use `--quiet` to suppress progress messages.
 
-- Import helper: the repository includes a helper binary `import_nu_docs` that
-  performs progressive ingestion, batching, and checkpointing. Build and run:
-
-   cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
-   ./target/debug/import_nu_docs
-
-  Defaults used by `import_nu_docs` (can be overridden via env vars):
-   - EMBEDDING_REMOTE_URL default: http://172.19.224.1:1234/v1/embeddings
-   - EMBEDDING_MODEL default: text-embedding-mxbai-embed-large-v1
-   - Partial checkpoint: /tmp/partial_nu_wiki.msgpack (flushed every 500 chunks)
-   - Final index output: ./data/nu_wiki.msgpack
-   - Embed batch size: 64
-   - Shredder/tokenizer: controlled with SHREDDER_TOKENIZER (defaults to mixedbread tokenizer in shredder)
+- Tokenizer-aware shredding: the `shredder` standalone binary uses the mixedbread
+  tokenizer (`mixedbread-ai/mxbai-embed-large-v1` by default) to chunk markdown by
+  token count, sized to the embedding model's context window. Will be wrapped as a
+  `rag shred` plugin command in Phase 2.
 
 Testing
 -------
 
-- scripts/test-integrity.nu performs a smoke round-trip test (save → remove → load → search).
-- crates/nu_plugin_rag/src/bin/integrity_test.rs provides a programmatic round-trip check.
+- `scripts/test-integrity.nu` performs a plugin round-trip smoke (mock embed →
+  save → remove → load → search).
 
 See also: README.md and crates/nu_plugin_rag/README.md for command reference and examples.

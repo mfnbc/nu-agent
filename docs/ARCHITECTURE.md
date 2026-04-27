@@ -87,7 +87,7 @@ Operator is supported by three files because tool-call dispatch is materially mo
 Retrieval is broken at multiple layers; see [STATUS.md](STATUS.md) Known Warts for specifics. The pieces that exist on disk:
 
 - **`shredder/`** — Rust binary converting Markdown to Nu Doc Chunk JSONL.
-- **`crates/nu_plugin_rag/`** — Rust crate producing `embed_runner`, `import_nu_docs`, and `nu_plugin_rag` (the latter's plugin-loader handshake is currently broken — rejects `--stdio`).
+- **`crates/nu_plugin_rag/`** — Rust crate producing `embed_runner`, `shredder`, and `nu_plugin_rag` (the Nushell plugin exposing `rag embed` / `rag index-*` commands).
 - **`scripts/ingest-docs.nu`**, **`scripts/prep-nu-rag.nu`** — ingestion orchestration scripts.
 
 See [RAG.md](RAG.md) for the intended pipeline and [STATUS.md](STATUS.md) for what currently works and what doesn't.

@@ -1,7 +1,8 @@
 use crate::state::RagPlugin;
 use nu_plugin::{EngineInterface, EvaluatedCall, PluginCommand};
 use nu_protocol::{
-    IntoInterruptiblePipelineData, LabeledError, PipelineData, Signature, SyntaxShape, Type, Value,
+    IntoInterruptiblePipelineData, LabeledError, PipelineData, Signals, Signature, SyntaxShape,
+    Type, Value,
 };
 
 pub struct IndexCreate;
@@ -20,7 +21,7 @@ impl PluginCommand for IndexCreate {
         "rag index-create"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Create an in-memory index bucket"
     }
 
@@ -51,7 +52,7 @@ impl PluginCommand for IndexSave {
         "rag index-save"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Save an in-memory index to a MessagePack file"
     }
 
@@ -136,7 +137,7 @@ impl PluginCommand for IndexLoad {
         "rag index-load"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Load an index from a MessagePack file into memory"
     }
 
@@ -218,7 +219,7 @@ impl PluginCommand for IndexAdd {
         "rag index-add"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Add embedded records into an index"
     }
 
@@ -237,7 +238,7 @@ impl PluginCommand for IndexAdd {
                 "Suppress progress messages",
                 Some('q'),
             )
-            .input_output_type(Type::ListStream, Type::Nothing)
+            .input_output_type(Type::Any, Type::Nothing)
     }
 
     fn run(
@@ -266,7 +267,7 @@ impl PluginCommand for IndexAdd {
         for v in input.into_iter() {
             match v {
                 Value::Record { val, .. } => {
-                    let rec = *val;
+                    let rec = (*val).clone();
                     // expect an "embedding" column that is a list of floats
                     if let Some(emb_val) = rec.get("embedding") {
                         match emb_val {
@@ -296,10 +297,7 @@ impl PluginCommand for IndexAdd {
                                     buffer.push(crate::state::DocRecord {
                                         id,
                                         embedding: vec_f,
-                                        value: Value::Record {
-                                            val: Box::new(rec.clone()),
-                                            internal_span: span,
-                                        },
+                                        value: Value::record(rec.clone(), span),
                                     });
 
                                     if buffer.len() >= batch_size {
@@ -404,7 +402,7 @@ impl PluginCommand for IndexSearch {
         "rag index-search"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Search an in-memory index by vector or by text query"
     }
 
@@ -448,7 +446,7 @@ impl PluginCommand for IndexSearch {
                 "When used with --with-doc, return only this field from the stored doc",
                 Some('f'),
             )
-            .input_output_type(Type::Nothing, Type::ListStream)
+            .input_output_type(Type::Nothing, Type::Any)
     }
 
     fn run(
@@ -498,7 +496,7 @@ impl PluginCommand for IndexSearch {
         let lock = plugin.indexes.lock().unwrap();
         let bucket = match lock.get(&name) {
             Some(b) => b.clone(),
-            None => return Ok(Vec::<Value>::new().into_pipeline_data(None)),
+            None => return Ok(Vec::<Value>::new().into_pipeline_data(call.head, Signals::empty())),
         };
 
         // Build query vector either from --query-vector, text positional arg, or error
@@ -602,7 +600,7 @@ impl PluginCommand for IndexSearch {
                     let doc_to_push = if let Some(field_name) = field.as_ref() {
                         match &doc_val {
                             Value::Record { val, .. } => {
-                                let map = &**val;
+                                let map: &nu_protocol::Record = val;
                                 map.get(field_name)
                                     .cloned()
                                     .unwrap_or_else(|| Value::nothing(call.head))
@@ -616,14 +614,11 @@ impl PluginCommand for IndexSearch {
 
                     rec.push("doc".to_string(), doc_to_push);
                 }
-                Value::Record {
-                    val: Box::new(rec),
-                    internal_span: call.head,
-                }
+                Value::record(rec, call.head)
             })
             .collect();
 
-        Ok(out.into_pipeline_data(None))
+        Ok(out.into_pipeline_data(call.head, Signals::empty()))
     }
 }
 
@@ -634,14 +629,14 @@ impl PluginCommand for IndexStats {
         "rag index-stats"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Show statistics for an in-memory index"
     }
 
     fn signature(&self) -> Signature {
         Signature::build(self.name())
             .required("name", SyntaxShape::String, "index name")
-            .input_output_type(Type::Nothing, Type::ListStream)
+            .input_output_type(Type::Nothing, Type::Any)
     }
 
     fn run(
@@ -665,14 +660,11 @@ impl PluginCommand for IndexStats {
             rec.push("dimension".to_string(), Value::int(dim, call.head));
             rec.push("est_mem_bytes".to_string(), Value::int(est_mem, call.head));
 
-            let out = Value::Record {
-                val: Box::new(rec),
-                internal_span: call.head,
-            };
+            let out = Value::record(rec, call.head);
 
-            Ok(vec![out].into_pipeline_data(None))
+            Ok(vec![out].into_pipeline_data(call.head, Signals::empty()))
         } else {
-            Ok(Vec::<Value>::new().into_pipeline_data(None))
+            Ok(Vec::<Value>::new().into_pipeline_data(call.head, Signals::empty()))
         }
     }
 }
@@ -684,12 +676,12 @@ impl PluginCommand for IndexList {
         "rag index-list"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "List all active in-memory indexes"
     }
 
     fn signature(&self) -> Signature {
-        Signature::build(self.name()).input_output_type(Type::Nothing, Type::ListStream)
+        Signature::build(self.name()).input_output_type(Type::Nothing, Type::Any)
     }
 
     fn run(
@@ -713,13 +705,10 @@ impl PluginCommand for IndexList {
             rec.push("dimension".to_string(), Value::int(dim, call.head));
             rec.push("est_mem_bytes".to_string(), Value::int(est_mem, call.head));
 
-            out.push(Value::Record {
-                val: Box::new(rec),
-                internal_span: call.head,
-            });
+            out.push(Value::record(rec, call.head));
         }
 
-        Ok(out.into_pipeline_data(None))
+        Ok(out.into_pipeline_data(call.head, Signals::empty()))
     }
 }
 
@@ -730,7 +719,7 @@ impl PluginCommand for IndexRemove {
         "rag index-remove"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Remove an in-memory index and free its memory"
     }
 

@@ -2,7 +2,7 @@ use blake3::Hasher;
 use nu_plugin::{EngineInterface, EvaluatedCall, PluginCommand};
 use nu_protocol::LabeledError;
 use nu_protocol::Value;
-use nu_protocol::{IntoInterruptiblePipelineData, PipelineData, Signature, SyntaxShape, Type};
+use nu_protocol::{IntoInterruptiblePipelineData, PipelineData, Signals, Signature, SyntaxShape, Type};
 use reqwest::blocking::Client;
 use serde_json::json;
 use std::collections::VecDeque;
@@ -91,7 +91,7 @@ impl PluginCommand for Embed {
         "rag embed"
     }
 
-    fn usage(&self) -> &str {
+    fn description(&self) -> &str {
         "Attach embeddings to incoming records (mock or live)."
     }
 
@@ -128,7 +128,7 @@ impl PluginCommand for Embed {
                 "Embedding model name (default: text-embedding-mxbai-embed-large-v1)",
                 Some('o'),
             )
-            .input_output_type(Type::ListStream, Type::ListStream)
+            .input_output_type(Type::Any, Type::Any)
     }
 
     fn run(
@@ -269,33 +269,21 @@ impl PluginCommand for Embed {
                             .collect();
                         let rec_val = match orig {
                             Value::Record { val, .. } => {
-                                let mut rec = *val;
+                                let mut rec = (*val).clone();
                                 rec.insert(
                                     "embedding",
-                                    Value::List {
-                                        vals: list_values,
-                                        internal_span: span_for_values,
-                                    },
+                                    Value::list(list_values, span_for_values),
                                 );
-                                Value::Record {
-                                    val: Box::new(rec),
-                                    internal_span: span_for_values,
-                                }
+                                Value::record(rec, span_for_values)
                             }
                             other => {
                                 let mut rec = nu_protocol::Record::new();
                                 rec.push("value".to_string(), other);
                                 rec.push(
                                     "embedding".to_string(),
-                                    Value::List {
-                                        vals: list_values,
-                                        internal_span: span_for_values,
-                                    },
+                                    Value::list(list_values, span_for_values),
                                 );
-                                Value::Record {
-                                    val: Box::new(rec),
-                                    internal_span: span_for_values,
-                                }
+                                Value::record(rec, span_for_values)
                             }
                         };
                         pending.push_back(rec_val);
@@ -319,22 +307,16 @@ impl PluginCommand for Embed {
 
                         let rec_val = match orig {
                             Value::Record { val, .. } => {
-                                let mut rec = *val;
+                                let mut rec = (*val).clone();
                                 // attach the error as the embedding field
                                 rec.insert("embedding", error_val.clone());
-                                Value::Record {
-                                    val: Box::new(rec),
-                                    internal_span: span_for_values,
-                                }
+                                Value::record(rec, span_for_values)
                             }
                             other => {
                                 let mut rec = nu_protocol::Record::new();
                                 rec.push("value".to_string(), other);
                                 rec.push("embedding".to_string(), error_val.clone());
-                                Value::Record {
-                                    val: Box::new(rec),
-                                    internal_span: span_for_values,
-                                }
+                                Value::record(rec, span_for_values)
                             }
                         };
                         pending.push_back(rec_val);
@@ -346,6 +328,6 @@ impl PluginCommand for Embed {
             pending.pop_front()
         });
 
-        Ok(iter.into_pipeline_data(None))
+        Ok(iter.into_pipeline_data(call.head, Signals::empty()))
     }
 }

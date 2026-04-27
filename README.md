@@ -9,7 +9,7 @@ One invocation is one query. Batching, iteration, scheduling, and cross-invocati
 ## Quickstart
 
 ```nu
-# Build the Rust helpers (shredder, embed_runner, import_nu_docs, nu_plugin_rag).
+# Build the Rust helpers (shredder, embed_runner, nu_plugin_rag).
 cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 
 # Run a single-record enrichment. The LLM endpoint is hardcoded in llm.nu;

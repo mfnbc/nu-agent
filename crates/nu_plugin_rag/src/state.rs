@@ -35,6 +35,10 @@ impl RagPlugin {
 }
 
 impl Plugin for RagPlugin {
+    fn version(&self) -> String {
+        env!("CARGO_PKG_VERSION").to_string()
+    }
+
     fn commands(&self) -> Vec<Box<dyn PluginCommand<Plugin = Self>>> {
         // Register embed and index commands
         vec![

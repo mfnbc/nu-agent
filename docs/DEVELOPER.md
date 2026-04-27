@@ -18,7 +18,7 @@ The nu-agent core is pure Nushell — no build step. The RAG pipeline's Rust com
 cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
 ```
 
-Produces `target/debug/embed_runner`, `target/debug/nu-search`, `target/debug/import_nu_docs`, and `target/debug/nu_plugin_rag`. See [RAG.md](RAG.md) for the intended pipeline and [STATUS.md](STATUS.md) for what currently works.
+Produces `crates/nu_plugin_rag/target/debug/embed_runner`, `crates/nu_plugin_rag/target/debug/shredder`, and `crates/nu_plugin_rag/target/debug/nu_plugin_rag`. See [RAG.md](RAG.md) for the pipeline.
 
 ## Run the CLI
 
