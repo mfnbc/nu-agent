@@ -404,6 +404,11 @@ impl PluginCommand for IndexSearch {
     fn signature(&self) -> Signature {
         Signature::build(self.name())
             .required("name", SyntaxShape::String, "index name")
+            .optional(
+                "query_text",
+                SyntaxShape::String,
+                "Optional text query (embedded at search time)",
+            )
             .named("k", SyntaxShape::Int, "number of hits to return", Some('k'))
             .named(
                 "query-vector",
@@ -473,8 +478,10 @@ impl PluginCommand for IndexSearch {
             .get_flag::<Value>("query-vector")
             .map_err(|e| LabeledError::new(format!("failed to read query-vector: {}", e)))?;
 
-        // positional optional text query is at index 1; call.req returns Err if missing
-        let maybe_text_opt = call.req::<String>(1).ok();
+        // positional optional text query (declared as `query_text` in signature)
+        let maybe_text_opt = call
+            .opt::<String>(1)
+            .map_err(|e| LabeledError::new(format!("failed to read query_text: {}", e)))?;
         let maybe_text = maybe_text_opt.map(|s| Value::string(s, call.head));
 
         let with_doc = call
