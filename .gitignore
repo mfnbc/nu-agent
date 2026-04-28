@@ -17,3 +17,6 @@ crates/**/.cache/
 external/
 data/
 tokenizers/
+
+# Local config override (per-clone overrides for ./config.toml)
+/config.local.toml

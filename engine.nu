@@ -16,7 +16,18 @@
 # `plugin add ./crates/nu_plugin_rag/target/debug/nu_plugin_rag` once
 # before this engine is invoked.
 
+use ./config.nu *
 use ./llm.nu *
+
+# Embed a single text string and return its embedding vector. Wraps `rag embed`
+# with config-derived endpoint/model/batch-size so the engine never silently
+# relies on plugin defaults.
+def embed-one [text: string] {
+  let emb = (get-config | get embedding)
+  ([{text: $text}]
+   | rag embed --column text --url $emb.url --model $emb.model --batch-size $emb.batch_size
+   | get 0.embedding)
+}
 
 # Tool descriptor for the LLM's `tools` body field — OpenAI function-calling shape.
 const SEARCH_NU_DOCS_TOOL = {
@@ -160,7 +171,7 @@ def tool-search-nu-docs [args: record, contract: record] {
     return $"tool error: corpus '($corpus_path)' not found on disk"
   }
 
-  let qv = ([{text: $q}] | rag embed --column text | get 0.embedding)
+  let qv = (embed-one $q)
   let hits = (open $corpus_path | rag similarity --query $qv --k $k)
   $hits | each { |h|
     $"Source: ($h.source)\nTitle: ($h.title)\nScore: ($h.score)\n\n($h.text)"
@@ -179,7 +190,7 @@ def retrieve-context [contract: record, prompt: string] {
     return ""
   }
   let k = ($contract.action.retrieval_k? | default 5)
-  let qv = ([{text: $prompt}] | rag embed --column text | get 0.embedding)
+  let qv = (embed-one $prompt)
   let hits = (open $corpus_path | rag similarity --query $qv --k $k)
   $hits | get text | str join "\n\n---\n\n"
 }

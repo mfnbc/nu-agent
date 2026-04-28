@@ -4,51 +4,55 @@
 #
 #   call-llm-raw $body → string
 #     The primitive. Merges model/temperature/reasoning defaults into the
-#     supplied body, POSTs to the hardcoded endpoint, returns the content
-#     string. Response normalisation handles chat-style (choices[].message),
-#     completion-style (choices[].text), and native tool-call responses
-#     (choices[].message.tool_calls — serialized into a JSON string so the
-#     caller's parser sees a single content shape).
+#     supplied body, POSTs to the configured chat endpoint, returns the
+#     content string. Response normalisation handles chat-style
+#     (choices[].message), completion-style (choices[].text), and native
+#     tool-call responses (choices[].message.tool_calls — serialized into a
+#     JSON string so the caller's parser sees a single content shape).
 #
 #   call-llm $messages → string
-#     Convenience wrapper for the common case: caller supplies only a messages
-#     list, everything else comes from defaults. Used by Enrichment and
-#     Consultant adapters.
+#     Convenience wrapper: caller supplies only a messages list.
 #
-# Endpoint, model, timeout, temperature, reasoning suppression are hardcoded
-# at this stage. Configurability returns when a concrete need surfaces.
+#   call-llm-message $body → record
+#     Like call-llm-raw, but returns the full choice.message record
+#     (content + tool_calls + role) instead of collapsing to content.
+#     Used by the Investigate action where the engine needs to decide
+#     whether the response is a tool call or a final answer.
+#
+# Endpoint, model, and timeout come from `config.nu`'s cascade. Override
+# locally via ./config.local.toml, ~/.config/nu-agent/config.toml, or
+# NU_AGENT_CHAT_URL / NU_AGENT_CHAT_MODEL env vars.
 
-const CHAT_URL = "http://172.19.224.1:1234/v1/chat/completions"
-const MODEL = "google/gemma-4-26b-a4b"
-const TIMEOUT = 2min
+use ./config.nu *
 
-# Post a chat body to the LLM endpoint and return the content string.
-# Callers may supply any subset of fields in $body (at minimum `messages`);
-# default model/temperature/reasoning fields are merged in.
-export def call-llm-raw [body: record] {
+const HEADERS = {
+  "Content-Type": "application/json"
+  Connection: "close"
+  Accept: "application/json"
+}
+
+# Build the merged body record (defaults + user fields) for one chat call.
+def build-body [body: record, model: string] {
   let defaults = {
-    model: $MODEL
+    model: $model
     temperature: 0
     top_p: 1
     reasoning_format: "none"
     include_reasoning: false
   }
-  let merged_body = ($defaults | merge $body)
+  ($defaults | merge $body)
+}
 
-  let headers = {
-    "Content-Type": "application/json"
-    Connection: "close"
-    Accept: "application/json"
-  }
-
+# POST $body to $url and return the parsed JSON body or error.
+def post-chat [url: string, body: record, timeout: duration] {
   let http_out = (
     http post
       -t application/json
       --full
-      -H $headers
-      $CHAT_URL
-      $merged_body
-      --max-time $TIMEOUT
+      -H $HEADERS
+      $url
+      $body
+      --max-time $timeout
   )
 
   if $http_out.status >= 400 {
@@ -56,7 +60,15 @@ export def call-llm-raw [body: record] {
     error make { msg: $"LLM request failed with status ($http_out.status): ($body_text)" }
   }
 
-  let parsed_body = try { ($http_out.body | from json) } catch { $http_out.body }
+  try { ($http_out.body | from json) } catch { $http_out.body }
+}
+
+# Post a chat body to the LLM endpoint and return the content string.
+export def call-llm-raw [body: record] {
+  let chat = (get-config | get chat)
+  let timeout = (try { $chat.timeout | into duration } catch { 2min })
+  let merged_body = (build-body $body $chat.model)
+  let parsed_body = (post-chat $chat.url $merged_body $timeout)
   let choice = ($parsed_body.choices.0)
 
   # Normalize chat-style (choices[].message), native-tool-call
@@ -67,8 +79,7 @@ export def call-llm-raw [body: record] {
     let raw = if (($message.content? | default "") | str length) > 0 {
       $message.content
     } else if (($message.tool_calls? | default [] | length) > 0) {
-      # Serialize native tool_calls into the JSON-array-of-{name, arguments}
-      # shape the Operator adapter already parses.
+      # Serialize native tool_calls into a JSON-array-of-{name, arguments}.
       ($message.tool_calls | each { |tc|
         { name: $tc.function.name, arguments: ($tc.function.arguments | from json) }
       } | to json)
@@ -89,47 +100,14 @@ export def call-llm-raw [body: record] {
   }
 }
 
-# Call the LLM with a list of chat messages. Thin wrapper over call-llm-raw
-# for the common case with no extra body fields (no tools, no overrides).
 export def call-llm [messages: list] {
   (call-llm-raw { messages: $messages })
 }
 
-# Like call-llm-raw, but returns the full message record (content +
-# tool_calls + role) instead of collapsing to a content string. Used by
-# the Investigate action where the engine needs to decide whether the
-# response is a tool call or a final answer.
 export def call-llm-message [body: record] {
-  let defaults = {
-    model: $MODEL
-    temperature: 0
-    top_p: 1
-    reasoning_format: "none"
-    include_reasoning: false
-  }
-  let merged_body = ($defaults | merge $body)
-
-  let headers = {
-    "Content-Type": "application/json"
-    Connection: "close"
-    Accept: "application/json"
-  }
-
-  let http_out = (
-    http post
-      -t application/json
-      --full
-      -H $headers
-      $CHAT_URL
-      $merged_body
-      --max-time $TIMEOUT
-  )
-
-  if $http_out.status >= 400 {
-    let body_text = try { ($http_out.body | to json) } catch { $http_out.body }
-    error make { msg: $"LLM request failed with status ($http_out.status): ($body_text)" }
-  }
-
-  let parsed_body = try { ($http_out.body | from json) } catch { $http_out.body }
+  let chat = (get-config | get chat)
+  let timeout = (try { $chat.timeout | into duration } catch { 2min })
+  let merged_body = (build-body $body $chat.model)
+  let parsed_body = (post-chat $chat.url $merged_body $timeout)
   ($parsed_body.choices.0.message)
 }

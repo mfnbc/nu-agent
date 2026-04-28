@@ -11,7 +11,7 @@ export def main [
   let contract_path = if ($contract | str length) > 0 {
     $contract
   } else {
-    ($env.FILE_PWD | path join "contracts" "architect.toml")
+    (get-config).engine.default_contract
   }
   print --stderr "Calling Nushell Data Architect. May take several minutes."
   run $contract_path $prompt

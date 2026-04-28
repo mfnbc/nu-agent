@@ -1,0 +1,26 @@
+# Default nu-agent configuration. Committed; safe to edit.
+#
+# To override per-machine without touching the committed defaults, create
+# either:
+#   ./config.local.toml                  (repo-local, gitignored)
+#   ~/.config/nu-agent/config.toml       (user-global, XDG-style)
+#
+# Or set NU_AGENT_* env vars. See config.nu for the full cascade.
+
+[chat]
+url = "http://172.19.224.1:1234/v1/chat/completions"
+model = "google/gemma-4-26b-a4b"
+timeout = "2min"
+
+[embedding]
+url = "http://172.19.224.1:1234/v1/embeddings"
+model = "text-embedding-mxbai-embed-large-v1"
+batch_size = 64
+
+[shredder]
+tokenizer_path = "tokenizers/mxbai.json"
+max_tokens = 480
+overlap_tokens = 50
+
+[engine]
+default_contract = "contracts/architect.toml"
