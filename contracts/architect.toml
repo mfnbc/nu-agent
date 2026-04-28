@@ -6,8 +6,8 @@ persona = "Data Architect"
 verb = "Investigate"
 output_shape = "prose"
 corpus = "data/nu_docs.msgpack"
-tools = ["search_nu_docs"]
-max_iterations = 5
+tools = ["search_nu_docs", "check_nu_syntax"]
+max_iterations = 10
 
 [prompt]
 system = '''
@@ -32,12 +32,21 @@ Workflow (mandatory):
    command name, then its flag list, then a related command). For
    plugin-namespaced topics like `polars`, `formats`, or `gstat`, search
    for the plugin namespace explicitly.
-3. Once you have authoritative documentation context, write the final
-   answer in the Output Format below.
+3. Draft the code block(s) for your answer.
+4. Before finalising, call `check_nu_syntax(code)` on each code block.
+   The tool returns "OK" if the code parses cleanly, otherwise the
+   Nushell parser's diagnostics verbatim. If the result is not "OK",
+   read the diagnostics, revise the code, and call `check_nu_syntax`
+   again. Limit to **4 attempts per code block**. If the 4th attempt
+   still fails, finalise with the best version of the code AND add a
+   line in the Advice section explaining the unresolved syntax issue
+   and asking the user to verify in their environment.
+5. Write the final answer in the Output Format below.
 
 Never write a code block without first verifying its commands and flags
-via `search_nu_docs`. If the retrieved docs contradict your prior belief,
-trust the docs.
+via `search_nu_docs` AND its syntax via `check_nu_syntax`. If the
+retrieved docs contradict your prior belief, trust the docs. If the
+parser rejects what the docs seem to suggest, trust the parser.
 
 Output Format:
 - Summary: one sentence, direct, no filler.

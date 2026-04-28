@@ -29,7 +29,7 @@ def embed-one [text: string] {
    | get 0.embedding)
 }
 
-# Tool descriptor for the LLM's `tools` body field — OpenAI function-calling shape.
+# Tool descriptors for the LLM's `tools` body field — OpenAI function-calling shape.
 const SEARCH_NU_DOCS_TOOL = {
   type: "function"
   function: {
@@ -48,6 +48,24 @@ const SEARCH_NU_DOCS_TOOL = {
         }
       }
       required: ["query"]
+    }
+  }
+}
+
+const CHECK_NU_SYNTAX_TOOL = {
+  type: "function"
+  function: {
+    name: "check_nu_syntax"
+    description: "Parse-check a Nushell code snippet without executing it. Returns 'OK' if it parses cleanly, otherwise the parser's diagnostics verbatim. Call this before finalising any nu code in your answer."
+    parameters: {
+      type: "object"
+      properties: {
+        code: {
+          type: "string"
+          description: "Nushell code to parse-check (the contents of a single code block)."
+        }
+      }
+      required: ["code"]
     }
   }
 }
@@ -140,6 +158,7 @@ def build-tools-array [whitelist: list] {
   $whitelist | each { |t|
     match $t {
       "search_nu_docs" => $SEARCH_NU_DOCS_TOOL
+      "check_nu_syntax" => $CHECK_NU_SYNTAX_TOOL
       _ => null
     }
   } | where $it != null
@@ -152,6 +171,7 @@ def dispatch-tool [name: string, args: record, contract: record, whitelist: list
   }
   match $name {
     "search_nu_docs" => (tool-search-nu-docs $args $contract)
+    "check_nu_syntax" => (tool-check-nu-syntax $args)
     _ => $"tool error: no implementation for '($name)'"
   }
 }
@@ -176,6 +196,32 @@ def tool-search-nu-docs [args: record, contract: record] {
   $hits | each { |h|
     $"Source: ($h.source)\nTitle: ($h.title)\nScore: ($h.score)\n\n($h.text)"
   } | str join "\n\n---\n\n"
+}
+
+# check_nu_syntax implementation: write the code to a temp file, run `nu --ide-check`,
+# return the parser's stdout/stderr verbatim (or "OK" when it's silent).
+def tool-check-nu-syntax [args: record] {
+  let code = ($args.code? | default "")
+  if ($code | str length) == 0 {
+    return "tool error: check_nu_syntax requires a non-empty `code` argument"
+  }
+  let tmpfile = $"/tmp/nu-agent-check-(random uuid).nu"
+  $code | save --raw $tmpfile
+  let result = (do { ^nu --ide-check 5 $tmpfile } | complete)
+  rm -f $tmpfile
+  let stdout = ($result.stdout | str trim)
+  let stderr = ($result.stderr | str trim)
+  if ($stdout | str length) == 0 and ($stderr | str length) == 0 and $result.exit_code == 0 {
+    "OK"
+  } else if ($stdout | str length) > 0 and ($stderr | str length) > 0 {
+    $"stdout:\n($stdout)\n\nstderr:\n($stderr)"
+  } else if ($stdout | str length) > 0 {
+    $stdout
+  } else if ($stderr | str length) > 0 {
+    $stderr
+  } else {
+    $"nu --ide-check exited with code ($result.exit_code) and no diagnostic output"
+  }
 }
 
 # Consult retrieval pre-step. Returns concatenated chunk text for the top-k corpus matches,
