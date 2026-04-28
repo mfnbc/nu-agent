@@ -18,13 +18,11 @@ A contract is specified along **two dimensions**: **Role** (who the LLM is) and 
   - **Investigate** — search and retrieve (read + query).
   - **Enact** — execute (read + write).
 - **Corpus** — repositories or vectorised reference corpora the LLM may read.
-- **Tool-set** — Nushell commands the LLM may call. Default is the `TOOL_NAMES` whitelist in `tools.nu`; contracts may extend it from a wing.
+- **Tool-set** — tools the LLM may call (named in the contract's `action.tools` array; engine dispatches whitelisted names against actual implementations).
 - **Output-shape** — JSON tool-call array, validated record, `.try` preview, or prose.
 - **Execution-shape** — single dispatch, sequential, plan-then-execute, iterative refinement, DAG.
 
 ## See also
 
 - [VISION.md](VISION.md) — the ecosystem.
-- [ARCHITECTURE.md](ARCHITECTURE.md) — implementation.
-- [../RULES.md](../RULES.md) — invariants.
-- [RAG.md](RAG.md) — retrieval pipeline.
+- [STATUS.md](STATUS.md) — current implementation state.

@@ -1,83 +1,63 @@
 # Status
 
-Snapshot of nu-agent's implementation state, known warts, and near-term direction.
+Snapshot of nu-agent's implementation state and known warts.
 
-**Last updated:** 2026-04-27 (corpus + token-aware chunking online)
+**Last updated:** 2026-04-28 (config cascade + cleanup)
 
-## Implemented and stable
+## Implemented
 
 ### Engine
 
-- **`llm.nu`** — thin LLM client. `call-llm-raw $body → string`; `call-llm $messages → string`. Hardcoded endpoint, model, timeout, reasoning suppression. Handles chat, native tool-call, and completion response shapes.
-- **`engine.nu`** — `consult contract prompt → prose`. Reads a contract TOML, dispatches by `action.verb` (only `Consult` implemented). When `action.corpus` is declared, runs a retrieval pre-step: embeds the prompt, opens the msgpack corpus, takes top-k via `rag similarity`, injects results as a second system message before the user turn.
-- **`mod.nu`** — one-line aggregator: `export use ./engine.nu *`.
-- **`nu-agent`** — repo-root CLI. Single mode: `--prompt <string>`, optional `--contract <path>` (defaults to `contracts/architect.toml` resolved relative to the script).
+- **`llm.nu`** — thin LLM client. `call-llm-raw $body → string`, `call-llm $messages → string`, `call-llm-message $body → record`. Reads chat config (URL, model, timeout) from `config.nu`'s cascade.
+- **`engine.nu`** — `run contract prompt` dispatches by `action.verb`:
+  - **Consult** — single-shot. Engine pre-retrieves top-k chunks from the declared corpus, injects them as a system message, calls the LLM once.
+  - **Investigate** — multi-turn tool loop. Engine sends `[system, user] + tools_array` to the LLM, dispatches whatever `tool_calls` come back, appends results as tool messages, repeats until a final answer (or `action.max_iterations` is hit). Tool dispatcher checks the contract's `action.tools` whitelist; current tools: `search_nu_docs`. Calls print to stderr for visibility.
+- **`config.nu`** — four-layer config cascade (env vars > local TOML > XDG TOML > committed TOML > fallback). Relative paths in a config file resolve against that file's directory.
+- **`mod.nu`** — re-exports `run` from engine and `get-config` from config.
+- **`nu-agent`** — repo-root CLI. `--prompt <string>`, optional `--contract <path>`. Default contract path comes from config.
 
 ### Contracts
 
-- **`contracts/architect.toml`** — Nushell Data Architect. Domain `nushell+rust`; persona `Data Architect`; action verb `Consult`; `corpus = "data/nu_docs.msgpack"`, `retrieval_k = 5`. System prompt enforces strict-Nushell-and-nu-plugin-Rust discipline, target version 0.111, output format Summary/Code(optional)/Advice.
+- **`contracts/architect.toml`** — Nushell Data Architect. Domain `nushell+rust`; persona `Data Architect`; action `Investigate` with `tools = ["search_nu_docs"]`, `max_iterations = 5`, `corpus = "data/nu_docs.msgpack"`. System prompt mandates at least one search call before answering.
 
 ### RAG plugin (`crates/nu_plugin_rag/`)
 
-- Built against `nu-plugin = "0.111"`. Registered via `plugin add` and `plugin use rag`.
-- **Three stateless plugin commands:**
-  - **`rag shred`** — text in (pipeline) → chunk records out. Tokenizer-aware via mxbai (currently falling back to char-based — see Known warts). Flags: `--source`, `--max-tokens`, `--overlap-tokens`, `--tokenizer`, `--prepend-passage`.
-  - **`rag embed`** — records with text → records with `embedding`. Flags: `--column`, `--mock`, `--url`, `--model`, `--batch-size`. Defaults match LM Studio mxbai-embed-large-v1.
-  - **`rag similarity`** — records with `embedding` + `--query <vec>` → top-k records with `score`, sorted desc. Cosine similarity.
-- **Two standalone binaries kept** alongside the plugin: `shredder` (CLI scripting fallback) and `embed_runner` (pre-plugin embedder utility).
+Built against `nu-plugin = "0.111"`. Three stateless plugin commands:
+
+- **`rag shred`** — text in (pipeline) → chunk records out. Tokenizer-aware via mxbai (`Tokenizer::from_file` against `--tokenizer-path`); falls back to char-based 1500/100 if the tokenizer can't load. Other flags: `--source`, `--max-tokens`, `--overlap-tokens`, `--prepend-passage`.
+- **`rag embed`** — records with text → records with `embedding`. Flags: `--column`, `--mock`, `--url`, `--model`, `--batch-size`. Engine passes config-derived flags explicitly.
+- **`rag similarity`** — records with `embedding` + `--query <vec>` → top-k records with `score`, sorted desc by cosine. Flags: `--k`, `--field`.
+
+Two standalone binaries kept alongside: `shredder` (CLI fallback for the chunking logic), `embed_runner` (pre-plugin embedder utility).
 
 ### Corpus
 
-- **`data/nu_docs.msgpack`** — Nushell documentation corpus from `external/nushell.github.io`, English-only, token-aware chunked at 480 tokens / 50 overlap. Built via the canonical `ls **/*.md | where (not language-coded path) | rag shred --tokenizer-path | rag embed | save` pipeline. Architect grounding verified end-to-end 2026-04-27 — produces idiomatic `ls **/* | where type == file | sort-by size --reverse | first 10` for "highest disk usage files" instead of the bash confabulation it gave with no corpus, or the `du -s` partial confabulation it gave with the earlier char-truncated corpus.
-- **`tokenizers/mxbai.json`** — pre-downloaded `mixedbread-ai/mxbai-embed-large-v1` tokenizer JSON (711 kB). Required because `tokenizers = 0.19` can't fetch via `Tokenizer::from_pretrained` (URL parser bug); `rag shred --tokenizer-path` uses `Tokenizer::from_file` instead.
+- **`data/nu_docs.msgpack`** — Nushell documentation corpus from `external/nushell.github.io`, English-only (BCP-47 language-tag exclusion regex), token-aware chunked at 480 tokens / 50 overlap. Architect grounding verified end-to-end 2026-04-27.
+- **`tokenizers/mxbai.json`** — pre-downloaded mxbai-embed-large-v1 tokenizer JSON.
 
 ### Documentation
 
-- `docs/VISION.md` — ecosystem north star.
-- `docs/CONTRACTS.md` — two-dimensional contract model (Role × Action-Scope).
-- `docs/RAG.md` — retrieval pipeline reference.
-- `docs/DEVELOPER.md` — build/run/smoke.
-- `docs/ARCHITECTURE.md` — file-level technical layer (currently stale; describes the deprecated 3-adapter shape and needs rewriting).
-- `RULES.md` — hard invariants (currently stale; references the deprecated TOOL_NAMES whitelist and Operator-era rules).
-
-## In flight
-
-- **Doc reconciliation.** ARCHITECTURE.md and RULES.md still describe the pre-2026-04-27 architecture (3 contract adapters, tools.nu whitelist, 8-command index plugin). Need to be rewritten to match the engine + 3-command plugin reality.
-
-## Deferred
-
-- **Additional contracts beyond the architect.** The contract-as-data abstraction works; building a second Consult persona (e.g. for a wing) would validate composition. Not blocking.
-- **Operator-action contracts.** The architect is Consult-only. `Investigate` (read+query) and `Enact` (read+write) action verbs are designed in CONTRACTS.md but not implemented in the engine. The engine errors on any non-`Consult` verb. Will need RBAC plumbing when revisited.
-- **`plugin add` automation.** Currently a one-time manual step. Could be wrapped in a `setup.nu` helper or the README could include a check on missing-plugin error.
+- `README.md` — quickstart and config.
+- `docs/VISION.md` — ecosystem narrative.
+- `docs/CONTRACTS.md` — Role × Action-Scope model.
+- `docs/STATUS.md` — this file.
 
 ## Known warts
 
-**`tokenizers = 0.19` URL parser bug** prevents `Tokenizer::from_pretrained` from fetching from HuggingFace (`RelativeUrlWithoutBase`). **Workaround in place:** `rag shred --tokenizer-path tokenizers/mxbai.json` loads the tokenizer from a pre-downloaded file via `Tokenizer::from_file`. End-to-end pipeline works. Future cleanup: bump `tokenizers` to 0.20+ to restore `--tokenizer` (HF name) as a no-pre-download convenience.
+**`tokenizers = 0.19` URL parser bug.** `Tokenizer::from_pretrained` can't fetch from HuggingFace (`RelativeUrlWithoutBase`). Workaround in place: `--tokenizer-path` with a pre-downloaded `tokenizer.json`. Future fix: bump `tokenizers` to 0.20+ and the `--tokenizer` HF-name flag becomes usable again.
 
-**Char-based fallback at 1500/100** is still in `rag shred` for when `--tokenizer-path` is absent or the file is unreadable. Sized to fit within mxbai's 512-token context for English prose, but code-heavy or CJK content can still overflow at the embedding endpoint. Always pass `--tokenizer-path` for production ingests.
+**Plugin response sometimes leaks gemma reasoning tokens** (`thoughtthought<channel|>` etc.) into `content` instead of `reasoning_content`. Cosmetic; output is still readable but the prefix is noise. Either filter in `llm.nu` post-processing or wait for an LM Studio update.
 
-**Script sprawl in `scripts/`.** The directory mixes ingestion helpers, RAG search scripts, and debug one-offs without organisation. Some files (e.g. `rag-search.nu` invoking `embed_runner --input -`) are non-functional under the current binary contracts. Audit and prune pending.
+**Architect occasionally invents flag names** even after retrieving docs (saw `polars sort-by (-descending mean_value)` once where the docs use a different form). Mitigation under consideration: add a second tool (`check_nu_syntax`) so the architect can verify code by parsing it before finalising.
 
-**`tools/` vs `crates/`.** `tools/` contains standalone Rust source that overlaps with `crates/nu_plugin_rag/src/bin/`. Per-item decision needed: move, promote to sibling crate, or delete.
+## Deferred
 
-**Wing-specific artefacts in core.** Hebrew token-seed helpers (`token-seed-input`, `seed-prompt`, `token-seed-schema`) are bible-wing content that bleeds into the core. Should migrate to a separate wing repo per the VISION.md core/wings split.
-
-**Archive detritus.** `archive/external_nushell_repo_backup`, `archive/nu_ingest_rebuild_backup`, and a 34 MB file literally named `-` at the repo root are historical artefacts that should be audited and removed or relocated to a clearly-labelled `legacy/`.
-
-**Root clutter.** Multiple `test-*.nu` files at repo root (`test-enrich.nu`, `test-ingest.nu`, `test-malformed.nu`, `test-schema.nu`, `test-seed-template.nu`) are leftover from the previous architecture. Some import deleted modules and will fail. Should be removed or moved to a `tests/` directory.
-
-## Near-term next steps
-
-1. **Rewrite ARCHITECTURE.md and RULES.md** to match the post-refactor reality (engine + plugin + contracts).
-2. **Audit `scripts/` and root `test-*.nu`** — remove cruft, organise survivors.
-3. **Build a second contract** to validate the contract-as-data abstraction with more than one persona.
-4. **Bible-wing migration.** Extract Hebrew/UXLC artefacts to their own repo.
-5. **Bump `tokenizers` to 0.20+** to restore `--tokenizer` HF-name convenience alongside `--tokenizer-path`.
+- **Investigate action for personas other than the architect.** Engine supports it; just no other contracts written.
+- **Enact action.** Engine errors on `verb = "Enact"` today; needs RBAC plumbing when revisited.
+- **`check_nu_syntax` tool.** Mentioned above. Would let the architect iterate on its own code via the parser before claiming a final answer.
 
 ## See also
 
+- [../README.md](../README.md) — quickstart.
 - [VISION.md](VISION.md) — the ecosystem goal.
 - [CONTRACTS.md](CONTRACTS.md) — the contract model.
-- [DEVELOPER.md](DEVELOPER.md) — build/run.
-- [RAG.md](RAG.md) — retrieval pipeline.
-- [../RULES.md](../RULES.md) — hard invariants.

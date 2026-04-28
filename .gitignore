@@ -2,6 +2,7 @@
 /target/
 /**/target/
 crates/**/.cache/
+**/Cargo.lock
 
 # Editors
 .idea/

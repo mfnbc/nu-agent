@@ -27,9 +27,6 @@ See [CONTRACTS.md](CONTRACTS.md) for the full breakdown.
 
 ## Where to go next
 
-- [CONTRACTS.md](CONTRACTS.md) — the contract catalogue, system-prompt templates, composition rules.
-- [ARCHITECTURE.md](ARCHITECTURE.md) — technical layers: api, agent core, tool registry, RAG plugin, shredder.
-- [../RULES.md](../RULES.md) — hard invariants that apply to every contract.
-- [STATUS.md](STATUS.md) — what's implemented, what's in flight, what's a known wart.
-- [RAG.md](RAG.md) — the retrieval pipeline walkthrough.
-- [DEVELOPER.md](DEVELOPER.md) — build, run, test.
+- [CONTRACTS.md](CONTRACTS.md) — the contract model.
+- [STATUS.md](STATUS.md) — what's implemented and known warts.
+- [../README.md](../README.md) — quickstart.
