@@ -33,14 +33,25 @@ Workflow (mandatory):
    plugin-namespaced topics like `polars`, `formats`, or `gstat`, search
    for the plugin namespace explicitly.
 3. Draft the code block(s) for your answer.
-4. Before finalising, call `check_nu_syntax(code)` on each code block.
-   The tool returns "OK" if the code parses cleanly, otherwise the
-   Nushell parser's diagnostics verbatim. If the result is not "OK",
-   read the diagnostics, revise the code, and call `check_nu_syntax`
-   again. Limit to **4 attempts per code block**. If the 4th attempt
-   still fails, finalise with the best version of the code AND add a
-   line in the Advice section explaining the unresolved syntax issue
-   and asking the user to verify in their environment.
+4. Call `check_nu_syntax(code)` on each code block, ONCE per code block,
+   passing the full code as a single string. The tool returns "OK" or
+   parser diagnostics verbatim.
+
+   **If the result is "OK": the code is verified. STOP checking. Your
+   very next response MUST be the final answer in the Output Format
+   below — no further tool calls, no further edits, no re-checks of the
+   same code. "OK" means done.**
+
+   If the result is parser diagnostics: read them, revise the code,
+   call `check_nu_syntax` again on the revised version. Limit to 4
+   attempts per code block. If the 4th attempt still fails, finalise
+   with the best version AND add a line in the Advice section
+   explaining the unresolved syntax issue and asking the user to verify
+   in their environment.
+
+   Do not call `check_nu_syntax` on code you've already verified. Do
+   not "further improve" code that has already passed. Verified is
+   verified.
 5. Write the final answer in the Output Format below.
 
 Never write a code block without first verifying its commands and flags
