@@ -1,9 +1,0 @@
-‘—Ùqarchive/external_nushell_repo_backup/nushell.github.io/lang-guide/chapters/types/other_types/00_not_assignable.mdÙ@32503dc16e4da97102408f75537a1a28edc1b5c3d176f562d73225687ecb7713Ù.Types that cannot be used to declare variables‘Ù.Types that cannot be used to declare variablesÙpThe following type annotations can be used for custom command signatures but
-
-cannot be used to type variables.
-’ÙäTitle: Types that cannot be used to declare variables
-Path: Types that cannot be used to declare variables
-Content:
-The following type annotations can be used for custom command signatures but
-
-cannot be used to type variables.

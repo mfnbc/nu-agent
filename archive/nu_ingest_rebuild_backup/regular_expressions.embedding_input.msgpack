@@ -1,8 +1,0 @@
-‘’Ù@c8ab1caef62f551f997f563058cc46cf3a8eeae8509d34634bf343a9032c2e77ÚTitle: Regular Expressions
-Path: Regular Expressions
-Content:
-Regular expressions in Nushell's commands are handled by the 
-``rust-lang/regex``
- crate. If you want to know more, check the crate documentation: "
-[link: https://github.com/rust-lang/regex] regex
-".

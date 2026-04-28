@@ -1,4 +1,0 @@
-‘’Ù@dfdaf992ac315b8077453f6d6800c88394a44e9b69787cb3df2ba765a9f2156eÚ.Title: Types that are not declarable by the user
-Path: Types that are not declarable by the user
-Content:
-The following are valid Nushell data types which cannot be declared by the user. They are used by Nushell internally or by plugins or commands compiled in Nushell like Polars and SQLite database.

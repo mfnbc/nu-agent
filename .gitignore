@@ -1,40 +1,19 @@
-# Rust/Cargo
+# Rust build artifacts
 /target/
 /**/target/
-
-# Ignore Cargo.lock in workspace crates/build outputs but allow top-level if desired
-/**/Cargo.lock
-
-# Crate caches and plugin caches
 crates/**/.cache/
-crates/**/target/
 
-# Datascience / model artifacts
-*.onnx
-*.onnx.*
-
-# Rust incremental and build artifacts
-**/*.rlib
-**/*.o
-**/*.d
-
-# Local editor/IDE
+# Editors
 .idea/
 .vscode/
 
-# Local artifacts
+# Local junk
 *.log
 *.tmp
-
-# Misc
-/node_modules/
 .DS_Store
 
-# External docs / rebuildable corpora
-external/nushell.github.io/
-
-# Large generated corpus artifacts (rebuildable)
-data/nu_docs_vectors.nuon
-build/nu_ingest/
+# External corpora and runtime artifacts
+# (user runs `git clone <docs>`, `cargo build`, and the ingest pipeline to populate these)
+external/
 data/
-build/smoke/
+tokenizers/

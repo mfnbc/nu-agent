@@ -1,4 +1,0 @@
-[
-  { "id": "test-1", "embedding_input": "This is a test document about Nushell." },
-  { "id": "test-2", "embedding_input": "Another short text to embed." }
-]
