@@ -2,7 +2,7 @@
 
 Snapshot of nu-agent's implementation state and known warts.
 
-**Last updated:** 2026-04-30 (drop standalone bins; rename `[shredder]` config section to `[shred]`)
+**Last updated:** 2026-04-30 (architect gains filesystem tools: `find_files`, `read_file`; cwd-scoped sandbox)
 
 ## Implemented
 
@@ -11,14 +11,14 @@ Snapshot of nu-agent's implementation state and known warts.
 - **`llm.nu`** — thin LLM client. `call-llm-raw $body → string`, `call-llm $messages → string`, `call-llm-message $body → record`. Reads chat config (URL, model, timeout) from `config.nu`'s cascade.
 - **`engine.nu`** — `run contract prompt` dispatches by `action.verb`:
   - **Consult** — single-shot. Engine pre-retrieves top-k chunks from the declared corpus, injects them as a system message, calls the LLM once.
-  - **Investigate** — multi-turn tool loop. Engine sends `[system, user] + tools_array` to the LLM, dispatches whatever `tool_calls` come back, appends results as tool messages, repeats until a final answer (or `action.max_iterations` is hit). Tool dispatcher checks the contract's `action.tools` whitelist; current tools: `search_nu_docs` (RAG retrieval), `check_nu_syntax` (parse-check via `nu --ide-check`, output passed verbatim to the LLM). Calls print to stderr for visibility.
+  - **Investigate** — multi-turn tool loop. Engine sends `[system, user] + tools_array` to the LLM, dispatches whatever `tool_calls` come back, appends results as tool messages, repeats until a final answer (or `action.max_iterations` is hit). Tool dispatcher checks the contract's `action.tools` whitelist; current tools: `search_nu_docs` (RAG retrieval), `check_nu_syntax` (parse-check via `nu --ide-check`, output passed verbatim to the LLM), `find_files` (glob within cwd), `read_file` (line-numbered, default 2000-line cap, cwd-scoped). The two filesystem tools enforce a lexical cwd-containment check via `path expand`; paths that escape the working directory are rejected. Calls print to stderr for visibility.
 - **`config.nu`** — four-layer config cascade (env vars > local TOML > XDG TOML > committed TOML > fallback). Relative paths in a config file resolve against that file's directory.
 - **`mod.nu`** — re-exports `run` from engine and `get-config` from config.
 - **`nu-agent`** — repo-root CLI. `--prompt <string>`, optional `--contract <path>`. Default contract path comes from config.
 
 ### Contracts
 
-- **`contracts/architect.toml`** — Nushell Data Architect. Domain `nushell+rust`; persona `Data Architect`; action `Investigate` with `tools = ["search_nu_docs", "check_nu_syntax"]`, `max_iterations = 10`, `corpus = "data/nu_docs.msgpack"`. System prompt mandates at least one `search_nu_docs` call before answering and a `check_nu_syntax` call on every drafted code block (max 4 retries per block; if still failing, finalise with a help note in Advice).
+- **`contracts/architect.toml`** — Nushell Data Architect. Domain `nushell+rust`; persona `Data Architect`; action `Investigate` with `tools = ["search_nu_docs", "check_nu_syntax", "find_files", "read_file"]`, `max_iterations = 10`, `corpus = "data/nu_docs.msgpack"`. System prompt mandates at least one `search_nu_docs` call before answering and a `check_nu_syntax` call on every drafted code block (max 4 retries per block; if still failing, finalise with a help note in Advice). Project-exploration mode (placed before the Workflow in the system prompt) instructs the architect to use `find_files`/`read_file` FIRST when the user asks about their own project/directory rather than a Nu-language question.
 
 ### RAG plugin (`crates/nu_plugin_rag/`)
 
