@@ -205,6 +205,9 @@ def run-consult [contract: record, prompt: string] {
 }
 
 # Investigate action: tool-calling loop. The LLM decides when (and what) to retrieve.
+# Tracks propose-tool successes so that, if the loop exhausts max_iterations
+# without a final answer but at least one proposal succeeded, the engine
+# returns a graceful summary listing the .proposed files instead of erroring.
 def run-investigate [contract: record, prompt: string] {
   let max_iter = ($contract.action.max_iterations? | default 5)
   let tools_whitelist = ($contract.action.tools? | default [])
@@ -218,8 +221,17 @@ def run-investigate [contract: record, prompt: string] {
 
   mut iter = 0
   mut final_content = ""
+  mut propose_count = 0
+  mut proposed_paths = []
   loop {
     if $iter >= $max_iter {
+      if $propose_count > 0 {
+        let unique_paths = ($proposed_paths | uniq)
+        let listing = ($unique_paths | each { |p| $"  - ($p).proposed" } | str join "\n")
+        print --stderr $"engine: max_iterations ($max_iter) reached but ($propose_count) proposal\(s) succeeded; returning graceful summary"
+        $final_content = $"Reached max_iterations \(($max_iter)\) without a clean final answer from the model, but ($propose_count) proposal\(s) were recorded. Review:\n($listing)\n\nOpen each .proposed file in your editor to review; `mv <path>.proposed <path>` to accept, `rm <path>.proposed` to reject."
+        break
+      }
       error make { msg: $"engine: max_iterations ($max_iter) reached without final answer" }
     }
 
@@ -248,6 +260,20 @@ def run-investigate [contract: record, prompt: string] {
       } catch { |e|
         $"tool error: (try { $e.msg } catch { $e | to text })"
       })
+
+      # Track propose successes for the graceful-end-of-loop summary. Both
+      # fresh proposals and "already applied" retries reference a .proposed
+      # path worth listing; only fresh ones increment the count.
+      if ($name in $WRITE_TOOLS) {
+        let p = ($args.path? | default "")
+        if ($p | str length) > 0 and ($result | str starts-with "(proposal recorded)") {
+          $propose_count = ($propose_count + 1)
+          $proposed_paths = ($proposed_paths | append $p)
+        } else if ($p | str length) > 0 and ($result | str starts-with "(already applied)") {
+          $proposed_paths = ($proposed_paths | append $p)
+        }
+      }
+
       $messages = ($messages | append {
         role: "tool"
         tool_call_id: $tc.id
@@ -477,6 +503,20 @@ def tool-propose-edit [args: record] {
   }
   let occurrences = (($text | split row $old_string | length) - 1)
   if $occurrences == 0 {
+    # Idempotency: if old_string is missing but new_string is already
+    # present in the source (which is .proposed when it exists), this
+    # is almost certainly a retry of an already-applied edit. Return a
+    # success-shaped result so the model breaks out of the retry loop.
+    let new_count = if ($new_string | str length) > 0 {
+      (($text | split row $new_string | length) - 1)
+    } else {
+      0
+    }
+    if $new_count >= 1 {
+      let already = $"\(already applied\) ($raw_path) → ($raw_path).proposed already contains this change. Do NOT call propose_edit on this old_string again. Next action: write the final answer."
+      print --stderr $already
+      return $already
+    }
     return $"tool error: old_string not found in '($source_label)' — verify exact text including whitespace"
   }
   if $occurrences > 1 {
@@ -486,9 +526,11 @@ def tool-propose-edit [args: record] {
   let new_text = ($text | str replace $old_string $new_string)
   $new_text | save --raw --force $proposed_path
 
+  # Verbose preview to stderr (for the user reading the trace); compact
+  # directive return to the LLM (so it doesn't try to re-process the diff).
   let preview = $"# proposed edit to ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- old\n($old_string)\n--- new\n($new_string)\n---"
   print --stderr $preview
-  $"\(proposal recorded\)\n($preview)"
+  $"\(proposal recorded\) ($raw_path) → ($raw_path).proposed; this change is complete. Do NOT call propose_edit on this old_string again. Next action: write the final answer.\n  rationale: ($rationale)"
 }
 
 # propose_write implementation: verify the file does NOT exist, write the
@@ -516,9 +558,11 @@ def tool-propose-write [args: record] {
   let proposed_path = ($abs + ".proposed")
   $content | save --raw --force $proposed_path
 
+  # Verbose preview to stderr (for the user reading the trace); compact
+  # directive return to the LLM.
   let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- content\n($content)\n---"
   print --stderr $preview
-  $"\(proposal recorded\)\n($preview)"
+  $"\(proposal recorded\) new file ($raw_path).proposed written. Do NOT call propose_write on this path again. Next action: write the final answer.\n  rationale: ($rationale)"
 }
 
 # Consult retrieval pre-step. Returns concatenated chunk text for the top-k corpus matches,
