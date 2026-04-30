@@ -285,7 +285,9 @@ def is-under-cwd [p: string] {
 }
 
 # find_files implementation: glob within cwd; reject any matches that escape.
-# Caps at 500 results with a truncation tail to keep tool output bounded.
+# Caps at 100 results with a truncation tail to keep tool output bounded.
+# (Lower than you might expect — broad globs over a project with a data
+# dir blow the LLM's per-turn ingestion budget on small local models.)
 def tool-find-files [args: record] {
   let pat = ($args.pattern? | default "")
   if ($pat | str length) == 0 {
@@ -300,9 +302,9 @@ def tool-find-files [args: record] {
   if $count == 0 {
     return "(no matches)"
   }
-  if $count > 500 {
-    let body = ($in_scope | first 500 | str join "\n")
-    let extra = ($count - 500)
+  if $count > 100 {
+    let body = ($in_scope | first 100 | str join "\n")
+    let extra = ($count - 100)
     $"($body)\n\n... ($extra) more matches truncated; refine your pattern"
   } else {
     $in_scope | str join "\n"

@@ -44,6 +44,13 @@ Answer based on what you actually read. Do NOT respond with phrases like
 "I cannot perform a live scan of your local filesystem" — you can. The
 tools are listed in your tool array; use them.
 
+Glob discipline: use TARGETED patterns by default. Prefer
+`find_files("**/*.nu")` or `find_files("**/*.{md,toml}")` over
+`find_files("**/*")`. Catch-all globs (`*` or `**/*`) over projects
+with data directories return hundreds of paths and exhaust the
+per-turn ingestion budget. Only fall back to `**/*` when targeted
+patterns return nothing relevant.
+
 In project-exploration mode, `search_nu_docs` and `check_nu_syntax`
 remain mandatory ONLY if your answer references nu commands or includes
 nu code. A purely descriptive overview of the user's existing files
