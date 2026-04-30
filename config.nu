@@ -26,7 +26,7 @@ def fallback-config [] {
       model: "text-embedding-mxbai-embed-large-v1"
       batch_size: 64
     }
-    shredder: {
+    shred: {
       tokenizer_path: ($HERE | path join "tokenizers" "mxbai.json")
       max_tokens: 480
       overlap_tokens: 50
@@ -42,16 +42,16 @@ def is-rooted-path [p: string] {
   ($p | str starts-with "/") or ($p | str starts-with "~")
 }
 
-# Resolve known path-valued keys (shredder.tokenizer_path, engine.default_contract)
+# Resolve known path-valued keys (shred.tokenizer_path, engine.default_contract)
 # to absolute paths against base_dir. Other values pass through unchanged.
 def resolve-paths [cfg: record, base_dir: string] {
   mut out = $cfg
 
-  let tp = ($out | get -o shredder | default {} | get -o tokenizer_path | default null)
+  let tp = ($out | get -o shred | default {} | get -o tokenizer_path | default null)
   if $tp != null and not (is-rooted-path $tp) {
     let resolved = ($base_dir | path join $tp | path expand)
-    let s = ($out | get shredder | upsert tokenizer_path $resolved)
-    $out = ($out | upsert shredder $s)
+    let s = ($out | get shred | upsert tokenizer_path $resolved)
+    $out = ($out | upsert shred $s)
   }
 
   let dc = ($out | get -o engine | default {} | get -o default_contract | default null)
@@ -95,7 +95,7 @@ def apply-env-overrides [cfg: record] {
     [chat model NU_AGENT_CHAT_MODEL]
     [embedding url NU_AGENT_EMBEDDING_URL]
     [embedding model NU_AGENT_EMBEDDING_MODEL]
-    [shredder tokenizer_path NU_AGENT_TOKENIZER_PATH]
+    [shred tokenizer_path NU_AGENT_TOKENIZER_PATH]
     [engine default_contract NU_AGENT_DEFAULT_CONTRACT]
   ]
   for m in $mappings {

@@ -2,7 +2,7 @@
 
 Snapshot of nu-agent's implementation state and known warts.
 
-**Last updated:** 2026-04-28 (config cascade, cleanup, syntax-check tool)
+**Last updated:** 2026-04-30 (drop standalone bins; rename `[shredder]` config section to `[shred]`)
 
 ## Implemented
 
@@ -27,8 +27,6 @@ Built against `nu-plugin = "0.111"`. Three stateless plugin commands:
 - **`rag shred`** — text in (pipeline) → chunk records out. Tokenizer-aware via mxbai (`Tokenizer::from_file` against `--tokenizer-path`); falls back to char-based 1500/100 if the tokenizer can't load. Other flags: `--source`, `--max-tokens`, `--overlap-tokens`, `--prepend-passage`.
 - **`rag embed`** — records with text → records with `embedding`. Flags: `--column`, `--mock`, `--url`, `--model`, `--batch-size`. Engine passes config-derived flags explicitly.
 - **`rag similarity`** — records with `embedding` + `--query <vec>` → top-k records with `score`, sorted desc by cosine. Flags: `--k`, `--field`.
-
-Two standalone binaries kept alongside: `shredder` (CLI fallback for the chunking logic), `embed_runner` (pre-plugin embedder utility).
 
 ### Corpus
 

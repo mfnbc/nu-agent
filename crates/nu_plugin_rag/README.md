@@ -1,44 +1,37 @@
 nu_plugin_rag (Rust)
 ---------------------
 
-Purpose
- - Provide a small, efficient Rust binary for indexing and brute-force similarity search.
- - Keep heavy numeric / binary responsibilities in compiled Rust for correctness and performance.
+A Nushell plugin providing the chunk → embed → search primitives for nu-agent's RAG path. Heavy work (markdown parsing, tokenizer-aware splitting, batched HTTP, cosine scoring) lives in compiled Rust; orchestration and persistence stay in Nushell.
 
-Included binaries
- - `nu_plugin_rag`: the Nushell plugin (registered via `plugin add`).
- - `shredder`: tokenizer-aware markdown chunker (mixedbread tokenizer via `text-splitter`).
- - `embed_runner`: standalone embedder utility for CLI scripting.
+Built against `nu-plugin = "0.111"`.
 
-When to use Rust vs Nushell
-- Nushell: orchestration, structured data manipulation, streaming IO, calling external services.
-- Rust: binary-safe MessagePack handling, large-array numeric operations (vector storage, dot products), indexing, and the `rag` plugin runtime.
+Build and register
+------------------
 
-Environment
- - EMBEDDING_REMOTE_URL: URL for the remote embedding service.
- - EMBEDDING_MODEL: model to request for embeddings.
- - EMBEDDING_API_KEY: optional API key.
+    cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
+    plugin add ./crates/nu_plugin_rag/target/debug/nu_plugin_rag
+    plugin use rag
 
-Usage (plugin)
-- Build the plugin and register it with Nushell:
-  cargo build --manifest-path crates/nu_plugin_rag/Cargo.toml
-  plugin add ./crates/nu_plugin_rag/target/debug/nu_plugin_rag
+Commands
+--------
 
-After registering the plugin you can use these commands from Nushell:
- - rag embed --mock|--url --column <col>
- - rag index-create <name>
- - rag index-add <name> [--batch-size N] [--quiet]
- - rag index-search <name> [--query-vector <vec>] [--mock] [--with-doc] [-f field]
- - rag index-save <name> --path <file>
- - rag index-load <name> --path <file>
- - rag index-list
- - rag index-remove <name>
+All three are stateless transforms over Nushell pipeline data — no internal index, no persistence. Persistence is the caller's job (`open` / `save` over msgpack).
 
-Shredder tokenizer usage
- - The `shredder` binary supports tokenizer-aware splitting via the `tokenizers` + `text-splitter` crates.
- - Recommended for mixedbread (`mxbai-embed-large-v1`) models to ensure chunk token counts match the remote model's tokenizer.
- - Example:
-     `./crates/nu_plugin_rag/target/debug/shredder README.md --max-tokens 480 --overlap-tokens 50 --prepend-passage > out.msgpack`
- - Defaults: tokenizer `mixedbread-ai/mxbai-embed-large-v1`, max 480 tokens, overlap 50.
- - If tokenizer loading fails (no network, etc.), shredder falls back to char-based chunking and logs to stderr.
- - Phase 2 will wrap this as a `rag shred` plugin command.
+- **`rag shred`** — string in → chunk records out.
+  Tokenizer-aware splitting via the `tokenizers` + `text-splitter` crates; falls back to char-based 1500/100 if the tokenizer can't load.
+  Flags: `--source <path-tag>`, `--max-tokens` (default 480), `--overlap-tokens` (default 50), `--tokenizer-path <local-json>` (preferred), `--tokenizer <hf-name>` (default `mixedbread-ai/mxbai-embed-large-v1`), `--prepend-passage`.
+  Output record: `{id, source, title, text, embedding_input}`.
+
+- **`rag embed`** — records with text → records with `embedding`.
+  Calls an OpenAI-compatible `/v1/embeddings` endpoint (or computes deterministic mock embeddings).
+  Flags: `--column <field>` (default `input`), `--mock`, `--batch-size` (default 16), `--dim` (mock only, default 768), `--url`, `--model`.
+
+- **`rag similarity`** — records with `embedding` + a query vector → top-k records with `score`, sorted desc by cosine.
+  Flags: `--query <vec>` (required), `--k` (default 5), `--field` (default `embedding`).
+
+See the repo-root [README](../../README.md) for the full pipeline (`shred | embed | save msgpack` to build a corpus; `open | similarity` to query) and the config cascade that supplies URLs, models, and the tokenizer path.
+
+Known wart
+----------
+
+`tokenizers = 0.19` has a URL-parser bug that breaks `Tokenizer::from_pretrained` against HuggingFace (`RelativeUrlWithoutBase`). Workaround: `--tokenizer-path` with a pre-downloaded `tokenizer.json`. Bumping to `tokenizers >= 0.20` should restore `--tokenizer`.

@@ -17,7 +17,7 @@ url = "http://172.19.224.1:1234/v1/embeddings"
 model = "text-embedding-mxbai-embed-large-v1"
 batch_size = 64
 
-[shredder]
+[shred]
 tokenizer_path = "tokenizers/mxbai.json"
 max_tokens = 480
 overlap_tokens = 50
