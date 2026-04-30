@@ -59,7 +59,8 @@ Workflow (mandatory):
    Do NOT use check_nu_syntax as a pseudo-write tool by feeding it
    whole files; check_nu_syntax verifies syntax, only propose_edit /
    propose_write surface your work to the user.
-   - "OK" is conclusive; move directly to step 5.
+   - "OK" is conclusive; move directly to step 5. Do NOT call
+     check_nu_syntax on the same code again — "OK" stands.
    - Diagnostics: revise and re-check, up to 4 attempts per block.
    - If still failing after 4 attempts, propose anyway and flag in
      your Notes section that the user should verify in their
@@ -94,6 +95,10 @@ Workflow (mandatory):
    Each proposal requires a one-sentence rationale. The tool echoes
    the proposal preview back so you can reference it in your final
    summary.
+
+   After your last propose_* call, your VERY NEXT action is the
+   final answer (step 6). Do NOT call check_nu_syntax again after
+   proposing — the work is done; summarize and exit.
 
 6. Write the final answer in the Output Format below, summarizing
    every proposal. Each item in your Proposals list MUST correspond
