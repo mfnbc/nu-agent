@@ -115,11 +115,73 @@ const READ_FILE_TOOL = {
   }
 }
 
+const PROPOSE_EDIT_TOOL = {
+  type: "function"
+  function: {
+    name: "propose_edit"
+    description: "Propose a surgical edit to an existing file by replacing one occurrence of `old_string` with `new_string`. Verifies that `old_string` matches exactly once in the file (rejects otherwise). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
+    parameters: {
+      type: "object"
+      properties: {
+        path: {
+          type: "string"
+          description: "Path to an existing file, scoped to the working directory."
+        }
+        old_string: {
+          type: "string"
+          description: "Exact text to replace. Must match exactly once. Include surrounding context if the change point would otherwise be ambiguous."
+        }
+        new_string: {
+          type: "string"
+          description: "Replacement text."
+        }
+        rationale: {
+          type: "string"
+          description: "One-sentence justification for this edit."
+        }
+      }
+      required: ["path", "old_string", "new_string", "rationale"]
+    }
+  }
+}
+
+const PROPOSE_WRITE_TOOL = {
+  type: "function"
+  function: {
+    name: "propose_write"
+    description: "Propose creating a new file with the given content. Rejects if the file already exists (use propose_edit instead). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
+    parameters: {
+      type: "object"
+      properties: {
+        path: {
+          type: "string"
+          description: "Path for the new file, scoped to the working directory."
+        }
+        content: {
+          type: "string"
+          description: "Full contents of the new file."
+        }
+        rationale: {
+          type: "string"
+          description: "One-sentence justification for this new file."
+        }
+      }
+      required: ["path", "content", "rationale"]
+    }
+  }
+}
+
+# Tools that mutate the user's project (or propose to). Only contracts whose
+# action.verb is "Enact" may dispatch these. Investigate contracts have these
+# stripped from their tool array AND rejected at dispatch as a backstop.
+const WRITE_TOOLS = ["propose_edit", "propose_write"]
+
 export def run [contract: string, prompt: string] {
   let c = (open $contract)
   match $c.action.verb {
     "Consult" => (run-consult $c $prompt)
     "Investigate" => (run-investigate $c $prompt)
+    "Enact" => (run-investigate $c $prompt)
     _ => { error make { msg: $"engine: unsupported action verb '($c.action.verb)' in ($contract)" } }
   }
 }
@@ -146,7 +208,8 @@ def run-consult [contract: record, prompt: string] {
 def run-investigate [contract: record, prompt: string] {
   let max_iter = ($contract.action.max_iterations? | default 5)
   let tools_whitelist = ($contract.action.tools? | default [])
-  let llm_tools = (build-tools-array $tools_whitelist)
+  let verb = ($contract.action.verb? | default "")
+  let llm_tools = (build-tools-array $tools_whitelist $verb)
 
   mut messages = [
     { role: "system", content: $contract.prompt.system }
@@ -199,28 +262,45 @@ def run-investigate [contract: record, prompt: string] {
 }
 
 # Build the `tools` array for the LLM body from a whitelist of tool names.
-def build-tools-array [whitelist: list] {
-  $whitelist | each { |t|
+# Strips write tools (propose_edit, propose_write) when verb != "Enact" so the
+# LLM never sees them in non-Enact contracts.
+def build-tools-array [whitelist: list, verb: string] {
+  let allowed = if $verb == "Enact" {
+    $whitelist
+  } else {
+    $whitelist | where { |t| ($t in $WRITE_TOOLS) == false }
+  }
+  $allowed | each { |t|
     match $t {
       "search_nu_docs" => $SEARCH_NU_DOCS_TOOL
       "check_nu_syntax" => $CHECK_NU_SYNTAX_TOOL
       "find_files" => $FIND_FILES_TOOL
       "read_file" => $READ_FILE_TOOL
+      "propose_edit" => $PROPOSE_EDIT_TOOL
+      "propose_write" => $PROPOSE_WRITE_TOOL
       _ => null
     }
   } | where $it != null
 }
 
 # Dispatch a single tool call. Rejects names not in the contract's whitelist.
+# Also rejects write tools when contract.action.verb != "Enact" — backstop
+# for build-tools-array's filtering.
 def dispatch-tool [name: string, args: record, contract: record, whitelist: list] {
   if ($name not-in $whitelist) {
     return $"tool error: '($name)' not in this contract's tool whitelist"
+  }
+  let verb = ($contract.action.verb? | default "")
+  if ($name in $WRITE_TOOLS) and $verb != "Enact" {
+    return $"tool error: '($name)' is a write tool; only Enact contracts may dispatch it"
   }
   match $name {
     "search_nu_docs" => (tool-search-nu-docs $args $contract)
     "check_nu_syntax" => (tool-check-nu-syntax $args)
     "find_files" => (tool-find-files $args)
     "read_file" => (tool-read-file $args)
+    "propose_edit" => (tool-propose-edit $args)
+    "propose_write" => (tool-propose-write $args)
     _ => $"tool error: no implementation for '($name)'"
   }
 }
@@ -355,6 +435,74 @@ def tool-read-file [args: record] {
   } | str join "\n")
   let last = ($start_idx + $returned)
   $"# ($raw_path) — lines ($start_idx + 1)–($last) of ($total)\n($numbered)"
+}
+
+# propose_edit implementation: verify the file exists, the old_string matches
+# exactly once, and emit a structured proposal preview. Does NOT write to disk.
+# Echoes the proposal to stderr (so the user sees the trail during execution)
+# and returns the same preview as the tool result (so the LLM has it in context
+# for its final summary).
+def tool-propose-edit [args: record] {
+  let raw_path = ($args.path? | default "")
+  if ($raw_path | str length) == 0 {
+    return "tool error: propose_edit requires a non-empty `path` argument"
+  }
+  let old_string = ($args.old_string? | default "")
+  if ($old_string | str length) == 0 {
+    return "tool error: propose_edit requires a non-empty `old_string` argument"
+  }
+  let new_string = ($args.new_string? | default "")
+  let rationale = ($args.rationale? | default "")
+  if ($rationale | str length) == 0 {
+    return "tool error: propose_edit requires a `rationale` argument (one-sentence justification)"
+  }
+  if not (is-under-cwd $raw_path) {
+    return $"tool error: path '($raw_path)' resolves outside the working directory"
+  }
+  let abs = ($raw_path | path expand)
+  if not ($abs | path exists) {
+    return $"tool error: file '($raw_path)' not found — for new files, call propose_write instead"
+  }
+  let text = (try { open --raw $abs | decode utf-8 } catch { null })
+  if $text == null {
+    return $"tool error: '($raw_path)' is not valid UTF-8 text"
+  }
+  let occurrences = (($text | split row $old_string | length) - 1)
+  if $occurrences == 0 {
+    return $"tool error: old_string not found in '($raw_path)' — verify exact text including whitespace"
+  }
+  if $occurrences > 1 {
+    return $"tool error: old_string matches ($occurrences) times in '($raw_path)' — add surrounding context to make the match unique"
+  }
+
+  let preview = $"# proposed edit to ($raw_path)\n# rationale: ($rationale)\n--- old\n($old_string)\n--- new\n($new_string)\n---"
+  print --stderr $preview
+  $"\(proposal recorded\)\n($preview)"
+}
+
+# propose_write implementation: verify the file does NOT exist and emit a
+# proposal preview. Does NOT write to disk.
+def tool-propose-write [args: record] {
+  let raw_path = ($args.path? | default "")
+  if ($raw_path | str length) == 0 {
+    return "tool error: propose_write requires a non-empty `path` argument"
+  }
+  let content = ($args.content? | default "")
+  let rationale = ($args.rationale? | default "")
+  if ($rationale | str length) == 0 {
+    return "tool error: propose_write requires a `rationale` argument (one-sentence justification)"
+  }
+  if not (is-under-cwd $raw_path) {
+    return $"tool error: path '($raw_path)' resolves outside the working directory"
+  }
+  let abs = ($raw_path | path expand)
+  if ($abs | path exists) {
+    return $"tool error: file '($raw_path)' already exists — to modify, call propose_edit instead"
+  }
+
+  let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n--- content\n($content)\n---"
+  print --stderr $preview
+  $"\(proposal recorded\)\n($preview)"
 }
 
 # Consult retrieval pre-step. Returns concatenated chunk text for the top-k corpus matches,
