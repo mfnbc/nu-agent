@@ -21,3 +21,7 @@ tokenizers/
 
 # Local config override (per-clone overrides for ./config.toml)
 /config.local.toml
+
+# Developer-agent proposal companion files (review/copy/apply manually,
+# then `mv <path>.proposed <path>` to accept or `rm` to reject)
+*.proposed

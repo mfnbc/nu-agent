@@ -438,10 +438,10 @@ def tool-read-file [args: record] {
 }
 
 # propose_edit implementation: verify the file exists, the old_string matches
-# exactly once, and emit a structured proposal preview. Does NOT write to disk.
-# Echoes the proposal to stderr (so the user sees the trail during execution)
-# and returns the same preview as the tool result (so the LLM has it in context
-# for its final summary).
+# exactly once, write the post-edit content to a `<path>.proposed` companion
+# file (the original is NOT touched), and emit a structured preview. Multiple
+# edits to the same path stack — the second edit reads from .proposed if
+# present, building cumulatively on the first.
 def tool-propose-edit [args: record] {
   let raw_path = ($args.path? | default "")
   if ($raw_path | str length) == 0 {
@@ -463,25 +463,38 @@ def tool-propose-edit [args: record] {
   if not ($abs | path exists) {
     return $"tool error: file '($raw_path)' not found — for new files, call propose_write instead"
   }
-  let text = (try { open --raw $abs | decode utf-8 } catch { null })
+
+  # Cumulative source: if a .proposed companion already exists from an
+  # earlier edit this session, build on top of it; otherwise start from
+  # the original. This lets multiple edits to the same file stack.
+  let proposed_path = ($abs + ".proposed")
+  let source_path = if ($proposed_path | path exists) { $proposed_path } else { $abs }
+  let source_label = if ($proposed_path | path exists) { $"($raw_path).proposed" } else { $raw_path }
+
+  let text = (try { open --raw $source_path | decode utf-8 } catch { null })
   if $text == null {
-    return $"tool error: '($raw_path)' is not valid UTF-8 text"
+    return $"tool error: '($source_label)' is not valid UTF-8 text"
   }
   let occurrences = (($text | split row $old_string | length) - 1)
   if $occurrences == 0 {
-    return $"tool error: old_string not found in '($raw_path)' — verify exact text including whitespace"
+    return $"tool error: old_string not found in '($source_label)' — verify exact text including whitespace"
   }
   if $occurrences > 1 {
-    return $"tool error: old_string matches ($occurrences) times in '($raw_path)' — add surrounding context to make the match unique"
+    return $"tool error: old_string matches ($occurrences) times in '($source_label)' — add surrounding context to make the match unique"
   }
 
-  let preview = $"# proposed edit to ($raw_path)\n# rationale: ($rationale)\n--- old\n($old_string)\n--- new\n($new_string)\n---"
+  let new_text = ($text | str replace $old_string $new_string)
+  $new_text | save --raw --force $proposed_path
+
+  let preview = $"# proposed edit to ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- old\n($old_string)\n--- new\n($new_string)\n---"
   print --stderr $preview
   $"\(proposal recorded\)\n($preview)"
 }
 
-# propose_write implementation: verify the file does NOT exist and emit a
-# proposal preview. Does NOT write to disk.
+# propose_write implementation: verify the file does NOT exist, write the
+# proposed content to a `<path>.proposed` companion file (the path itself
+# is NOT created), and emit a preview. Repeated propose_write to the same
+# path overwrites the previous .proposed (last write wins).
 def tool-propose-write [args: record] {
   let raw_path = ($args.path? | default "")
   if ($raw_path | str length) == 0 {
@@ -500,7 +513,10 @@ def tool-propose-write [args: record] {
     return $"tool error: file '($raw_path)' already exists — to modify, call propose_edit instead"
   }
 
-  let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n--- content\n($content)\n---"
+  let proposed_path = ($abs + ".proposed")
+  $content | save --raw --force $proposed_path
+
+  let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- content\n($content)\n---"
   print --stderr $preview
   $"\(proposal recorded\)\n($preview)"
 }

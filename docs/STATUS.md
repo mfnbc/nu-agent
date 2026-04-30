@@ -2,7 +2,7 @@
 
 Snapshot of nu-agent's implementation state and known warts.
 
-**Last updated:** 2026-04-30 (developer contract + Enact verb + propose_edit / propose_write tools)
+**Last updated:** 2026-04-30 (propose_edit / propose_write now produce `<path>.proposed` companion files for review)
 
 ## Implemented
 
@@ -12,7 +12,7 @@ Snapshot of nu-agent's implementation state and known warts.
 - **`engine.nu`** — `run contract prompt` dispatches by `action.verb`:
   - **Consult** — single-shot. Engine pre-retrieves top-k chunks from the declared corpus, injects them as a system message, calls the LLM once.
   - **Investigate** — multi-turn tool loop. Engine sends `[system, user] + tools_array` to the LLM, dispatches whatever `tool_calls` come back, appends results as tool messages, repeats until a final answer (or `action.max_iterations` is hit). Tool dispatcher checks the contract's `action.tools` whitelist; current tools: `search_nu_docs` (RAG retrieval), `check_nu_syntax` (parse-check via `nu --ide-check`, output passed verbatim to the LLM), `find_files` (glob within cwd), `read_file` (line-numbered, default 2000-line cap, cwd-scoped). The two filesystem tools enforce a lexical cwd-containment check via `path expand`; paths that escape the working directory are rejected. Calls print to stderr for visibility.
-  - **Enact** — same loop as Investigate, but additionally allows the contract to whitelist write-side tools. The `WRITE_TOOLS` constant lists tools that mutate (or propose to mutate) the user's project; `build-tools-array` strips them when verb ≠ Enact, and `dispatch-tool` rejects them with an error message as a backstop. Currently only proposal tools (no direct writes). Tools added: `propose_edit(path, old_string, new_string, rationale)` — verifies `old_string` matches exactly once, echoes a structured preview to stderr, returns the preview as the tool result; does not modify disk. `propose_write(path, content, rationale)` — refuses if the file already exists, echoes a preview, does not modify disk.
+  - **Enact** — same loop as Investigate, but additionally allows the contract to whitelist write-side tools. The `WRITE_TOOLS` constant lists tools that mutate (or propose to mutate) the user's project; `build-tools-array` strips them when verb ≠ Enact, and `dispatch-tool` rejects them with an error message as a backstop. Currently only proposal tools (no direct writes to the path itself). Tools added: `propose_edit(path, old_string, new_string, rationale)` — verifies `old_string` matches exactly once, applies the replacement, writes the result to `<path>.proposed` (the original is untouched); subsequent edits to the same path build cumulatively on `.proposed`. `propose_write(path, content, rationale)` — refuses if `<path>` already exists, writes the proposed content to `<path>.proposed`. Both tools echo a structured preview to stderr and return it to the LLM. User workflow: open `<path>.proposed` in editor to review; `mv <path>.proposed <path>` to accept, `rm <path>.proposed` to reject, or cherry-pick blocks. `*.proposed` is gitignored.
 - **`config.nu`** — four-layer config cascade (env vars > local TOML > XDG TOML > committed TOML > fallback). Relative paths in a config file resolve against that file's directory.
 - **`mod.nu`** — re-exports `run` from engine and `get-config` from config.
 - **`nu-agent`** — repo-root CLI. `--prompt <string>`, optional `--contract <path>`. Default contract path comes from config.
