@@ -18,7 +18,7 @@ def fallback-config [] {
   {
     chat: {
       url: "http://172.19.224.1:1234/v1/chat/completions"
-      model: "google/gemma-4-26b-a4b"
+      model: "google/gemma-4-31b"
       timeout: "10min"
     }
     embedding: {

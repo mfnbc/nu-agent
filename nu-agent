@@ -1,4 +1,4 @@
-#!/home/michael/.cargo/bin/nu
+#!/usr/bin/env nu
 use ./mod.nu *
 
 export def main [
