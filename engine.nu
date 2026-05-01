@@ -20,6 +20,11 @@
 use ./config.nu *
 use ./llm.nu *
 
+# Engine module's own directory — used to locate the bundled `contracts/`
+# fallback when a user-supplied contract path is missing on disk. Mirrors
+# the pattern in config.nu.
+const HERE = (path self | path dirname)
+
 # Embed a single text string and return its embedding vector. Wraps `rag embed`
 # with config-derived endpoint/model/batch-size so the engine never silently
 # relies on plugin defaults.
@@ -173,33 +178,50 @@ const TOOL_DEFS = {
 # stripped from their tool array AND rejected at dispatch as a backstop.
 const WRITE_TOOLS = ["propose_edit", "propose_write"]
 
-export def run [contract: string, prompt: string] {
-  # Accept either a path to a contract file or a directory containing contracts.
-  # If a directory is passed, prefer `<dir>/architect.toml` or the first
-  # `*.toml` found inside it. This supports config values that point at a
-  # contracts directory (eg. ~/.config/nu-agent/contracts).
-  mut contract_path = $contract
-  if ($contract_path | path exists) {
-    let info = (try { ls $contract_path | get 0 } catch { null })
-    if $info != null and $info.type == "dir" {
-      let preferred = ($contract_path | path join "architect.toml")
-      if (preferred | path exists) {
-        $contract_path = $preferred
-      } else {
-        let found = (try { glob ($contract_path | path join "*.toml") } catch { [] })
-        if ($found | length) > 0 {
-          $contract_path = ($found | get 0)
-        }
-      }
-    }
-  }
+# Resolve `p` to an existing contract file. If `p` is a file, return it
+# as-is. If `p` is a directory, prefer `architect.toml` or the first
+# `*.toml` found inside. Returns null if `p` doesn't exist or contains no
+# .toml file.
+def resolve-contract-at [p: string] {
+  let kind = ($p | path type)
+  if $kind == "file" { return $p }
+  if $kind != "dir" { return null }
+  let preferred = ($p | path join "architect.toml")
+  if ($preferred | path type) == "file" { return $preferred }
+  let found = (try { glob ($p | path join "*.toml") } catch { [] })
+  if ($found | length) > 0 { $found | get 0 } else { null }
+}
 
+# Resolve a contract argument, with cascade fallback to the bundled repo
+# contracts dir. Mirrors config.toml's cascade: if the user's override
+# (e.g. `~/.config/nu-agent/contracts/architect.toml`) is missing, fall
+# back to the committed `<repo>/contracts/<basename>`.
+def resolve-contract-path [contract: string] {
+  let direct = (resolve-contract-at $contract)
+  if $direct != null { return $direct }
+
+  let basename = if ($contract | str ends-with "/") {
+    "architect.toml"
+  } else {
+    $contract | path basename
+  }
+  let bundled_dir = ($HERE | path join "contracts")
+  let fallback = (resolve-contract-at ($bundled_dir | path join $basename))
+  if $fallback != null {
+    print --stderr $"engine: '($contract)' not found, using bundled '($fallback)'"
+    return $fallback
+  }
+  error make { msg: $"engine: contract not found at '($contract)' or bundled '($bundled_dir)/($basename)'" }
+}
+
+export def run [contract: string, prompt: string] {
+  let contract_path = (resolve-contract-path $contract)
   let c = (open $contract_path)
   match $c.action.verb {
     "Consult" => (run-consult $c $prompt)
     "Investigate" => (run-investigate $c $prompt)
     "Enact" => (run-investigate $c $prompt)
-    _ => { error make { msg: $"engine: unsupported action verb '($c.action.verb)' in ($contract)" } }
+    _ => { error make { msg: $"engine: unsupported action verb '($c.action.verb)' in ($contract_path)" } }
   }
 }
 
