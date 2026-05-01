@@ -184,11 +184,11 @@ export def run [contract: string, prompt: string] {
     if $info != null and $info.type == "dir" {
       let preferred = ($contract_path | path join "architect.toml")
       if (preferred | path exists) {
-        contract_path = $preferred
+        $contract_path = $preferred
       } else {
         let found = (try { glob ($contract_path | path join "*.toml") } catch { [] })
         if ($found | length) > 0 {
-          contract_path = ($found | get 0)
+          $contract_path = ($found | get 0)
         }
       }
     }
