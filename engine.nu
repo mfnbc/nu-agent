@@ -178,7 +178,7 @@ export def run [contract: string, prompt: string] {
   # If a directory is passed, prefer `<dir>/architect.toml` or the first
   # `*.toml` found inside it. This supports config values that point at a
   # contracts directory (eg. ~/.config/nu-agent/contracts).
-  let contract_path = $contract
+  mut contract_path = $contract
   if ($contract_path | path exists) {
     let info = (try { ls $contract_path | get 0 } catch { null })
     if $info != null and $info.type == "dir" {
