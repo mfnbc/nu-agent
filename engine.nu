@@ -174,7 +174,27 @@ const TOOL_DEFS = {
 const WRITE_TOOLS = ["propose_edit", "propose_write"]
 
 export def run [contract: string, prompt: string] {
-  let c = (open $contract)
+  # Accept either a path to a contract file or a directory containing contracts.
+  # If a directory is passed, prefer `<dir>/architect.toml` or the first
+  # `*.toml` found inside it. This supports config values that point at a
+  # contracts directory (eg. ~/.config/nu-agent/contracts).
+  let contract_path = $contract
+  if ($contract_path | path exists) {
+    let info = (try { ls $contract_path | get 0 } catch { null })
+    if $info != null and $info.type == "dir" {
+      let preferred = ($contract_path | path join "architect.toml")
+      if (preferred | path exists) {
+        contract_path = $preferred
+      } else {
+        let found = (try { glob ($contract_path | path join "*.toml") } catch { [] })
+        if ($found | length) > 0 {
+          contract_path = ($found | get 0)
+        }
+      }
+    }
+  }
+
+  let c = (open $contract_path)
   match $c.action.verb {
     "Consult" => (run-consult $c $prompt)
     "Investigate" => (run-investigate $c $prompt)
