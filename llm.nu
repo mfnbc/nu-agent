@@ -63,12 +63,16 @@ def post-chat [url: string, body: record, timeout: duration] {
   try { ($http_out.body | from json) } catch { $http_out.body }
 }
 
-# Post a chat body to the LLM endpoint and return the content string.
-export def call-llm-raw [body: record] {
+def post-chat-with-config [body: record] {
   let chat = (get-config | get chat)
   let timeout = (try { $chat.timeout | into duration } catch { 2min })
   let merged_body = (build-body $body $chat.model)
-  let parsed_body = (post-chat $chat.url $merged_body $timeout)
+  post-chat $chat.url $merged_body $timeout
+}
+
+# Post a chat body to the LLM endpoint and return the content string.
+export def call-llm-raw [body: record] {
+  let parsed_body = (post-chat-with-config $body)
   let choice = ($parsed_body.choices.0)
 
   # Normalize chat-style (choices[].message), native-tool-call
@@ -76,7 +80,7 @@ export def call-llm-raw [body: record] {
   # into a single content string for the caller.
   if ($choice.message? | default null) != null {
     let message = ($choice | get message)
-    let raw = if (($message.content? | default "") | str length) > 0 {
+    let raw = if ($message.content? | default "") != "" {
       $message.content
     } else if (($message.tool_calls? | default [] | length) > 0) {
       # Serialize native tool_calls into a JSON-array-of-{name, arguments}.
@@ -89,11 +93,11 @@ export def call-llm-raw [body: record] {
       ($message.reasoning_content? | default "")
     }
     let content = ($raw | str trim)
-    if ($content | str length) == 0 {
+    if $content == "" {
       error make { msg: "LLM returned empty content: message.content, message.tool_calls, and message.reasoning_content were all missing or empty. Check reasoning suppression settings or model state." }
     }
     $content
-  } else if (($choice.text? | default "") | str trim | str length) > 0 {
+  } else if (($choice.text? | default "") | str trim) != "" {
     ($choice.text | str trim)
   } else {
     error make { msg: "LLM returned an unknown response shape (neither choices[].message nor choices[].text)" }
@@ -105,9 +109,6 @@ export def call-llm [messages: list] {
 }
 
 export def call-llm-message [body: record] {
-  let chat = (get-config | get chat)
-  let timeout = (try { $chat.timeout | into duration } catch { 2min })
-  let merged_body = (build-body $body $chat.model)
-  let parsed_body = (post-chat $chat.url $merged_body $timeout)
+  let parsed_body = (post-chat-with-config $body)
   ($parsed_body.choices.0.message)
 }

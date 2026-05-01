@@ -5,10 +5,10 @@ export def main [
   --prompt: string = ""
   --contract: string = ""
 ] {
-  if ($prompt | str length) == 0 {
+  if $prompt == "" {
     error make { msg: "Missing required --prompt argument. Example: nu-agent --prompt \"How do I stream records to an HTTP endpoint?\"" }
   }
-  let contract_path = if ($contract | str length) > 0 {
+  let contract_path = if $contract != "" {
     $contract
   } else {
     (get-config).engine.default_contract

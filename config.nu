@@ -46,21 +46,13 @@ def is-rooted-path [p: string] {
 # to absolute paths against base_dir. Other values pass through unchanged.
 def resolve-paths [cfg: record, base_dir: string] {
   mut out = $cfg
-
-  let tp = ($out | get -o shred | default {} | get -o tokenizer_path | default null)
-  if $tp != null and not (is-rooted-path $tp) {
-    let resolved = ($base_dir | path join $tp | path expand)
-    let s = ($out | get shred | upsert tokenizer_path $resolved)
-    $out = ($out | upsert shred $s)
+  for path in [["shred" "tokenizer_path"] ["engine" "default_contract"]] {
+    let cp = ($path | into cell-path)
+    let val = ($out | get -o $cp)
+    if $val != null and not (is-rooted-path $val) {
+      $out = ($out | upsert $cp ($base_dir | path join $val | path expand))
+    }
   }
-
-  let dc = ($out | get -o engine | default {} | get -o default_contract | default null)
-  if $dc != null and not (is-rooted-path $dc) {
-    let resolved = ($base_dir | path join $dc | path expand)
-    let s = ($out | get engine | upsert default_contract $resolved)
-    $out = ($out | upsert engine $s)
-  }
-
   $out
 }
 
@@ -91,21 +83,17 @@ def read-layer [path: string] {
 def apply-env-overrides [cfg: record] {
   mut out = $cfg
   let mappings = [
-    [chat url NU_AGENT_CHAT_URL]
-    [chat model NU_AGENT_CHAT_MODEL]
-    [embedding url NU_AGENT_EMBEDDING_URL]
-    [embedding model NU_AGENT_EMBEDDING_MODEL]
-    [shred tokenizer_path NU_AGENT_TOKENIZER_PATH]
-    [engine default_contract NU_AGENT_DEFAULT_CONTRACT]
+    [["chat" "url"] NU_AGENT_CHAT_URL]
+    [["chat" "model"] NU_AGENT_CHAT_MODEL]
+    [["embedding" "url"] NU_AGENT_EMBEDDING_URL]
+    [["embedding" "model"] NU_AGENT_EMBEDDING_MODEL]
+    [["shred" "tokenizer_path"] NU_AGENT_TOKENIZER_PATH]
+    [["engine" "default_contract"] NU_AGENT_DEFAULT_CONTRACT]
   ]
   for m in $mappings {
-    let section = ($m | get 0)
-    let leaf = ($m | get 1)
-    let var = ($m | get 2)
-    let v = ($env | get -o $var | default "")
-    if ($v | str length) > 0 {
-      let s = ($out | get $section | upsert $leaf $v)
-      $out = ($out | upsert $section $s)
+    let v = ($env | get -o ($m | get 1) | default "")
+    if $v != "" {
+      $out = ($out | upsert (($m | get 0) | into cell-path) $v)
     }
   }
   $out
@@ -118,13 +106,13 @@ export def get-config [] {
   # Lowest-to-highest priority; each merge overwrites the previous.
   let layer_paths = [
     ($HERE | path join "config.toml")
-    (if ($user_dir | str length) > 0 { $user_dir | path join "config.toml" } else { "" })
+    (if $user_dir != "" { $user_dir | path join "config.toml" } else { "" })
     ($HERE | path join "config.local.toml")
   ]
 
   mut cfg = (fallback-config)
   for p in $layer_paths {
-    if ($p | str length) == 0 { continue }
+    if $p == "" { continue }
     let layer = (read-layer $p)
     if $layer != null {
       $cfg = (merge-config $cfg $layer)

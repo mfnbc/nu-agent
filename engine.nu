@@ -31,142 +31,139 @@ def embed-one [text: string] {
 }
 
 # Tool descriptors for the LLM's `tools` body field — OpenAI function-calling shape.
-const SEARCH_NU_DOCS_TOOL = {
-  type: "function"
-  function: {
-    name: "search_nu_docs"
-    description: "Retrieve chunks from the Nushell documentation corpus by semantic similarity. Use this to verify a command, flag, or idiom rather than relying on memory."
-    parameters: {
-      type: "object"
-      properties: {
-        query: {
-          type: "string"
-          description: "Natural-language search query."
+const TOOL_DEFS = {
+  search_nu_docs: {
+    type: "function"
+    function: {
+      name: "search_nu_docs"
+      description: "Retrieve chunks from the Nushell documentation corpus by semantic similarity. Use this to verify a command, flag, or idiom rather than relying on memory."
+      parameters: {
+        type: "object"
+        properties: {
+          query: {
+            type: "string"
+            description: "Natural-language search query."
+          }
+          k: {
+            type: "integer"
+            description: "Number of top results to return (default 3)."
+          }
         }
-        k: {
-          type: "integer"
-          description: "Number of top results to return (default 3)."
-        }
+        required: ["query"]
       }
-      required: ["query"]
     }
   }
-}
-
-const CHECK_NU_SYNTAX_TOOL = {
-  type: "function"
-  function: {
-    name: "check_nu_syntax"
-    description: "Parse-check a Nushell code snippet without executing it. Returns 'OK' if it parses cleanly, otherwise the parser's diagnostics verbatim. Call this before finalising any nu code in your answer."
-    parameters: {
-      type: "object"
-      properties: {
-        code: {
-          type: "string"
-          description: "Nushell code to parse-check (the contents of a single code block)."
+  check_nu_syntax: {
+    type: "function"
+    function: {
+      name: "check_nu_syntax"
+      description: "Parse-check a Nushell code snippet without executing it. Returns 'OK' if it parses cleanly, otherwise the parser's diagnostics verbatim. Call this before finalising any nu code in your answer."
+      parameters: {
+        type: "object"
+        properties: {
+          code: {
+            type: "string"
+            description: "Nushell code to parse-check (the contents of a single code block)."
+          }
         }
+        required: ["code"]
       }
-      required: ["code"]
     }
   }
-}
-
-const FIND_FILES_TOOL = {
-  type: "function"
-  function: {
-    name: "find_files"
-    description: "Find files matching a glob pattern, scoped to the working directory tree the agent was invoked from. Use this to locate scripts, config files, or other artifacts the user is asking about. Returns matching paths joined by newlines."
-    parameters: {
-      type: "object"
-      properties: {
-        pattern: {
-          type: "string"
-          description: "Glob pattern relative to the working directory (e.g., '**/*.nu', 'crates/**/Cargo.toml'). Standard glob syntax."
+  find_files: {
+    type: "function"
+    function: {
+      name: "find_files"
+      description: "Find files matching a glob pattern, scoped to the working directory tree the agent was invoked from. Use this to locate scripts, config files, or other artifacts the user is asking about. Returns matching paths joined by newlines."
+      parameters: {
+        type: "object"
+        properties: {
+          pattern: {
+            type: "string"
+            description: "Glob pattern relative to the working directory (e.g., '**/*.nu', 'crates/**/Cargo.toml'). Standard glob syntax."
+          }
         }
+        required: ["pattern"]
       }
-      required: ["pattern"]
     }
   }
-}
-
-const READ_FILE_TOOL = {
-  type: "function"
-  function: {
-    name: "read_file"
-    description: "Read a file's contents, scoped to the working directory tree. Returns line-numbered text. Use this to inspect a specific file the user asked about, or one located via find_files."
-    parameters: {
-      type: "object"
-      properties: {
-        path: {
-          type: "string"
-          description: "Path to the file, relative to the working directory or absolute (must resolve under the working directory)."
+  read_file: {
+    type: "function"
+    function: {
+      name: "read_file"
+      description: "Read a file's contents, scoped to the working directory tree. Returns line-numbered text. Use this to inspect a specific file the user asked about, or one located via find_files."
+      parameters: {
+        type: "object"
+        properties: {
+          path: {
+            type: "string"
+            description: "Path to the file, relative to the working directory or absolute (must resolve under the working directory)."
+          }
+          offset: {
+            type: "integer"
+            description: "Line number to start from (1-indexed). Default 1."
+          }
+          limit: {
+            type: "integer"
+            description: "Maximum number of lines to return. Default 2000."
+          }
         }
-        offset: {
-          type: "integer"
-          description: "Line number to start from (1-indexed). Default 1."
-        }
-        limit: {
-          type: "integer"
-          description: "Maximum number of lines to return. Default 2000."
-        }
+        required: ["path"]
       }
-      required: ["path"]
     }
   }
-}
-
-const PROPOSE_EDIT_TOOL = {
-  type: "function"
-  function: {
-    name: "propose_edit"
-    description: "Propose a surgical edit to an existing file by replacing one occurrence of `old_string` with `new_string`. Verifies that `old_string` matches exactly once in the file (rejects otherwise). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
-    parameters: {
-      type: "object"
-      properties: {
-        path: {
-          type: "string"
-          description: "Path to an existing file, scoped to the working directory."
+  propose_edit: {
+    type: "function"
+    function: {
+      name: "propose_edit"
+      description: "Propose a surgical edit to an existing file by replacing one occurrence of `old_string` with `new_string`. Verifies that `old_string` matches exactly once in the file (rejects otherwise). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
+      parameters: {
+        type: "object"
+        properties: {
+          path: {
+            type: "string"
+            description: "Path to an existing file, scoped to the working directory."
+          }
+          old_string: {
+            type: "string"
+            description: "Exact text to replace. Must match exactly once. Include surrounding context if the change point would otherwise be ambiguous."
+          }
+          new_string: {
+            type: "string"
+            description: "Replacement text."
+          }
+          rationale: {
+            type: "string"
+            description: "One-sentence justification for this edit."
+          }
         }
-        old_string: {
-          type: "string"
-          description: "Exact text to replace. Must match exactly once. Include surrounding context if the change point would otherwise be ambiguous."
-        }
-        new_string: {
-          type: "string"
-          description: "Replacement text."
-        }
-        rationale: {
-          type: "string"
-          description: "One-sentence justification for this edit."
-        }
+        required: ["path", "old_string", "new_string", "rationale"]
       }
-      required: ["path", "old_string", "new_string", "rationale"]
     }
   }
-}
-
-const PROPOSE_WRITE_TOOL = {
-  type: "function"
-  function: {
-    name: "propose_write"
-    description: "Propose creating a new file with the given content. Rejects if the file already exists (use propose_edit instead). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
-    parameters: {
-      type: "object"
-      properties: {
-        path: {
-          type: "string"
-          description: "Path for the new file, scoped to the working directory."
+  propose_write: {
+    type: "function"
+    function: {
+      name: "propose_write"
+      description: "Propose creating a new file with the given content. Rejects if the file already exists (use propose_edit instead). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
+      parameters: {
+        type: "object"
+        properties: {
+          path: {
+            type: "string"
+            description: "Path for the new file, scoped to the working directory."
+          }
+          content: {
+            type: "string"
+            description: "Full contents of the new file."
+          }
+          rationale: {
+            type: "string"
+            description: "One-sentence justification for this new file."
+          }
         }
-        content: {
-          type: "string"
-          description: "Full contents of the new file."
-        }
-        rationale: {
-          type: "string"
-          description: "One-sentence justification for this new file."
-        }
+        required: ["path", "content", "rationale"]
       }
-      required: ["path", "content", "rationale"]
     }
   }
 }
@@ -189,7 +186,7 @@ export def run [contract: string, prompt: string] {
 # Consult action: deterministic pre-retrieval (when corpus is declared) → single LLM call.
 def run-consult [contract: record, prompt: string] {
   let context = (retrieve-context $contract $prompt)
-  let messages = if ($context | str length) > 0 {
+  let messages = if $context != "" {
     [
       { role: "system", content: $contract.prompt.system }
       { role: "system", content: $"Relevant Nushell documentation:\n\n($context)" }
@@ -266,10 +263,10 @@ def run-investigate [contract: record, prompt: string] {
       # path worth listing; only fresh ones increment the count.
       if ($name in $WRITE_TOOLS) {
         let p = ($args.path? | default "")
-        if ($p | str length) > 0 and ($result | str starts-with "(proposal recorded)") {
+        if $p != "" and ($result | str starts-with "(proposal recorded)") {
           $propose_count = ($propose_count + 1)
           $proposed_paths = ($proposed_paths | append $p)
-        } else if ($p | str length) > 0 and ($result | str starts-with "(already applied)") {
+        } else if $p != "" and ($result | str starts-with "(already applied)") {
           $proposed_paths = ($proposed_paths | append $p)
         }
       }
@@ -294,19 +291,9 @@ def build-tools-array [whitelist: list, verb: string] {
   let allowed = if $verb == "Enact" {
     $whitelist
   } else {
-    $whitelist | where { |t| ($t in $WRITE_TOOLS) == false }
+    $whitelist | where { |t| $t not-in $WRITE_TOOLS }
   }
-  $allowed | each { |t|
-    match $t {
-      "search_nu_docs" => $SEARCH_NU_DOCS_TOOL
-      "check_nu_syntax" => $CHECK_NU_SYNTAX_TOOL
-      "find_files" => $FIND_FILES_TOOL
-      "read_file" => $READ_FILE_TOOL
-      "propose_edit" => $PROPOSE_EDIT_TOOL
-      "propose_write" => $PROPOSE_WRITE_TOOL
-      _ => null
-    }
-  } | where $it != null
+  $allowed | each { |t| $TOOL_DEFS | get -o $t } | where $it != null
 }
 
 # Dispatch a single tool call. Rejects names not in the contract's whitelist.
@@ -334,12 +321,12 @@ def dispatch-tool [name: string, args: record, contract: record, whitelist: list
 # search_nu_docs implementation: embed query → similarity over corpus → top-k chunks as text.
 def tool-search-nu-docs [args: record, contract: record] {
   let q = ($args.query? | default "")
-  if ($q | str length) == 0 {
+  if $q == "" {
     return "tool error: search_nu_docs requires a non-empty `query` argument"
   }
   let k = ($args.k? | default 3)
   let corpus_path = ($contract.action.corpus? | default "")
-  if ($corpus_path | str length) == 0 {
+  if $corpus_path == "" {
     return "tool error: contract declares no `action.corpus`"
   }
   if not ($corpus_path | path exists) {
@@ -357,7 +344,7 @@ def tool-search-nu-docs [args: record, contract: record] {
 # return the parser's stdout/stderr verbatim (or "OK" when it's silent).
 def tool-check-nu-syntax [args: record] {
   let code = ($args.code? | default "")
-  if ($code | str length) == 0 {
+  if $code == "" {
     return "tool error: check_nu_syntax requires a non-empty `code` argument"
   }
   let tmpfile = $"/tmp/nu-agent-check-(random uuid).nu"
@@ -366,13 +353,13 @@ def tool-check-nu-syntax [args: record] {
   rm -f $tmpfile
   let stdout = ($result.stdout | str trim)
   let stderr = ($result.stderr | str trim)
-  if ($stdout | str length) == 0 and ($stderr | str length) == 0 and $result.exit_code == 0 {
+  if $stdout == "" and $stderr == "" and $result.exit_code == 0 {
     "OK"
-  } else if ($stdout | str length) > 0 and ($stderr | str length) > 0 {
+  } else if $stdout != "" and $stderr != "" {
     $"stdout:\n($stdout)\n\nstderr:\n($stderr)"
-  } else if ($stdout | str length) > 0 {
+  } else if $stdout != "" {
     $stdout
-  } else if ($stderr | str length) > 0 {
+  } else if $stderr != "" {
     $stderr
   } else {
     $"nu --ide-check exited with code ($result.exit_code) and no diagnostic output"
@@ -386,8 +373,7 @@ def tool-check-nu-syntax [args: record] {
 def is-under-cwd [p: string] {
   let cwd_abs = (pwd | path expand)
   let p_abs = ($p | path expand)
-  if $p_abs == $cwd_abs { return true }
-  ($p_abs | str starts-with ($cwd_abs + "/"))
+  $p_abs == $cwd_abs or ($p_abs | str starts-with ($cwd_abs + "/"))
 }
 
 # find_files implementation: glob within cwd; reject any matches that escape.
@@ -396,7 +382,7 @@ def is-under-cwd [p: string] {
 # dir blow the LLM's per-turn ingestion budget on small local models.)
 def tool-find-files [args: record] {
   let pat = ($args.pattern? | default "")
-  if ($pat | str length) == 0 {
+  if $pat == "" {
     return "tool error: find_files requires a non-empty `pattern` argument"
   }
   let raw = (try { glob $pat } catch { null })
@@ -423,7 +409,7 @@ def tool-find-files [args: record] {
 # tool emits — familiar to any LLM trained against that conversation style.
 def tool-read-file [args: record] {
   let raw_path = ($args.path? | default "")
-  if ($raw_path | str length) == 0 {
+  if $raw_path == "" {
     return "tool error: read_file requires a non-empty `path` argument"
   }
   if not (is-under-cwd $raw_path) {
@@ -470,16 +456,16 @@ def tool-read-file [args: record] {
 # present, building cumulatively on the first.
 def tool-propose-edit [args: record] {
   let raw_path = ($args.path? | default "")
-  if ($raw_path | str length) == 0 {
+  if $raw_path == "" {
     return "tool error: propose_edit requires a non-empty `path` argument"
   }
   let old_string = ($args.old_string? | default "")
-  if ($old_string | str length) == 0 {
+  if $old_string == "" {
     return "tool error: propose_edit requires a non-empty `old_string` argument"
   }
   let new_string = ($args.new_string? | default "")
   let rationale = ($args.rationale? | default "")
-  if ($rationale | str length) == 0 {
+  if $rationale == "" {
     return "tool error: propose_edit requires a `rationale` argument (one-sentence justification)"
   }
   if not (is-under-cwd $raw_path) {
@@ -507,7 +493,7 @@ def tool-propose-edit [args: record] {
     # present in the source (which is .proposed when it exists), this
     # is almost certainly a retry of an already-applied edit. Return a
     # success-shaped result so the model breaks out of the retry loop.
-    let new_count = if ($new_string | str length) > 0 {
+    let new_count = if $new_string != "" {
       (($text | split row $new_string | length) - 1)
     } else {
       0
@@ -539,12 +525,12 @@ def tool-propose-edit [args: record] {
 # path overwrites the previous .proposed (last write wins).
 def tool-propose-write [args: record] {
   let raw_path = ($args.path? | default "")
-  if ($raw_path | str length) == 0 {
+  if $raw_path == "" {
     return "tool error: propose_write requires a non-empty `path` argument"
   }
   let content = ($args.content? | default "")
   let rationale = ($args.rationale? | default "")
-  if ($rationale | str length) == 0 {
+  if $rationale == "" {
     return "tool error: propose_write requires a `rationale` argument (one-sentence justification)"
   }
   if not (is-under-cwd $raw_path) {
@@ -569,7 +555,7 @@ def tool-propose-write [args: record] {
 # or empty string when no corpus is declared / corpus file is missing.
 def retrieve-context [contract: record, prompt: string] {
   let corpus_path = ($contract.action.corpus? | default "")
-  if ($corpus_path | str length) == 0 {
+  if $corpus_path == "" {
     return ""
   }
   if not ($corpus_path | path exists) {
