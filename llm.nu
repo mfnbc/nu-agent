@@ -43,8 +43,9 @@ def build-body [body: record, model: string] {
   ($defaults | merge $body)
 }
 
-# POST $body to $url and return the parsed JSON body or error.
-def post-chat [url: string, body: record, timeout: duration] {
+# Generic POST to an LLM endpoint (chat or embeddings).
+# Parses the JSON response or throws an error.
+def post-llm [url: string, body: record, timeout: duration] {
   let http_out = (
     http post
       -t application/json
@@ -67,7 +68,7 @@ def post-chat-with-config [body: record] {
   let chat = (get-config | get chat)
   let timeout = (try { $chat.timeout | into duration } catch { 2min })
   let merged_body = (build-body $body $chat.model)
-  post-chat $chat.url $merged_body $timeout
+  post-llm $chat.url $merged_body $timeout
 }
 
 # Post a chat body to the LLM endpoint and return the content string.
@@ -111,4 +112,39 @@ export def call-llm [messages: list] {
 export def call-llm-message [body: record] {
   let parsed_body = (post-chat-with-config $body)
   ($parsed_body.choices.0.message)
+}
+
+# --- Embeddings ---
+
+# Call the configured embedding endpoint with a list of strings.
+# Returns a list of embedding vectors (list<list<float>>).
+export def call-llm-embed [texts: list<string>] {
+  let cfg = (get-config | get embedding)
+  let timeout = (try { $cfg.timeout | into duration } catch { 5min })
+  let body = { model: $cfg.model, input: $texts }
+  
+  let response = (post-llm $cfg.url $body $timeout)
+  
+  # Return the list of float arrays
+  $response.data | get embedding
+}
+
+# Pipeline filter: chunk records, fetch embeddings, zip vectors into the 'embedding' column.
+export def attach-embeddings [
+  --batch-size: int
+  --column: string = "embedding_input"
+] {
+  let stream = $in
+  
+  let cfg = (get-config | get embedding)
+  let active_batch_size = ($batch_size | default ($cfg.batch_size? | default 16))
+
+  $stream | chunks $active_batch_size | each { |batch|
+    let texts = ($batch | get $column)
+    let embeddings = (call-llm-embed $texts)
+    
+    $batch | zip $embeddings | each { |pair|
+      $pair.0 | insert embedding $pair.1
+    }
+  } | flatten
 }
