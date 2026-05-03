@@ -136,12 +136,12 @@ export def attach-embeddings [
   --batch-size: int
   --column: string = "embedding_input"
 ] {
-  let stream = $in
-  
+  # Read config first
   let cfg = (get-config | get embedding)
   let active_batch_size = ($batch_size | default ($cfg.batch_size? | default 16))
 
-  $stream | chunks $active_batch_size | each { |batch|
+  # Stream directly from $in. Assigning `let stream = $in` drains the pipeline into memory!
+  $in | chunks $active_batch_size | each { |batch|
     let texts = ($batch | get $column)
     let embeddings = (call-llm-embed $texts)
     
