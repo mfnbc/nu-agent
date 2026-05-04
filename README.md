@@ -24,15 +24,26 @@ http get https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1/resolve/main/
 
 # 5. Build the corpus (one-time, ~10-30 minutes)
 # `where` filters out translated docs (any path segment matching a BCP-47 language tag)
-mkdir data
+mkdir -p data
+use llm.nu *
 (ls external/nushell.github.io/**/*.md
  | where { |f| not ($f.name =~ '/[a-z]{2}(-[A-Z]{2,3})?/') }
- | each { |f| open $f.name | rag shred --source $f.name --tokenizer-path tokenizers/mxbai.json }
+ | each { |f|
+     open $f.name
+     | rag shred --source $f.name --tokenizer-path tokenizers/mxbai.json
+     | attach-embeddings --column embedding_input
+   }
  | flatten
- | rag embed --column embedding_input
  | save --force data/nu_docs.msgpack)
 
-# 6. Ask the architect
+# 6. Quick query example (compute a query vector and run flat-cosine similarity)
+use llm.nu *
+# produce a single query vector (call-llm-embed returns a list-of-vectors; get the first)
+let qvec = (call-llm-embed ["How do I find the highest disk usage files in Nushell?"] | get 0)
+# run similarity against the saved corpus
+open data/nu_docs.msgpack | rag similarity --query $qvec --k 5 --field embedding
+
+# 7. Ask the architect
 ./nu-agent --prompt "How do I find the highest disk usage files in Nushell?"
 ```
 
