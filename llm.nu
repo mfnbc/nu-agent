@@ -122,11 +122,7 @@ export def call-llm-embed [texts: list<string>] {
   let cfg = (get-config | get embedding)
   let timeout = (try { $cfg.timeout | into duration } catch { 5min })
   let body = { model: $cfg.model, input: $texts }
-  
-  print $"[llm.nu] Sending batch of ($texts | length) to ($cfg.url) (model: ($cfg.model))"
   let response = (post-llm $cfg.url $body $timeout)
-  print $"[llm.nu] Received response from ($cfg.url)"
-  
   # Return the list of float arrays
   $response.data | get embedding
 }
