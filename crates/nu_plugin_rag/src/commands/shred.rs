@@ -219,13 +219,10 @@ impl PluginCommand for Shred {
             .and_then(|tok| Self::chunk_text_with_tokenizer(&text, tok, max_tokens, overlap_tokens))
         {
             Ok(c) => c,
-            Err(e) => {
-                eprintln!(
-                    "rag shred: tokenizer split failed ({}); falling back to char-based",
-                    e
-                );
-                // Conservative defaults sized to fit within mxbai-embed-large-v1's 512-token
-                // context with margin for code-heavy content (which tokenizes denser than prose).
+            Err(_e) => {
+                // Tokenizer failed to load or split; silently fall back to a
+                // conservative char-based splitter. This avoids noisy stderr
+                // output during normal operation.
                 Self::chunk_text_by_chars(&text, 1500, 100)
             }
         };

@@ -36,12 +36,13 @@ use llm.nu *
  | flatten
  | save --force data/nu_docs.msgpack)
 
-# 6. Quick query example (compute a query vector and run flat-cosine similarity)
+# 6. Quick query example — use the provided helper
 use llm.nu *
-# produce a single query vector (call-llm-embed returns a list-of-vectors; get the first)
-let qvec = (call-llm-embed ["How do I find the highest disk usage files in Nushell?"] | get 0)
-# run similarity against the saved corpus
-open data/nu_docs.msgpack | rag similarity --query $qvec --k 5 --field embedding
+# run a semantic search against the saved corpus; query-corpus embeds the
+# query and runs rag similarity for you (default k=5)
+let hits = (query-corpus "How do I find the highest disk usage files in Nushell?" "data/nu_docs.msgpack" 5)
+# inspect the top hit(s)
+$hits
 
 # 7. Ask the architect
 ./nu-agent --prompt "How do I find the highest disk usage files in Nushell?"

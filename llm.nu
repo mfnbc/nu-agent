@@ -127,6 +127,13 @@ export def call-llm-embed [texts: list<string>] {
   $response.data | get embedding
 }
 
+# Query helper: embed a single string and run rag similarity against a corpus path.
+export def query-corpus [query: string, corpus: string, k: int] {
+  let k = ($k | default 5)
+  let qvec = (call-llm-embed [ $query ] | get 0)
+  open $corpus | rag similarity --query $qvec --k $k
+}
+
 # Pipeline filter: chunk records, fetch embeddings, zip vectors into the 'embedding' column.
 export def attach-embeddings [
   --batch-size: int
