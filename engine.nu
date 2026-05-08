@@ -221,8 +221,21 @@ export def run [contract: string, prompt: string] {
     "Consult" => (run-consult $c $prompt)
     "Investigate" => (run-investigate $c $prompt)
     "Enact" => (run-investigate $c $prompt)
+    "Enrich" => (run-enrich $c $prompt)
     _ => { error make { msg: $"engine: unsupported action verb '($c.action.verb)' in ($contract_path)" } }
   }
+}
+
+# Enrich action: single-shot JSON fill-in. No corpus retrieval, no tool loop.
+# The contract's system prompt declares the schema; the caller's prompt IS the
+# JSON record to enrich. Returns the raw LLM response string — the caller is
+# responsible for parsing and validating the JSON.
+def run-enrich [contract: record, prompt: string] {
+  let messages = [
+    { role: "system", content: $contract.prompt.system }
+    { role: "user", content: $prompt }
+  ]
+  call-llm $messages
 }
 
 # Consult action: deterministic pre-retrieval (when corpus is declared) → single LLM call.

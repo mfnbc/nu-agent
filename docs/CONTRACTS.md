@@ -17,6 +17,7 @@ A contract is specified along **two dimensions**: **Role** (who the LLM is) and 
   - **Consult** — prose (read-only).
   - **Investigate** — search and retrieve (read + query).
   - **Enact** — execute (read + write).
+  - **Enrich** — JSON fill-in (read-only, structured output). The system prompt declares a JSON schema with fields to complete; the user message is the JSON record to enrich; the response is the same record with the declared fields filled in. No corpus retrieval, no tool loop, no free text — JSON in, JSON out.
 - **Corpus** — repositories or vectorised reference corpora the LLM may read.
 - **Tool-set** — tools the LLM may call (named in the contract's `action.tools` array; engine dispatches whitelisted names against actual implementations).
 - **Output-shape** — JSON tool-call array, validated record, `.try` preview, or prose.
