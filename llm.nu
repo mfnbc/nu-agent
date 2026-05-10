@@ -48,14 +48,7 @@ def build-body [body: record, model: string] {
 def post-llm [url: string, body: record, timeout: duration] {
   let http_out = (
     try {
-      http post
-        -t application/json
-        -e
-        --full
-        -H $HEADERS
-        $url
-        $body
-        --max-time $timeout
+      http post -t application/json -e --full -H $HEADERS --max-time $timeout $url $body
     } catch { |err|
       error make { msg: $"HTTP POST threw an error directly: ($err)" }
     }
