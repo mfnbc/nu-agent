@@ -47,13 +47,17 @@ def build-body [body: record, model: string] {
 # Parses the JSON response or throws an error.
 def post-llm [url: string, body: record, timeout: duration] {
   let http_out = (
-    http post
-      -t application/json
-      --full
-      -H $HEADERS
-      $url
-      $body
-      --max-time $timeout
+    try {
+      http post
+        -t application/json
+        --full
+        -H $HEADERS
+        $url
+        $body
+        --max-time $timeout
+    } catch { |err|
+      error make { msg: $"HTTP POST threw an error directly: ($err)" }
+    }
   )
 
   if $http_out.status >= 400 {
