@@ -50,6 +50,7 @@ def post-llm [url: string, body: record, timeout: duration] {
     try {
       http post
         -t application/json
+        -e
         --full
         -H $HEADERS
         $url
