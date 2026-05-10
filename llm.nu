@@ -57,8 +57,8 @@ def post-llm [url: string, body: record, timeout: duration] {
   )
 
   if $http_out.status >= 400 {
-    let body_text = try { ($http_out.body | to json) } catch { $http_out.body }
-    error make { msg: $"LLM request failed with status ($http_out.status): ($body_text)" }
+    let body_text = try { ($http_out.body | to json) } catch { $http_out.body | into string }
+    error make { msg: $"LLM request failed with status ($http_out.status) to ($url): ($body_text)\nBody sent: ($body | to json)" }
   }
 
   try { ($http_out.body | from json) } catch { $http_out.body }
