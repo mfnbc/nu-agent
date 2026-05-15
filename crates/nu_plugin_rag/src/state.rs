@@ -1,6 +1,6 @@
 use nu_plugin::{Plugin, PluginCommand};
 
-use crate::commands::{embed::Embed, shred::Shred, similarity::Similarity};
+use crate::commands::{embed::Embed, shred::Shred, similarity::Similarity, ann::{AnnBuild, AnnQuery}, ann_hnsw::{AnnHnswBuild, AnnHnswQuery}};
 
 #[derive(Clone, Default)]
 pub struct RagPlugin;
@@ -21,6 +21,10 @@ impl Plugin for RagPlugin {
             Box::new(Shred {}),
             Box::new(Embed {}),
             Box::new(Similarity {}),
+            Box::new(AnnBuild {}),
+            Box::new(AnnQuery {}),
+            Box::new(AnnHnswBuild {}),
+            Box::new(AnnHnswQuery {}),
         ]
     }
 }

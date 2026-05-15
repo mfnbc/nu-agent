@@ -28,10 +28,10 @@ const HERE = (path self | path dirname)
 # Embed a single text string and return its embedding vector. Wraps `rag embed`
 # with config-derived endpoint/model/batch-size so the engine never silently
 # relies on plugin defaults.
-def embed-one [text: string] {
+export def embed-one [text: string] {
   let emb = (get-config | get embedding)
   ([{text: $text}]
-   | rag embed --column text --url $emb.url --model $emb.model --batch-size $emb.batch_size
+   | rag embed --field text
    | get 0.embedding)
 }
 
@@ -621,4 +621,12 @@ def retrieve-context [contract: record, prompt: string] {
   let qv = (embed-one $prompt)
   let hits = (open $corpus_path | rag similarity --query $qv --k $k)
   $hits | get text | str join "\n\n---\n\n"
+}
+
+# CLI entry point: `nu engine.nu run <contract> <prompt>`
+export def main [verb: string, contract: string, prompt: string] {
+  match $verb {
+    "run" => (run $contract $prompt)
+    _ => { error make { msg: $"engine: unknown verb '($verb)'. Use: nu engine.nu run <contract> <prompt>" } }
+  }
 }

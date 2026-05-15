@@ -9,7 +9,7 @@ use crate::state::RagPlugin;
 pub struct Similarity;
 
 impl Similarity {
-    fn extract_vec(value: &Value) -> Option<Vec<f32>> {
+    pub(crate) fn extract_vec(value: &Value) -> Option<Vec<f32>> {
         if let Value::List { vals, .. } = value {
             let mut out = Vec::with_capacity(vals.len());
             for v in vals.iter() {
@@ -25,7 +25,7 @@ impl Similarity {
         }
     }
 
-    fn cosine(a: &[f32], b: &[f32]) -> f32 {
+    pub(crate) fn cosine(a: &[f32], b: &[f32]) -> f32 {
         if a.len() != b.len() {
             return 0.0;
         }
