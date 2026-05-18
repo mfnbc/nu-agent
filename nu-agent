@@ -6,13 +6,12 @@ export def main [
   --contract: string = ""
 ] {
   if $prompt == "" {
-    error make { msg: "Missing required --prompt argument. Example: nu-agent --prompt \"How do I stream records to an HTTP endpoint?\"" }
+    error make { msg: "Missing required --prompt argument. Usage: nu-agent --prompt <prompt> [--contract <path>]" }
   }
   let contract_path = if $contract != "" {
     $contract
   } else {
     (get-config).engine.default_contract
   }
-  print --stderr "Calling Nushell Data Architect. May take several minutes."
   run $contract_path $prompt
 }
