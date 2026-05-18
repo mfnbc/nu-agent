@@ -2,7 +2,7 @@
 
 Snapshot of nu-agent's implementation state and known warts.
 
-**Last updated:** 2026-04-30 (engine guards against propose retry loops: idempotency detection, graceful max_iterations, directive tool-result messages)
+**Last updated:** 2026-05-18 (chess coach contract documented, nuchessdb DERIVE phase three-script pipeline verified)
 
 ## Implemented
 
