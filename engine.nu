@@ -31,7 +31,7 @@ const HERE = (path self | path dirname)
 export def embed-one [text: string] {
   let emb = (get-config | get embedding)
   ([{text: $text}]
-   | rag embed --field text
+   | rag embed --column text
    | get 0.embedding)
 }
 
