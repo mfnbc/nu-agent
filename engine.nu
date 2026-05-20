@@ -25,14 +25,15 @@ use ./llm.nu *
 # the pattern in config.nu.
 const HERE = (path self | path dirname)
 
-# Embed a single text string and return its embedding vector. Wraps `rag embed`
-# with config-derived endpoint/model/batch-size so the engine never silently
-# relies on plugin defaults.
+# Embed a single text string and return its embedding vector.
+# Use the config-aware embedding path (call-llm-embed) rather than relying
+# on plugin process environment variables. This keeps embedding config
+# resolution centralized and consistent between batch and single-shot flows.
 export def embed-one [text: string] {
-  let emb = (get-config | get embedding)
-  ([{text: $text}]
-   | rag embed --column text
-   | get 0.embedding)
+  # Prefer the unified embedding path implemented in llm.nu which reads
+  # the full config cascade and performs HTTP embedding requests.
+  let vec = (call-llm-embed [$text] | get 0)
+  $vec
 }
 
 # Tool descriptors for the LLM's `tools` body field — OpenAI function-calling shape.
@@ -72,6 +73,25 @@ const TOOL_DEFS = {
           }
         }
         required: ["code"]
+      }
+    }
+  }
+  search_ann: {
+    type: "function"
+    function: {
+      name: "search_ann"
+      description: "Query a persisted ANN index (HNSW or exact index) using a prompt or embedding vector. If `query` is provided, it will be embedded using the engine's embedding path. Returns top-k hits (id + score)."
+      parameters: {
+        type: "object"
+        properties: {
+          index: { type: "string", description: "Path to ANN index basename or index file (plugin-specific)" }
+          map: { type: "string", description: "Path to the index id map JSON file" }
+          query: { type: "string", description: "Natural-language query to embed (optional)" }
+          query_vec: { type: "array", items: { type: "number" }, description: "Embedding vector (optional)" }
+          k: { type: "integer", description: "Number of top results to return (default 5)" }
+          ef_search: { type: "integer", description: "HNSW ef_search parameter (default 200)" }
+        }
+        required: ["index", "map"]
       }
     }
   }
@@ -228,14 +248,34 @@ export def run [contract: string, prompt: string] {
 
 # Enrich action: single-shot JSON fill-in. No corpus retrieval, no tool loop.
 # The contract's system prompt declares the schema; the caller's prompt IS the
-# JSON record to enrich. Returns the raw LLM response string — the caller is
-# responsible for parsing and validating the JSON.
+# JSON record to enrich. This helper attempts to validate JSON and retry a
+# small number of times to accommodate local/smaller models that sometimes
+# wrap or slightly corrupt the JSON output (fences, brief prefixes).
 def run-enrich [contract: record, prompt: string] {
-  let messages = [
+  mut messages = [
     { role: "system", content: $contract.prompt.system }
     { role: "user", content: $prompt }
   ]
-  call-llm $messages
+
+  mut attempts = 0
+  loop {
+    let raw = (call-llm $messages | str trim)
+    # Strip common markdown code fences that models sometimes include.
+    let cleaned = ($raw | str replace -r '^```[a-z]*\n?' '' | str replace -r '\n?```$' '')
+
+    # Verify JSON parseability before returning. If valid, return the cleaned JSON string.
+    if (try { $cleaned | from json; true } catch { false }) {
+      return $cleaned
+    }
+
+    attempts = ($attempts + 1)
+    if $attempts >= 3 {
+      error make { msg: $("engine: run-enrich: model did not return valid JSON after 3 attempts. Last output: " + ($cleaned | str substring 0..300)) }
+    }
+
+    # Ask the model to return JSON only on the next attempt.
+    messages = ($messages | append { role: "system", content: "Please return ONLY a JSON object matching the contract schema with no surrounding text or markdown fences." })
+  }
 }
 
 # Consult action: deterministic pre-retrieval (when corpus is declared) → single LLM call.
@@ -364,6 +404,7 @@ def dispatch-tool [name: string, args: record, contract: record, whitelist: list
   }
   match $name {
     "search_nu_docs" => (tool-search-nu-docs $args $contract)
+    "search_ann" => (tool-search-ann $args $contract)
     "check_nu_syntax" => (tool-check-nu-syntax $args)
     "find_files" => (tool-find-files $args)
     "read_file" => (tool-read-file $args)
@@ -393,6 +434,32 @@ def tool-search-nu-docs [args: record, contract: record] {
   $hits | each { |h|
     $"Source: ($h.source)\nTitle: ($h.title)\nScore: ($h.score)\n\n($h.text)"
   } | str join "\n\n---\n\n"
+}
+
+# ANN search tool: embed a natural-language query (or accept an embedding vector),
+# query an HNSW/ANN index via the plugin, and return top-k hits.
+def tool-search-ann [args: record, contract: record] {
+  let index = ($args.index? | default "")
+  let map = ($args.map? | default "")
+  if $index == "" or $map == "" { return "tool error: search_ann requires `index` and `map` parameters" }
+  let k = ($args.k? | default 5)
+  let ef = ($args.ef_search? | default 200)
+
+  # Acquire query vector: either a textual query (embed) or an explicit vector
+  if ($args.query? | default "") != "" {
+    let qtxt = $args.query
+    let qv = (embed-one $qtxt)
+    let hits = (rag ann-query-hnsw --index $index --map $map --query ($qv) --k $k --ef-search $ef)
+    if ($hits | is-empty) { return "(no hits)" }
+    $hits | each { |h| $"Hit: id=($h.id) score=($h.score) index=($h.index)" } | str join "\n\n---\n\n"
+  } else if ($args.query_vec? | default []) != [] {
+    let qv = ($args.query_vec)
+    let hits = (rag ann-query-hnsw --index $index --map $map --query ($qv) --k $k --ef-search $ef)
+    if ($hits | is-empty) { return "(no hits)" }
+    $hits | each { |h| $"Hit: id=($h.id) score=($h.score) index=($h.index)" } | str join "\n\n---\n\n"
+  } else {
+    return "tool error: search_ann requires either `query` (string) or `query_vec` (list of numbers)"
+  }
 }
 
 # check_nu_syntax implementation: write the code to a temp file, run `nu --ide-check`,

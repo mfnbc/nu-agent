@@ -17,10 +17,8 @@ tokenizers = { version = "0.19", features = ["http"] }
 nu-plugin = "0.111"
 nu-protocol = "0.111"
 nu-engine = "0.111"
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 walkdir = "2"
 
 # HNSW approximate nearest neighbor index for research prototype
 hnsw_rs = "0.3.4"
-serde_cbor = "0.11"
 anndists = "0.1.5"

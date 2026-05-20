@@ -60,6 +60,47 @@ prompt + contract.toml
 
 Each invocation is one query. The plugin commands (`rag shred`, `rag embed`, `rag similarity`) are stateless transforms — Rust does the heavy compute, nu does I/O and orchestration. Persistence is nu's job (`open`/`save` over msgpack).
 
+## Embeddings & ANN (Approximate Nearest Neighbors)
+
+nu-agent ships a small RAG plugin (`nu_plugin_rag`) that provides two complementary retrieval modes:
+
+- MessagePack / in-memory cosine similarity (rag similarity)
+  - Intended for small-to-medium corpora that fit comfortably in memory (e.g., the Nushell documentation corpus saved as msgpack). The engine embeds a query (call-llm-embed), runs `rag similarity --query <vec>`, and returns top-k chunks.
+
+- NDJSON + ANN / HNSW indexing (rag ann-build-hnsw, rag ann-query-hnsw)
+  - Intended for larger or append-heavy corpora (e.g., biblexicon's 70k+ root registry). Workflow: produce NDJSON embeddings (via `rag embed --out <ndjson>`), build an HNSW index (`rag ann-build-hnsw`), then query it (`rag ann-query-hnsw`) and optionally re-rank exact cosine on the top candidates.
+  - This path is used by projects that need sublinear retrieval and clustering (biblexicon, experimental knowledge corpora).
+
+Key notes:
+- The two formats are different by design: NDJSON (streamable, ANN build) vs msgpack (compact, in-memory similarity). Choose the flow that matches your scale and workflow.
+- Use `bin/embed-resilient.nu` in consumer projects as an example wrapper that resolves config and falls back to mock embeddings when an embedding endpoint is unavailable.
+
+Using ANN from a contract/tool
+
+nu-agent exposes a standard `search_ann` tool that contracts may declare in `action.tools`. This lets a contract's LLM invoke ANN retrieval (HNSW or exact persisted index) in a controlled, auditable way.
+
+Example contract snippet (TOML):
+
+[role]
+domain = "mydomain"
+persona = "Retriever"
+
+[action]
+verb = "Investigate"
+corpus = ""
+tools = ["search_ann", "read_file"]
+
+[prompt]
+system = '''
+You are a retriever. You may call the `search_ann` tool to find relevant concepts in a pre-built ANN index. When calling the tool, pass `index` (index basename), `map` (id map path) and either a `query` string or a `query_vec` embedding.
+'''
+
+How the tool is called by the model (function-call shape)
+- name: search_ann
+- arguments: { index: "/path/to/global_hnsw", map: "/path/to/global_hnsw_map.json", query: "find similar concept to X", k: 5 }
+
+The engine implements `search_ann` by embedding `query` (via the engine embedding path) when necessary and dispatching `rag ann-query-hnsw` under the hood; results are returned as structured top-k hits (id + score) for the model to consume and reason about.
+
 ## Configuration
 
 All knobs live in TOML, resolved through a four-layer cascade (highest priority first):

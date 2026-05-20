@@ -169,7 +169,12 @@ impl PluginCommand for Embed {
             for v in out_records.iter() {
                 if let Value::Record { val, .. } = v {
                     // try to extract xxh3_hash and embedding
-                    let id = val.get("xxh3_hash").and_then(|x| x.clone().into_string().ok()).unwrap_or_default();
+                    // Prefer explicit provenance fields: accept xxh3_hash when present,
+                    // but fall back to `id` (used by rag shred) to maximize interoperability.
+                    let id = val.get("xxh3_hash")
+                        .or_else(|| val.get("id"))
+                        .and_then(|x| x.clone().into_string().ok())
+                        .unwrap_or_default();
                     let emb_val = val.get("embedding").cloned();
                     if let Some(Value::List { vals, .. }) = emb_val {
                         let arr: Vec<f32> = vals.iter().filter_map(|vv| match vv { Value::Float{ val, .. } => Some(*val as f32), Value::Int{ val, .. } => Some(*val as f32), _ => None }).collect();
