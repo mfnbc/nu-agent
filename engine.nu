@@ -268,13 +268,14 @@ def run-enrich [contract: record, prompt: string] {
       return $cleaned
     }
 
-    attempts = ($attempts + 1)
+    $attempts = ($attempts + 1)
     if $attempts >= 3 {
-      error make { msg: $("engine: run-enrich: model did not return valid JSON after 3 attempts. Last output: " + ($cleaned | str substring 0..300)) }
+      let err_msg = ("engine: run-enrich: model did not return valid JSON after 3 attempts. Last output: " + ($cleaned | str substring 0..300))
+      error make { msg: $err_msg }
     }
 
     # Ask the model to return JSON only on the next attempt.
-    messages = ($messages | append { role: "system", content: "Please return ONLY a JSON object matching the contract schema with no surrounding text or markdown fences." })
+    $messages = ($messages | append { role: "system", content: "Please return ONLY a JSON object matching the contract schema with no surrounding text or markdown fences." })
   }
 }
 
