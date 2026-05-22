@@ -692,6 +692,22 @@ def retrieve-context [contract: record, prompt: string] {
 }
 
 # CLI entry point: `nu engine.nu run <contract> <prompt>`
+# Resolve a contract string/name to the parsed record and its config overrides.
+export def info [contract: string] {
+  let contract_path = (resolve-contract-path $contract)
+  let c = (open $contract_path)
+  
+  let cfg = (get-config)
+  let model = ($c.model? | default $cfg.chat.model)
+  
+  {
+      name: ($contract_path | path basename | str replace '.toml' ''),
+      path: $contract_path,
+      verb: $c.action.verb,
+      model: $model
+  }
+}
+
 export def main [verb: string, contract: string, prompt: string] {
   match $verb {
     "run" => (run $contract $prompt)
