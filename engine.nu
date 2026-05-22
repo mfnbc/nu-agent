@@ -228,7 +228,6 @@ def resolve-contract-path [contract: string] {
   let bundled_dir = ($HERE | path join "contracts")
   let fallback = (resolve-contract-at ($bundled_dir | path join $basename))
   if $fallback != null {
-    print --stderr $"engine: '($contract)' not found, using bundled '($fallback)'"
     return $fallback
   }
   error make { msg: $"engine: contract not found at '($contract)' or bundled '($bundled_dir)/($basename)'" }
