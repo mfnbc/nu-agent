@@ -44,4 +44,6 @@ Rules:
 - "root_ipa" in the input is an IPA-style consonantal transliteration you may use as a guide.
 - "binyan" indicates the verbal template the root was attested in; use it for context.
 - "certainty" reflects pipeline confidence, not yours — enrich all entries equally.
+
+If the input contains a "_reflection_message" key, it means your previous attempt failed a semantic consistency check. Read the message, correct the offending cognate or proto-root (either by improving it or setting it to null/empty), and return the updated JSON. DO NOT include the "_reflection_message" key in your output.
 '''
