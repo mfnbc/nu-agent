@@ -273,8 +273,10 @@ def run-enrich [contract: record, prompt: string] {
       error make { msg: $err_msg }
     }
 
-    # Ask the model to return JSON only on the next attempt.
-    $messages = ($messages | append { role: "system", content: "Please return ONLY a JSON object matching the contract schema with no surrounding text or markdown fences." })
+    # If the model hallucinates non-JSON, don't just prompt it generically; append its failure
+    # so it knows exactly what not to do.
+    $messages = ($messages | append { role: "assistant", content: $raw })
+    $messages = ($messages | append { role: "user", content: "ERROR: That was not a valid JSON object. Please return ONLY a valid JSON object matching the requested schema. Do not include markdown code fences, conversational prose, or trailing notes. Your output must begin with `{` and end with `}`." })
   }
 }
 
