@@ -38,6 +38,40 @@ export def embed-one [text: string] {
 
 # Tool descriptors for the LLM's `tools` body field — OpenAI function-calling shape.
 const TOOL_DEFS = {
+  chess_db_schema: {
+    type: "function"
+    function: {
+      name: "chess_db_schema"
+      description: "Return the CREATE TABLE DDL for every table in the chess database. Call this first to understand what data is available before writing any queries."
+      parameters: {
+        type: "object"
+        properties: {}
+        required: []
+      }
+    }
+  }
+  query_chess_db: {
+    type: "function"
+    function: {
+      name: "query_chess_db"
+      description: "Execute a read-only SELECT query against the chess database. Returns up to 100 rows as JSON. Use chess_db_schema first to learn the schema. Only SELECT statements are permitted — the tool will reject anything else."
+      parameters: {
+        type: "object"
+        properties: {
+          sql: {
+            type: "string"
+            description: "A SQL SELECT statement."
+          }
+          params: {
+            type: "array"
+            items: { type: "string" }
+            description: "Optional positional parameter values for ? placeholders in the SQL."
+          }
+        }
+        required: ["sql"]
+      }
+    }
+  }
   search_nu_docs: {
     type: "function"
     function: {
@@ -233,14 +267,14 @@ def resolve-contract-path [contract: string] {
   error make { msg: $"engine: contract not found at '($contract)' or bundled '($bundled_dir)/($basename)'" }
 }
 
-export def run [contract: string, prompt: string] {
+export def run [contract: string, prompt: string, prior_messages: list = []] {
   let contract_path = (resolve-contract-path $contract)
   let c = (open $contract_path)
   match $c.action.verb {
-    "Consult" => (run-consult $c $prompt)
-    "Investigate" => (run-investigate $c $prompt)
-    "Enact" => (run-investigate $c $prompt)
-    "Enrich" => (run-enrich $c $prompt)
+    "Consult"     => (run-consult     $c $prompt $prior_messages)
+    "Investigate" => (run-investigate $c $prompt $prior_messages)
+    "Enact"       => (run-investigate $c $prompt $prior_messages)
+    "Enrich"      => (run-enrich      $c $prompt)
     _ => { error make { msg: $"engine: unsupported action verb '($c.action.verb)' in ($contract_path)" } }
   }
 }
@@ -281,19 +315,21 @@ def run-enrich [contract: record, prompt: string] {
 }
 
 # Consult action: deterministic pre-retrieval (when corpus is declared) → single LLM call.
-def run-consult [contract: record, prompt: string] {
+def run-consult [contract: record, prompt: string, prior_messages: list = []] {
   let context = (retrieve-context $contract $prompt)
   let messages = if $context != "" {
-    [
-      { role: "system", content: $contract.prompt.system }
-      { role: "system", content: $"Relevant Nushell documentation:\n\n($context)" }
-      { role: "user", content: $prompt }
-    ]
+    (
+      [{ role: "system", content: $contract.prompt.system }]
+      | append [{ role: "system", content: $"Relevant Nushell documentation:\n\n($context)" }]
+      | append $prior_messages
+      | append [{ role: "user", content: $prompt }]
+    )
   } else {
-    [
-      { role: "system", content: $contract.prompt.system }
-      { role: "user", content: $prompt }
-    ]
+    (
+      [{ role: "system", content: $contract.prompt.system }]
+      | append $prior_messages
+      | append [{ role: "user", content: $prompt }]
+    )
   }
   call-llm $messages
 }
@@ -302,16 +338,17 @@ def run-consult [contract: record, prompt: string] {
 # Tracks propose-tool successes so that, if the loop exhausts max_iterations
 # without a final answer but at least one proposal succeeded, the engine
 # returns a graceful summary listing the .proposed files instead of erroring.
-def run-investigate [contract: record, prompt: string] {
+def run-investigate [contract: record, prompt: string, prior_messages: list = []] {
   let max_iter = ($contract.action.max_iterations? | default 5)
   let tools_whitelist = ($contract.action.tools? | default [])
   let verb = ($contract.action.verb? | default "")
   let llm_tools = (build-tools-array $tools_whitelist $verb)
 
-  mut messages = [
-    { role: "system", content: $contract.prompt.system }
-    { role: "user", content: $prompt }
-  ]
+  mut messages = (
+    [{ role: "system", content: $contract.prompt.system }]
+    | append $prior_messages
+    | append [{ role: "user", content: $prompt }]
+  )
 
   mut iter = 0
   mut final_content = ""
@@ -405,13 +442,15 @@ def dispatch-tool [name: string, args: record, contract: record, whitelist: list
     return $"tool error: '($name)' is a write tool; only Enact contracts may dispatch it"
   }
   match $name {
-    "search_nu_docs" => (tool-search-nu-docs $args $contract)
-    "search_ann" => (tool-search-ann $args $contract)
+    "search_nu_docs"  => (tool-search-nu-docs $args $contract)
+    "search_ann"      => (tool-search-ann $args $contract)
     "check_nu_syntax" => (tool-check-nu-syntax $args)
-    "find_files" => (tool-find-files $args)
-    "read_file" => (tool-read-file $args)
-    "propose_edit" => (tool-propose-edit $args)
-    "propose_write" => (tool-propose-write $args)
+    "find_files"      => (tool-find-files $args)
+    "read_file"       => (tool-read-file $args)
+    "propose_edit"    => (tool-propose-edit $args)
+    "propose_write"   => (tool-propose-write $args)
+    "chess_db_schema" => (tool-chess-db-schema $contract)
+    "query_chess_db"  => (tool-query-chess-db $args $contract)
     _ => $"tool error: no implementation for '($name)'"
   }
 }
@@ -673,6 +712,65 @@ def tool-propose-write [args: record] {
   let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- content\n($content)\n---"
   print --stderr $preview
   $"\(proposal recorded\) new file ($raw_path).proposed written. Do NOT call propose_write on this path again. Next action: write the final answer.\n  rationale: ($rationale)"
+}
+
+# chess_db_schema: return CREATE TABLE DDL for all user tables in the chess database.
+def tool-chess-db-schema [contract: record] {
+  let db_path = ($contract.action.db_path? | default "")
+  if $db_path == "" {
+    return "tool error: contract declares no `action.db_path`"
+  }
+  if not ($db_path | path exists) {
+    return $"tool error: chess database not found at '($db_path)'"
+  }
+  let tables = (open $db_path | query db "
+    SELECT name, sql FROM sqlite_master
+    WHERE type = 'table' AND name NOT LIKE '_%'
+    ORDER BY name
+  ")
+  if ($tables | is-empty) {
+    return "No tables found."
+  }
+  $tables | each { |t| $t.sql } | str join "\n\n"
+}
+
+# query_chess_db: run a read-only SELECT and return up to 100 rows as JSON.
+def tool-query-chess-db [args: record, contract: record] {
+  let db_path = ($contract.action.db_path? | default "")
+  if $db_path == "" {
+    return "tool error: contract declares no `action.db_path`"
+  }
+  if not ($db_path | path exists) {
+    return $"tool error: chess database not found at '($db_path)'"
+  }
+  let sql = ($args.sql? | default "" | str trim)
+  if $sql == "" {
+    return "tool error: query_chess_db requires a non-empty `sql` argument"
+  }
+  if not ($sql | str downcase | str starts-with "select") {
+    return "tool error: only SELECT statements are permitted"
+  }
+  let params = ($args.params? | default [])
+  let results = try {
+    if ($params | is-empty) {
+      open $db_path | query db $sql
+    } else {
+      open $db_path | query db $sql --params $params
+    }
+  } catch { |e|
+    return $"tool error: query failed — ($e.msg)"
+  }
+  if ($results | is-empty) {
+    return "(no rows returned)"
+  }
+  let count = ($results | length)
+  let capped = ($results | first 100)
+  let body = ($capped | to json)
+  if $count > 100 {
+    $"($body)\n\n(showing first 100 of ($count) rows)"
+  } else {
+    $body
+  }
 }
 
 # Consult retrieval pre-step. Returns concatenated chunk text for the top-k corpus matches,

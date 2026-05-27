@@ -4,14 +4,45 @@ use ./mod.nu *
 export def main [
   --prompt: string = ""
   --contract: string = ""
+  --session: string = ""   # name for a persistent conversation (e.g. "chess-analysis")
 ] {
   if $prompt == "" {
-    error make { msg: "Missing required --prompt argument. Usage: nu-agent --prompt <prompt> [--contract <path>]" }
+    error make { msg: "Usage: nu-agent --prompt <text> [--contract <path>] [--session <name>]" }
   }
+
   let contract_path = if $contract != "" {
     $contract
   } else {
     (get-config).engine.default_contract
   }
-  run $contract_path $prompt
+
+  # Load prior turns from the session file, if one is named
+  let session_file = if $session != "" {
+    let dir = ($env.HOME | path join ".local" "share" "nu-agent" "sessions")
+    mkdir $dir
+    $dir | path join $"($session).jsonl"
+  } else { "" }
+
+  let prior_messages = if $session_file != "" and ($session_file | path exists) {
+    open --raw $session_file
+    | lines
+    | where { |l| ($l | str trim) != "" }
+    | each { |l| $l | from json }
+  } else { [] }
+
+  let result = (run $contract_path $prompt $prior_messages)
+
+  # Append this turn to the session file
+  if $session_file != "" {
+    [
+      { role: "user",      content: $prompt }
+      { role: "assistant", content: $result }
+    ]
+    | each { |m| $m | to json -r }
+    | str join "\n"
+    | $in + "\n"
+    | save --append $session_file
+  }
+
+  $result
 }
