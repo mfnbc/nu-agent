@@ -375,7 +375,47 @@ def run-investigate [contract: record, prompt: string, prior_messages: list = []
     let tcs = ($msg.tool_calls? | default [])
 
     if ($tcs | length) == 0 {
-      $final_content = ($msg.content? | default "")
+      # Fallback: some models output tool arguments as JSON content instead of
+      # using tool_calls. Try to infer which tool was intended by matching the
+      # JSON keys against each whitelisted tool's required parameters.
+      let raw_content = ($msg.content? | default "" | str trim)
+      let inferred_tools = if ($raw_content | str starts-with "{") {
+        let parsed = try { $raw_content | from json } catch { null }
+        if $parsed != null {
+          let cols = ($parsed | columns)
+          $tools_whitelist | each { |t|
+            let def = ($TOOL_DEFS | get -o $t)
+            let req = if $def != null { ($def.function.parameters.required? | default []) } else { [] }
+            if $def != null and ($req | length) > 0 and ($req | all { |k| $k in $cols }) { $t } else { null }
+          } | where $it != null
+        } else { [] }
+      } else { [] }
+
+      if ($inferred_tools | length) == 1 {
+        let tool_name = ($inferred_tools | first)
+        let fake_id = $"inferred-($iter)"
+        $messages = ($messages | append {
+          role: "assistant"
+          content: null
+          tool_calls: [{ id: $fake_id, type: "function", function: { name: $tool_name, arguments: $raw_content } }]
+        })
+        let args = (try { $raw_content | from json } catch { {} })
+        print --stderr $"engine: (inferred) ($tool_name) ($raw_content)"
+        let result = (try {
+          dispatch-tool $tool_name $args $contract $tools_whitelist
+        } catch { |e|
+          $"tool error: (try { $e.msg } catch { $e | to text })"
+        })
+        $messages = ($messages | append {
+          role: "tool"
+          tool_call_id: $fake_id
+          content: $result
+        })
+        $iter = ($iter + 1)
+        continue
+      }
+
+      $final_content = $raw_content
       break
     }
 
