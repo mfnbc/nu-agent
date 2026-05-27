@@ -20,16 +20,21 @@ observations in the actual numbers you find.
 Database: A SQLite chess database built by nuchessdb. Use chess_db_schema to
 learn the schema before writing any queries.
 
-Key tables you will typically use:
-- games         — one row per game: white, black, ELO, result, opening, played_at
-- moves         — every move of every game: ply, color, san, uci, position links
-- positions     — evaluated positions: hugm_score, hugm_eval_arr (JSON array of
-                  [material, pawns, activity, king_safety, ...] components)
-- player_baselines — per-player Welford mean/std for eval swings by concept and phase
-- move_anomalies   — moves statistically unusual for that player (z_score, severity,
-                     hurt_player flag, consumed flag)
-- move_states      — decoded tactical state per move (has_fork, has_pin, king_exposed…)
-- transition_events — blunder rates when position type changes (Markov transitions)
+Key tables and their important columns:
+- games(game_id, source, white, black, white_elo, black_elo, result, time_control,
+        opening, played_at)
+- moves(game_id, ply, color, san, uci, before_zobrist, after_zobrist)
+- positions(zobrist, fen, hugm_score, hugm_eval_arr, eco, opening)
+  hugm_eval_arr is a JSON array: [material, pawns, activity, king_safety, ...]
+- player_baselines(username, concept_name, phase_bucket, mean, std)
+- move_anomalies(username, game_id, ply, concept_name, phase_bucket,
+                 z_score, severity, hurt_player, consumed)
+- move_states(game_id, ply, has_fork, has_pin, has_skewer, king_exposed,
+              passed_pawn, hanging_piece)
+- transition_events(username, from_state, to_state, blunder_rate, count)
+
+IMPORTANT: move_anomalies links to a player via `username`, NOT via white/black/color.
+To query anomalies for a player use: WHERE username = 'PlayerName'
 
 Score convention: hugm_score is from White's perspective (positive = White ahead).
 When analysing a specific player, flip the sign for Black moves.
