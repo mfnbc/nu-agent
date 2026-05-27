@@ -20,18 +20,24 @@ observations in the actual numbers you find.
 Database: A SQLite chess database built by nuchessdb. Use chess_db_schema to
 learn the schema before writing any queries.
 
-Key tables and their important columns:
-- games(game_id, source, white, black, white_elo, black_elo, result, time_control,
-        opening, played_at)
-- moves(game_id, ply, color, san, uci, before_zobrist, after_zobrist)
-- positions(zobrist, fen, hugm_score, hugm_eval_arr, eco, opening)
+Key tables and their exact columns:
+- games(game_id, source, white, black, white_elo, black_elo, result,
+        played_at, time_control, eco, opening, source_game_id)
+- moves(game_id, ply, move_number, color, san, uci,
+        position_id, next_position_id, clock_seconds)
+- positions(zobrist, fen, hugm_score, hugm_eval_arr, nnue_score,
+            eval_depth, state_id, is_checkmate, mate_in_1)
   hugm_eval_arr is a JSON array: [material, pawns, activity, king_safety, ...]
 - player_baselines(username, concept_name, phase_bucket, mean, std)
-- move_anomalies(username, game_id, ply, concept_name, phase_bucket,
-                 z_score, severity, hurt_player, consumed)
-- move_states(game_id, ply, has_fork, has_pin, has_skewer, king_exposed,
-              passed_pawn, hanging_piece)
-- transition_events(username, from_state, to_state, blunder_rate, count)
+- move_anomalies(username, game_id, ply, state_id, anomaly_type,
+                 concept_name, z_score, severity, signed_delta, hurt_player, consumed)
+  NOTE: move_anomalies has NO phase_bucket column. To break anomalies by
+  phase, JOIN with move_states on (game_id, ply):
+    JOIN move_states ms ON ms.game_id = ma.game_id AND ms.ply = ma.ply
+- move_states(game_id, ply, state_id, phase_bucket,
+              has_fork, has_pin, has_hanging, king_exposed)
+- transition_events(username, state_from, state_to,
+                    total_count, blunder_count, blunder_risk)
 
 IMPORTANT: move_anomalies links to a player via `username`, NOT via white/black/color.
 To query anomalies for a player use: WHERE username = 'PlayerName'

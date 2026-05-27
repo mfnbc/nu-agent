@@ -803,7 +803,7 @@ def tool-query-chess-db [args: record, contract: record] {
       open $db_path | query db $sql --params $params
     }
   } catch { |e|
-    return $"tool error: query failed — ($e.msg)"
+    return $"tool error: query failed — ($e.msg) | sql was: ($sql)"
   }
   if ($results | is-empty) {
     return "(no rows returned)"
