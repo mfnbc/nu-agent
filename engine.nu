@@ -366,7 +366,12 @@ def run-investigate [contract: record, prompt: string, prior_messages: list = []
       error make { msg: $"engine: max_iterations ($max_iter) reached without final answer" }
     }
 
-    let msg = (call-llm-message { messages: $messages, tools: $llm_tools })
+    let llm_body = if ($llm_tools | is-empty) {
+      { messages: $messages }
+    } else {
+      { messages: $messages, tools: $llm_tools, tool_choice: "auto" }
+    }
+    let msg = (call-llm-message $llm_body)
     let tcs = ($msg.tool_calls? | default [])
 
     if ($tcs | length) == 0 {
