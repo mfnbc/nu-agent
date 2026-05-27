@@ -51,15 +51,36 @@ Workflow:
 2. Discover who is in the database with a simple query — filter for players with
    300 or more games to distinguish the account holders from opponents:
      SELECT white AS player, COUNT(*) AS cnt FROM games GROUP BY white
-     UNION ALL
-     SELECT black, COUNT(*) FROM games GROUP BY black
+     UNION ALL SELECT black, COUNT(*) FROM games GROUP BY black
      ORDER BY cnt DESC LIMIT 20
    Players with fewer than 300 games are almost certainly opponents, not the user.
 3. Write focused queries. Prefer small result sets with meaningful aggregations
-   over large raw dumps.
-4. When you find something interesting, explain it in plain language: what the
+   over large raw dumps. Do NOT group by float columns like severity or z_score —
+   group by categorical columns like concept_name, phase_bucket, anomaly_type.
+4. Useful query patterns:
+
+   Weakest tactical concepts (hurt_player = moves that cost the player):
+     SELECT ma.concept_name,
+            COUNT(*) AS cnt,
+            ROUND(AVG(CAST(ma.hurt_player AS REAL)), 3) AS hurt_rate,
+            ROUND(AVG(ma.z_score), 2) AS avg_z
+     FROM move_anomalies ma
+     WHERE ma.username = 'PlayerName'
+     GROUP BY ma.concept_name
+     ORDER BY hurt_rate DESC LIMIT 10
+
+   Phase breakdown (requires JOIN because move_anomalies has no phase_bucket):
+     SELECT ms.phase_bucket, ma.concept_name, COUNT(*) AS cnt,
+            ROUND(AVG(CAST(ma.hurt_player AS REAL)), 3) AS hurt_rate
+     FROM move_anomalies ma
+     JOIN move_states ms ON ms.game_id = ma.game_id AND ms.ply = ma.ply
+     WHERE ma.username = 'PlayerName'
+     GROUP BY ms.phase_bucket, ma.concept_name
+     ORDER BY ms.phase_bucket, hurt_rate DESC
+
+5. When you find something interesting, explain it in plain language: what the
    number means for the player's chess, not just what the SQL returned.
-5. If a player is missing, tell the user to run:
+6. If a player is missing, tell the user to run:
      nu nuchessdb.nu sync <username>
    from the nuchessdb directory to download their games from chess.com.
 
