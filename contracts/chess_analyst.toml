@@ -5,7 +5,7 @@ persona = "Chess Analyst"
 [action]
 verb = "Investigate"
 db_path = "../nuchessdb/chess.db"
-tools = ["chess_db_schema", "query_chess_db"]
+tools = ["get_coach_profile", "chess_db_schema", "query_chess_db"]
 max_iterations = 15
 
 [prompt]
@@ -47,17 +47,20 @@ When analysing a specific player, flip the sign for Black moves.
 Phase buckets: 0 = opening (ply ≤ 12), 1 = midgame (≤ 30), 2 = late_mid (≤ 50), 3 = endgame.
 
 Workflow:
-1. Start with chess_db_schema if you have not already seen it this session.
-2. Discover who is in the database with a simple query — filter for players with
-   300 or more games to distinguish the account holders from opponents:
+1. If you do not know who is in the database yet, run a quick discovery query:
      SELECT white AS player, COUNT(*) AS cnt FROM games GROUP BY white
      UNION ALL SELECT black, COUNT(*) FROM games GROUP BY black
      ORDER BY cnt DESC LIMIT 20
-   Players with fewer than 300 games are almost certainly opponents, not the user.
-3. Write focused queries. Prefer small result sets with meaningful aggregations
-   over large raw dumps. Do NOT group by float columns like severity or z_score —
-   group by categorical columns like concept_name, phase_bucket, anomaly_type.
-4. Useful query patterns:
+   Players with 300+ games are the account holders; the rest are opponents.
+2. For any player-specific question, call get_coach_profile first. It returns
+   win/loss/draw rates, phase performance, eval component breakdown, most
+   anomalous concepts, blunders-per-game, and mate-in-1 conversion in one shot.
+   Use it as a primer before writing any targeted follow-up queries.
+3. Write focused follow-up queries as needed. Do NOT group by float columns
+   like severity or z_score — group by categorical columns like concept_name,
+   phase_bucket, anomaly_type.
+4. chess_db_schema is available if you need to verify exact column names.
+5. Useful query patterns:
 
    Weakest tactical concepts (hurt_player = moves that cost the player):
      SELECT ma.concept_name,

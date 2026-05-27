@@ -38,6 +38,23 @@ export def embed-one [text: string] {
 
 # Tool descriptors for the LLM's `tools` body field — OpenAI function-calling shape.
 const TOOL_DEFS = {
+  get_coach_profile: {
+    type: "function"
+    function: {
+      name: "get_coach_profile"
+      description: "Return a comprehensive one-shot coaching profile for a player: win/loss/draw rates by color, phase performance in centipawns, eval component breakdown (pawns/activity/king-safety), most anomalous concepts, blunders-per-game, mate-in-1 conversion rate, and the top 5 worst unreviewed moves. Call this as the first step for any player-specific question — it provides the full context needed to frame targeted follow-up queries."
+      parameters: {
+        type: "object"
+        properties: {
+          username: {
+            type: "string"
+            description: "The player's username exactly as stored in the database."
+          }
+        }
+        required: ["username"]
+      }
+    }
+  }
   chess_db_schema: {
     type: "function"
     function: {
@@ -494,8 +511,9 @@ def dispatch-tool [name: string, args: record, contract: record, whitelist: list
     "read_file"       => (tool-read-file $args)
     "propose_edit"    => (tool-propose-edit $args)
     "propose_write"   => (tool-propose-write $args)
-    "chess_db_schema" => (tool-chess-db-schema $contract)
-    "query_chess_db"  => (tool-query-chess-db $args $contract)
+    "get_coach_profile" => (tool-get-coach-profile $args $contract)
+    "chess_db_schema"   => (tool-chess-db-schema $contract)
+    "query_chess_db"    => (tool-query-chess-db $args $contract)
     _ => $"tool error: no implementation for '($name)'"
   }
 }
@@ -757,6 +775,26 @@ def tool-propose-write [args: record] {
   let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- content\n($content)\n---"
   print --stderr $preview
   $"\(proposal recorded\) new file ($raw_path).proposed written. Do NOT call propose_write on this path again. Next action: write the final answer.\n  rationale: ($rationale)"
+}
+
+# get_coach_profile: shell out to nuchessdb.nu coach-profile and return the JSON profile.
+def tool-get-coach-profile [args: record, contract: record] {
+  let db_path = ($contract.action.db_path? | default "")
+  if $db_path == "" { return "tool error: contract declares no `action.db_path`" }
+  if not ($db_path | path exists) { return $"tool error: chess database not found at '($db_path)'" }
+
+  let username = ($args.username? | default "")
+  if $username == "" { return "tool error: get_coach_profile requires a `username` argument" }
+
+  let db_abs  = ($db_path | path expand)
+  let script  = ($db_abs | path dirname | path join "nuchessdb.nu")
+  if not ($script | path exists) { return $"tool error: nuchessdb.nu not found at '($script)'" }
+
+  let result = (do { ^nu $script coach-profile $username --db $db_abs --json --examples 0 } | complete)
+  if $result.exit_code != 0 {
+    return $"tool error: coach-profile failed — ($result.stderr | str trim)"
+  }
+  $result.stdout | str trim
 }
 
 # chess_db_schema: return CREATE TABLE DDL for all user tables in the chess database.
