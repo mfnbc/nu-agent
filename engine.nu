@@ -400,7 +400,7 @@ def run-investigate [contract: record, prompt: string, prior_messages: list = []
           tool_calls: [{ id: $fake_id, type: "function", function: { name: $tool_name, arguments: $raw_content } }]
         })
         let args = (try { $raw_content | from json } catch { {} })
-        print --stderr $"engine: (inferred) ($tool_name) ($raw_content)"
+        print --stderr $"engine: inferred ($tool_name) ($raw_content)"
         let result = (try {
           dispatch-tool $tool_name $args $contract $tools_whitelist
         } catch { |e|
