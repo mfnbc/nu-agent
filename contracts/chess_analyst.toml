@@ -5,7 +5,7 @@ persona = "Chess Analyst"
 [action]
 verb = "Investigate"
 db_path = "../nuchessdb/chess.db"
-tools = ["get_coach_profile", "chess_db_schema", "query_chess_db"]
+tools = ["get_coach_profile", "get_tactical_profile", "get_precision_profile", "get_positional_profile", "chess_db_schema", "query_chess_db"]
 max_iterations = 15
 
 [prompt]
@@ -56,10 +56,14 @@ Workflow:
    win/loss/draw rates, phase performance, eval component breakdown, most
    anomalous concepts, blunders-per-game, and mate-in-1 conversion in one shot.
    Use it as a primer before writing any targeted follow-up queries.
-3. Write focused follow-up queries as needed. Do NOT group by float columns
-   like severity or z_score — group by categorical columns like concept_name,
-   phase_bucket, anomaly_type.
-4. chess_db_schema is available if you need to verify exact column names.
+3. Use focused sub-profile tools to drill into specific areas rather than writing
+   complex SQL from scratch:
+   - get_tactical_profile: fork/pin/hanging breakdown by phase, win rates with/without each pattern
+   - get_precision_profile: eval-swing baselines, blunder distribution, risky transitions, top anomalies
+   - get_positional_profile: eval components (pawns/activity/king-safety) by phase/color, win rates with outpost/open-file/passed-pawn/king-exposed
+4. Write ad-hoc follow-up queries with query_chess_db for anything the sub-profiles
+   do not cover. Do NOT group by float columns — group by categoricals.
+5. chess_db_schema is available if you need to verify exact column names.
 5. Useful query patterns:
 
    Weakest tactical concepts (hurt_player = moves that cost the player):

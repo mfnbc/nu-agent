@@ -55,6 +55,57 @@ const TOOL_DEFS = {
       }
     }
   }
+  get_tactical_profile: {
+    type: "function"
+    function: {
+      name: "get_tactical_profile"
+      description: "Return a focused tactical drill-down for a player: anomaly counts and hurt rates for each tactical concept (fork, pin, hanging_piece, skewer, discovered_attack) broken down by phase, plus win-rate correlation for games where each pattern appeared on the board. Use this after get_coach_profile when tactical patterns show up as a weakness."
+      parameters: {
+        type: "object"
+        properties: {
+          username: {
+            type: "string"
+            description: "The player's username exactly as stored in the database."
+          }
+        }
+        required: ["username"]
+      }
+    }
+  }
+  get_precision_profile: {
+    type: "function"
+    function: {
+      name: "get_precision_profile"
+      description: "Return a focused precision drill-down for a player: eval-swing baselines per phase (mean/std of |hugm_delta|), blunder frequency by phase, severity distribution (mild/moderate/significant/severe), risky state transitions, and the top anomalies by z_score. Use this to investigate whether the player makes consistent mistakes or occasional catastrophic ones."
+      parameters: {
+        type: "object"
+        properties: {
+          username: {
+            type: "string"
+            description: "The player's username exactly as stored in the database."
+          }
+        }
+        required: ["username"]
+      }
+    }
+  }
+  get_positional_profile: {
+    type: "function"
+    function: {
+      name: "get_positional_profile"
+      description: "Return a focused positional drill-down for a player: avg eval components (pawns/activity/king-safety in cp) by phase and color, plus win-rate when positional advantages (outpost, open file, passed pawn) or weaknesses (king exposed) were present on the board. Use this to investigate positional patterns."
+      parameters: {
+        type: "object"
+        properties: {
+          username: {
+            type: "string"
+            description: "The player's username exactly as stored in the database."
+          }
+        }
+        required: ["username"]
+      }
+    }
+  }
   chess_db_schema: {
     type: "function"
     function: {
@@ -511,9 +562,12 @@ def dispatch-tool [name: string, args: record, contract: record, whitelist: list
     "read_file"       => (tool-read-file $args)
     "propose_edit"    => (tool-propose-edit $args)
     "propose_write"   => (tool-propose-write $args)
-    "get_coach_profile" => (tool-get-coach-profile $args $contract)
-    "chess_db_schema"   => (tool-chess-db-schema $contract)
-    "query_chess_db"    => (tool-query-chess-db $args $contract)
+    "get_coach_profile"    => (tool-get-coach-profile $args $contract)
+    "get_tactical_profile" => (tool-get-sub-profile $args $contract "coach-profile-tactical")
+    "get_precision_profile"=> (tool-get-sub-profile $args $contract "coach-profile-precision")
+    "get_positional_profile"=> (tool-get-sub-profile $args $contract "coach-profile-position")
+    "chess_db_schema"      => (tool-chess-db-schema $contract)
+    "query_chess_db"       => (tool-query-chess-db $args $contract)
     _ => $"tool error: no implementation for '($name)'"
   }
 }
@@ -793,6 +847,26 @@ def tool-get-coach-profile [args: record, contract: record] {
   let result = (do { ^nu $script coach-profile $username --db $db_abs --json --examples 0 } | complete)
   if $result.exit_code != 0 {
     return $"tool error: coach-profile failed — ($result.stderr | str trim)"
+  }
+  $result.stdout | str trim
+}
+
+# Shared helper for the three sub-profile tools. Shells out to nuchessdb.nu <subcommand>.
+def tool-get-sub-profile [args: record, contract: record, subcommand: string] {
+  let db_path = ($contract.action.db_path? | default "")
+  if $db_path == "" { return "tool error: contract declares no `action.db_path`" }
+  if not ($db_path | path exists) { return $"tool error: chess database not found at '($db_path)'" }
+
+  let username = ($args.username? | default "")
+  if $username == "" { return $"tool error: ($subcommand) requires a `username` argument" }
+
+  let db_abs = ($db_path | path expand)
+  let script = ($db_abs | path dirname | path join "nuchessdb.nu")
+  if not ($script | path exists) { return $"tool error: nuchessdb.nu not found at '($script)'" }
+
+  let result = (do { ^nu $script $subcommand $username --db $db_abs } | complete)
+  if $result.exit_code != 0 {
+    return $"tool error: ($subcommand) failed — ($result.stderr | str trim)"
   }
   $result.stdout | str trim
 }
