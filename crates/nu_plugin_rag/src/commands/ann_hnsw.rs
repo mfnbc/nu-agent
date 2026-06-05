@@ -22,11 +22,12 @@ impl PluginCommand for AnnHnswBuild {
 
     fn name(&self) -> &str { "rag ann-build-hnsw" }
 
-    fn description(&self) -> &str { "Build an HNSW index (research prototype) from NDJSON embeddings" }
+    fn description(&self) -> &str { "Build an HNSW index (research prototype) from embeddings. Accepts NDJSON, Nuon/JSON-array, or MessagePack (msgpack) input." }
 
     fn signature(&self) -> Signature {
         Signature::build(self.name())
-            .named("input", SyntaxShape::String, "NDJSON input file with records containing id and embedding", Some('i'))
+            .named("input", SyntaxShape::String, "Input file with records containing id and embedding (ndjson | nuon/json-array | msgpack)", Some('i'))
+            .named("format", SyntaxShape::String, "Input format: ndjson|nuon|msgpack (autodetect by extension if omitted)", None)
             .named("id-field", SyntaxShape::String, "JSON field for id (default: xxh3_hash)", Some('d'))
             .named("emb-field", SyntaxShape::String, "JSON field for embedding (default: embedding)", Some('e'))
             .named("out-index", SyntaxShape::String, "Output index file path", Some('o'))
@@ -46,42 +47,110 @@ impl PluginCommand for AnnHnswBuild {
         let m = call.get_flag::<i64>("m").map_err(|e| LabeledError::new(format!("--m: {}", e)))?.map(|v| v as usize).unwrap_or(16);
         let ef_c = call.get_flag::<i64>("ef-construction").map_err(|e| LabeledError::new(format!("--ef-construction: {}", e)))?.map(|v| v as usize).unwrap_or(200);
 
-        // Read NDJSON of embeddings
-        let f = File::open(&input).map_err(|e| LabeledError::new(format!("Failed to open input file: {}", e)))?;
-        let reader = BufReader::new(f);
-
+        // Read embeddings from input, supporting multiple formats (msgpack, nuon/json-array, ndjson)
+        let fmt_flag = call.get_flag::<String>("format").map_err(|e| LabeledError::new(format!("--format: {}", e)))?.unwrap_or_default();
+        let path = Path::new(&input);
         let mut ids: Vec<String> = Vec::new();
         let mut vecs: Vec<Vec<f32>> = Vec::new();
         let mut dim: Option<usize> = None;
 
-        for line in reader.lines() {
-            let l = line.map_err(|e| LabeledError::new(format!("IO error reading input: {}", e)))?;
-            let s = l.trim();
-            if s.is_empty() { continue; }
-            let j: JsonValue = serde_json::from_str(s).map_err(|e| LabeledError::new(format!("Failed to parse JSON line: {}", e)))?;
-            let id_val = j.get(&id_field).ok_or_else(|| LabeledError::new(format!("Missing id field '{}' in record", id_field)))?;
-            let id = if id_val.is_string() { id_val.as_str().unwrap().to_string() } else { id_val.to_string() };
-            let emb_val = j.get(&emb_field).ok_or_else(|| LabeledError::new(format!("Missing embedding field '{}' in record", emb_field)))?;
-            let emb = match emb_val {
-                JsonValue::Array(arr) => {
-                    let mut v = Vec::with_capacity(arr.len());
-                    for a in arr.iter() {
-                        match a {
-                            JsonValue::Number(n) => { if let Some(f) = n.as_f64() { v.push(f as f32); } else { return Err(LabeledError::new("Embedding number parse error")); } }
-                            _ => return Err(LabeledError::new("Embedding array contains non-number")),
+        let effective_fmt = if fmt_flag != "" {
+            fmt_flag.to_lowercase()
+        } else if let Some(ext) = path.extension().and_then(|s| s.to_str()) {
+            ext.to_lowercase()
+        } else { "ndjson".to_string() };
+
+        if effective_fmt.contains("msg") || effective_fmt == "mpack" || effective_fmt == "msgpack" {
+            // MessagePack: read entire file and deserialize to Vec<JsonValue>
+            let f = File::open(&input).map_err(|e| LabeledError::new(format!("Failed to open input file: {}", e)))?;
+            let v: Vec<JsonValue> = rmp_serde::from_read(f).map_err(|e| LabeledError::new(format!("Failed to parse msgpack input: {}", e)))?;
+            for j in v.iter() {
+                let id_val = j.get(&id_field).ok_or_else(|| LabeledError::new(format!("Missing id field '{}' in record", id_field)))?;
+                let id = if id_val.is_string() { id_val.as_str().unwrap().to_string() } else { id_val.to_string() };
+                let emb_val = j.get(&emb_field).ok_or_else(|| LabeledError::new(format!("Missing embedding field '{}' in record", emb_field)))?;
+                let emb = match emb_val {
+                    JsonValue::Array(arr) => {
+                        let mut v = Vec::with_capacity(arr.len());
+                        for a in arr.iter() {
+                            match a {
+                                JsonValue::Number(n) => { if let Some(f) = n.as_f64() { v.push(f as f32); } else { return Err(LabeledError::new("Embedding number parse error")); } }
+                                _ => return Err(LabeledError::new("Embedding array contains non-number")),
+                            }
                         }
+                        v
                     }
-                    v
+                    _ => return Err(LabeledError::new("Embedding field is not an array")),
+                };
+                if let Some(d) = dim { if d != emb.len() { return Err(LabeledError::new("Inconsistent embedding dimension")); } } else { dim = Some(emb.len()); }
+                // normalize
+                let mut norm = 0.0f32; for &x in emb.iter() { norm += x*x; };
+                let mut emb_norm = emb.clone();
+                if norm > 0.0 { norm = norm.sqrt(); for v in emb_norm.iter_mut() { *v /= norm; } }
+                ids.push(id);
+                vecs.push(emb_norm);
+            }
+        } else {
+            // Try reading entire file as a JSON array (nuon that is JSON-like), else fallback to NDJSON per-line
+            let s = std::fs::read_to_string(&input).map_err(|e| LabeledError::new(format!("Failed to open input file: {}", e)))?;
+            if let Ok(arr) = serde_json::from_str::<Vec<JsonValue>>(&s) {
+                for j in arr.iter() {
+                    let id_val = j.get(&id_field).ok_or_else(|| LabeledError::new(format!("Missing id field '{}' in record", id_field)))?;
+                    let id = if id_val.is_string() { id_val.as_str().unwrap().to_string() } else { id_val.to_string() };
+                    let emb_val = j.get(&emb_field).ok_or_else(|| LabeledError::new(format!("Missing embedding field '{}' in record", emb_field)))?;
+                    let emb = match emb_val {
+                        JsonValue::Array(arr) => {
+                            let mut v = Vec::with_capacity(arr.len());
+                            for a in arr.iter() {
+                                match a {
+                                    JsonValue::Number(n) => { if let Some(f) = n.as_f64() { v.push(f as f32); } else { return Err(LabeledError::new("Embedding number parse error")); } }
+                                    _ => return Err(LabeledError::new("Embedding array contains non-number")),
+                                }
+                            }
+                            v
+                        }
+                        _ => return Err(LabeledError::new("Embedding field is not an array")),
+                    };
+                    if let Some(d) = dim { if d != emb.len() { return Err(LabeledError::new("Inconsistent embedding dimension")); } } else { dim = Some(emb.len()); }
+                    let mut norm = 0.0f32; for &x in emb.iter() { norm += x*x; };
+                    let mut emb_norm = emb.clone();
+                    if norm > 0.0 { norm = norm.sqrt(); for v in emb_norm.iter_mut() { *v /= norm; } }
+                    ids.push(id);
+                    vecs.push(emb_norm);
                 }
-                _ => return Err(LabeledError::new("Embedding field is not an array")),
-            };
-            if let Some(d) = dim { if d != emb.len() { return Err(LabeledError::new("Inconsistent embedding dimension")); } } else { dim = Some(emb.len()); }
-            // normalize vector to unit length for cosine semantics
-            let mut norm = 0.0f32; for &x in emb.iter() { norm += x*x; };
-            let mut emb_norm = emb.clone();
-            if norm > 0.0 { norm = norm.sqrt(); for v in emb_norm.iter_mut() { *v /= norm; } }
-            ids.push(id);
-            vecs.push(emb_norm);
+            } else {
+                // Fallback: NDJSON per-line (legacy behavior)
+                let f = File::open(&input).map_err(|e| LabeledError::new(format!("Failed to open input file: {}", e)))?;
+                let reader = BufReader::new(f);
+                for line in reader.lines() {
+                    let l = line.map_err(|e| LabeledError::new(format!("IO error reading input: {}", e)))?;
+                    let s = l.trim();
+                    if s.is_empty() { continue; }
+                    let j: JsonValue = serde_json::from_str(s).map_err(|e| LabeledError::new(format!("Failed to parse JSON line: {}", e)))?;
+                    let id_val = j.get(&id_field).ok_or_else(|| LabeledError::new(format!("Missing id field '{}' in record", id_field)))?;
+                    let id = if id_val.is_string() { id_val.as_str().unwrap().to_string() } else { id_val.to_string() };
+                    let emb_val = j.get(&emb_field).ok_or_else(|| LabeledError::new(format!("Missing embedding field '{}' in record", emb_field)))?;
+                    let emb = match emb_val {
+                        JsonValue::Array(arr) => {
+                            let mut v = Vec::with_capacity(arr.len());
+                            for a in arr.iter() {
+                                match a {
+                                    JsonValue::Number(n) => { if let Some(f) = n.as_f64() { v.push(f as f32); } else { return Err(LabeledError::new("Embedding number parse error")); } }
+                                    _ => return Err(LabeledError::new("Embedding array contains non-number")),
+                                }
+                            }
+                            v
+                        }
+                        _ => return Err(LabeledError::new("Embedding field is not an array")),
+                    };
+                    if let Some(d) = dim { if d != emb.len() { return Err(LabeledError::new("Inconsistent embedding dimension")); } } else { dim = Some(emb.len()); }
+                    // normalize vector to unit length for cosine semantics
+                    let mut norm = 0.0f32; for &x in emb.iter() { norm += x*x; };
+                    let mut emb_norm = emb.clone();
+                    if norm > 0.0 { norm = norm.sqrt(); for v in emb_norm.iter_mut() { *v /= norm; } }
+                    ids.push(id);
+                    vecs.push(emb_norm);
+                }
+            }
         }
 
         let dim = dim.ok_or_else(|| LabeledError::new("No embeddings found in input"))?;
