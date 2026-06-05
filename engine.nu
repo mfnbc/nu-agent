@@ -10,7 +10,7 @@
 #                 tool array to the LLM, dispatches whatever tool calls
 #                 come back, appends results as tool messages, repeats
 #                 until the LLM emits a final answer or
-#                 `action.max_iterations` is hit. See `build-tools-array`
+#                 `action.max_iterations` is hit. See `build-ai-tools`
 #                 below for the catalog of supported tools.
 #
 # Plugin commands `rag embed` and `rag similarity` must be registered via
@@ -19,6 +19,12 @@
 
 use ./config.nu *
 use ./llm.nu *
+use ../ai.nu/ai/function.nu [closure-run, closure-list]
+
+export-env {
+    if ($env.AI_TOOLS? | is-empty) { $env.AI_TOOLS = {} }
+    if ($env.AI_CONFIG? | is-empty) { $env.AI_CONFIG = { tool_calls: "grey" } }
+}
 
 # Engine module's own directory — used to locate the bundled `contracts/`
 # fallback when a user-supplied contract path is missing on disk. Mirrors
@@ -94,6 +100,23 @@ const TOOL_DEFS = {
     function: {
       name: "get_positional_profile"
       description: "Return a focused positional drill-down for a player: avg eval components (pawns/activity/king-safety in cp) by phase and color, plus win-rate when positional advantages (outpost, open file, passed pawn) or weaknesses (king exposed) were present on the board. Use this to investigate positional patterns."
+      parameters: {
+        type: "object"
+        properties: {
+          username: {
+            type: "string"
+            description: "The player's username exactly as stored in the database."
+          }
+        }
+        required: ["username"]
+      }
+    }
+  }
+  get_opening_profile: {
+    type: "function"
+    function: {
+      name: "get_opening_profile"
+      description: "Return the player's opening repertoire: top ECOs by games played as white and black, ECO family win rates (A=flank B=semi-open C=open D=closed E=indian), weakest and strongest openings by win%, and which openings correlate with the most anomalies. Use this to investigate repertoire gaps or opening-specific weaknesses."
       parameters: {
         type: "object"
         properties: {
@@ -300,6 +323,44 @@ const TOOL_DEFS = {
 # stripped from their tool array AND rejected at dispatch as a backstop.
 const WRITE_TOOLS = ["propose_edit", "propose_write"]
 
+# Build an AI_TOOLS-compatible registry from the whitelist: each entry carries
+# the OpenAI schema (from TOOL_DEFS), a handler closure, and the contract as
+# context (passed to the handler as `ctx`). Write tools are excluded unless
+# verb == "Enact". The result is passed to `with-env { AI_TOOLS: ... }` so it
+# is visible to `closure-list` and `closure-run` without polluting the outer env.
+def build-ai-tools [contract: record, whitelist: list<string>, verb: string] -> record {
+    let is_enact = ($verb == "Enact")
+    let handlers = {
+        get_coach_profile:      {|args, ctx| tool-get-coach-profile $args $ctx}
+        get_tactical_profile:   {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-tactical"}
+        get_precision_profile:  {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-precision"}
+        get_positional_profile: {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-position"}
+        get_opening_profile:    {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-opening"}
+        chess_db_schema:        {|args, ctx| tool-chess-db-schema $ctx}
+        query_chess_db:         {|args, ctx| tool-query-chess-db $args $ctx}
+        search_nu_docs:         {|args, ctx| tool-search-nu-docs $args $ctx}
+        search_ann:             {|args, ctx| tool-search-ann $args $ctx}
+        check_nu_syntax:        {|args, ctx| tool-check-nu-syntax $args}
+        find_files:             {|args, ctx| tool-find-files $args}
+        read_file:              {|args, ctx| tool-read-file $args}
+        propose_edit:           {|args, ctx| tool-propose-edit $args}
+        propose_write:          {|args, ctx| tool-propose-write $args}
+    }
+    mut tools = {}
+    for name in $whitelist {
+        if ($name in $WRITE_TOOLS) and not $is_enact { continue }
+        let schema = ($TOOL_DEFS | get -o $name)
+        let handler = ($handlers | get -o $name)
+        if $schema == null or $handler == null { continue }
+        $tools = ($tools | upsert $name {
+            schema: $schema.function
+            handler: $handler
+            context: $contract
+        })
+    }
+    $tools
+}
+
 # Resolve `p` to an existing contract file. If `p` is a file, return it
 # as-is. If `p` is a directory, prefer `architect.toml` or the first
 # `*.toml` found inside. Returns null if `p` doesn't exist or contains no
@@ -406,169 +467,141 @@ def run-consult [contract: record, prompt: string, prior_messages: list = []] {
 # Tracks propose-tool successes so that, if the loop exhausts max_iterations
 # without a final answer but at least one proposal succeeded, the engine
 # returns a graceful summary listing the .proposed files instead of erroring.
+#
+# Tool dispatch delegates to ai.nu's `closure-run` (parallel execution, context
+# injection) and `closure-list` (OpenAI schema formatting). Tools are registered
+# in a temporary AI_TOOLS env scope via `with-env` so each invocation is isolated.
 def run-investigate [contract: record, prompt: string, prior_messages: list = []] {
   let max_iter = ($contract.action.max_iterations? | default 5)
   let tools_whitelist = ($contract.action.tools? | default [])
   let verb = ($contract.action.verb? | default "")
-  let llm_tools = (build-tools-array $tools_whitelist $verb)
 
-  mut messages = (
+  # Build tool registry: schemas + handler closures + contract context.
+  let tools_reg = (build-ai-tools $contract $tools_whitelist $verb)
+  # Whitelist filtered to what the LLM may see (write tools stripped for non-Enact).
+  let allowed = if $verb == "Enact" {
+    $tools_whitelist
+  } else {
+    $tools_whitelist | where { |t| $t not-in $WRITE_TOOLS }
+  }
+
+  let init_messages = (
     [{ role: "system", content: $contract.prompt.system }]
     | append $prior_messages
     | append [{ role: "user", content: $prompt }]
   )
 
-  mut iter = 0
-  mut final_content = ""
-  mut propose_count = 0
-  mut proposed_paths = []
-  loop {
-    if $iter >= $max_iter {
-      if $propose_count > 0 {
-        let unique_paths = ($proposed_paths | uniq)
-        let listing = ($unique_paths | each { |p| $"  - ($p).proposed" } | str join "\n")
-        print --stderr $"engine: max_iterations ($max_iter) reached but ($propose_count) proposal\(s) succeeded; returning graceful summary"
-        $final_content = $"Reached max_iterations \(($max_iter)\) without a clean final answer from the model, but ($propose_count) proposal\(s) were recorded. Review:\n($listing)\n\nOpen each .proposed file in your editor to review; `mv <path>.proposed <path>` to accept, `rm <path>.proposed` to reject."
+  # Scope AI_TOOLS to this invocation so registrations don't bleed between calls.
+  with-env { AI_TOOLS: $tools_reg } {
+    let llm_tools = if ($allowed | is-empty) { [] } else { closure-list $allowed }
+
+    mut messages = $init_messages
+    mut iter = 0
+    mut final_content = ""
+    mut propose_count = 0
+    mut proposed_paths = []
+    loop {
+      if $iter >= $max_iter {
+        if $propose_count > 0 {
+          let unique_paths = ($proposed_paths | uniq)
+          let listing = ($unique_paths | each { |p| $"  - ($p).proposed" } | str join "\n")
+          print --stderr $"engine: max_iterations ($max_iter) reached but ($propose_count) proposal\(s) succeeded; returning graceful summary"
+          $final_content = $"Reached max_iterations \(($max_iter)\) without a clean final answer from the model, but ($propose_count) proposal\(s) were recorded. Review:\n($listing)\n\nOpen each .proposed file in your editor to review; `mv <path>.proposed <path>` to accept, `rm <path>.proposed` to reject."
+          break
+        }
+        error make { msg: $"engine: max_iterations ($max_iter) reached without final answer" }
+      }
+
+      let llm_body = if ($llm_tools | is-empty) {
+        { messages: $messages }
+      } else {
+        { messages: $messages, tools: $llm_tools, tool_choice: "auto" }
+      }
+      let msg = (call-llm-message $llm_body)
+      let tcs = ($msg.tool_calls? | default [])
+
+      if ($tcs | length) == 0 {
+        # Fallback: some models output tool arguments as JSON content instead of
+        # using tool_calls. Try to infer which tool was intended by matching the
+        # JSON keys against each whitelisted tool's required parameters.
+        let raw_content = ($msg.content? | default "" | str trim)
+        let inferred_tools = if ($raw_content | str starts-with "{") {
+          let parsed = try { $raw_content | from json } catch { null }
+          if $parsed != null {
+            let cols = ($parsed | columns)
+            $tools_whitelist | each { |t|
+              let def = ($TOOL_DEFS | get -o $t)
+              let req = if $def != null { ($def.function.parameters.required? | default []) } else { [] }
+              if $def != null and ($req | length) > 0 and ($req | all { |k| $k in $cols }) { $t } else { null }
+            } | where $it != null
+          } else { [] }
+        } else { [] }
+
+        if ($inferred_tools | length) == 1 {
+          let tool_name = ($inferred_tools | first)
+          let fake_id = $"inferred-($iter)"
+          $messages = ($messages | append {
+            role: "assistant"
+            content: null
+            tool_calls: [{ id: $fake_id, type: "function", function: { name: $tool_name, arguments: $raw_content } }]
+          })
+          print --stderr $"engine: inferred ($tool_name) ($raw_content)"
+          # Run the inferred call through closure-run for uniform dispatch.
+          let fake_tc = [{ id: $fake_id, type: "function", function: { name: $tool_name, arguments: $raw_content } }]
+          let tool_results = (closure-run $fake_tc)
+          for x in $tool_results {
+            let content = if ($x.err? | is-not-empty) { $x.err } else { $x.result | into string }
+            $messages = ($messages | append { role: "tool", tool_call_id: $x.id, content: $content })
+          }
+          $iter = ($iter + 1)
+          continue
+        }
+
+        $final_content = $raw_content
         break
       }
-      error make { msg: $"engine: max_iterations ($max_iter) reached without final answer" }
-    }
 
-    let llm_body = if ($llm_tools | is-empty) {
-      { messages: $messages }
-    } else {
-      { messages: $messages, tools: $llm_tools, tool_choice: "auto" }
-    }
-    let msg = (call-llm-message $llm_body)
-    let tcs = ($msg.tool_calls? | default [])
+      # Append the assistant's tool-call turn to the history.
+      $messages = ($messages | append {
+        role: "assistant"
+        content: ($msg.content? | default "")
+        tool_calls: $tcs
+      })
 
-    if ($tcs | length) == 0 {
-      # Fallback: some models output tool arguments as JSON content instead of
-      # using tool_calls. Try to infer which tool was intended by matching the
-      # JSON keys against each whitelisted tool's required parameters.
-      let raw_content = ($msg.content? | default "" | str trim)
-      let inferred_tools = if ($raw_content | str starts-with "{") {
-        let parsed = try { $raw_content | from json } catch { null }
-        if $parsed != null {
-          let cols = ($parsed | columns)
-          $tools_whitelist | each { |t|
-            let def = ($TOOL_DEFS | get -o $t)
-            let req = if $def != null { ($def.function.parameters.required? | default []) } else { [] }
-            if $def != null and ($req | length) > 0 and ($req | all { |k| $k in $cols }) { $t } else { null }
-          } | where $it != null
-        } else { [] }
-      } else { [] }
+      # Dispatch all tool calls in parallel via ai.nu's closure-run.
+      # Each handler receives (parsed_args, contract) and returns a string result.
+      let tool_results = (closure-run $tcs)
+      for x in $tool_results {
+        let name = $x.function.name
+        let content = if ($x.err? | is-not-empty) {
+          $x.err
+        } else {
+          $x.result | into string
+        }
 
-      if ($inferred_tools | length) == 1 {
-        let tool_name = ($inferred_tools | first)
-        let fake_id = $"inferred-($iter)"
-        $messages = ($messages | append {
-          role: "assistant"
-          content: null
-          tool_calls: [{ id: $fake_id, type: "function", function: { name: $tool_name, arguments: $raw_content } }]
-        })
-        let args = (try { $raw_content | from json } catch { {} })
-        print --stderr $"engine: inferred ($tool_name) ($raw_content)"
-        let result = (try {
-          dispatch-tool $tool_name $args $contract $tools_whitelist
-        } catch { |e|
-          $"tool error: (try { $e.msg } catch { $e | to text })"
-        })
+        # Track propose successes for the graceful-end-of-loop summary.
+        if ($name in $WRITE_TOOLS) {
+          let tc_args = try { $x.function.arguments | from json } catch { {} }
+          let p = ($tc_args.path? | default "")
+          if $p != "" and ($content | str starts-with "(proposal recorded)") {
+            $propose_count = ($propose_count + 1)
+            $proposed_paths = ($proposed_paths | append $p)
+          } else if $p != "" and ($content | str starts-with "(already applied)") {
+            $proposed_paths = ($proposed_paths | append $p)
+          }
+        }
+
         $messages = ($messages | append {
           role: "tool"
-          tool_call_id: $fake_id
-          content: $result
+          tool_call_id: $x.id
+          content: $content
         })
-        $iter = ($iter + 1)
-        continue
       }
 
-      $final_content = $raw_content
-      break
+      $iter = ($iter + 1)
     }
 
-    # Append the assistant's tool-call turn to the history.
-    $messages = ($messages | append {
-      role: "assistant"
-      content: ($msg.content? | default "")
-      tool_calls: $tcs
-    })
-
-    # Run each tool, append its result as a tool message.
-    for tc in $tcs {
-      let name = $tc.function.name
-      let args = (try { ($tc.function.arguments | from json) } catch { {} })
-      print --stderr $"engine: ($name) ($args | to json -r)"
-      let result = (try {
-        dispatch-tool $name $args $contract $tools_whitelist
-      } catch { |e|
-        $"tool error: (try { $e.msg } catch { $e | to text })"
-      })
-
-      # Track propose successes for the graceful-end-of-loop summary. Both
-      # fresh proposals and "already applied" retries reference a .proposed
-      # path worth listing; only fresh ones increment the count.
-      if ($name in $WRITE_TOOLS) {
-        let p = ($args.path? | default "")
-        if $p != "" and ($result | str starts-with "(proposal recorded)") {
-          $propose_count = ($propose_count + 1)
-          $proposed_paths = ($proposed_paths | append $p)
-        } else if $p != "" and ($result | str starts-with "(already applied)") {
-          $proposed_paths = ($proposed_paths | append $p)
-        }
-      }
-
-      $messages = ($messages | append {
-        role: "tool"
-        tool_call_id: $tc.id
-        content: $result
-      })
-    }
-
-    $iter = ($iter + 1)
-  }
-
-  $final_content
-}
-
-# Build the `tools` array for the LLM body from a whitelist of tool names.
-# Strips write tools (propose_edit, propose_write) when verb != "Enact" so the
-# LLM never sees them in non-Enact contracts.
-def build-tools-array [whitelist: list, verb: string] {
-  let allowed = if $verb == "Enact" {
-    $whitelist
-  } else {
-    $whitelist | where { |t| $t not-in $WRITE_TOOLS }
-  }
-  $allowed | each { |t| $TOOL_DEFS | get -o $t } | where $it != null
-}
-
-# Dispatch a single tool call. Rejects names not in the contract's whitelist.
-# Also rejects write tools when contract.action.verb != "Enact" — backstop
-# for build-tools-array's filtering.
-def dispatch-tool [name: string, args: record, contract: record, whitelist: list] {
-  if ($name not-in $whitelist) {
-    return $"tool error: '($name)' not in this contract's tool whitelist"
-  }
-  let verb = ($contract.action.verb? | default "")
-  if ($name in $WRITE_TOOLS) and $verb != "Enact" {
-    return $"tool error: '($name)' is a write tool; only Enact contracts may dispatch it"
-  }
-  match $name {
-    "search_nu_docs"  => (tool-search-nu-docs $args $contract)
-    "search_ann"      => (tool-search-ann $args $contract)
-    "check_nu_syntax" => (tool-check-nu-syntax $args)
-    "find_files"      => (tool-find-files $args)
-    "read_file"       => (tool-read-file $args)
-    "propose_edit"    => (tool-propose-edit $args)
-    "propose_write"   => (tool-propose-write $args)
-    "get_coach_profile"    => (tool-get-coach-profile $args $contract)
-    "get_tactical_profile" => (tool-get-sub-profile $args $contract "coach-profile-tactical")
-    "get_precision_profile"=> (tool-get-sub-profile $args $contract "coach-profile-precision")
-    "get_positional_profile"=> (tool-get-sub-profile $args $contract "coach-profile-position")
-    "chess_db_schema"      => (tool-chess-db-schema $contract)
-    "query_chess_db"       => (tool-query-chess-db $args $contract)
-    _ => $"tool error: no implementation for '($name)'"
+    $final_content
   }
 }
 
