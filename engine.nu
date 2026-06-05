@@ -6,20 +6,21 @@
 #                 declared corpus, injects them as a system message, calls
 #                 the LLM once, returns prose.
 #
-#   Investigate — multi-turn tool loop. Engine sends the system prompt + a
-#                 tool array to the LLM, dispatches whatever tool calls
-#                 come back, appends results as tool messages, repeats
-#                 until the LLM emits a final answer or
-#                 `action.max_iterations` is hit. See `build-ai-tools`
-#                 below for the catalog of supported tools.
+#   Investigate — multi-turn tool loop. Engine registers tools in AI_TOOLS
+#                 (via build-ai-tools) then delegates to ai.nu's ai-send,
+#                 which runs the while-tools loop internally (closure-run
+#                 for parallel dispatch, closure-list for schema). See
+#                 build-ai-tools below for the catalog of supported tools.
 #
-# Plugin commands `rag embed` and `rag similarity` must be registered via
-# `plugin add ./crates/nu_plugin_rag/target/debug/nu_plugin_rag` once
-# before this engine is invoked.
+# Requires ai.nu to be loaded first so that AI_STATE and AI_SESSION are
+# initialised. Plugin commands `rag embed` and `rag similarity` must be
+# registered via `plugin add` once before RAG tools are invoked.
 
 use ./config.nu *
 use ./llm.nu *
 use ../ai.nu/ai/function.nu [closure-run, closure-list]
+use ../ai.nu/ai/base.nu [ai-send]
+use ../ai.nu/ai/data.nu
 
 export-env {
     if ($env.AI_TOOLS? | is-empty) { $env.AI_TOOLS = {} }
@@ -444,164 +445,37 @@ def run-enrich [contract: record, prompt: string] {
 }
 
 # Consult action: deterministic pre-retrieval (when corpus is declared) → single LLM call.
+# Uses ai-send --oneshot so no prior session history bleeds in; the retrieved context
+# is folded into the system prompt rather than a second system message.
 def run-consult [contract: record, prompt: string, prior_messages: list = []] {
   let context = (retrieve-context $contract $prompt)
-  let messages = if $context != "" {
-    (
-      [{ role: "system", content: $contract.prompt.system }]
-      | append [{ role: "system", content: $"Relevant Nushell documentation:\n\n($context)" }]
-      | append $prior_messages
-      | append [{ role: "user", content: $prompt }]
-    )
+  let s = (data session)
+  let system = if $context != "" {
+    $"($contract.prompt.system)\n\nRelevant documentation:\n\n($context)"
   } else {
-    (
-      [{ role: "system", content: $contract.prompt.system }]
-      | append $prior_messages
-      | append [{ role: "user", content: $prompt }]
-    )
+    $contract.prompt.system
   }
-  call-llm $messages
+  let r = ($prompt | ai-send -s $s --system $system --oneshot)
+  $r.result.content
 }
 
-# Investigate action: tool-calling loop. The LLM decides when (and what) to retrieve.
-# Tracks propose-tool successes so that, if the loop exhausts max_iterations
-# without a final answer but at least one proposal succeeded, the engine
-# returns a graceful summary listing the .proposed files instead of erroring.
-#
-# Tool dispatch delegates to ai.nu's `closure-run` (parallel execution, context
-# injection) and `closure-list` (OpenAI schema formatting). Tools are registered
-# in a temporary AI_TOOLS env scope via `with-env` so each invocation is isolated.
+# Investigate/Enact action: full tool-calling loop delegated to ai.nu's ai-send.
+# ai-send drives the while-tools loop internally (base.nu lines 163-183); nu-agent's
+# role is to populate AI_TOOLS so closure-run (called inside ai-send) can dispatch
+# each tool call. --oneshot keeps this invocation isolated from prior session history.
 def run-investigate [contract: record, prompt: string, prior_messages: list = []] {
-  let max_iter = ($contract.action.max_iterations? | default 5)
   let tools_whitelist = ($contract.action.tools? | default [])
   let verb = ($contract.action.verb? | default "")
-
-  # Build tool registry: schemas + handler closures + contract context.
   let tools_reg = (build-ai-tools $contract $tools_whitelist $verb)
-  # Whitelist filtered to what the LLM may see (write tools stripped for non-Enact).
   let allowed = if $verb == "Enact" {
     $tools_whitelist
   } else {
     $tools_whitelist | where { |t| $t not-in $WRITE_TOOLS }
   }
-
-  let init_messages = (
-    [{ role: "system", content: $contract.prompt.system }]
-    | append $prior_messages
-    | append [{ role: "user", content: $prompt }]
-  )
-
-  # Scope AI_TOOLS to this invocation so registrations don't bleed between calls.
+  let s = (data session)
   with-env { AI_TOOLS: $tools_reg } {
-    let llm_tools = if ($allowed | is-empty) { [] } else { closure-list $allowed }
-
-    mut messages = $init_messages
-    mut iter = 0
-    mut final_content = ""
-    mut propose_count = 0
-    mut proposed_paths = []
-    loop {
-      if $iter >= $max_iter {
-        if $propose_count > 0 {
-          let unique_paths = ($proposed_paths | uniq)
-          let listing = ($unique_paths | each { |p| $"  - ($p).proposed" } | str join "\n")
-          print --stderr $"engine: max_iterations ($max_iter) reached but ($propose_count) proposal\(s) succeeded; returning graceful summary"
-          $final_content = $"Reached max_iterations \(($max_iter)\) without a clean final answer from the model, but ($propose_count) proposal\(s) were recorded. Review:\n($listing)\n\nOpen each .proposed file in your editor to review; `mv <path>.proposed <path>` to accept, `rm <path>.proposed` to reject."
-          break
-        }
-        error make { msg: $"engine: max_iterations ($max_iter) reached without final answer" }
-      }
-
-      let llm_body = if ($llm_tools | is-empty) {
-        { messages: $messages }
-      } else {
-        { messages: $messages, tools: $llm_tools, tool_choice: "auto" }
-      }
-      let msg = (call-llm-message $llm_body)
-      let tcs = ($msg.tool_calls? | default [])
-
-      if ($tcs | length) == 0 {
-        # Fallback: some models output tool arguments as JSON content instead of
-        # using tool_calls. Try to infer which tool was intended by matching the
-        # JSON keys against each whitelisted tool's required parameters.
-        let raw_content = ($msg.content? | default "" | str trim)
-        let inferred_tools = if ($raw_content | str starts-with "{") {
-          let parsed = try { $raw_content | from json } catch { null }
-          if $parsed != null {
-            let cols = ($parsed | columns)
-            $tools_whitelist | each { |t|
-              let def = ($TOOL_DEFS | get -o $t)
-              let req = if $def != null { ($def.function.parameters.required? | default []) } else { [] }
-              if $def != null and ($req | length) > 0 and ($req | all { |k| $k in $cols }) { $t } else { null }
-            } | where $it != null
-          } else { [] }
-        } else { [] }
-
-        if ($inferred_tools | length) == 1 {
-          let tool_name = ($inferred_tools | first)
-          let fake_id = $"inferred-($iter)"
-          $messages = ($messages | append {
-            role: "assistant"
-            content: null
-            tool_calls: [{ id: $fake_id, type: "function", function: { name: $tool_name, arguments: $raw_content } }]
-          })
-          print --stderr $"engine: inferred ($tool_name) ($raw_content)"
-          # Run the inferred call through closure-run for uniform dispatch.
-          let fake_tc = [{ id: $fake_id, type: "function", function: { name: $tool_name, arguments: $raw_content } }]
-          let tool_results = (closure-run $fake_tc)
-          for x in $tool_results {
-            let content = if ($x.err? | is-not-empty) { $x.err } else { $x.result | into string }
-            $messages = ($messages | append { role: "tool", tool_call_id: $x.id, content: $content })
-          }
-          $iter = ($iter + 1)
-          continue
-        }
-
-        $final_content = $raw_content
-        break
-      }
-
-      # Append the assistant's tool-call turn to the history.
-      $messages = ($messages | append {
-        role: "assistant"
-        content: ($msg.content? | default "")
-        tool_calls: $tcs
-      })
-
-      # Dispatch all tool calls in parallel via ai.nu's closure-run.
-      # Each handler receives (parsed_args, contract) and returns a string result.
-      let tool_results = (closure-run $tcs)
-      for x in $tool_results {
-        let name = $x.function.name
-        let content = if ($x.err? | is-not-empty) {
-          $x.err
-        } else {
-          $x.result | into string
-        }
-
-        # Track propose successes for the graceful-end-of-loop summary.
-        if ($name in $WRITE_TOOLS) {
-          let tc_args = try { $x.function.arguments | from json } catch { {} }
-          let p = ($tc_args.path? | default "")
-          if $p != "" and ($content | str starts-with "(proposal recorded)") {
-            $propose_count = ($propose_count + 1)
-            $proposed_paths = ($proposed_paths | append $p)
-          } else if $p != "" and ($content | str starts-with "(already applied)") {
-            $proposed_paths = ($proposed_paths | append $p)
-          }
-        }
-
-        $messages = ($messages | append {
-          role: "tool"
-          tool_call_id: $x.id
-          content: $content
-        })
-      }
-
-      $iter = ($iter + 1)
-    }
-
-    $final_content
+    let r = ($prompt | ai-send -s $s --system $contract.prompt.system --function $allowed --oneshot)
+    $r.result.content
   }
 }
 
