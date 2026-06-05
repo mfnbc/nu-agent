@@ -12,6 +12,12 @@
 #                 for parallel dispatch, closure-list for schema). See
 #                 build-ai-tools below for the catalog of supported tools.
 #
+# Generic tools provided: search_nu_docs, check_nu_syntax, search_ann,
+# find_files, read_file, propose_edit, propose_write.
+# Domain tools live in their home packages:
+#   chess  → nuchessdb/ai/mod.nu
+#   hebrew → biblexicon_builder/ai/mod.nu
+#
 # Requires ai.nu to be loaded first so that AI_STATE and AI_SESSION are
 # initialised. Plugin commands `rag embed` and `rag similarity` must be
 # registered via `plugin add` once before RAG tools are invoked.
@@ -44,126 +50,8 @@ export def embed-one [text: string] {
 }
 
 # Tool descriptors for the LLM's `tools` body field — OpenAI function-calling shape.
+# Chess tools live in nuchessdb/ai/mod.nu; hebraist lives in biblexicon_builder/ai/mod.nu.
 const TOOL_DEFS = {
-  get_coach_profile: {
-    type: "function"
-    function: {
-      name: "get_coach_profile"
-      description: "Return a comprehensive one-shot coaching profile for a player: win/loss/draw rates by color, phase performance in centipawns, eval component breakdown (pawns/activity/king-safety), most anomalous concepts, blunders-per-game, mate-in-1 conversion rate, and the top 5 worst unreviewed moves. Call this as the first step for any player-specific question — it provides the full context needed to frame targeted follow-up queries."
-      parameters: {
-        type: "object"
-        properties: {
-          username: {
-            type: "string"
-            description: "The player's username exactly as stored in the database."
-          }
-        }
-        required: ["username"]
-      }
-    }
-  }
-  get_tactical_profile: {
-    type: "function"
-    function: {
-      name: "get_tactical_profile"
-      description: "Return a focused tactical drill-down for a player: anomaly counts and hurt rates for each tactical concept (fork, pin, hanging_piece, skewer, discovered_attack) broken down by phase, plus win-rate correlation for games where each pattern appeared on the board. Use this after get_coach_profile when tactical patterns show up as a weakness."
-      parameters: {
-        type: "object"
-        properties: {
-          username: {
-            type: "string"
-            description: "The player's username exactly as stored in the database."
-          }
-        }
-        required: ["username"]
-      }
-    }
-  }
-  get_precision_profile: {
-    type: "function"
-    function: {
-      name: "get_precision_profile"
-      description: "Return a focused precision drill-down for a player: eval-swing baselines per phase (mean/std of |hugm_delta|), blunder frequency by phase, severity distribution (mild/moderate/significant/severe), risky state transitions, and the top anomalies by z_score. Use this to investigate whether the player makes consistent mistakes or occasional catastrophic ones."
-      parameters: {
-        type: "object"
-        properties: {
-          username: {
-            type: "string"
-            description: "The player's username exactly as stored in the database."
-          }
-        }
-        required: ["username"]
-      }
-    }
-  }
-  get_positional_profile: {
-    type: "function"
-    function: {
-      name: "get_positional_profile"
-      description: "Return a focused positional drill-down for a player: avg eval components (pawns/activity/king-safety in cp) by phase and color, plus win-rate when positional advantages (outpost, open file, passed pawn) or weaknesses (king exposed) were present on the board. Use this to investigate positional patterns."
-      parameters: {
-        type: "object"
-        properties: {
-          username: {
-            type: "string"
-            description: "The player's username exactly as stored in the database."
-          }
-        }
-        required: ["username"]
-      }
-    }
-  }
-  get_opening_profile: {
-    type: "function"
-    function: {
-      name: "get_opening_profile"
-      description: "Return the player's opening repertoire: top ECOs by games played as white and black, ECO family win rates (A=flank B=semi-open C=open D=closed E=indian), weakest and strongest openings by win%, and which openings correlate with the most anomalies. Use this to investigate repertoire gaps or opening-specific weaknesses."
-      parameters: {
-        type: "object"
-        properties: {
-          username: {
-            type: "string"
-            description: "The player's username exactly as stored in the database."
-          }
-        }
-        required: ["username"]
-      }
-    }
-  }
-  chess_db_schema: {
-    type: "function"
-    function: {
-      name: "chess_db_schema"
-      description: "Return the CREATE TABLE DDL for every table in the chess database. Call this first to understand what data is available before writing any queries."
-      parameters: {
-        type: "object"
-        properties: {}
-        required: []
-      }
-    }
-  }
-  query_chess_db: {
-    type: "function"
-    function: {
-      name: "query_chess_db"
-      description: "Execute a read-only SELECT query against the chess database. Returns up to 100 rows as JSON. Use chess_db_schema first to learn the schema. Only SELECT statements are permitted — the tool will reject anything else."
-      parameters: {
-        type: "object"
-        properties: {
-          sql: {
-            type: "string"
-            description: "A SQL SELECT statement."
-          }
-          params: {
-            type: "array"
-            items: { type: "string" }
-            description: "Optional positional parameter values for ? placeholders in the SQL."
-          }
-        }
-        required: ["sql"]
-      }
-    }
-  }
   search_nu_docs: {
     type: "function"
     function: {
@@ -332,13 +220,6 @@ const WRITE_TOOLS = ["propose_edit", "propose_write"]
 def build-ai-tools [contract: record, whitelist: list<string>, verb: string] -> record {
     let is_enact = ($verb == "Enact")
     let handlers = {
-        get_coach_profile:      {|args, ctx| tool-get-coach-profile $args $ctx}
-        get_tactical_profile:   {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-tactical"}
-        get_precision_profile:  {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-precision"}
-        get_positional_profile: {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-position"}
-        get_opening_profile:    {|args, ctx| tool-get-sub-profile $args $ctx "coach-profile-opening"}
-        chess_db_schema:        {|args, ctx| tool-chess-db-schema $ctx}
-        query_chess_db:         {|args, ctx| tool-query-chess-db $args $ctx}
         search_nu_docs:         {|args, ctx| tool-search-nu-docs $args $ctx}
         search_ann:             {|args, ctx| tool-search-ann $args $ctx}
         check_nu_syntax:        {|args, ctx| tool-check-nu-syntax $args}
@@ -404,43 +285,7 @@ export def run [contract: string, prompt: string, prior_messages: list = []] {
     "Consult"     => (run-consult     $c $prompt $prior_messages)
     "Investigate" => (run-investigate $c $prompt $prior_messages)
     "Enact"       => (run-investigate $c $prompt $prior_messages)
-    "Enrich"      => (run-enrich      $c $prompt)
     _ => { error make { msg: $"engine: unsupported action verb '($c.action.verb)' in ($contract_path)" } }
-  }
-}
-
-# Enrich action: single-shot JSON fill-in. No corpus retrieval, no tool loop.
-# The contract's system prompt declares the schema; the caller's prompt IS the
-# JSON record to enrich. This helper attempts to validate JSON and retry a
-# small number of times to accommodate local/smaller models that sometimes
-# wrap or slightly corrupt the JSON output (fences, brief prefixes).
-def run-enrich [contract: record, prompt: string] {
-  mut messages = [
-    { role: "system", content: $contract.prompt.system }
-    { role: "user", content: $prompt }
-  ]
-
-  mut attempts = 0
-  loop {
-    let raw = (call-llm $messages | str trim)
-    # Strip common markdown code fences that models sometimes include.
-    let cleaned = ($raw | str replace -r '^```[a-z]*\n?' '' | str replace -r '\n?```$' '')
-
-    # Verify JSON parseability before returning. If valid, return the cleaned JSON string.
-    if (try { $cleaned | from json; true } catch { false }) {
-      return $cleaned
-    }
-
-    $attempts = ($attempts + 1)
-    if $attempts >= 3 {
-      let err_msg = ("engine: run-enrich: model did not return valid JSON after 3 attempts. Last output: " + ($cleaned | str substring 0..300))
-      error make { msg: $err_msg }
-    }
-
-    # If the model hallucinates non-JSON, don't just prompt it generically; append its failure
-    # so it knows exactly what not to do.
-    $messages = ($messages | append { role: "assistant", content: $raw })
-    $messages = ($messages | append { role: "user", content: "ERROR: That was not a valid JSON object. Please return ONLY a valid JSON object matching the requested schema. Do not include markdown code fences, conversational prose, or trailing notes. Your output must begin with `{` and end with `}`." })
   }
 }
 
@@ -736,105 +581,6 @@ def tool-propose-write [args: record] {
   let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- content\n($content)\n---"
   print --stderr $preview
   $"\(proposal recorded\) new file ($raw_path).proposed written. Do NOT call propose_write on this path again. Next action: write the final answer.\n  rationale: ($rationale)"
-}
-
-# get_coach_profile: shell out to nuchessdb.nu coach-profile and return the JSON profile.
-def tool-get-coach-profile [args: record, contract: record] {
-  let db_path = ($contract.action.db_path? | default "")
-  if $db_path == "" { return "tool error: contract declares no `action.db_path`" }
-  if not ($db_path | path exists) { return $"tool error: chess database not found at '($db_path)'" }
-
-  let username = ($args.username? | default "")
-  if $username == "" { return "tool error: get_coach_profile requires a `username` argument" }
-
-  let db_abs  = ($db_path | path expand)
-  let script  = ($db_abs | path dirname | path join "nuchessdb.nu")
-  if not ($script | path exists) { return $"tool error: nuchessdb.nu not found at '($script)'" }
-
-  let result = (do { ^nu $script coach-profile $username --db $db_abs --json --examples 0 } | complete)
-  if $result.exit_code != 0 {
-    return $"tool error: coach-profile failed — ($result.stderr | str trim)"
-  }
-  $result.stdout | str trim
-}
-
-# Shared helper for the three sub-profile tools. Shells out to nuchessdb.nu <subcommand>.
-def tool-get-sub-profile [args: record, contract: record, subcommand: string] {
-  let db_path = ($contract.action.db_path? | default "")
-  if $db_path == "" { return "tool error: contract declares no `action.db_path`" }
-  if not ($db_path | path exists) { return $"tool error: chess database not found at '($db_path)'" }
-
-  let username = ($args.username? | default "")
-  if $username == "" { return $"tool error: ($subcommand) requires a `username` argument" }
-
-  let db_abs = ($db_path | path expand)
-  let script = ($db_abs | path dirname | path join "nuchessdb.nu")
-  if not ($script | path exists) { return $"tool error: nuchessdb.nu not found at '($script)'" }
-
-  let result = (do { ^nu $script $subcommand $username --db $db_abs } | complete)
-  if $result.exit_code != 0 {
-    return $"tool error: ($subcommand) failed — ($result.stderr | str trim)"
-  }
-  $result.stdout | str trim
-}
-
-# chess_db_schema: return CREATE TABLE DDL for all user tables in the chess database.
-def tool-chess-db-schema [contract: record] {
-  let db_path = ($contract.action.db_path? | default "")
-  if $db_path == "" {
-    return "tool error: contract declares no `action.db_path`"
-  }
-  if not ($db_path | path exists) {
-    return $"tool error: chess database not found at '($db_path)'"
-  }
-  let tables = (open $db_path | query db "
-    SELECT name, sql FROM sqlite_master
-    WHERE type = 'table' AND name NOT LIKE '_%'
-    ORDER BY name
-  ")
-  if ($tables | is-empty) {
-    return "No tables found."
-  }
-  $tables | each { |t| $t.sql } | str join "\n\n"
-}
-
-# query_chess_db: run a read-only SELECT and return up to 100 rows as JSON.
-def tool-query-chess-db [args: record, contract: record] {
-  let db_path = ($contract.action.db_path? | default "")
-  if $db_path == "" {
-    return "tool error: contract declares no `action.db_path`"
-  }
-  if not ($db_path | path exists) {
-    return $"tool error: chess database not found at '($db_path)'"
-  }
-  let sql = ($args.sql? | default "" | str trim)
-  if $sql == "" {
-    return "tool error: query_chess_db requires a non-empty `sql` argument"
-  }
-  if not ($sql | str downcase | str starts-with "select") {
-    return "tool error: only SELECT statements are permitted"
-  }
-  let params = ($args.params? | default [])
-  let results = try {
-    if ($params | is-empty) {
-      open $db_path | query db $sql
-    } else {
-      open $db_path | query db $sql --params $params
-    }
-  } catch { |e|
-    return $"tool error: query failed — ($e.msg) | sql was: ($sql)"
-  }
-  if ($results | is-empty) {
-    return "(no rows returned)"
-  }
-  let count = ($results | length)
-  let capped = ($results | first 100)
-  let body = ($capped | to json)
-  if $count > 100 {
-    $"($body)\n\n(showing first 100 of ($count) rows)"
-  } else {
-    $body
-  }
 }
 
 # Consult retrieval pre-step. Returns concatenated chunk text for the top-k corpus matches,
