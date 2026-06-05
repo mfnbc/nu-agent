@@ -1,625 +1,401 @@
-# Contract execution engine.
+# Nu-agent engine — generic tools and prompt runner on top of ai.nu.
 #
-# Reads a contract TOML and dispatches by `action.verb`:
-#
-#   Consult     — single-shot. Engine pre-retrieves top-k chunks from the
-#                 declared corpus, injects them as a system message, calls
-#                 the LLM once, returns prose.
-#
-#   Investigate — multi-turn tool loop. Engine registers tools in AI_TOOLS
-#                 (via build-ai-tools) then delegates to ai.nu's ai-send,
-#                 which runs the while-tools loop internally (closure-run
-#                 for parallel dispatch, closure-list for schema). See
-#                 build-ai-tools below for the catalog of supported tools.
-#
-# Generic tools provided: search_nu_docs, check_nu_syntax, search_ann,
-# find_files, read_file, propose_edit, propose_write.
-# Domain tools live in their home packages:
+# export-env registers 7 generic tools into AI_TOOLS and seeds prompts from
+# contracts/*.toml into AI_PROMPTS. Domain tools live in their packages:
 #   chess  → nuchessdb/ai/mod.nu
 #   hebrew → biblexicon_builder/ai/mod.nu
 #
-# Requires ai.nu to be loaded first so that AI_STATE and AI_SESSION are
-# initialised. Plugin commands `rag embed` and `rag similarity` must be
-# registered via `plugin add` once before RAG tools are invoked.
+# Verbs supported by `run`:
+#   Consult     — single-shot with optional RAG pre-retrieval
+#   Investigate — tool loop (ai-send drives internally via AI_TOOLS)
+#   Enact       — tool loop with write tools included
+#
+# Requires ai.nu loaded first (AI_STATE, AI_SESSION, ai-do, ai-send).
+# Requires nu_plugin_rag registered for RAG and ANN tools.
 
 use ./config.nu *
 use ./llm.nu *
+use ../ai.nu/ai/config.nu [ai-config-env-tools, ai-config-env-prompts]
 use ../ai.nu/ai/function.nu [closure-run, closure-list]
 use ../ai.nu/ai/base.nu [ai-send]
 use ../ai.nu/ai/data.nu
 
+const HERE = (path self | path dirname)
+
+# Tools that require Enact verb — not presented to LLM for Investigate/Consult.
+const WRITE_TOOLS = ["propose_edit", "propose_write"]
+
 export-env {
     if ($env.AI_TOOLS? | is-empty) { $env.AI_TOOLS = {} }
     if ($env.AI_CONFIG? | is-empty) { $env.AI_CONFIG = { tool_calls: "grey" } }
+
+    let nu_docs = ($HERE | path join "data" "nu_docs.msgpack")
+
+    ai-config-env-tools "search_nu_docs" {
+        schema: {
+            description: "Retrieve chunks from the Nushell documentation corpus by semantic similarity. Use this to verify a command, flag, or idiom rather than relying on memory."
+            parameters: {
+                type: "object"
+                properties: {
+                    query: { type: "string", description: "Natural-language search query." }
+                    k: { type: "integer", description: "Number of top results to return (default 3)." }
+                }
+                required: ["query"]
+            }
+        }
+        context: { corpus: $nu_docs }
+        handler: {|args, ctx|
+            let q = ($args.query? | default "")
+            if $q == "" { return "tool error: requires non-empty `query`" }
+            let k = ($args.k? | default 3)
+            let corpus = ($ctx.corpus? | default "")
+            if $corpus == "" or not ($corpus | path exists) {
+                return $"tool error: corpus not found at '($corpus)'"
+            }
+            let qv = (embed-one $q)
+            let hits = (open $corpus | rag similarity --query $qv --k $k)
+            $hits | each { |h|
+                $"Source: ($h.source)\nTitle: ($h.title)\nScore: ($h.score)\n\n($h.text)"
+            } | str join "\n\n---\n\n"
+        }
+    }
+
+    ai-config-env-tools "check_nu_syntax" {
+        schema: {
+            description: "Parse-check a Nushell code snippet without executing it. Returns 'OK' if it parses cleanly, otherwise the parser's diagnostics verbatim. Call this before finalising any nu code in your answer."
+            parameters: {
+                type: "object"
+                properties: {
+                    code: { type: "string", description: "Nushell code to parse-check." }
+                }
+                required: ["code"]
+            }
+        }
+        handler: {|args, _| tool-check-nu-syntax $args }
+    }
+
+    ai-config-env-tools "search_ann" {
+        schema: {
+            description: "Query a persisted ANN index (HNSW or exact) using a natural-language query or embedding vector. Returns top-k hits (id + score)."
+            parameters: {
+                type: "object"
+                properties: {
+                    index: { type: "string", description: "Path to ANN index basename." }
+                    map: { type: "string", description: "Path to the index id map JSON file." }
+                    query: { type: "string", description: "Natural-language query to embed (optional)." }
+                    query_vec: { type: "array", items: { type: "number" }, description: "Embedding vector (optional)." }
+                    k: { type: "integer", description: "Number of top results (default 5)." }
+                    ef_search: { type: "integer", description: "HNSW ef_search (default 200)." }
+                }
+                required: ["index", "map"]
+            }
+        }
+        handler: {|args, _|
+            let index = ($args.index? | default "")
+            let map   = ($args.map? | default "")
+            if $index == "" or $map == "" { return "tool error: requires `index` and `map`" }
+            let k  = ($args.k? | default 5)
+            let ef = ($args.ef_search? | default 200)
+            if ($args.query? | default "") != "" {
+                let qv = (embed-one $args.query)
+                let hits = (rag ann-query-hnsw --index $index --map $map --query $qv --k $k --ef-search $ef)
+                if ($hits | is-empty) { return "(no hits)" }
+                $hits | each { |h| $"id=($h.id) score=($h.score) index=($h.index)" } | str join "\n"
+            } else if ($args.query_vec? | default []) != [] {
+                let hits = (rag ann-query-hnsw --index $index --map $map --query $args.query_vec --k $k --ef-search $ef)
+                if ($hits | is-empty) { return "(no hits)" }
+                $hits | each { |h| $"id=($h.id) score=($h.score) index=($h.index)" } | str join "\n"
+            } else {
+                "tool error: requires `query` (string) or `query_vec` (list)"
+            }
+        }
+    }
+
+    ai-config-env-tools "find_files" {
+        schema: {
+            description: "Find files matching a glob pattern, scoped to the working directory. Returns matching paths joined by newlines."
+            parameters: {
+                type: "object"
+                properties: {
+                    pattern: { type: "string", description: "Glob pattern (e.g. '**/*.nu'). Standard glob syntax." }
+                }
+                required: ["pattern"]
+            }
+        }
+        handler: {|args, _| tool-find-files $args }
+    }
+
+    ai-config-env-tools "read_file" {
+        schema: {
+            description: "Read a file's contents, scoped to the working directory. Returns line-numbered text."
+            parameters: {
+                type: "object"
+                properties: {
+                    path: { type: "string", description: "Path to the file, relative to cwd or absolute." }
+                    offset: { type: "integer", description: "Line number to start from (1-indexed, default 1)." }
+                    limit: { type: "integer", description: "Maximum lines to return (default 2000)." }
+                }
+                required: ["path"]
+            }
+        }
+        handler: {|args, _| tool-read-file $args }
+    }
+
+    ai-config-env-tools "propose_edit" {
+        schema: {
+            description: "Propose a surgical edit to an existing file by replacing one exact occurrence of old_string with new_string. Does NOT write to disk — writes a .proposed companion file for user review."
+            parameters: {
+                type: "object"
+                properties: {
+                    path: { type: "string", description: "Path to an existing file, scoped to cwd." }
+                    old_string: { type: "string", description: "Exact text to replace. Must match exactly once." }
+                    new_string: { type: "string", description: "Replacement text." }
+                    rationale: { type: "string", description: "One-sentence justification." }
+                }
+                required: ["path", "old_string", "new_string", "rationale"]
+            }
+        }
+        handler: {|args, _| tool-propose-edit $args }
+    }
+
+    ai-config-env-tools "propose_write" {
+        schema: {
+            description: "Propose creating a new file with given content. Rejects if the file already exists. Does NOT write to disk — writes a .proposed companion file for user review."
+            parameters: {
+                type: "object"
+                properties: {
+                    path: { type: "string", description: "Path for the new file, scoped to cwd." }
+                    content: { type: "string", description: "Full contents of the new file." }
+                    rationale: { type: "string", description: "One-sentence justification." }
+                }
+                required: ["path", "content", "rationale"]
+            }
+        }
+        handler: {|args, _| tool-propose-write $args }
+    }
+
+    # Load contracts/*.toml into AI_PROMPTS so `run` can look them up by name.
+    # Each contract contributes: system, template, placeholder, plus nu-agent
+    # extensions (corpus, tools, verb) stored in the same record.
+    let contracts_dir = ($HERE | path join "contracts")
+    if ($contracts_dir | path exists) {
+        glob ($contracts_dir | path join "*.toml")
+        | each { |f|
+            let c = (open $f)
+            let name = ($f | path basename | str replace ".toml" "")
+            ai-config-env-prompts $name {
+                system:      $c.prompt.system
+                template:    "{{}}"
+                placeholder: "[]"
+                corpus:      ($c.action.corpus? | default "")
+                tools:       ($c.action.tools?  | default [])
+                verb:        ($c.action.verb?   | default "Investigate")
+                description: $"($c.role.persona) — ($c.role.domain)"
+            }
+        }
+    }
 }
 
-# Engine module's own directory — used to locate the bundled `contracts/`
-# fallback when a user-supplied contract path is missing on disk. Mirrors
-# the pattern in config.nu.
-const HERE = (path self | path dirname)
-
-# Embed a single text string and return its embedding vector.
-# Use the config-aware embedding path (call-llm-embed) rather than relying
-# on plugin process environment variables. This keeps embedding config
-# resolution centralized and consistent between batch and single-shot flows.
+# Embed a single text string via the config-aware embedding path in llm.nu.
 export def embed-one [text: string] {
-  # Prefer the unified embedding path implemented in llm.nu which reads
-  # the full config cascade and performs HTTP embedding requests.
-  let vec = (call-llm-embed [$text] | get 0)
-  $vec
+    call-llm-embed [$text] | get 0
 }
 
-# Tool descriptors for the LLM's `tools` body field — OpenAI function-calling shape.
-# Chess tools live in nuchessdb/ai/mod.nu; hebraist lives in biblexicon_builder/ai/mod.nu.
-const TOOL_DEFS = {
-  search_nu_docs: {
-    type: "function"
-    function: {
-      name: "search_nu_docs"
-      description: "Retrieve chunks from the Nushell documentation corpus by semantic similarity. Use this to verify a command, flag, or idiom rather than relying on memory."
-      parameters: {
-        type: "object"
-        properties: {
-          query: {
-            type: "string"
-            description: "Natural-language search query."
-          }
-          k: {
-            type: "integer"
-            description: "Number of top results to return (default 3)."
-          }
-        }
-        required: ["query"]
-      }
+# Run a named prompt (loaded from contracts/*.toml at startup).
+# Corpus pre-retrieval is performed when the prompt declares a corpus path.
+# Tools are passed to ai-send via --function; write tools are stripped unless
+# verb == "Enact".
+export def run [name: string, prompt: string] {
+    let p = ($env.AI_PROMPTS | get -o $name)
+    if ($p | is-empty) {
+        error make { msg: $"nu-agent: unknown prompt '($name)' — available: ($env.AI_PROMPTS | columns | str join ', ')" }
     }
-  }
-  check_nu_syntax: {
-    type: "function"
-    function: {
-      name: "check_nu_syntax"
-      description: "Parse-check a Nushell code snippet without executing it. Returns 'OK' if it parses cleanly, otherwise the parser's diagnostics verbatim. Call this before finalising any nu code in your answer."
-      parameters: {
-        type: "object"
-        properties: {
-          code: {
-            type: "string"
-            description: "Nushell code to parse-check (the contents of a single code block)."
-          }
-        }
-        required: ["code"]
-      }
-    }
-  }
-  search_ann: {
-    type: "function"
-    function: {
-      name: "search_ann"
-      description: "Query a persisted ANN index (HNSW or exact index) using a prompt or embedding vector. If `query` is provided, it will be embedded using the engine's embedding path. Returns top-k hits (id + score)."
-      parameters: {
-        type: "object"
-        properties: {
-          index: { type: "string", description: "Path to ANN index basename or index file (plugin-specific)" }
-          map: { type: "string", description: "Path to the index id map JSON file" }
-          query: { type: "string", description: "Natural-language query to embed (optional)" }
-          query_vec: { type: "array", items: { type: "number" }, description: "Embedding vector (optional)" }
-          k: { type: "integer", description: "Number of top results to return (default 5)" }
-          ef_search: { type: "integer", description: "HNSW ef_search parameter (default 200)" }
-        }
-        required: ["index", "map"]
-      }
-    }
-  }
-  find_files: {
-    type: "function"
-    function: {
-      name: "find_files"
-      description: "Find files matching a glob pattern, scoped to the working directory tree the agent was invoked from. Use this to locate scripts, config files, or other artifacts the user is asking about. Returns matching paths joined by newlines."
-      parameters: {
-        type: "object"
-        properties: {
-          pattern: {
-            type: "string"
-            description: "Glob pattern relative to the working directory (e.g., '**/*.nu', 'crates/**/Cargo.toml'). Standard glob syntax."
-          }
-        }
-        required: ["pattern"]
-      }
-    }
-  }
-  read_file: {
-    type: "function"
-    function: {
-      name: "read_file"
-      description: "Read a file's contents, scoped to the working directory tree. Returns line-numbered text. Use this to inspect a specific file the user asked about, or one located via find_files."
-      parameters: {
-        type: "object"
-        properties: {
-          path: {
-            type: "string"
-            description: "Path to the file, relative to the working directory or absolute (must resolve under the working directory)."
-          }
-          offset: {
-            type: "integer"
-            description: "Line number to start from (1-indexed). Default 1."
-          }
-          limit: {
-            type: "integer"
-            description: "Maximum number of lines to return. Default 2000."
-          }
-        }
-        required: ["path"]
-      }
-    }
-  }
-  propose_edit: {
-    type: "function"
-    function: {
-      name: "propose_edit"
-      description: "Propose a surgical edit to an existing file by replacing one occurrence of `old_string` with `new_string`. Verifies that `old_string` matches exactly once in the file (rejects otherwise). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
-      parameters: {
-        type: "object"
-        properties: {
-          path: {
-            type: "string"
-            description: "Path to an existing file, scoped to the working directory."
-          }
-          old_string: {
-            type: "string"
-            description: "Exact text to replace. Must match exactly once. Include surrounding context if the change point would otherwise be ambiguous."
-          }
-          new_string: {
-            type: "string"
-            description: "Replacement text."
-          }
-          rationale: {
-            type: "string"
-            description: "One-sentence justification for this edit."
-          }
-        }
-        required: ["path", "old_string", "new_string", "rationale"]
-      }
-    }
-  }
-  propose_write: {
-    type: "function"
-    function: {
-      name: "propose_write"
-      description: "Propose creating a new file with the given content. Rejects if the file already exists (use propose_edit instead). Does NOT write to disk — proposals are echoed to stderr and returned to you so you can summarize them in your final answer; the user reviews and applies them manually."
-      parameters: {
-        type: "object"
-        properties: {
-          path: {
-            type: "string"
-            description: "Path for the new file, scoped to the working directory."
-          }
-          content: {
-            type: "string"
-            description: "Full contents of the new file."
-          }
-          rationale: {
-            type: "string"
-            description: "One-sentence justification for this new file."
-          }
-        }
-        required: ["path", "content", "rationale"]
-      }
-    }
-  }
-}
-
-# Tools that mutate the user's project (or propose to). Only contracts whose
-# action.verb is "Enact" may dispatch these. Investigate contracts have these
-# stripped from their tool array AND rejected at dispatch as a backstop.
-const WRITE_TOOLS = ["propose_edit", "propose_write"]
-
-# Build an AI_TOOLS-compatible registry from the whitelist: each entry carries
-# the OpenAI schema (from TOOL_DEFS), a handler closure, and the contract as
-# context (passed to the handler as `ctx`). Write tools are excluded unless
-# verb == "Enact". The result is passed to `with-env { AI_TOOLS: ... }` so it
-# is visible to `closure-list` and `closure-run` without polluting the outer env.
-def build-ai-tools [contract: record, whitelist: list<string>, verb: string] -> record {
-    let is_enact = ($verb == "Enact")
-    let handlers = {
-        search_nu_docs:         {|args, ctx| tool-search-nu-docs $args $ctx}
-        search_ann:             {|args, ctx| tool-search-ann $args $ctx}
-        check_nu_syntax:        {|args, ctx| tool-check-nu-syntax $args}
-        find_files:             {|args, ctx| tool-find-files $args}
-        read_file:              {|args, ctx| tool-read-file $args}
-        propose_edit:           {|args, ctx| tool-propose-edit $args}
-        propose_write:          {|args, ctx| tool-propose-write $args}
-    }
-    mut tools = {}
-    for name in $whitelist {
-        if ($name in $WRITE_TOOLS) and not $is_enact { continue }
-        let schema = ($TOOL_DEFS | get -o $name)
-        let handler = ($handlers | get -o $name)
-        if $schema == null or $handler == null { continue }
-        $tools = ($tools | upsert $name {
-            schema: $schema.function
-            handler: $handler
-            context: $contract
-        })
-    }
-    $tools
-}
-
-# Resolve `p` to an existing contract file. If `p` is a file, return it
-# as-is. If `p` is a directory, prefer `architect.toml` or the first
-# `*.toml` found inside. Returns null if `p` doesn't exist or contains no
-# .toml file.
-def resolve-contract-at [p: string] {
-  let kind = ($p | path type)
-  if $kind == "file" { return $p }
-  if $kind != "dir" { return null }
-  let preferred = ($p | path join "architect.toml")
-  if ($preferred | path type) == "file" { return $preferred }
-  let found = (try { glob ($p | path join "*.toml") } catch { [] })
-  if ($found | length) > 0 { $found | get 0 } else { null }
-}
-
-# Resolve a contract argument, with cascade fallback to the bundled repo
-# contracts dir. Mirrors config.toml's cascade: if the user's override
-# (e.g. `~/.config/nu-agent/contracts/architect.toml`) is missing, fall
-# back to the committed `<repo>/contracts/<basename>`.
-def resolve-contract-path [contract: string] {
-  let direct = (resolve-contract-at $contract)
-  if $direct != null { return $direct }
-
-  let basename = if ($contract | str ends-with "/") {
-    "architect.toml"
-  } else {
-    $contract | path basename
-  }
-  let bundled_dir = ($HERE | path join "contracts")
-  let fallback = (resolve-contract-at ($bundled_dir | path join $basename))
-  if $fallback != null {
-    return $fallback
-  }
-  error make { msg: $"engine: contract not found at '($contract)' or bundled '($bundled_dir)/($basename)'" }
-}
-
-export def run [contract: string, prompt: string, prior_messages: list = []] {
-  let contract_path = (resolve-contract-path $contract)
-  let c = (open $contract_path)
-  match $c.action.verb {
-    "Consult"     => (run-consult     $c $prompt $prior_messages)
-    "Investigate" => (run-investigate $c $prompt $prior_messages)
-    "Enact"       => (run-investigate $c $prompt $prior_messages)
-    _ => { error make { msg: $"engine: unsupported action verb '($c.action.verb)' in ($contract_path)" } }
-  }
-}
-
-# Consult action: deterministic pre-retrieval (when corpus is declared) → single LLM call.
-# Uses ai-send --oneshot so no prior session history bleeds in; the retrieved context
-# is folded into the system prompt rather than a second system message.
-def run-consult [contract: record, prompt: string, prior_messages: list = []] {
-  let context = (retrieve-context $contract $prompt)
-  let s = (data session)
-  let system = if $context != "" {
-    $"($contract.prompt.system)\n\nRelevant documentation:\n\n($context)"
-  } else {
-    $contract.prompt.system
-  }
-  let r = ($prompt | ai-send -s $s --system $system --oneshot)
-  $r.result.content
-}
-
-# Investigate/Enact action: full tool-calling loop delegated to ai.nu's ai-send.
-# ai-send drives the while-tools loop internally (base.nu lines 163-183); nu-agent's
-# role is to populate AI_TOOLS so closure-run (called inside ai-send) can dispatch
-# each tool call. --oneshot keeps this invocation isolated from prior session history.
-def run-investigate [contract: record, prompt: string, prior_messages: list = []] {
-  let tools_whitelist = ($contract.action.tools? | default [])
-  let verb = ($contract.action.verb? | default "")
-  let tools_reg = (build-ai-tools $contract $tools_whitelist $verb)
-  let allowed = if $verb == "Enact" {
-    $tools_whitelist
-  } else {
-    $tools_whitelist | where { |t| $t not-in $WRITE_TOOLS }
-  }
-  let s = (data session)
-  with-env { AI_TOOLS: $tools_reg } {
-    let r = ($prompt | ai-send -s $s --system $contract.prompt.system --function $allowed --oneshot)
-    $r.result.content
-  }
-}
-
-# search_nu_docs implementation: embed query → similarity over corpus → top-k chunks as text.
-def tool-search-nu-docs [args: record, contract: record] {
-  let q = ($args.query? | default "")
-  if $q == "" {
-    return "tool error: search_nu_docs requires a non-empty `query` argument"
-  }
-  let k = ($args.k? | default 3)
-  let corpus_path = ($contract.action.corpus? | default "")
-  if $corpus_path == "" {
-    return "tool error: contract declares no `action.corpus`"
-  }
-  if not ($corpus_path | path exists) {
-    return $"tool error: corpus '($corpus_path)' not found on disk"
-  }
-
-  let qv = (embed-one $q)
-  let hits = (open $corpus_path | rag similarity --query $qv --k $k)
-  $hits | each { |h|
-    $"Source: ($h.source)\nTitle: ($h.title)\nScore: ($h.score)\n\n($h.text)"
-  } | str join "\n\n---\n\n"
-}
-
-# ANN search tool: embed a natural-language query (or accept an embedding vector),
-# query an HNSW/ANN index via the plugin, and return top-k hits.
-def tool-search-ann [args: record, contract: record] {
-  let index = ($args.index? | default "")
-  let map = ($args.map? | default "")
-  if $index == "" or $map == "" { return "tool error: search_ann requires `index` and `map` parameters" }
-  let k = ($args.k? | default 5)
-  let ef = ($args.ef_search? | default 200)
-
-  # Acquire query vector: either a textual query (embed) or an explicit vector
-  if ($args.query? | default "") != "" {
-    let qtxt = $args.query
-    let qv = (embed-one $qtxt)
-    let hits = (rag ann-query-hnsw --index $index --map $map --query ($qv) --k $k --ef-search $ef)
-    if ($hits | is-empty) { return "(no hits)" }
-    $hits | each { |h| $"Hit: id=($h.id) score=($h.score) index=($h.index)" } | str join "\n\n---\n\n"
-  } else if ($args.query_vec? | default []) != [] {
-    let qv = ($args.query_vec)
-    let hits = (rag ann-query-hnsw --index $index --map $map --query ($qv) --k $k --ef-search $ef)
-    if ($hits | is-empty) { return "(no hits)" }
-    $hits | each { |h| $"Hit: id=($h.id) score=($h.score) index=($h.index)" } | str join "\n\n---\n\n"
-  } else {
-    return "tool error: search_ann requires either `query` (string) or `query_vec` (list of numbers)"
-  }
-}
-
-# check_nu_syntax implementation: write the code to a temp file, run `nu --ide-check`,
-# return the parser's stdout/stderr verbatim (or "OK" when it's silent).
-def tool-check-nu-syntax [args: record] {
-  let code = ($args.code? | default "")
-  if $code == "" {
-    return "tool error: check_nu_syntax requires a non-empty `code` argument"
-  }
-  let tmpfile = $"/tmp/nu-agent-check-(random uuid).nu"
-  $code | save --raw $tmpfile
-  let result = (do { ^nu --ide-check 5 $tmpfile } | complete)
-  rm -f $tmpfile
-  let stdout = ($result.stdout | str trim)
-  let stderr = ($result.stderr | str trim)
-  if $stdout == "" and $stderr == "" and $result.exit_code == 0 {
-    "OK"
-  } else if $stdout != "" and $stderr != "" {
-    $"stdout:\n($stdout)\n\nstderr:\n($stderr)"
-  } else if $stdout != "" {
-    $stdout
-  } else if $stderr != "" {
-    $stderr
-  } else {
-    $"nu --ide-check exited with code ($result.exit_code) and no diagnostic output"
-  }
-}
-
-# Lexical containment check: returns true if `p` (after expansion) lives at or
-# below the working directory. Both paths run through `path expand` so that
-# `..` and `~` are collapsed before comparison; if `path expand` resolves
-# symlinks, a symlink escaping cwd will fail this check (intentional).
-def is-under-cwd [p: string] {
-  let cwd_abs = (pwd | path expand)
-  let p_abs = ($p | path expand)
-  $p_abs == $cwd_abs or ($p_abs | str starts-with ($cwd_abs + "/"))
-}
-
-# find_files implementation: glob within cwd; reject any matches that escape.
-# Caps at 100 results with a truncation tail to keep tool output bounded.
-# (Lower than you might expect — broad globs over a project with a data
-# dir blow the LLM's per-turn ingestion budget on small local models.)
-def tool-find-files [args: record] {
-  let pat = ($args.pattern? | default "")
-  if $pat == "" {
-    return "tool error: find_files requires a non-empty `pattern` argument"
-  }
-  let raw = (try { glob $pat } catch { null })
-  if $raw == null {
-    return $"tool error: glob failed for pattern '($pat)'"
-  }
-  let in_scope = ($raw | where { |p| is-under-cwd $p })
-  let count = ($in_scope | length)
-  if $count == 0 {
-    return "(no matches)"
-  }
-  if $count > 100 {
-    let body = ($in_scope | first 100 | str join "\n")
-    let extra = ($count - 100)
-    $"($body)\n\n... ($extra) more matches truncated; refine your pattern"
-  } else {
-    $in_scope | str join "\n"
-  }
-}
-
-# read_file implementation: cwd-scoped, line-numbered, default 2000-line cap.
-# Output format: a header line ("# path — lines A–B of N") followed by tab-
-# separated `<lineno>\t<content>` rows, matching the shape Claude Code's Read
-# tool emits — familiar to any LLM trained against that conversation style.
-def tool-read-file [args: record] {
-  let raw_path = ($args.path? | default "")
-  if $raw_path == "" {
-    return "tool error: read_file requires a non-empty `path` argument"
-  }
-  if not (is-under-cwd $raw_path) {
-    return $"tool error: path '($raw_path)' resolves outside the working directory"
-  }
-  let abs = ($raw_path | path expand)
-  if not ($abs | path exists) {
-    return $"tool error: file '($raw_path)' not found"
-  }
-  let info = (try { ls $abs | get 0 } catch { null })
-  if $info == null {
-    return $"tool error: could not stat '($raw_path)'"
-  }
-  let kind = ($info.type)
-  if $kind != "file" {
-    return $"tool error: '($raw_path)' is not a regular file. type: ($kind)"
-  }
-  let text = (try { open --raw $abs | decode utf-8 } catch { null })
-  if $text == null {
-    return $"tool error: '($raw_path)' is not valid UTF-8 text"
-  }
-  let all_lines = ($text | lines)
-  let total = ($all_lines | length)
-  let offset = ($args.offset? | default 1)
-  let limit = ($args.limit? | default 2000)
-  let start_idx = (if $offset > 0 { $offset - 1 } else { 0 })
-  let slice = ($all_lines | skip $start_idx | take $limit)
-  let returned = ($slice | length)
-  if $returned == 0 {
-    return $"# ($raw_path) — empty range (offset ($offset), file has ($total) lines)"
-  }
-  let numbered = ($slice | enumerate | each { |row|
-    let n = ($start_idx + $row.index + 1)
-    $"($n)\t($row.item)"
-  } | str join "\n")
-  let last = ($start_idx + $returned)
-  $"# ($raw_path) — lines ($start_idx + 1)–($last) of ($total)\n($numbered)"
-}
-
-# propose_edit implementation: verify the file exists, the old_string matches
-# exactly once, write the post-edit content to a `<path>.proposed` companion
-# file (the original is NOT touched), and emit a structured preview. Multiple
-# edits to the same path stack — the second edit reads from .proposed if
-# present, building cumulatively on the first.
-def tool-propose-edit [args: record] {
-  let raw_path = ($args.path? | default "")
-  if $raw_path == "" {
-    return "tool error: propose_edit requires a non-empty `path` argument"
-  }
-  let old_string = ($args.old_string? | default "")
-  if $old_string == "" {
-    return "tool error: propose_edit requires a non-empty `old_string` argument"
-  }
-  let new_string = ($args.new_string? | default "")
-  let rationale = ($args.rationale? | default "")
-  if $rationale == "" {
-    return "tool error: propose_edit requires a `rationale` argument (one-sentence justification)"
-  }
-  if not (is-under-cwd $raw_path) {
-    return $"tool error: path '($raw_path)' resolves outside the working directory"
-  }
-  let abs = ($raw_path | path expand)
-  if not ($abs | path exists) {
-    return $"tool error: file '($raw_path)' not found — for new files, call propose_write instead"
-  }
-
-  # Cumulative source: if a .proposed companion already exists from an
-  # earlier edit this session, build on top of it; otherwise start from
-  # the original. This lets multiple edits to the same file stack.
-  let proposed_path = ($abs + ".proposed")
-  let source_path = if ($proposed_path | path exists) { $proposed_path } else { $abs }
-  let source_label = if ($proposed_path | path exists) { $"($raw_path).proposed" } else { $raw_path }
-
-  let text = (try { open --raw $source_path | decode utf-8 } catch { null })
-  if $text == null {
-    return $"tool error: '($source_label)' is not valid UTF-8 text"
-  }
-  let occurrences = (($text | split row $old_string | length) - 1)
-  if $occurrences == 0 {
-    # Idempotency: if old_string is missing but new_string is already
-    # present in the source (which is .proposed when it exists), this
-    # is almost certainly a retry of an already-applied edit. Return a
-    # success-shaped result so the model breaks out of the retry loop.
-    let new_count = if $new_string != "" {
-      (($text | split row $new_string | length) - 1)
+    let corpus = ($p.corpus? | default "")
+    let verb   = ($p.verb?   | default "Investigate")
+    let tools  = ($p.tools?  | default [])
+    let allowed = if $verb == "Enact" {
+        $tools
     } else {
-      0
+        $tools | where { |t| $t not-in $WRITE_TOOLS }
     }
-    if $new_count >= 1 {
-      let already = $"\(already applied\) ($raw_path) → ($raw_path).proposed already contains this change. Do NOT call propose_edit on this old_string again. Next action: write the final answer."
-      print --stderr $already
-      return $already
+    let context = if $corpus != "" { retrieve-context $corpus $prompt } else { "" }
+    let system = if $context != "" {
+        $"($p.system)\n\nRelevant documentation:\n\n($context)"
+    } else {
+        $p.system
     }
-    return $"tool error: old_string not found in '($source_label)' — verify exact text including whitespace"
-  }
-  if $occurrences > 1 {
-    return $"tool error: old_string matches ($occurrences) times in '($source_label)' — add surrounding context to make the match unique"
-  }
-
-  let new_text = ($text | str replace $old_string $new_string)
-  $new_text | save --raw --force $proposed_path
-
-  # Verbose preview to stderr (for the user reading the trace); compact
-  # directive return to the LLM (so it doesn't try to re-process the diff).
-  let preview = $"# proposed edit to ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- old\n($old_string)\n--- new\n($new_string)\n---"
-  print --stderr $preview
-  $"\(proposal recorded\) ($raw_path) → ($raw_path).proposed; this change is complete. Do NOT call propose_edit on this old_string again. Next action: write the final answer.\n  rationale: ($rationale)"
+    let s = (data session)
+    let r = ($prompt | ai-send -s $s --system $system --function $allowed --oneshot)
+    $r.result.content
 }
 
-# propose_write implementation: verify the file does NOT exist, write the
-# proposed content to a `<path>.proposed` companion file (the path itself
-# is NOT created), and emit a preview. Repeated propose_write to the same
-# path overwrites the previous .proposed (last write wins).
+# Pre-retrieve top-k corpus chunks for a prompt; returns concatenated text
+# or empty string when the corpus file is absent.
+def retrieve-context [corpus_path: string, prompt: string, k: int = 5] {
+    if not ($corpus_path | path exists) {
+        print --stderr $"warning: corpus '($corpus_path)' not found; skipping retrieval"
+        return ""
+    }
+    let qv = (embed-one $prompt)
+    let hits = (open $corpus_path | rag similarity --query $qv --k $k)
+    $hits | get text | str join "\n\n---\n\n"
+}
+
+# check_nu_syntax: write to temp file, run `nu --ide-check`, return diagnostics or "OK".
+def tool-check-nu-syntax [args: record] {
+    let code = ($args.code? | default "")
+    if $code == "" { return "tool error: requires non-empty `code`" }
+    let tmpfile = $"/tmp/nu-agent-check-(random uuid).nu"
+    $code | save --raw $tmpfile
+    let result = (do { ^nu --ide-check 5 $tmpfile } | complete)
+    rm -f $tmpfile
+    let stdout = ($result.stdout | str trim)
+    let stderr = ($result.stderr | str trim)
+    if $stdout == "" and $stderr == "" and $result.exit_code == 0 {
+        "OK"
+    } else if $stdout != "" and $stderr != "" {
+        $"stdout:\n($stdout)\n\nstderr:\n($stderr)"
+    } else if $stdout != "" {
+        $stdout
+    } else if $stderr != "" {
+        $stderr
+    } else {
+        $"nu --ide-check exited with code ($result.exit_code) and no output"
+    }
+}
+
+# Lexical containment check: true if p lives at or below cwd after path expansion.
+def is-under-cwd [p: string] {
+    let cwd_abs = (pwd | path expand)
+    let p_abs   = ($p | path expand)
+    $p_abs == $cwd_abs or ($p_abs | str starts-with ($cwd_abs + "/"))
+}
+
+# find_files: glob within cwd, reject escapes, cap at 100 results.
+def tool-find-files [args: record] {
+    let pat = ($args.pattern? | default "")
+    if $pat == "" { return "tool error: requires non-empty `pattern`" }
+    let raw = (try { glob $pat } catch { null })
+    if $raw == null { return $"tool error: glob failed for pattern '($pat)'" }
+    let in_scope = ($raw | where { |p| is-under-cwd $p })
+    let count = ($in_scope | length)
+    if $count == 0 { return "(no matches)" }
+    if $count > 100 {
+        $"($in_scope | first 100 | str join "\n")\n\n... ($count - 100) more matches truncated"
+    } else {
+        $in_scope | str join "\n"
+    }
+}
+
+# read_file: cwd-scoped, line-numbered, 2000-line default cap.
+def tool-read-file [args: record] {
+    let raw_path = ($args.path? | default "")
+    if $raw_path == "" { return "tool error: requires non-empty `path`" }
+    if not (is-under-cwd $raw_path) {
+        return $"tool error: path '($raw_path)' resolves outside the working directory"
+    }
+    let abs = ($raw_path | path expand)
+    if not ($abs | path exists) { return $"tool error: file '($raw_path)' not found" }
+    let info = (try { ls $abs | get 0 } catch { null })
+    if $info == null { return $"tool error: could not stat '($raw_path)'" }
+    if $info.type != "file" { return $"tool error: '($raw_path)' is not a regular file (type: ($info.type))" }
+    let text = (try { open --raw $abs | decode utf-8 } catch { null })
+    if $text == null { return $"tool error: '($raw_path)' is not valid UTF-8 text" }
+    let all_lines = ($text | lines)
+    let total     = ($all_lines | length)
+    let offset    = ($args.offset? | default 1)
+    let limit     = ($args.limit?  | default 2000)
+    let start_idx = (if $offset > 0 { $offset - 1 } else { 0 })
+    let slice     = ($all_lines | skip $start_idx | take $limit)
+    let returned  = ($slice | length)
+    if $returned == 0 {
+        return $"# ($raw_path) — empty range (offset ($offset), file has ($total) lines)"
+    }
+    let numbered = ($slice | enumerate | each { |row|
+        $"($start_idx + $row.index + 1)\t($row.item)"
+    } | str join "\n")
+    $"# ($raw_path) — lines ($start_idx + 1)–($start_idx + $returned) of ($total)\n($numbered)"
+}
+
+# propose_edit: verify old_string matches exactly once, write .proposed companion file.
+# Multiple edits to the same path stack cumulatively on the .proposed file.
+def tool-propose-edit [args: record] {
+    let raw_path   = ($args.path?       | default "")
+    let old_string = ($args.old_string? | default "")
+    let new_string = ($args.new_string? | default "")
+    let rationale  = ($args.rationale?  | default "")
+    if $raw_path == ""   { return "tool error: requires non-empty `path`" }
+    if $old_string == "" { return "tool error: requires non-empty `old_string`" }
+    if $rationale == ""  { return "tool error: requires `rationale`" }
+    if not (is-under-cwd $raw_path) {
+        return $"tool error: path '($raw_path)' resolves outside the working directory"
+    }
+    let abs = ($raw_path | path expand)
+    if not ($abs | path exists) {
+        return $"tool error: file '($raw_path)' not found — for new files use propose_write"
+    }
+    let proposed_path = ($abs + ".proposed")
+    let source_path   = if ($proposed_path | path exists) { $proposed_path } else { $abs }
+    let source_label  = if ($proposed_path | path exists) { $"($raw_path).proposed" } else { $raw_path }
+    let text = (try { open --raw $source_path | decode utf-8 } catch { null })
+    if $text == null { return $"tool error: '($source_label)' is not valid UTF-8" }
+    let occurrences = (($text | split row $old_string | length) - 1)
+    if $occurrences == 0 {
+        let new_count = if $new_string != "" { ($text | split row $new_string | length) - 1 } else { 0 }
+        if $new_count >= 1 {
+            let msg = $"\(already applied\) ($raw_path).proposed already contains this change. Next action: write the final answer."
+            print --stderr $msg
+            return $msg
+        }
+        return $"tool error: old_string not found in '($source_label)' — verify exact whitespace"
+    }
+    if $occurrences > 1 {
+        return $"tool error: old_string matches ($occurrences) times — add surrounding context to make it unique"
+    }
+    $text | str replace $old_string $new_string | save --raw --force $proposed_path
+    let preview = $"# proposed edit to ($raw_path)\n# rationale: ($rationale)\n# written to ($raw_path).proposed\n--- old\n($old_string)\n--- new\n($new_string)\n---"
+    print --stderr $preview
+    $"\(proposal recorded\) ($raw_path) → ($raw_path).proposed. Do NOT repeat this old_string. Next action: write the final answer.\n  rationale: ($rationale)"
+}
+
+# propose_write: verify file does NOT exist, write .proposed companion file.
 def tool-propose-write [args: record] {
-  let raw_path = ($args.path? | default "")
-  if $raw_path == "" {
-    return "tool error: propose_write requires a non-empty `path` argument"
-  }
-  let content = ($args.content? | default "")
-  let rationale = ($args.rationale? | default "")
-  if $rationale == "" {
-    return "tool error: propose_write requires a `rationale` argument (one-sentence justification)"
-  }
-  if not (is-under-cwd $raw_path) {
-    return $"tool error: path '($raw_path)' resolves outside the working directory"
-  }
-  let abs = ($raw_path | path expand)
-  if ($abs | path exists) {
-    return $"tool error: file '($raw_path)' already exists — to modify, call propose_edit instead"
-  }
-
-  let proposed_path = ($abs + ".proposed")
-  $content | save --raw --force $proposed_path
-
-  # Verbose preview to stderr (for the user reading the trace); compact
-  # directive return to the LLM.
-  let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n# preview written to ($raw_path).proposed\n--- content\n($content)\n---"
-  print --stderr $preview
-  $"\(proposal recorded\) new file ($raw_path).proposed written. Do NOT call propose_write on this path again. Next action: write the final answer.\n  rationale: ($rationale)"
+    let raw_path  = ($args.path?      | default "")
+    let content   = ($args.content?   | default "")
+    let rationale = ($args.rationale? | default "")
+    if $raw_path == ""  { return "tool error: requires non-empty `path`" }
+    if $rationale == "" { return "tool error: requires `rationale`" }
+    if not (is-under-cwd $raw_path) {
+        return $"tool error: path '($raw_path)' resolves outside the working directory"
+    }
+    let abs = ($raw_path | path expand)
+    if ($abs | path exists) {
+        return $"tool error: '($raw_path)' already exists — use propose_edit instead"
+    }
+    $content | save --raw --force ($abs + ".proposed")
+    let preview = $"# proposed new file: ($raw_path)\n# rationale: ($rationale)\n# written to ($raw_path).proposed\n--- content\n($content)\n---"
+    print --stderr $preview
+    $"\(proposal recorded\) ($raw_path).proposed written. Do NOT repeat this path. Next action: write the final answer.\n  rationale: ($rationale)"
 }
 
-# Consult retrieval pre-step. Returns concatenated chunk text for the top-k corpus matches,
-# or empty string when no corpus is declared / corpus file is missing.
-def retrieve-context [contract: record, prompt: string] {
-  let corpus_path = ($contract.action.corpus? | default "")
-  if $corpus_path == "" {
-    return ""
-  }
-  if not ($corpus_path | path exists) {
-    print --stderr $"warning: corpus '($corpus_path)' declared but not found; skipping retrieval"
-    return ""
-  }
-  let k = ($contract.action.retrieval_k? | default 5)
-  let qv = (embed-one $prompt)
-  let hits = (open $corpus_path | rag similarity --query $qv --k $k)
-  $hits | get text | str join "\n\n---\n\n"
+# Show metadata for a loaded prompt.
+export def info [name: string] {
+    let p = ($env.AI_PROMPTS | get -o $name)
+    if ($p | is-empty) {
+        error make { msg: $"nu-agent: unknown prompt '($name)'" }
+    }
+    {
+        name:        $name
+        verb:        ($p.verb?        | default "Investigate")
+        corpus:      ($p.corpus?      | default "")
+        tools:       ($p.tools?       | default [])
+        description: ($p.description? | default "")
+    }
 }
 
-# CLI entry point: `nu engine.nu run <contract> <prompt>`
-# Resolve a contract string/name to the parsed record and its config overrides.
-export def info [contract: string] {
-  let contract_path = (resolve-contract-path $contract)
-  let c = (open $contract_path)
-  
-  let cfg = (get-config)
-  let model = ($c.model? | default $cfg.chat.model)
-  
-  {
-      name: ($contract_path | path basename | str replace '.toml' ''),
-      path: $contract_path,
-      verb: $c.action.verb,
-      model: $model
-  }
-}
-
-export def main [verb: string, contract: string, prompt: string] {
-  match $verb {
-    "run" => (run $contract $prompt)
-    _ => { error make { msg: $"engine: unknown verb '($verb)'. Use: nu engine.nu run <contract> <prompt>" } }
-  }
+export def main [verb: string, name: string, prompt: string] {
+    match $verb {
+        "run" => (run $name $prompt)
+        _ => { error make { msg: $"engine: unknown verb '($verb)'. Use: nu engine.nu run <name> <prompt>" } }
+    }
 }
